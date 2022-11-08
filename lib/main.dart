@@ -26,10 +26,12 @@ void main() async{
   //     child: MyApp()
   // );
   runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
@@ -113,7 +115,8 @@ class _ScreenSplachState extends State<ScreenSplach> {
     //FrLoginService(FirebaseAuth.instance).signinwithgoogle(context);
     //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Homepage()),);
     //Timer(const Duration(milliseconds: 990000),
-                  Timer(const Duration(milliseconds: 4900),
+                  //Timer(const Duration(milliseconds: 490),
+                      Timer(const Duration(milliseconds: 4900),
           () => Navigator.of(context).pushReplacement(MaterialPageRoute(
           //  builder: (BuildContext context) => const ScreenBoarding())));
           // builder: (BuildContext context) => SelectCountry())));
@@ -158,8 +161,10 @@ class _ScreenSplachState extends State<ScreenSplach> {
           )
         ),
       );
+    }
   }
-}
+
+
 
 // class GoogleSignInProvider extends ChangeNotifier{
 //   final googleSignIn= GoogleSignIn();

@@ -17,13 +17,17 @@ const Color errorBackClr = Color(0xFFFFE4E6);
 const Color errorFontClr = Color(0xFFE11D48);
 const Color dotDesctiveClr = Color(0xFF878787);
 const Color fontgrey = Color(0xFF878787);
+const Color online = Color(0xFF1AD95A);
+
 
 Color coverBackClr = const Color(0xFFC4C4C4).withOpacity(0.73);
+const Color greybackground = Color(0xFFD2D2D2);
 
 
 const Color srpgradient1 = Color(0xFF64B580);
 const Color srpgradient2 = Color(0xFF50A69D);
 const Color srpgradient3 = Color(0xFF3390C7);
+
 
 
 const Color linkclr = Color(0xFF3692C2);
