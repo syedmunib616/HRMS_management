@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:provider/provider.dart';
-
+import 'Provider/Storage_Future.dart';
 import 'Provider/providergenerator.dart';
 import 'Theme/Theme_Provider.dart';
 import 'Theme/Theme_Style.dart';
@@ -27,12 +26,10 @@ void main() async{
   //     child: MyApp()
   // );
   runApp(MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
@@ -47,10 +44,9 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider<ProviderGenerator>(
                 create: (context) => ProviderGenerator(),
               ),
-
-
-
-
+              ChangeNotifierProvider<StorageFutureProvider>(
+                create: (context) => StorageFutureProvider(),
+              ),
               ChangeNotifierProvider<ThemeProvider>(
                 create: (context) => ThemeProvider(),
                 builder: (context, _) => MaterialApp(
@@ -121,7 +117,7 @@ class _ScreenSplachState extends State<ScreenSplach> {
           () => Navigator.of(context).pushReplacement(MaterialPageRoute(
           //  builder: (BuildContext context) => const ScreenBoarding())));
           // builder: (BuildContext context) => SelectCountry())));
-          builder: (BuildContext context) => SginUp(),)));
+          builder: (BuildContext context) => Login(),)));
     super.initState();
   }
 
@@ -164,8 +160,6 @@ class _ScreenSplachState extends State<ScreenSplach> {
       );
   }
 }
-
-
 
 // class GoogleSignInProvider extends ChangeNotifier{
 //   final googleSignIn= GoogleSignIn();

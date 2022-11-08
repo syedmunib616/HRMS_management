@@ -23,6 +23,7 @@ abstract class TextStrings {
   static const Sgin_Up= "Sgin Up";
 
 
+
   static const Create_Account	=	"Create_Account";
   static const Done ='Done';
   static const Search ='Search';
@@ -30,7 +31,9 @@ abstract class TextStrings {
   static const OR='OR';
   static const Success='Success!';
   static const Sign_In='Sign In';
+  static const Login='Login';
   static const Remember_Me='Remember Me';
+  static const Forgot_your_password='Forgot your password?';
 
 }
 

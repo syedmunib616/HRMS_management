@@ -1,17 +1,12 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
-
-
 import '../../Theme/Theme_Color.dart';
 
-
 class CsMainInputField extends StatelessWidget {
-
   const CsMainInputField(
       {Key? key,
         required this.prefixIcon,
@@ -26,7 +21,6 @@ class CsMainInputField extends StatelessWidget {
         this.onSubmite,
         required this.myhint})
       : super(key: key);
-
   final TextEditingController mycontroller;
   final String myhint;
   final bool isPassword;
@@ -58,7 +52,6 @@ class CsMainInputField extends StatelessWidget {
         height: 38.h,
         width: width.w,
         child: TextFormField(
-
           textAlignVertical:TextAlignVertical.bottom ,
           maxLines: maxline ?? 1,
           keyboardType: keyboardType,

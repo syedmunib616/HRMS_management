@@ -26,6 +26,9 @@ const Color srpgradient2 = Color(0xFF50A69D);
 const Color srpgradient3 = Color(0xFF3390C7);
 
 
+const Color linkclr = Color(0xFF3692C2);
+
+
 
 
 

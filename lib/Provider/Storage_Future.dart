@@ -5,18 +5,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tiktag_application/Businesslogic/Bs_OnCreateUser.dart';
-import 'package:tiktag_application/Provider/Storage_Future.dart';
-import 'package:tiktag_application/Theme/Theme_Color.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tiktag_application/View/Component/Cs_MainProgButton.dart';
-import 'package:tiktag_application/View/Component/Cs_SocialButton.dart';
-import 'package:tiktag_application/View/Screen/BottomSheep/BtS_Contact.dart';
-import 'package:tiktag_application/View/Screen/BottomSheep/BtS_EditPassword.dart';
-import 'package:tiktag_application/View/Screen/BottomSheep/BtS_Group.dart';
-import 'package:tiktag_application/View/Screen/BottomSheep/BtS_MemberGroup.dart';
-import 'package:tiktag_application/View/Screen/BottomSheep/BtS_PrivatDescription.dart';
-import 'package:tiktag_application/translations/locale_keys.g.dart';
 
 
 
@@ -137,7 +127,7 @@ class StorageFutureProvider with ChangeNotifier {
     String? value = prefs.getString(key);
     if (value == null) {
       //setCityValue('Chose your city');
-      setCityValue(TextStrings.Choose_your_city.tr());
+      setCityValue("");
     } else {
       setCityValue(value);
     }
