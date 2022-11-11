@@ -7,6 +7,7 @@ import 'Theme_ColorModel.dart';
 import 'Theme_Provider.dart';
 
 const Color blackClr = Color(0xFF000000);
+const Color fontclr = Color(0xFF323232);
 const Color whiteClr = Color(0xFFffffff);
 const Color lightBleuClr = Color(0xFF007AFF);
 const Color greyOpenClr = Color(0xFFF2EFEF);
