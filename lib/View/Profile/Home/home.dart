@@ -15,13 +15,15 @@ import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/pie_chart
 import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/pie_chart_sample2.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/piechart.dart';
 class Home extends StatefulWidget {
-   Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
+
 }
 
 class _HomeState extends State<Home> {
+
   final _controller = PageController();
 
   final _duration = const Duration(milliseconds: 300);
@@ -48,7 +50,6 @@ class _HomeState extends State<Home> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-
               Container(
                 height: 102.h,
                 width:MediaQuery.of(context).size.width,
@@ -65,7 +66,7 @@ class _HomeState extends State<Home> {
                   color: whiteClr,
                 ),
                 child: Column(
-                 crossAxisAlignment:CrossAxisAlignment.center ,
+                 crossAxisAlignment:CrossAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -150,7 +151,6 @@ class _HomeState extends State<Home> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-
                           Container(
                             width: 80.w,
                             height: 40.h,

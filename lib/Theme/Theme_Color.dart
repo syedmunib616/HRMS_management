@@ -19,6 +19,7 @@ const Color errorFontClr = Color(0xFFE11D48);
 const Color dotDesctiveClr = Color(0xFF878787);
 const Color fontgrey = Color(0xFF878787);
 const Color online = Color(0xFF1AD95A);
+const Color iconcolor = Color(0xFF808080);
 
 
 Color coverBackClr = const Color(0xFFC4C4C4).withOpacity(0.73);
