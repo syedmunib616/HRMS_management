@@ -165,6 +165,7 @@ class PieChart21State extends State {
     return AspectRatio(
       aspectRatio: 1.3,
       child: Card(
+
         color: Colors.white,
         child: Row(
           children: <Widget>[
@@ -187,7 +188,8 @@ class PieChart21State extends State {
                           }
                           touchedIndex = pieTouchResponse
                               .touchedSection!.touchedSectionIndex;
-                        });
+                          }
+                        );
                       },
                     ),
                     borderData: FlBorderData(
@@ -274,7 +276,6 @@ class PieChart21State extends State {
             title: '15%',
             radius: radius,
             titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
-
           );
       // case 3:
       //   return PieChartSectionData(

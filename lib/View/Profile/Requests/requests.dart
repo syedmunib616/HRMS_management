@@ -22,7 +22,6 @@ class Requests extends StatelessWidget {
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: AppBar(
-
             backgroundColor: Colors.transparent,
             flexibleSpace:  Container(
               height: 102.h,

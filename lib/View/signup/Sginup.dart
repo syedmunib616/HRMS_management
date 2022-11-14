@@ -54,6 +54,7 @@ class SginUp extends StatelessWidget {
                       SizedBox(
                         height: 45.h,
                       ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -68,16 +69,20 @@ class SginUp extends StatelessWidget {
                           ),
                         ],
                       ),
+
                       SizedBox(
                         height: 28.h,
                       ),
+
                       Text(
                         "Sgin up to continue",
                         style: GoogleFonts.poppins(fontSize: 15.sp,color: settingFontBackColor(context),fontWeight: FontWeight.w500),
                       ),
+
                       SizedBox(
                         height: 16.h,
                       ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -107,10 +112,13 @@ class SginUp extends StatelessWidget {
                           ),
                         ],
                       ),
+
                       SizedBox(
                         height: 15.h,
                       ),
+
                       Text("Or",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w600),),
+
                       SizedBox(
                         height: 15.h,
                       ),
@@ -219,10 +227,10 @@ class SginUp extends StatelessWidget {
                         //     ? Colors.red
                         //     : null,
                         ),
-                        SizedBox(
+                      SizedBox(
                           height: 20.h,
                         ),
-                        Container(
+                      Container(
                             height: 40.h,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
@@ -250,6 +258,9 @@ class SginUp extends StatelessWidget {
                               child: Text(TextStrings.Sgin_Up, style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                             )
                         ),
+
+
+
                       ],
                     ),
                   ),

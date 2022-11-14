@@ -34,6 +34,33 @@ abstract class TextStrings {
   static const Login='Login';
   static const Remember_Me='Remember Me';
   static const Forgot_your_password='Forgot your password?';
+  static const Setting='Settings';
+
+  static const Employees='Employees';
+  static const ManageEmployees='Manage Employees';
+
+  static const Shits='Shits';
+  static const ManageShifts='Manage Shifts';
+
+  static const Departments='Departments';
+
+  static const ManageDepartments='Manage Departments';
+
+  static const Designations='Designations';
+
+  static const ManageDesignations='Manage Designations';
+
+  static const ManageyourProfile='Manage your Profile';
+
+  static const ChangePassword='Change Password';
+  static const Profile='Profile';
+
+
+
+
+
+
+
 
 }
 

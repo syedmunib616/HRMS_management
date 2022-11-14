@@ -31,17 +31,14 @@ class _HomeState extends State<Home> {
   final _curve = Curves.easeInOutCubic;
 
   final _pages = const [
+
     LineChartPage(),
-    // BarChartPage(),
-    // BarChartPage2(),
-    // PieChartPage(),
     LineChartPage2(),
     LineChartPage3(),
     LineChartPage4(),
-    // BarChartPage3(),
-    // ScatterChartPage(),
-    // RadarChartPage(),
+
   ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +50,7 @@ class _HomeState extends State<Home> {
               Container(
                 height: 102.h,
                 width:MediaQuery.of(context).size.width,
+
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -65,6 +63,7 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                   color: whiteClr,
                 ),
+
                 child: Column(
                  crossAxisAlignment:CrossAxisAlignment.center,
                   children: [
@@ -145,12 +144,14 @@ class _HomeState extends State<Home> {
                         SizedBox(width: 15.w,)
                       ],
                     ),
+
                     Container(
                       height: 50.h,
                       width: MediaQuery.of(context).size.width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+
                           Container(
                             width: 80.w,
                             height: 40.h,
@@ -176,6 +177,7 @@ class _HomeState extends State<Home> {
                               ],
                             ),
                           ),
+
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Container(
@@ -184,6 +186,7 @@ class _HomeState extends State<Home> {
                               width: 1.w,
                             ),
                           ),
+
                           Container(
                             width: 240.w,
                             height: 40.h,
@@ -232,9 +235,11 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
+
               SizedBox(
                 height: 10.h,
               ),
+
               Padding(
                 padding: EdgeInsets.all(20.0.sp),
                 child: Container(
@@ -327,6 +332,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
+
               Padding(
                 padding: EdgeInsets.all(20.0.sp),
                 child: Container(
@@ -573,9 +579,11 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
+
               SizedBox(
                 height: 20.h,
-              )
+              ),
+
             ],
           ),
         ),
