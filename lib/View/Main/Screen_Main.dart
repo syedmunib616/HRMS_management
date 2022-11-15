@@ -18,6 +18,7 @@ class ScreenMain extends StatefulWidget {
 }
 
 class _ScreenMainState extends State<ScreenMain> {
+
   TextEditingController searchController=TextEditingController();
   int curentindex = 0;
 
@@ -38,7 +39,6 @@ class _ScreenMainState extends State<ScreenMain> {
       body:
       // Stack(
       //   children: [
-
       IndexedStack(
         index: curentindex,
         children: screens,
@@ -189,6 +189,7 @@ class _ScreenMainState extends State<ScreenMain> {
                   ],
                 )),
           ]),
+
     );
   }
 }

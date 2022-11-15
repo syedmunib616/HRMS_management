@@ -1,22 +1,19 @@
-
-
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
-import 'package:hrmanagementapp/View/Components/textfield.dart';
-import 'package:hrmanagementapp/View/Profile/Requests/components/NoRequest.dart';
+import 'package:hrmanagementapp/View/employeDirectory/EmployeDirectory.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
-import 'package:hrmanagementapp/Provider/providergenerator.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hrmanagementapp/View/DepartmentList/Departmentlist.dart';
+import 'package:hrmanagementapp/View/Shifts/shifts.dart';
+
+
+
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -171,7 +168,6 @@ class Settings extends StatelessWidget {
               ],
             ),
           ),
-
         ),
           body: SingleChildScrollView(
             child: Padding(
@@ -181,31 +177,44 @@ class Settings extends StatelessWidget {
                  SizedBox(
                    height: 20.h,
                  ),
-
-                 SubReportsOrSubSettings(iconString: "assets/user-svg.png",title: TextStrings.Employees,subtitle: TextStrings.ManageEmployees,),
+                 GestureDetector(
+                     onTap: (){
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(builder: (context) => EmployeeDirectory()),
+                       );
+                     },
+                     child: SubReportsOrSubSettings(iconString: "assets/user-svg.png",title: TextStrings.Employees,subtitle: TextStrings.ManageEmployees,)
+                 ),
                  SizedBox(height: 18.h,),
-                 SubReportsOrSubSettings(iconString: "assets/clock.png",title: TextStrings.Shits,subtitle: TextStrings.ManageShifts,),
+                 GestureDetector(
+                     onTap: (){
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(builder: (context) => Shifts()),
+                       );
+                     },
+                     child: SubReportsOrSubSettings(iconString: "assets/clock.png",title: TextStrings.Shifts,subtitle: TextStrings.ManageShifts,)),
                  SizedBox(height: 18.h,),
-                 SubReportsOrSubSettings(iconString: "assets/networking.png",title: TextStrings.Departments,subtitle: TextStrings.ManageDepartments,),
-
+                 GestureDetector(
+                     onTap: (){
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(builder: (context) => DepartmentList()),
+                       );
+                     },
+                  child: SubReportsOrSubSettings(iconString: "assets/networking.png",title: TextStrings.Departments,subtitle: TextStrings.ManageDepartments,)),
                  SizedBox(height: 18.h,),
                  SubReportsOrSubSettings(iconString: "assets/chair.png",title: TextStrings.Designations,subtitle: TextStrings.ManageDesignations,),
-
                  SizedBox(height: 18.h,),
                  SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.Profile,subtitle: TextStrings.ManageyourProfile,),
-
                  SizedBox(height: 18.h,),
                  SubReportsOrSubSettings(iconString: "assets/lock.png",title: TextStrings.Password,subtitle: TextStrings.ChangePassword,),
-
-
-
-
-
-
                 ],
               ),
             ),
           ),
+
         ),
       ),
     );
@@ -213,15 +222,13 @@ class Settings extends StatelessWidget {
 }
 
 class SubReportsOrSubSettings extends StatelessWidget {
-   SubReportsOrSubSettings({
+  SubReportsOrSubSettings({
     Key? key, required this.title, required this.subtitle, required this.iconString,
   }) : super(key: key);
-
 
   final String title;
   final String subtitle;
   final String iconString;
-
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +259,6 @@ class SubReportsOrSubSettings extends StatelessWidget {
             children: [
               Text(title,style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
               Text(subtitle,style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-
             ],
           ),
           Spacer(),
@@ -272,7 +278,7 @@ class SubReportsOrSubSettings extends StatelessWidget {
               color: greybackground,
             ),
             child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
-          SizedBox(width: 20.w,)
+          SizedBox(width: 20.w,),
         ],
       ),
     );

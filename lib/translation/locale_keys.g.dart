@@ -37,9 +37,11 @@ abstract class TextStrings {
   static const Setting='Settings';
 
   static const Employees='Employees';
+
   static const ManageEmployees='Manage Employees';
 
-  static const Shits='Shits';
+  static const Shifts='Shifts';
+
   static const ManageShifts='Manage Shifts';
 
   static const Departments='Departments';
@@ -53,6 +55,7 @@ abstract class TextStrings {
   static const ManageyourProfile='Manage your Profile';
 
   static const ChangePassword='Change Password';
+
   static const Profile='Profile';
 
 
