@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,11 +19,11 @@ class Requests extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: AppBar(
+            leading: SizedBox(),
             backgroundColor: Colors.transparent,
             flexibleSpace:  Container(
               height: 102.h,
@@ -45,9 +47,14 @@ class Requests extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0.sp),
-                        child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.sp),
+                          child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                        ),
                       ),
                       Spacer(),
                       Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),

@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
@@ -23,6 +25,7 @@ class SelectedLeave extends StatelessWidget {
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: AppBar(
+            leading: SizedBox(),
             backgroundColor: Colors.transparent,
             flexibleSpace:  Container(
               height: 102.h,
@@ -46,9 +49,14 @@ class SelectedLeave extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0.sp),
-                        child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.sp),
+                          child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                        ),
                       ),
                       Spacer(),
                       Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
@@ -323,9 +331,11 @@ class SelectedLeave extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
+
                 SizedBox(
                   height: 15.h,
                 ),
+
                 Padding(
                   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
                   child: CsMainInputField1(
@@ -369,8 +379,6 @@ class SelectedLeave extends StatelessWidget {
                   //   ),
                   // ),
                 ),
-
-
 
                 Padding(
                   padding:  EdgeInsets.only(top: 8.0.h,right: 20.w,left: 20.w),
@@ -503,6 +511,7 @@ class SelectedLeave extends StatelessWidget {
                     ),
                   ),
                 ),
+
               ],
             ),
           ),

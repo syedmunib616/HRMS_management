@@ -15,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
   TextEditingController textEditingController1 = TextEditingController();
+  TextEditingController textEditingController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,7 @@ class Login extends StatelessWidget {
                           ),
 
                           Text(
-                            "Sgin up to continue",
+                            "Sign up to continue",
                             style: GoogleFonts.poppins(fontSize: 15.sp,color: settingFontBackColor(context),fontWeight: FontWeight.w500),
                           ),
 
@@ -154,7 +155,7 @@ class Login extends StatelessWidget {
                           CsMainInputField(
                             providerGenerator: providerGenerator,
                             width: 287.w,
-                            mycontroller: textEditingController1,
+                            mycontroller: textEditingController2,
                             myhint: TextStrings.Password,
                             prefixIcon: Icons.lock,
                             isPassword: false,

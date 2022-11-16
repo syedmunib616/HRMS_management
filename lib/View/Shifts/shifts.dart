@@ -356,11 +356,15 @@ class Shifts extends StatelessWidget {
                     child: Row(
                       children:  [
                         SizedBox(width: 20.w,),
-                        Text("Department ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                        Text("Shifts",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
                         Spacer(),
+                        SizedBox(width: 20.w,),
+                        Text("Start Time",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                        SizedBox(width: 20.w,),
+                        Text("End Time",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                        SizedBox(width: 20.w,),
                         Text("Status",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
                         SizedBox(width: 20.w,),
-
                       ],
                     ),
                   ),
@@ -368,7 +372,6 @@ class Shifts extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-
                 Padding(
                   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
                   child: Column(
@@ -377,65 +380,22 @@ class Shifts extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(width: 15.w,),
-
-                          Text("Finance ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                          Text("Trail Shifts",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
                           Spacer(),
-                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
-                          SizedBox(width: 15.w,)
+                          Text("09:00",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
+                          SizedBox(width: 40.w,),
+                          Text("Active",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
+                          SizedBox(width: 27.w,),
+                          Text("Active",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
+                          SizedBox(width: 20.w,)
                         ],
                       ),
                       SizedBox(
                         height: 15.h,
                       ),
-                      Row(
-                        children: [
-
-                          SizedBox(width: 15.w,),
-                          Text("Human Resource",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
-                          Spacer(),
-                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
-                          SizedBox(width: 15.w,)
-
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Row(
-                        children: [
-
-                          SizedBox(width: 15.w,),
-                          Text("Marketing",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
-                          Spacer(),
-                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
-                          SizedBox(width: 15.w,)
-
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Row(
-                        children: [
-
-                          SizedBox(width: 15.w,),
-                          Text("IT",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
-                          Spacer(),
-                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
-                          SizedBox(width: 15.w,)
-
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-
-
-
                     ],
                   ),
                 ),
-
               ],
             ),
           ),

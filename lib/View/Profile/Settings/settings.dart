@@ -4,22 +4,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
+import 'package:hrmanagementapp/View/Designation/designation.dart';
 import 'package:hrmanagementapp/View/employeDirectory/EmployeDirectory.dart';
+import 'package:hrmanagementapp/View/user/User.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:hrmanagementapp/View/DepartmentList/Departmentlist.dart';
 import 'package:hrmanagementapp/View/Shifts/shifts.dart';
 
-
-
-
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: AppBar(
+            leading: SizedBox(),
           backgroundColor: Colors.transparent,
           flexibleSpace:  Container(
             height: 102.h,
@@ -43,9 +44,14 @@ class Settings extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0.sp),
-                      child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0.sp),
+                        child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                      ),
                     ),
                     Spacer(),
                     Text(TextStrings.Setting,style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
@@ -205,9 +211,23 @@ class Settings extends StatelessWidget {
                      },
                   child: SubReportsOrSubSettings(iconString: "assets/networking.png",title: TextStrings.Departments,subtitle: TextStrings.ManageDepartments,)),
                  SizedBox(height: 18.h,),
-                 SubReportsOrSubSettings(iconString: "assets/chair.png",title: TextStrings.Designations,subtitle: TextStrings.ManageDesignations,),
+                 GestureDetector(
+                     onTap: (){
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(builder: (context) => Designation()),
+                       );
+                     },
+                     child: SubReportsOrSubSettings(iconString: "assets/chair.png",title: TextStrings.Designations,subtitle: TextStrings.ManageDesignations,)),
                  SizedBox(height: 18.h,),
-                 SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.Profile,subtitle: TextStrings.ManageyourProfile,),
+                 GestureDetector(
+                     onTap: (){
+                       // Navigator.push(
+                       //   context,
+                       //   MaterialPageRoute(builder: (context) => Profile()),
+                       // );
+                     },
+                     child: SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.Profile,subtitle: TextStrings.ManageyourProfile,)),
                  SizedBox(height: 18.h,),
                  SubReportsOrSubSettings(iconString: "assets/lock.png",title: TextStrings.Password,subtitle: TextStrings.ChangePassword,),
                 ],

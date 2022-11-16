@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 
 
 class EmployeeDirectory extends StatelessWidget {
- EmployeeDirectory({Key? key}) : super(key: key);
+  EmployeeDirectory({Key? key}) : super(key: key);
   TextEditingController textEditingController1 = TextEditingController();
 
   @override
@@ -93,7 +93,6 @@ class EmployeeDirectory extends StatelessWidget {
                       //   //   ],
                       //   // ),
                       // ),
-
                     ],
                   ),
                   // Container(
@@ -181,7 +180,6 @@ class EmployeeDirectory extends StatelessWidget {
                 ],
               ),
             ),
-
           ),
           body: SingleChildScrollView(
             child: Column(

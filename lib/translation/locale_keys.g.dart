@@ -20,7 +20,7 @@ abstract class TextStrings {
   static const Phone_No	= "Phone No";
   static const Password	= "Password";
   static const ConformPassword	= "Conform Password";
-  static const Sgin_Up= "Sgin Up";
+  static const Sgin_Up= "Sign Up";
 
 
 
