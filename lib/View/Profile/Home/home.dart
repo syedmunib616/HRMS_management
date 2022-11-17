@@ -50,7 +50,6 @@ class _HomeState extends State<Home> {
               Container(
                 height: 102.h,
                 width:MediaQuery.of(context).size.width,
-
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -63,7 +62,6 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                   color: whiteClr,
                 ),
-
                 child: Column(
                  crossAxisAlignment:CrossAxisAlignment.center,
                   children: [
@@ -85,7 +83,6 @@ class _HomeState extends State<Home> {
                               height: 8.h,
                               width: 130.w,
                               decoration: BoxDecoration(
-
                                 borderRadius: BorderRadius.circular(20.sp),
                                 color: greyOpenClr,
                               ),

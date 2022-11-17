@@ -22,8 +22,13 @@ abstract class TextStrings {
   static const ConformPassword	= "Conform Password";
   static const Sgin_Up= "Sign Up";
 
+  static const OldPassword= "Old Password";
 
+  static const NewPassword= "New Password";
 
+  static const ConfirmPassword= "Confirm Password";
+
+  static const Submit= "Submit";
   static const Create_Account	=	"Create_Account";
   static const Done ='Done';
   static const Search ='Search';
@@ -35,7 +40,6 @@ abstract class TextStrings {
   static const Remember_Me='Remember Me';
   static const Forgot_your_password='Forgot your password?';
   static const Setting='Settings';
-
   static const Employees='Employees';
 
   static const ManageEmployees='Manage Employees';
@@ -60,12 +64,23 @@ abstract class TextStrings {
 
 
 
-
-
-
-
+  static const DailyAttendance='Daily Attendance';
+  static const CheckPresentsAbsentList='Check Presents & Absent List';
+  static const LateComers='Late Comers';
+  static const GetLateComersList='Get Late Comers List';
+  static const EarlyLeavers='Early Leavers';
+  static const GetEarlyLeaversList='Get Early Leavers List';
+  static const ByDepartment='By Department';
+  static const AttendancebyDepartment='Attendance by Department';
+  static const ByDesignation='By Designation';
+  static const AttendancebyDesignation='Attendance by Designation';
+  static const ByEmployee='By Employee';
+  static const AttendancedataofspecifiedEmployees='Attendance data of specified Employees';
+  static const PunchedVisits='Punched Visits';
+  static const ListofPinchedVisits='List of Pinched Visits';
+  static const SuspiciousSelfies='Suspicious Selfies';
+  static const ListofSuspiciousSelfies='List of Suspicious Selfies';
+  static const OutsideGeoFence='Outside Geo-Fence';
+  static const Employeesnotinthespecifiedlocation='Employees not in the specified location';
 
 }
-
-
-
