@@ -4,31 +4,30 @@ import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
+import 'package:hrmanagementapp/View/ByDepartment/bydepartment.dart';
+import 'package:hrmanagementapp/View/ByDesignation/bydesignation.dart';
+import 'package:hrmanagementapp/View/ByEmployee/byemployee.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Designation/designation.dart';
-import 'package:hrmanagementapp/View/Profile/Reports/components/dailyattendance.dart';
-import 'package:hrmanagementapp/View/Profile/Reports/components/latecomers.dart';
-import 'package:hrmanagementapp/View/Profile/Reports/components/suspicious.dart';
+import 'package:hrmanagementapp/View/LateComers/latecomers.dart';
+import 'package:hrmanagementapp/View/Paswrd/paswrd.dart';
 import 'package:hrmanagementapp/View/Profile/Settings/component/subreportsOrSubSettings.dart';
+import 'package:hrmanagementapp/View/PunchedVisits/punchedvisits.dart';
+import 'package:hrmanagementapp/View/Suspicious/suspicious.dart';
 import 'package:hrmanagementapp/View/changepassword/Changepassword.dart';
+import 'package:hrmanagementapp/View/dailyAttendance/dailyattendance.dart';
+import 'package:hrmanagementapp/View/earlyLeavers/earlyleavers.dart';
 import 'package:hrmanagementapp/View/user/User.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:hrmanagementapp/View/DepartmentList/Departmentlist.dart';
 
-import 'components/bydepartment.dart';
-import 'components/bydesignation.dart';
-import 'components/byemployee.dart';
-import 'components/earlyleavers.dart';
-import 'components/paswrd.dart';
-import 'components/punchedvisits.dart';
 
 class Reports extends StatelessWidget {
   const Reports({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return
-      SafeArea(
+    return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: AppBar(
@@ -43,14 +42,15 @@ class Reports extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.01),
                     spreadRadius: 2,
                     blurRadius: 1,
-                    offset: const Offset(0, 2), // changes position of shadow
+                    offset: const Offset(0, 2),
+                    // changes position of shadow
                   ),
                 ],
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                 color: whiteClr,
               ),
               child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center ,
+                crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 20.h,),
                   Row(
@@ -98,7 +98,7 @@ class Reports extends StatelessWidget {
                         //   ],
                         // ),
                       ),
-                      SizedBox(width: 15.w,)
+                      SizedBox(width: 15.w,),
                     ],
                   ),
                   // Container(
@@ -187,12 +187,12 @@ class Reports extends StatelessWidget {
               ),
             ),
           ),
-
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0.w),
               child: Column(
                 children: [
+
                   SizedBox(
                     height: 20.h,
                   ),
@@ -215,7 +215,6 @@ class Reports extends StatelessWidget {
                         );
                       },
                       child: SubReportsOrSubSettings(iconString: "assets/clock.png",title: TextStrings.LateComers,subtitle: TextStrings.GetLateComersList,)),
-
                   SizedBox(height: 18.h,),
                   GestureDetector(
                       onTap: (){
@@ -225,7 +224,6 @@ class Reports extends StatelessWidget {
                         );
                       },
                       child: SubReportsOrSubSettings(iconString: "assets/hour.png",title: TextStrings.EarlyLeavers,subtitle: TextStrings.GetEarlyLeaversList,)),
-
                   SizedBox(height: 18.h,),
                   GestureDetector(
                       onTap: (){
@@ -280,11 +278,11 @@ class Reports extends StatelessWidget {
                         );
                       },
                       child: SubReportsOrSubSettings(iconString: "assets/gps.png",title: TextStrings.SuspiciousSelfies,subtitle: TextStrings.ListofPinchedVisits,)),
+
                 ],
               ),
             ),
           ),
-
         ),
       ),
     );
