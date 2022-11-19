@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:hrmanagementapp/View/dailyAttendance/dailyattendance.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:provider/provider.dart';
 import 'Provider/Storage_Future.dart';
@@ -69,7 +70,10 @@ class MyApp extends StatelessWidget {
                       // supportedLocales: context.supportedLocales,
                       // locale: context.locale,
                       // home:  const Homepage(),
-                      home: const ScreenSplach(),
+                      // home: const ScreenSplach(),
+
+                      home: DailyAttendance(),
+
                       //home: const TestScreen(),
                       //home: const ScreenResetPassword(),
                       //home: SelectCountry(),

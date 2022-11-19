@@ -62,6 +62,8 @@ abstract class TextStrings {
 
   static const Profile='Profile';
 
+  static const Timein='Time In';
+  static const Timeout='Time Out';
 
 
   static const DailyAttendance='Daily Attendance';
