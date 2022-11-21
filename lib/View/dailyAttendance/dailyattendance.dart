@@ -1,4 +1,4 @@
-import 'dart:html';
+
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
-import 'package:cr_calendar/cr_calendar.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
-import 'package:hrmanagementapp/View/dailyAttendance/dailyattendance.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
-import 'package:flutter_rounded_date_picker/src/material_rounded_year_picker_style.dart';
 
 
 class DailyAttendance extends StatefulWidget {
@@ -609,6 +605,7 @@ class _DailyAttendanceState extends State<DailyAttendance> {
                 initialIndex: 2,
                 child:  Scaffold(
                   appBar:  AppBar(
+                    leading: SizedBox(),
                     flexibleSpace:  Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children:  [
@@ -833,19 +830,21 @@ class TabsforDailyAbsentLateEarly extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment:CrossAxisAlignment.start ,
                       children: [
+
                         Text("Umar",style: GoogleFonts.poppins(fontSize:12.sp,
                             color: blackClr,fontWeight: FontWeight.w600),),
-
                         Text("Time In: 247, BMCHS Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
                             color: blackClr,fontWeight: FontWeight.w400),),
-
                         Text("Time Out: 247, Sharfabad Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
                             color: blackClr,fontWeight: FontWeight.w400),),
+
                       ],
                     ),
                   ),
                 ),
+
                 Spacer(),
+
                 Padding(
                   padding:  EdgeInsets.only(left: 35.0.w),
                   child: Column(
@@ -864,7 +863,9 @@ class TabsforDailyAbsentLateEarly extends StatelessWidget {
                     ],
                   )
                 ),
+
                 SizedBox(width: 20.w,),
+
                 Padding(
                   padding:  EdgeInsets.only(left: 35.0.w),
                   child: Column(
