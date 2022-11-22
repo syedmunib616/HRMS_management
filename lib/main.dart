@@ -3,8 +3,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:hrmanagementapp/View/ByDepartment/bydepartment.dart';
 import 'package:hrmanagementapp/View/LateComers/latecomers.dart';
 import 'package:hrmanagementapp/View/dailyAttendance/dailyattendance.dart';
+import 'package:hrmanagementapp/View/earlyLeavers/earlyleavers.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:provider/provider.dart';
 import 'Provider/Storage_Future.dart';
@@ -13,22 +15,20 @@ import 'Theme/Theme_Provider.dart';
 import 'Theme/Theme_Style.dart';
 import 'View/signup/Sginup.dart';
 
-void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   // EasyLocalization(
-  //     supportedLocales: const [Locale('en', 'US'), Locale('fr', 'FR'), Locale('es', 'ES'), Locale('ru', 'RU'),Locale('zh', 'CN'),
-  //       Locale('pl', 'PL'),Locale('de', 'DE'),Locale('th', 'TH'),Locale('ko', 'KR'),Locale('cs', 'CZ'),Locale('ja', 'JP'),Locale('it', 'IT'),
-  //       Locale('pt', 'PT'),Locale('ar', 'SA'),
-  //     ],
-  //     path: 'assets/translations',
-  //     fallbackLocale: const Locale('en', 'US',),
-  //     assetLoader: const CodegenLoader(),
-  //     child: MyApp()
-  // );
+    //     supportedLocales: const [Locale('en', 'US'), Locale('fr', 'FR'), Locale('es', 'ES'), Locale('ru', 'RU'),Locale('zh', 'CN'),
+    //       Locale('pl', 'PL'),Locale('de', 'DE'),Locale('th', 'TH'),Locale('ko', 'KR'),Locale('cs', 'CZ'),Locale('ja', 'JP'),Locale('it', 'IT'),
+    //       Locale('pt', 'PT'),Locale('ar', 'SA'),
+    //     ],
+    //     path: 'assets/translations',
+    //     fallbackLocale: const Locale('en', 'US',),
+    //     assetLoader: const CodegenLoader(),
+    //     child: MyApp()
+    // );
   runApp(MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -71,11 +71,14 @@ class MyApp extends StatelessWidget {
                       // supportedLocales: context.supportedLocales,
                       // locale: context.locale,
                       // home:  const Homepage(),
-                       home: const ScreenSplach(),
-                      //home: LateComers(),
+
+
+                      // home: const ScreenSplach(),
+                      home:   ByDepartment(),
+
+
 
                       //home: DailyAttendance(),
-
                       //home: const TestScreen(),
                       //home: const ScreenResetPassword(),
                       //home: SelectCountry(),
@@ -106,10 +109,8 @@ class MyApp extends StatelessWidget {
 
 class ScreenSplach extends StatefulWidget {
   const ScreenSplach({Key? key}) : super(key: key);
-
   @override
   State<ScreenSplach> createState() => _ScreenSplachState();
-
 }
 
 class _ScreenSplachState extends State<ScreenSplach> {
@@ -122,12 +123,13 @@ class _ScreenSplachState extends State<ScreenSplach> {
     //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Homepage()),);
     //Timer(const Duration(milliseconds: 990000),
                   //Timer(const Duration(milliseconds: 490),
-                      Timer(const Duration(milliseconds: 4900),
+          Timer(const Duration(milliseconds: 4900),
           () => Navigator.of(context).pushReplacement(MaterialPageRoute(
           //  builder: (BuildContext context) => const ScreenBoarding())));
           // builder: (BuildContext context) => SelectCountry())));
           builder: (BuildContext context) => Login(),)));
     super.initState();
+
   }
 
   @override
@@ -168,7 +170,6 @@ class _ScreenSplachState extends State<ScreenSplach> {
         ),
       );
     }
-
   }
 
 // class GoogleSignInProvider extends ChangeNotifier{

@@ -30,16 +30,16 @@ class Reports extends StatelessWidget {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
-          appBar: AppBar(
-            leading: SizedBox(),
-            backgroundColor: Colors.transparent,
-            flexibleSpace:  Container(
+          appBar: PreferredSize(
+            preferredSize:  Size.fromHeight(94.0.h),
+
+            child:  Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.01),
+                    color: Colors.grey.withOpacity(0.4),
                     spreadRadius: 2,
                     blurRadius: 1,
                     offset: const Offset(0, 2),
@@ -187,6 +187,8 @@ class Reports extends StatelessWidget {
               ),
             ),
           ),
+
+
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0.w),

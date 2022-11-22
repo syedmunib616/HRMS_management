@@ -360,7 +360,7 @@ class _DailyAttendanceState extends State<DailyAttendance> {
                                  //color: Colors.black45,
                                  alignment:Alignment.center ,
                                  width: 130.w,
-                                 child: Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp,
+                                 child: Text("Daily Attendance",style: GoogleFonts.poppins(fontSize:12.sp,
                                      color: Colors.black,fontWeight: FontWeight.w500),),
                               ),
                               SizedBox(height: 10.h,),
@@ -632,10 +632,12 @@ class _DailyAttendanceState extends State<DailyAttendance> {
                   /*--------------- Build Tab body here -------------------*/
                   body: const TabBarView(
                     children: <Widget>[
+
                       TabsforDailyAbsentLateEarly(),
                       TabsforDailyAbsentLateEarly(),
                       TabsforDailyAbsentLateEarly(),
                       TabsforDailyAbsentLateEarly(),
+
                     ],
                   ),
                 ),

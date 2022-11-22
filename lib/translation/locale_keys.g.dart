@@ -55,7 +55,6 @@ abstract class TextStrings {
   static const Timein='Time In';
   static const Timeout='Time Out';
 
-
   static const DailyAttendance='Daily Attendance';
   static const CheckPresentsAbsentList='Check Presents & Absent List';
   static const LateComers='Late Comers';
@@ -74,5 +73,8 @@ abstract class TextStrings {
   static const ListofSuspiciousSelfies='List of Suspicious Selfies';
   static const OutsideGeoFence='Outside Geo-Fence';
   static const Employeesnotinthespecifiedlocation='Employees not in the specified location';
+  static const Earlyby='Early by';
+
+
 
 }
