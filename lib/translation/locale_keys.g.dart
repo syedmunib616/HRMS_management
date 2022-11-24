@@ -14,6 +14,13 @@ abstract class LocaleKeys {
 
 //airpods)
 abstract class TextStrings {
+
+
+  static const Total	= "Total";
+  static const Present	= "Present";
+  static const Absent	= "Absent";
+
+
   static const Name	= "Name";
   static const Company_name	= "Company Name";
   static const Email	= "Email";
@@ -74,6 +81,7 @@ abstract class TextStrings {
   static const OutsideGeoFence='Outside Geo-Fence';
   static const Employeesnotinthespecifiedlocation='Employees not in the specified location';
   static const Earlyby='Early by';
+
 
 
 

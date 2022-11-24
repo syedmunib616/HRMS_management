@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hrmanagementapp/View/ByDepartment/bydepartment.dart';
+import 'package:hrmanagementapp/View/ByDesignation/bydesignation.dart';
 import 'package:hrmanagementapp/View/LateComers/latecomers.dart';
 import 'package:hrmanagementapp/View/dailyAttendance/dailyattendance.dart';
 import 'package:hrmanagementapp/View/earlyLeavers/earlyleavers.dart';
@@ -72,12 +73,9 @@ class MyApp extends StatelessWidget {
                       // locale: context.locale,
                       // home:  const Homepage(),
 
+                      home: const ScreenSplach(),
 
-                      // home: const ScreenSplach(),
-                      home:   ByDepartment(),
-
-
-
+                      //home:   ByDesignation(),
                       //home: DailyAttendance(),
                       //home: const TestScreen(),
                       //home: const ScreenResetPassword(),

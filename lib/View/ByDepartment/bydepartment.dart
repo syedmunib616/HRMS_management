@@ -26,6 +26,11 @@ class _ByDepartmentState extends State<ByDepartment> {
   late Duration duration;
   String time='';
   //late DateTime dateTime;
+
+  var items =  ['Finance','Marketing','IT',];
+  String dropdownvalue = 'Marketing';
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -168,22 +173,73 @@ class _ByDepartmentState extends State<ByDepartment> {
                 ),
                 /*--------------- Build Tab body here -------------------*/
                 body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: EdgeInsets.all(9.0.sp),
+                      child: Container(
+                        height: 37.h,
+                        width: 150.w,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.25),
+                              spreadRadius: 1,
+                              blurRadius: 1,
+                              offset: const Offset(0, 2), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(5.sp),
+                          color: whiteClr,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                             Padding(
+                               padding: const EdgeInsets.only(left: 8.0),
+                               child: SizedBox(
+                                 height: 25.h,
+                                 width: 25.w,
+                                 child: Image.asset('assets/office.png'),
+                               ),
+                             ),
+                            SizedBox(width: 20.w,),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                style: GoogleFonts.poppins(fontSize:12.sp,
+                                    color: fontgrey,fontWeight: FontWeight.w400),
+                                elevation: 0,
+                                value: dropdownvalue,
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                items:items.map((String items) {
+                                  return DropdownMenuItem(
+                                          value: items,
+                                          child: Text(items)
+                                      );
+                                    }
+                                  ).toList(),
+                                  onChanged: (String? newValue){
+                                    setState(() {
+                                        dropdownvalue = newValue!;
+                                      }
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     Container(
-                      color: Colors.yellowAccent,
-                      height: 50.h,
+                      //color: Colors.purpleAccent,
+                      height: 485.h,
                       width: MediaQuery.of(context).size.width,
-                    ),
-                    Container(
-                      color: Colors.purpleAccent,
-                      height: 492.h,
-                      width: MediaQuery.of(context).size.width,
-                      child: const TabBarView(
+                      child: TabBarView(
                         children: <Widget>[
-                          TabsforDailyAbsentLateEarly(),
-                          TabsforDailyAbsentLateEarly(),
-                          TabsforDailyAbsentLateEarly(),
-                          TabsforDailyAbsentLateEarly(),
+                          DepartmentsWiseAttendance(department: "IT",),
+                          DepartmentsWiseAttendance(department: "Finance",),
+                          DepartmentsWiseAttendance(department: "Marketing",),
+                          DepartmentsWiseAttendance(department: "HR",),
                         ],
                       ),
                     ),
@@ -208,7 +264,6 @@ class _ByDepartmentState extends State<ByDepartment> {
     //   ),
     // );
   }
-
 
   Future<DateTime?> buildShowRoundedDatePicker(BuildContext context) {
     return showRoundedDatePicker(
@@ -250,5 +305,113 @@ class _ByDepartmentState extends State<ByDepartment> {
     );
   }
 
+}
 
+class DepartmentsWiseAttendance extends StatelessWidget {
+   DepartmentsWiseAttendance({Key? key, required this.department}) : super(key: key);
+
+  final String department;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: whiteClr,
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10.h,),
+              Container(
+                height: 30.h,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.25),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(5.sp),
+                  color: whiteClr,
+                ),
+                child: Row(
+                  children: [
+
+                    Padding(
+                      padding:  EdgeInsets.only(left: 11.0.w),
+                      child: Text(TextStrings.Departments,style: GoogleFonts.poppins(fontSize:10.sp,
+                          color: fontgrey,fontWeight: FontWeight.w600),),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding:  EdgeInsets.only(left: 35.0.w),
+                      child: Text(TextStrings.Total,style: GoogleFonts.poppins(fontSize:10.sp,
+                          color: fontgrey,fontWeight: FontWeight.w600),),
+                    ),
+                    Padding(
+                      padding:  EdgeInsets.only(left: 35.0.w),
+                      child: Text(TextStrings.Present,style: GoogleFonts.poppins(fontSize:10.sp,
+                          color: fontgrey,fontWeight: FontWeight.w600),),
+                    ),
+                    Padding(
+                      padding:  EdgeInsets.only(left: 35.0.w),
+                      child: Text(TextStrings.Absent,style: GoogleFonts.poppins(fontSize:10.sp,
+                          color: fontgrey,fontWeight: FontWeight.w600),),
+                    ),
+                    SizedBox(width: 14.w,),
+
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 17.h,),
+
+              TotalPresentAbsent(department: "Finance"),
+              TotalPresentAbsent(department: "IT"),
+
+              TotalPresentAbsent(department: "Marketing"),
+
+
+            ],
+          ),
+        )
+    );
+  }
+
+}
+
+class TotalPresentAbsent extends StatelessWidget {
+  TotalPresentAbsent({
+    Key? key, required this.department,
+  }) : super(key: key);
+
+  final String department;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 13.w,),
+        Container(
+          height: 30.h,
+          width: 150.w,
+          // color: Colors.yellow,
+          child: Text(department,style: GoogleFonts.poppins(fontSize:12.sp,
+                      color: blackClr,fontWeight: FontWeight.w400),),
+        ),
+        SizedBox(width: 23.w,),
+        Text("5",style: GoogleFonts.poppins(fontSize:12.sp,
+            color: blackClr,fontWeight: FontWeight.w400),),
+        Spacer(),
+        Text("3",style: GoogleFonts.poppins(fontSize:12.sp,
+            color: blackClr,fontWeight: FontWeight.w400),),
+        Spacer(),
+        Text("2",style: GoogleFonts.poppins(fontSize:12.sp,
+            color: blackClr,fontWeight: FontWeight.w400),),
+        SizedBox(width: 30.w,)
+      ],
+    );
+  }
 }
