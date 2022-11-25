@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hrmanagementapp/View/ByDepartment/bydepartment.dart';
 import 'package:hrmanagementapp/View/ByDesignation/bydesignation.dart';
+import 'package:hrmanagementapp/View/ByEmployee/byemployee.dart';
 import 'package:hrmanagementapp/View/LateComers/latecomers.dart';
 import 'package:hrmanagementapp/View/dailyAttendance/dailyattendance.dart';
 import 'package:hrmanagementapp/View/earlyLeavers/earlyleavers.dart';
@@ -75,7 +76,8 @@ class MyApp extends StatelessWidget {
 
                       home: const ScreenSplach(),
 
-                      //home:   ByDesignation(),
+                      //home:   ByEmployee(),
+
                       //home: DailyAttendance(),
                       //home: const TestScreen(),
                       //home: const ScreenResetPassword(),
@@ -88,6 +90,7 @@ class MyApp extends StatelessWidget {
                   // localizationsDelegates: context.localizationDelegates,
                   // supportedLocales: context.supportedLocales,
                   // locale: context.locale,
+
                 ),
               ),
             ],
@@ -102,7 +105,6 @@ class MyApp extends StatelessWidget {
     //   home: const ScreenSplach(),
     // );
   }
-
 }
 
 class ScreenSplach extends StatefulWidget {
@@ -127,7 +129,6 @@ class _ScreenSplachState extends State<ScreenSplach> {
           // builder: (BuildContext context) => SelectCountry())));
           builder: (BuildContext context) => Login(),)));
     super.initState();
-
   }
 
   @override
@@ -169,6 +170,8 @@ class _ScreenSplachState extends State<ScreenSplach> {
       );
     }
   }
+
+
 
 // class GoogleSignInProvider extends ChangeNotifier{
 //   final googleSignIn= GoogleSignIn();

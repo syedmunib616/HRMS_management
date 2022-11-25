@@ -1,6 +1,8 @@
 // // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
 
+import 'dart:html';
+
 abstract class LocaleKeys {
 
   static const firstData = 'firstData';
@@ -14,6 +16,10 @@ abstract class LocaleKeys {
 
 //airpods)
 abstract class TextStrings {
+
+  static const In	= "In";
+  static const Out	= "Out";
+  static const Client	= "Client";
 
 
   static const Total	= "Total";

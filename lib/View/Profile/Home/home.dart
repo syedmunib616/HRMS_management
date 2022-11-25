@@ -73,7 +73,8 @@ class _HomeState extends State<Home> {
                           child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
                         ),
                         Spacer(),
-                        Column(mainAxisAlignment: MainAxisAlignment.center,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                             SizedBox(
@@ -102,11 +103,12 @@ class _HomeState extends State<Home> {
                                         width: 133.w,
                                       ),
                                     )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+
                         Spacer(),
                         Container(
                           width: 30.0.w,

@@ -294,6 +294,148 @@ class PieChart21State extends State {
 }
 
 
+class PieChartEmployee extends StatefulWidget {
+  const PieChartEmployee({super.key});
+
+  @override
+  State<StatefulWidget> createState() =>PieChartEmployeeState();
+}
+
+class PieChartEmployeeState extends State {
+  int touchedIndex = -1;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 220.h,
+      width: 220.w,
+      child: Row(
+
+        children: <Widget>[
+          // const SizedBox(
+          //   height: 18,
+          // ),
+          Expanded(
+            child: SizedBox(
+              height: 220.h,
+              width: 220.w,
+              child: PieChart(
+                PieChartData(
+                  pieTouchData: PieTouchData(
+                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                      setState(() {
+                        if (!event.isInterestedForInteractions ||
+                            pieTouchResponse == null ||
+                            pieTouchResponse.touchedSection == null) {
+                          touchedIndex = -1;
+                          return;
+                        }
+                        touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
+                      });
+                    },
+                  ),
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 60 .sp,
+                  sections: showingSections(),
+                ),
+              ),
+            ),
+          ),
+          // Column(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: <Widget>[
+          //     const Indicator(
+          //       color: srpgradient1,
+          //       text: 'Present',
+          //       isSquare: true,
+          //     ),
+          //     SizedBox(
+          //       height: 2.h,
+          //     ),
+          //     const Indicator(
+          //       color: srpgradient2,
+          //       text: 'Late',
+          //       isSquare: true,
+          //     ),
+          //     SizedBox(
+          //       height: 2.h,
+          //     ),
+          //     const Indicator(
+          //       color: srpgradient3,
+          //       text: 'Absents',
+          //       isSquare: true,
+          //     ),
+          //     SizedBox(
+          //       height: 12.h,
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(
+          //   width: 28,
+          // ),
+        ],
+      ),
+    );
+  }
+
+  List<PieChartSectionData> showingSections() {
+    return List.generate(3, (i) {
+      final isTouched = i == touchedIndex;
+      final fontSize = isTouched ? 25.0 : 16.0;
+      final radius = isTouched ? 60.0 : 50.0;
+      switch (i) {
+        case 0:
+          return PieChartSectionData(
+            color: srpgradient1,
+            value: 40,
+            title: '40%',
+            radius: radius,
+            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+            // TextStyle(
+            //   fontSize: fontSize,
+            //   fontWeight: FontWeight.bold,
+            //   color: const Color(0xffffffff),
+            // ),
+          );
+        case 1:
+          return PieChartSectionData(
+            color: srpgradient2,
+            value: 30,
+            title: '30%',
+            radius: radius,
+            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+
+          );
+        case 2:
+          return PieChartSectionData(
+            color: srpgradient3,
+            value: 30,
+            title: '15%',
+            radius: radius,
+            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+
+          );
+      // case 3:
+      //   return PieChartSectionData(
+      //     color: const Color(0xff13d38e),
+      //     value: 15,
+      //     title: '15%',
+      //     radius: radius,
+      //     titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+      //
+      //   );
+        default:
+          throw Error();
+      }
+    });
+  }
+}
+
+
 
 
 

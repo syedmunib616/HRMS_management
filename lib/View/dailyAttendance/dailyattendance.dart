@@ -699,71 +699,7 @@ class _DailyAttendanceState extends State<DailyAttendance> {
                       borderRadius: 30.sp,
     );
   }
-  // void _showRangePicker(BuildContext context) {
-  //   FocusScope.of(context).unfocus();
-  //   showCrDatePicker(
-  //     context,
-  //     properties: DatePickerProperties(
-  //       onDateRangeSelected: _setRangeData,
-  //       dayItemBuilder: (properties) =>
-  //           PickerDayItemWidget(properties: properties),
-  //       weekDaysBuilder: (day) => WeekDaysWidget(day: day),
-  //       initialPickerDate: _beginDate ?? DateTime.now(),
-  //       pickerTitleBuilder: (date) => DatePickerTitle(date: date),
-  //       yearPickerItemBuilder: (year, isPicked) => Container(
-  //         height: 24.h,
-  //         width: 54.w,
-  //         decoration: BoxDecoration(
-  //           color: isPicked ? violet : Colors.white,
-  //           borderRadius: const BorderRadius.all(Radius.circular(28)),
-  //         ),
-  //         child: Center(
-  //           child: Text(year.toString(),
-  //               style: TextStyle(
-  //                   color: isPicked ? Colors.white : violet, fontSize: 16)),
-  //         ),
-  //       ),
-  //       controlBarTitleBuilder: (date) => Text(
-  //         DateFormat(kAppBarDateFormat).format(date).toString(),
-  //         style: const TextStyle(
-  //           fontSize: 16,
-  //           color: violet,
-  //           fontWeight: FontWeight.normal,
-  //         ),
-  //       ),
-  //       okButtonBuilder: (onPress) => ElevatedButton(
-  //         onPressed: () => onPress?.call(),
-  //         child: const Text('OK'),
-  //       ),
-  //       cancelButtonBuilder: (onPress) => OutlinedButton(
-  //         onPressed: () => onPress?.call(),
-  //         child: const Text('CANCEL'),
-  //       ),
-  //     ),
-  //   );
-  // }
-  //
-  // void _setRangeData(DateTime? begin, DateTime? end) {
-  //   if (begin == null || end == null) {
-  //     return;
-  //   }
-  //   setState(() {
-  //     _beginDate = begin;
-  //     _endDate = end;
-  //     _rangeButtonText = _parseDateRange(begin, end);
-  //   });
-  // }
-  //
-  // /// Parse selected date to readable format.
-  // String _parseDateRange(DateTime begin, DateTime end) {
-  //   if (begin.isAtSameMomentAs(end)) {
-  //     return begin.toString();
-  //     //return begin.format(kDateRangeFormat);
-  //   } else {
-  //    // return '${begin.format(kDateRangeFormat)} - ${end.format(kDateRangeFormat)}';
-  //     return '${begin} - ${end}';
-  //   }
-  // }
+
 
   Widget getTabContent(String text) {
     return Scaffold(
@@ -897,10 +833,6 @@ class TabsforDailyAbsentLateEarly extends StatelessWidget {
   }
 
 }
-
-
-
-
 
 class Tabname extends StatelessWidget {
   Tabname({required this.name,

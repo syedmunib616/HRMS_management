@@ -10,7 +10,7 @@ import 'package:hrmanagementapp/View/ByEmployee/byemployee.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Designation/designation.dart';
 import 'package:hrmanagementapp/View/LateComers/latecomers.dart';
-import 'package:hrmanagementapp/View/Paswrd/paswrd.dart';
+import 'package:hrmanagementapp/View/OutsideGeoFence/paswrd.dart';
 import 'package:hrmanagementapp/View/Profile/Settings/component/subreportsOrSubSettings.dart';
 import 'package:hrmanagementapp/View/PunchedVisits/punchedvisits.dart';
 import 'package:hrmanagementapp/View/Suspicious/suspicious.dart';
@@ -258,19 +258,11 @@ class Reports extends StatelessWidget {
                       onTap: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Paswrd()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.Password,subtitle: TextStrings.ChangePassword,)),
-                  SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
                           MaterialPageRoute(builder: (context) => PunchedVisit()),
+                              //Paswrd()),
                         );
                       },
-                      child: SubReportsOrSubSettings(iconString: "assets/pic.png",title: TextStrings.PunchedVisits,subtitle: TextStrings.ListofPinchedVisits,)),
+                      child: SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.PunchedVisits,subtitle: TextStrings.ListofPinchedVisits,)),
                   SizedBox(height: 18.h,),
                   GestureDetector(
                       onTap: (){
@@ -279,8 +271,16 @@ class Reports extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => Suspicious()),
                         );
                       },
-                      child: SubReportsOrSubSettings(iconString: "assets/gps.png",title: TextStrings.SuspiciousSelfies,subtitle: TextStrings.ListofPinchedVisits,)),
-
+                      child: SubReportsOrSubSettings(iconString: "assets/pic.png",title: TextStrings.SuspiciousSelfies,subtitle: TextStrings.ListofPinchedVisits,)),
+                  SizedBox(height: 18.h,),
+                  GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => OutsideGeoFence()),
+                        );
+                      },
+                      child: SubReportsOrSubSettings(iconString: "assets/gps.png",title: TextStrings.OutsideGeoFence,subtitle: TextStrings.Employeesnotinthespecifiedlocation,)),
                 ],
               ),
             ),

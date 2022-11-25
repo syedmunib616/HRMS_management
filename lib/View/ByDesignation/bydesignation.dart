@@ -14,18 +14,13 @@ import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_sty
 
 class ByDesignation extends StatefulWidget {
   ByDesignation({Key? key}) : super(key: key);
-
   @override
   State<ByDesignation> createState() => _ByDesignationState();
 }
-
 class _ByDesignationState extends State<ByDesignation> {
   late DateTime dateTime;
-
   late Duration duration;
-
   String time='';
-
   var items =  ['Finance','Marketing','IT',];
   String dropdownvalue = 'Marketing';
   @override
@@ -34,288 +29,17 @@ class _ByDesignationState extends State<ByDesignation> {
     duration = Duration(minutes: 10);
     super.initState();
   }
-
   DateTime? newDateTime;
-
   //late DateTime dateTime;
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
         child: CsScreenUtilInit(
           child:Scaffold(
-            // appBar: AppBar(
-            //   leading: SizedBox(),
-            //   backgroundColor: Colors.transparent,
-            //   flexibleSpace: Container(
-            //     height: 290.h,
-            //     width:MediaQuery.of(context).size.width,
-            //     decoration: BoxDecoration(
-            //         boxShadow: [
-            //           BoxShadow(
-            //             color: Colors.grey.withOpacity(0.4),
-            //             spreadRadius: 2,
-            //             blurRadius: 1,
-            //             offset: const Offset(0, 2), // changes position of shadow
-            //           ),
-            //         ],
-            //         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-            //         //color: whiteClr,
-            //         color: Colors.cyanAccent
-            //       ),
-            //      child: Row(
-            //       children:[
-            //         Padding(
-            //           padding: EdgeInsets.symmetric(horizontal: 1.0.sp),
-            //           child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-            //           ),
-            //         Column(
-            //          children:[
-            //           Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp,
-            //               color: Colors.black,fontWeight: FontWeight.w500),),
-            //           GestureDetector(
-            //             onTap: () async {
-            //               //DatePickerTitle(date: dateTime);
-            //               // _showRangePicker(context);
-            //               newDateTime = await buildShowRoundedDatePicker(context);
-            //               print(newDateTime);
-            //               if (newDateTime != null) {
-            //                 setState((){
-            //                   time=newDateTime.toString();
-            //                   time=time.substring(0,time.length-13);
-            //                   dateTime = newDateTime!;});
-            //                 print("${dateTime.month}");
-            //               }
-            //             },
-            //             child: Container(
-            //               height: 35.09.h,
-            //               width: MediaQuery.of(context).size.width,
-            //               child: Row(
-            //                 mainAxisAlignment: MainAxisAlignment.center,
-            //                 children: [
-            //                   // Container(
-            //                   //   width: 80.w,
-            //                   //   height: 40.h,
-            //                   //   decoration: BoxDecoration(
-            //                   //     boxShadow: [
-            //                   //       BoxShadow(
-            //                   //         color: Colors.grey.withOpacity(0.2),
-            //                   //         spreadRadius: 2,
-            //                   //         blurRadius: 1,
-            //                   //         offset: const Offset(0, 2), // changes position of shadow
-            //                   //       ),
-            //                   //     ],
-            //                   //     borderRadius: BorderRadius.circular(5),
-            //                   //     color: whiteClr,
-            //                   //   ),
-            //                   //   child: Column(
-            //                   //     children: [
-            //                   //       SizedBox(height: 5.h,),
-            //                   //       Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-            //                   //       Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                   //     ],
-            //                   //   ),
-            //                   // ),
-            //                   // Padding(
-            //                   //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            //                   //   child: Container(
-            //                   //     color: coverBackClr,
-            //                   //     height: 40.h,
-            //                   //     width: 1.w,
-            //                   //   ),
-            //                   // ),
-            //                   Container(
-            //                     width: 240.w,
-            //                     height: 35.09.h,
-            //                     decoration: BoxDecoration(
-            //                       boxShadow: [
-            //                         BoxShadow(
-            //                           color: Colors.grey.withOpacity(0.2),
-            //                           spreadRadius: 2,
-            //                           blurRadius: 1,
-            //                           offset: const Offset(0, 2), // changes position of shadow
-            //                         ),
-            //                       ],
-            //                       borderRadius: BorderRadius.circular(5),
-            //                       color: whiteClr,
-            //                     ),
-            //                     child: Padding(
-            //                       padding: EdgeInsets.all( 3.5.sp),
-            //                       child: Row(
-            //                         children: [
-            //                           Image.asset('assets/calender.png',height: 30.h,width: 30.w,),
-            //                           SizedBox(width: 10.w,),
-            //                           Column(
-            //                             children: [
-            //                               Text("Select Date, Day, Month & Year", style: GoogleFonts.poppins(fontSize:8.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                               Text("$time", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-            //                             ],
-            //                           ),
-            //                           const Spacer(),
-            //                           Container(
-            //                             height: 20.h,
-            //                             width: 20.w,
-            //                             decoration: const BoxDecoration(
-            //                               // boxShadow: [
-            //                               //   BoxShadow(
-            //                               //     color: Colors.grey.withOpacity(0),
-            //                               //     spreadRadius: 0,
-            //                               //     blurRadius: 1,
-            //                               //     offset: const Offset(0, 2), // changes position of shadow
-            //                               //   ),
-            //                               // ],
-            //                               // borderRadius: BorderRadius.circular(15.sp),
-            //                               // color: greybackground,
-            //                             ),
-            //                             child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),),
-            //                         ],
-            //                       ),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             ),
-            //           ),
-            //             ]
-            //           )
-            //         ]
-            //      ),
-            //   //    child: Column(
-            //   //       crossAxisAlignment:CrossAxisAlignment.center,
-            //   //       children: [
-            //   //         Row(
-            //   //           mainAxisAlignment: MainAxisAlignment.center,
-            //   //           children: [
-            //   //             Padding(
-            //   //               padding: EdgeInsets.symmetric(horizontal: 5.0.sp),
-            //   //               child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-            //   //             ),
-            //   //             Spacer(),
-            //   //             Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp,
-            //   //                 color: Colors.black,fontWeight: FontWeight.w500),),
-            //   //             Spacer(),
-            //   //             SizedBox(width: 40.w,),
-            //   //
-            //   //           ],
-            //   //         ),
-            //   //         GestureDetector(
-            //   //           onTap: () async {
-            //   //             //DatePickerTitle(date: dateTime);
-            //   //             // _showRangePicker(context);
-            //   //             newDateTime = await buildShowRoundedDatePicker(context);
-            //   //             print(newDateTime);
-            //   //             if (newDateTime != null) {
-            //   //               setState((){
-            //   //                 time=newDateTime.toString();
-            //   //                 time=time.substring(0,time.length-13);
-            //   //                 dateTime = newDateTime!;});
-            //   //               print("${dateTime.month}");
-            //   //             }
-            //   //           },
-            //   //           child: Container(
-            //   //             height: 35.09.h,
-            //   //             width: MediaQuery.of(context).size.width,
-            //   //             child: Row(
-            //   //               mainAxisAlignment: MainAxisAlignment.center,
-            //   //               children: [
-            //   //                 // Container(
-            //   //                 //   width: 80.w,
-            //   //                 //   height: 40.h,
-            //   //                 //   decoration: BoxDecoration(
-            //   //                 //     boxShadow: [
-            //   //                 //       BoxShadow(
-            //   //                 //         color: Colors.grey.withOpacity(0.2),
-            //   //                 //         spreadRadius: 2,
-            //   //                 //         blurRadius: 1,
-            //   //                 //         offset: const Offset(0, 2), // changes position of shadow
-            //   //                 //       ),
-            //   //                 //     ],
-            //   //                 //     borderRadius: BorderRadius.circular(5),
-            //   //                 //     color: whiteClr,
-            //   //                 //   ),
-            //   //                 //   child: Column(
-            //   //                 //     children: [
-            //   //                 //       SizedBox(height: 5.h,),
-            //   //                 //       Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-            //   //                 //       Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //   //                 //     ],
-            //   //                 //   ),
-            //   //                 // ),
-            //   //                 // Padding(
-            //   //                 //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            //   //                 //   child: Container(
-            //   //                 //     color: coverBackClr,
-            //   //                 //     height: 40.h,
-            //   //                 //     width: 1.w,
-            //   //                 //   ),
-            //   //                 // ),
-            //   //                 Container(
-            //   //                   width: 240.w,
-            //   //                   height: 35.09.h,
-            //   //                   decoration: BoxDecoration(
-            //   //                     boxShadow: [
-            //   //                       BoxShadow(
-            //   //                         color: Colors.grey.withOpacity(0.2),
-            //   //                         spreadRadius: 2,
-            //   //                         blurRadius: 1,
-            //   //                         offset: const Offset(0, 2), // changes position of shadow
-            //   //                       ),
-            //   //                     ],
-            //   //                     borderRadius: BorderRadius.circular(5),
-            //   //                     color: whiteClr,
-            //   //                   ),
-            //   //                   child: Padding(
-            //   //                     padding: EdgeInsets.all( 3.5.sp),
-            //   //                     child: Row(
-            //   //                       children: [
-            //   //                         Image.asset('assets/calender.png',height: 30.h,width: 30.w,),
-            //   //                         SizedBox(width: 10.w,),
-            //   //                         Column(
-            //   //                           children: [
-            //   //                             Text("Select Date, Day, Month & Year", style: GoogleFonts.poppins(fontSize:8.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //   //                             Text("$time", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-            //   //                           ],
-            //   //                         ),
-            //   //                         const Spacer(),
-            //   //                         Container(
-            //   //                           height: 20.h,
-            //   //                           width: 20.w,
-            //   //                           decoration: const BoxDecoration(
-            //   //                             // boxShadow: [
-            //   //                             //   BoxShadow(
-            //   //                             //     color: Colors.grey.withOpacity(0),
-            //   //                             //     spreadRadius: 0,
-            //   //                             //     blurRadius: 1,
-            //   //                             //     offset: const Offset(0, 2), // changes position of shadow
-            //   //                             //   ),
-            //   //                             // ],
-            //   //                             // borderRadius: BorderRadius.circular(15.sp),
-            //   //                             // color: greybackground,
-            //   //                           ),
-            //   //                           child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),),
-            //   //                       ],
-            //   //                     ),
-            //   //                   ),
-            //   //                 ),
-            //   //               ],
-            //   //             ),
-            //   //           ),
-            //   //         ),
-            //   //
-            //   //
-            //   //
-            //   //   ],
-            //   // ),
-            // ),
-            // ),
+
             appBar: PreferredSize(
               preferredSize:  Size.fromHeight(94.0.h),
               child: Container(
-                // decoration: const BoxDecoration(
-                //   gradient: LinearGradient(
-                //     colors: <Color>[Colors.blue, Colors.pink],
-                //   ),
-                // ),
                 child:  Container(
                   height: 300.h,
                   width:MediaQuery.of(context).size.width,
@@ -373,37 +97,6 @@ class _ByDesignationState extends State<ByDesignation> {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
-                                            // Container(
-                                            //   width: 80.w,
-                                            //   height: 40.h,
-                                            //   decoration: BoxDecoration(
-                                            //     boxShadow: [
-                                            //       BoxShadow(
-                                            //         color: Colors.grey.withOpacity(0.2),
-                                            //         spreadRadius: 2,
-                                            //         blurRadius: 1,
-                                            //         offset: const Offset(0, 2), // changes position of shadow
-                                            //       ),
-                                            //     ],
-                                            //     borderRadius: BorderRadius.circular(5),
-                                            //     color: whiteClr,
-                                            //   ),
-                                            //   child: Column(
-                                            //     children: [
-                                            //       SizedBox(height: 5.h,),
-                                            //       Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                                            //       Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                            //     ],
-                                            //   ),
-                                            // ),
-                                            // Padding(
-                                            //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                            //   child: Container(
-                                            //     color: coverBackClr,
-                                            //     height: 40.h,
-                                            //     width: 1.w,
-                                            //   ),
-                                            // ),
                                             Container(
                                               width: 170.w,
                                               height: 40.0.h,
@@ -436,16 +129,6 @@ class _ByDesignationState extends State<ByDesignation> {
                                                       height: 20.h,
                                                       width: 20.w,
                                                       decoration: const BoxDecoration(
-                                                        // boxShadow: [
-                                                        //   BoxShadow(
-                                                        //     color: Colors.grey.withOpacity(0),
-                                                        //     spreadRadius: 0,
-                                                        //     blurRadius: 1,
-                                                        //     offset: const Offset(0, 2), // changes position of shadow
-                                                        //   ),
-                                                        // ],
-                                                        // borderRadius: BorderRadius.circular(15.sp),
-                                                        // color: greybackground,
                                                       ),
                                                       child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),),
                                                   ],
@@ -533,132 +216,6 @@ class _ByDesignationState extends State<ByDesignation> {
                         ),
                         ]
                       ),
-                  //    child: Column(
-                  //       crossAxisAlignment:CrossAxisAlignment.center,
-                  //       children: [
-                  //         Row(
-                  //           mainAxisAlignment: MainAxisAlignment.center,
-                  //           children: [
-                  //             Padding(
-                  //               padding: EdgeInsets.symmetric(horizontal: 5.0.sp),
-                  //               child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                  //             ),
-                  //             Spacer(),
-                  //             Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp,
-                  //                 color: Colors.black,fontWeight: FontWeight.w500),),
-                  //             Spacer(),
-                  //             SizedBox(width: 40.w,),
-                  //
-                  //           ],
-                  //         ),
-                  //         GestureDetector(
-                  //           onTap: () async {
-                  //             //DatePickerTitle(date: dateTime);
-                  //             // _showRangePicker(context);
-                  //             newDateTime = await buildShowRoundedDatePicker(context);
-                  //             print(newDateTime);
-                  //             if (newDateTime != null) {
-                  //               setState((){
-                  //                 time=newDateTime.toString();
-                  //                 time=time.substring(0,time.length-13);
-                  //                 dateTime = newDateTime!;});
-                  //               print("${dateTime.month}");
-                  //             }
-                  //           },
-                  //           child: Container(
-                  //             height: 35.09.h,
-                  //             width: MediaQuery.of(context).size.width,
-                  //             child: Row(
-                  //               mainAxisAlignment: MainAxisAlignment.center,
-                  //               children: [
-                  //                 // Container(
-                  //                 //   width: 80.w,
-                  //                 //   height: 40.h,
-                  //                 //   decoration: BoxDecoration(
-                  //                 //     boxShadow: [
-                  //                 //       BoxShadow(
-                  //                 //         color: Colors.grey.withOpacity(0.2),
-                  //                 //         spreadRadius: 2,
-                  //                 //         blurRadius: 1,
-                  //                 //         offset: const Offset(0, 2), // changes position of shadow
-                  //                 //       ),
-                  //                 //     ],
-                  //                 //     borderRadius: BorderRadius.circular(5),
-                  //                 //     color: whiteClr,
-                  //                 //   ),
-                  //                 //   child: Column(
-                  //                 //     children: [
-                  //                 //       SizedBox(height: 5.h,),
-                  //                 //       Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                  //                 //       Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                  //                 //     ],
-                  //                 //   ),
-                  //                 // ),
-                  //                 // Padding(
-                  //                 //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  //                 //   child: Container(
-                  //                 //     color: coverBackClr,
-                  //                 //     height: 40.h,
-                  //                 //     width: 1.w,
-                  //                 //   ),
-                  //                 // ),
-                  //                 Container(
-                  //                   width: 240.w,
-                  //                   height: 35.09.h,
-                  //                   decoration: BoxDecoration(
-                  //                     boxShadow: [
-                  //                       BoxShadow(
-                  //                         color: Colors.grey.withOpacity(0.2),
-                  //                         spreadRadius: 2,
-                  //                         blurRadius: 1,
-                  //                         offset: const Offset(0, 2), // changes position of shadow
-                  //                       ),
-                  //                     ],
-                  //                     borderRadius: BorderRadius.circular(5),
-                  //                     color: whiteClr,
-                  //                   ),
-                  //                   child: Padding(
-                  //                     padding: EdgeInsets.all( 3.5.sp),
-                  //                     child: Row(
-                  //                       children: [
-                  //                         Image.asset('assets/calender.png',height: 30.h,width: 30.w,),
-                  //                         SizedBox(width: 10.w,),
-                  //                         Column(
-                  //                           children: [
-                  //                             Text("Select Date, Day, Month & Year", style: GoogleFonts.poppins(fontSize:8.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                  //                             Text("$time", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                  //                           ],
-                  //                         ),
-                  //                         const Spacer(),
-                  //                         Container(
-                  //                           height: 20.h,
-                  //                           width: 20.w,
-                  //                           decoration: const BoxDecoration(
-                  //                             // boxShadow: [
-                  //                             //   BoxShadow(
-                  //                             //     color: Colors.grey.withOpacity(0),
-                  //                             //     spreadRadius: 0,
-                  //                             //     blurRadius: 1,
-                  //                             //     offset: const Offset(0, 2), // changes position of shadow
-                  //                             //   ),
-                  //                             // ],
-                  //                             // borderRadius: BorderRadius.circular(15.sp),
-                  //                             // color: greybackground,
-                  //                           ),
-                  //                           child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),),
-                  //                       ],
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ),
-                  //         ),
-                  //
-                  //
-                  //
-                  //   ],
-                  // ),
                 ),
               ),
             ),
@@ -672,13 +229,7 @@ class _ByDesignationState extends State<ByDesignation> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children:  [
                       TabBar(
-                        //padding: EdgeInsets.zero,
-                        //indicatorPadding: EdgeInsets.zero,
                         labelPadding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
-                        // indicator: BoxDecoration(
-                        //     // boxShadow: const [BoxShadow(color: Color(
-                        //     //     0xffdcdcdc), blurRadius: 6.0)]
-                        // ),
                         indicatorColor:srpgradient2,
                         isScrollable: true,
                         tabs: [
@@ -708,7 +259,6 @@ class _ByDesignationState extends State<ByDesignation> {
         )
       );
     }
-
   Future<DateTime?> buildShowRoundedDatePicker(BuildContext context) {
     return showRoundedDatePicker(
       height: 290.h,
@@ -749,7 +299,6 @@ class _ByDesignationState extends State<ByDesignation> {
     );
   }
 }
-
 
 class TabsforDesignationAbsentLateEarly extends StatelessWidget {
   const TabsforDesignationAbsentLateEarly({Key? key}) : super(key: key);
@@ -820,18 +369,15 @@ class TabsforDesignationAbsentLateEarly extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       width: 130.w,
                       height: 90.h,
-                      // color: Colors.cyanAccent,
                       child: Column(
                         crossAxisAlignment:CrossAxisAlignment.start ,
                         children: [
-
                           Text("Umar",style: GoogleFonts.poppins(fontSize:12.sp,
                               color: blackClr,fontWeight: FontWeight.w600),),
                           Text("Time In: 247, BMCHS Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
                               color: blackClr,fontWeight: FontWeight.w400),),
                           Text("Time Out: 247, Sharfabad Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
                               color: blackClr,fontWeight: FontWeight.w400),),
-
                         ],
                       ),
                     ),
@@ -889,3 +435,4 @@ class TabsforDesignationAbsentLateEarly extends StatelessWidget {
   }
 
 }
+
