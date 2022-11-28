@@ -35,14 +35,14 @@ class SubReportsOrSubSettings extends StatelessWidget {
             offset: const Offset(0, 2), // changes position of shadow
           ),
         ],
-        borderRadius: BorderRadius.circular(10.sp),
+        borderRadius: BorderRadius.circular(5.sp),
         color: whiteClr,
       ),
       child: Row(
         children: [
           Padding(
             padding:  EdgeInsets.only(left: 32.w,right: 20.w),
-            child: Image.asset(iconString,height: 26.h,width: 26,),
+            child: Image.asset(iconString,height: 25.h,width: 25,),
           ),
           Column(
             crossAxisAlignment:CrossAxisAlignment.start ,

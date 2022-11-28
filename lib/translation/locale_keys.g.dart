@@ -1,7 +1,7 @@
 // // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
 
-import 'dart:html';
+
 
 abstract class LocaleKeys {
 
@@ -16,6 +16,15 @@ abstract class LocaleKeys {
 
 //airpods)
 abstract class TextStrings {
+
+  static const Expenses	= "Expenses";
+  static const Leave	= "Leave";
+
+  static const CheckLeaveRequestList	= "Check Leave Request List";
+
+  static const CheckExpensesRequestList	= "Check Expenses Request List";
+
+
 
   static const In	= "In";
   static const Out	= "Out";
@@ -34,14 +43,12 @@ abstract class TextStrings {
   static const Password	= "Password";
   static const ConformPassword	= "Conform Password";
   static const Sgin_Up= "Sign Up";
-
   static const OldPassword= "Old Password";
-
   static const NewPassword= "New Password";
-
   static const ConfirmPassword= "Confirm Password";
 
-  static const Submit= "Submit";
+
+  static const Submit= "SUBMIT";
   static const Create_Account	=	"Create_Account";
   static const Done ='Done';
   static const Search ='Search';
@@ -92,3 +99,4 @@ abstract class TextStrings {
 
 
 }
+

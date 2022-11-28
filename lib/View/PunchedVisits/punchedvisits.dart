@@ -21,9 +21,11 @@ class PunchedVisit extends StatefulWidget {
 
   @override
   State<PunchedVisit> createState() => _PunchedVisitState();
+
 }
 
 class _PunchedVisitState extends State<PunchedVisit> {
+
   late DateTime dateTime;
   late Duration duration;
   String time='';
@@ -463,3 +465,4 @@ class TabsforDesignationAbsentLateEarly extends StatelessWidget {
   }
 
 }
+  

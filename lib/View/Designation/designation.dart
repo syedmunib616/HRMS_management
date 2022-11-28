@@ -5,6 +5,7 @@ import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Designation extends StatelessWidget {
   Designation({Key? key}) : super(key: key);
@@ -17,78 +18,77 @@ class Designation extends StatelessWidget {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
+          backgroundColor: backgroundcolorr,
+          appBar: PreferredSize(
+            preferredSize:  Size.fromHeight(94.0.h),
 
-          appBar: AppBar(
-            leading:
-            GestureDetector(
-              onTap: (){
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
-                child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            flexibleSpace:  Container(
+            child:  Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.01),
+                    color: Colors.grey.withOpacity(0.15),
                     spreadRadius: 2,
                     blurRadius: 1,
-                    offset: const Offset(0, 2), // changes position of shadow
+                    offset: const Offset(0, 2),
+                    // changes position of shadow
                   ),
                 ],
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                 color: whiteClr,
               ),
               child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center ,
+                crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 26.h,),
+                  SizedBox(height: 30.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Padding(
-                      //   padding: EdgeInsets.all(8.0.sp),
-                      //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                      // ),
+                      SizedBox(width: 15.w,),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.sp),
+                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+                        ),
+                      ),
                       Spacer(),
-                      Text("Designation List",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                      Text("Designations List",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
-                      // Container(
-                      //   width: 30.0.w,
-                      //   height: 30.0.h,
-                      //   // child: Stack(
-                      //   //   children: [
-                      //   //     ClipRRect(
-                      //   //       borderRadius: BorderRadius.circular(15.0.sp),
-                      //   //       child: Image.asset(
-                      //   //         'assets/user.jpg',
-                      //   //         width: 30.0.w,
-                      //   //         height: 30.0.h,
-                      //   //         fit: BoxFit.fill,
-                      //   //       ),
-                      //   //     ),
-                      //   //     Positioned(
-                      //   //       bottom: 1.5,
-                      //   //       right: 1.5,
-                      //   //       child: Container(
-                      //   //         height: 5.h,
-                      //   //         width: 5.w,
-                      //   //         //color:online,
-                      //   //         decoration: BoxDecoration(
-                      //   //           borderRadius: BorderRadius.circular(5.sp),
-                      //   //           color: online,
-                      //   //         ),
-                      //   //       ),
-                      //   //     )
-                      //   //   ],
-                      //   // ),
-                      // ),
+                      Container(
+                        width: 30.0.w,
+                        height: 30.0.h,
+                        // child: Stack(
+                        //   children: [
+                        //     ClipRRect(
+                        //       borderRadius: BorderRadius.circular(15.0.sp),
+                        //       child: Image.asset(
+                        //         'assets/user.jpg',
+                        //         width: 30.0.w,
+                        //         height: 30.0.h,
+                        //         fit: BoxFit.fill,
+                        //       ),
+                        //     ),
+                        //     Positioned(
+                        //       bottom: 1.5,
+                        //       right: 1.5,
+                        //       child: Container(
+                        //         height: 5.h,
+                        //         width: 5.w,
+                        //         //color:online,
+                        //         decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(5.sp),
+                        //           color: online,
+                        //         ),
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
+                      ),
+                      SizedBox(width: 5.w,),
                     ],
                   ),
                   // Container(
@@ -330,7 +330,7 @@ class Designation extends StatelessWidget {
                 //   ),
                 // ),
                 SizedBox(
-                  height: 15.h,
+                  height: 22.h,
                 ),
                 Padding(
                   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
@@ -341,13 +341,13 @@ class Designation extends StatelessWidget {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.4),
+                          color: Colors.grey.withOpacity(0.15),
                           spreadRadius: 2,
                           blurRadius: 1,
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(17.sp),
+                      borderRadius: BorderRadius.circular(10.sp),
                       color: whiteClr,
                     ),
                     child: Row(
@@ -374,48 +374,48 @@ class Designation extends StatelessWidget {
                           SizedBox(width: 15.w,),
                           Text("Manger ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
                           Spacer(),
-                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
+                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
                           SizedBox(width: 15.w,)
                         ],
                       ),
                       SizedBox(
-                        height: 15.h,
+                        height: 22.h,
                       ),
                       Row(
                         children: [
                           SizedBox(width: 15.w,),
                           Text("HR",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
                           Spacer(),
-                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
+                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
                           SizedBox(width: 15.w,)
                         ],
                       ),
                       SizedBox(
-                        height: 15.h,
+                        height: 22.h,
                       ),
                       Row(
                         children: [
                           SizedBox(width: 15.w,),
                           Text("Clerk",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
                           Spacer(),
-                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
+                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
                           SizedBox(width: 15.w,)
                         ],
                       ),
                       SizedBox(
-                        height: 15.h,
+                        height: 22.h,
                       ),
                       Row(
                         children: [
                           SizedBox(width: 15.w,),
                           Text("Trial Designation",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
                           Spacer(),
-                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
+                          Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
                           SizedBox(width: 15.w,),
                         ],
                       ),
                       SizedBox(
-                        height: 15.h,
+                        height: 22.h,
                       ),
                     ],
                   ),

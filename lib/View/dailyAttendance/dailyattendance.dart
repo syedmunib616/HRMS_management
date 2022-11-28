@@ -10,6 +10,8 @@ import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 
 class DailyAttendance extends StatefulWidget {
@@ -32,20 +34,25 @@ class _DailyAttendanceState extends State<DailyAttendance> {
     _eventNameController.dispose();
     super.dispose();
   }
-
+  String convertedDateTime='';
   late DateTime dateTime;
   late Duration duration;
   String time='';
-
+  DateTime now = DateTime.now();
   @override
   void initState() {
     dateTime = DateTime.now();
     duration = Duration(minutes: 10);
+    convertedDateTime = "${now.year.toString()}-${now.month.toString().padLeft(2,'0')}-${now.day.toString().padLeft(2,'0')} ";
     super.initState();
   }
 
   DateTime? newDateTime;
   //late DateTime dateTime;
+
+
+  //DateTime now = DateTime.now();
+  //String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -317,8 +324,9 @@ class _DailyAttendanceState extends State<DailyAttendance> {
             //   // ),
             // ),
             // ),
+            backgroundColor: backgroundcolorr,
              appBar: PreferredSize(
-               preferredSize:  Size.fromHeight(94.0.h),
+               preferredSize:  Size.fromHeight(100.0.h),
                child: Container(
                  // decoration: const BoxDecoration(
                  //   gradient: LinearGradient(
@@ -341,136 +349,147 @@ class _DailyAttendanceState extends State<DailyAttendance> {
                        color: whiteClr,
                        // color: Colors.cyanAccent
                    ),
-                   child: Row(
-                       children:[
-                         GestureDetector(
-                           onTap: (){
-                             Navigator.pop(context);
-                           },
-                           child: Padding(
-                             padding: EdgeInsets.symmetric(horizontal: 12.0.sp,vertical: 20.h),
-                             child: Image.asset('assets/doublearrow.png',height: 26.h,width: 26.w,),
+                   child: Padding(
+                     padding:  EdgeInsets.only(top: 15.0.h),
+                     child: Row(
+                         children:[
+                           GestureDetector(
+                             onTap: (){
+                               Navigator.pop(context);
+                             },
+                             child: Padding(
+                               padding: EdgeInsets.symmetric(horizontal: 12.0.sp,vertical: 20.h),
+                               child: Image.asset('assets/doublearrow.png',height: 26.h,width: 26.w,),
+                             ),
                            ),
-                         ),
-                         SizedBox(width: 17.w,),
-                         Column(
-                           children:[
-                             SizedBox(height: 10.h,),
-                             Container(
-                                 //color: Colors.black45,
-                                 alignment:Alignment.center ,
-                                 width: 130.w,
-                                 child: Text("Daily Attendance",style: GoogleFonts.poppins(fontSize:12.sp,
-                                     color: Colors.black,fontWeight: FontWeight.w500),),
-                              ),
-                              SizedBox(height: 10.h,),
-                              GestureDetector(
-                                 onTap: () async {
-                                   //DatePickerTitle(date: dateTime);
-                                   // _showRangePicker(context);
-                                   newDateTime = await buildShowRoundedDatePicker(context);
-                                   print(newDateTime);
-                                   if (newDateTime != null) {
-                                     setState((){
-                                       time=newDateTime.toString();
-                                       time=time.substring(0,time.length-13);
-                                       dateTime = newDateTime!;});
-                                     print("${dateTime.month}");
-                                   }
-                                 },
-                                 child: Container(
-                                   height: 40.0.h,
-                                   width: 250.w,
-                                   child: Row(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     children: [
-                                       // Container(
-                                       //   width: 80.w,
-                                       //   height: 40.h,
-                                       //   decoration: BoxDecoration(
-                                       //     boxShadow: [
-                                       //       BoxShadow(
-                                       //         color: Colors.grey.withOpacity(0.2),
-                                       //         spreadRadius: 2,
-                                       //         blurRadius: 1,
-                                       //         offset: const Offset(0, 2), // changes position of shadow
-                                       //       ),
-                                       //     ],
-                                       //     borderRadius: BorderRadius.circular(5),
-                                       //     color: whiteClr,
-                                       //   ),
-                                       //   child: Column(
-                                       //     children: [
-                                       //       SizedBox(height: 5.h,),
-                                       //       Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                                       //       Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                       //     ],
-                                       //   ),
-                                       // ),
-                                       // Padding(
-                                       //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                       //   child: Container(
-                                       //     color: coverBackClr,
-                                       //     height: 40.h,
-                                       //     width: 1.w,
-                                       //   ),
-                                       // ),
-                                       Container(
-                                         width: 240.w,
-                                         height: 40.0.h,
-                                         decoration: BoxDecoration(
-                                           boxShadow: [
-                                             BoxShadow(
-                                               color: Colors.grey.withOpacity(0.2),
-                                               spreadRadius: 2,
-                                               blurRadius: 1,
-                                               offset: const Offset(0, 2), // changes position of shadow
+                           SizedBox(width: 20.w,),
+                           Padding(
+                             padding:  EdgeInsets.only(top: 15.0.h),
+                             child: Column(
+                               children:[
+                                 SizedBox(height: 10.h,),
+                                 Container(
+                                     //color: Colors.black45,
+                                     alignment:Alignment.center ,
+                                     width: 130.w,
+                                     child: Text("Daily Attendance",style: GoogleFonts.poppins(fontSize:12.sp,
+                                         color: Colors.black,fontWeight: FontWeight.w500),),
+                                  ),
+                                  SizedBox(height: 10.h,),
+                                  GestureDetector(
+                                     onTap: () async {
+                                       //DatePickerTitle(date: dateTime);
+                                       // _showRangePicker(context);
+                                       newDateTime = await buildShowRoundedDatePicker(context);
+                                       print(newDateTime);
+                                       if (newDateTime != null) {
+                                         setState((){
+                                           time=newDateTime.toString();
+                                           time=time.substring(0,time.length-13);
+                                           dateTime = newDateTime!;});
+                                         print("${dateTime.month}");
+                                       }
+                                     },
+                                     child: Container(
+                                       height: 40.0.h,
+                                       width: 250.w,
+                                       child: Row(
+                                         mainAxisAlignment: MainAxisAlignment.center,
+                                         children: [
+                                           // Container(
+                                           //   width: 80.w,
+                                           //   height: 40.h,
+                                           //   decoration: BoxDecoration(
+                                           //     boxShadow: [
+                                           //       BoxShadow(
+                                           //         color: Colors.grey.withOpacity(0.2),
+                                           //         spreadRadius: 2,
+                                           //         blurRadius: 1,
+                                           //         offset: const Offset(0, 2), // changes position of shadow
+                                           //       ),
+                                           //     ],
+                                           //     borderRadius: BorderRadius.circular(5),
+                                           //     color: whiteClr,
+                                           //   ),
+                                           //   child: Column(
+                                           //     children: [
+                                           //       SizedBox(height: 5.h,),
+                                           //       Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+                                           //       Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                           //     ],
+                                           //   ),
+                                           // ),
+                                           // Padding(
+                                           //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                           //   child: Container(
+                                           //     color: coverBackClr,
+                                           //     height: 40.h,
+                                           //     width: 1.w,
+                                           //   ),
+                                           // ),
+                                           Container(
+                                             width: 240.w,
+                                             height: 40.0.h,
+                                             decoration: BoxDecoration(
+                                               boxShadow: [
+                                                 BoxShadow(
+                                                   color: Colors.grey.withOpacity(0.2),
+                                                   spreadRadius: 2,
+                                                   blurRadius: 1,
+                                                   offset: const Offset(0, 2), // changes position of shadow
+                                                 ),
+                                               ],
+                                               borderRadius: BorderRadius.circular(5),
+                                               color: whiteClr,
                                              ),
-                                           ],
-                                           borderRadius: BorderRadius.circular(5),
-                                           color: whiteClr,
-                                         ),
-                                         child: Padding(
-                                           padding: EdgeInsets.all( 3.5.sp),
-                                           child: Row(
-                                             children: [
-                                               Image.asset('assets/calender.png',height: 30.h,width: 30.w,),
-                                               SizedBox(width: 10.w,),
-                                               Column(
+                                             child: Padding(
+                                               padding: EdgeInsets.all( 3.5.sp),
+                                               child: Row(
                                                  children: [
-                                                   Text("Select Date, Day, Month & Year", style: GoogleFonts.poppins(fontSize:8.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                                   Text("$time", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                   SizedBox(width: 5.w,),
+
+                                                   Icon(FontAwesomeIcons.calendarDays,size: 30.sp,color: srpgradient2,),
+
+                                                   SizedBox(width: 10.w,),
+                                                   Column(
+                                                     children: [
+                                                       Text("Select Date, Day, Month & Year", style: GoogleFonts.poppins(fontSize:8.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                                       Text("${time.isNotEmpty?time:convertedDateTime}", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                     ],
+                                                   ),
+                                                   const Spacer(),
+                                                   Container(
+                                                     height: 20.h,
+                                                     width: 20.w,
+                                                     decoration: const BoxDecoration(
+                                                       // boxShadow: [
+                                                       //   BoxShadow(
+                                                       //     color: Colors.grey.withOpacity(0),
+                                                       //     spreadRadius: 0,
+                                                       //     blurRadius: 1,
+                                                       //     offset: const Offset(0, 2), // changes position of shadow
+                                                       //   ),
+                                                       // ],
+                                                       // borderRadius: BorderRadius.circular(15.sp),
+                                                       // color: greybackground,
+                                                     ),
+                                                     child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),),
+                                                   SizedBox(width: 5.w,),
+
                                                  ],
                                                ),
-                                               const Spacer(),
-                                               Container(
-                                                 height: 20.h,
-                                                 width: 20.w,
-                                                 decoration: const BoxDecoration(
-                                                   // boxShadow: [
-                                                   //   BoxShadow(
-                                                   //     color: Colors.grey.withOpacity(0),
-                                                   //     spreadRadius: 0,
-                                                   //     blurRadius: 1,
-                                                   //     offset: const Offset(0, 2), // changes position of shadow
-                                                   //   ),
-                                                   // ],
-                                                   // borderRadius: BorderRadius.circular(15.sp),
-                                                   // color: greybackground,
-                                                 ),
-                                                 child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),),
-                                             ],
+                                             ),
                                            ),
-                                         ),
+                                         ],
                                        ),
-                                     ],
+                                     ),
                                    ),
-                                 ),
-                               ),
-                           ]
-                         )
-                       ]
-                     ),
+                               ]
+                             ),
+                           )
+                         ]
+                       ),
+                   ),
                    //    child: Column(
                    //       crossAxisAlignment:CrossAxisAlignment.center,
                    //       children: [
@@ -718,7 +737,7 @@ class TabsforDailyAbsentLateEarly extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: whiteClr,
+        backgroundColor: backgroundcolorr,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.0.w),
         child: Column(
@@ -763,7 +782,7 @@ class TabsforDailyAbsentLateEarly extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.topLeft,
                     width: 130.w,
-                    height: 90.h,
+                    height: 105.h,
                    // color: Colors.cyanAccent,
                     child: Column(
                       crossAxisAlignment:CrossAxisAlignment.start ,
@@ -844,7 +863,7 @@ class Tabname extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35.h,
+      height: 38.h,
       width: 87.w,
       decoration: BoxDecoration(
         gradient: const LinearGradient(

@@ -32,7 +32,6 @@ class Reports extends StatelessWidget {
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize:  Size.fromHeight(94.0.h),
-
             child:  Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
@@ -52,10 +51,11 @@ class Reports extends StatelessWidget {
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 20.h,),
+                  SizedBox(height: 30.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+
                       GestureDetector(
                         onTap: (){
                           Navigator.pop(context);
@@ -65,9 +65,13 @@ class Reports extends StatelessWidget {
                           child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
                         ),
                       ),
+
                       Spacer(),
+
                       Text("Report",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+
                       Spacer(),
+
                       Container(
                         width: 30.0.w,
                         height: 30.0.h,
@@ -98,9 +102,11 @@ class Reports extends StatelessWidget {
                         //   ],
                         // ),
                       ),
+
                       SizedBox(width: 15.w,),
-                    ],
-                  ),
+
+                      ],
+                    ),
                   // Container(
                   //   height: 50.h,
                   //   width: MediaQuery.of(context).size.width,
@@ -188,7 +194,7 @@ class Reports extends StatelessWidget {
             ),
           ),
 
-
+          backgroundColor: backgroundcolorr,
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0.w),
@@ -273,14 +279,15 @@ class Reports extends StatelessWidget {
                       },
                       child: SubReportsOrSubSettings(iconString: "assets/pic.png",title: TextStrings.SuspiciousSelfies,subtitle: TextStrings.ListofPinchedVisits,)),
                   SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => OutsideGeoFence()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/gps.png",title: TextStrings.OutsideGeoFence,subtitle: TextStrings.Employeesnotinthespecifiedlocation,)),
+
+                  // GestureDetector(
+                  //     onTap: (){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => OutsideGeoFence()),
+                  //       );
+                  //     },
+                  //     child: SubReportsOrSubSettings(iconString: "assets/gps.png",title: TextStrings.OutsideGeoFence,subtitle: TextStrings.Employeesnotinthespecifiedlocation,)),
                 ],
               ),
             ),

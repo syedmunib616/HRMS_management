@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-
 import 'package:provider/provider.dart';
-
 import 'Theme_ColorModel.dart';
 import 'Theme_Provider.dart';
 
@@ -20,24 +17,15 @@ const Color dotDesctiveClr = Color(0xFF878787);
 const Color fontgrey = Color(0xFF878787);
 const Color online = Color(0xFF1AD95A);
 const Color iconcolor = Color(0xFF808080);
-
+const Color backgroundcolorr = Color(0xffF6F6F6);
 
 Color coverBackClr = const Color(0xFFC4C4C4).withOpacity(0.73);
 const Color greybackground = Color(0xFFD2D2D2);
 
-
 const Color srpgradient1 = Color(0xFF64B580);
 const Color srpgradient2 = Color(0xFF50A69D);
 const Color srpgradient3 = Color(0xFF3390C7);
-
-
-
 const Color linkclr = Color(0xFF3692C2);
-
-
-
-
-
 
 const List<Color> clrLisst = [
   blackClr,
@@ -55,13 +43,11 @@ Color ContectusbackgroundColor(BuildContext context) {
       : whiteClr;
 }
 
-
 Color personal(BuildContext context) {
   return Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
       ? Color(0xFF6C6767)
       : blackClr;
 }
-
 
 Color backgroundColor(BuildContext context) {
   return Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark

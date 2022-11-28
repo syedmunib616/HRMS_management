@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class LateComers extends StatefulWidget {
   LateComers({Key? key}) : super(key: key);
@@ -19,13 +21,31 @@ class _LateComersState extends State<LateComers> {
   String time='';
   late DateTime dateTime;
 
+  var now = new DateTime.now();
+  // var formatter = new DateFormat('yyyy-MM-dd');
+  // String formattedDate='';
+
+String convertedDateTime='';
+  @override
+  void initState() {
+    // TODO: implement initState
+    // initializeDateFormatting();
+    convertedDateTime = "${now.year.toString()}-${now.month.toString().padLeft(2,'0')}-${now.day.toString().padLeft(2,'0')} ";
+    // setState(() {
+    //    formattedDate = formatter.format(now);
+    // });
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: CsScreenUtilInit(
           child:Scaffold(
+           backgroundColor: backgroundcolorr,
             appBar: PreferredSize(
-              preferredSize:  Size.fromHeight(94.0.h),
+              preferredSize:  Size.fromHeight(100.0.h),
               child: Container(
                 child:  Container(
                   height: 290.h,
@@ -33,7 +53,7 @@ class _LateComersState extends State<LateComers> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
+                        color: Colors.grey.withOpacity(0.2),
                         spreadRadius: 2,
                         blurRadius: 1,
                         offset: const Offset(0, 2), // changes position of shadow
@@ -43,92 +63,103 @@ class _LateComersState extends State<LateComers> {
                     color: whiteClr,
                     // color: Colors.cyanAccent
                   ),
-                  child: Row(
-                      children:[
-                        GestureDetector(
-                          onTap: (){
-                            Navigator.pop(context);
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.0.sp,vertical: 20.h),
-                            child: Image.asset('assets/doublearrow.png',height: 26.h,width: 26.w,),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 18.0.h),
+                    child: Row(
+                        children:[
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 12.0.sp,vertical: 20.h),
+                              child: Image.asset('assets/doublearrow.png',height: 26.h,width: 26.w,),
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 17.w,),
-                        Column(
-                            children:[
-                              SizedBox(height: 10.h,),
-                              Container(
-                                alignment:Alignment.center ,
-                                width: 130.w,
-                                child: Text("Late Comers",style: GoogleFonts.poppins(fontSize:12.sp,
-                                    color: Colors.black,fontWeight: FontWeight.w500),),
-                              ),
-                              SizedBox(height: 10.h,),
-                              GestureDetector(
-                                onTap: () async {
-                                  newDateTime = await buildShowRoundedDatePicker(context);
-                                  print(newDateTime);
-                                  if (newDateTime != null) {
-                                    setState((){
-                                      time=newDateTime.toString();
-                                      time=time.substring(0,time.length-13);
-                                      dateTime = newDateTime!;});
-                                    print("${dateTime.month}");
-                                  }
-                                },
-                                child: Container(
-                                  height: 40.0.h,
-                                  width: 250.w,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width: 240.w,
-                                        height: 40.0.h,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withOpacity(0.2),
-                                              spreadRadius: 2,
-                                              blurRadius: 1,
-                                              offset: const Offset(0, 2), // changes position of shadow
+                          SizedBox(width: 20.w,),
+                          Padding(
+                            padding:  EdgeInsets.only(top: 13.8.h),
+                            child: Column(
+                                children:[
+                                  Container(
+
+                                    alignment:Alignment.topLeft,
+                                    width: 100.w,
+                                   // color: Colors.purpleAccent,
+                                    child: Text("Late Comers",style: GoogleFonts.poppins(
+                                        fontSize:12.sp,color: Colors.black,fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10.h,),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      newDateTime = await buildShowRoundedDatePicker(context);
+                                      print(newDateTime);
+                                      if (newDateTime != null) {
+                                        setState((){
+                                          time=newDateTime.toString();
+                                          time=time.substring(0,time.length-13);
+                                          dateTime = newDateTime!;});
+                                        print("${dateTime.month}");
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 40.0.h,
+                                      width: 250.w,
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 240.w,
+                                            height: 40.0.h,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey.withOpacity(0.2),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 1,
+                                                  offset: const Offset(0, 2), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: whiteClr,
                                             ),
-                                          ],
-                                          borderRadius: BorderRadius.circular(5),
-                                          color: whiteClr,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all( 3.5.sp),
-                                          child: Row(
-                                            children: [
-                                              Image.asset('assets/calender.png',height: 30.h,width: 30.w,),
-                                              SizedBox(width: 10.w,),
-                                              Column(
+                                            child: Padding(
+                                              padding: EdgeInsets.all( 3.5.sp),
+                                              child: Row(
+                                                mainAxisAlignment:MainAxisAlignment.start,
+                                                crossAxisAlignment:CrossAxisAlignment.start,
                                                 children: [
-                                                  Text("Select Date, Day, Month & Year", style: GoogleFonts.poppins(fontSize:8.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                                  Text("$time", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                  SizedBox(width: 5.w,),
+                                                  Image.asset('assets/calender.png',height: 30.h,width: 30.w,),
+                                                  SizedBox(width: 10.w,),
+                                                  Column(
+                                                    children: [
+                                                      Text("Select Date, Day, Month & Year", style: GoogleFonts.poppins(fontSize:8.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                                      //  Text("${time!=null ? time :formattedDate}", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                      Text("${time.isNotEmpty?time:convertedDateTime}", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                    ],
+                                                  ),
+                                                  const Spacer(),
+                                                  Container(
+                                                    height: 20.h,
+                                                    width: 20.w,
+                                                    decoration: const BoxDecoration(),
+                                                    child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),
+                                                  ),
+                                                  SizedBox(width: 5.w,),
                                                 ],
                                               ),
-                                              const Spacer(),
-                                              Container(
-                                                height: 20.h,
-                                                width: 20.w,
-                                                decoration: const BoxDecoration(),
-                                                child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),
-                                              ),
-
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ]
-                        )
-                      ]
+                                ]
+                            ),
+                          )
+                        ]
+                    ),
                   ),
 
                 ),
@@ -151,7 +182,7 @@ class _LateComersState extends State<LateComers> {
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 19.0.w),
                   child: Container(
-                    height: 535.h,
+                    height: 505.h,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       // gradient: const LinearGradient(
@@ -165,7 +196,7 @@ class _LateComersState extends State<LateComers> {
                       // ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: Colors.grey.withOpacity(0.15),
                           spreadRadius: 2,
                           blurRadius: 8,
                           offset: const Offset(0, 0), // changes position of shadow
@@ -207,28 +238,25 @@ class _LateComersState extends State<LateComers> {
                           padding:  EdgeInsets.symmetric(horizontal: 5.0.w),
                           child: Column(
                             children: [
-                              Lateperson(),
-                              Lateperson(),
-                              Lateperson(),
-
-
+                              Padding(
+                                padding:  EdgeInsets.symmetric(vertical: 10.0.h),
+                                child: Lateperson(),
+                              ),
+                              Padding(
+                                padding:  EdgeInsets.symmetric(vertical: 10.0.h),
+                                child: Lateperson(),
+                              ),
+                              Padding(
+                                padding:  EdgeInsets.symmetric(vertical: 10.0.h),
+                                child: Lateperson(),
+                              ),
                             ],
                           ),
                         )
-
-
-
-
                       ],
                     ),
-
                   ),
                 ),
-
-
-
-
-
               ],
             ) ,
           ),

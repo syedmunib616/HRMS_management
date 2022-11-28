@@ -7,6 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/View/user/component/nameEditprofilepic.dart ';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../translation/locale_keys.g.dart';
 
 class Profile extends StatelessWidget {
   Profile({Key? key}) : super(key: key);
@@ -18,77 +21,76 @@ class Profile extends StatelessWidget {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
-          appBar: AppBar(
-            leading:
-            GestureDetector(
-              onTap: (){
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
-                child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            flexibleSpace:  Container(
+          appBar: PreferredSize(
+            preferredSize:  Size.fromHeight(94.0.h),
+
+            child:  Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.01),
+                    color: Colors.grey.withOpacity(0.1),
                     spreadRadius: 2,
                     blurRadius: 1,
-                    offset: const Offset(0, 2), // changes position of shadow
+                    offset: const Offset(0, 2),
+                    // changes position of shadow
                   ),
                 ],
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                 color: whiteClr,
               ),
               child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center ,
+                crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 26.h,),
+                  SizedBox(height: 30.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Padding(
-                      //   padding: EdgeInsets.all(8.0.sp),
-                      //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                      // ),
+                      SizedBox(width: 10.w,),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0.sp),
+                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+                        ),
+                      ),
                       Spacer(),
-                      Text("Profile",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                      Text(TextStrings.Profile,style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
-                      // Container(
-                      //   width: 30.0.w,
-                      //   height: 30.0.h,
-                      //   // child: Stack(
-                      //   //   children: [
-                      //   //     ClipRRect(
-                      //   //       borderRadius: BorderRadius.circular(15.0.sp),
-                      //   //       child: Image.asset(
-                      //   //         'assets/user.jpg',
-                      //   //         width: 30.0.w,
-                      //   //         height: 30.0.h,
-                      //   //         fit: BoxFit.fill,
-                      //   //       ),
-                      //   //     ),
-                      //   //     Positioned(
-                      //   //       bottom: 1.5,
-                      //   //       right: 1.5,
-                      //   //       child: Container(
-                      //   //         height: 5.h,
-                      //   //         width: 5.w,
-                      //   //         //color:online,
-                      //   //         decoration: BoxDecoration(
-                      //   //           borderRadius: BorderRadius.circular(5.sp),
-                      //   //           color: online,
-                      //   //         ),
-                      //   //       ),
-                      //   //     )
-                      //   //   ],
-                      //   // ),
-                      // ),
+                      Container(
+                        width: 30.0.w,
+                        height: 30.0.h,
+                        // child: Stack(
+                        //   children: [
+                        //     ClipRRect(
+                        //       borderRadius: BorderRadius.circular(15.0.sp),
+                        //       child: Image.asset(
+                        //         'assets/user.jpg',
+                        //         width: 30.0.w,
+                        //         height: 30.0.h,
+                        //         fit: BoxFit.fill,
+                        //       ),
+                        //     ),
+                        //     Positioned(
+                        //       bottom: 1.5,
+                        //       right: 1.5,
+                        //       child: Container(
+                        //         height: 5.h,
+                        //         width: 5.w,
+                        //         //color:online,
+                        //         decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(5.sp),
+                        //           color: online,
+                        //         ),
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
+                      ),
+                      SizedBox(width: 5.w,),
                     ],
                   ),
                   // Container(
@@ -177,7 +179,7 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-
+          backgroundColor: backgroundcolorr,
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment:CrossAxisAlignment.start ,
@@ -331,13 +333,13 @@ class Profile extends StatelessWidget {
                 // ),
 
                 SizedBox(
-                  height: 15.h,
+                  height: 17.h,
                 ),
 
                 NameEditprofilepic(),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(vertical: 17.0.h,horizontal: 20.w),
                   child:
                   Container(
                     height: 500.h,
@@ -345,13 +347,13 @@ class Profile extends StatelessWidget {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.4),
+                          color: Colors.grey.withOpacity(0.15),
                           spreadRadius: 2,
                           blurRadius: 1,
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(17.sp),
+                      borderRadius: BorderRadius.circular(9.sp),
                       color: whiteClr,
                     ),
                     child: Column(
@@ -417,8 +419,12 @@ class ProfileField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
           height: 30.h,
-          width: 280.w,
-          color: Colors.grey.shade200,
+          width: 305.w,
+          //color: Colors.grey.shade200,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+
+          ),
           child: Row(
             children: [
               SizedBox(width: 10.w,),

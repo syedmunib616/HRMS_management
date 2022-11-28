@@ -43,6 +43,7 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   Positioned(
                     top: 0,
                     bottom: 0,
@@ -53,11 +54,9 @@ class Login extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-
                           SizedBox(
                             height: 45.h,
                           ),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -72,26 +71,20 @@ class Login extends StatelessWidget {
                               ),
                             ],
                           ),
-
                           SizedBox(
-                            height: 12.h,
+                            height: 14.h,
                           ),
-
                           Text("Welcome back",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey),),
-
                           SizedBox(
-                            height: 12.h,
+                            height: 10.h,
                           ),
-
                           Text(
-                            "Sign up to continue",
+                            "Login to continue",
                             style: GoogleFonts.poppins(fontSize: 15.sp,color: settingFontBackColor(context),fontWeight: FontWeight.w500),
                           ),
-
                           SizedBox(
                             height: 16.h,
                           ),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -121,17 +114,13 @@ class Login extends StatelessWidget {
                               ),
                             ],
                           ),
-
                           SizedBox(
                             height: 25.h,
                           ),
-
-                          Text("Or",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w600),),
-
+                          Text("Or",style: GoogleFonts.poppins(fontSize: 12.sp,color: Color(0xff313131),fontWeight: FontWeight.w600),),
                           SizedBox(
                             height: 25.h,
                           ),
-
                           CsMainInputField(
                             providerGenerator: providerGenerator,
                             width: 287.w,
@@ -147,18 +136,17 @@ class Login extends StatelessWidget {
                             //     ? Colors.red
                             //     : null,
                           ),
-
                           SizedBox(
                             height: 20.h,
                           ),
-
-                          CsMainInputField(
+                          CsMainInputField3(
                             providerGenerator: providerGenerator,
                             width: 287.w,
                             mycontroller: textEditingController2,
                             myhint: TextStrings.Password,
                             prefixIcon: Icons.lock,
-                            isPassword: false,
+                            isPassword: true,
+                            obscureIndex: 2,
                             keyboardType: TextInputType.visiblePassword,
                             bordercolor: providerGenerator.getVisibleError(index: 0)
                                 ? Colors.red
@@ -167,11 +155,9 @@ class Login extends StatelessWidget {
                             //     ? Colors.red
                             //     : null,
                           ),
-
                           SizedBox(
                             height: 20.h,
                           ),
-
                           GestureDetector(
                             onTap: (){
                              // Navigator.pop(context);
@@ -205,15 +191,13 @@ class Login extends StatelessWidget {
                                   color: whiteClr,
                                 ),
                                 child:Center(
-                                  child: Text(TextStrings.Login,style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                  child: Text(TextStrings.Login,style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                 )
                             ),
                           ),
-
                           SizedBox(
                             height: 20.h,
                           ),
-
                           Text(TextStrings.Forgot_your_password,style: GoogleFonts.poppins(fontSize: 15.sp,color: linkclr,),),
 
                         ],
@@ -223,7 +207,6 @@ class Login extends StatelessWidget {
                 ],
               ),
             ),
-
         ),
       ),
     );

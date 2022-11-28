@@ -9,6 +9,7 @@ import 'package:hrmanagementapp/View/Profile/Requests/components/NoRequest.dart'
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChangePassword extends StatelessWidget {
 
@@ -24,78 +25,78 @@ class ChangePassword extends StatelessWidget {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
+
           backgroundColor: Colors.grey.shade200,
-          appBar: AppBar(
-            leading:
-            GestureDetector(
-              onTap: (){
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
-                child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            flexibleSpace:  Container(
+
+          appBar: PreferredSize(
+            preferredSize:  Size.fromHeight(94.0.h),
+
+            child:  Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.01),
+                    color: Colors.grey.withOpacity(0.4),
                     spreadRadius: 2,
                     blurRadius: 1,
-                    offset: const Offset(0, 2), // changes position of shadow
+                    offset: const Offset(0, 2),
+                    // changes position of shadow
                   ),
                 ],
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                 color: whiteClr,
               ),
               child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center ,
+                crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 26.h,),
+                  SizedBox(height: 20.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Padding(
-                      //   padding: EdgeInsets.all(8.0.sp),
-                      //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                      // ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.sp),
+                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+                        ),
+                      ),
                       Spacer(),
                       Text("Change your Password",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
-                      // Container(
-                      //   width: 30.0.w,
-                      //   height: 30.0.h,
-                      //   // child: Stack(
-                      //   //   children: [
-                      //   //     ClipRRect(
-                      //   //       borderRadius: BorderRadius.circular(15.0.sp),
-                      //   //       child: Image.asset(
-                      //   //         'assets/user.jpg',
-                      //   //         width: 30.0.w,
-                      //   //         height: 30.0.h,
-                      //   //         fit: BoxFit.fill,
-                      //   //       ),
-                      //   //     ),
-                      //   //     Positioned(
-                      //   //       bottom: 1.5,
-                      //   //       right: 1.5,
-                      //   //       child: Container(
-                      //   //         height: 5.h,
-                      //   //         width: 5.w,
-                      //   //         //color:online,
-                      //   //         decoration: BoxDecoration(
-                      //   //           borderRadius: BorderRadius.circular(5.sp),
-                      //   //           color: online,
-                      //   //         ),
-                      //   //       ),
-                      //   //     )
-                      //   //   ],
-                      //   // ),
-                      // ),
+                      Container(
+                        width: 30.0.w,
+                        height: 30.0.h,
+                        // child: Stack(
+                        //   children: [
+                        //     ClipRRect(
+                        //       borderRadius: BorderRadius.circular(15.0.sp),
+                        //       child: Image.asset(
+                        //         'assets/user.jpg',
+                        //         width: 30.0.w,
+                        //         height: 30.0.h,
+                        //         fit: BoxFit.fill,
+                        //       ),
+                        //     ),
+                        //     Positioned(
+                        //       bottom: 1.5,
+                        //       right: 1.5,
+                        //       child: Container(
+                        //         height: 5.h,
+                        //         width: 5.w,
+                        //         //color:online,
+                        //         decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(5.sp),
+                        //           color: online,
+                        //         ),
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
+                      ),
+                      SizedBox(width: 5.w,),
                     ],
                   ),
                   // Container(
@@ -184,6 +185,7 @@ class ChangePassword extends StatelessWidget {
               ),
             ),
           ),
+
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -340,10 +342,10 @@ class ChangePassword extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding:  EdgeInsets.symmetric(vertical: 12.0.h,horizontal: 20.w),
                   child: CsMainInputField2(
                     providerGenerator: providerGenerator,
-                    width: 287.w,
+                    width: 307.w,
                     mycontroller: textEditingController1,
                     myhint: TextStrings.OldPassword,
                     prefixIcon: Icons.lock_outline_rounded,
@@ -357,10 +359,10 @@ class ChangePassword extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(vertical: 12.0.h,horizontal: 20.w),
                   child: CsMainInputField2(
                     providerGenerator: providerGenerator,
-                    width: 287.w,
+                    width: 307.w,
                     mycontroller: textEditingController2,
                     myhint: TextStrings.NewPassword,
                     prefixIcon: Icons.lock_outline_rounded,
@@ -374,10 +376,10 @@ class ChangePassword extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(vertical: 12.0.h,horizontal: 20.w),
                   child: CsMainInputField2(
                     providerGenerator: providerGenerator,
-                    width: 287.w,
+                    width: 307.w,
                     mycontroller: textEditingController3,
                     myhint: TextStrings.ConformPassword,
                     prefixIcon: Icons.lock_outline_rounded,
@@ -393,7 +395,7 @@ class ChangePassword extends StatelessWidget {
                 SizedBox(height: 20.h,),
 
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                      Navigator.pop(context);
                     // Navigator.push(
                     //   context,
@@ -401,8 +403,8 @@ class ChangePassword extends StatelessWidget {
                     // );
                   },
                   child: Container(
-                      height: 28.h,
-                      width: 80.w,
+                      height: 32.h,
+                      width: 85.w,
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
                           begin: Alignment.topCenter,
@@ -410,7 +412,7 @@ class ChangePassword extends StatelessWidget {
                           colors: [
                             srpgradient1,
                             srpgradient2,
-                            srpgradient3
+                            srpgradient3,
                           ],
                         ),
                         boxShadow: [
@@ -429,11 +431,10 @@ class ChangePassword extends StatelessWidget {
                           style: GoogleFonts.poppins(fontSize: 12.sp,
                               color: shapeitemColor(context),
                               fontWeight: FontWeight.w500),
-                        ),
                       ),
+                    ),
                   ),
                 ),
-
               ],
             ),
           ),
