@@ -4,18 +4,17 @@ import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Components/textfield.dart';
 import 'package:hrmanagementapp/View/Profile/Requests/components/NoRequest.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
-import 'package:hrmanagementapp/Provider/providergenerator.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
-import 'package:hrmanagementapp/Provider/providergenerator.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hrmanagementapp/Provider/providergenerator.dart';
+import 'package:provider/provider.dart';
+
 
 class DepartmentList extends StatelessWidget {
   DepartmentList({Key? key}) : super(key: key);
@@ -399,9 +398,11 @@ class DepartmentList extends StatelessWidget {
                           SizedBox(width: 15.w,)
                         ],
                       ),
+
                       SizedBox(
                         height: 22.h,
                       ),
+
                       Row(
                         children: [
                           SizedBox(width: 15.w,),
@@ -411,9 +412,11 @@ class DepartmentList extends StatelessWidget {
                           SizedBox(width: 15.w,)
                         ],
                       ),
+
                       SizedBox(
                         height: 22.h,
                       ),
+
                       Row(
                         children: [
                           SizedBox(width: 15.w,),
@@ -433,6 +436,7 @@ class DepartmentList extends StatelessWidget {
               ],
             ),
           ),
+
           floatingActionButton: FloatingActionButton(
             child: Container(
               width: 60,
@@ -461,30 +465,74 @@ class DepartmentList extends StatelessWidget {
     );
   }
 
-
+  TextEditingController textEditingController3 = TextEditingController();
+  TextEditingController textEditingController2 = TextEditingController();
   showAlertDialog(BuildContext context) {
 
     // set up the buttons
     Widget remindButton = TextButton(
-      child: Text("Remind me later"),
-      onPressed:  () {},
+      child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
     );
 
     Widget cancelButton = TextButton(
-      child: Text("Cancel"),
-      onPressed:  () {},
+      child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
     );
 
     // Widget launchButton = TextButton(
     //   child: Text("Launch missile"),
     //   onPressed:  () {},
     // );
-
     // set up the AlertDialog
 
     AlertDialog alert = AlertDialog(
-      title: Text("Notice"),
-      // content: Text("Launching this missile will destroy the entire universe. Is this what you intended to do?"),
+      title: Text("Add Department",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+         content: Container(
+           height: 110.h,
+           width: 300.w,
+           child: Column(
+             children: [
+               CsMainInputField4(
+                 // providerGenerator: providerGenerator,
+                 width: 287.w,
+                 mycontroller: textEditingController1,
+                 // myhint: TextStrings.Enter_your_email_address.tr(),
+                 myhint: "ID",
+                 prefixIcon: FontAwesomeIcons.fingerprint,
+                  isPassword: false,
+                 keyboardType: TextInputType.emailAddress,
+                 // bordercolor: providerGenerator.getVisibleError(index: 0)
+                 //     ? Colors.red
+                 //     : null,
+                 // bordercolor: providerGenerator.getVisibleError(index: 0)
+                 //     ? Colors.red
+                 //     : null,
+               ),
+               SizedBox(height: 10.h,),
+               CsMainInputField4(
+                 // providerGenerator: providerGenerator,
+                 width: 287.w,
+                 mycontroller: textEditingController2,
+                 // myhint: TextStrings.Enter_your_email_address.tr(),
+                 myhint: "Department Name",
+                 prefixIcon: FontAwesomeIcons.building,
+                 isPassword: false,
+                 keyboardType: TextInputType.emailAddress,
+                 // bordercolor: providerGenerator.getVisibleError(index: 0)
+                 //     ? Colors.red
+                 //     : null,
+                 // bordercolor: providerGenerator.getVisibleError(index: 0)
+                 //     ? Colors.red
+                 //     : null,
+               ),
+             ],
+           ),
+         ),
       actions: [
         remindButton,
         cancelButton,
@@ -495,11 +543,77 @@ class DepartmentList extends StatelessWidget {
     // show the dialog
     showDialog(
       context: context,
+      //  barrierDismissible: false,
       builder: (BuildContext context) {
         return alert;
+
+        // return Column(
+        //   children: [
+        //     TextFormField()
+        //   ],
+        // );
+
       },
     );
   }
 
 
 }
+
+// class DialogContent extends StatelessWidget {
+//    DialogContent({ Key? key,}) : super(key: key);
+//
+//
+//  TextEditingController textEditingController3=TextEditingController();
+//  TextEditingController textEditingController2=TextEditingController();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final providerGenerator = Provider.of<ProviderGenerator>(context);
+//
+//     return Column(
+//        children: [
+//           SizedBox(
+//            height: 25.h,
+//          ),
+//          CsMainInputField(
+//            providerGenerator: providerGenerator,
+//            width: 287.w,
+//            mycontroller: textEditingController3,
+//            myhint: TextStrings.Email,
+//            prefixIcon: Icons.mail,
+//            isPassword: false,
+//            keyboardType: TextInputType.emailAddress,
+//            bordercolor: providerGenerator.getVisibleError(index: 0)
+//                ? Colors.red
+//                : null,
+//            // bordercolor: providerGenerator.getVisibleError(index: 0)
+//            //     ? Colors.red
+//            //     : null,
+//          ),
+//          SizedBox(
+//            height: 20.h,
+//          ),
+//          CsMainInputField3(
+//            providerGenerator: providerGenerator,
+//            width: 287.w,
+//            mycontroller: textEditingController2,
+//            myhint: TextStrings.Password,
+//            prefixIcon: Icons.lock,
+//            isPassword: true,
+//            obscureIndex: 2,
+//            keyboardType: TextInputType.visiblePassword,
+//            bordercolor: providerGenerator.getVisibleError(index: 0)
+//                ? Colors.red
+//                : null,
+//            // bordercolor: providerGenerator.getVisibleError(index: 0)
+//            //     ? Colors.red
+//            //     : null,
+//          ),
+//          SizedBox(
+//            height: 20.h,
+//          ),
+//        ],
+//        );
+//   }
+// }

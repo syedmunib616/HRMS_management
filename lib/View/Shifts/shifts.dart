@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
+import 'package:hrmanagementapp/View/Components/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+
 
 class Shifts extends StatelessWidget {
   Shifts({Key? key}) : super(key: key);
@@ -418,11 +422,125 @@ class Shifts extends StatelessWidget {
                       colors: [srpgradient1, srpgradient3])
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              showAlertDialog(context);
+            },
           ),
-
         ),
       ),
     );
   }
+
+
+  TextEditingController textEditingController3 = TextEditingController();
+  TextEditingController textEditingController2 = TextEditingController();
+  showAlertDialog(BuildContext context) {
+
+    // set up the buttons
+    Widget remindButton = TextButton(
+      child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
+    );
+
+    Widget cancelButton = TextButton(
+      child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
+    );
+
+    // Widget launchButton = TextButton(
+    //   child: Text("Launch missile"),
+    //   onPressed:  () {},
+    // );
+    // set up the AlertDialog
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Add Shift",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      content: Container(
+        height: 140.h,
+        width: 300.w,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CsMainInputField4(
+              // providerGenerator: providerGenerator,
+              width: 287.w,
+              mycontroller: textEditingController1,
+              // myhint: TextStrings.Enter_your_email_address.tr(),
+              myhint: "ID",
+              prefixIcon: FontAwesomeIcons.fingerprint,
+              isPassword: false,
+              keyboardType: TextInputType.emailAddress,
+              // bordercolor: providerGenerator.getVisibleError(index: 0)
+              //     ? Colors.red
+              //     : null,
+              // bordercolor: providerGenerator.getVisibleError(index: 0)
+              //     ? Colors.red
+              //     : null,
+            ),
+            SizedBox(height: 10.h,),
+            CsMainInputField4(
+              // providerGenerator: providerGenerator,
+              width: 287.w,
+              mycontroller: textEditingController2,
+              // myhint: TextStrings.Enter_your_email_address.tr(),
+              myhint: "Shift Start Time",
+              prefixIcon: FontAwesomeIcons.building,
+              isPassword: false,
+              keyboardType: TextInputType.emailAddress,
+              // bordercolor: providerGenerator.getVisibleError(index: 0)
+              //     ? Colors.red
+              //     : null,
+              // bordercolor: providerGenerator.getVisibleError(index: 0)
+              //     ? Colors.red
+              //     : null,
+            ),
+            SizedBox(height: 10.h,),
+            CsMainInputField4(
+              // providerGenerator: providerGenerator,
+              width: 287.w,
+              mycontroller: textEditingController2,
+              // myhint: TextStrings.Enter_your_email_address.tr(),
+              myhint: "Shift End Time",
+              prefixIcon: FontAwesomeIcons.building,
+              isPassword: false,
+              keyboardType: TextInputType.emailAddress,
+              // bordercolor: providerGenerator.getVisibleError(index: 0)
+              //     ? Colors.red
+              //     : null,
+              // bordercolor: providerGenerator.getVisibleError(index: 0)
+              //     ? Colors.red
+              //     : null,
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        remindButton,
+        cancelButton,
+        //launchButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      //  barrierDismissible: false,
+      builder: (BuildContext context) {
+        return alert;
+
+        // return Column(
+        //   children: [
+        //     TextFormField()
+        //   ],
+        // );
+
+      },
+    );
+  }
+
+
 }
