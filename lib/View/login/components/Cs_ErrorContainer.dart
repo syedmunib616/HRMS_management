@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class CsErrorContainer extends StatelessWidget {
@@ -37,12 +38,16 @@ class CsErrorContainer extends StatelessWidget {
                   errorMsg,
                   textAlign: TextAlign.left,
                   maxLines: 2,
-                  style: TextStyle(
-                    letterSpacing: 1,
-                    color: errorFontClr,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
-                  ),
+                  style:
+                  GoogleFonts.poppins(fontSize: 12.sp,color: errorFontClr,fontWeight: FontWeight.w500,),
+
+
+                  // TextStyle(
+                  //   letterSpacing: 1,
+                  //   color: errorFontClr,
+                  //   fontWeight: FontWeight.w500,
+                  //   fontSize: 14.sp,
+                  // ),
                 ),
               ),
             ],

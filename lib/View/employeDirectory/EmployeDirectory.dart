@@ -28,7 +28,7 @@ class EmployeeDirectory extends StatelessWidget {
           appBar: AppBar(
             leading:
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
               child: Padding(
@@ -403,11 +403,9 @@ class EmployeeDirectory extends StatelessWidget {
               ),
               decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-
                       colors: [srpgradient1, srpgradient3])
               ),
             ),
@@ -419,9 +417,7 @@ class EmployeeDirectory extends StatelessWidget {
             },
           ),
         ),
-
       ),
-
     );
   }
 }
@@ -429,8 +425,7 @@ class EmployeeDirectory extends StatelessWidget {
 
 
 class CreateEmployee extends StatefulWidget {
- CreateEmployee({Key? key}) : super(key: key);
-
+  CreateEmployee({Key? key}) : super(key: key);
   @override
   State<CreateEmployee> createState() => _CreateEmployeeState();
 }
@@ -440,9 +435,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
 
   TextEditingController textEditingController2 = TextEditingController();
 
- var items =  ['Finance','Marketing','IT',];
+  var items =  ['Finance','Marketing','IT',];
 
- String dropdownvalue = 'Marketing';
+  String dropdownvalue = 'Marketing';
 
   @override
   Widget build(BuildContext context) {
@@ -476,7 +471,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
                       SizedBox(width: 15.w,),
                       GestureDetector(
                         onTap: (){
@@ -495,7 +489,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                         height: 30.0.h,
                       ),
                       SizedBox(width: 5.w,),
-
                     ],
                   ),
                 ],
@@ -508,11 +501,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 SizedBox(
                   height: 45.h,
                 ),
-
                 CsMainInputField(
                   providerGenerator: providerGenerator,
                   width: 287.w,
@@ -559,7 +550,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   bordercolor: providerGenerator.getVisibleError(index: 0)
                       ? Colors.red
                       : null,
-
                 ),
 
                 SizedBox(

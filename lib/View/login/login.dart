@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_Login.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_MainPopup.dart';
@@ -16,8 +17,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   TextEditingController textEditingController1 = TextEditingController();
   TextEditingController textEditingController2 = TextEditingController();
 
@@ -27,7 +34,7 @@ class Login extends StatelessWidget {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
-          body:  Container(
+          body: Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Stack(
@@ -125,6 +132,7 @@ class Login extends StatelessWidget {
                           SizedBox(
                             height: 25.h,
                           ),
+
                           CsMainInputField(
                             providerGenerator: providerGenerator,
                             width: 287.w,
@@ -136,13 +144,15 @@ class Login extends StatelessWidget {
                             bordercolor: providerGenerator.getVisibleError(index: 0)
                                 ? Colors.red
                                 : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
                             //     ? Colors.red
                             //     : null,
                           ),
+
                           SizedBox(
                             height: 20.h,
                           ),
+
                           CsMainInputField3(
                             providerGenerator: providerGenerator,
                             width: 287.w,
@@ -155,20 +165,54 @@ class Login extends StatelessWidget {
                             bordercolor: providerGenerator.getVisibleError(index: 0)
                                 ? Colors.red
                                 : null,
+
+                            onSubmite: (_) => FrLoginService(FirebaseAuth.instance)
+                                .onTapSignIn(
+                                buttonIndex: 1,
+                                errorIndex: 0,
+                                context: context,
+                                email: textEditingController1.text.trim(),
+                                password: textEditingController2.text.trim(),
+                                providerGenerator: providerGenerator)
+                                .then((value) => print('submited')),
+
                             // bordercolor: providerGenerator.getVisibleError(index: 0)
                             //     ? Colors.red
                             //     : null,
                           ),
+
                           SizedBox(
-                            height: 20.h,
+                            height: 10.h,
+                          ),
+                          Visibility(
+                            visible: providerGenerator.getVisibleError(index: 0),
+                            child: Container(
+                              width: double.infinity.w,
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 21.w,
+                              ),
+                              child: CsErrorContainer(
+                                errorMsg: providerGenerator.getErrorMessage(index: 0),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.h,
                           ),
                           GestureDetector(
                             onTap: (){
-                             // Navigator.pop(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const ScreenMain()),
-                              );
+                              // Navigator.pop(context);
+                              FrLoginService(FirebaseAuth.instance).onTapSignIn(
+                                  buttonIndex: 1,
+                                  errorIndex: 0,
+                                  context: context,
+                                  email: textEditingController1.text.trim(),
+                                  password: textEditingController2.text.trim(),
+                                  providerGenerator: providerGenerator);
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(builder: (context) => const ScreenMain()),
+                                // );
                             },
                             child: Container(
                                 height: 40.h,
@@ -199,9 +243,11 @@ class Login extends StatelessWidget {
                                 )
                             ),
                           ),
+
                           SizedBox(
                             height: 20.h,
                           ),
+
                           GestureDetector(
                               onTap: (){
                                 Navigator.push(
@@ -210,7 +256,6 @@ class Login extends StatelessWidget {
                                 );
                               },
                               child: Text(TextStrings.Forgot_your_password,style: GoogleFonts.poppins(fontSize: 15.sp,color: linkclr,),)),
-
                         ],
                       ),
                     ),
@@ -218,9 +263,53 @@ class Login extends StatelessWidget {
                 ],
               ),
             ),
+          ),
         ),
-      ),
-    );
+      );
+    }
+  }
+
+
+
+class Homepage extends StatefulWidget {
+  const Homepage({Key? key}) : super(key: key);
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   print('deeppath home $deeppath');
+  //   print('deeppath nhi home $deeplinkqueryParametersvaluesfirst');
+  //
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.black,
+              ),
+            );
+          } else if (snapshot.hasData) {
+            return const ScreenMain();
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text("Something went wrong!"),
+            );
+          } else {
+            // return const ScreenLogin();
+            return Login();
+          }
+        });
   }
 }
 

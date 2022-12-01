@@ -16,11 +16,17 @@ import 'Provider/providergenerator.dart';
 import 'Theme/Theme_Provider.dart';
 import 'Theme/Theme_Style.dart';
 import 'View/signup/Sginup.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-  // EasyLocalization(
+void main() {
+   WidgetsFlutterBinding.ensureInitialized();
+   Firebase.initializeApp();
+   //WidgetsFlutterBinding.ensureInitialized;
+   EasyLocalization.ensureInitialized();
+
+   //WidgetsFlutterBinding.ensureInitialized();
+
+    // EasyLocalization(
     //     supportedLocales: const [Locale('en', 'US'), Locale('fr', 'FR'), Locale('es', 'ES'), Locale('ru', 'RU'),Locale('zh', 'CN'),
     //       Locale('pl', 'PL'),Locale('de', 'DE'),Locale('th', 'TH'),Locale('ko', 'KR'),Locale('cs', 'CZ'),Locale('ja', 'JP'),Locale('it', 'IT'),
     //       Locale('pt', 'PT'),Locale('ar', 'SA'),
@@ -30,7 +36,7 @@ void main() async {
     //     assetLoader: const CodegenLoader(),
     //     child: MyApp()
     // );
-  runApp(MyApp());
+   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -76,13 +82,13 @@ class MyApp extends StatelessWidget {
 
                       home: const ScreenSplach(),
 
-                        //home: LateComers(),
-                      //home:   ByEmployee(),
-
+                      //home: LateComers(),
+                      //home: ByEmployee(),
                       //home: DailyAttendance(),
                       //home: const TestScreen(),
                       //home: const ScreenResetPassword(),
                       //home: SelectCountry(),
+
                     ),
                   ),
                   themeMode: themeProvider.themeMode,

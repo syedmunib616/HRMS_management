@@ -24,6 +24,7 @@ abstract class TextStrings {
 
   static const CheckExpensesRequestList	= "Check Expenses Request List";
 
+  static const Invalid_email='Invalid email';
 
 
   static const In	= "In";
