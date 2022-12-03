@@ -24,6 +24,7 @@ class _ScreenMainState extends State<ScreenMain> {
 
   final screens = [
    Home(),
+  // Zoom(),
    Reports(),
    Requests(),
    Log(),
