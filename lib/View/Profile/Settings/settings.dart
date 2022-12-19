@@ -14,7 +14,9 @@ import 'package:hrmanagementapp/View/DepartmentList/Departmentlist.dart';
 import 'package:hrmanagementapp/View/Shifts/shifts.dart';
 
 class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({Key? key, required this.password}) : super(key: key);
+
+  final String password;
 
   @override
   Widget build(BuildContext context) {
@@ -345,7 +347,7 @@ class Settings extends StatelessWidget {
                      onTap: (){
                        Navigator.push(
                          context,
-                         MaterialPageRoute(builder: (context) => EmployeeDirectory()),
+                         MaterialPageRoute(builder: (context) => EmployeeDirectory(password: password,)),
                        );
                      },
                   child: SubReportsOrSubSettings(iconString: "assets/user-svg.png",title: TextStrings.Employees,subtitle: TextStrings.ManageEmployees,)

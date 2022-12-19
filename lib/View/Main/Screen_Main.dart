@@ -12,7 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenMain extends StatefulWidget {
-  const ScreenMain({Key? key}) : super(key: key);
+ ScreenMain({Key? key, required this.password}) : super(key: key);
+   String password;
   @override
   State<ScreenMain> createState() => _ScreenMainState();
 }
@@ -21,21 +22,40 @@ class _ScreenMainState extends State<ScreenMain> {
 
   TextEditingController searchController=TextEditingController();
   int curentindex = 0;
+late String password;
 
-  final screens = [
-   Home(),
-  // Zoom(),
-   Reports(),
-   Requests(),
-   Log(),
-   Settings(),
-  ];
+  late List<Widget> screens;
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {});
+    password=widget.password;
+      screens = <Widget>[
+      Home(),
+      // Zoom(),
+      Reports(),
+      Requests(),
+      Log(),
+      Settings(password: password),
+    ];
+  }
+
+  //List<Widget>
 
   int a=1;
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     final storageFutureProvider = Provider.of<StorageFutureProvider>(context);
     // final providerQrCode = Provider.of<ProviderQrCode>(context);
+
     return Scaffold(
       body:
       // Stack(
@@ -44,7 +64,6 @@ class _ScreenMainState extends State<ScreenMain> {
         index: curentindex,
         children: screens,
       ),
-
       // Positioned(
       //   child: Padding(
       //     padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -108,7 +127,6 @@ class _ScreenMainState extends State<ScreenMain> {
             //   moreBottomSheet(context, storageFutureProvider);
             // }
           },
-
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           showSelectedLabels: false,
@@ -192,6 +210,8 @@ class _ScreenMainState extends State<ScreenMain> {
           ]),
 
     );
+
   }
+
 }
 

@@ -25,6 +25,7 @@ class ProviderGenerator with ChangeNotifier {
   ];
 
   String getErrorMessage({required int index}) => errorMessage[index];
+
   void setErrorMessage({required String value, required int index}) {
     errorMessage[index] = value;
     notifyListeners();
@@ -39,6 +40,7 @@ class ProviderGenerator with ChangeNotifier {
   ];
 
   bool getObscurText({required int index}) => obscurText[index];
+
   void setObscurText({required bool value, required int index}) {
     obscurText[index] = value;
     notifyListeners();

@@ -6,10 +6,12 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hrmanagementapp/View/ByDepartment/bydepartment.dart';
 import 'package:hrmanagementapp/View/ByDesignation/bydesignation.dart';
 import 'package:hrmanagementapp/View/ByEmployee/byemployee.dart';
+import 'package:hrmanagementapp/View/EmployeeDashboard/Employeedashboard.dart';
 import 'package:hrmanagementapp/View/LateComers/latecomers.dart';
 import 'package:hrmanagementapp/View/dailyAttendance/dailyattendance.dart';
 import 'package:hrmanagementapp/View/earlyLeavers/earlyleavers.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
+import 'package:hrmanagementapp/test.dart';
 import 'package:provider/provider.dart';
 import 'Provider/Storage_Future.dart';
 import 'Provider/providergenerator.dart';
@@ -79,9 +81,13 @@ class MyApp extends StatelessWidget {
                       // supportedLocales: context.supportedLocales,
                       // locale: context.locale,
                       // home:  const Homepage(),
+                      //home:Test(),
 
-                      home: const ScreenSplach(),
 
+                      //home: const ScreenSplach(),
+                      home: Login(),
+                      //home: EmployeeDashboard(),
+                      //
                       //home: LateComers(),
                       //home: ByEmployee(),
                       //home: DailyAttendance(),

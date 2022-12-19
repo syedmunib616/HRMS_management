@@ -11,7 +11,12 @@ import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -175,7 +180,6 @@ class _LoginState extends State<Login> {
                                 password: textEditingController2.text.trim(),
                                 providerGenerator: providerGenerator)
                                 .then((value) => print('submited')),
-
                             // bordercolor: providerGenerator.getVisibleError(index: 0)
                             //     ? Colors.red
                             //     : null,
@@ -184,6 +188,7 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 10.h,
                           ),
+
                           Visibility(
                             visible: providerGenerator.getVisibleError(index: 0),
                             child: Container(
@@ -196,9 +201,11 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
+
                           SizedBox(
                             height: 10.h,
                           ),
+
                           GestureDetector(
                             onTap: (){
                               // Navigator.pop(context);
@@ -209,10 +216,10 @@ class _LoginState extends State<Login> {
                                   email: textEditingController1.text.trim(),
                                   password: textEditingController2.text.trim(),
                                   providerGenerator: providerGenerator);
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) => const ScreenMain()),
-                                // );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(builder: (context) => const ScreenMain()),
+                                  // );
                             },
                             child: Container(
                                 height: 40.h,
@@ -249,7 +256,7 @@ class _LoginState extends State<Login> {
                           ),
 
                           GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => const Forgotpassword()),
@@ -279,14 +286,59 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   print('deeppath home $deeppath');
-  //   print('deeppath nhi home $deeplinkqueryParametersvaluesfirst');
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+
+  }
+  CollectionReference f=FirebaseFirestore.instance.collection("Companies");
+
+  // bool active=false;
+  // fetch()async{
+  //   final QuerySnapshot result = await FirebaseFirestore.instance.collection('Companies').get();
+  //   final List<DocumentSnapshot> documents = result.docs;
+  //   final user=FirebaseAuth.instance.currentUser;
+  //   documents.forEach((element) {
+  //     active=false;
+  //     //admin_name.add(element.id);
+  //
+  //     print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
+  //     f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
+  //       active = element.get("active");
+  //       //if(email==element.id){
+  //       if(user!.email.toString()=='${element.id}')
+  //       if (active == true) {
+  //           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+  //             builder: (BuildContext context) => ScreenMain(password: '123',),
+  //           ), (route) => false,);
+  //         }
+  //         else{
+  //           FirebaseAuth.instance.signOut().then((value) async {
+  //             Navigator.of(context).pushReplacement(
+  //                 MaterialPageRoute(builder: (context) => const Homepage()),
+  //                 result: false);
+  //           });
+  //         }}
+  //       else {
+  //         element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+  //           String a;
+  //           a=element.get('email');
+  //           print("laksjdhfkjsadf $a");
+  //           if(email==a){
+  //             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+  //               builder: (BuildContext context) =>
+  //                   EmployeeDashboard(),
+  //             ), (route) => false,);
+  //           }
+  //         }));
+  //       }
+  //     }));
+  //   });
   //
   // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -300,7 +352,7 @@ class _HomepageState extends State<Homepage> {
               ),
             );
           } else if (snapshot.hasData) {
-            return const ScreenMain();
+            return ScreenMain(password: '123',);
           } else if (snapshot.hasError) {
             return const Center(
               child: Text("Something went wrong!"),
@@ -830,7 +882,7 @@ class FrForgetService {
 
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (context) => const ScreenMain(),
+        builder: (context) =>  ScreenMain(password: '123',),
       ),(route) => false,
     );
   }

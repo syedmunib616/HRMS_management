@@ -5,11 +5,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
+import 'package:hrmanagementapp/View/EmployeeDashboard/Employeedashboard.dart';
 import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
+import 'package:hrmanagementapp/test.dart';
 
 class FrLoginService {
+
   final FirebaseAuth firebaseAuth;
   FrLoginService(this.firebaseAuth);
 
@@ -23,12 +26,12 @@ class FrLoginService {
     required ProviderGenerator providerGenerator,
   }) async {
 
-    providerGenerator.setLoadingValue(value: true, index: buttonIndex);
+  providerGenerator.setLoadingValue(value: true, index: buttonIndex);
 
-    try {
+  try {
       isEmpty(email, password)
           ? onlogicErrorHandling(
-              //error: "Please enter your Information",
+        //error: "Please enter your Information",
         error: TextStrings.Invalid_email,
         providerGenerator: providerGenerator,
               buttonIndex: buttonIndex,
@@ -42,89 +45,323 @@ class FrLoginService {
                   errorIndex: errorIndex,
                 )
               : await firebaseAuth
-                  .signInWithEmailAndPassword( email: email, password: password, )
+                  .signInWithEmailAndPassword(email: email, password: password,)
                   .then(
                     (value) => onSuccessSignIn(
-                      email: value.user!.email.toString(),
+                      password: password,
+                      email: email,
                       uid: value.user!.uid,
                       providerGenerator: providerGenerator,
                       context: context,
                       buttonIndex: buttonIndex,
-                      errorIndex: errorIndex,
-                    ),
+                      errorIndex: errorIndex,),
                   );
-    } on FirebaseAuthException catch (error) {
-      //print(error.code);
-      onlogicErrorHandling(
-        error: onFirebaseErrorHandling(error.code),
-        providerGenerator: providerGenerator,
-        buttonIndex: buttonIndex,
-        errorIndex: errorIndex,
-      );
-    }
+      } on FirebaseAuthException catch (error) {
+        //print(error.code);
+        onlogicErrorHandling(
+          error: onFirebaseErrorHandling(error.code),
+          providerGenerator: providerGenerator,
+          buttonIndex: buttonIndex,
+          errorIndex: errorIndex,
+        );
+      }
   }
 
+  CollectionReference f=FirebaseFirestore.instance.collection("Companies");
+  final user=FirebaseAuth.instance.currentUser;
+  bool superadmin=false;
+  bool active=false;
+  List<String> admin_name=[];
+
   // Reading Error Value on the Screen
-  onSuccessSignIn(
-   {
+  onSuccessSignIn({
+      required String password,
       required String email,
       required String uid,
       required ProviderGenerator providerGenerator,
       required BuildContext context,
       required int buttonIndex,
-      required int errorIndex})async {
+      required int errorIndex}) async {
       //Active Error Ui
 
-    providerGenerator.setErrorMessage(index: errorIndex, value: '');
-    providerGenerator.setVisibleError(index: errorIndex, value: false);
-    providerGenerator.setLoadingValue(value: false, index: buttonIndex);
+      providerGenerator.setErrorMessage(index: errorIndex, value: '');
+      providerGenerator.setVisibleError(index: errorIndex, value: false);
+      providerGenerator.setLoadingValue(value: false, index: buttonIndex);
+      print("---------------- $email");
 
-    // print("the uid is this : " + uid);
-    print("%%%%%%%%%%%%%% $email");
-    CollectionReference UserT=  FirebaseFirestore.instance.collection("UserT");
-    final user=FirebaseAuth.instance.currentUser;
-    // await UserT.doc("$email").set({'userTId': email.toString(),
-    //   'persoName': "",
-    //   'businessColor':'', 'businessCover':'',"Location":'',
-    //   'businessDescription':'', 'businessEmail':"$email", 'businessEmailSignaturePath':'', 'businessEnterprise':'', 'businessEnterpriseLogo':'',
-    //   'businessFullname':'',
-    //   'businessIsPrivate':'', 'businessIsShowDescription':'', 'businessIsShowLocation':'', 'businessLink':'', 'businessPhoneNumber1':'',
-    //   'businessPhoneNumber1ype':'', 'businessPhoneNumber2':'', 'businessPhoneNumber2ype':'', 'businessPhoneNumber3':'',
-    //   'businessPhoneNumber3ype':'',
-    //   'businessPhoneNumber4':'', 'businessPhoneNumber4ype':'', 'businessPhoto':"", 'businessPrivateCode':'', 'businessQrcode':'',
-    //   'businessService':'',
-    //   'businessWebsite':'', 'businessWorkPost':'', 'GlobalEmail':"", 'GlobalEmailSignaturePath':'',
-    //   'GlobalLink':'', 'GlobalPassword':'',
-    //   'GlobalQrcode':'', 'GlobalUsername':'','persoCoverPath':'','persoColor':'','persoDescription':'','persoEmailSignature':'',
-    //   'persoIsPrivate':'','persoIsShowLocation':'','persoLink':'','persoLocation':'','persoPhotoPath':"",'persoPrivateCode':'',
-    //   'persoQrcode':'',
-    //   'uid':"",}).then((value) =>
-    //     Navigator.of(context).pushAndRemoveUntil(
-    //   MaterialPageRoute(
-    //     builder: (context) => const YourName(),
-    //   ),
-    //       (route) => false,
-    // );
 
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const ScreenMain(),
-        ), (route) => false,
-      );
-  }
+    CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
+
+
+    if(email!="example@gmail.com") {//braek point laga k check krna hai kidhr masla araha hai
+         FirebaseFirestore.instance.collection('Companies').get().then((value) {
+            value.docs.forEach((element) {
+             active=false;
+             //admin_name.add(element.id);
+             print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
+             f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
+               active = element.get("active");
+               if(email==element.id){
+                 if (active == true) {
+                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                     builder: (BuildContext context) => ScreenMain(password: password,),
+                   ), (route) => false,);
+                 } else{
+                   FirebaseAuth.instance.signOut().then((value) async {
+                     Navigator.of(context).pushReplacement(
+                         MaterialPageRoute(builder: (context) =>  Login()),
+                         result: false);
+                   });}}
+               else {
+                 // element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+                 //   String a;
+                 //   a=element.get('email');
+                 //   print("laksjdhfkjsadf $a");
+                 //   if(email==a){
+                 //     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                 //       builder: (BuildContext context) => EmployeeDashboard(),
+                 //     ), (route) => false,);
+                 //   }
+                 // }));
+               }
+             })).then((value) {
+               element.reference.collection("Employee").get().then((value) => value.docs.forEach((elemen) {
+                 String a; a=elemen.get('email');
+                 print("laksjdhfkjsadf $a");
+                 if(email==a){
+                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => EmployeeDashboard(admineamil: element.id,),), (route) => false,);
+                 }
+               }));
+             });
+           });
+         });
+
+         // final QuerySnapshot result =await FirebaseFirestore.instance.collection('Companies').get()
+         //   final List<DocumentSnapshot> documents = result.docs;
+         //
+         //   if(active==true){
+         //      active=false;
+         //    documents.forEach((element) {
+         //      //admin_name.add(element.id);
+         //      print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
+         //      f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
+         //        print("::::::::::::::::::::: ${element.id}");
+         //        active = element.get("active");
+         //          if(email==element.id){
+         //            if (active == true) {
+         //                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+         //                  builder: (BuildContext context) => ScreenMain(password: password,),
+         //                ), (route) => false,);
+         //              }
+         //            else{
+         //               FirebaseAuth.instance.signOut().then((value) async {
+         //                  Navigator.of(context).pushReplacement(
+         //                      MaterialPageRoute(builder: (context) => const Homepage()),
+         //                      result: false);
+         //                });
+         //              }
+         //          }
+         //          else {
+         //
+         //            element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+         //            String a;
+         //            a=element.get('email');
+         //            print("laksjdhfkjsadf $a");
+         //
+         //            if(email==a){
+         //              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+         //                builder: (BuildContext context) => EmployeeDashboard(),), (route) => false,);
+         //            }
+         //
+         //          }));
+         //
+         //        }
+         //        }));
+         //       });
+         //    }
+         //
+         //   else{
+         //     documents.forEach((element) {
+         //       active=false;
+         //      //admin_name.add(element.id);
+         //        print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
+         //        f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
+         //          active = element.get("active");
+         //          if(email==element.id){
+         //              if (active == true) {
+         //                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+         //                  builder: (BuildContext context) => ScreenMain(password: password,),
+         //                ), (route) => false,);
+         //              }
+         //              else{
+         //                FirebaseAuth.instance.signOut().then((value) async {
+         //                  Navigator.of(context).pushReplacement(
+         //                      MaterialPageRoute(builder: (context) =>  Login()),
+         //                      result: false);
+         //                });
+         //              }}
+         //          else {
+         //              element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+         //                String a;
+         //                a=element.get('email');
+         //                print("laksjdhfkjsadf $a");
+         //                if(email==a){
+         //                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+         //                    builder: (BuildContext context) => EmployeeDashboard(),
+         //                  ), (route) => false,);
+         //                }
+         //              }));
+         //            }
+         //          }));
+         //           });
+         //        }
+            // await f.where('email', isEqualTo: email).get().then((value) =>
+              //     value.docs.forEach((element) {
+              //       active = element.get("active");
+              //       print("ghghghghgh $active");
+              //     }))
+              //     .then((value) async {
+              //
+              // }).then((value) async {
+              //     // print("88888888888888888888 $admin_name");
+              //     // await FirebaseAuth.instance.signOut().then((value) async {
+              //     // Navigator.of(context).pushReplacement(
+              //     //     MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
+              //     //     result: false);
+              //     // });
+              // });
+            //EmployeeDashboard()
+       }
+    else if(email=="example@gmail.com"){
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+    builder: (BuildContext context) => Test(),
+    ),(route) => false, );}
+
+        ////////////////////////////////////////////////
+        // await f.where('email', isEqualTo: email).get().then((value) => value.docs.forEach((element) {
+        //      superadmin=element.get("super");
+        //      print("kkkkk $superadmin");
+        //      // element.reference.collection("$email").get().then((value) => value.docs.forEach((element) {
+        //      //    print("-------------- ${element.data().toString()}");
+        //      //
+        //      //
+        //      //    // element.data()[''].toString();
+        //      //   // element.data().forEach((a, b) {
+        //      //   //   //print("@@@@ $a : $b ");
+        //      //   //   if (a != "personal" && a != "bussiness" && a !='ufileupload' && a!="docufileupload"){
+        //      //   //     if (b != ""){
+        //      //   //       print("44444444 $a $b");
+        //      //   //       list.add(a.toString());
+        //      //   //       streamController.add(a.toString());
+        //      //   //     }
+        //      //   //   }
+        //      //   // });
+        //      //
+        //      //
+        //      // }));
+        //   })
+        //
+        // ).then((value) async {
+        //   print("::::::::::::: $email $superadmin");
+        //
+        //   if(superadmin==true) {
+        //   //if(email=="example@gmail.com"){
+        //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+        //       builder: (BuildContext context) => Test(),
+        //     ), (route) => false, );
+        //   }
+        //   else {
+        //     await f.where('email', isEqualTo: email).get().then((value) => value.docs.forEach((element) {
+        //       active=element.get("active");
+        //       print("ghghghghgh $active");
+        //       // element.reference.collection("$email").get().then((value) => value.docs.forEach((element) {
+        //       //    print("-------------- ${element.data().toString()}");
+        //       //
+        //       //
+        //       //    // element.data()[''].toString();
+        //       //   // element.data().forEach((a, b) {
+        //       //   //   //print("@@@@ $a : $b ");
+        //       //   //   if (a != "personal" && a != "bussiness" && a !='ufileupload' && a!="docufileupload"){
+        //       //   //     if (b != ""){
+        //       //   //       print("44444444 $a $b");
+        //       //   //       list.add(a.toString());
+        //       //   //       streamController.add(a.toString());
+        //       //   //     }
+        //       //   //   }
+        //       //   // });
+        //       //
+        //       //
+        //       // }));
+        //     })).then((value) async{
+        //
+        //       if(active==true){
+        //
+        //         Navigator.of(context).pushAndRemoveUntil( MaterialPageRoute(
+        //           builder: (BuildContext context) => const ScreenMain(),
+        //         ), (route) => false,);
+        //         // Navigator.of(context).push( MaterialPageRoute(
+        //         //   builder: (context) => const ScreenMain(),
+        //         // ));
+        //       }
+        //       else{
+        //         await FirebaseAuth.instance.signOut().then((value) async {
+        //           Navigator.of(context).pushReplacement(
+        //               MaterialPageRoute(builder: (context) => const Homepage()), result: false);
+        //         });
+        //       }
+        //     });
+        //     // await f.where('email', isEqualTo: user?.email.toString()).get().then((value) => value.docs.forEach((element) {
+        //     //   print("888878787878787878788787 ");
+        //     //   String g='';
+        //     //
+        //     //   element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+        //     //     g=element.get("$email");
+        //     //       element.data().forEach((a, b) {
+        //     //
+        //     //         print("888878787878787878788787 $g $a");
+        //     //
+        //     //       });
+        //     //     }));
+        //     //
+        //     //       // element.reference.collection("$email").get().then((value) => value.docs.forEach((element) {
+        //     //       //    print("-------------- ${element.data().toString()}");
+        //     //       //
+        //     //       //
+        //     //       //    // element.data()[''].toString();
+        //     //       //   // element.data().forEach((a, b) {
+        //     //       //   //   //print("@@@@ $a : $b ");
+        //     //       //   //   if (a != "personal" && a != "bussiness" && a !='ufileupload' && a!="docufileupload"){
+        //     //       //   //     if (b != ""){
+        //     //       //   //       print("44444444 $a $b");
+        //     //       //   //       list.add(a.toString());
+        //     //       //   //       streamController.add(a.toString());
+        //     //       //   //     }
+        //     //       //   //   }
+        //     //       //   // });
+        //     //       //
+        //     //       //
+        //     //       // }));
+        //     //
+        //     //   })
+        //    // );
+        //   }
+        //
+        // });
+     }
+
 
   // Reading Error Value on the Screen
-  onlogicErrorHandling(
-      {required String error,
+  onlogicErrorHandling({
+      required String error,
       required ProviderGenerator providerGenerator,
       required int buttonIndex,
       required int errorIndex}) {
-    //Active Error Ui
-    providerGenerator.setVisibleError(value: true, index: errorIndex);
-    providerGenerator.setErrorMessage(value: error, index: errorIndex);
 
-    providerGenerator.setLoadingValue(value: false, index: buttonIndex);
-  }
+      //Active Error Ui
+      providerGenerator.setVisibleError(value: true, index: errorIndex);
+      providerGenerator.setErrorMessage(value: error, index: errorIndex);
+      providerGenerator.setLoadingValue(value: false, index: buttonIndex);
+    }
 
   //check Empty Value
   bool isEmpty(String email, password) {
@@ -134,7 +371,7 @@ class FrLoginService {
   // check RegExp Validation for email
   bool isRegExpValid(String value) {
     return RegExp(
-                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
             .hasMatch(value.trim())
         ? true
         : false;
@@ -145,46 +382,39 @@ class FrLoginService {
     switch (error) {
       case "invalid-email":
         return TextStrings.Invalid_email.tr();
-
       case "wrong-password":
         //return TextStrings.You_have_entered_an_invalid_password.tr();
           return "You have entered an invalid password";
       case "user-not-found":
         return "User with this email doesn't exist.";
-
       case "user-disabled":
         return "User with this email has been disabled.";
-
       case "operation-not-allowed":
         return "Signing in with Email and Password is not enabled.";
-
       default:
         return "An undefined Error happened.";
     }
   }
 
-    //Google Sign in
+  //Google Sign in
 
   Future<void> signinwithgoogle(BuildContext context)async {
     CollectionReference UserT = FirebaseFirestore.instance.collection("UserT");
     final user = FirebaseAuth.instance.currentUser;
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
       final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-
       if (googleAuth.accessToken != null && googleAuth.idToken != null) {
+
         final credential = GoogleAuthProvider.credential(
             accessToken: googleAuth.accessToken,
             idToken: googleAuth.idToken
         );
 
         UserCredential userCredential = await firebaseAuth.signInWithCredential(credential);
-
         if (userCredential.user != null) {
-
           if (userCredential.additionalUserInfo!.isNewUser) {
-            //print("11111111111111 ${UserT.doc(user?.email.toString())}");
+            // print("11111111111111 ${UserT.doc(user?.email.toString())}");
             print("11111111111111 ${userCredential.user?.email} \n 2222222222  ${userCredential.user?.photoURL} \n 333333333 ${userCredential.user?.displayName} \n 4444444 ${userCredential.user?.phoneNumber} 55555 4444444 ${userCredential.user?.metadata}");
             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Homepage()),);
             String qrcode='';
@@ -192,8 +422,7 @@ class FrLoginService {
             final fb = FirebaseDatabase.instance;
             final r = fb.reference().child("UserT");
             userid = userCredential.user!.uid.toString();
-              await UserT.doc(userCredential.user?.email).set(
-                    {
+              await UserT.doc(userCredential.user?.email).set({
                       'userTId': "",
                       'persoName':"",
                       'businessColor':'', 'businessCover':'',"Location":'',
@@ -210,14 +439,11 @@ class FrLoginService {
                       'persoIsPrivate':'','persoIsShowLocation':'','persoLink':'','persoLocation':'','persoPhotoPath':"",'persoPrivateCode':'',
                       'persoQrcode':'',
                       'uid':userCredential.user?.uid.toString(),
-                    },
-                  ).then((value) {
+                    },).then((value) {
                     r.push().set(userid).then((value) {
                       r.child(userid).set({"GlobalQrcode": "",});
                   });
                 });
-
-
             await UserT.doc(userCredential.user?.email).collection("Groups").doc("Group").set({"Group1":'',"Group2":'',"Group3":'',"Group4":'',
               "Group5":'',"Group6":'',"Group7":'',"Group8":'',"Group9":'',"Group10":'',"Group11":'',"Group12":'',"Group13":'',"Group14":'',
               "Group15":'',"Group16":'',"Group17":'',"Group18":'',"Group19":'',"Group20":'',"Group21":'',"Group22" :'',"Group23":'',"Group24":'',
@@ -229,7 +455,6 @@ class FrLoginService {
               "PicGroup25":'',"PicGroup26":'',"PicGroup27":'',"PicGroup28":'',"PicGroup29":'',"PicGroup30":'',"PicGroup31":'',"PicGroup32":'',"PicGroup33":'',"PicGroup34":'',
               "PicGroup35":'',"PicGroup36":'',"PicGroup37":'',"PicGroup38":'',"PicGroup39":'',"PicGroup40":'',"PicGroup41":'',"PicGroup42":'',"PicGroup43":'',"PicGroup44":'',
               "PicGroup45":'',"PicGroup46":'',"PicGroup47":'',"PicGroup48":'',"PicGroup49":'',"PicGroup50":'',"PicGroup51":'',"PicGroup52":'',"PicGroup53":'',});
-
             await UserT.doc(userCredential.user?.email).collection("Contacts").doc("${userCredential.user?.email}").set({"businessDescription":"","businessPhoto":"","businessFullname":""});
             await UserT.doc(userCredential.user?.email).collection("Linkstore").doc("mail").set({"mail":"","personal":false,"bussiness":false});
             await UserT.doc(userCredential.user?.email).collection("Linkstore").doc("locationgoogle").set({"locationgoogle":"","personal":false,"bussiness":false});
@@ -282,4 +507,57 @@ class FrLoginService {
         }
       }
 
-  }
+}
+
+
+
+
+
+
+
+// onSuccessSignIn({
+//   required String password,
+//   required String email,
+//   required String uid,
+//   required ProviderGenerator providerGenerator,
+//   required BuildContext context,
+//   required int buttonIndex,
+//   required int errorIndex}) async {
+//
+//
+//   providerGenerator.setErrorMessage(index: errorIndex, value: '');
+//   providerGenerator.setVisibleError(index: errorIndex, value: false);
+//   providerGenerator.setLoadingValue(value: false, index: buttonIndex);
+//
+//
+//   CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
+//
+//   print("%%%%%%%%%%%%%% $email");
+//
+//   if(email=="example@gmail.com"){
+//     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+//       builder: (BuildContext context) => Test(),
+//     ), (route) => false, );
+//   }
+//   else {
+//     await f.where('email', isEqualTo: email).get().then((value) => value.docs.forEach((element) {
+//       active=element.get("active");
+//       print("ghghghghgh $active");
+//
+//     })).then((value) async{
+//
+//       if(active==true){
+//         Navigator.of(context).pushAndRemoveUntil( MaterialPageRoute(
+//           builder: (BuildContext context) =>  ScreenMain(password: password,),
+//         ), (route) => false,);
+//
+//       }
+//       else{
+//         await FirebaseAuth.instance.signOut().then((value) async {
+//           Navigator.of(context).pushReplacement(
+//               MaterialPageRoute(builder: (context) => const Homepage()), result: false);
+//         });
+//       }
+//     });
+//   }
+// }

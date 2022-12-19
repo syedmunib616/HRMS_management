@@ -87,12 +87,16 @@ class _HomeState extends State<Home> {
   ];
 
   final _advancedDrawerController = AdvancedDrawerController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: AdvancedDrawer(
-
         backdropColor: srpgradient2,
         controller: _advancedDrawerController,
         animationCurve: Curves.easeInOut,
@@ -119,10 +123,8 @@ class _HomeState extends State<Home> {
             // srpgradient2,
             // srpgradient3
             // ],),
-
           borderRadius: const BorderRadius.all(Radius.circular(16)),
         ),
-
         drawer: SafeArea(
           child: Container(
             child: ListTileTheme(
@@ -139,17 +141,16 @@ class _HomeState extends State<Home> {
                       bottom: 64.0,
                     ),
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
                       'assets/user.jpg',
-
                     ),
                   ),
                   ListTile(
-                    onTap: () async{
+                    onTap: () async {
                        await FirebaseAuth.instance.signOut().then((value) async {
                          Navigator.of(context).pushReplacement(
                              MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
@@ -249,7 +250,9 @@ class _HomeState extends State<Home> {
                           //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
                           // ),
                         ),
+
                         Spacer(),
+
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -328,7 +331,7 @@ class _HomeState extends State<Home> {
                         children: [
                           Container(
                             width: 80.w,
-                            height: 40.h,
+                            height: 42.h,
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -764,7 +767,7 @@ class _HomeState extends State<Home> {
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            height: 74.h,
+                            height: 77.h,
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
                               child: Row(
@@ -941,11 +944,23 @@ class _HomeState extends State<Home> {
                           Row(
                             children: [
                               SizedBox(width: 11.w,),
-                              Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                              Container(
+                               // color: Colors.purpleAccent,
+                                  height: 30.h,
+                                  width: 100.w,
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
                               SizedBox(width: 10.w,),
-                              Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                              Container(
+                                  //color: Colors.purpleAccent,
+                                  height: 30.h,
+                                  width: 100.w,
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
                               SizedBox(width: 10.w,),
-                              Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                              Container(
+                                 // color: Colors.purpleAccent,
+                                  height: 30.h,
+                                  width: 100.w,
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
                             ],
                           )
                         ],
