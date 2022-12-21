@@ -29,14 +29,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class EmployeeDashboard extends StatefulWidget {
-   EmployeeDashboard({required this.admineamil,Key? key}) : super(key: key);
-    String admineamil;
+  EmployeeDashboard({required this.admineamil,Key? key}) : super(key: key);
+  String admineamil;
   @override
   State<EmployeeDashboard> createState() => _EmployeeDashboardState();
 }
 
 class _EmployeeDashboardState extends State<EmployeeDashboard> {
-
   final _controller = PageController();
   final _duration = const Duration(milliseconds: 300);
   final _curve = Curves.easeInOutCubic;
@@ -51,7 +50,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   String admin='';
   String name='';
   String department='';
-
   String datestring='';
 
   @override
@@ -65,45 +63,69 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     DateTime date = DateTime(now.year, now.month, now.day);
     datestring=date.toString();
     datestring=datestring.substring(0, datestring.length - 13);
-
-
     fetchuser();
   }
 
-  final user=FirebaseAuth.instance.currentUser;
+  final user = FirebaseAuth.instance.currentUser;
+  bool itis=false;
+
   fetchuser() async {
-
-
-    print("%%%%%%%%%%%%%%%% $datestring");
-
-
-    FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+     print("%%%%%%%%%%%%%%%% $datestring");
+     FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
         .doc('${user!.email.toString()}').get().then((value)  {
      name= value.get('name');
      department= value.get('designation');
      print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $name $department');
-
     }).then((value) async {
       FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
-          .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
+          .doc('${user!.email.toString()}').collection("Attendance").get().then((value) {
+
+            value.docs.forEach((element) {
+              print(":::::::::::: ${element.id}");
+              if(datestring=="${element.id}"){
+                print("jjjjjjjjjjjjjj");
+                setState(() {
+                  itis=true;
+                });
+              }
+            });
+     }).then((value){
+
+        if(itis==false){
+          FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+              .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+          .set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
+        }
+
+      });
+
+      // FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+      //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').get().then((value) {
+      //   print("lklklklklklklk $datestring ${value.id}");
+      //   if(datestring==value.id){
+      //     print("qiowueytoiutyeqrt");
+      //   }
+      //   else{
+      //     print(":::::::::::::::::");
+      //     // FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+      //     //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+      //   }
+      // });
+
+      // FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+      //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+          //.set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
+
       Position position = await _determinePosition();
       GetAddressFromLatLong(position);
       GetAddressFromLatLong1(position);
     });
   }
 
-
-
-
-
-
-
-  ////////////////////location fetching///////////////////////
+  ////////////////////location fetching/////////////////////////
   final _advancedDrawerController = AdvancedDrawerController();
   String Address='';
   String Address1='';
-
-
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -118,6 +140,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     }
 
     permission = await Geolocator.checkPermission();
+
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
@@ -137,35 +160,23 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     }
 
     return await Geolocator.getCurrentPosition();
+
   }
-
-  Future<void> GetAddressFromLatLong(Position position)async{
-
+  Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
-
     Address= '${place.thoroughfare}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode} ${place.administrativeArea}';
-
     setState(() {});
-
   }
-
-  Future<void> GetAddressFromLatLong1(Position position)async{
-
+  Future<void> GetAddressFromLatLong1(Position position)async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
-
     Address1= '${place.thoroughfare}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode} ${place.administrativeArea}';
-
     setState(() {});
-
   }
-
-  /////////////////////////////////////////////////////////////////
-
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -228,12 +239,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     onTap: () async {
                       await FirebaseAuth.instance.signOut().then((value) async {
                         Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
+                            MaterialPageRoute(builder: (BuildContext context) =>  Login()),//Homepage()),munib
                             result: false);
                       });
                     },
                     leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
-                    title: Text('Logout'),
+                    title: const Text('Logout'),
                   ),
                   // ListTile(
                   //   onTap: () {},
@@ -250,9 +261,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                   //   leading: Icon(Icons.settings),
                   //   title: Text('Settings'),
                   // ),
-                  Spacer(),
+                  const Spacer(),
                   DefaultTextStyle(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.white54,
                     ),
@@ -260,7 +271,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                       margin: const EdgeInsets.symmetric(
                         vertical: 16.0,
                       ),
-                      child: Text('Terms of Service | Privacy Policy'),
+                      child: const Text('Terms of Service | Privacy Policy'),
                     ),
                   ),
                 ],
@@ -289,7 +300,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -311,7 +322,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                             valueListenable: _advancedDrawerController,
                             builder: (_, value, __) {
                               return AnimatedSwitcher(
-                                duration: Duration(milliseconds: 250),
+                                duration: const Duration(milliseconds: 250),
                                 child: Icon(
                                   value.visible ? Icons.clear : Icons.menu,
                                   key: ValueKey<bool>(value.visible),
@@ -325,10 +336,10 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
                         // ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text("User Name",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                      Spacer(),
-                      SizedBox(width: 30.w,)
+                      const Spacer(),
+                      SizedBox(width: 30.w,),
                     ],
                   ),
                   Container(
@@ -343,7 +354,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
               ),
             ),
           ),
-
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -592,7 +602,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Container(
                                   height: 27.h,
                                   width: 27.w,
@@ -682,9 +692,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     ),
                   ),
                 ),
-
-
-
                 Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
@@ -720,7 +727,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Container(
                                   height: 27.h,
                                   width: 27.w,
@@ -872,7 +879,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 // ),
               ],
             ),
-          ),    // appBar: AppBar(
+          ),
+          // appBar: AppBar(
           //   title: const Text('Advanced Drawer Example'),
           //   leading: IconButton(
           //     onPressed: _handleMenuButtonPressed,
@@ -1446,6 +1454,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         // ),
       ),
     );
+
   }
 
   void _handleMenuButtonPressed() {

@@ -277,93 +277,93 @@ class _LoginState extends State<Login> {
   }
 
 
-
-class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
-  @override
-  _HomepageState createState() => _HomepageState();
-}
-
-class _HomepageState extends State<Homepage> {
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-
-  }
-  CollectionReference f=FirebaseFirestore.instance.collection("Companies");
-
-  // bool active=false;
-  // fetch()async{
-  //   final QuerySnapshot result = await FirebaseFirestore.instance.collection('Companies').get();
-  //   final List<DocumentSnapshot> documents = result.docs;
-  //   final user=FirebaseAuth.instance.currentUser;
-  //   documents.forEach((element) {
-  //     active=false;
-  //     //admin_name.add(element.id);
-  //
-  //     print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
-  //     f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
-  //       active = element.get("active");
-  //       //if(email==element.id){
-  //       if(user!.email.toString()=='${element.id}')
-  //       if (active == true) {
-  //           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-  //             builder: (BuildContext context) => ScreenMain(password: '123',),
-  //           ), (route) => false,);
-  //         }
-  //         else{
-  //           FirebaseAuth.instance.signOut().then((value) async {
-  //             Navigator.of(context).pushReplacement(
-  //                 MaterialPageRoute(builder: (context) => const Homepage()),
-  //                 result: false);
-  //           });
-  //         }}
-  //       else {
-  //         element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
-  //           String a;
-  //           a=element.get('email');
-  //           print("laksjdhfkjsadf $a");
-  //           if(email==a){
-  //             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-  //               builder: (BuildContext context) =>
-  //                   EmployeeDashboard(),
-  //             ), (route) => false,);
-  //           }
-  //         }));
-  //       }
-  //     }));
-  //   });
-  //
-  // }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.black,
-              ),
-            );
-          } else if (snapshot.hasData) {
-            return ScreenMain(password: '123',);
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text("Something went wrong!"),
-            );
-          } else {
-            // return const ScreenLogin();
-            return Login();
-          }
-        });
-  }
-}
+//munib
+// class Homepage extends StatefulWidget {
+//   const Homepage({Key? key}) : super(key: key);
+//   @override
+//   _HomepageState createState() => _HomepageState();
+// }
+//
+// class _HomepageState extends State<Homepage> {
+//
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//
+//
+//   }
+//   CollectionReference f=FirebaseFirestore.instance.collection("Companies");
+//
+//   // bool active=false;
+//   // fetch()async{
+//   //   final QuerySnapshot result = await FirebaseFirestore.instance.collection('Companies').get();
+//   //   final List<DocumentSnapshot> documents = result.docs;
+//   //   final user=FirebaseAuth.instance.currentUser;
+//   //   documents.forEach((element) {
+//   //     active=false;
+//   //     //admin_name.add(element.id);
+//   //
+//   //     print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
+//   //     f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
+//   //       active = element.get("active");
+//   //       //if(email==element.id){
+//   //       if(user!.email.toString()=='${element.id}')
+//   //       if (active == true) {
+//   //           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+//   //             builder: (BuildContext context) => ScreenMain(password: '123',),
+//   //           ), (route) => false,);
+//   //         }
+//   //         else{
+//   //           FirebaseAuth.instance.signOut().then((value) async {
+//   //             Navigator.of(context).pushReplacement(
+//   //                 MaterialPageRoute(builder: (context) => const Homepage()),
+//   //                 result: false);
+//   //           });
+//   //         }}
+//   //       else {
+//   //         element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+//   //           String a;
+//   //           a=element.get('email');
+//   //           print("laksjdhfkjsadf $a");
+//   //           if(email==a){
+//   //             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+//   //               builder: (BuildContext context) =>
+//   //                   EmployeeDashboard(),
+//   //             ), (route) => false,);
+//   //           }
+//   //         }));
+//   //       }
+//   //     }));
+//   //   });
+//   //
+//   // }
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder(
+//         stream: FirebaseAuth.instance.authStateChanges(),
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return const Center(
+//               child: CircularProgressIndicator(
+//                 color: Colors.black,
+//               ),
+//             );
+//           } else if (snapshot.hasData) {
+//             return ScreenMain(password: '123',);
+//           } else if (snapshot.hasError) {
+//             return const Center(
+//               child: Text("Something went wrong!"),
+//             );
+//           } else {
+//             // return const ScreenLogin();
+//             return Login();
+//           }
+//         });
+//   }
+// }
 
 
 

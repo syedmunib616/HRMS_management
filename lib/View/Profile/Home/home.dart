@@ -153,7 +153,7 @@ class _HomeState extends State<Home> {
                     onTap: () async {
                        await FirebaseAuth.instance.signOut().then((value) async {
                          Navigator.of(context).pushReplacement(
-                             MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
+                             MaterialPageRoute(builder: (BuildContext context) => Login()),// Homepage()),munib
                              result: false);
                         });
                     },
