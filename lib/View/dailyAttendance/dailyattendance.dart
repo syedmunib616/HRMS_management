@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,6 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-
 
 class DailyAttendance extends StatefulWidget {
   const DailyAttendance({Key? key}) : super(key: key);
@@ -34,11 +32,13 @@ class _DailyAttendanceState extends State<DailyAttendance> {
     _eventNameController.dispose();
     super.dispose();
   }
+
   String convertedDateTime='';
   late DateTime dateTime;
   late Duration duration;
   String time='';
   DateTime now = DateTime.now();
+
   @override
   void initState() {
     dateTime = DateTime.now();
@@ -48,15 +48,13 @@ class _DailyAttendanceState extends State<DailyAttendance> {
   }
 
   DateTime? newDateTime;
+
   //late DateTime dateTime;
-
-
   //DateTime now = DateTime.now();
   //String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
         child: CsScreenUtilInit(
           child:Scaffold(
@@ -370,7 +368,7 @@ class _DailyAttendanceState extends State<DailyAttendance> {
                                  SizedBox(height: 10.h,),
                                  Container(
                                      //color: Colors.black45,
-                                     alignment:Alignment.center ,
+                                     alignment:Alignment.center,
                                      width: 130.w,
                                      child: Text("Daily Attendance",style: GoogleFonts.poppins(fontSize:12.sp,
                                          color: Colors.black,fontWeight: FontWeight.w500),),
@@ -378,9 +376,28 @@ class _DailyAttendanceState extends State<DailyAttendance> {
                                   SizedBox(height: 10.h,),
                                   GestureDetector(
                                      onTap: () async {
-                                       //DatePickerTitle(date: dateTime);
+
+                                       // DatePickerTitle(date: dateTime);
                                        // _showRangePicker(context);
+                                       // newDateTime = await buildShowRoundedDatePicker(context);
+
+                                       var a,b,c;
                                        newDateTime = await buildShowRoundedDatePicker(context);
+                                       a=newDateTime?.day.toString();
+                                       b=newDateTime?.month.toString();
+                                       c=newDateTime?.year.toString();
+
+                                       if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+                                           a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+                                         a="0$a";
+                                       }
+
+                                       if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+                                           b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+                                         b="0$b";
+                                       }
+
+                                       print("guddi teri ma ka $a $b $c");
                                        print(newDateTime);
                                        if (newDateTime != null) {
                                          setState((){

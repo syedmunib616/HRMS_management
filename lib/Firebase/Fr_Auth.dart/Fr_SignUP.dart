@@ -364,10 +364,9 @@ class FrSignUpService1 {
 
     await UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
       print("kkklklklkk $email $adminemail ${password}");
-      element.reference.collection("Employee").doc(email).
-      set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+      element.reference.collection("Employee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
         "name":"$name","email":"$email","uid":"$uid",});
-    }));
+      }));
 
     //     .then((value) async {
     //   await FirebaseAuth.instance.signOut().then((value) async {

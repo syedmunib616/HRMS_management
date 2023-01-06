@@ -12,18 +12,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenMain extends StatefulWidget {
- ScreenMain({Key? key, required this.password}) : super(key: key);
+  ScreenMain({Key? key, required this.password}) : super(key: key);
    String password;
   @override
   State<ScreenMain> createState() => _ScreenMainState();
 }
 
 class _ScreenMainState extends State<ScreenMain> {
-
   TextEditingController searchController=TextEditingController();
   int curentindex = 0;
-late String password;
-
+  late String password;
   late List<Widget> screens;
 
   void initState() {
@@ -36,8 +34,8 @@ late String password;
       // Zoom(),
       Reports(),
       Requests(),
-      Log(),
-      Settings(password: password),
+      // Log(),
+      // Settings(password: password),
     ];
   }
 
@@ -52,18 +50,18 @@ late String password;
 
   @override
   Widget build(BuildContext context) {
-
     final storageFutureProvider = Provider.of<StorageFutureProvider>(context);
     // final providerQrCode = Provider.of<ProviderQrCode>(context);
-
     return Scaffold(
       body:
       // Stack(
       //   children: [
+
       IndexedStack(
         index: curentindex,
         children: screens,
       ),
+
       // Positioned(
       //   child: Padding(
       //     padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -98,6 +96,7 @@ late String password;
 
       //   ],
       // ),
+
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: curentindex,
           onTap: (index) {
@@ -176,41 +175,40 @@ late String password;
                     Text("Request",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==2? srpgradient2 :fontgrey,),),
                   ],
                 )),
-            BottomNavigationBarItem(
-                backgroundColor: blackClr,
-                label: 'Log',
-                icon: Column(
-                  children: [
-                    Image.asset(
-                      'assets/log.png',
-                      height: 24,
-                      width: 24,
-                      color:curentindex==3? srpgradient2 : settingFontBackColor(context),
-                      //providerQrCode.getActiveValue ? whiteClr : subTitleClr,
-                    ),
-                    Text("Log",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==3? srpgradient2 :fontgrey,),),
-
-                  ],
-                )),
-            BottomNavigationBarItem(
-                backgroundColor: blackClr,
-                label: 'Settings',
-                icon: Column(
-                  children: [
-                    Image.asset(
-                      'assets/setting-lines.png',
-                      height: 24,
-                      width: 24,
-                      color:curentindex==4? srpgradient2 : settingFontBackColor(context),
-                    ),
-                    Text("Settings",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==4? srpgradient2 :fontgrey,),),
-
-                  ],
-                )),
+            // BottomNavigationBarItem(
+            //     backgroundColor: blackClr,
+            //     label: 'Log',
+            //     icon: Column(
+            //       children: [
+            //         Image.asset(
+            //           'assets/log.png',
+            //           height: 24,
+            //           width: 24,
+            //           color:curentindex==3? srpgradient2 : settingFontBackColor(context),
+            //           //providerQrCode.getActiveValue ? whiteClr : subTitleClr,
+            //         ),
+            //         Text("Log",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==3? srpgradient2 :fontgrey,),),
+            //
+            //       ],
+            //     )),
+            // BottomNavigationBarItem(
+            //     backgroundColor: blackClr,
+            //     label: 'Settings',
+            //     icon: Column(
+            //       children: [
+            //         Image.asset(
+            //           'assets/setting-lines.png',
+            //           height: 24,
+            //           width: 24,
+            //           color:curentindex==4? srpgradient2 : settingFontBackColor(context),
+            //         ),
+            //         Text("Settings",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==4? srpgradient2 :fontgrey,),),
+            //
+            //       ],
+            //     )),
           ]),
 
     );
-
   }
 
 }

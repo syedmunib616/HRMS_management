@@ -83,15 +83,12 @@ class FrLoginService {
       required int buttonIndex,
       required int errorIndex}) async {
       //Active Error Ui
-
       providerGenerator.setErrorMessage(index: errorIndex, value: '');
       providerGenerator.setVisibleError(index: errorIndex, value: false);
       providerGenerator.setLoadingValue(value: false, index: buttonIndex);
       print("---------------- $email");
 
-
     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
-
 
     if(email!="example@gmail.com") {//braek point laga k check krna hai kidhr masla araha hai
          FirebaseFirestore.instance.collection('Companies').get().then((value) {
@@ -111,7 +108,8 @@ class FrLoginService {
                      Navigator.of(context).pushReplacement(
                          MaterialPageRoute(builder: (context) =>  Login()),
                          result: false);
-                   });}}
+                   });
+                 }}
                else {
                  // element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
                  //   String a;
@@ -135,7 +133,6 @@ class FrLoginService {
              });
            });
          });
-
          // final QuerySnapshot result =await FirebaseFirestore.instance.collection('Companies').get()
          //   final List<DocumentSnapshot> documents = result.docs;
          //
@@ -236,7 +233,6 @@ class FrLoginService {
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
     builder: (BuildContext context) => Test(),
     ),(route) => false, );}
-
         ////////////////////////////////////////////////
         // await f.where('email', isEqualTo: email).get().then((value) => value.docs.forEach((element) {
         //      superadmin=element.get("super");
@@ -508,12 +504,6 @@ class FrLoginService {
   //     }
 
 }
-
-
-
-
-
-
 
 // onSuccessSignIn({
 //   required String password,

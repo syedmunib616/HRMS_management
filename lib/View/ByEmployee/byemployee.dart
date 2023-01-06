@@ -16,7 +16,6 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class ByEmployee extends StatefulWidget {
   ByEmployee({Key? key}) : super(key: key);
 
@@ -68,7 +67,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                   ),
                   child: Stack(
                       children:[
-
                         Positioned(
                           top: 0,
                           bottom: 0,
@@ -91,15 +89,37 @@ class _ByEmployeeState extends State<ByEmployee> {
                                       onTap: () async {
                                         //DatePickerTitle(date: dateTime);
                                         // _showRangePicker(context);
+
+                                        var a,b,c;
                                         newDateTime = await buildShowRoundedDatePicker(context);
+
+                                        a=newDateTime?.day.toString();
+                                        b=newDateTime?.month.toString();
+                                        c=newDateTime?.year.toString();
+
+                                        if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+                                            a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+                                          a="0$a";
+                                        }
+
+                                        if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+                                            b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+                                          b="0$b";
+                                        }
+
+                                        print("guddi teri ma ka $a $b $c");
+
                                         print(newDateTime);
                                         if (newDateTime != null) {
-                                          setState((){
-                                            time=newDateTime.toString();
-                                            time=time.substring(0,time.length-13);
-                                            dateTime = newDateTime!;});
+                                          setState(() {
+                                            // time=newDateTime.toString();
+                                            // time=time.substring(0,time.length-13);
+                                            time= "$c-$b-$a";
+                                            dateTime = newDateTime!;
+                                          });
                                           print("${dateTime.month}");
                                         }
+
                                       },
                                       child: Container(
                                         height: 36.0.h,
@@ -195,7 +215,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                                ]
                               ),
                              ),
-
                         Positioned(
                           top: 0,
                           left: 0,
@@ -212,7 +231,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                             ),
                           ),
                         ),
-
                       ]
                     ),
                   ),
@@ -220,7 +238,7 @@ class _ByEmployeeState extends State<ByEmployee> {
             ),
             body: DefaultTabController(
               length: 4,
-              initialIndex: 2,
+              initialIndex: 0,
               child:  Scaffold(
                 appBar:  AppBar(
                   leading: SizedBox(),
@@ -242,12 +260,12 @@ class _ByEmployeeState extends State<ByEmployee> {
                   ),
                 ),
                 /*--------------- Build Tab body here -------------------*/
-                body: const TabBarView(
+                body:  TabBarView(
                   children: <Widget>[
-                    TabsforDesignationAbsentLateEarly(),
-                    TabsforDesignationAbsentLateEarly(),
-                    TabsforDesignationAbsentLateEarly(),
-                    TabsforDesignationAbsentLateEarly(),
+                    TabsforDesignationAbsentLateEarly(time: time,tabcount: 0,),
+                    TabsforDesignationAbsentLateEarly(time: time,tabcount: 1,),
+                    TabsforDesignationAbsentLateEarly(time: time,tabcount: 2,),
+                    TabsforDesignationAbsentLateEarly(time: time,tabcount: 3,),
                   ],
                 ),
               ),
@@ -301,7 +319,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                   children: [
                     Text("Record",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                     const Spacer(),
-
                   ],
                 ),
               ),
@@ -336,18 +353,18 @@ class _ByEmployeeState extends State<ByEmployee> {
                                 Text("Record",style: GoogleFonts.poppins(fontSize: 18.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                               ],
                             )),
+                          ],
+                        )),
                       ],
-                    )),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                //cancelButton,
+                continueButton,
               ],
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        //cancelButton,
-        continueButton,
-      ],
-    );
+            );
 
     // show the dialog
     showDialog(
@@ -401,8 +418,28 @@ class _ByEmployeeState extends State<ByEmployee> {
 
 }
 
-class TabsforDesignationAbsentLateEarly extends StatelessWidget {
-  const TabsforDesignationAbsentLateEarly({Key? key}) : super(key: key);
+class TabsforDesignationAbsentLateEarly extends StatefulWidget {
+  const TabsforDesignationAbsentLateEarly({Key? key, required this.time, required this.tabcount}) : super(key: key);
+
+  final String time;
+  final int tabcount;
+
+  @override
+  State<TabsforDesignationAbsentLateEarly> createState() => _TabsforDesignationAbsentLateEarlyState();
+}
+
+class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAbsentLateEarly> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("uuuuuuuuuuuuuuu ${widget.time} ${widget.tabcount}");
+  }
+
+  fetchattendance(){
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -416,9 +453,8 @@ class TabsforDesignationAbsentLateEarly extends StatelessWidget {
               SizedBox(height: 10.h,),
               Padding(
                 padding:  EdgeInsets.only(left: 8.0.w),
-                child: Text("Total Present: 1",style: GoogleFonts.poppins(fontSize:12.sp,
-                    color: srpgradient3,fontWeight: FontWeight.w500),),
-              ),
+                child: Text("Total Present: 1", style: GoogleFonts.poppins(fontSize:12.sp,
+                    color: srpgradient3,fontWeight: FontWeight.w500),),),
               SizedBox(height: 10.h,),
               Container(
                 height: 30.h,
@@ -499,7 +535,7 @@ class TabsforDesignationAbsentLateEarly extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ),
+                  ),
                   SizedBox(width: 20.w,),
                   Padding(
                       padding:  EdgeInsets.only(left: 35.0.w),
@@ -518,7 +554,7 @@ class TabsforDesignationAbsentLateEarly extends StatelessWidget {
                           ),
                         ],
                       )
-                    ),
+                  ),
                   SizedBox(width: 14.w,),
                 ],
               ),
@@ -527,6 +563,5 @@ class TabsforDesignationAbsentLateEarly extends StatelessWidget {
         )
       );
     }
-
 }
 

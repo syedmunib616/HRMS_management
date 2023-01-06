@@ -575,14 +575,18 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   bool reportingto = false;
 
   String email='';
-
+  bool isLoading = false;
   late final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     setState(() {
+
       email=user!.email.toString();
+    isLoading=false;
     });
     fetchemploye();
     textEditingController3.text="abcd123";
@@ -592,13 +596,14 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       }
     });
   }
+
   CollectionReference f=FirebaseFirestore.instance.collection("Companies");
   final user=FirebaseAuth.instance.currentUser;
   bool superadmin=false;
   bool active=false;
-  fetchemploye()async{
-    //////////////////////////////////////////////
 
+  fetchemploye() async {
+    //////////////////////////////////////////////
     print("kjhsadlkjf ${user!.email.toString()}");
     await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
       element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
@@ -610,7 +615,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     }));
   }
 
-@override
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
@@ -674,7 +679,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
           body:  Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: Column(
+            child:
+            //isLoading==false?
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
@@ -962,6 +969,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                     final user=FirebaseAuth.instance.currentUser;
                     print("${textEditingController1.text.trim()} ${textEditingController3.text.trim()} ${designationdropdownvalue} ${textEditingController4.text.trim()} "
                         "${dropdownvalue} ${textEditingController2.text.trim()} ${reportings}");
+                    setState(() {
+                      isLoading=true;
+                    });
                     FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
                       adminemail: email,
                       email: textEditingController1.text.trim(),
@@ -974,16 +984,22 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                       phonenumber: textEditingController2.text.trim(),
                       context: context,
                       providerGenerator: providerGenerator, adminpassword: widget.password,
-                    ).then((value)async {
+                    ).then((value) async {
                       // print("lkajshfaslkjdf $email");
                       // await UserT.where('email', isEqualTo: email).get().then((value) => value.docs.forEach((element) {
                       //   element.reference.collection("Employee").doc(textEditingController1.text.trim()).
                       //   set({"reportingto":"$reportings","designation":"$designationdropdownvalue","phonenumber":"${textEditingController2.text.trim()}","department":"$dropdownvalue",
                       //     "name":"${textEditingController4.text.trim()}","email":"${textEditingController1.text.trim()}",});
                       // }));
+                      // setState(() {
+                      //   isLoading=false;
+                      // });
                       await FirebaseAuth.instance.signOut().then((value) async {
-                        firebaseAuth.signInWithEmailAndPassword( email: email, password: widget.password, ).then((value) {
+                        firebaseAuth.signInWithEmailAndPassword(email: email, password: widget.password,).then((value) {
                           print("iiiiiiiiii ${widget.password}");
+                          // setState(() {
+                          //   isLoading=false;
+                          // });
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: widget.password,)),
                               result: false);
@@ -1034,7 +1050,10 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 ),
 
               ],
-            ),
+            )
+            // : const Center(
+            //   child: CircularProgressIndicator(),
+            // ),
           ),
         ),
       ),

@@ -36,34 +36,38 @@ class EmployeeDashboard extends StatefulWidget {
 }
 
 class _EmployeeDashboardState extends State<EmployeeDashboard> {
-  final _controller = PageController();
-  final _duration = const Duration(milliseconds: 300);
-  final _curve = Curves.easeInOutCubic;
 
-  final _pages = const [
-    LineChartPage(),
-    LineChartPage2(),
-    LineChartPage3(),
-    LineChartPage4(),
-  ];
+    final _controller = PageController();
+    final _duration = const Duration(milliseconds: 300);
+    final _curve = Curves.easeInOutCubic;
 
-  String admin='';
-  String name='';
-  String department='';
-  String datestring='';
+    final _pages = const [
+      LineChartPage(),
+      LineChartPage2(),
+      LineChartPage3(),
+      LineChartPage4(),
+    ];
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setState(() {
-      admin=widget.admineamil;
+    String admin='';
+    String name='';
+    String department='';
+    String datestring='';
+
+    @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+      setState(() {
+        admin=widget.admineamil;
     });
+
+
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
     datestring=date.toString();
     datestring=datestring.substring(0, datestring.length - 13);
     fetchuser();
+
   }
 
   final user = FirebaseAuth.instance.currentUser;
@@ -72,14 +76,13 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   fetchuser() async {
      print("%%%%%%%%%%%%%%%% $datestring");
      FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
-        .doc('${user!.email.toString()}').get().then((value)  {
+        .doc('${user!.email.toString()}').get().then((value) {
      name= value.get('name');
      department= value.get('designation');
      print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $name $department');
     }).then((value) async {
       FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
           .doc('${user!.email.toString()}').collection("Attendance").get().then((value) {
-
             value.docs.forEach((element) {
               print(":::::::::::: ${element.id}");
               if(datestring=="${element.id}"){
@@ -90,15 +93,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
               }
             });
      }).then((value){
-
-        if(itis==false){
+       if(itis==false){
           FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
               .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
           .set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
         }
-
       });
-
       // FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
       //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').get().then((value) {
       //   print("lklklklklklklk $datestring ${value.id}");
@@ -115,7 +115,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       // FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
       //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
           //.set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
-
       Position position = await _determinePosition();
       GetAddressFromLatLong(position);
       GetAddressFromLatLong1(position);
@@ -127,17 +126,17 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   String Address='';
   String Address1='';
   Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+  bool serviceEnabled;
+  LocationPermission permission;
 
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
+  // Test if location services are enabled.
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.
       return Future.error('Location services are disabled.');
-    }
+  }
 
     permission = await Geolocator.checkPermission();
 
@@ -162,6 +161,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     return await Geolocator.getCurrentPosition();
 
   }
+
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
@@ -169,6 +169,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     Address= '${place.thoroughfare}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode} ${place.administrativeArea}';
     setState(() {});
   }
+
   Future<void> GetAddressFromLatLong1(Position position)async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
@@ -180,7 +181,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: AdvancedDrawer(
         backdropColor: srpgradient2,
@@ -636,15 +636,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
                             child: Column(
                               children: [
-
                                 Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-
                                 SizedBox(
                                   height: 10.h,
                                 ),
-
                                 GestureDetector(
-                                  onTap: ()async{
+                                  onTap: () async {
                                     Position position = await _determinePosition();
                                     print(position.latitude);
                                     print(position.longitude);
@@ -653,7 +650,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
                                         .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"}).
                                     then((value) => CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed"));
-
                                   },
                                   child: Container(
                                       height: 40.h,
@@ -695,7 +691,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
-                    height: 151.h,
+                    height: 151.1.h,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -1454,7 +1450,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         // ),
       ),
     );
-
   }
 
   void _handleMenuButtonPressed() {
@@ -1464,4 +1459,5 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   }
 
 }
+
 

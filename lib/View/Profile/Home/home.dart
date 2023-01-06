@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
+import 'package:hrmanagementapp/View/DepartmentList/Departmentlist.dart';
+import 'package:hrmanagementapp/View/Designation/designation.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/line_chart_page.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/line_chart_page2.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/line_chart_page3.dart';
@@ -14,11 +16,15 @@ import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/pie_chart
 import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/pie_chart_sample2.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/piechart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hrmanagementapp/View/Shifts/shifts.dart';
+import 'package:hrmanagementapp/View/changepassword/Changepassword.dart';
+import 'package:hrmanagementapp/View/employeDirectory/EmployeDirectory.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hrmanagementapp/View/user/User.dart';
 
 // final ZoomDrawerController z = ZoomDrawerController();
 //
@@ -133,6 +139,7 @@ class _HomeState extends State<Home> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
+
                   Container(
                     width: 128.0,
                     height: 128.0,
@@ -145,10 +152,78 @@ class _HomeState extends State<Home> {
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
-                    child: Image.asset(
-                      'assets/user.jpg',
-                    ),
+                    child: Icon(FontAwesomeIcons.user,size: 80.sp,color: whiteClr,),
+                    // child: Image.asset(
+                    //   'assets/user.jpg',
+                    // ),
                   ),
+
+                  ListTile(
+                    onTap: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EmployeeDirectory(password: '',)),
+                      );
+                    },
+                    leading: Icon(FontAwesomeIcons.users,size: 20.sp,color: whiteClr,),
+                    title: Text('Employees'),
+                  ),
+
+                  ListTile(
+                    onTap: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Shifts()),
+                      );
+                    },
+                    leading: Icon(FontAwesomeIcons.solidClock,size: 20.sp,color: whiteClr,),
+                    title: Text('Shifts'),
+                  ),
+
+                  ListTile(
+                    onTap: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DepartmentList()),
+                      );
+                    },
+                    leading: Icon(FontAwesomeIcons.sitemap,size: 20.sp,color: whiteClr,),
+                    title: Text('Departments'),
+                  ),
+
+                  ListTile(
+                    onTap: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Designation()),
+                      );
+                    },
+                    leading: Icon(FontAwesomeIcons.idCardClip,size: 20.sp,color: whiteClr,),
+                    title: Text('Designation'),
+                  ),
+
+                  ListTile(
+                    onTap: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Profile()),
+                      );
+                    },
+                    leading: Icon(FontAwesomeIcons.userPen,size: 20.sp,color: whiteClr,),
+                    title: Text('Profile'),
+                  ),
+
+                  ListTile(
+                    onTap: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChangePassword()),
+                      );
+                    },
+                    leading: Icon(FontAwesomeIcons.lock,size: 20.sp,color: whiteClr,),
+                    title: Text('Password'),
+                  ),
+
                   ListTile(
                     onTap: () async {
                        await FirebaseAuth.instance.signOut().then((value) async {
@@ -160,6 +235,7 @@ class _HomeState extends State<Home> {
                     leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
                     title: Text('Logout'),
                   ),
+
                   // ListTile(
                   //   onTap: () {},
                   //   leading: Icon(Icons.account_circle_rounded),
@@ -175,9 +251,11 @@ class _HomeState extends State<Home> {
                   //   leading: Icon(Icons.settings),
                   //   title: Text('Settings'),
                   // ),
+
                   Spacer(),
+
                   DefaultTextStyle(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.white54,
                     ),
@@ -188,6 +266,7 @@ class _HomeState extends State<Home> {
                       child: Text('Terms of Service | Privacy Policy'),
                     ),
                   ),
+
                 ],
               ),
             ),
@@ -409,7 +488,6 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -643,6 +721,7 @@ class _HomeState extends State<Home> {
                       ),
                       child: Column(
                         children: [
+
                           Padding(
                             padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
                             child: Container(
@@ -672,11 +751,13 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
+
                           Container(
                             height: 1,
                             width: MediaQuery.of(context).size.width,
                             color: coverBackClr,
                           ),
+
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
                             height: 78.h,
@@ -708,6 +789,7 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
+
                         ],
                       ),
                     ),
@@ -776,7 +858,6 @@ class _HomeState extends State<Home> {
                                     children: [
                                       Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
                                       Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-
                                     ],
                                   ),
                                   Spacer(),
@@ -973,7 +1054,6 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-
           // appBar: AppBar(
           //   title: const Text('Advanced Drawer Example'),
           //   leading: IconButton(

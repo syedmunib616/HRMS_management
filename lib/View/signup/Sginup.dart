@@ -9,9 +9,7 @@ import 'package:hrmanagementapp/View/login/components/Cs_ErrorContainer.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:provider/provider.dart';
-
 import '../../Theme/Theme_Color.dart';
 import '../Components/Cs_ScreenUtilInit.dart';
 
@@ -29,14 +27,12 @@ class _SginUpState extends State<SginUp> {
   TextEditingController textEditingController3 = TextEditingController();
   TextEditingController textEditingController4 = TextEditingController();
   TextEditingController textEditingController5 = TextEditingController();
-  TextEditingController textEditingController6 = TextEditingController(); TextEditingController textEditingController7 = TextEditingController();
-
+  TextEditingController textEditingController6 = TextEditingController();
+  TextEditingController textEditingController7 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
-    final providerGenerator = Provider.of<ProviderGenerator>(context);
-
+  final providerGenerator = Provider.of<ProviderGenerator>(context);
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
@@ -314,3 +310,4 @@ class _SginUpState extends State<SginUp> {
     );
   }
 }
+
