@@ -343,7 +343,7 @@ class FrLoginService {
         //   }
         //
         // });
-     }
+   }
 
 
   // Reading Error Value on the Screen

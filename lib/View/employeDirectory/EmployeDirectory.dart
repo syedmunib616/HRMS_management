@@ -36,7 +36,7 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
   bool superadmin=false;
   bool active=false;
   var reporting=[];
-  
+  var email=[];
   @override
   void initState() {
     // TODO: implement initState
@@ -44,18 +44,26 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
     fetchemploye();
   }
 
-  fetchemploye()async{
-    //////////////////////////////////////////////
-    print("kjhsadlkjf ${user!.email.toString()}");
-    await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+  fetchemploye() async {
+
+   //////////////////////////////////////////////
+
+   print("kjhsadlkjf ${user!.email.toString()}");
+   await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
       element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
-        String a;
+        String a,b;
+
         a=element.get('name');
         reporting.add(a);
+
+        b=element.get('email');
+        email.add(b);
+
         print("uuuuuuu $a");
         setState(() {});
       }));
     }));
+
   }
 
   @override
@@ -420,25 +428,28 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                   //   ),
                   // ),
                 ),
-                reporting.length==null?SizedBox(): Container(
+                reporting.length==null ? SizedBox(): Container(
                   // color: Colors.purpleAccent,
                   height: 530.h,
                   width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
                       itemCount: reporting.length,
                       itemBuilder: (BuildContext contet,index){
-                        return Empolyee(name: reporting[index],);
-                      }),
-                ),
+                        return Empolyee(
+                                email: email[index],
+                                name: reporting[index],);
+                        }
+                      ),
+                    ),
                 // NoOfRequest(),
                 // NoOfRequest(),
                 // NoOfRequest(),
                 // NoOfRequest(),
                 // NoOfRequest(),
                 // NoOfRequest(),
-              ],
+                ],
+              ),
             ),
-          ),
           floatingActionButton: FloatingActionButton(
             child: Container(
               width: 60,
@@ -468,12 +479,192 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
   }
 }
 
+class EditEmployee extends StatefulWidget {
+  const EditEmployee({Key? key,required this.email}) : super(key: key);
+  final String email ;
+  @override
+  State<EditEmployee> createState() => _EditEmployeeState();
+}
+
+class _EditEmployeeState extends State<EditEmployee> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: CsScreenUtilInit(
+        child: Scaffold(
+          appBar: AppBar(
+              leading:
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
+                  child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
+                ),
+              ),
+              backgroundColor: Colors.transparent,
+              flexibleSpace:  Container(
+                height: 102.h,
+                width:MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.01),
+                      spreadRadius: 2,
+                      blurRadius: 1,
+                      offset: const Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                  color: whiteClr,
+                ),
+                child: Column(
+                  crossAxisAlignment:CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 26.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Spacer(),
+                        Row(
+                          children: [
+                            Icon(FontAwesomeIcons.user),
+                            Text(" ${widget.email}",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                          ],
+                        ),
+                        Spacer(),
+
+                      ],
+                    ),
+
+                  ],
+                ),
+              ),
+            ),
+          body:Container(
+            padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
+            child: GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+              },
+              child: ListView(
+                children: [
+                  const Text(
+                    "Edit Profile",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    width: 130,
+                    height: 130,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 4,
+                            color: Theme.of(context).scaffoldBackgroundColor),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: Colors.black.withOpacity(0.1),
+                              offset: const Offset(0, 10))
+                        ],
+                        shape: BoxShape.circle,
+                        image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                              "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+                            ))),
+                  ),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  TextField(
+                    decoration: const InputDecoration(
+                      labelText: "Name",
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.teal)),
+                      hintText: 'Input Name',
+                    ),
+                    controller: displayNameController,
+                    keyboardType: TextInputType.name,
+                  ),
+                  TextField(
+                    decoration: const InputDecoration(
+                      labelText: "Age",
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.teal)),
+                      hintText: 'Input Age',
+                    ),
+                    controller: ageController,
+                    //
+                    keyboardType: TextInputType.number,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("Email: ", style: TextStyle(fontSize: 20),),
+                  ),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text("CANCEL",
+                            style: TextStyle(
+                                fontSize: 14,
+                                letterSpacing: 2.2,
+                                color: Colors.black)),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          FirebaseDatabase.instance.ref()
+                              .child('useProfileBrowse')
+                              .child(user!.uid)
+                              .update({
+                            'name': displayNameController.text //yes I know.
+                          });
+                          FirebaseDatabase.instance.ref()
+                              .child('useProfileBrowse')
+                              .child(user!.uid)
+                              .update({
+                            'age': ageController.text //yes I know.
+                          });
+                        },
+                        child: const Text(
+                          "SAVE",
+                          style: TextStyle(
+                              fontSize: 14,
+                              letterSpacing: 2.2,
+                              color: Colors.white),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+
+
+
+    );
+  }
+}
+
+
+
 class Empolyee extends StatelessWidget {
   Empolyee({
-    Key? key, required this.name,
+    Key? key, required this.name, required this.email,
   }) : super(key: key);
-  TextEditingController textEditingController1 = TextEditingController();
 
+  TextEditingController textEditingController1 = TextEditingController();
+  final String email;
   final String name;
   @override
   Widget build(BuildContext context) {
@@ -487,6 +678,11 @@ class Empolyee extends StatelessWidget {
           //   context,
           //   MaterialPageRoute(builder: (context) => SelectedLeave()),
           // );
+          print("akjsdhfkajdsf ${email}");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EditEmployee(email: email,)),
+          );
         },
         child: Container(
           height: 55.h,
@@ -548,7 +744,6 @@ class Empolyee extends StatelessWidget {
     );
   }
 }
-
 
 class CreateEmployee extends StatefulWidget {
   CreateEmployee({Key? key, required this.password}) : super(key: key);
