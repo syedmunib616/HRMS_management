@@ -588,7 +588,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                           borderSide: BorderSide(color: Colors.teal)),
                       hintText: 'Input Name',
                     ),
-                    controller: displayNameController,
+                   // controller: displayNameController,
                     keyboardType: TextInputType.name,
                   ),
                   TextField(
@@ -598,7 +598,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                           borderSide: BorderSide(color: Colors.teal)),
                       hintText: 'Input Age',
                     ),
-                    controller: ageController,
+                   // controller: ageController,
                     //
                     keyboardType: TextInputType.number,
                   ),
@@ -622,18 +622,18 @@ class _EditEmployeeState extends State<EditEmployee> {
                       ),
                       TextButton(
                         onPressed: () {
-                          FirebaseDatabase.instance.ref()
-                              .child('useProfileBrowse')
-                              .child(user!.uid)
-                              .update({
-                            'name': displayNameController.text //yes I know.
-                          });
-                          FirebaseDatabase.instance.ref()
-                              .child('useProfileBrowse')
-                              .child(user!.uid)
-                              .update({
-                            'age': ageController.text //yes I know.
-                          });
+                          // FirebaseDatabase.instance.ref()
+                          //     .child('useProfileBrowse')
+                          //     .child(user!.uid)
+                          //     .update({
+                          //   'name': displayNameController.text //yes I know.
+                          // });
+                          // FirebaseDatabase.instance.ref()
+                          //     .child('useProfileBrowse')
+                          //     .child(user!.uid)
+                          //     .update({
+                          //   'age': ageController.text //yes I know.
+                          // });
                         },
                         child: const Text(
                           "SAVE",
@@ -650,7 +650,7 @@ class _EditEmployeeState extends State<EditEmployee> {
             ),
           ),
 
-
+      ))
 
     );
   }
