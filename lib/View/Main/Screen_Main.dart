@@ -21,22 +21,25 @@ class ScreenMain extends StatefulWidget {
 class _ScreenMainState extends State<ScreenMain> {
   TextEditingController searchController=TextEditingController();
   int curentindex = 0;
-  late String password;
+  late String password='';
   late List<Widget> screens;
 
   void initState() {
     // TODO: implement initState
     super.initState();
     setState(() {});
-    password=widget.password;
-      screens = <Widget>[
-      Home(),
+    screens = <Widget>[
+      Home(password: widget.password),
       // Zoom(),
       Reports(),
       Requests(),
       // Log(),
       // Settings(password: password),
     ];
+    print("{{{{{{{{{{{{ $password ${widget.password}");
+
+    password=widget.password;
+
   }
 
   //List<Widget>

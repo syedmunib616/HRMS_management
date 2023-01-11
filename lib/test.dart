@@ -10,11 +10,9 @@ import 'package:hrmanagementapp/View/listofcompany/companylist.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/View/signup/Sginup.dart';
 
-
-
 class Test extends StatefulWidget {
-  Test({Key? key}) : super(key: key);
-
+  Test({Key? key, required this.password}) : super(key: key);
+  final String password;
   @override
   State<Test> createState() => _TestState();
 }
@@ -26,7 +24,6 @@ class _TestState extends State<Test> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: AdvancedDrawer(
-
         backdropColor: srpgradient2,
         controller: _advancedDrawerController,
         animationCurve: Curves.easeInOut,
@@ -126,9 +123,10 @@ class _TestState extends State<Test> {
             ),
           ),
         ),
+
         child: Scaffold(
-          appBar:PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(94.0.h),
             child: Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
@@ -151,6 +149,7 @@ class _TestState extends State<Test> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+
                       GestureDetector(
                         onTap: _handleMenuButtonPressed,
                         // onTap: () async {
@@ -183,6 +182,7 @@ class _TestState extends State<Test> {
                         //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
                         // ),
                       ),
+
                       Spacer(),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -219,9 +219,10 @@ class _TestState extends State<Test> {
                           // )
                         ],
                       ),
-                      Spacer(),
 
+                      Spacer(),
                       SizedBox(width: 25.w,),
+
                     ],
                   ),
                 ],
@@ -234,7 +235,6 @@ class _TestState extends State<Test> {
               children: [
                 Row(
                   children: [
-
                     GestureDetector(
                       onTap: (){
                         Navigator.push(
@@ -262,24 +262,22 @@ class _TestState extends State<Test> {
                           child: Center(
                             child: Column(
                                 children: [
-
                                 SizedBox(height: 15.h,),
                                 Icon(FontAwesomeIcons.building,size: 68.sp,color: srpgradient2,),
                                 SizedBox(height: 10.h,),
                                 Text("Create Company", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-
                                 ],
                               ),
                             ),
                           ),
                         ),
-                      ),
+                    ),
 
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Companylist()),
+                          MaterialPageRoute(builder: (context) => Companylist(password: widget.password,)),
                         );
                       },
                       child: Padding(
@@ -299,20 +297,19 @@ class _TestState extends State<Test> {
                             borderRadius: BorderRadius.circular(6.sp),
                             color: whiteClr,
                           ),
-                          child: Center(child: Column(
-                            children: [
-                              SizedBox(height: 15.h,),
-                              Icon(FontAwesomeIcons.listOl,size: 68.sp,color: srpgradient2,),
-                              SizedBox(height: 10.h,),
-                              Text("Company List", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-
-                            ],
-                          ),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 15.h,),
+                                Icon(FontAwesomeIcons.listOl,size: 68.sp,color: srpgradient2,),
+                                SizedBox(height: 10.h,),
+                                Text("Company List", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-
                     ],
                   ),
                   SizedBox(
@@ -902,4 +899,5 @@ class _TestState extends State<Test> {
     // _advancedDrawerController.value = AdvancedDrawerValue.visible();
     _advancedDrawerController.showDrawer();
   }
+
 }

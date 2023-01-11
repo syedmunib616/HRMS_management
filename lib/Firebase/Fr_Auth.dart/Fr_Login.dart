@@ -231,7 +231,7 @@ class FrLoginService {
        }
     else if(email=="example@gmail.com"){
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    builder: (BuildContext context) => Test(),
+    builder: (BuildContext context) => Test(password: password,),
     ),(route) => false, );}
         ////////////////////////////////////////////////
         // await f.where('email', isEqualTo: email).get().then((value) => value.docs.forEach((element) {

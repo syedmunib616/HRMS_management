@@ -323,7 +323,7 @@ class Settings extends StatelessWidget {
                      onTap: (){
                        Navigator.push(
                          context,
-                         MaterialPageRoute(builder: (context) => EmployeeDirectory(password: password,)),
+                         MaterialPageRoute(builder: (context) => EmployeeDirectory(password: password,superadmin: false,compnayemail: '',)),
                        );
                      },
                   child: SubReportsOrSubSettings(iconString: "assets/user-svg.png",title: TextStrings.Employees,subtitle: TextStrings.ManageEmployees,)

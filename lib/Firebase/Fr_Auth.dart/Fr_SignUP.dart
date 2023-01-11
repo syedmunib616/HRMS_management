@@ -7,6 +7,7 @@ import 'package:hrmanagementapp/View/Components/Cs_MainPopup.dart';
 import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
+import 'package:hrmanagementapp/test.dart';
 
 
 
@@ -256,6 +257,7 @@ class FrSignUpService1 {
 
   // To Sign UP
   Future onTapSignUP({
+
     required String adminpassword,
     required String adminemail,
     required String email,
@@ -267,6 +269,7 @@ class FrSignUpService1 {
     required String reportingto,
     required BuildContext context,
     required ProviderGenerator providerGenerator,
+    required bool superadmin
     }) async {
     onHideError(providerGenerator);
     providerGenerator.setLoadingValue(value: true, index: 0);
@@ -307,6 +310,7 @@ class FrSignUpService1 {
             context: context,
             designation: designation,
             reportingto: reportingto,
+            superadmin: superadmin
           ),
         );
       } on FirebaseAuthException catch (error) {
@@ -341,9 +345,10 @@ class FrSignUpService1 {
     required String uid,
     required ProviderGenerator providerGenerator,
     required BuildContext context,
-  }) async {
-    //Active Error Ui
+    required bool superadmin
+    }) async {
 
+    //Active Error Ui
     onHideError(providerGenerator);
     globalemail=email.toString();
     print("the uid is this : " + uid);
@@ -362,30 +367,31 @@ class FrSignUpService1 {
     //await UserT.doc(email).collection("Contacts").doc("$email").set({"email":"$email","role":"admin","uid":"$uid",});
     //await UserT.firestore.collection(email).doc().set({"admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber"});
 
-    await UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
+    UserT.where('email', isEqualTo: adminemail).firestore.collection("Empoloyee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+      "name":"$name","email":"$email","uid":"$uid",});
+
+
+     UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
       print("kkklklklkk $email $adminemail ${password}");
       element.reference.collection("Employee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
         "name":"$name","email":"$email","uid":"$uid",});
-      }));
-
-    //     .then((value) async {
-    //   await FirebaseAuth.instance.signOut().then((value) async {
-    //     firebaseAuth.signInWithEmailAndPassword( email: adminemail, password: password, ).then((value) {
-    //       print("iiiiiiiiii ${password}");
-    //       Navigator.of(context).pushReplacement(
-    //           MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,)),
-    //           result: false);
-    //     });
-    //   });
-    // });
-
-
+      })).then((value) async {
+      await FirebaseAuth.instance.signOut().then((value) async {
+        print("iiiiiiiiii ${user!.email.toString()} ll $adminemail JJ ${password}");
+        firebaseAuth.signInWithEmailAndPassword( email: adminemail, password: password, ).then((value) {
+          // Navigator.of(context).pushReplacement(
+          //     MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,)),
+          //     result: false);
+        }).then((value) {
+          superadmin==false? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully'):CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',) ;
+        });
+      });
+    });
     // await UserT.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
     //   element.reference.collection("Employee").doc(email).
     //   set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
     //     "name":"$name","email":"$email","uid":"$uid",});
     // })).then((value) => Navigator.pop(context));
-
   }
 
   // Reading Error Value on the Screen
@@ -407,7 +413,6 @@ class FrSignUpService1 {
       ..setVisibleError(value: true, index: errorIndex)
       ..setErrorMessage(value: error, index: errorIndex)
       ..setLoadingValue(value: false, index: 0);
-
   }
 
 

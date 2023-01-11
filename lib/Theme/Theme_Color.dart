@@ -21,7 +21,7 @@ const Color backgroundcolorr = Color(0xffF6F6F6);
 
 Color coverBackClr = const Color(0xFFC4C4C4).withOpacity(0.73);
 const Color greybackground = Color(0xFFD2D2D2);
-
+const Color srpgradient20= Color(0xFF197B6C);
 const Color srpgradient1 = Color(0xFF64B580);
 const Color srpgradient2 = Color(0xFF50A69D);
 const Color srpgradient3 = Color(0xFF3390C7);

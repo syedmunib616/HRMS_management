@@ -74,8 +74,9 @@ import 'package:hrmanagementapp/View/user/User.dart';
 
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  Home({Key? key, required this.password}) : super(key: key);
 
+  final String password;
   @override
   State<Home> createState() => _HomeState();
 }
@@ -152,7 +153,7 @@ class _HomeState extends State<Home> {
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.user,size: 80.sp,color: whiteClr,),
+                    child: Icon(FontAwesomeIcons.user, size: 80.sp, color: whiteClr,),
                     // child: Image.asset(
                     //   'assets/user.jpg',
                     // ),
@@ -162,7 +163,7 @@ class _HomeState extends State<Home> {
                     onTap: () async {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => EmployeeDirectory(password: '',)),
+                        MaterialPageRoute(builder: (context) => EmployeeDirectory(password: widget.password,superadmin: false,compnayemail: '',)),
                       );
                     },
                     leading: Icon(FontAwesomeIcons.users,size: 20.sp,color: whiteClr,),
@@ -235,7 +236,6 @@ class _HomeState extends State<Home> {
                     leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
                     title: Text('Logout'),
                   ),
-
                   // ListTile(
                   //   onTap: () {},
                   //   leading: Icon(Icons.account_circle_rounded),
@@ -253,7 +253,6 @@ class _HomeState extends State<Home> {
                   // ),
 
                   Spacer(),
-
                   DefaultTextStyle(
                     style: const TextStyle(
                       fontSize: 12,
@@ -279,6 +278,7 @@ class _HomeState extends State<Home> {
               child: Container(
                 height: 102.h,
                 width:MediaQuery.of(context).size.width,
+
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -291,6 +291,7 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                   color: whiteClr,
                 ),
+
                 child: Column(
                   crossAxisAlignment:CrossAxisAlignment.center,
                   children: [
@@ -329,9 +330,7 @@ class _HomeState extends State<Home> {
                           //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
                           // ),
                         ),
-
                         Spacer(),
-
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -428,7 +427,6 @@ class _HomeState extends State<Home> {
                                 SizedBox(height: 5.h,),
                                 Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
                                 Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-
                               ],
                             ),
                           ),
@@ -488,6 +486,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
+
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -789,7 +788,6 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
-
                         ],
                       ),
                     ),
@@ -917,7 +915,6 @@ class _HomeState extends State<Home> {
                                 children: [
                                   Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                                   const Spacer(),
-
                                 ],
                               ),
                             ),
@@ -968,7 +965,6 @@ class _HomeState extends State<Home> {
                                 children: [
                                   Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                                   const Spacer(),
-
                                 ],
                               ),
                             ),
@@ -1073,7 +1069,6 @@ class _HomeState extends State<Home> {
           //   ),
           // ),
         ),
-
         // child: Scaffold(
         //   body: SingleChildScrollView(
         //     child: Column(

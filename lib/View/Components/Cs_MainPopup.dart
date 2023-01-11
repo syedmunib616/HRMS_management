@@ -166,7 +166,7 @@ CSMainPopup1(
                   onTap: () {
 
                     Navigator.pop(context);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Test()),);
+                    //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Test(password:'' ,)),);
 
                   },
                 ),
@@ -178,6 +178,94 @@ CSMainPopup1(
     },
   );
 }
+
+
+CSMainPopup4(
+    { required BuildContext context,
+      required String superadmin,
+      required String btnText,
+      required String popMessag,
+      //required VoidCallback onTap
+    }) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return CsScreenUtilInit(
+        child: AlertDialog(
+          backgroundColor: backgroundColor(context),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                47.0,
+              ),
+            ),
+          ),
+          contentPadding: const EdgeInsets.all(27),
+          content: SizedBox(
+            height: 250.h,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  'assets/correct.svg',
+                  height: 48.h,
+                  width: 48.w,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Text('Success!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    letterSpacing: 1,
+                    color: srpgradient2,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 24.sp,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  popMessag,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    letterSpacing: 1,
+                    color: srpgradient2,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.sp,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+
+                CsMainButton(
+                  height: 35.h,
+                  width: 106.w,
+                  fontSize: 18.sp,
+                  backClr: srpgradient2,
+                  fontClr: buttonFontColor(context),
+                  title: btnText,
+                  onTap: () {
+                    Navigator.pop(context);
+                     Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: superadmin)),
+                            result: false);
+                  },
+                ),
+
+
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
 CSMainPopup2(
     {required BuildContext context,
       required String btnText,
@@ -212,8 +300,7 @@ CSMainPopup2(
                 SizedBox(
                   height: 15.h,
                 ),
-                Text(
-                  'Success!',
+                Text('Success!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     letterSpacing: 1,
@@ -235,7 +322,86 @@ CSMainPopup2(
                     fontSize: 16.sp,
                   ),
                 ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                CsMainButton(
+                  height: 35.h,
+                  width: 106.w,
+                  fontSize: 18.sp,
+                  backClr: srpgradient2,
+                  fontClr: buttonFontColor(context),
+                  title: btnText,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
 
+CSMainPopup3(
+    { required BuildContext context,
+      required String superadmin,
+      required String btnText,
+      required String popMessag,
+      //required VoidCallback onTap
+    }) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return CsScreenUtilInit(
+        child: AlertDialog(
+          backgroundColor: backgroundColor(context),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                47.0,
+              ),
+            ),
+          ),
+          contentPadding: const EdgeInsets.all(27),
+          content: SizedBox(
+            height: 250.h,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  'assets/correct.svg',
+                  height: 48.h,
+                  width: 48.w,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Text('Success!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    letterSpacing: 1,
+                    color: srpgradient2,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 24.sp,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  popMessag,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    letterSpacing: 1,
+                    color: srpgradient2,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.sp,
+                  ),
+                ),
                 SizedBox(
                   height: 20.h,
                 ),
@@ -248,11 +414,12 @@ CSMainPopup2(
                   fontClr: buttonFontColor(context),
                   title: btnText,
                   onTap: () {
-
                     Navigator.pop(context);
-
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Test(password: superadmin,)),);
                   },
                 ),
+
+
               ],
             ),
           ),
@@ -261,6 +428,7 @@ CSMainPopup2(
     },
   );
 }
+
 
 
 
