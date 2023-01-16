@@ -185,12 +185,12 @@ class _HomeState extends State<Home> {
                     onTap: () async {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => DepartmentList()),
+                        MaterialPageRoute(builder: (context) => DepartmentList(password: widget.password,)),
                       );
                     },
                     leading: Icon(FontAwesomeIcons.sitemap,size: 20.sp,color: whiteClr,),
                     title: Text('Departments'),
-                  ),
+                    ),
 
                   ListTile(
                     onTap: () async {
@@ -201,7 +201,7 @@ class _HomeState extends State<Home> {
                     },
                     leading: Icon(FontAwesomeIcons.idCardClip,size: 20.sp,color: whiteClr,),
                     title: Text('Designation'),
-                  ),
+                    ),
 
                   ListTile(
                     onTap: () async {
@@ -253,6 +253,7 @@ class _HomeState extends State<Home> {
                   // ),
 
                   Spacer(),
+
                   DefaultTextStyle(
                     style: const TextStyle(
                       fontSize: 12,

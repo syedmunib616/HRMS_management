@@ -138,280 +138,21 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Padding(
-                      //   padding: EdgeInsets.all(8.0.sp),
-                      //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                      // ),
+
                       Spacer(),
                       Text("Employee Directory",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
-                      // Container(
-                      //   width: 30.0.w,
-                      //   height: 30.0.h,
-                      //   // child: Stack(
-                      //   //   children: [
-                      //   //     ClipRRect(
-                      //   //       borderRadius: BorderRadius.circular(15.0.sp),
-                      //   //       child: Image.asset(
-                      //   //         'assets/user.jpg',
-                      //   //         width: 30.0.w,
-                      //   //         height: 30.0.h,
-                      //   //         fit: BoxFit.fill,
-                      //   //       ),
-                      //   //     ),
-                      //   //     Positioned(
-                      //   //       bottom: 1.5,
-                      //   //       right: 1.5,
-                      //   //       child: Container(
-                      //   //         height: 5.h,
-                      //   //         width: 5.w,
-                      //   //         //color:online,
-                      //   //         decoration: BoxDecoration(
-                      //   //           borderRadius: BorderRadius.circular(5.sp),
-                      //   //           color: online,
-                      //   //         ),
-                      //   //       ),
-                      //   //     )
-                      //   //   ],
-                      //   // ),
-                      // ),
+
                     ],
                   ),
-                  // Container(
-                  //   height: 50.h,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       Container(
-                  //         width: 80.w,
-                  //         height: 40.h,
-                  //         decoration: BoxDecoration(
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //               color: Colors.grey.withOpacity(0.2),
-                  //               spreadRadius: 2,
-                  //               blurRadius: 1,
-                  //               offset: const Offset(0, 2), // changes position of shadow
-                  //             ),
-                  //           ],
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           color: whiteClr,
-                  //         ),
-                  //         child: Column(
-                  //           children: [
-                  //             SizedBox(height: 5.h,),
-                  //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                  //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  //         child: Container(
-                  //           color: coverBackClr,
-                  //           height: 40.h,
-                  //           width: 1.w,
-                  //         ),
-                  //       ),
-                  //       Container(
-                  //         width: 240.w,
-                  //         height: 40.h,
-                  //         decoration: BoxDecoration(
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //               color: Colors.grey.withOpacity(0.2),
-                  //               spreadRadius: 2,
-                  //               blurRadius: 1,
-                  //               offset: const Offset(0, 2), // changes position of shadow
-                  //             ),
-                  //           ],
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           color: whiteClr,
-                  //         ),
-                  //         child: Padding(
-                  //           padding: EdgeInsets.all( 10.sp),
-                  //           child: Row(
-                  //             children: [
-                  //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                  //               Spacer(),
-                  //               Container(
-                  //                 height: 20.h,
-                  //                 width: 20.w,
-                  //                 decoration: BoxDecoration(
-                  //                   boxShadow: [
-                  //                     BoxShadow(
-                  //                       color: Colors.grey.withOpacity(0),
-                  //                       spreadRadius: 0,
-                  //                       blurRadius: 1,
-                  //                       offset: const Offset(0, 2), // changes position of shadow
-                  //                     ),
-                  //                   ],
-                  //                   borderRadius: BorderRadius.circular(15.sp),
-                  //                   color: greybackground,
-                  //                 ),
-                  //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //
-                  //     ],
-                  //   ),
-                  // )
+
                 ],
               ),
             ),
           ),
           body: Stack(
             children: [
-              // Container(
-              //   height: 102.h,
-              //   width:MediaQuery.of(context).size.width,
-              //   decoration: BoxDecoration(
-              //     boxShadow: [
-              //       BoxShadow(
-              //         color: Colors.grey.withOpacity(0.4),
-              //         spreadRadius: 2,
-              //         blurRadius: 1,
-              //         offset: const Offset(0, 2), // changes position of shadow
-              //       ),
-              //     ],
-              //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-              //     color: whiteClr,
-              //   ),
-              //   child: Column(
-              //     crossAxisAlignment:CrossAxisAlignment.center ,
-              //     children: [
-              //       SizedBox(height: 20.h,),
-              //       Row(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         children: [
-              //           Padding(
-              //             padding: EdgeInsets.all(8.0.sp),
-              //             child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-              //           ),
-              //           Spacer(),
-              //           Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
-              //           Spacer(),
-              //           Container(
-              //             width: 30.0.w,
-              //             height: 30.0.h,
-              //             // child: Stack(
-              //             //   children: [
-              //             //     ClipRRect(
-              //             //       borderRadius: BorderRadius.circular(15.0.sp),
-              //             //       child: Image.asset(
-              //             //         'assets/user.jpg',
-              //             //         width: 30.0.w,
-              //             //         height: 30.0.h,
-              //             //         fit: BoxFit.fill,
-              //             //       ),
-              //             //     ),
-              //             //     Positioned(
-              //             //       bottom: 1.5,
-              //             //       right: 1.5,
-              //             //       child: Container(
-              //             //         height: 5.h,
-              //             //         width: 5.w,
-              //             //         //color:online,
-              //             //         decoration: BoxDecoration(
-              //             //           borderRadius: BorderRadius.circular(5.sp),
-              //             //           color: online,
-              //             //         ),
-              //             //       ),
-              //             //     )
-              //             //   ],
-              //             // ),
-              //           ),
-              //           SizedBox(width: 15.w,)
-              //         ],
-              //       ),
-              //       // Container(
-              //       //   height: 50.h,
-              //       //   width: MediaQuery.of(context).size.width,
-              //       //   child: Row(
-              //       //     mainAxisAlignment: MainAxisAlignment.center,
-              //       //     children: [
-              //       //       Container(
-              //       //         width: 80.w,
-              //       //         height: 40.h,
-              //       //         decoration: BoxDecoration(
-              //       //           boxShadow: [
-              //       //             BoxShadow(
-              //       //               color: Colors.grey.withOpacity(0.2),
-              //       //               spreadRadius: 2,
-              //       //               blurRadius: 1,
-              //       //               offset: const Offset(0, 2), // changes position of shadow
-              //       //             ),
-              //       //           ],
-              //       //           borderRadius: BorderRadius.circular(5),
-              //       //           color: whiteClr,
-              //       //         ),
-              //       //         child: Column(
-              //       //           children: [
-              //       //             SizedBox(height: 5.h,),
-              //       //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-              //       //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-              //       //           ],
-              //       //         ),
-              //       //       ),
-              //       //       Padding(
-              //       //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              //       //         child: Container(
-              //       //           color: coverBackClr,
-              //       //           height: 40.h,
-              //       //           width: 1.w,
-              //       //         ),
-              //       //       ),
-              //       //       Container(
-              //       //         width: 240.w,
-              //       //         height: 40.h,
-              //       //         decoration: BoxDecoration(
-              //       //           boxShadow: [
-              //       //             BoxShadow(
-              //       //               color: Colors.grey.withOpacity(0.2),
-              //       //               spreadRadius: 2,
-              //       //               blurRadius: 1,
-              //       //               offset: const Offset(0, 2), // changes position of shadow
-              //       //             ),
-              //       //           ],
-              //       //           borderRadius: BorderRadius.circular(5),
-              //       //           color: whiteClr,
-              //       //         ),
-              //       //         child: Padding(
-              //       //           padding: EdgeInsets.all( 10.sp),
-              //       //           child: Row(
-              //       //             children: [
-              //       //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-              //       //               Spacer(),
-              //       //               Container(
-              //       //                 height: 20.h,
-              //       //                 width: 20.w,
-              //       //                 decoration: BoxDecoration(
-              //       //                   boxShadow: [
-              //       //                     BoxShadow(
-              //       //                       color: Colors.grey.withOpacity(0),
-              //       //                       spreadRadius: 0,
-              //       //                       blurRadius: 1,
-              //       //                       offset: const Offset(0, 2), // changes position of shadow
-              //       //                     ),
-              //       //                   ],
-              //       //                   borderRadius: BorderRadius.circular(15.sp),
-              //       //                   color: greybackground,
-              //       //                 ),
-              //       //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
-              //       //             ],
-              //       //           ),
-              //       //         ),
-              //       //       ),
-              //       //
-              //       //     ],
-              //       //   ),
-              //       // )
-              //     ],
-              //   ),
-              // ),
+
               reporting.length==null ? SizedBox(): Positioned(
                 top: 50,
                 bottom: 0,
@@ -941,23 +682,20 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   TextEditingController textEditingController2 = TextEditingController();
   TextEditingController textEditingController3 = TextEditingController();
   TextEditingController textEditingController4 = TextEditingController();
-
   var items =  ['Finance','Marketing','IT',];
   String dropdownvalue = 'Marketing';
   var designationitems =  ['Admin','Employee'];
   String designationdropdownvalue = 'Admin';
   var manageritems =  ['Employee','Manager',];
   String managerdropdownvalue = 'Manager';
-
   var reporting=['Admin'];
   String reportings='Admin';
   bool reportingto = false;
-
   String email='';
   bool isLoading = false;
   late final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-
+  List<String> i=[];
 
   @override
   void initState() {
@@ -966,12 +704,13 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     setState(() {
     if(widget.superadmin==false) {
       email=user!.email.toString();
-    } else{
+    } else {
       email=widget.email;
     }
     isLoading=false;
     });
     fetchemploye();
+    fetchDepartments();
     textEditingController3.text="abcd123";
     setState(() {
       if(designationdropdownvalue=='Employee'){
@@ -980,8 +719,71 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     });
   }
 
+  fetchDepartments()async{
+    // FirebaseFirestore.instance.collection('Companies')
+    //     .doc("example@gmail.com").collection('Departments').get().then((value) => value.docs.forEach((element) {
+    //   print("--------- ${element.id}");
+    // }));
+    // String a,b,c;
+    //   //UserT.get().then((value) {
+    //   // value.docs.forEach((element) async{
+    //   setState(() {
+    //     b=user!.email.toString();
+    //   });
+    //   print("======= $b");
+    //   FirebaseFirestore.instance.collection('Companies')
+    //       .doc(b).collection('Departments').get().then((value) => value.docs.forEach((element) {
+    //
+    //
+    //
+    //     FirebaseFirestore.instance.collection('Companies')
+    //         .doc(b).collection('Departments').doc('${element.id}').get().then((value) {
+    //
+    //       a= value.get('DepartmentsID');
+    //       c= value.get('DepartmentsName');
+    //       departments.add(Departments(a, c));
+    //       setState(() {});
+    //       print("--------- $a $c ${departments.length}");
+    //     });
+
+
+        // a=element.get('${element.get('DepartmentsID')}');
+        // c=element.get('${element.get('DepartmentsName')}');
+
+
+
+      // }));
+      // await UserT.where('email', isEqualTo: user!.email.toString()).get().then((value) {
+      //   value.docs.forEach((element) {
+      //    element.get('Departments');
+      //     //print("-------- $a");
+      //   });
+      // });
+
+      // await UserT.where('email', isEqualTo: user!.email.toString()).firestore.collection('Departments').get().then((value){
+      //   var a =value.docs.first.get('DepartmentsName');
+      //   //print('--------- $a');
+      // });
+
+      //});
+      // UserT.where('email', isEqualTo: user!.email.toString()).firestore.collection("Departments")
+      //     .get().then((value) => value.docs.forEach((element) {
+      //       String a,b,c;
+      //       a=element.get('DepartmentsName');
+      //       b=element.get('DepartmentsID');
+      //       print("------------ $a $b");
+      // }));
+      //
+      // await UserT.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+      //
+      //   print("kkkkkkkjjjjjjj $companyname $email $company_phonenumber $website");
+      // }));
+      // });
+
+  }
+
   CollectionReference f=FirebaseFirestore.instance.collection("Companies");
-  final user=FirebaseAuth.instance.currentUser;
+  final user= FirebaseAuth.instance.currentUser;
   bool superadmin=false;
   bool active=false;
 
@@ -1207,7 +1009,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 SizedBox(
                   height: 20.h,
                 ),
-
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 26.w),
                   child: Container(
@@ -1438,7 +1239,8 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   height: 20.h,
                 ),
               ],
-            )
+            ),
+
             // : const Center(
             //   child: CircularProgressIndicator(),
             // ),

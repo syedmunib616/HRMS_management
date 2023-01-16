@@ -6,6 +6,7 @@ import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hrmanagementapp/View/DepartmentList/Departmentlist.dart';
 import 'package:hrmanagementapp/View/listofcompany/companylist.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/View/signup/Sginup.dart';
@@ -123,7 +124,6 @@ class _TestState extends State<Test> {
             ),
           ),
         ),
-
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(94.0.h),
@@ -312,8 +312,50 @@ class _TestState extends State<Test> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                SizedBox(
                     height: 20.h,
+                ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DepartmentList(password: widget.password,)),
+                        );
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(17.0.sp),
+                        child: Container(
+                          height: 115.h,
+                          width:139.w,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.4),
+                                spreadRadius: 2,
+                                blurRadius: 1,
+                                offset: const Offset(0, 2), // changes position of shadow
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(6.sp),
+                            color: whiteClr,
+                          ),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 15.h,),
+                                Icon(FontAwesomeIcons.codeBranch,size: 68.sp,color: srpgradient2,),
+                                SizedBox(height: 10.h,),
+                                Text("Create Departments", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -900,4 +942,15 @@ class _TestState extends State<Test> {
     _advancedDrawerController.showDrawer();
   }
 
+}
+
+
+class Departments extends StatelessWidget {
+  const Departments({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("Departments"),
+    );
+  }
 }

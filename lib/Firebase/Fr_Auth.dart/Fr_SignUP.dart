@@ -367,9 +367,14 @@ class FrSignUpService1 {
     //await UserT.doc(email).collection("Contacts").doc("$email").set({"email":"$email","role":"admin","uid":"$uid",});
     //await UserT.firestore.collection(email).doc().set({"admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber"});
 
-    UserT.where('email', isEqualTo: adminemail).firestore.collection("Empoloyee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+
+
+    FirebaseFirestore.instance.collection("Companies").doc(adminemail).collection('Employee').doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
       "name":"$name","email":"$email","uid":"$uid",});
 
+
+     // UserT.where('email', isEqualTo: adminemail).firestore.collection("Empoloyee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+     //  "name":"$name","email":"$email","uid":"$uid",});
 
      UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
       print("kkklklklkk $email $adminemail ${password}");
@@ -400,8 +405,7 @@ class FrSignUpService1 {
     required ProviderGenerator providerGenerator,
     required int errorIndex,
     int? errorIndex2,
-  }) {
-
+    }) {
     if (errorIndex2 != null) {
       providerGenerator
         ..setVisibleError(value: true, index: errorIndex2)

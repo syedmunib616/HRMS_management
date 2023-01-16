@@ -52,53 +52,74 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     String name='';
     String department='';
     String datestring='';
+    String user_name='';
 
     @override
     void initState() {
       // TODO: implement initState
       super.initState();
       setState(() {
-        admin=widget.admineamil;
-    });
-
-
+        user_name=user!.email.toString();
+        admin=widget.admineamil;  });
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
     datestring=date.toString();
     datestring=datestring.substring(0, datestring.length - 13);
     fetchuser();
-
   }
 
   final user = FirebaseAuth.instance.currentUser;
   bool itis=false;
 
+  bool timeinshow=false;
+  bool timeoutshow=false;
+
+
   fetchuser() async {
      print("%%%%%%%%%%%%%%%% $datestring");
-     FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
-        .doc('${user!.email.toString()}').get().then((value) {
+     FirebaseFirestore.instance
+         .collection('Companies')
+         .doc('${admin}').collection("Employee")
+         .doc('${user!.email.toString()}').get().then((value) {
      name= value.get('name');
      department= value.get('designation');
      print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $name $department');
     }).then((value) async {
-      FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
-          .doc('${user!.email.toString()}').collection("Attendance").get().then((value) {
-            value.docs.forEach((element) {
-              print(":::::::::::: ${element.id}");
-              if(datestring=="${element.id}"){
-                print("jjjjjjjjjjjjjj");
+      FirebaseFirestore.instance.collection('Companies')
+       .doc('${admin}').collection("Employee")
+       .doc('${user!.email.toString()}').collection("Attendance").get().then((value) {
+       value.docs.forEach((element) {
+       print(":::::::::::: ${element.id}");
+       if(datestring=="${element.id}"){
+        print("jjjjjjjjjjjjjj");
                 setState(() {
                   itis=true;
-                });
-              }
-            });
-     }).then((value){
+                });}});}).then((value) {
        if(itis==false){
-          FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+          FirebaseFirestore.instance.collection('Companies')
+              .doc('${admin}').collection("Employee")
               .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
-          .set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
-        }
-      });
+            .set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
+            setState(() {timeinshow=true; timeoutshow=false;});}
+       else{ FirebaseFirestore.instance.collection('Companies')
+             .doc('${admin}').collection("Employee")
+             .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').snapshots()
+             .forEach((element) { String a,b;
+               a=element.get('TimeIn');
+               b=element.get('TimeOut');
+               print("######## $a $b");
+               if(a.isNotEmpty && b.isEmpty) {
+                 setState(() {
+                    timeinshow=false;
+                    timeoutshow=true;
+                  });}
+               else if(a.isEmpty && b.isEmpty) {
+                 setState(() {
+                   timeinshow=true;
+                   timeoutshow=false;
+                 });
+               }
+             });}});
       // FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
       //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').get().then((value) {
       //   print("lklklklklklklk $datestring ${value.id}");
@@ -117,8 +138,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
           //.set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
       Position position = await _determinePosition();
       GetAddressFromLatLong(position);
-      GetAddressFromLatLong1(position);
-    });
+      GetAddressFromLatLong1(position);});
+      print("-------------------------------- $timeinshow $timeoutshow");
   }
 
   ////////////////////location fetching/////////////////////////
@@ -161,7 +182,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     return await Geolocator.getCurrentPosition();
 
   }
-
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
@@ -169,7 +189,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     Address= '${place.thoroughfare}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode} ${place.administrativeArea}';
     setState(() {});
   }
-
   Future<void> GetAddressFromLatLong1(Position position)async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
@@ -177,7 +196,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     Address1= '${place.thoroughfare}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode} ${place.administrativeArea}';
     setState(() {});
   }
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -188,8 +207,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 300),
         animateChildDecoration: true,
-        rtlOpening: false,
-        // openScale: 1.0,
+        rtlOpening: false, // openScale: 1.0,
         disabledGestures: false,
         childDecoration: const BoxDecoration(
           // NOTICE: Uncomment if you want to add shadow behind the page.
@@ -337,7 +355,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         // ),
                       ),
                       const Spacer(),
-                      Text("User Name",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                      Text("$user_name",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                       const Spacer(),
                       SizedBox(width: 30.w,),
                     ],
@@ -347,7 +365,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
+                      children: [
+
+                      ],
                     ),
                   ),
                 ],
@@ -355,7 +375,13 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
             ),
           ),
           body: SingleChildScrollView(
-            child: Column(
+            child: timeinshow ==false && timeoutshow ==false ?
+            Container(
+              // color: Colors.purpleAccent,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child:Center(child: Text("Attendance is Marked",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),),
+            ):Column(
               children: [
                 // Container(
                 //   height: 102.h,
@@ -568,7 +594,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 // SizedBox(
                 //   height: 10.h,
                 // ),
-                Padding(
+                timeinshow==true? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
                     height: 151.h,
@@ -641,15 +667,19 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                   height: 10.h,
                                 ),
                                 GestureDetector(
-                                  onTap: () async {
-                                    Position position = await _determinePosition();
-                                    print(position.latitude);
-                                    print(position.longitude);
-                                    GetAddressFromLatLong1(position);
-                                    DateTime now = DateTime.now();
-                                    FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
-                                        .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"}).
-                                    then((value) => CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed"));
+                                  onTap: () async {Position position = await _determinePosition();
+                                    print(position.latitude);print(position.longitude);
+                                    GetAddressFromLatLong1(position);DateTime now = DateTime.now();
+                                    FirebaseFirestore.instance
+                                        .collection('Companies').doc('${admin}').collection("Employee")
+                                        .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+                                        .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
+                                        .then((value) {
+                                          setState(() {
+                                            timeinshow=false;
+                                          });
+                                        return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
+                                    }); //.then((value) => initState());
                                   },
                                   child: Container(
                                       height: 40.h,
@@ -687,8 +717,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                       ],
                     ),
                   ),
-                ),
-                Padding(
+                ) : SizedBox(),
+                timeoutshow==true? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
                     height: 151.1.h,
@@ -762,19 +792,20 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                   height: 10.h,
                                 ),
                                 GestureDetector(
-                                  onTap: () async {
-
-                                  FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+                                  onTap: () async {FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
                                     .doc('${user!.email.toString()}');
-
                                     Position position = await _determinePosition();
-                                    print(position.latitude);
-                                    print(position.longitude);
-                                    GetAddressFromLatLong(position);
-                                    DateTime now = DateTime.now();
+                                    print(position.latitude);print(position.longitude);
+                                    GetAddressFromLatLong(position);DateTime now = DateTime.now();
                                     FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
-                                        .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').update({"TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":"$Address"}).
-                                    then((value) => CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed"));
+                                      .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+                                      .update({"TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":"$Address"})
+                                      .then((value) {
+                                        setState(() {
+                                          timeoutshow=false;
+                                        });
+                                     return CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time Out Completed");
+                                    }); // .then((value) => initState());
                                     },
                                   child: Container(
                                       height: 40.h,
@@ -802,7 +833,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                       ),
                                       child:Center(
                                         child: Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
-                                      )
+                                    )
                                   ),
                                 ),
                               ],
@@ -812,7 +843,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                       ],
                     ),
                   ),
-                ),
+                ) : SizedBox(),
                 SizedBox(
                   height: 20.h,
                 ),

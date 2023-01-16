@@ -344,7 +344,7 @@ class Settings extends StatelessWidget {
                      onTap: (){
                        Navigator.push(
                          context,
-                         MaterialPageRoute(builder: (context) => DepartmentList()),
+                         MaterialPageRoute(builder: (context) => DepartmentList(password:'',)),
                        );
                      },
                   child: SubReportsOrSubSettings(iconString: "assets/networking.png",title: TextStrings.Departments,subtitle: TextStrings.ManageDepartments,)),
