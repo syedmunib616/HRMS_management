@@ -1,3 +1,8 @@
+
+import 'dart:async';
+
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -53,20 +58,56 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     String department='';
     String datestring='';
     String user_name='';
+    String time='';
+    String _timeString='';
 
     @override
     void initState() {
       // TODO: implement initState
       super.initState();
+      initializeDateFormatting();
+      DateTime now = DateTime.now();
+      _timeString = _formatDateTime(now);
+      Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+      time=_timeString;
+      time=time.substring(10);
+
+      _timeString=_timeString.substring(10);
       setState(() {
-        user_name=user!.email.toString();
-        admin=widget.admineamil;  });
-    DateTime now = DateTime.now();
+      user_name=user!.email.toString();
+      admin=widget.admineamil;  });
+
+
     DateTime date = DateTime(now.year, now.month, now.day);
+    DateTime time1=DateTime(now.hour,now.minute,now.second);
+
+      //time=time1.toString();
+
+    // time='${now.hour}:${now.minute}';
     datestring=date.toString();
     datestring=datestring.substring(0, datestring.length - 13);
+
+    print("*-/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/  $time");
     fetchuser();
-  }
+
+    }
+
+
+    void _getTime() {
+      final DateTime now = DateTime.now();
+      final String formattedDateTime = _formatDateTime(now);
+      if (this.mounted) {
+
+        setState(() {
+        _timeString = formattedDateTime;
+        _timeString=_timeString.substring(10);
+      });}
+    }
+
+    String _formatDateTime(DateTime dateTime) {
+      return DateFormat('MM/dd/yyyy hh:mm:ss').format(dateTime);
+    }
+
 
   final user = FirebaseAuth.instance.currentUser;
   bool itis=false;
@@ -76,7 +117,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
 
 
   fetchuser() async {
-     print("%%%%%%%%%%%%%%%% $datestring");
+    print("%%%%%%%%%%%%%%%% $datestring");
      FirebaseFirestore.instance
          .collection('Companies')
          .doc('${admin}').collection("Employee")
@@ -94,7 +135,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         print("jjjjjjjjjjjjjj");
                 setState(() {
                   itis=true;
-                });}});}).then((value) {
+                });
+         }});
+       }).then((value) {
        if(itis==false){
           FirebaseFirestore.instance.collection('Companies')
               .doc('${admin}').collection("Employee")
@@ -158,9 +201,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       // App to enable the location services.
       return Future.error('Location services are disabled.');
   }
-
     permission = await Geolocator.checkPermission();
-
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
@@ -172,15 +213,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         return Future.error('Location permissions are denied');
       }
     }
-
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-
     return await Geolocator.getCurrentPosition();
-
   }
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
@@ -381,7 +419,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child:Center(child: Text("Attendance is Marked",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),),
-            ):Column(
+            ):
+            Column(
               children: [
                 // Container(
                 //   height: 102.h,
@@ -630,6 +669,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                 ),
                                 const Spacer(),
                                 Container(
+                                  // color: Colors.purpleAccent,
+                                  width: 92.w,
+                                  height: 25.h,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                const Spacer(),
+                                Container(
                                   height: 27.h,
                                   width: 27.w,
                                   decoration: BoxDecoration(
@@ -753,6 +798,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
+                                const Spacer(),
+                                Container(
+                                  // color: Colors.purpleAccent,
+                                    width: 92.w,
+                                    height: 25.h,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 Container(
                                   height: 27.h,

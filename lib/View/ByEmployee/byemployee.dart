@@ -16,6 +16,40 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'dart:async';
+
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter/material.dart';
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hrmanagementapp/Theme/Theme_Color.dart';
+import 'package:hrmanagementapp/View/Components/Cs_MainPopup.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/line_chart_page.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/line_chart_page2.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/line_chart_page3.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/line_chart_page4.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/samples/line_chart_sample3.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/linearchart.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/pie_chart_page.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/pie_chart_sample2.dart';
+import 'package:hrmanagementapp/View/Profile/Home/components/piechart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hrmanagementapp/View/login/login.dart';
+import 'package:flutter_zoom_drawer/config.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+
 class ByEmployee extends StatefulWidget {
   ByEmployee({Key? key}) : super(key: key);
 
@@ -26,20 +60,144 @@ class ByEmployee extends StatefulWidget {
 class _ByEmployeeState extends State<ByEmployee> {
 
   late DateTime dateTime;
+  late DateTime dateTime1;
   late Duration duration;
+  late Duration duration1;
   String time='';
+  String time1='';
   var items =  ['Finance','Marketing','IT',];
   String dropdownvalue = 'Marketing';
+  String admin='';
+  String name='';
+  String department='';
+  String datestring='';
+  String user_name='';
+  //String time='';
+  String _timeString='';
+  bool itis=false;
+  bool timeinshow=false;
+  bool timeoutshow=false;
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
+
+    DateTimeRange dateRange = DateTimeRange(
+      start: DateTime(DateTime.now().year,DateTime.now().month,1),
+      end: DateTime(DateTime.now().year,DateTime.now().month,28),
+    );
     dateTime = DateTime.now();
-    duration = Duration(minutes: 10);
+    duration = const Duration(minutes: 10);
+    duration1= const Duration(minutes: 10);
+    late DateTime dateTime1;
+    setState(() {
+      time='( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )';
+
+    });
+    fetchuser();
+    getDaysInBetween(dateRange.start,dateRange.end);
     super.initState();
   }
 
+  // Initial Selected Value
+  String dropdownvalue1 = 'All';
+
+  // List of items in our dropdown menu
+  var items1 = [
+    'All',
+  ];
+
+
+  DateTimeRange dateRange = DateTimeRange(
+      start: DateTime(DateTime.now().year,DateTime.now().month,1),
+      end: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day),
+  );
+
+  fetchuser() async {
+    String a,b,c;
+    print("%%%%%%%%%%%%%%%% $datestring");
+    FirebaseFirestore.instance
+        .collection('Companies')
+        .doc('${user!.email.toString()}').collection("Employee").get().then((value) {
+          value.docs.forEach((element) {
+            a=element.get('email');
+            items1.add(a);
+            setState(() { items1; });
+            print("++++++++++++++++++ $a");
+          });
+      });
+    //     .doc('${user!.email.toString()}').get().then((value) {
+    //   name= value.get('name');
+    //   department= value.get('designation');
+    //   print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $name $department');
+    // });
+      //   .then((value) async {
+      // FirebaseFirestore.instance.collection('Companies')
+      //     .doc('${admin}').collection("Employee")
+      //     .doc('${user!.email.toString()}').collection("Attendance").get().then((value) {
+      //   value.docs.forEach((element) {
+      //     print(":::::::::::: ${element.id}");
+      //     // if(datestring=="${element.id}"){
+      //     //   print("jjjjjjjjjjjjjj");
+      //     //   setState(() {
+      //     //     itis=true;
+      //     //   });
+      //     // }
+      //     }
+      //   );
+      // }).then((value) {
+      //   if(itis==false){
+      //     FirebaseFirestore.instance.collection('Companies')
+      //         .doc('${admin}').collection("Employee")
+      //         .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+      //         .set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
+      //     setState(() {timeinshow=true; timeoutshow=false;});
+      //    }
+      //    else{
+      //
+      //     FirebaseFirestore.instance.collection('Companies')
+      //       .doc('${admin}').collection("Employee")
+      //       .doc('${user!.email.toString()}')
+      //       .collection("Attendance")
+      //       .doc('$datestring')
+      //       .snapshots()
+      //       .forEach((element) {
+      //
+      //         String a,b;
+      //         a=element.get('TimeIn');
+      //         b=element.get('TimeOut');
+      //         print("######## $a $b");
+      //         // if(a.isNotEmpty && b.isEmpty) {
+      //   //   setState(() {
+      //   //     timeinshow=false;
+      //   //     timeoutshow=true;
+      //   //   });}
+      //   // else if(a.isEmpty && b.isEmpty) {
+      //   //   setState(() {
+      //   //     timeinshow=true;
+      //   //     timeoutshow=false;
+      //   //   });
+      //   // }
+      //
+      //     });
+      //   }});
+      //});
+  }
+
+  // checkdate() {
+  //   if (date3.isBefore(date1) && date3.isAfter(date2)) {
+  //     print("date3 is between date1 and date2");
+  //   }
+  //   else {
+  //     print("date3 isn't between date1 and date2");
+  //   }
+  // }
+
   DateTime? newDateTime;
+  DateTime? newDateTime1;
   //late DateTime dateTime;
+
+  //////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +205,7 @@ class _ByEmployeeState extends State<ByEmployee> {
         child: CsScreenUtilInit(
           child: Scaffold(
             appBar: PreferredSize(
-              preferredSize:  Size.fromHeight(94.0.h),
+              preferredSize: Size.fromHeight(110.0.h),
               child: Container(
                 child:  Container(
                   height: 300.h,
@@ -63,7 +221,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                     ],
                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                     color: whiteClr,
-                    // color: Colors.cyanAccent
+                      //color: Colors.cyanAccent
                   ),
                   child: Stack(
                       children:[
@@ -78,8 +236,10 @@ class _ByEmployeeState extends State<ByEmployee> {
                                 Container(
                                   //color: Colors.black45,
                                   alignment:Alignment.center ,
-                                  width: 180.w,
-                                  child: Text("Employee Wise Attendance",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
+                                  width: 185.w,
+                                  child: Text("Employee Wise Attendance",
+                                    style: GoogleFonts.poppins(fontSize:12.sp,
+                                        color: Colors.black, fontWeight: FontWeight.w500),),
                                 ),
                                 SizedBox(height: 10.h,),
                                 Row(
@@ -88,48 +248,81 @@ class _ByEmployeeState extends State<ByEmployee> {
                                     GestureDetector(
                                       onTap: () async {
                                         //DatePickerTitle(date: dateTime);
-                                        // _showRangePicker(context);
-
-                                        var a,b,c;
-                                        newDateTime = await buildShowRoundedDatePicker(context);
-
-                                        a=newDateTime?.day.toString();
-                                        b=newDateTime?.month.toString();
-                                        c=newDateTime?.year.toString();
-
-                                        if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-                                            a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-                                          a="0$a";
-                                        }
-
-                                        if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-                                            b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-                                          b="0$b";
-                                        }
-
-                                        print("guddi teri ma ka $a $b $c");
-
-                                        print(newDateTime);
-                                        if (newDateTime != null) {
-                                          setState(() {
-                                            // time=newDateTime.toString();
-                                            // time=time.substring(0,time.length-13);
-                                            time= "$c-$b-$a";
-                                            dateTime = newDateTime!;
-                                          });
-                                          print("${dateTime.month}");
-                                        }
-
+                                         // _showRangePicker(context);
+                                        // showDateRangePicker(
+                                        //     context: context,
+                                        //     firstDate: DateTime(2000),
+                                        //     lastDate: DateTime(2200),
+                                        //     builder: (context, child) {
+                                        //       return Theme(
+                                        //         data: ThemeData.light().copyWith(
+                                        //             colorScheme: const ColorScheme.light(
+                                        //                 onPrimary: Colors.white, // selected text color
+                                        //                 onSurface: srpgradient3, // default text color
+                                        //                 primary: srpgradient2 // circle color
+                                        //                 // onPrimary: Colors.black, // selected text color
+                                        //                 // onSurface: Colors.amberAccent, // default text color
+                                        //                 // primary: Colors.lightBlue // circle color
+                                        //             ),
+                                        //             dialogBackgroundColor: Colors.white,
+                                        //             textButtonTheme: TextButtonThemeData(
+                                        //                 style: TextButton.styleFrom(
+                                        //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
+                                        //                         color: srpgradient2, fontWeight: FontWeight.w500),
+                                        //                     primary: srpgradient2, // color of button's letters
+                                        //                     //backgroundColor: Colors.white60, // Background color
+                                        //                     //backgroundColor: Colors.white, // Background color
+                                        //                     shape: RoundedRectangleBorder(
+                                        //                         side: const BorderSide(
+                                        //                             color: Colors.transparent,
+                                        //                             width: 1,
+                                        //                             style: BorderStyle.solid),
+                                        //                         borderRadius: BorderRadius.circular(50))
+                                        //                 ))),
+                                        //         child: child!,
+                                        //       );
+                                        //     });
+                                        pickDateRange();
+                                        // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+                                        // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
+                                        // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
+                                        // final String formatted = serverFormater.format(displayDate);
+                                        // var a,b,c;
+                                        // newDateTime = await buildShowRoundedDatePicker(context);
+                                        // a=newDateTime?.day.toString();
+                                        // b=newDateTime?.month.toString();
+                                        // c=newDateTime?.year.toString();
+                                        // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+                                        //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+                                        //   a="0$a";
+                                        // }
+                                        // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+                                        //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+                                        //   b="0$b";
+                                        // }
+                                        // print("guddi teri ma ka $a $b $c");
+                                        // print(newDateTime);
+                                        // if (newDateTime != null) {
+                                        //   setState(() {
+                                        //
+                                        //     time= "$c-$b-$a";
+                                        //     dateTime = newDateTime!;
+                                        //   });
+                                        //   print("${dateTime.month}");
+                                        // }
                                       },
                                       child: Container(
                                         height: 36.0.h,
-                                        width: 170.w,
+                                        //width: 125.w,
+                                        width: MediaQuery.of(context).size.width,
+                                        //color: Colors.purpleAccent,
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Container(
-                                              width: 170.w,
-                                              height: 40.0.h,
+                                              //width: 125.w,
+                                              width: 300.w,
+                                              height: 42.0.h,
                                               decoration: BoxDecoration(
                                                 boxShadow: [
                                                   BoxShadow(
@@ -147,20 +340,20 @@ class _ByEmployeeState extends State<ByEmployee> {
                                                 child: Row(
                                                   children: [
                                                     Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-                                                    SizedBox(width: 10.w,),
+                                                    Spacer(),
                                                     Column(
                                                       children: [
-                                                        Text("Select Date, Day, Month & Year", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                                        Text("$time", style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                        Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                                         Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                       // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
                                                       ],
                                                     ),
                                                     const Spacer(),
                                                     Container(
-                                                      height: 20.h,
-                                                      width: 20.w,
-                                                      decoration: const BoxDecoration(
-                                                      ),
-                                                      child: Icon(Icons.keyboard_arrow_down,size:20.sp,color: iconcolor,),),
+                                                      height: 15.h,
+                                                      width: 15.w,
+                                                      //color: Colors.purpleAccent,
+                                                      child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
                                                   ],
                                                 ),
                                               ),
@@ -170,110 +363,377 @@ class _ByEmployeeState extends State<ByEmployee> {
                                       ),
                                     ),
                                     Spacer(),
-                                    GestureDetector(
-                                      onTap: (){
-                                        showAlertDialog(context);
-                                      },
-                                      child: Container(
-                                        height: 37.h,
-                                        width: 149.w,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withOpacity(0.25),
-                                              spreadRadius: 1,
-                                              blurRadius: 1,
-                                              offset: const Offset(0, 2), // changes position of shadow
-                                            ),
-                                          ],
-                                          borderRadius: BorderRadius.circular(5.sp),
-                                          color: whiteClr,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 8.0),
-                                              child: SizedBox(
-                                                height: 25.h,
-                                                width: 25.w,
-                                                child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
-                                              ),
-                                            ),
-                                            Spacer(),
-                                            Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                            Spacer(),
-                                            SizedBox(width: 4.w,),
+                                    // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
+                                    // Spacer(),
+                                    // GestureDetector(
+                                    //   onTap: () async {
+                                    //     //DatePickerTitle(date: dateTime);
+                                    //     // _showRangePicker(context);
+                                    //     var a,b,c;
+                                    //     newDateTime1 = await buildShowRoundedDatePicker(context);
+                                    //
+                                    //     a=newDateTime1?.day.toString();
+                                    //     b=newDateTime1?.month.toString();
+                                    //     c=newDateTime1?.year.toString();
+                                    //
+                                    //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+                                    //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+                                    //       a="0$a";
+                                    //     }
+                                    //
+                                    //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+                                    //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+                                    //       b="0$b";
+                                    //     }
+                                    //
+                                    //     print("guddi teri ma ka $a $b $c");
+                                    //
+                                    //     print(newDateTime1);
+                                    //     if (newDateTime1 != null) {
+                                    //       setState(() {
+                                    //         // time=newDateTime.toString();
+                                    //         // time=time.substring(0,time.length-13);
+                                    //         time1 = "$c-$b-$a";
+                                    //         dateTime1 = newDateTime1!;
+                                    //       });
+                                    //       print("${dateTime1.month}");
+                                    //     }
+                                    //   },
+                                    //   child: Container(
+                                    //     height: 36.0.h,
+                                    //     width: 125.w,
+                                    //     child: Row(
+                                    //       mainAxisAlignment: MainAxisAlignment.center,
+                                    //       children: [
+                                    //         Container(
+                                    //           width: 125.w,
+                                    //           height: 42.0.h,
+                                    //           decoration: BoxDecoration(
+                                    //             boxShadow: [
+                                    //               BoxShadow(
+                                    //                 color: Colors.grey.withOpacity(0.2),
+                                    //                 spreadRadius: 2,
+                                    //                 blurRadius: 1,
+                                    //                 offset: const Offset(0, 2), // changes position of shadow
+                                    //               ),
+                                    //             ],
+                                    //             borderRadius: BorderRadius.circular(5),
+                                    //             color: whiteClr,
+                                    //           ),
+                                    //           child: Padding(
+                                    //             padding: EdgeInsets.all( 3.5.sp),
+                                    //             child: Row(
+                                    //               children: [
+                                    //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+                                    //                 SizedBox(width: 10.w,),
+                                    //                 Column(
+                                    //                   children: [
+                                    //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                    //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                    //                   ],
+                                    //                 ),
+                                    //                 const Spacer(),
+                                    //                 Container(
+                                    //                   height: 15.h,
+                                    //                   width: 15.w,
+                                    //                   //color: Colors.purpleAccent,
+                                    //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+                                    //               ],
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ],
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    // Spacer(),
+                                    ],
+                                  ),
 
-                                          ],
-                                        ),
+                                SizedBox(height: 12.h,),
+
+                                Container(
+                                  height: 30.h,
+                                  width: 300.w,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.2),
+                                        spreadRadius: 2,
+                                        blurRadius: 1,
+                                        offset: const Offset(0, 2), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: whiteClr,
+                                  ),
+                                  //color: Colors.purpleAccent,
+                                  child:  Row(
+                                    children: [
+                                      SizedBox(width: 5.w,),
+                                      Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
+                                      SizedBox(width: 14.w,),
+                                      DropdownButton(
+                                        // Initial Value
+                                        value: dropdownvalue1,
+                                        // Down Arrow Icon
+                                        icon:  Row(children: [SizedBox(width: 112.w,), Icon(Icons.keyboard_arrow_down,size: 23.sp,)],),
+                                        // Array list of items
+                                        items: items1.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (String? newValue) {
+
+                                          setState(() {
+                                            dropdownvalue1 = newValue!;
+                                          });
+                                          print("::::::::::: $dropdownvalue1 $days");
+                                          if(dropdownvalue1=='All'){}
+                                          else{
+                                            if(days.isEmpty){}
+                                            else {
+                                              String a;
+                                              for(int i=0;i<days.length;i++){
+                                                String b;
+                                                b= '${days[i].year}-${days[i].month}-${days[i].day}';
+                                              FirebaseFirestore.instance
+                                                  .collection('Companies')
+                                                  .doc(
+                                                  '${user!.email.toString()}')
+                                                  .collection("Employee")
+                                                  .doc(dropdownvalue1)
+                                                  .collection('Attendance')
+                                                  .doc(b)
+                                                  .get().then((value) {
+                                                    String c;
+                                                    c=value.get('TimeIn');
+                                                    // print("ajajajjajajjajajajjajaj $c");
+                                                  });
+                                                  // .get().then((value){
+                                                  //   value.docs.forEach((element) {
+                                                  //       a=element.id.toString();
+                                                  //       print("yayayyayayayayayayay $a");
+                                                  //     });
+                                                  //   });
+                                                  }
+                                                }
+                                              }
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Spacer(),
-                                 ],
-                                ),
-                               ]
-                              ),
+                                // Row(
+                                //   children: [
+                                //     Spacer(),
+                                //     GestureDetector(
+                                //       onTap: (){
+                                //         showAlertDialog(context);
+                                //       },
+                                //       child: Container(
+                                //         height: 37.h,
+                                //         width: 149.w,
+                                //         decoration: BoxDecoration(
+                                //           boxShadow: [
+                                //             BoxShadow(
+                                //               color: Colors.grey.withOpacity(0.25),
+                                //               spreadRadius: 1,
+                                //               blurRadius: 1,
+                                //               offset: const Offset(0, 2), // changes position of shadow
+                                //             ),
+                                //           ],
+                                //           borderRadius: BorderRadius.circular(5.sp),
+                                //           color: whiteClr,
+                                //         ),
+                                //         child: Row(
+                                //           mainAxisAlignment: MainAxisAlignment.start,
+                                //           children: [
+                                //             Padding(
+                                //               padding: const EdgeInsets.only(left: 8.0),
+                                //               child: SizedBox(
+                                //                 height: 25.h,
+                                //                 width: 25.w,
+                                //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
+                                //               ),
+                                //             ),
+                                //             Spacer(),
+                                //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                //             Spacer(),
+                                //             SizedBox(width: 4.w,),
+                                //
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     Spacer(),
+                                //     GestureDetector(
+                                //       onTap: (){
+                                //         showAlertDialog(context);
+                                //       },
+                                //       child: Container(
+                                //         height: 37.h,
+                                //         width: 149.w,
+                                //         decoration: BoxDecoration(
+                                //           boxShadow: [
+                                //             BoxShadow(
+                                //               color: Colors.grey.withOpacity(0.25),
+                                //               spreadRadius: 1,
+                                //               blurRadius: 1,
+                                //               offset: const Offset(0, 2), // changes position of shadow
+                                //             ),
+                                //           ],
+                                //           borderRadius: BorderRadius.circular(5.sp),
+                                //           color: whiteClr,
+                                //         ),
+                                //         child: Row(
+                                //           mainAxisAlignment: MainAxisAlignment.start,
+                                //           children: [
+                                //             Padding(
+                                //               padding: const EdgeInsets.only(left: 8.0),
+                                //               child: SizedBox(
+                                //                 height: 25.h,
+                                //                 width: 25.w,
+                                //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
+                                //               ),
+                                //             ),
+                                //             Spacer(),
+                                //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                //             Spacer(),
+                                //             SizedBox(width: 4.w,),
+                                //
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     Spacer(),
+                                //   ],
+                                // ),
+                                 ]
+                               ),
                              ),
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              //color: Colors.yellow,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 10.w,top: 8.h),
-                                child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+                          Positioned(
+                            top: 6,
+                            left: 4,
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                //color: Colors.yellow,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10.w,top: 8.h),
+                                  child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ]
+                        ]
+                      ),
                     ),
                   ),
                 ),
-            ),
-            body: DefaultTabController(
-              length: 4,
-              initialIndex: 0,
-              child:  Scaffold(
-                appBar:  AppBar(
-                  leading: SizedBox(),
-                  flexibleSpace:  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children:  [
-                      TabBar(
-                        labelPadding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
-                        indicatorColor:srpgradient2,
-                        isScrollable: true,
-                        tabs: [
-                          Tab(child:  Tabname(name: "Present",),),
-                          Tab(child:  Tabname(name: "Absent",),),
-                          Tab(child:  Tabname(name: "Late Comers",),),
-                          Tab(child:  Tabname(name: "Early Leavers",),),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                /*--------------- Build Tab body here -------------------*/
-                body:  TabBarView(
-                  children: <Widget>[
-                    TabsforDesignationAbsentLateEarly(time: time,tabcount: 0,),
-                    TabsforDesignationAbsentLateEarly(time: time,tabcount: 1,),
-                    TabsforDesignationAbsentLateEarly(time: time,tabcount: 2,),
-                    TabsforDesignationAbsentLateEarly(time: time,tabcount: 3,),
-                  ],
-                ),
-              ),
-            ),
+
+            body: days.isEmpty? SizedBox():TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+            // DefaultTabController(
+            //   length: 1,
+            //   initialIndex: 0,
+            //   child:  Scaffold(
+            //     appBar:  AppBar(
+            //       leading: SizedBox(),
+            //       flexibleSpace: Column(
+            //         mainAxisAlignment: MainAxisAlignment.end,
+            //         children:  [
+            //           TabBar(
+            //             labelPadding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
+            //             indicatorColor:srpgradient2,
+            //             isScrollable: true,
+            //             tabs: [
+            //               Tab(child:  Tabname(name: "Present",),),
+            //               // Tab(child:  Tabname(name: "Absent",),),
+            //               // Tab(child:  Tabname(name: "Late Comers",),),
+            //               // Tab(child:  Tabname(name: "Early Leavers",),),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     /*--------------- Build Tab body here -------------------*/
+            //     body:  TabBarView(
+            //       children: <Widget>[
+            //         TabsforDesignationAbsentLateEarly(time: time,tabcount: 0,),
+            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 1,),
+            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 2,),
+            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 3,),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ),
         )
       );
     }
+
+  late DateTimeRange dateTimeRange =dateRange;
+  List<DateTime> days = [];
+
+  Future pickDateRange() async {
+      DateTimeRange?  newDateRange = await showDateRangePicker(
+          context: context,
+          initialDateRange: dateRange,
+          firstDate: DateTime(2000),
+          lastDate: DateTime(2200),
+          builder: (context, child) {
+            return Theme(
+              data: ThemeData.light().copyWith(
+                  colorScheme: const ColorScheme.light(
+                      onPrimary: Colors.white, // selected text color
+                      onSurface: srpgradient3, // default text color
+                      primary: srpgradient2 // circle color
+                    // onPrimary: Colors.black, // selected text color
+                    // onSurface: Colors.amberAccent, // default text color
+                    // primary: Colors.lightBlue // circle color
+                  ),
+                  dialogBackgroundColor: Colors.white,
+                  textButtonTheme: TextButtonThemeData(
+                      style: TextButton.styleFrom(
+                          textStyle:GoogleFonts.poppins(
+                              fontSize:12.sp,
+                              color: srpgradient2,
+                              fontWeight: FontWeight.w500),
+                              primary: srpgradient2,
+                          // color of button's letters
+                          //backgroundColor: Colors.white60, // Background color
+                          //backgroundColor: Colors.white, // Background color
+                          shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                  style: BorderStyle.solid),
+                              borderRadius: BorderRadius.circular(50)),
+                      ))),
+              child: child!,
+            );
+          });
+      if(newDateRange==null) return;
+      setState(() => dateTimeRange=newDateRange);
+      setState(() {
+        time='( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )';
+      });
+      getDaysInBetween(dateTimeRange.start, dateTimeRange.end);
+    }
+
+
+  getDaysInBetween(DateTime startDate, DateTime endDate) {
+    for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
+      days.add(startDate.add(Duration(days: i)));
+      print(":::::::::: PRINT :::::::::::: ${days[i].year}-${days[i].month}-${days[i].day}");
+    }
+  }
 
   showAlertDialog(BuildContext context) {
 
@@ -284,9 +744,7 @@ class _ByEmployeeState extends State<ByEmployee> {
     // );
 
     Widget continueButton = TextButton(
-
       child: Text("OK", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-
       onPressed:  () {},
     );
 
@@ -330,7 +788,6 @@ class _ByEmployeeState extends State<ByEmployee> {
             ),
             SizedBox(height: 30.h,),
             Stack(
-
               children: [
                 PieChartEmployee(),
                 Positioned(
@@ -358,12 +815,10 @@ class _ByEmployeeState extends State<ByEmployee> {
                       ],
                     ),
                   ],
-                ),
-              ),
-              actions: [
+                ), ),
+               actions: [
                 //cancelButton,
-                continueButton,
-              ],
+                continueButton, ],
             );
 
     // show the dialog
@@ -373,7 +828,6 @@ class _ByEmployeeState extends State<ByEmployee> {
         return alert;
       },
     );
-
   }
 
   Future<DateTime?> buildShowRoundedDatePicker(BuildContext context) {
@@ -418,11 +872,17 @@ class _ByEmployeeState extends State<ByEmployee> {
 
 }
 
+
+
 class TabsforDesignationAbsentLateEarly extends StatefulWidget {
-  const TabsforDesignationAbsentLateEarly({Key? key, required this.time, required this.tabcount}) : super(key: key);
+  const TabsforDesignationAbsentLateEarly({Key? key, required this.time,
+    required this.tabcount, required this.datetime, required this.employe}) :
+        super(key: key);
 
   final String time;
   final int tabcount;
+  final List<DateTime> datetime;
+  final String employe;
 
   @override
   State<TabsforDesignationAbsentLateEarly> createState() => _TabsforDesignationAbsentLateEarlyState();
@@ -434,7 +894,9 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("uuuuuuuuuuuuuuu ${widget.time} ${widget.tabcount}");
+    //print("uuuuuuuuuuuuuuu ${widget.time} ${widget.tabcount}");
+    print("############ ${widget.employe}");
+    print("************ ${widget.employe}");
   }
 
   fetchattendance(){
@@ -499,11 +961,11 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
               Row(
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only(left: 25.0.w),
+                    padding: EdgeInsets.only(left: 25.0.w),
                     child: Container(
                       alignment: Alignment.topLeft,
                       width: 130.w,
-                      height: 90.h,
+                      height: 105.h,
                       child: Column(
                         crossAxisAlignment:CrossAxisAlignment.start ,
                         children: [

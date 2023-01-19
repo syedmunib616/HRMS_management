@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
                 builder: (context, _) => MaterialApp(
                   title: 'Srp.Ai',
                   home: ChangeNotifierProvider(
-                    //create: (context) => GoogleSignInProvider(),
+                    // create: (context) => GoogleSignInProvider(),
                     create: (context) => ThemeProvider(),
                     builder:(cotext,_) => GetMaterialApp(
                       routes: const {
@@ -82,19 +82,15 @@ class MyApp extends StatelessWidget {
                       // locale: context.locale,
                       // home:  const Homepage(),
                       //home:Test(),
-
-
                       //home: const ScreenSplach(),
                       home: Login(),
                       //home: EmployeeDashboard(),
-                      //
                       //home: LateComers(),
                       //home: ByEmployee(),
                       //home: DailyAttendance(),
                       //home: const TestScreen(),
                       //home: const ScreenResetPassword(),
                       //home: SelectCountry(),
-
                     ),
                   ),
                   themeMode: themeProvider.themeMode,
