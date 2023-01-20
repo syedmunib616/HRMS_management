@@ -81,7 +81,6 @@ class _ByEmployeeState extends State<ByEmployee> {
 
   @override
   void initState() {
-
     DateTimeRange dateRange = DateTimeRange(
       start: DateTime(DateTime.now().year,DateTime.now().month,1),
       end: DateTime(DateTime.now().year,DateTime.now().month,28),
@@ -92,7 +91,6 @@ class _ByEmployeeState extends State<ByEmployee> {
     late DateTime dateTime1;
     setState(() {
       time='( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )';
-
     });
     fetchuser();
     getDaysInBetween(dateRange.start,dateRange.end);
@@ -118,7 +116,10 @@ class _ByEmployeeState extends State<ByEmployee> {
     print("%%%%%%%%%%%%%%%% $datestring");
     FirebaseFirestore.instance
         .collection('Companies')
-        .doc('${user!.email.toString()}').collection("Employee").get().then((value) {
+        .doc('${user!.email.toString()}')
+        .collection("Employee")
+        .get()
+        .then((value) {
           value.docs.forEach((element) {
             a=element.get('email');
             items1.add(a);
@@ -195,6 +196,8 @@ class _ByEmployeeState extends State<ByEmployee> {
 
   DateTime? newDateTime;
   DateTime? newDateTime1;
+  StreamController<ListAttandance> streamController = StreamController.broadcast();
+
   //late DateTime dateTime;
 
   //////////////////////////////////////////////////
@@ -282,6 +285,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                         //         child: child!,
                                         //       );
                                         //     });
+
                                         pickDateRange();
                                         // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
                                         // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
@@ -488,7 +492,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                                         // After selecting the desired option,it will
                                         // change button value to selected value
                                         onChanged: (String? newValue) {
-
                                           setState(() {
                                             dropdownvalue1 = newValue!;
                                           });
@@ -498,22 +501,11 @@ class _ByEmployeeState extends State<ByEmployee> {
                                             if(days.isEmpty){}
                                             else {
                                               String a;
-                                              for(int i=0;i<days.length;i++){
+                                              for(int i=0;i<days.length;i++) {
                                                 String b;
                                                 b= '${days[i].year}-${days[i].month}-${days[i].day}';
-                                              FirebaseFirestore.instance
-                                                  .collection('Companies')
-                                                  .doc(
-                                                  '${user!.email.toString()}')
-                                                  .collection("Employee")
-                                                  .doc(dropdownvalue1)
-                                                  .collection('Attendance')
-                                                  .doc(b)
-                                                  .get().then((value) {
-                                                    String c;
-                                                    c=value.get('TimeIn');
-                                                    // print("ajajajjajajjajajajjajaj $c");
-                                                  });
+                                                //print("987987987987987987 $b");
+                                                fetchattendance(b);
                                                   // .get().then((value){
                                                   //   value.docs.forEach((element) {
                                                   //       a=element.id.toString();
@@ -528,7 +520,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                         ],
                                       ),
                                     ),
-                                // Row(
+                                  // Row(
                                 //   children: [
                                 //     Spacer(),
                                 //     GestureDetector(
@@ -637,8 +629,104 @@ class _ByEmployeeState extends State<ByEmployee> {
                     ),
                   ),
                 ),
+            body: days.isEmpty? SizedBox(): Column(
+              children: [
+                SizedBox(height: 20.h,),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 8.sp),
+                  child: Container(
+                    height: 30.h,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 2,
+                          offset: const Offset(0, 2), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10.sp),
+                      color: whiteClr,
+                      // color: Colors.cyanAccent
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.only(left: 26.0.w),
+                          child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding:  EdgeInsets.only(left: 45.0.w),
+                          child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        SizedBox(width: 20.w,),
+                        Padding(
+                          padding:  EdgeInsets.only(left: 20.0.w),
+                          child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        SizedBox(width: 14.w,),
+                      ],
+                    ),
+                  ),
+                ),
+                StreamBuilder(
+                    stream: streamController.stream,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      print("%%%%%%%%% $snapshot");
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return const Text(
+                            " null",
+                            style: TextStyle(color: Colors.white),
+                          );
+                        case ConnectionState.waiting:
+                          return const SizedBox();
+                        case ConnectionState.active:
+                          return (snapshot.hasData == false)
+                              ? const CircularProgressIndicator()
+                              : ListView.builder(
+                                padding: const EdgeInsets.only(top: 0),
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: attendance.length,
+                                itemBuilder: (context, index) {
+                                //managetotalcontact = contact.length.toString();
+                                 // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+                               return TabsforDesignationAbsentLateEarly(
+                                timein: attendance[index].timein,timeout: attendance[index].timeout,
+                                addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                                date: attendance[index].date,
+                                time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,);
+                            },
+                          );
+                        case ConnectionState.done:
+                          return (snapshot.hasData == false)
+                              ? const CircularProgressIndicator()
+                              : ListView.builder(
+                            padding: const EdgeInsets.only(top: 0),
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: attendance.length,
+                            itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly(
+                              timein: attendance[index].timein,timeout: attendance[index].timeout,
+                              addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                              date: attendance[index].date,
+                              time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+                          );
+                        default:
+                          return const Text("default", style: TextStyle(color: Colors.white));
+                      }
+                    }),
+              ],
+            ),
 
-            body: days.isEmpty? SizedBox():TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+                //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+
             // DefaultTabController(
             //   length: 1,
             //   initialIndex: 0,
@@ -678,8 +766,61 @@ class _ByEmployeeState extends State<ByEmployee> {
       );
     }
 
+
   late DateTimeRange dateTimeRange =dateRange;
   List<DateTime> days = [];
+  List<ListAttandance> attendance=[];
+  
+  fetchattendance(String date)async{
+    print("kkkkkkkkkk $date");
+    String a,b;
+    await FirebaseFirestore.instance
+          .collection('Companies')
+          .doc('${user!.email.toString()}')
+          .collection("Employee")
+          .doc(dropdownvalue1)
+          .collection('Attendance')
+          // .doc(date)
+          // .get()
+          // .then((value) {
+          //   a=value.get('TimeIn');
+          //   b=value.get('TimeInAddress');
+          //   print("time pora ho gaya hai $a $b");
+          //
+          // });
+         .get().then((value) {
+          value.docs.forEach((element) {
+          a=element.id;
+          print("^&^&^&^&^&^&^&^&^&^& $date $a");
+            if(date==a){
+              print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+
+              FirebaseFirestore.instance
+                  .collection('Companies')
+                  .doc('${user!.email.toString()}')
+                  .collection("Employee")
+                  .doc(dropdownvalue1)
+                  .collection('Attendance')
+                  .doc('$date').get().then((value) {
+                    String e,f,g,h,j;
+                    e=value.get('TimeIn');
+                    f=value.get('TimeInAddress');
+                    g=value.get('TimeOut');
+                    h=value.get('TimeOutAddress');
+
+                    attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                    streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                    print("///////////// $attendance");
+
+
+              });
+            }
+            else{
+              print("1111111111111");
+            }
+          });
+         });
+        }
 
   Future pickDateRange() async {
       DateTimeRange?  newDateRange = await showDateRangePicker(
@@ -719,19 +860,21 @@ class _ByEmployeeState extends State<ByEmployee> {
               child: child!,
             );
           });
+
       if(newDateRange==null) return;
       setState(() => dateTimeRange=newDateRange);
       setState(() {
         time='( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )';
       });
       getDaysInBetween(dateTimeRange.start, dateTimeRange.end);
-    }
-
+  }
 
   getDaysInBetween(DateTime startDate, DateTime endDate) {
+    setState(() { days=[]; });
     for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
+      //if(startDate.month==1 ||startDate.month==2 ||startDate.month==3 ||startDate.month==4 ||startDate.month==5 ||startDate.month==6 ||startDate.month==7 ||startDate.month==8 ||startDate.month==9 )
       days.add(startDate.add(Duration(days: i)));
-      print(":::::::::: PRINT :::::::::::: ${days[i].year}-${days[i].month}-${days[i].day}");
+      print(":::::::::: PRINT :::::::::::: ${startDate.month} ${days[i].year}-${days[i].month}-${days[i].day}");
     }
   }
 
@@ -872,17 +1015,29 @@ class _ByEmployeeState extends State<ByEmployee> {
 
 }
 
-
+class ListAttandance{
+  ListAttandance({required this.date,required this.timein,required this.addressIn,required this.timeout,required this.addressout,});
+  String date;
+  String timein;
+  String addressIn;
+  String timeout;
+  String addressout;
+}
 
 class TabsforDesignationAbsentLateEarly extends StatefulWidget {
   const TabsforDesignationAbsentLateEarly({Key? key, required this.time,
-    required this.tabcount, required this.datetime, required this.employe}) :
+    required this.tabcount, required this.datetime, required this.employe, required this.timein, required this.timeout, required this.addressin, required this.addressout, required this.date}) :
         super(key: key);
 
   final String time;
   final int tabcount;
   final List<DateTime> datetime;
   final String employe;
+  final String timein;
+  final String timeout;
+  final String addressin;
+  final String addressout;
+  final String date;
 
   @override
   State<TabsforDesignationAbsentLateEarly> createState() => _TabsforDesignationAbsentLateEarlyState();
@@ -905,125 +1060,84 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: whiteClr,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 10.h,),
-              Padding(
-                padding:  EdgeInsets.only(left: 8.0.w),
-                child: Text("Total Present: 1", style: GoogleFonts.poppins(fontSize:12.sp,
-                    color: srpgradient3,fontWeight: FontWeight.w500),),),
-              SizedBox(height: 10.h,),
-              Container(
-                height: 30.h,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 2,
-                      offset: const Offset(0, 2), // changes position of shadow
+    return Container(
+      height: 120.h,
+      width: MediaQuery.of(context).size.width,
+      // color: Colors.purpleAccent,
+
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            SizedBox(height: 12.h,),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 25.0.w),
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    width: 130.w,
+                    height: 105.h,
+                    child: Column(
+                      crossAxisAlignment:CrossAxisAlignment.start ,
+                      children: [
+                        Text("Umar",style: GoogleFonts.poppins(fontSize:12.sp,
+                            color: blackClr,fontWeight: FontWeight.w600),),
+                        Text("Time In: 247, BMCHS Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
+                            color: blackClr,fontWeight: FontWeight.w400),),
+                        Text("Time Out: 247, Sharfabad Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
+                            color: blackClr,fontWeight: FontWeight.w400),),
+                      ],
                     ),
-                  ],
-                  borderRadius: BorderRadius.circular(10.sp),
-                  color: whiteClr,
-                  // color: Colors.cyanAccent
+                  ),
                 ),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding:  EdgeInsets.only(left: 26.0.w),
-                      child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
+                Spacer(),
+                Padding(
+                  padding:  EdgeInsets.only(left: 35.0.w),
+                  child: Column(
+                    children: [
+                      Text("9:00",style: GoogleFonts.poppins(fontSize:12.sp,
                           color: srpgradient2,fontWeight: FontWeight.w600),),
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 45.0.w),
-                      child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
-                          color: srpgradient2,fontWeight: FontWeight.w600),),
-                    ),
-                    SizedBox(width: 20.w,),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 20.0.w),
-                      child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
-                          color: srpgradient2,fontWeight: FontWeight.w600),),
-                    ),
-                    SizedBox(width: 14.w,),
-                  ],
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0.sp),
+                        child: Image.asset(
+                          'assets/user.jpg',
+                          width: 40.0.w,
+                          height: 40.0.h,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 12.h,),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 25.0.w),
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      width: 130.w,
-                      height: 105.h,
-                      child: Column(
-                        crossAxisAlignment:CrossAxisAlignment.start ,
-                        children: [
-                          Text("Umar",style: GoogleFonts.poppins(fontSize:12.sp,
-                              color: blackClr,fontWeight: FontWeight.w600),),
-                          Text("Time In: 247, BMCHS Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
-                              color: blackClr,fontWeight: FontWeight.w400),),
-                          Text("Time Out: 247, Sharfabad Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
-                              color: blackClr,fontWeight: FontWeight.w400),),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Padding(
-                      padding:  EdgeInsets.only(left: 35.0.w),
-                      child: Column(
-                        children: [
-                          Text("9:00",style: GoogleFonts.poppins(fontSize:12.sp,
-                              color: srpgradient2,fontWeight: FontWeight.w600),),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0.sp),
-                            child: Image.asset(
-                              'assets/user.jpg',
-                              width: 40.0.w,
-                              height: 40.0.h,
-                              fit: BoxFit.fill,
-                            ),
+                SizedBox(width: 20.w,),
+                Padding(
+                    padding:  EdgeInsets.only(left: 35.0.w),
+                    child: Column(
+                      children: [
+                        Text("16:00",style: GoogleFonts.poppins(fontSize:12.sp,
+                            color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0.sp),
+                          child: Image.asset(
+                            'assets/user.jpg',
+                            width: 40.0.w,
+                            height: 40.0.h,
+                            fit: BoxFit.fill,
                           ),
-                        ],
-                      ),
-                  ),
-                  SizedBox(width: 20.w,),
-                  Padding(
-                      padding:  EdgeInsets.only(left: 35.0.w),
-                      child: Column(
-                        children: [
-                          Text("16:00",style: GoogleFonts.poppins(fontSize:12.sp,
-                              color: srpgradient2,fontWeight: FontWeight.w600),),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0.sp),
-                            child: Image.asset(
-                              'assets/user.jpg',
-                              width: 40.0.w,
-                              height: 40.0.h,
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ],
-                      )
-                  ),
-                  SizedBox(width: 14.w,),
-                ],
-              ),
-            ],
-          ),
-        )
-      );
+                        ),
+                      ],
+                    )
+                ),
+                SizedBox(width: 14.w,),
+              ],
+            ),
+          ],
+        ),
+      ),
+        );
     }
 }
 

@@ -78,18 +78,29 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       admin=widget.admineamil;  });
 
 
-    DateTime date = DateTime(now.year, now.month, now.day);
-    DateTime time1=DateTime(now.hour,now.minute,now.second);
+      if(now.month==01||now.month==02||now.month==03
+          ||now.month==04||now.month==05||now.month==06
+          ||now.month==07||now.month==08||now.month==09) {
+        String month;
+        month=now.month.toString();
+        month=month.substring(0);
+        int m=int.parse(month);
 
-      //time=time1.toString();
 
-    // time='${now.hour}:${now.minute}';
-    datestring=date.toString();
-    datestring=datestring.substring(0, datestring.length - 13);
+        DateTime date = DateTime(now.year, m, now.day);
+        //DateTime date = DateTime(now.year, now.month, now.day);
+        DateTime time1 = DateTime(now.hour, now.minute, now.second);
 
+        datestring='${now.year}-$m-${now.day}';
+
+        print("gudddddddddddddddddii $datestring 1");
+        // time=time1.toString();
+        // time='${now.hour}:${now.minute}';
+        // datestring=date.toString();
+        // datestring=datestring.substring(0, datestring.length - 13);
+      }
     print("*-/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/  $time");
     fetchuser();
-
     }
 
 
@@ -111,7 +122,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
 
   final user = FirebaseAuth.instance.currentUser;
   bool itis=false;
-
   bool timeinshow=false;
   bool timeoutshow=false;
 
@@ -139,6 +149,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
          }});
        }).then((value) {
        if(itis==false){
+
           FirebaseFirestore.instance.collection('Companies')
               .doc('${admin}').collection("Employee")
               .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
