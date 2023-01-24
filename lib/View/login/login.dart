@@ -71,14 +71,15 @@ class _LoginState extends State<Login> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: 45.h,
+                            height: 95.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                height: 17.h,
-                                width: 40.w,
+
+                                height: 40.h,
+                                width: 120.w,
                                 decoration: const BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage('assets/logo.png'),
@@ -98,42 +99,43 @@ class _LoginState extends State<Login> {
                             "Login to continue",
                             style: GoogleFonts.poppins(fontSize: 15.sp,color: settingFontBackColor(context),fontWeight: FontWeight.w500),
                           ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 22.h,
-                                width: 90.w,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 1,
-                                      blurRadius: 1,
-                                      offset: const Offset(0, 0), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(8.2),
-                                  color: whiteClr,
-                                ),
-                                child:Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('assets/google.png',height: 18.h,width: 18.w,),
-                                    SizedBox(width: 8.w,),
-                                    Text("Google",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey),),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 25.h,
-                          ),
-                          Text("Or",style: GoogleFonts.poppins(fontSize: 12.sp,color: Color(0xff313131),fontWeight: FontWeight.w600),),
+                          // SizedBox(
+                          //   height: 16.h,
+                          // ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     Container(
+                          //       height: 22.h,
+                          //       width: 90.w,
+                          //       decoration: BoxDecoration(
+                          //         boxShadow: [
+                          //           BoxShadow(
+                          //             color: Colors.grey.withOpacity(0.5),
+                          //             spreadRadius: 1,
+                          //             blurRadius: 1,
+                          //             offset: const Offset(0, 0), // changes position of shadow
+                          //           ),
+                          //         ],
+                          //         borderRadius: BorderRadius.circular(8.2),
+                          //         color: whiteClr,
+                          //       ),
+                          //       child:Row(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           Image.asset('assets/google.png',height: 18.h,width: 18.w,),
+                          //           SizedBox(width: 8.w,),
+                          //           Text("Google",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey),),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+                          // SizedBox(
+                          //   height: 25.h,
+                          // ),
+                          // Text("Or",style: GoogleFonts.poppins(fontSize: 12.sp,color: Color(0xff313131),fontWeight: FontWeight.w600),),
+                          //
                           SizedBox(
                             height: 25.h,
                           ),

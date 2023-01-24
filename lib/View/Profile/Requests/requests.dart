@@ -1,5 +1,4 @@
-
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +12,10 @@ import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
 
 class Requests extends StatelessWidget {
   Requests({Key? key}) : super(key: key);
@@ -201,16 +204,16 @@ class Requests extends StatelessWidget {
                       iconString: "assets/month.png",title: TextStrings.Leave,subtitle: TextStrings.CheckLeaveRequestList,)
                 ),
                 SizedBox(height: 18.h,),
-                GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ListOfRequest(Appbarheading: "Expenses List",providerGenerator: providerGenerator, textEditingController1: textEditingController1)),
-                      );
-                    },
-                    child: SubReportsOrSubSetting(icon:Icon(FontAwesomeIcons.wallet,size: 23.sp,color: srpgradient2,),
-                      iconString: "assets/clock.png",title: TextStrings.Expenses,subtitle: TextStrings.CheckExpensesRequestList,)),
-                SizedBox(height: 18.h,),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => ListOfRequest(Appbarheading: "Expenses List",providerGenerator: providerGenerator, textEditingController1: textEditingController1)),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSetting(icon:Icon(FontAwesomeIcons.wallet,size: 23.sp,color: srpgradient2,),
+                //       iconString: "assets/clock.png",title: TextStrings.Expenses,subtitle: TextStrings.CheckExpensesRequestList,)),
+                // SizedBox(height: 18.h,),
               ],
             ),
           ),
@@ -286,8 +289,21 @@ class SubReportsOrSubSetting extends StatelessWidget {
   }
 }
 
+class ListOfLeavesByEmployee{
+  ListOfLeavesByEmployee( {required this.time,
+    required this.employee,
+    required this.subject,
+    required this.message,
+    required this.approve,});
 
-class ListOfRequest extends StatelessWidget {
+  final String time;
+  final String employee;
+  final String subject;
+  final String message;
+   var approve;
+}
+
+class ListOfRequest extends StatefulWidget {
   const ListOfRequest({
     Key? key,
     required this.providerGenerator,
@@ -297,6 +313,63 @@ class ListOfRequest extends StatelessWidget {
   final ProviderGenerator providerGenerator;
   final TextEditingController textEditingController1;
   final String Appbarheading;
+
+  @override
+  State<ListOfRequest> createState() => _ListOfRequestState();
+}
+
+class _ListOfRequestState extends State<ListOfRequest> {
+
+  final user = FirebaseAuth.instance.currentUser;
+  List<ListOfLeavesByEmployee> listofleavebyemployee=[];
+  StreamController<ListOfLeavesByEmployee> streamController = StreamController.broadcast();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchleave();
+  }
+
+  fetchleave(){
+    // FirebaseFirestore.instance
+    //     .collection('Companies')
+    //     .doc(user!.email.toString())
+    //     .collection("Employee")
+    //     .doc(user!.email.toString())
+    //     .collection('Leaves')
+    //     .doc().
+    FirebaseFirestore.instance
+        .collection('Companies')
+        .doc(user!.email.toString())
+        .collection("Employee").get().then((value) {
+          value.docs.forEach((elemen) {
+            print("iiiiiiiiiiiiii ${elemen.id}");
+            FirebaseFirestore.instance
+                .collection('Companies')
+                .doc(user!.email.toString())
+                .collection("Employee")
+                .doc('${elemen.id}')
+                .collection('Leaves')
+                .get().then((value) {
+
+                  value.docs.forEach((element) {
+                    String a,b,c,d;
+                    var e;
+                    b=element.get('subject');
+                    c=element.get('message');
+                    e=element.get('approve');
+                    d=element.get('date');
+                    a=elemen.id;
+
+                    listofleavebyemployee.add(ListOfLeavesByEmployee(time: d,subject: b,message: c,approve: e,employee: a));
+                    streamController.add(ListOfLeavesByEmployee(time: d,subject: b,message: c,approve: e,employee: a));
+
+              });
+            });
+          });
+        });
+      }
 
   @override
   Widget build(BuildContext context) {
@@ -341,7 +414,7 @@ class ListOfRequest extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
-                        Text(Appbarheading,style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                        Text(widget.Appbarheading,style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                         Spacer(),
                         Container(
                           width: 30.0.w,
@@ -615,18 +688,17 @@ class ListOfRequest extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
                   child: CsMainInputField1(
-                    providerGenerator: providerGenerator,
+                    providerGenerator: widget.providerGenerator,
                     width: 287.w,
-                    mycontroller: textEditingController1,
+                    mycontroller: widget.textEditingController1,
                     myhint: TextStrings.Search,
                     prefixIcon: Icons.search,
                     isPassword: false,
                     keyboardType: TextInputType.emailAddress,
-                    bordercolor: providerGenerator.getVisibleError(index: 0)
+                    bordercolor: widget.providerGenerator.getVisibleError(index: 0)
                         ? Colors.red
                         : null,
                     // bordercolor: providerGenerator.getVisibleError(index: 0)
@@ -660,12 +732,63 @@ class ListOfRequest extends StatelessWidget {
                   // ),
                 ),
 
-                NoOfRequest(),
-                NoOfRequest(),
-                NoOfRequest(),
-                NoOfRequest(),
-                NoOfRequest(),
-                NoOfRequest(),
+                StreamBuilder(
+                    stream: streamController.stream,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      print("%%%%%%%%% $snapshot");
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return const Text(
+                            " null",
+                            style: TextStyle(color: Colors.white),
+                          );
+                        case ConnectionState.waiting:
+                          return const SizedBox();
+                        case ConnectionState.active:
+                          return (snapshot.hasData == false)
+                              ? const CircularProgressIndicator()
+                              : ListView.builder(
+                                padding: const EdgeInsets.only(top: 0),
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: listofleavebyemployee.length,
+                                itemBuilder: (context, index) {
+                                // managetotalcontact = contact.length.toString();
+                                // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+                                return NoOfRequest(
+                                  time: listofleavebyemployee[index].time,
+                                  user: listofleavebyemployee[index].employee,
+                                  subject: listofleavebyemployee[index].subject,
+                                  message: listofleavebyemployee[index].message,
+                                  approve: listofleavebyemployee[index].approve,);
+                            },
+                          );
+                        case ConnectionState.done:
+                          return (snapshot.hasData == false)
+                              ? const CircularProgressIndicator()
+                              : ListView.builder(
+                                padding: const EdgeInsets.only(top: 0),
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: listofleavebyemployee.length,
+                                itemBuilder: (context, index) =>  NoOfRequest(
+                                  time: listofleavebyemployee[index].time,
+                                  user: listofleavebyemployee[index].employee,
+                                  subject: listofleavebyemployee[index].subject,
+                                  message: listofleavebyemployee[index].message,
+                                  approve: listofleavebyemployee[index].approve,),
+                          );
+                        default:
+                          return const Text("default", style: TextStyle(color: Colors.white));
+                      }
+                    }),
+
+                  // NoOfRequest(),
+                  // NoOfRequest(),
+                  // NoOfRequest(),
+                  // NoOfRequest(),
+                  // NoOfRequest(),
+                  // NoOfRequest(),
 
               ],
             ),

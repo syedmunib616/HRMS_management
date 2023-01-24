@@ -52,13 +52,11 @@ import 'package:flutter/material.dart';
 
 class ByEmployee extends StatefulWidget {
   ByEmployee({Key? key}) : super(key: key);
-
   @override
   State<ByEmployee> createState() => _ByEmployeeState();
 }
 
 class _ByEmployeeState extends State<ByEmployee> {
-
   late DateTime dateTime;
   late DateTime dateTime1;
   late Duration duration;
@@ -94,6 +92,7 @@ class _ByEmployeeState extends State<ByEmployee> {
     });
     fetchuser();
     getDaysInBetween(dateRange.start,dateRange.end);
+    dropdownfetchattendance(dropdownvalue1);
     super.initState();
   }
 
@@ -101,9 +100,7 @@ class _ByEmployeeState extends State<ByEmployee> {
   String dropdownvalue1 = 'All';
 
   // List of items in our dropdown menu
-  var items1 = [
-    'All',
-  ];
+  var items1 = ['All',];
 
 
   DateTimeRange dateRange = DateTimeRange(
@@ -251,7 +248,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                     GestureDetector(
                                       onTap: () async {
                                         //DatePickerTitle(date: dateTime);
-                                         // _showRangePicker(context);
+                                        // _showRangePicker(context);
                                         // showDateRangePicker(
                                         //     context: context,
                                         //     firstDate: DateTime(2000),
@@ -496,25 +493,10 @@ class _ByEmployeeState extends State<ByEmployee> {
                                             dropdownvalue1 = newValue!;
                                           });
                                           print("::::::::::: $dropdownvalue1 $days");
-                                          if(dropdownvalue1=='All'){}
-                                          else{
-                                            if(days.isEmpty){}
-                                            else {
-                                              String a;
-                                              for(int i=0;i<days.length;i++) {
-                                                String b;
-                                                b= '${days[i].year}-${days[i].month}-${days[i].day}';
-                                                //print("987987987987987987 $b");
-                                                fetchattendance(b);
-                                                  // .get().then((value){
-                                                  //   value.docs.forEach((element) {
-                                                  //       a=element.id.toString();
-                                                  //       print("yayayyayayayayayayay $a");
-                                                  //     });
-                                                  //   });
-                                                  }
-                                                }
-                                              }
+
+                                          dropdownfetchattendance(dropdownvalue1);
+
+
                                             },
                                           ),
                                         ],
@@ -629,100 +611,109 @@ class _ByEmployeeState extends State<ByEmployee> {
                     ),
                   ),
                 ),
-            body: days.isEmpty? SizedBox(): Column(
-              children: [
-                SizedBox(height: 20.h,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.sp),
-                  child: Container(
-                    height: 30.h,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 2,
-                          offset: const Offset(0, 2), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10.sp),
-                      color: whiteClr,
-                      // color: Colors.cyanAccent
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding:  EdgeInsets.only(left: 26.0.w),
-                          child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
-                              color: srpgradient2,fontWeight: FontWeight.w600),),
-                        ),
-                        Spacer(),
-                        Padding(
-                          padding:  EdgeInsets.only(left: 45.0.w),
-                          child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
-                              color: srpgradient2,fontWeight: FontWeight.w600),),
-                        ),
-                        SizedBox(width: 20.w,),
-                        Padding(
-                          padding:  EdgeInsets.only(left: 20.0.w),
-                          child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
-                              color: srpgradient2,fontWeight: FontWeight.w600),),
-                        ),
-                        SizedBox(width: 14.w,),
-                      ],
+
+            body: days.isEmpty? SizedBox(): SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 20.h,),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 8.sp),
+                    child: Container(
+                      height: 30.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 2,
+                            blurRadius: 2,
+                            offset: const Offset(0, 2), // changes position of shadow
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(10.sp),
+                        color: whiteClr,
+                        // color: Colors.cyanAccent
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding:  EdgeInsets.only(left: 15.0.w),
+                            child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
+                                color: srpgradient2,fontWeight: FontWeight.w600),),
+                          ),
+                          SizedBox(width: 80.w,),
+                          Padding(
+                            padding:  EdgeInsets.only(left:10.0.w),
+                            child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
+                                color: srpgradient2,fontWeight: FontWeight.w600),),
+                          ),
+                          Spacer(),
+                          Padding(
+                            padding:  EdgeInsets.only(left: 35.0.w),
+                            child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
+                                color: srpgradient2,fontWeight: FontWeight.w600),),
+                          ),
+                          SizedBox(width: 7.w,),
+                          Padding(
+                            padding:  EdgeInsets.only(left: 10.0.w),
+                            child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
+                                color: srpgradient2,fontWeight: FontWeight.w600),),
+                          ),
+                          SizedBox(width: 5.w,),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                StreamBuilder(
-                    stream: streamController.stream,
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      print("%%%%%%%%% $snapshot");
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                          return const Text(
-                            " null",
-                            style: TextStyle(color: Colors.white),
-                          );
-                        case ConnectionState.waiting:
-                          return const SizedBox();
-                        case ConnectionState.active:
-                          return (snapshot.hasData == false)
-                              ? const CircularProgressIndicator()
-                              : ListView.builder(
-                                padding: const EdgeInsets.only(top: 0),
-                                shrinkWrap: true,
-                                physics: const BouncingScrollPhysics(),
-                                itemCount: attendance.length,
-                                itemBuilder: (context, index) {
-                                //managetotalcontact = contact.length.toString();
-                                 // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
-                               return TabsforDesignationAbsentLateEarly(
-                                timein: attendance[index].timein,timeout: attendance[index].timeout,
-                                addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
-                                date: attendance[index].date,
-                                time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,);
-                            },
-                          );
-                        case ConnectionState.done:
-                          return (snapshot.hasData == false)
-                              ? const CircularProgressIndicator()
-                              : ListView.builder(
-                            padding: const EdgeInsets.only(top: 0),
-                            shrinkWrap: true,
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: attendance.length,
-                            itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly(
-                              timein: attendance[index].timein,timeout: attendance[index].timeout,
-                              addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
-                              date: attendance[index].date,
-                              time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
-                          );
-                        default:
-                          return const Text("default", style: TextStyle(color: Colors.white));
-                      }
-                    }),
-              ],
+                  StreamBuilder(
+                      stream: streamController.stream,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        print("%%%%%%%%% $snapshot");
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                            return const Text(
+                              " null",
+                              style: TextStyle(color: Colors.white),
+                            );
+                          case ConnectionState.waiting:
+                            return const SizedBox();
+                          case ConnectionState.active:
+                            return (snapshot.hasData == false)
+                                ? const CircularProgressIndicator()
+                                : ListView.builder(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: attendance.length,
+                                  itemBuilder: (context, index) {
+                                  // managetotalcontact = contact.length.toString();
+                                  // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+                                 return TabsforDesignationAbsentLateEarly(
+                                  timein: attendance[index].timein,timeout: attendance[index].timeout,
+                                  addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                                  date: attendance[index].date,
+                                  time: time,tabcount: 0, datetime: days,employe: attendance[index].employee,);
+                              },
+                            );
+                          case ConnectionState.done:
+                            return (snapshot.hasData == false)
+                                ? const CircularProgressIndicator()
+                                : ListView.builder(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: attendance.length,
+                                  itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly(
+                                    timein: attendance[index].timein,timeout: attendance[index].timeout,
+                                    addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                                    date: attendance[index].date,
+                                    time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+                            );
+                          default:
+                            return const Text("default", style: TextStyle(color: Colors.white));
+                        }
+                      }),
+                ],
+              ),
             ),
 
                 //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
@@ -766,13 +757,143 @@ class _ByEmployeeState extends State<ByEmployee> {
       );
     }
 
+    dropdownfetchattendance(String dropdownvalue1){
+      if(dropdownvalue1=='All'){
+        setState(() {
+          attendance=[];
+        });
+        FirebaseFirestore.instance
+            .collection('Companies')
+            .doc('${user!.email.toString()}')
+            .collection("Employee").get().then((value) {
+          value.docs.forEach((element) {
+            String a;
+            a = element.id;
+            FirebaseFirestore.instance
+                .collection('Companies')
+                .doc(user!.email.toString())
+                .collection("Employee")
+                .doc(a).collection('Attendance')
+                .get()
+                .then((value) {
+              value.docs.forEach((element) {
+                for(int i=0;i<days.length;i++) {
+                  String b;
+                  b= '${days[i].year}-${days[i].month}-${days[i].day}';
+                  print("!!!!!!!!!! ${b}");
+                  if(b==element.id){
+                    print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+                    // setState(() {
+                    //   attendance=[];
+                    //   //streamController.isPaused;
+                    // });
+                    FirebaseFirestore.instance
+                        .collection('Companies')
+                        .doc('${user!.email.toString()}')
+                        .collection("Employee")
+                        .doc(a)
+                        .collection('Attendance')
+                        .doc('$b').get().then((value) {
+                      String e,f,g,h,j;
+                      e=value.get('TimeIn');
+                      f=value.get('TimeInAddress');
+                      g=value.get('TimeOut');
+                      h=value.get('TimeOutAddress');
+                      attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                      streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                      print("///////////// $attendance");
+                    });
+                    setState(() {
+                      streamController.stream;
+                    });
+                  }}});});//     FirebaseFirestore.instance
+            //         .collection('Companies')
+            //         .doc('${user!.email.toString()}')
+            //         .collection("Employee")
+            //         .doc(dropdownvalue1)
+            //         .collection('Attendance')
+            //
+            //         .get().then((value) {
+            //       value.docs.forEach((element) {
+            //         a=element.id;
+            //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
+            //
+            //         if(date==a){
+            //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+            //
+            //           // setState(() {
+            //           //   attendance=[];
+            //           //   //streamController.isPaused;
+            //           // });
+            //
+            //           FirebaseFirestore.instance
+            //               .collection('Companies')
+            //               .doc('${user!.email.toString()}')
+            //               .collection("Employee")
+            //               .doc(dropdownvalue1)
+            //               .collection('Attendance')
+            //               .doc('$date').get().then((value) {
+            //             String e,f,g,h,j;
+            //             e=value.get('TimeIn');
+            //             f=value.get('TimeInAddress');
+            //             g=value.get('TimeOut');
+            //             h=value.get('TimeOutAddress');
+            //
+            //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+            //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+            //
+            //             print("///////////// $attendance");
+            //           });
+            //           setState(() {
+            //             streamController.stream;
+            //           });
+            //         }
+            //         else{
+            //           print("1111111111111");
+            //         }
+            //         setState(() {
+            //           streamController.stream;
+            //         });
+            //       });
+            //     });
+            //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
+            //
+            //   });
+            // });
+          });});}
+      else{
+        if(days.isEmpty){}
+        else {
+          String a;
+          setState(() {
+            attendance=[];
+            print("iiiiiiiiiiiiiiiii ${attendance.length}");
+            //streamController.isPaused;
+          });
+          for(int i=0;i<days.length;i++) {
+            String b;
+            b= '${days[i].year}-${days[i].month}-${days[i].day}';
+            //print("987987987987987987 $b");
+            fetchattendance(b);
+            // .get().then((value){
+            //   value.docs.forEach((element) {
+            //       a=element.id.toString();
+            //       print("yayayyayayayayayayay $a");
+            //     });
+            //   });
+          }
+        }
+      }
+    }
+
+
 
   late DateTimeRange dateTimeRange =dateRange;
   List<DateTime> days = [];
   List<ListAttandance> attendance=[];
-  
+
   fetchattendance(String date)async{
-    print("kkkkkkkkkk $date");
+    print("kkkkkkkkkk $date $dropdownvalue1");
     String a,b;
     await FirebaseFirestore.instance
           .collection('Companies')
@@ -791,9 +912,14 @@ class _ByEmployeeState extends State<ByEmployee> {
          .get().then((value) {
           value.docs.forEach((element) {
           a=element.id;
-          print("^&^&^&^&^&^&^&^&^&^& $date $a");
-            if(date==a){
+          print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
+          if(date==a){
               print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+
+              // setState(() {
+              //   attendance=[];
+              //   //streamController.isPaused;
+              // });
 
               FirebaseFirestore.instance
                   .collection('Companies')
@@ -808,16 +934,22 @@ class _ByEmployeeState extends State<ByEmployee> {
                     g=value.get('TimeOut');
                     h=value.get('TimeOutAddress');
 
-                    attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-                    streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                    attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                    streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+
                     print("///////////// $attendance");
 
-
+              });
+              setState(() {
+                streamController.stream;
               });
             }
             else{
               print("1111111111111");
             }
+            setState(() {
+              streamController.stream;
+            });
           });
          });
         }
@@ -860,7 +992,6 @@ class _ByEmployeeState extends State<ByEmployee> {
               child: child!,
             );
           });
-
       if(newDateRange==null) return;
       setState(() => dateTimeRange=newDateRange);
       setState(() {
@@ -872,20 +1003,18 @@ class _ByEmployeeState extends State<ByEmployee> {
   getDaysInBetween(DateTime startDate, DateTime endDate) {
     setState(() { days=[]; });
     for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
-      //if(startDate.month==1 ||startDate.month==2 ||startDate.month==3 ||startDate.month==4 ||startDate.month==5 ||startDate.month==6 ||startDate.month==7 ||startDate.month==8 ||startDate.month==9 )
+      // if(startDate.month==1 ||startDate.month==2 ||startDate.month==3 ||startDate.month==4 ||startDate.month==5 ||startDate.month==6 ||startDate.month==7 ||startDate.month==8 ||startDate.month==9 )
       days.add(startDate.add(Duration(days: i)));
       print(":::::::::: PRINT :::::::::::: ${startDate.month} ${days[i].year}-${days[i].month}-${days[i].day}");
     }
   }
 
   showAlertDialog(BuildContext context) {
-
     // set up the buttons
     // Widget cancelButton = TextButton(
     //   child: Text("Cancel"),
     //   onPressed:  () {},
     // );
-
     Widget continueButton = TextButton(
       child: Text("OK", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
       onPressed:  () {},
@@ -1016,19 +1145,20 @@ class _ByEmployeeState extends State<ByEmployee> {
 }
 
 class ListAttandance{
-  ListAttandance({required this.date,required this.timein,required this.addressIn,required this.timeout,required this.addressout,});
+  ListAttandance({required this.employee,required this.date,required this.timein,required this.addressIn,required this.timeout,required this.addressout,});
   String date;
   String timein;
   String addressIn;
   String timeout;
   String addressout;
+  String employee;
 }
 
 class TabsforDesignationAbsentLateEarly extends StatefulWidget {
   const TabsforDesignationAbsentLateEarly({Key? key, required this.time,
-    required this.tabcount, required this.datetime, required this.employe, required this.timein, required this.timeout, required this.addressin, required this.addressout, required this.date}) :
-        super(key: key);
-
+    required this.tabcount, required this.datetime, required this.employe,
+    required this.timein, required this.timeout, required this.addressin,
+    required this.addressout, required this.date}) : super(key: key);
   final String time;
   final int tabcount;
   final List<DateTime> datetime;
@@ -1041,6 +1171,7 @@ class TabsforDesignationAbsentLateEarly extends StatefulWidget {
 
   @override
   State<TabsforDesignationAbsentLateEarly> createState() => _TabsforDesignationAbsentLateEarlyState();
+
 }
 
 class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAbsentLateEarly> {
@@ -1054,90 +1185,115 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
     print("************ ${widget.employe}");
   }
 
-  fetchattendance(){
-
-  }
+  fetchattendance(){}
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120.h,
+      height: 165.h,
       width: MediaQuery.of(context).size.width,
-      // color: Colors.purpleAccent,
-
+       //color: Colors.purpleAccent,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+        padding: EdgeInsets.symmetric(horizontal: 3.0.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             SizedBox(height: 12.h,),
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 25.0.w),
+                  padding: EdgeInsets.only(left: 14.0.w),
                   child: Container(
+                   // color: Colors.lightBlue,
                     alignment: Alignment.topLeft,
-                    width: 130.w,
-                    height: 105.h,
+                    width: 120.w,
+                    height: 141.h,
                     child: Column(
-                      crossAxisAlignment:CrossAxisAlignment.start ,
+                      crossAxisAlignment:CrossAxisAlignment.start,
                       children: [
-                        Text("Umar",style: GoogleFonts.poppins(fontSize:12.sp,
+                        Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12.sp,
                             color: blackClr,fontWeight: FontWeight.w600),),
-                        Text("Time In: 247, BMCHS Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
+                        Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
                             color: blackClr,fontWeight: FontWeight.w400),),
-                        Text("Time Out: 247, Sharfabad Road No. 17 BMCHS",style: GoogleFonts.poppins(fontSize:10.sp,
+                        Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
                             color: blackClr,fontWeight: FontWeight.w400),),
                       ],
                     ),
                   ),
                 ),
                 Spacer(),
-                Padding(
-                  padding:  EdgeInsets.only(left: 35.0.w),
-                  child: Column(
-                    children: [
-                      Text("9:00",style: GoogleFonts.poppins(fontSize:12.sp,
-                          color: srpgradient2,fontWeight: FontWeight.w600),),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0.sp),
-                        child: Image.asset(
-                          'assets/user.jpg',
-                          width: 40.0.w,
-                          height: 40.0.h,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(width: 20.w,),
-                Padding(
-                    padding:  EdgeInsets.only(left: 35.0.w),
-                    child: Column(
-                      children: [
-                        Text("16:00",style: GoogleFonts.poppins(fontSize:12.sp,
-                            color: srpgradient2,fontWeight: FontWeight.w600),),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0.sp),
-                          child: Image.asset(
-                            'assets/user.jpg',
-                            width: 40.0.w,
-                            height: 40.0.h,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ],
-                    )
-                ),
-                SizedBox(width: 14.w,),
+                Container(
+                 // width: 230.w,
+                 // color: Colors.lightBlue,
+                 child: Row(
+                   children: [
+                      Padding(
+                         padding:  EdgeInsets.only(left: .0.w),
+                         child: Column(
+                           children: [
+                             Text(
+                               "${widget.date}",
+                               //"2023-23-21",
+                               style: GoogleFonts.poppins(fontSize:11.sp,
+                                   color: srpgradient2,fontWeight: FontWeight.w600),),
+                             // ClipRRect(
+                             //   borderRadius: BorderRadius.circular(20.0.sp),
+                             //   child: Image.asset(
+                             //     'assets/user.jpg',
+                             //     width: 40.0.w,
+                             //     height: 40.0.h,
+                             //     fit: BoxFit.fill,
+                             //   ),
+                             // ),
+                           ],
+                         ),
+                       ),
+                      Padding(
+                         padding:  EdgeInsets.only(left: 35.0.w),
+                         child: Column(
+                           children: [
+                             Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                 color: srpgradient2,fontWeight: FontWeight.w600),),
+                             // ClipRRect(
+                             //   borderRadius: BorderRadius.circular(20.0.sp),
+                             //   child: Image.asset(
+                             //     'assets/user.jpg',
+                             //     width: 40.0.w,
+                             //     height: 40.0.h,
+                             //     fit: BoxFit.fill,
+                             //   ),
+                             // ),
+                           ],
+                         ),
+                       ),
+                      SizedBox(width: 20.w,),
+                      Padding(
+                           padding:  EdgeInsets.only(left: 22.0.w),
+                           child: Column(
+                             children: [
+                               Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                   color: srpgradient2,fontWeight: FontWeight.w600),),
+                               // ClipRRect(
+                               //   borderRadius: BorderRadius.circular(20.0.sp),
+                               //   child: Image.asset(
+                               //     'assets/user.jpg',
+                               //     width: 40.0.w,
+                               //     height: 40.0.h,
+                               //     fit: BoxFit.fill,
+                               //   ),
+                               // ),
+                             ],
+                           )
+                       ),
+                      SizedBox(width: 10.w,),
+                   ],
+                 ),
+                )
               ],
             ),
           ],
         ),
       ),
-        );
-    }
+    );
+  }
 }
-
