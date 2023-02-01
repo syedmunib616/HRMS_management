@@ -144,7 +144,7 @@ class _CompanylistState extends State<Companylist> {
                           ? const Expanded(child:  Center(child: CircularProgressIndicator()))
                           : Expanded(
                             child: ListView.separated(
-                              separatorBuilder: (context, index) => Divider(color: Colors.white),
+                              separatorBuilder: (context, index) => const Divider(color: Colors.white),
                               itemCount: list.length,
                               itemBuilder:(BuildContext context, int index){
                                 return NoOfReques(password:widget.password ,adminname: list[index].admin_name,website: website,companyname: list[index].companyname,phonenumber:list[index].company_phonenumber, active: list[index].active,email: list[index].email,);
@@ -264,6 +264,7 @@ class NoOfReques extends StatelessWidget {
 
 
 class SelectedCompany extends StatefulWidget {
+
   SelectedCompany({
     Key? key,
     required this.companyname,
@@ -282,9 +283,9 @@ class SelectedCompany extends StatefulWidget {
   final String email;
   final String website;
   final String adminname;
-
   @override
   State<SelectedCompany> createState() => _SelectedCompanyState();
+
 }
 
 class _SelectedCompanyState extends State<SelectedCompany> {
@@ -326,7 +327,7 @@ class _SelectedCompanyState extends State<SelectedCompany> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                SizedBox(height: 15.h,),
+              SizedBox(height: 15.h,),
               Row(
                 children: [
                   Text("Email : ",style: GoogleFonts.poppins(fontSize: 14.sp, color:srpgradient2,),),
@@ -357,7 +358,7 @@ class _SelectedCompanyState extends State<SelectedCompany> {
                             colors: [
                               srpgradient1,
                               srpgradient2,
-                              srpgradient3
+                              srpgradient3,
                             ],
                           ),
                           boxShadow: [
@@ -379,7 +380,7 @@ class _SelectedCompanyState extends State<SelectedCompany> {
                 ],
               ),
               SizedBox(height: 13.h,),
-              Divider(thickness: 1,),
+              const Divider(thickness: 1,),
               SizedBox(height: 7.h,),
               Text("Company Name",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
               SizedBox(height: 7.h,),

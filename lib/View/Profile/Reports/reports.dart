@@ -51,20 +51,20 @@ class Reports extends StatelessWidget {
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 40.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
 
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pop(context);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0.sp),
-                          child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: (){
+                      //     Navigator.pop(context);
+                      //   },
+                      //   child: Padding(
+                      //     padding: EdgeInsets.all(8.0.sp),
+                      //     child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                      //   ),
+                      // ),
 
                       Spacer(),
 
@@ -72,38 +72,38 @@ class Reports extends StatelessWidget {
 
                       Spacer(),
 
-                      Container(
-                        width: 30.0.w,
-                        height: 30.0.h,
-                        // child: Stack(
-                        //   children: [
-                        //     ClipRRect(
-                        //       borderRadius: BorderRadius.circular(15.0.sp),
-                        //       child: Image.asset(
-                        //         'assets/user.jpg',
-                        //         width: 30.0.w,
-                        //         height: 30.0.h,
-                        //         fit: BoxFit.fill,
-                        //       ),
-                        //     ),
-                        //     Positioned(
-                        //       bottom: 1.5,
-                        //       right: 1.5,
-                        //       child: Container(
-                        //         height: 5.h,
-                        //         width: 5.w,
-                        //         //color:online,
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(5.sp),
-                        //           color: online,
-                        //         ),
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
-                      ),
-
-                      SizedBox(width: 15.w,),
+                      // Container(
+                      //   width: 30.0.w,
+                      //   height: 30.0.h,
+                      //   // child: Stack(
+                      //   //   children: [
+                      //   //     ClipRRect(
+                      //   //       borderRadius: BorderRadius.circular(15.0.sp),
+                      //   //       child: Image.asset(
+                      //   //         'assets/user.jpg',
+                      //   //         width: 30.0.w,
+                      //   //         height: 30.0.h,
+                      //   //         fit: BoxFit.fill,
+                      //   //       ),
+                      //   //     ),
+                      //   //     Positioned(
+                      //   //       bottom: 1.5,
+                      //   //       right: 1.5,
+                      //   //       child: Container(
+                      //   //         height: 5.h,
+                      //   //         width: 5.w,
+                      //   //         //color:online,
+                      //   //         decoration: BoxDecoration(
+                      //   //           borderRadius: BorderRadius.circular(5.sp),
+                      //   //           color: online,
+                      //   //         ),
+                      //   //       ),
+                      //   //     )
+                      //   //   ],
+                      //   // ),
+                      // ),
+                      //
+                      // SizedBox(width: 15.w,),
 
                       ],
                     ),
@@ -193,7 +193,6 @@ class Reports extends StatelessWidget {
               ),
             ),
           ),
-
           backgroundColor: backgroundcolorr,
           body: SingleChildScrollView(
             child: Padding(

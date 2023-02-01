@@ -9,12 +9,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
+import 'package:hrmanagementapp/View/Components/textfield.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/pie_chart_sample2.dart';
 import 'package:hrmanagementapp/View/dailyAttendance/dailyattendance.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hrmanagementapp/Provider/providergenerator.dart';
 
 import 'dart:async';
 
@@ -49,6 +51,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ByEmployee extends StatefulWidget {
   ByEmployee({Key? key}) : super(key: key);
@@ -57,6 +60,7 @@ class ByEmployee extends StatefulWidget {
 }
 
 class _ByEmployeeState extends State<ByEmployee> {
+
   late DateTime dateTime;
   late DateTime dateTime1;
   late Duration duration;
@@ -76,6 +80,8 @@ class _ByEmployeeState extends State<ByEmployee> {
   bool timeinshow=false;
   bool timeoutshow=false;
   final user = FirebaseAuth.instance.currentUser;
+
+
 
   @override
   void initState() {
@@ -354,7 +360,8 @@ class _ByEmployeeState extends State<ByEmployee> {
                                                       height: 15.h,
                                                       width: 15.w,
                                                       //color: Colors.purpleAccent,
-                                                      child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+                                                      child: Icon(Icons.keyboard_arrow_down,size:22.sp,color: iconcolor,),),
+                                                    SizedBox(width: 10.w,)
                                                   ],
                                                 ),
                                               ),
@@ -641,7 +648,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                             child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
-                          SizedBox(width: 80.w,),
+                          SizedBox(width: 100.w,),
                           Padding(
                             padding:  EdgeInsets.only(left:10.0.w),
                             child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
@@ -653,7 +660,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                             child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
-                          SizedBox(width: 7.w,),
+                          SizedBox(width: 14.w,),
                           Padding(
                             padding:  EdgeInsets.only(left: 10.0.w),
                             child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
@@ -688,10 +695,15 @@ class _ByEmployeeState extends State<ByEmployee> {
                                   // managetotalcontact = contact.length.toString();
                                   // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
                                  return TabsforDesignationAbsentLateEarly(
-                                  timein: attendance[index].timein,timeout: attendance[index].timeout,
-                                  addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                                  timein: attendance[index].timein,
+                                  timeout: attendance[index].timeout,
+                                  addressin: attendance[index].addressIn,
+                                  addressout: attendance[index].addressout,
                                   date: attendance[index].date,
-                                  time: time,tabcount: 0, datetime: days,employe: attendance[index].employee,);
+                                  time: time,
+                                   tabcount: 0,
+                                   datetime: days,
+                                   employe: attendance[index].employee,);
                               },
                             );
                           case ConnectionState.done:
@@ -702,11 +714,15 @@ class _ByEmployeeState extends State<ByEmployee> {
                                   shrinkWrap: true,
                                   physics: const BouncingScrollPhysics(),
                                   itemCount: attendance.length,
-                                  itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly(
-                                    timein: attendance[index].timein,timeout: attendance[index].timeout,
-                                    addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                                  itemBuilder: (context, index) => TabsforDesignationAbsentLateEarly(
+                                    timein: attendance[index].timein,
+                                    timeout: attendance[index].timeout,
+                                    addressin: attendance[index].addressIn,
+                                    addressout: attendance[index].addressout,
                                     date: attendance[index].date,
-                                    time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+                                    time: time,tabcount: 0,
+                                    datetime: days,
+                                    employe: dropdownvalue1,),
                             );
                           default:
                             return const Text("default", style: TextStyle(color: Colors.white));
@@ -715,7 +731,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                 ],
               ),
             ),
-
                 //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
 
             // DefaultTabController(
@@ -757,7 +772,7 @@ class _ByEmployeeState extends State<ByEmployee> {
       );
     }
 
-    dropdownfetchattendance(String dropdownvalue1){
+  dropdownfetchattendance(String dropdownvalue1){
       if(dropdownvalue1=='All'){
         setState(() {
           attendance=[];
@@ -801,12 +816,13 @@ class _ByEmployeeState extends State<ByEmployee> {
                       h=value.get('TimeOutAddress');
                       attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
                       streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-                      print("///////////// $attendance");
+                      print("///////////// ${attendance[i].date}");
                     });
                     setState(() {
                       streamController.stream;
                     });
-                  }}});});//     FirebaseFirestore.instance
+                  }}});});
+            //     FirebaseFirestore.instance
             //         .collection('Companies')
             //         .doc('${user!.email.toString()}')
             //         .collection("Employee")
@@ -868,12 +884,12 @@ class _ByEmployeeState extends State<ByEmployee> {
           setState(() {
             attendance=[];
             print("iiiiiiiiiiiiiiiii ${attendance.length}");
-            //streamController.isPaused;
+              //streamController.isPaused;
           });
           for(int i=0;i<days.length;i++) {
             String b;
             b= '${days[i].year}-${days[i].month}-${days[i].day}';
-            //print("987987987987987987 $b");
+              //print("987987987987987987 $b");
             fetchattendance(b);
             // .get().then((value){
             //   value.docs.forEach((element) {
@@ -885,8 +901,6 @@ class _ByEmployeeState extends State<ByEmployee> {
         }
       }
     }
-
-
 
   late DateTimeRange dateTimeRange =dateRange;
   List<DateTime> days = [];
@@ -915,12 +929,10 @@ class _ByEmployeeState extends State<ByEmployee> {
           print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
           if(date==a){
               print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-
               // setState(() {
               //   attendance=[];
               //   //streamController.isPaused;
               // });
-
               FirebaseFirestore.instance
                   .collection('Companies')
                   .doc('${user!.email.toString()}')
@@ -933,17 +945,14 @@ class _ByEmployeeState extends State<ByEmployee> {
                     f=value.get('TimeInAddress');
                     g=value.get('TimeOut');
                     h=value.get('TimeOutAddress');
-
                     attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
                     streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-
                     print("///////////// $attendance");
-
               });
               setState(() {
                 streamController.stream;
               });
-            }
+          }
             else{
               print("1111111111111");
             }
@@ -1144,8 +1153,14 @@ class _ByEmployeeState extends State<ByEmployee> {
 
 }
 
-class ListAttandance{
-  ListAttandance({required this.employee,required this.date,required this.timein,required this.addressIn,required this.timeout,required this.addressout,});
+class ListAttandance {
+  ListAttandance({
+    required this.employee,
+    required this.date,
+    required this.timein,
+    required this.addressIn,
+    required this.timeout,
+    required this.addressout,});
   String date;
   String timein;
   String addressIn;
@@ -1182,97 +1197,86 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
     super.initState();
     //print("uuuuuuuuuuuuuuu ${widget.time} ${widget.tabcount}");
     print("############ ${widget.employe}");
-    print("************ ${widget.employe}");
+    print("************ ${widget.timeout} ${widget.timein}");
   }
 
-  fetchattendance(){}
+  fetchattendance(){
+
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 165.h,
-      width: MediaQuery.of(context).size.width,
-       //color: Colors.purpleAccent,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 3.0.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 12.h,),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 14.0.w),
-                  child: Container(
-                   // color: Colors.lightBlue,
-                    alignment: Alignment.topLeft,
-                    width: 120.w,
-                    height: 141.h,
-                    child: Column(
-                      crossAxisAlignment:CrossAxisAlignment.start,
-                      children: [
-                        Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12.sp,
-                            color: blackClr,fontWeight: FontWeight.w600),),
-                        Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
-                            color: blackClr,fontWeight: FontWeight.w400),),
-                        Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
-                            color: blackClr,fontWeight: FontWeight.w400),),
-                      ],
+    return GestureDetector(
+      onTap: (){
+       widget.timeout.isEmpty || widget.timein.isEmpty? Navigator.push(context, MaterialPageRoute(builder: (context) =>
+              EditSelectedAttendance(
+                employe: widget.employe,
+                addressin: widget.addressin,
+                addressout:widget.addressout,
+                timein: widget.timein,
+                timeout: widget.timeout,
+                datetime:widget.datetime,
+                date: widget.date,
+                tabcount: widget.tabcount,
+                time: widget.time,
+              )
+          ),):null;
+      },
+      child: Container(
+        height: 165.h,
+        width: MediaQuery.of(context).size.width,
+         color: widget.timeout.isEmpty || widget.timein.isEmpty? Color(
+             0xffdbfdb8):Colors.transparent,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 3.0.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 12.h,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 14.0.w),
+                    child: Container(
+                      // color: Colors.lightBlue,
+                      alignment: Alignment.topLeft,
+                      width: 120.w,
+                      height: 141.h,
+                      child: Column(
+                        crossAxisAlignment:CrossAxisAlignment.start,
+                        children: [
+                          Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12.sp,
+                              color: blackClr,fontWeight: FontWeight.w600),),
+                          Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
+                              color: blackClr,fontWeight: FontWeight.w400),),
+                          Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
+                              color: blackClr,fontWeight: FontWeight.w400),),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Spacer(),
-                Container(
-                 // width: 230.w,
-                 // color: Colors.lightBlue,
-                 child: Row(
-                   children: [
-                      Padding(
-                         padding:  EdgeInsets.only(left: .0.w),
-                         child: Column(
-                           children: [
-                             Text(
-                               "${widget.date}",
-                               //"2023-23-21",
-                               style: GoogleFonts.poppins(fontSize:11.sp,
-                                   color: srpgradient2,fontWeight: FontWeight.w600),),
-                             // ClipRRect(
-                             //   borderRadius: BorderRadius.circular(20.0.sp),
-                             //   child: Image.asset(
-                             //     'assets/user.jpg',
-                             //     width: 40.0.w,
-                             //     height: 40.0.h,
-                             //     fit: BoxFit.fill,
-                             //   ),
-                             // ),
-                           ],
-                         ),
-                       ),
-                      Padding(
-                         padding:  EdgeInsets.only(left: 35.0.w),
-                         child: Column(
-                           children: [
-                             Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
-                                 color: srpgradient2,fontWeight: FontWeight.w600),),
-                             // ClipRRect(
-                             //   borderRadius: BorderRadius.circular(20.0.sp),
-                             //   child: Image.asset(
-                             //     'assets/user.jpg',
-                             //     width: 40.0.w,
-                             //     height: 40.0.h,
-                             //     fit: BoxFit.fill,
-                             //   ),
-                             // ),
-                           ],
-                         ),
-                       ),
-                      SizedBox(width: 20.w,),
-                      Padding(
-                           padding:  EdgeInsets.only(left: 22.0.w),
+                  Spacer(),
+                  Container(
+                   // width: 230.w,
+                   // color: Colors.lightBlue,
+                   child: Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     crossAxisAlignment: CrossAxisAlignment.center,
+                     children: [
+                        Padding(
+                           padding: EdgeInsets.only(left: .0.w),
                            child: Column(
                              children: [
-                               Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
-                                   color: srpgradient2,fontWeight: FontWeight.w600),),
+                               Text(
+                                 "${widget.date}",
+                                 //"2023-23-21",
+                                 style: GoogleFonts.poppins(fontSize:11.sp,
+                                     color: srpgradient2,fontWeight: FontWeight.w600),),
                                // ClipRRect(
                                //   borderRadius: BorderRadius.circular(20.0.sp),
                                //   child: Image.asset(
@@ -1283,17 +1287,347 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                                //   ),
                                // ),
                              ],
-                           )
-                       ),
-                      SizedBox(width: 10.w,),
-                   ],
-                 ),
-                )
-              ],
-            ),
-          ],
+                           ),
+                        ),
+                        Container(
+                          width: 80.w,
+                          //color: Colors.red,
+                          child: Padding(
+                             padding:  EdgeInsets.only(left: 35.0.w),
+                             child: Column(
+                               children: [
+                                 Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                     color: srpgradient2,fontWeight: FontWeight.w600),),
+                                 // ClipRRect(
+                                 //   borderRadius: BorderRadius.circular(20.0.sp),
+                                 //   child: Image.asset(
+                                 //     'assets/user.jpg',
+                                 //     width: 40.0.w,
+                                 //     height: 40.0.h,
+                                 //     fit: BoxFit.fill,
+                                 //   ),
+                                 // ),
+                               ],
+                             ),
+                           ),
+                        ),
+                       Container(
+                         width: 74.w,
+                         height: 100.h,
+                          color: Colors.transparent,
+                         alignment: Alignment.center,
+                         child: Padding(
+                              padding:  EdgeInsets.only(left: 22.0.w),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                      color: srpgradient2,fontWeight: FontWeight.w600),),
+                                  // ClipRRect(
+                                  //   borderRadius: BorderRadius.circular(20.0.sp),
+                                  //   child: Image.asset(
+                                  //     'assets/user.jpg',
+                                  //     width: 40.0.w,
+                                  //     height: 40.0.h,
+                                  //     fit: BoxFit.fill,
+                                  //   ),
+                                  // ),
+                                ],
+                              )
+                            ),
+                          ),
+                        SizedBox(width: 10.w,),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
+class EditSelectedAttendance extends StatefulWidget {
+  const EditSelectedAttendance({Key? key, required this.time, required this.tabcount, required this.datetime, required this.employe, required this.timein, required this.timeout, required this.addressin, required this.addressout, required this.date}) : super(key: key);
+  final String time;
+  final int tabcount;
+  final List<DateTime> datetime;
+  final String employe;
+  final String timein;
+  final String timeout;
+  final String addressin;
+  final String addressout;
+  final String date;
+
+  @override
+  State<EditSelectedAttendance> createState() => _EditSelectedAttendanceState();
+}
+
+class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
+
+  TextEditingController textEditingController1 = TextEditingController();
+  TextEditingController textEditingController2 = TextEditingController();
+  TextEditingController textEditingController3 = TextEditingController();
+  TextEditingController textEditingController4 = TextEditingController();
+  TextEditingController textEditingController5 = TextEditingController();
+  TextEditingController textEditingController6 = TextEditingController();
+  CollectionReference UserT = FirebaseFirestore.instance.collection("Companies");
+  final user = FirebaseAuth.instance.currentUser;
+  TimeOfDay timeOfDay=const TimeOfDay(hour: 12, minute: 00);
+  TimeOfDay timeOfDay1=const TimeOfDay(hour: 12, minute: 00);
+  late TimeOfDay timein;
+  late TimeOfDay timeout;
+  String IN='';
+  String OUT='';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    setState(() {
+      IN=widget.timein;
+      OUT=widget.timeout;
+      textEditingController1.text=widget.addressin;
+      textEditingController2.text=widget.addressout;
+    });
+
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final providerGenerator = Provider.of<ProviderGenerator>(context);
+
+    return CsScreenUtilInit(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("${widget.date}"),
+          backgroundColor: srpgradient2,
+        ),
+        //backgroundColor: Colors.red,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 15.h,),
+                Text("Email : ${widget.employe}",style: GoogleFonts.poppins(fontSize: 14.sp, color:srpgradient2,),),
+                SizedBox(height: 13.h,),
+                const Divider(thickness: 1,),
+                SizedBox(height: 7.h,),
+                Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
+                SizedBox(height: 7.h,),
+                GestureDetector(
+                  onTap: ()async{
+                    TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay,);
+                    if(newTime ==null) return;
+                    setState(() {
+                      timeOfDay=newTime;
+                      IN='${timeOfDay.hour}:${timeOfDay.minute}:00';
+                    });
+                    print("lakjsdhfalkjs ${timeOfDay} ${timeOfDay.hour} ${timeOfDay.minute}");
+                  },
+                  child: Container(
+                    height: 40.h,
+                    width: MediaQuery.of(context).size.width*0.57,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: const Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(8.2),
+                      color: whiteClr,
+                    ),
+                    alignment: Alignment.center,
+                    child: Row(
+
+                      children: [
+                        SizedBox(width: 20.w,),
+                        const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
+                        SizedBox(width: 10.w,),
+                        IN.isEmpty?Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
+                        Text("   $IN", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey, letterSpacing: 4.5.w,fontWeight: FontWeight.bold),),
+                        Spacer(),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.h,),
+                Text("Time In Address",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
+                SizedBox(height: 7.h,),
+                CsMainInputField(
+                  providerGenerator: providerGenerator,
+                  width: MediaQuery.of(context).size.width,
+                  // width: 287.w,
+                  mycontroller: textEditingController1,
+                  myhint: "Address which he/she check in",
+                  prefixIcon: FontAwesomeIcons.locationDot,
+                  isPassword: false,
+                  keyboardType: TextInputType.phone,
+                  bordercolor: providerGenerator.getVisibleError(index: 0)
+                      ? Colors.red
+                      : null,
+                  // bordercolor: providerGenerator.getVisibleError(index: 0)
+                  //     ? Colors.red
+                  //     : null,
+                ),
+                SizedBox(height: 20.h,),
+                Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
+                SizedBox(height: 7.h,),
+                GestureDetector(
+                  onTap: ()async{
+                    TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay1,);
+                    if(newTime ==null) return;
+                    setState(() {
+                      timeOfDay1=newTime;
+                      OUT='${timeOfDay1.hour}:${timeOfDay1.minute}:00';
+                    });
+                    print("lakjsdhfalkjs ${timeOfDay1} ${timeOfDay1.hour} ${timeOfDay1.minute}");
+                  },
+                  child: Container(
+                    height: 40.h,
+                    width: MediaQuery.of(context).size.width*0.57,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: const Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(8.2),
+                      color: whiteClr,
+                    ),
+                    alignment: Alignment.center,
+                    child: Row(
+
+                      children: [
+                        SizedBox(width: 20.w,),
+                        const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
+                        SizedBox(width: 10.w,),
+                        OUT.isEmpty?Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
+                        Text("   $OUT", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey, letterSpacing: 4.5.w,fontWeight: FontWeight.bold),),
+
+
+                        Spacer(),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.h,),
+                Text("Time Out Address",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
+                SizedBox(height: 7.h,),
+                CsMainInputField(
+                  providerGenerator: providerGenerator,
+                  width: MediaQuery.of(context).size.width,
+                  //width: 287.w,
+                  mycontroller: textEditingController2,
+                  myhint: "Address which he/she check out",
+                  prefixIcon: FontAwesomeIcons.locationDot,
+                  isPassword: false,
+                  keyboardType: TextInputType.text,
+                  bordercolor: providerGenerator.getVisibleError(index: 0)
+                      ? Colors.red
+                      : null,
+                  // bordercolor: providerGenerator.getVisibleError(index: 0)
+                  //     ? Colors.red
+                  //     : null,
+                ),
+                SizedBox(height: 15.h,),
+                // Row(
+                //   children: [
+                //     Text("Services Active",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
+                //     SizedBox(width: 20.w,),
+                //     // Switch.adaptive(
+                //     //   activeColor: inputBackColor(context),
+                //     //   inactiveThumbColor: settingButtonBackColor(context),
+                //     //   inactiveTrackColor: subTitleClr,
+                //     //   activeTrackColor: buttonBackColor(context),
+                //     //   value: active,
+                //     //   onChanged: (valu) async {
+                //     //     // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                //     //     //
+                //     //     // }
+                //     //     await UserT.doc(widget.email).update({"active":valu}).then((value) {
+                //     //       setState(() {
+                //     //         active = valu;
+                //     //       });
+                //     //     });
+                //     //     // await f.doc(user?.email.toString()).collection("Linkstore").doc("${ModelLinkInfo.linkInfoList[widget.index].linkTypeSvG}").update({"personal":valu}).
+                //     //     // then((value) {setState(() {
+                //     //     //   widget.active = valu;
+                //     //     // }); });
+                //     //   },
+                //     // ),
+                //   ],
+                // ),
+                SizedBox(height: 10.h,),
+                GestureDetector(
+                  onTap: () {
+                      print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
+                      print("&&&&&&&&&&& ${textEditingController1.text} ${textEditingController2.text}");
+                      UserT.doc("${user!.email.toString()}")
+                          .collection('Employee').doc("${widget.employe}")
+                          .collection('Attendance').doc('${widget.date}')
+                          .update({
+                        'TimeIn': IN,
+                        'TimeInAddress': "${textEditingController1.text}",
+                        'TimeOut': OUT,
+                        'TimeOutAddress': "${textEditingController2.text}",
+                      }).then((value) {
+                        print("///////////// ${textEditingController1.text} ${textEditingController2.text}");
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) =>  ByEmployee()), result: false);
+                      });
+                  },
+                  child: Container(
+                      height: 40.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            srpgradient1,
+                            srpgradient2,
+                            srpgradient3
+                          ],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(0, 0), // changes position of shadow
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(8.2),
+                        color: whiteClr,
+                      ),
+                      child: Center(
+                        child: Text("Save",
+                          style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),)
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+}
+

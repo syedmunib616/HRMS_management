@@ -21,13 +21,16 @@ class NoOfRequest extends StatelessWidget {
      required this.message,
      required this.approve,
      required this.time,
+     required this.leaveid
   }) : super(key: key);
 
+   final String leaveid;
    final String time;
    final String user;
    final String subject;
    final String message;
     var   approve;
+
 
   TextEditingController textEditingController1 = TextEditingController();
 
@@ -42,7 +45,7 @@ class NoOfRequest extends StatelessWidget {
         onTap: (){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SelectedLeave1(time: time,user: user,subject: subject,message: message,approve: approve,)),
+            MaterialPageRoute(builder: (context) => SelectedLeave1(leavid: leaveid,time: time,user: user,subject: subject,message: message,approve: approve,)),
           );
         },
         child: Container(
@@ -108,12 +111,15 @@ class NoOfRequest extends StatelessWidget {
 
 
 class SelectedLeave1 extends StatefulWidget {
-  SelectedLeave1({Key? key, required this.user, required this.subject, required this.message, required this.approve, required this.time}) : super(key: key);
-
+  SelectedLeave1({Key? key, required this.user,
+    required this.subject, required this.message,
+    required this.approve, required this.time,
+    required this.leavid}) : super(key: key);
   final String time;
   final String user;
   final String  subject;
   final String  message;
+  final String  leavid;
   var approve;
 
   @override
@@ -141,7 +147,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: AppBar(
-            leading: SizedBox(),
+            leading: const SizedBox(),
             backgroundColor: Colors.transparent,
             flexibleSpace:  Container(
               height: 102.h,
@@ -159,7 +165,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                 color: whiteClr,
               ),
               child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center ,
+                crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 20.h,),
                   Row(
@@ -576,12 +582,16 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                 ),
                               ),
                               onTap: (){
-                                // FirebaseFirestore.instance
-                                //     .collection('Companies')
-                                //     .doc(userr!.email.toString())
-                                //     .collection("Employee")
-                                //     .doc('${widget.user}')
-                                //     .collection('Leaves').get()
+                                FirebaseFirestore.instance
+                                    .collection('Companies')
+                                    .doc(userr!.email.toString())
+                                    .collection("Employee")
+                                    .doc('${widget.user}')
+                                    .collection('Leaves')
+                                    .doc('${widget.leavid}')
+                                    .update({'approve': true}).then((value) {
+                                  _showToast(context,"Done");
+                                });
                               },
                             ),
                             const SizedBox(width: 1,),
@@ -617,7 +627,16 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                 ),
                               ),
                               onTap: (){
-
+                                FirebaseFirestore.instance
+                                    .collection('Companies')
+                                    .doc(userr!.email.toString())
+                                    .collection("Employee")
+                                    .doc('${widget.user}')
+                                    .collection('Leaves')
+                                    .doc('${widget.leavid}')
+                                    .update({'approve': false}).then((value) {
+                                  _showToast(context,"Done");
+                                });
                               },
                             ),
                           ],
@@ -633,4 +652,17 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
       ),
     );
   }
+
+  void _showToast(BuildContext context,String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('$text',style:GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2)),
+        //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
+
+
 }

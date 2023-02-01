@@ -132,11 +132,15 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       return DateFormat('MM/dd/yyyy hh:mm:ss').format(dateTime);
   }
 
-
   final user = FirebaseAuth.instance.currentUser;
   bool itis=false;
   bool timeinshow=false;
   bool timeoutshow=false;
+
+  bool timinindicator=false;
+  bool timinoutdicator=false;
+  bool timininandoutdicator=false;
+
 
 
   fetchuser() async {
@@ -208,7 +212,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       GetAddressFromLatLong1(position);});
       print("-------------------------------- $timeinshow $timeoutshow");
   }
-
   ////////////////////location fetching/////////////////////////
   final _advancedDrawerController = AdvancedDrawerController();
   String Address='';
@@ -244,7 +247,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     }
     return await Geolocator.getCurrentPosition();
   }
-
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
@@ -252,7 +254,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     Address= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
     setState(() {});
   }
-
   Future<void> GetAddressFromLatLong1(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
@@ -260,7 +261,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     Address1= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
     setState(() {});
   }
-
   ///////////////////////////////////////////////////////////////////////
 
   @override
@@ -307,9 +307,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                   Container(
                     width: 128.0,
                     height: 128.0,
-                    margin: const EdgeInsets.only(
-                      top: 24.0,
-                      bottom: 64.0,
+                    margin:  EdgeInsets.only(
+                      top: 24.0.h,
+                      bottom: 10.0.h,
                     ),
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(
@@ -321,6 +321,13 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     //   'assets/user.jpg',
                     // ),
                   ),
+                  Text('${name}',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                  SizedBox(height: 45.h,),
+                  Container(
+                    height: 1,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.white,),
+                  SizedBox(height: 20.h,),
                   ListTile(
                     onTap: () async {
                       Navigator.push(
@@ -328,8 +335,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         MaterialPageRoute(builder: (context) => ByEmployee1(admin: widget.admineamil,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.users,size: 20.sp,color: whiteClr,),
-                    title: Text('Check Attendance'),
+                    leading: Icon(FontAwesomeIcons.clock,size: 20.sp,color: whiteClr,),
+                    title: Text('Check Attendance',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
                   ),
                   ListTile(
                     onTap: () async {
@@ -338,8 +345,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         MaterialPageRoute(builder: (context) => ListOfRequest1(adminemail: widget.admineamil,providerGenerator: providerGenerator,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.users,size: 20.sp,color: whiteClr,),
-                    title: Text('Leave'),
+                    leading: Icon(FontAwesomeIcons.addressCard,size: 20.sp,color: whiteClr,),
+                    title: Text('Leave',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
                   ),
                   ListTile(
                     onTap: () async {
@@ -350,7 +357,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                       });
                     },
                     leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
-                    title: const Text('Logout'),
+                    title:  Text('Logout',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white),),
                   ),
                   // ListTile(
                   //   onTap: () {},
@@ -768,20 +775,25 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                   height: 10.h,
                                 ),
                                 GestureDetector(
-                                  onTap: () async {Position position = await _determinePosition();
-                                    print(position.latitude);print(position.longitude);
-                                    GetAddressFromLatLong1(position);DateTime now = DateTime.now();
-                                    FirebaseFirestore.instance
-                                        .collection('Companies').doc('${admin}').collection("Employee")
-                                        .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
-                                        .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
-                                        .then((value) {
-                                          setState(() {
-                                            timeinshow=false;
-                                            timeoutshow=true;
-                                          });
-                                        return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
-                                    }); //.then((value) => initState());
+                                  onTap: () async {
+
+                                    timinindicator==false? markattimeintendance():null;
+
+                                    // Position position = await _determinePosition();
+                                    // print(position.latitude);print(position.longitude);
+                                    // GetAddressFromLatLong1(position);DateTime now = DateTime.now();
+                                    // FirebaseFirestore.instance
+                                    //     .collection('Companies').doc('${admin}').collection("Employee")
+                                    //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+                                    //     .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
+                                    //     .then((value) {
+                                    //       setState(() {
+                                    //         timeinshow=false;
+                                    //         timeoutshow=true;
+                                    //       });
+                                    //     return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
+                                    // }); //.then((value) => initState());
+
                                   },
                                   child: Container(
                                       height: 40.h,
@@ -808,7 +820,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                         color: whiteClr,
                                       ),
                                       child:Center(
-                                        child: Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                        child:  timinindicator==true
+                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                       )
                                   ),
                                 ),
@@ -820,6 +834,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     ),
                   ),
                 ) : SizedBox(),
+
                 timeoutshow==true ? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
@@ -900,21 +915,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                   height: 10.h,
                                 ),
                                 GestureDetector(
-                                  onTap: () async {FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
-                                    .doc('${user!.email.toString()}');
-                                    Position position = await _determinePosition();
-                                    print(position.latitude);print(position.longitude);
-                                    GetAddressFromLatLong(position);DateTime now = DateTime.now();
-                                    FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
-                                      .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
-                                      .update({"TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":"$Address"})
-                                      .then((value) {
-                                        setState(() {
-                                          timeoutshow=false;
-                                          timeinshow=true;
-                                        });
-                                       return CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time Out Completed");
-                                     }); // .then((value) => initState());
+                                  onTap: () async {
+                                    timinoutdicator==false ? marktimeoutAttendance(): null;
+                                    // .then((value) => initState());
                                     },
                                   child: Container(
                                       height: 40.h,
@@ -941,7 +944,10 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                         color: Colors.red,
                                       ),
                                       child:Center(
-                                        child: Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                        child: timinoutdicator==true
+                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+
                                     )
                                   ),
                                 ),
@@ -953,6 +959,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     ),
                   ),
                 ) : SizedBox(),
+
                 timeinshow==false && timeoutshow==false ? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
@@ -1032,20 +1039,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                   height: 10.h,
                                 ),
                                 GestureDetector(
-                                  onTap: () async {Position position = await _determinePosition();
-                                  print(position.latitude);print(position.longitude);
-                                  GetAddressFromLatLong1(position);DateTime now = DateTime.now();
-                                  FirebaseFirestore.instance
-                                      .collection('Companies').doc('${admin}').collection("Employee")
-                                      .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
-                                      .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
-                                      .then((value) {
-                                    setState(() {
-                                      timeinshow=false;
-                                      timeoutshow=true;
-                                    });
-                                    return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
-                                  }); //.then((value) => initState());
+                                  onTap: () async {
+                                    timinindicator ==false ?markattimeintendance() :null;
+                                     //.then((value) => initState());
                                   },
                                   child: Container(
                                       height: 40.h,
@@ -1072,7 +1068,10 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                         color: whiteClr,
                                       ),
                                       child:Center(
-                                        child: Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                        child:
+                                        timinindicator==true
+                                        ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                        : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                       )
                                   ),
                                 ),
@@ -1723,6 +1722,52 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     );
   }
 
+  marktimeoutAttendance() async {
+    print("............................................");
+    setState(() {
+      timinoutdicator=true;
+    });
+    FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+        .doc('${user!.email.toString()}');
+    Position position = await _determinePosition();
+    print(position.latitude);print(position.longitude);
+    GetAddressFromLatLong(position);DateTime now = DateTime.now();
+    FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
+        .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+        .update({"TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":"$Address"})
+        .then((value) {
+      setState(() {
+        timinoutdicator=false;
+        timeoutshow=false;
+        timeinshow=true;
+      });
+      return CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time Out Completed");
+    });
+  }
+
+  markattimeintendance()async{
+    print("ggggrrrrrrrrrrrr wwwwwwwwwwaaaaaaaaaaa ");
+    setState(() {
+      timinindicator=true;
+    });
+    Position position = await _determinePosition();
+    print(position.latitude);print(position.longitude);
+    GetAddressFromLatLong1(position);DateTime now = DateTime.now();
+    FirebaseFirestore.instance
+        .collection('Companies').doc('${admin}').collection("Employee")
+        .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+        .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
+        .then((value) {
+      setState(() {
+        timinindicator=false;
+        timeinshow=false;
+        timeoutshow=true;
+      });
+      return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
+    });
+  }
+
+
   void _handleMenuButtonPressed() {
     // NOTICE: Manage Advanced Drawer state through the Controller.
     // _advancedDrawerController.value = AdvancedDrawerValue.visible();
@@ -2229,7 +2274,6 @@ class _ListOfRequest1State extends State<ListOfRequest1> {
               );
             },
           ),
-
         ),
       ),
     );
@@ -2238,12 +2282,16 @@ class _ListOfRequest1State extends State<ListOfRequest1> {
 
 class NoOfRequest extends StatelessWidget {
   NoOfRequest({
-    Key? key, required this.subject, required this.message, required this.approve,
+    Key? key,
+    required this.subject,
+    required this.message,
+    required this.approve,
   }) : super(key: key);
 
   final String  subject;
   final String  message;
-   var approve;
+  var approve;
+
   TextEditingController textEditingController1 = TextEditingController();
 
   @override
@@ -2345,7 +2393,15 @@ class NoOfRequest extends StatelessWidget {
               ),
               Padding(
                 padding:EdgeInsets.symmetric(vertical: 4.0.h,horizontal: 11.w),
-                child: Text(message,style: GoogleFonts.poppins(fontSize: 9.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+                child: Container(
+                  height:77.h,
+                  //color:Colors.lightGreen,
+                  child: Text(message,
+                    style: GoogleFonts.poppins(fontSize: 9.sp, color: iconcolor, fontWeight: FontWeight.w400,),
+                    maxLines: 6,
+                    overflow:TextOverflow.fade,
+                  ),
+                ),
               ),
             ],
           ),
@@ -2532,8 +2588,8 @@ class _WriteLeaveState extends State<WriteLeave> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              //width: 125.w,
-                              width: 300.w,
+                              // width: 125.w,
+                              width: 272.w,
                               height: 62.0.h,
                               decoration: BoxDecoration(
                                 boxShadow: [
@@ -2548,10 +2604,10 @@ class _WriteLeaveState extends State<WriteLeave> {
                                 color: whiteClr,
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all( 3.5.sp),
+                                padding: EdgeInsets.all(3.5.sp),
                                 child: Row(
                                   children: [
-                                    SizedBox(width: 7.w,),
+                                    SizedBox(width: 15.w,),
                                     Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
                                     Spacer(),
                                     Column(
@@ -2567,8 +2623,9 @@ class _WriteLeaveState extends State<WriteLeave> {
                                     Container(
                                       height: 25.h,
                                       width: 25.w,
-                                      //color: Colors.purpleAccent,
-                                     child: Icon(Icons.keyboard_arrow_down,size:25.sp,color: iconcolor,),),
+                                      // color: Colors.purpleAccent,
+                                      child: Icon(Icons.arrow_drop_down,size:24.sp,),),
+                                    SizedBox(width: 9.w,),
                                   ],
                                 ),
                               ),
@@ -2576,28 +2633,30 @@ class _WriteLeaveState extends State<WriteLeave> {
                           ],
                         ),
                       ),
-                  ),
+                    ),
 
                 SizedBox(height: 12.h,),
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4.w),
                   child: Text("Select Subject",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),),
                 ),
+
                 SizedBox(height: 10.h,),
 
                 Container(
                   height: 60.h,
-                  width: 300.w,
+                  width: 272.w,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 3,
-                        blurRadius: 6,
-                        offset: const Offset(0, 4), // changes position of shadow
+                        spreadRadius: 2,
+                        blurRadius: 1,
+                        offset: const Offset(0, 2), // changes position of shadow
                       ),
                     ],
-                    borderRadius: BorderRadius.circular(10.sp),
+                    borderRadius: BorderRadius.circular(5),
                     color: whiteClr,
                   ),
                   child: Padding(
@@ -2608,13 +2667,12 @@ class _WriteLeaveState extends State<WriteLeave> {
                         const Icon(FontAwesomeIcons.personWalkingArrowRight,color: srpgradient2,),
                         SizedBox(width: 25.w,),
                         DropdownButton(
-                          hint: Text('Please choose a location',
+                          hint: Text('Subject',
                             style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),),
                           value: _selectedLocation,
                           onChanged: (newValue) {setState(() {
                               _selectedLocation = newValue.toString();
                               textEditingController1.text=_selectedLocation;
-
                             });},
                           items: _locations.map((location) {
                             return DropdownMenuItem(
@@ -2996,8 +3054,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
     });
   }
 
-
-
   // Initial Selected Value
   String dropdownvalue1 = 'All';
 
@@ -3005,7 +3061,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
   var items1 = [
     'All',
   ];
-
 
   DateTimeRange dateRange = DateTimeRange(
     start: DateTime(DateTime.now().year,DateTime.now().month,1),
@@ -3143,7 +3198,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
                                   //color: Colors.black45,
                                   alignment:Alignment.center,
                                   width: 185.w,
-                                  child: Text("Employee Wise Attendance",
+                                  child: Text("Employee Attendance",
                                     style: GoogleFonts.poppins(fontSize:12.sp,
                                         color: Colors.black, fontWeight: FontWeight.w500),),
                                 ),
@@ -3576,7 +3631,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
                 ),
               ),
             ),
-
             body: days.isEmpty? SizedBox(): SingleChildScrollView(
               child: Column(
                 children: [
@@ -3620,7 +3674,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
                           ),
                           SizedBox(width: 7.w,),
                           Padding(
-                            padding:  EdgeInsets.only(left: 10.0.w),
+                            padding: EdgeInsets.only(left: 10.0.w),
                             child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
@@ -3645,43 +3699,43 @@ class _ByEmployee1State extends State<ByEmployee1> {
                             return (snapshot.hasData == false)
                                 ? const CircularProgressIndicator()
                                 : ListView.builder(
-                              padding: const EdgeInsets.only(top: 0),
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: attendance.length,
-                              itemBuilder: (context, index) {
-                                //managetotalcontact = contact.length.toString();
-                                // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
-                                return TabsforDesignationAbsentLateEarly(
-                                  timein: attendance[index].timein,timeout: attendance[index].timeout,
-                                  addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
-                                  date: attendance[index].date,
-                                  time: time,tabcount: 0, datetime: days,employe: attendance[index].employee,);
+                                  padding: const EdgeInsets.only(top: 0),
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: attendance.length,
+                                  itemBuilder: (context, index) {
+                                    //managetotalcontact = contact.length.toString();
+                                    // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+                                  return TabsforDesignationAbsentLateEarly1(
+                                    timein: attendance[index].timein,timeout: attendance[index].timeout,
+                                    addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                                    date: attendance[index].date,
+                                    time: time,tabcount: 0, datetime: days,employe: attendance[index].employee,);
                               },
                             );
                           case ConnectionState.done:
                             return (snapshot.hasData == false)
                                 ? const CircularProgressIndicator()
                                 : ListView.builder(
-                              padding: const EdgeInsets.only(top: 0),
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: attendance.length,
-                              itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly(
-                                timein: attendance[index].timein,timeout: attendance[index].timeout,
-                                addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
-                                date: attendance[index].date,
-                                time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
-                            );
+                                    padding: const EdgeInsets.only(top: 0),
+                                    shrinkWrap: true,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemCount: attendance.length,
+                                    itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly1(
+                                      timein: attendance[index].timein,timeout: attendance[index].timeout,
+                                      addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                                      date: attendance[index].date,
+                                      time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+                                  );
                           default:
                             return const Text("default", style: TextStyle(color: Colors.white));
                         }
                       }),
-                ],
-              ),
-            ),
+                    ],
+                  ),
+                ),
 
-            //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+             //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
 
             // DefaultTabController(
             //   length: 1,
@@ -3947,4 +4001,171 @@ class _ByEmployee1State extends State<ByEmployee1> {
 
 }
 
+
+class TabsforDesignationAbsentLateEarly1 extends StatefulWidget {
+  const TabsforDesignationAbsentLateEarly1({Key? key, required this.time,
+    required this.tabcount, required this.datetime, required this.employe,
+    required this.timein, required this.timeout, required this.addressin,
+    required this.addressout, required this.date}) : super(key: key);
+  final String time;
+  final int tabcount;
+  final List<DateTime> datetime;
+  final String employe;
+  final String timein;
+  final String timeout;
+  final String addressin;
+  final String addressout;
+  final String date;
+
+  @override
+  State<TabsforDesignationAbsentLateEarly1> createState() => _TabsforDesignationAbsentLateEarly1State();
+
+}
+
+class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationAbsentLateEarly1> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //print("uuuuuuuuuuuuuuu ${widget.time} ${widget.tabcount}");
+    print("############ ${widget.employe}");
+    print("************ ${widget.employe}");
+  }
+
+  fetchattendance(){
+
+
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 165.h,
+      width: MediaQuery.of(context).size.width,
+      //color: Colors.purpleAccent,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 3.0.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(height: 12.h,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 14.0.w),
+                  child: Container(
+                    // color: Colors.lightBlue,
+                    alignment: Alignment.topLeft,
+                    width: 120.w,
+                    height: 141.h,
+                    child: Column(
+                      crossAxisAlignment:CrossAxisAlignment.start,
+                      children: [
+                        Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12.sp,
+                            color: blackClr,fontWeight: FontWeight.w600),),
+                        Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
+                            color: blackClr,fontWeight: FontWeight.w400),),
+                        Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
+                            color: blackClr,fontWeight: FontWeight.w400),),
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  // width: 230.w,
+                  // color: Colors.lightBlue,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+
+                      Padding(
+                        padding: EdgeInsets.only(left: .0.w),
+                        child: Column(
+                          children: [
+                            Text(
+                              "${widget.date}",
+                              //"2023-23-21",
+                              style: GoogleFonts.poppins(fontSize:11.sp,
+                                  color: srpgradient2,fontWeight: FontWeight.w600),),
+                            // ClipRRect(
+                            //   borderRadius: BorderRadius.circular(20.0.sp),
+                            //   child: Image.asset(
+                            //     'assets/user.jpg',
+                            //     width: 40.0.w,
+                            //     height: 40.0.h,
+                            //     fit: BoxFit.fill,
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+
+                      Container(
+                        width: 80.w,
+                        //color: Colors.red,
+                        child: Padding(
+                          padding:  EdgeInsets.only(left: 35.0.w),
+                          child: Column(
+                            children: [
+                              Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                  color: srpgradient2,fontWeight: FontWeight.w600),),
+                              // ClipRRect(
+                              //   borderRadius: BorderRadius.circular(20.0.sp),
+                              //   child: Image.asset(
+                              //     'assets/user.jpg',
+                              //     width: 40.0.w,
+                              //     height: 40.0.h,
+                              //     fit: BoxFit.fill,
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        width: 74.w,
+                        height: 100.h,
+                        //color: Colors.yellow,
+                        alignment: Alignment.center,
+                        child: Padding(
+                            padding:  EdgeInsets.only(left: 22.0.w),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                    color: srpgradient2,fontWeight: FontWeight.w600),),
+                                // ClipRRect(
+                                //   borderRadius: BorderRadius.circular(20.0.sp),
+                                //   child: Image.asset(
+                                //     'assets/user.jpg',
+                                //     width: 40.0.w,
+                                //     height: 40.0.h,
+                                //     fit: BoxFit.fill,
+                                //   ),
+                                // ),
+                              ],
+                            )
+                        ),
+                      ),
+                      SizedBox(width: 10.w,),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_SignUP.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:hrmanagementapp/View/Components/Cs_MainPopup.dart';
 import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
@@ -113,14 +114,39 @@ class FrSignUpService {
     final fb = FirebaseDatabase.instance;
     final r = fb.reference().child("UserT");
     userid=uid.toString();
-
+    List<Department> depaetment=[];
     //await UserT.doc(email).collection("Contacts").doc("$email").set({"email":"$email","role":"admin","uid":"$uid",});
     //await UserT.firestore.collection(email).doc().set({"admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber"});
 
-    //await UserT.doc(email).collection("Employee").doc("$email").set({"email":"$email","role":"admin","uid":"$uid","name":"$name"});
+    // await UserT.doc(email).collection("Employee").doc("$email").set({"email":"$email","role":"admin","uid":"$uid","name":"$name"});
 
-    await UserT.doc(email).set({"email":"$email","admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber","active":true,"super":false,"website":"$website"}).
-    then((value) => CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is createed"));
+
+    print("dev py dala wA HAI ${email}");
+
+    UserT.doc('example@gmail.com').collection('Departments').get().then((value) {
+      print("qwertyuioplkjhgfdsazxcvbnm, $depaetment ");
+
+      value.docs.forEach((element) {
+        String a,b;
+        a=element.get('DepartmentsID');
+        b=element.get('DepartmentsName');
+        depaetment.add(Department(departid: a, departmentname: b));
+        print("qwertyuioplkjhgfdsazxcvbnm, $depaetment ");
+      });
+
+    }).then((value) {
+
+      UserT.doc(email).set({"email":"$email","admin_name":"$name","company_name":"$companyname",
+        "phone_number":"$phonenumber","active":true,"super":false,"website":"$website"}).then((value) {
+          for(int i=0;i<depaetment.length;i++){
+            UserT.doc(email).collection('Departments').doc('${depaetment[i].departid}')
+                .set({'DepartmentsID':'${depaetment[i].departid}',
+              'DepartmentsName':'${depaetment[i].departmentname}'});
+          }
+        });
+      }).then((value) => CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is createed"));
+
+      // });
 
       // Navigator.of(context).pushAndRemoveUntil(
       //   MaterialPageRoute(
@@ -231,6 +257,11 @@ class FrSignUpService {
 //   }
 }
 
+class Department{
+  Department({required this.departid,required this.departmentname});
+  String departid;
+  String departmentname;
+}
 
 class FrSignUpService1 {
   final FirebaseAuth firebaseAuth;

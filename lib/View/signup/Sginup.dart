@@ -87,7 +87,7 @@ class _SginUpState extends State<SginUp> {
                         height: 28.h,
                       ),
                       Text(
-                        "Sgin up to continue",
+                        "${TextStrings.Sgin_Up} to continue",
                         style: GoogleFonts.poppins(fontSize: 15.sp,color: settingFontBackColor(context),fontWeight: FontWeight.w500),
                       ),
                       SizedBox(

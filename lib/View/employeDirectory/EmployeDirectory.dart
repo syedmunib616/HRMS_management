@@ -90,10 +90,7 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
          email.add(b);
 
          print("uuuuuuu $a");
-         setState(() {});
-
-        }));
-      }));
+         setState(() {}); }));}));
   }
 
 
@@ -702,12 +699,13 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     // TODO: implement initState
     super.initState();
     setState(() {
-    if(widget.superadmin==false) {
-      email=user!.email.toString();
-    } else {
-      email=widget.email;
-    }
-    isLoading=false;
+      if(widget.superadmin==false) {
+        email=user!.email.toString();
+      }
+      else {
+        email=widget.email;
+      }
+      isLoading=false;
     });
     fetchemploye();
     fetchDepartments();
@@ -719,7 +717,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     });
   }
 
-  fetchDepartments()async{
+  fetchDepartments() async {
     // FirebaseFirestore.instance.collection('Companies')
     //     .doc("example@gmail.com").collection('Departments').get().then((value) => value.docs.forEach((element) {
     //   print("--------- ${element.id}");
@@ -779,8 +777,16 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       //   print("kkkkkkkjjjjjjj $companyname $email $company_phonenumber $website");
       // }));
       // });
-
-  }
+    FirebaseFirestore.instance.collection('Companies')
+        .doc(email).collection('Departments')
+        .get().then((value) {
+          value.docs.forEach((element) {
+            String a;
+            a= element.get('DepartmentsName');
+            items.add(a);
+            setState(() {});
+          });
+        });}
 
   CollectionReference f=FirebaseFirestore.instance.collection("Companies");
   final user= FirebaseAuth.instance.currentUser;
@@ -813,8 +819,8 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
-            child:  Container(
+            preferredSize: Size.fromHeight(94.0.h),
+            child: Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(

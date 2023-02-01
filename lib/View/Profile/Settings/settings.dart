@@ -334,7 +334,7 @@ class Settings extends StatelessWidget {
                      onTap: (){
                        Navigator.push(
                          context,
-                         MaterialPageRoute(builder: (context) => Shifts()),
+                         MaterialPageRoute(builder: (context) => Shifts(password: '',)),
                        );
                      },
                   child: SubReportsOrSubSettings(iconString: "assets/clock.png",title: TextStrings.Shifts,subtitle: TextStrings.ManageShifts,)),

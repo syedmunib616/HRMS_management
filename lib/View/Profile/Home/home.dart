@@ -25,7 +25,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hrmanagementapp/View/user/User.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 // final ZoomDrawerController z = ZoomDrawerController();
 //
 // class Zoom extends StatefulWidget {
@@ -93,11 +93,32 @@ class _HomeState extends State<Home> {
     LineChartPage4(),
   ];
 
+  final user = FirebaseAuth.instance.currentUser;
   final _advancedDrawerController = AdvancedDrawerController();
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchuser();
+  }
+
+  String a='';
+  String b='';
+
+  fetchuser() async {
+    FirebaseFirestore.instance
+        .collection('Companies')
+        .doc('${user!.email.toString()}').get().then((value) {
+          a=value.get('company_name');
+          setState(() {});
+    });
   }
 
   @override
@@ -130,7 +151,7 @@ class _HomeState extends State<Home> {
             // srpgradient2,
             // srpgradient3
             // ],),
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         drawer: SafeArea(
           child: Container(
@@ -140,24 +161,30 @@ class _HomeState extends State<Home> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-
                   Container(
                     width: 128.0,
                     height: 128.0,
-                    margin: const EdgeInsets.only(
-                      top: 24.0,
-                      bottom: 64.0,
+                    margin: EdgeInsets.only(
+                      top: 24.0.h,
+                      bottom: 10.0.h,
                     ),
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.user, size: 80.sp, color: whiteClr,),
+                    child: Icon(FontAwesomeIcons.buildingUser, size: 60.sp, color: whiteClr,),
                     // child: Image.asset(
                     //   'assets/user.jpg',
                     // ),
                   ),
+                  Text('${a}',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                  SizedBox(height: 45.h,),
+                  Container(
+                    height: 1,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.white,),
+                  SizedBox(height: 20.h,),
 
                   ListTile(
                     onTap: () async {
@@ -174,7 +201,7 @@ class _HomeState extends State<Home> {
                     onTap: () async {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Shifts()),
+                        MaterialPageRoute(builder: (context) => Shifts(password: widget.password,)),
                       );
                     },
                     leading: Icon(FontAwesomeIcons.solidClock,size: 20.sp,color: whiteClr,),
@@ -185,23 +212,23 @@ class _HomeState extends State<Home> {
                     onTap: () async {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => DepartmentList(password: widget.password,)),
+                        MaterialPageRoute(builder: (context) => DepartmentList1(password: widget.password,)),
                       );
                     },
                     leading: Icon(FontAwesomeIcons.sitemap,size: 20.sp,color: whiteClr,),
                     title: Text('Departments'),
                     ),
-
-                  ListTile(
-                    onTap: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Designation()),
-                      );
-                    },
-                    leading: Icon(FontAwesomeIcons.idCardClip,size: 20.sp,color: whiteClr,),
-                    title: Text('Designation'),
-                    ),
+                  //
+                  // ListTile(
+                  //   onTap: () async {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) => Designation()),
+                  //     );
+                  //   },
+                  //   leading: Icon(FontAwesomeIcons.idCardClip,size: 20.sp,color: whiteClr,),
+                  //   title: Text('Designation'),
+                  //   ),
 
                   ListTile(
                     onTap: () async {
@@ -214,16 +241,16 @@ class _HomeState extends State<Home> {
                     title: Text('Profile'),
                   ),
 
-                  ListTile(
-                    onTap: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ChangePassword()),
-                      );
-                    },
-                    leading: Icon(FontAwesomeIcons.lock,size: 20.sp,color: whiteClr,),
-                    title: Text('Password'),
-                  ),
+                  // ListTile(
+                  //   onTap: () async {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) => ChangePassword()),
+                  //     );
+                  //   },
+                  //   leading: Icon(FontAwesomeIcons.lock,size: 20.sp,color: whiteClr,),
+                  //   title: Text('Password'),
+                  // ),
 
                   ListTile(
                     onTap: () async {
@@ -236,6 +263,7 @@ class _HomeState extends State<Home> {
                     leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
                     title: Text('Logout'),
                   ),
+
                   // ListTile(
                   //   onTap: () {},
                   //   leading: Icon(Icons.account_circle_rounded),
@@ -289,7 +317,9 @@ class _HomeState extends State<Home> {
                       offset: const Offset(0, 2), // changes position of shadow
                     ),
                   ],
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20.sp),
+                      bottomRight: Radius.circular(20.sp)),
                   color: whiteClr,
                 ),
 
@@ -401,7 +431,6 @@ class _HomeState extends State<Home> {
                         SizedBox(width: 15.w,)
                       ],
                     ),
-
                     Container(
                       height: 50.h,
                       width: MediaQuery.of(context).size.width,
@@ -458,8 +487,9 @@ class _HomeState extends State<Home> {
                               padding: EdgeInsets.all( 10.sp),
                               child: Row(
                                 children: [
-                                  Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                  Spacer(),
+                                  Text("View Organization",
+                                    style: GoogleFonts.poppins(fontSize:12.sp, color: const Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                  const Spacer(),
                                   Container(
                                     height: 20.h,
                                     width: 20.w,
@@ -475,7 +505,7 @@ class _HomeState extends State<Home> {
                                       borderRadius: BorderRadius.circular(15.sp),
                                       color: greybackground,
                                     ),
-                                    child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                                    child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
                                 ],
                               ),
                             ),
@@ -721,7 +751,6 @@ class _HomeState extends State<Home> {
                       ),
                       child: Column(
                         children: [
-
                           Padding(
                             padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
                             child: Container(
@@ -793,6 +822,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
+
                   Padding(
                     padding: EdgeInsets.all(20.0.sp),
                     child: Container(
@@ -813,7 +843,7 @@ class _HomeState extends State<Home> {
                       child: Column(
                         children: [
                           Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                            padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
                             child: Container(
                               height: 25.h,
                               width: MediaQuery.of(context).size.width,
@@ -1023,22 +1053,22 @@ class _HomeState extends State<Home> {
                             children: [
                               SizedBox(width: 11.w,),
                               Container(
-                               // color: Colors.purpleAccent,
+                                  // color: Colors.purpleAccent,
                                   height: 30.h,
                                   width: 100.w,
-                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
                               SizedBox(width: 10.w,),
                               Container(
-                                  //color: Colors.purpleAccent,
+                                  // color: Colors.purpleAccent,
                                   height: 30.h,
                                   width: 100.w,
-                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
                               SizedBox(width: 10.w,),
                               Container(
-                                 // color: Colors.purpleAccent,
+                                  // color: Colors.purpleAccent,
                                   height: 30.h,
                                   width: 100.w,
-                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
                             ],
                           )
                         ],

@@ -64,27 +64,32 @@ class _TestState extends State<Test> {
                   Container(
                     width: 128.0,
                     height: 128.0,
-                    margin: const EdgeInsets.only(
-                      top: 24.0,
-                      bottom: 64.0,
+                    margin:  EdgeInsets.only(
+                      top: 24.0.h,
+                      bottom: 10.0.h,
                     ),
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
-                    child: Image.asset(
-                      'assets/user.jpg',
-
-                    ),
+                    child: Icon(FontAwesomeIcons.crown, size: 80.sp, color: whiteClr,),
+                    // child: Image.asset(
+                    //   'assets/user.jpg',
+                    // ),
                   ),
+                  Text('Super Admin Panel',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                  SizedBox(height: 45.h,),
+                  Container(
+                    height: 1,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.white,),
+                  SizedBox(height: 20.h,),
                   ListTile(
-                    onTap: () async{
+                    onTap: () async {
                       await FirebaseAuth.instance.signOut().then((value) async {
                         Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (BuildContext context) =>
-                                Login()),
-                           // Homepage()), munib
+                            MaterialPageRoute(builder: (BuildContext context) => Login()),
                             result: false);
                       });
                     },
@@ -108,7 +113,7 @@ class _TestState extends State<Test> {
                   // ),
                   Spacer(),
                   DefaultTextStyle(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.white54,
                     ),
@@ -149,7 +154,6 @@ class _TestState extends State<Test> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
                       GestureDetector(
                         onTap: _handleMenuButtonPressed,
                         // onTap: () async {
@@ -229,7 +233,6 @@ class _TestState extends State<Test> {
               ),
             ),
           ),
-
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -272,7 +275,6 @@ class _TestState extends State<Test> {
                           ),
                         ),
                     ),
-
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -348,7 +350,6 @@ class _TestState extends State<Test> {
                                 Icon(FontAwesomeIcons.codeBranch,size: 68.sp,color: srpgradient2,),
                                 SizedBox(height: 10.h,),
                                 Text("Create Departments", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-
                                 ],
                               ),
                             ),
@@ -953,4 +954,5 @@ class Departments extends StatelessWidget {
       child: Text("Departments"),
     );
   }
+
 }

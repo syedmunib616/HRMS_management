@@ -10,10 +10,46 @@ import 'package:hrmanagementapp/View/user/component/nameEditprofilepic.dart ';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../translation/locale_keys.g.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   TextEditingController textEditingController1 = TextEditingController();
+
+  final user = FirebaseAuth.instance.currentUser;
+
+  String comapanyname='';
+  String adminname='';
+  String email='';
+  String phonenumber='';
+  String website='';
+
+  fetchuser() async {
+    FirebaseFirestore.instance
+        .collection('Companies')
+        .doc('${user!.email.toString()}').get().then((value) {
+      comapanyname=value.get('company_name');
+      adminname=value.get('admin_name');
+      email=value.get('email');
+      phonenumber=value.get('phone_number');
+      website=value.get('website');
+      setState(() {});
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchuser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +59,6 @@ class Profile extends StatelessWidget {
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize:  Size.fromHeight(94.0.h),
-
             child:  Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
@@ -331,17 +366,13 @@ class Profile extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
-
                 SizedBox(
                   height: 17.h,
                 ),
-
-                NameEditprofilepic(),
-
+                NameEditprofilepic(adminname: adminname,),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 17.0.h,horizontal: 20.w),
-                  child:
-                  Container(
+                  child: Container(
                     height: 500.h,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
@@ -359,24 +390,21 @@ class Profile extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-
                         SizedBox(height: 20.h,),
-                        ProfileField(heading: "Name",text: "Arsalan Anwer",),
+                        ProfileField(heading: "Company Name",text: "$comapanyname",),
                         SizedBox(height: 20.h,),
-                        ProfileField(heading: "Designation:",text: "Trial Designation",),
+                        ProfileField(heading: "Email:",text: "$email",),
                         SizedBox(height: 20.h,),
-                        ProfileField(heading: "Department:",text: "IT Department",),
+                        ProfileField(heading: "Phone Number:",text: "$phonenumber",),
                         SizedBox(height: 20.h,),
-                        ProfileField(heading: "Shift:",text: "Trial Shift",),
+                        ProfileField(heading: "Website:",text: "$website",),
                         SizedBox(height: 20.h,),
-                        ProfileField(heading: "Shift Timings:",text: "09:00 - 06:00",),
-                        SizedBox(height: 20.h,),
-                        ProfileField(heading: "Phone:",text: "03352824404",),
-                        SizedBox(height: 20.h,),
+                        // ProfileField(heading: "Shift Timings:",text: "09:00 - 06:00",),
+                        // SizedBox(height: 20.h,),
+                        // ProfileField(heading: "Phone:",text: "03352824404",),
+                        // SizedBox(height: 20.h,),
                         const Spacer(),
                         SizedBox(width: 20.w,),
-
-
                       ],
                     ),
                   ),
@@ -403,7 +431,6 @@ class Profile extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class ProfileField extends StatelessWidget {
@@ -438,5 +465,6 @@ class ProfileField extends StatelessWidget {
           ),
     );
   }
+
 }
 

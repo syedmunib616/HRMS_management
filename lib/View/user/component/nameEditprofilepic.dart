@@ -12,10 +12,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class NameEditprofilepic extends StatelessWidget {
-  const NameEditprofilepic({
-    Key? key,
+ NameEditprofilepic({
+    Key? key,required this.adminname,
   }) : super(key: key);
 
+   String adminname;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +24,7 @@ class NameEditprofilepic extends StatelessWidget {
       child: Row(
         children:  [
           SizedBox(width: 20.w,),
-          Text("Arsalan Anwer",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w600),),
+          Text("$adminname",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w600),),
           Spacer(),
           Container(
             height: 50.h,

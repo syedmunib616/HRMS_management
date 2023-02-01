@@ -29,7 +29,6 @@ class Requests extends StatelessWidget {
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize:  Size.fromHeight(94.0.h),
-
             child:  Container(
               height: 102.h,
               width:MediaQuery.of(context).size.width,
@@ -290,17 +289,20 @@ class SubReportsOrSubSetting extends StatelessWidget {
 }
 
 class ListOfLeavesByEmployee{
-  ListOfLeavesByEmployee( {required this.time,
+  ListOfLeavesByEmployee({
+    required this.time,
     required this.employee,
     required this.subject,
     required this.message,
-    required this.approve,});
+    required this.approve,
+    required this.leavid,});
 
   final String time;
   final String employee;
   final String subject;
   final String message;
    var approve;
+   final String leavid;
 }
 
 class ListOfRequest extends StatefulWidget {
@@ -354,16 +356,16 @@ class _ListOfRequestState extends State<ListOfRequest> {
                 .get().then((value) {
 
                   value.docs.forEach((element) {
-                    String a,b,c,d;
+                    String a,b,c,d,f;
                     var e;
                     b=element.get('subject');
                     c=element.get('message');
                     e=element.get('approve');
                     d=element.get('date');
                     a=elemen.id;
-
-                    listofleavebyemployee.add(ListOfLeavesByEmployee(time: d,subject: b,message: c,approve: e,employee: a));
-                    streamController.add(ListOfLeavesByEmployee(time: d,subject: b,message: c,approve: e,employee: a));
+                    f=element.id;
+                    listofleavebyemployee.add(ListOfLeavesByEmployee(leavid: f,time: d,subject: b,message: c,approve: e,employee: a));
+                    streamController.add(ListOfLeavesByEmployee(leavid: f,time: d,subject: b,message: c,approve: e,employee: a));
 
               });
             });
@@ -685,9 +687,11 @@ class _ListOfRequestState extends State<ListOfRequest> {
                 //     ],
                 //   ),
                 // ),
+
                 SizedBox(
                   height: 15.h,
                 ),
+
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
                   child: CsMainInputField1(
@@ -756,13 +760,17 @@ class _ListOfRequestState extends State<ListOfRequest> {
                                 // managetotalcontact = contact.length.toString();
                                 // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
                                 return NoOfRequest(
+                                  leaveid: listofleavebyemployee[index].leavid,
                                   time: listofleavebyemployee[index].time,
                                   user: listofleavebyemployee[index].employee,
                                   subject: listofleavebyemployee[index].subject,
                                   message: listofleavebyemployee[index].message,
-                                  approve: listofleavebyemployee[index].approve,);
+                                  approve: listofleavebyemployee[index].approve,
+
+                                );
                             },
                           );
+
                         case ConnectionState.done:
                           return (snapshot.hasData == false)
                               ? const CircularProgressIndicator()
@@ -776,8 +784,11 @@ class _ListOfRequestState extends State<ListOfRequest> {
                                   user: listofleavebyemployee[index].employee,
                                   subject: listofleavebyemployee[index].subject,
                                   message: listofleavebyemployee[index].message,
-                                  approve: listofleavebyemployee[index].approve,),
-                          );
+                                  approve: listofleavebyemployee[index].approve,
+                                  leaveid: listofleavebyemployee[index].leavid,
+                                ),
+                               );
+
                         default:
                           return const Text("default", style: TextStyle(color: Colors.white));
                       }
