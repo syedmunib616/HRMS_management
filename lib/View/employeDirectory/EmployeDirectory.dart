@@ -22,6 +22,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
+class EmailandName{
+  EmailandName({required this.Email,required this.Name});
+  String Email;
+  String Name;
+}
+
+
 class EmployeeDirectory extends StatefulWidget {
   EmployeeDirectory({Key? key, required this.password, required this.superadmin, required this.compnayemail}) : super(key: key);
   final String password;
@@ -40,8 +47,10 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
   final user=FirebaseAuth.instance.currentUser;
   bool superadmin=false;
   bool active=false;
-  var reporting=[];
+  List<EmailandName> reporting=[];
   var email=[];
+  List<EmailandName> _searchResult = [];
+
   String password='';
 
   @override
@@ -50,7 +59,6 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
     super.initState();
     print(":::::::::: $password ${widget.password}");
     password=widget.password;
-
     widget.superadmin==false? fetchemploye() : fetchemploye1();
   }
 
@@ -61,13 +69,13 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
     await f.where('email', isEqualTo: widget.compnayemail.toString()).get().then((value) => value.docs.forEach((element) {
       element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
         String a,b;
-
         a=element.get('name');
-        reporting.add(a);
+        // reporting.add(a);
 
         b=element.get('email');
         email.add(b);
 
+        reporting.add(EmailandName(Name: a,Email: b));
         print("uuuuuuu $a");
         setState(() {});
 
@@ -84,13 +92,28 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
          String a,b;
 
          a=element.get('name');
-         reporting.add(a);
+         // reporting.add(a);
 
          b=element.get('email');
          email.add(b);
 
          print("uuuuuuu $a");
+         reporting.add(EmailandName(Name: a,Email: b));
          setState(() {}); }));}));
+  }
+
+
+  onSearchTextChanged(String text) async {
+    _searchResult.clear();
+    if (text.isEmpty) {
+      setState(() {});
+      return;
+    }
+    reporting.forEach((name) {
+      if (name.Name.contains(text) || name.Name.contains(text))
+        _searchResult.add(EmailandName(Name: name.Name,Email: name.Email));
+    });
+    setState(() {});
   }
 
 
@@ -142,32 +165,41 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
 
                     ],
                   ),
-
                 ],
               ),
             ),
           ),
+
           body: Stack(
             children: [
-
               reporting.length==null ? SizedBox(): Positioned(
                 top: 50,
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: ListView.builder(
+                child:_searchResult.length != 0 || textEditingController1.text.isNotEmpty ?
+                ListView.builder(
+                    itemCount: _searchResult.length,
+                    itemBuilder: (BuildContext contet, index) {
+                      return Empolyee(
+                        companyemail: widget.compnayemail,
+                        superadmin:widget.superadmin,
+                        email: _searchResult[index].Email,
+                        name: _searchResult[index].Name,
+                      );
+                    }
+                ) :
+                ListView.builder(
                     itemCount: reporting.length,
                     itemBuilder: (BuildContext contet,index){
-
                       return Empolyee(
                         companyemail: widget.compnayemail,
                               superadmin:widget.superadmin,
-                              email: email[index],
-                              name: reporting[index],);
+                              email: reporting[index].Email,
+                              name: reporting[index].Name,);
                       }
                     ),
               ),
-
 
               Positioned(
                 top: 0,
@@ -175,21 +207,23 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                 right: 0,
                 child: Padding(
                   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                  child: CsMainInputField1(
-                    providerGenerator: providerGenerator,
-                    width: 287.w,
-                    mycontroller: textEditingController1,
-                    myhint: TextStrings.Search,
-                    prefixIcon: Icons.search,
-                    isPassword: false,
-                    keyboardType: TextInputType.emailAddress,
-                    bordercolor: providerGenerator.getVisibleError(index: 0)
-                        ? Colors.red
-                        : null,
-                    // bordercolor: providerGenerator.getVisibleError(index: 0)
-                    //     ? Colors.red
-                    //     : null,
-                  ),
+                  // child: CsMainInputField1(
+                  //   // onSubmite: ,
+                  //   providerGenerator: providerGenerator,
+                  //   width: 287.w,
+                  //   mycontroller: textEditingController1,
+                  //   myhint: TextStrings.Search,
+                  //   prefixIcon: Icons.search,
+                  //   isPassword: false,
+                  //   keyboardType: TextInputType.emailAddress,
+                  //   bordercolor: providerGenerator.getVisibleError(index: 0)
+                  //       ? Colors.red
+                  //       : null,
+                  //   // bordercolor: providerGenerator.getVisibleError(index: 0)
+                  //   //     ? Colors.red
+                  //   //     : null,
+                  // ),
+                 child: buildContainerforSearch(),
                   // Container(
                   //   height: 35.h,
                   //   width: MediaQuery.of(context).size.width,
@@ -217,8 +251,6 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                   // ),
                 ),
               ),
-
-
               // NoOfRequest(),
               // NoOfRequest(),
               // NoOfRequest(),
@@ -228,7 +260,7 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
               ],
             ),
 
-          floatingActionButton: FloatingActionButton(
+            floatingActionButton: FloatingActionButton(
             child: Container(
               width: 60,
               height: 60,
@@ -257,6 +289,67 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
     );
   }
 
+  Container buildContainerforSearch() {
+    return Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3,
+                        blurRadius: 6,
+                        offset: const Offset(0, 4), // changes position of shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(170.sp),
+                    color: whiteClr,
+                  ),
+                  height: 33.h,
+                  width: 287.w,
+                  child: TextFormField(
+                    textAlignVertical: TextAlignVertical.bottom ,
+                    maxLines:  1,
+                    keyboardType: TextInputType.emailAddress,
+                    controller:  textEditingController1,
+                    obscureText:  false,
+                    //onFieldSubmitted: onSubmite ?? (_) {},
+                    onTap: (){
+                      textEditingController1.clear();
+                      onSearchTextChanged('');
+                      },
+                    onChanged: onSearchTextChanged,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: whiteClr,
+                      contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+                      hintText: TextStrings.Search,
+
+                      // hintStyle: TextStyle(
+                      //   fontSize: 15.0.sp,
+                      //   fontWeight: FontWeight.w400,
+                      //   color: blackClr.withOpacity(0.8),
+                      // ),
+                      hintStyle: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: blackClr.withOpacity(0.6),
+                        size: 20.sp,
+                      ),
+                      suffixIcon: null,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                        BorderSide(width: 1.0, color:  Colors.white),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                        BorderSide(width: 1.0, color:  Colors.white),
+                      ),
+                    ),
+                  ),
+                );
+  }
+
 }
 
 class EditEmployee extends StatefulWidget {
@@ -273,7 +366,6 @@ class _EditEmployeeState extends State<EditEmployee> {
   final user=FirebaseAuth.instance.currentUser;
   CollectionReference f=FirebaseFirestore.instance.collection("Companies");
 
-
   String department='';
   String designation='';
   String email='';
@@ -281,16 +373,14 @@ class _EditEmployeeState extends State<EditEmployee> {
   String phonenumber='';
   String reportingto='';
 
-
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     widget.superadmin==false? fetchemploye(): fetchemploye1();
-
     //fetchemploye();
   }
+
 
   fetchemploye() async {
     //////////////////////////////////////////////
@@ -322,6 +412,8 @@ class _EditEmployeeState extends State<EditEmployee> {
       }));
     }));
   }
+
+
 
   fetchemploye1() async {
     //////////////////////////////////////////////
@@ -680,7 +772,11 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   TextEditingController textEditingController3 = TextEditingController();
   TextEditingController textEditingController4 = TextEditingController();
   var items =  ['Finance','Marketing','IT',];
+  var items1 =  ['9:00 to 17:00'];
   String dropdownvalue = 'Marketing';
+  String dropdownvalue1 = '9:00 to 17:00';
+
+
   var designationitems =  ['Admin','Employee'];
   String designationdropdownvalue = 'Admin';
   var manageritems =  ['Employee','Manager',];
@@ -709,6 +805,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     });
     fetchemploye();
     fetchDepartments();
+    fetchshifts();
     textEditingController3.text="abcd123";
     setState(() {
       if(designationdropdownvalue=='Employee'){
@@ -783,10 +880,28 @@ class _CreateEmployeeState extends State<CreateEmployee> {
           value.docs.forEach((element) {
             String a;
             a= element.get('DepartmentsName');
+            if(a=='IT'|| a=='Finance'|| a=='Marketing'){}
+            else{
             items.add(a);
-            setState(() {});
+            setState(() {});}
           });
-        });}
+        });
+  }
+
+  fetchshifts(){
+    FirebaseFirestore.instance.collection('Companies')
+        .doc(email).collection('Shifts')
+        .get().then((value) {
+      value.docs.forEach((element) {
+        String a,b,c;
+        a= element.get('ShiftTimeIn');
+        b= element.get('ShiftTimeOut');
+        c='$a to $b';
+        items1.add(c);
+        setState(() {});
+      });
+    });
+  }
 
   CollectionReference f=FirebaseFirestore.instance.collection("Companies");
   final user= FirebaseAuth.instance.currentUser;
@@ -800,7 +915,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
         String a;
         a=element.get('email');
-        //reporting.add(a);
+        // reporting.add(a);
         print("uuuuuuu $a");
       }));
     }));
@@ -976,6 +1091,69 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                           child: SizedBox(
                             height: 25.h,
                             width: 25.w,
+                            child: Icon(FontAwesomeIcons.peopleArrows,size: 23.sp,color: subTitleClr,),
+                          ),
+                        ),
+                        SizedBox(width: 20.w,),
+                        DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            style: GoogleFonts.poppins(fontSize:10.sp,
+                                color: fontgrey,fontWeight: FontWeight.w400),
+                            elevation: 0,
+                            value: dropdownvalue1,
+                            icon:  Container(
+                                height: 20.h,
+                                alignment: Alignment.topRight,
+                                width: 170.w,
+                                //color: Colors.purpleAccent,
+                                child: Icon(Icons.keyboard_arrow_down)),
+                            items:items1.map((String items) {
+                              return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items)
+                              );
+                            }
+                            ).toList(),
+                            onChanged: (String? newValue){
+                              setState(() {
+                                dropdownvalue1 = newValue!;
+                              }
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                  child: Container(
+                    height: 37.h,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.25),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: const Offset(0, 2), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(5.sp),
+                      color: whiteClr,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: SizedBox(
+                            height: 25.h,
+                            width: 25.w,
                             child: Icon(FontAwesomeIcons.building,size: 23.sp,color: subTitleClr,),
                           ),
                         ),
@@ -1121,15 +1299,15 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             icon:  Container(
                                 height: 20.h,
                                 alignment: Alignment.topRight,
-                                width: 200.w,
-                                //color: Colors.purpleAccent,
+                                width: 215.w,
+                                // color: Colors.purpleAccent,
                                 child: Icon(Icons.keyboard_arrow_down)),
                             items:reporting.map((String items) {
                               return DropdownMenuItem(
                                   value: items,
                                   child: Text(items)
-                              );
-                               }
+                                    );
+                                 }
                               ).toList(),
                             onChanged: (String? newValue){
                               setState(() {
@@ -1156,7 +1334,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 ),
                 GestureDetector(
                   onTap: (){
-
                     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
                     final user=FirebaseAuth.instance.currentUser;
                     print("${textEditingController1.text.trim()} ${textEditingController3.text.trim()} ${designationdropdownvalue} ${textEditingController4.text.trim()} "
@@ -1164,8 +1341,8 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                     setState(() {
                       isLoading=true;
                     });
-
                     FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
+                      shifts: dropdownvalue1,
                       adminemail: email,
                       email: textEditingController1.text.trim(),
                       password: textEditingController3.text.trim(),

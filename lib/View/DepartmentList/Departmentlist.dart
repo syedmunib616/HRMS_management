@@ -88,9 +88,9 @@ class _DepartmentListState extends State<DepartmentList> {
   fetchListOfSocialMedia() async {
 
     String a,c;
-    departments.add(Departments("111", 'Finance'));
-    departments.add(Departments("112", 'Marketing'));
-    departments.add(Departments("113", 'IT'));
+    // departments.add(Departments("111", 'Finance'));
+    // departments.add(Departments("112", 'Marketing'));
+    // departments.add(Departments("113", 'IT'));
         if(user!.email.toString()=="example@gmail.com") {
           //UserT.get().then((value) {
           // value.docs.forEach((element) async{
@@ -180,7 +180,6 @@ class _DepartmentListState extends State<DepartmentList> {
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(

@@ -11,7 +11,6 @@ import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/test.dart';
 
 
-
 String globalemail='';
 class FrSignUpService {
   final FirebaseAuth firebaseAuth;
@@ -104,7 +103,7 @@ class FrSignUpService {
     required ProviderGenerator providerGenerator,
     required BuildContext context,
   }) async {
-    //Active Error Ui
+    // Active Error Ui
     onHideError(providerGenerator);
     globalemail=email.toString();
     print("the uid is this : " + uid);
@@ -119,6 +118,10 @@ class FrSignUpService {
     //await UserT.firestore.collection(email).doc().set({"admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber"});
 
     // await UserT.doc(email).collection("Employee").doc("$email").set({"email":"$email","role":"admin","uid":"$uid","name":"$name"});
+    
+    // depaetment.add(Department(departid: '111', departmentname: 'Finance',));
+    // depaetment.add(Department(departid: '112', departmentname: 'Marketing',));
+    // depaetment.add(Department(departid: '113', departmentname: 'IT',));
 
 
     print("dev py dala wA HAI ${email}");
@@ -268,13 +271,13 @@ class FrSignUpService1 {
   FrSignUpService1(this.firebaseAuth);
 
   //check Empty Value
-  bool isEmpty(String email, String password,String name, String department,String phonenumber,String designation) {
+  bool isEmpty(String email, String password,String name, String department,String phonenumber,String designation,String shifts) {
     return email.trim().isEmpty ||
         password.trim().isEmpty ||
         designation.trim().isEmpty ||
         name.trim().isEmpty ||
         department.trim().isEmpty ||
-        phonenumber.trim().isEmpty
+        phonenumber.trim().isEmpty || shifts.trim().isEmpty
         ? true
         : false;
   }
@@ -298,6 +301,7 @@ class FrSignUpService1 {
     required String phonenumber,
     required String designation,
     required String reportingto,
+    required String shifts,
     required BuildContext context,
     required ProviderGenerator providerGenerator,
     required bool superadmin
@@ -305,7 +309,7 @@ class FrSignUpService1 {
     onHideError(providerGenerator);
     providerGenerator.setLoadingValue(value: true, index: 0);
       try {
-        isEmpty(email, password, name,department,phonenumber,designation)
+        isEmpty(email, password, name,department,phonenumber,designation,shifts)
             ? onlogicErrorHandling(
           error: "Please enter your Information",
           providerGenerator: providerGenerator,
@@ -330,6 +334,7 @@ class FrSignUpService1 {
             //   )
             .then((value) =>
             onSuccessSignUP(
+              shifts: shifts,
             password: adminpassword,
             adminemail: adminemail,
             name: name,
@@ -365,6 +370,7 @@ class FrSignUpService1 {
 
   // Reading Error Value on the Screen
   onSuccessSignUP({
+    required String shifts,
     required String password,
     required String adminemail,
     required String reportingto,
@@ -398,18 +404,16 @@ class FrSignUpService1 {
     //await UserT.doc(email).collection("Contacts").doc("$email").set({"email":"$email","role":"admin","uid":"$uid",});
     //await UserT.firestore.collection(email).doc().set({"admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber"});
 
-
-
-    FirebaseFirestore.instance.collection("Companies").doc(adminemail).collection('Employee').doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
-      "name":"$name","email":"$email","uid":"$uid",});
-
+    FirebaseFirestore.instance.collection("Companies").doc(adminemail).collection('Employee').doc(email)
+    .set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+      "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts'});
 
      // UserT.where('email', isEqualTo: adminemail).firestore.collection("Empoloyee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
      //  "name":"$name","email":"$email","uid":"$uid",});
 
      UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
       print("kkklklklkk $email $adminemail ${password}");
-      element.reference.collection("Employee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+      element.reference.collection("Employee").doc(email).set({'shift':'$shifts',"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
         "name":"$name","email":"$email","uid":"$uid",});
       })).then((value) async {
       await FirebaseAuth.instance.signOut().then((value) async {
@@ -419,15 +423,17 @@ class FrSignUpService1 {
           //     MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,)),
           //     result: false);
         }).then((value) {
-          superadmin==false? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully'):CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',) ;
+          superadmin==false ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully'):CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',) ;
         });
       });
     });
+
     // await UserT.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
     //   element.reference.collection("Employee").doc(email).
     //   set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
     //     "name":"$name","email":"$email","uid":"$uid",});
     // })).then((value) => Navigator.pop(context));
+
   }
 
   // Reading Error Value on the Screen

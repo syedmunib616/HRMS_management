@@ -20,7 +20,7 @@ import 'Theme/Theme_Style.dart';
 import 'View/signup/Sginup.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main()async {
    WidgetsFlutterBinding.ensureInitialized();
    Firebase.initializeApp();
    //WidgetsFlutterBinding.ensureInitialized;
@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
                       // home:  const Homepage(),
                       //home:Test(),
                       //home: const ScreenSplach(),
-                      home: Login(),
+                      home: Login(loading: false,),
                       //home: EmployeeDashboard(),
                       //home: LateComers(),
                       //home: ByEmployee(),
@@ -136,7 +136,7 @@ class _ScreenSplachState extends State<ScreenSplach> {
           () => Navigator.of(context).pushReplacement(MaterialPageRoute(
           //  builder: (BuildContext context) => const ScreenBoarding())));
           // builder: (BuildContext context) => SelectCountry())));
-          builder: (BuildContext context) => Login(),)));
+          builder: (BuildContext context) => Login(loading: false,),)));
     super.initState();
   }
 

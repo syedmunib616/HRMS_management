@@ -256,7 +256,7 @@ class _HomeState extends State<Home> {
                     onTap: () async {
                        await FirebaseAuth.instance.signOut().then((value) async {
                          Navigator.of(context).pushReplacement(
-                             MaterialPageRoute(builder: (BuildContext context) => Login()),// Homepage()),munib
+                             MaterialPageRoute(builder: (BuildContext context) => Login(loading: false,)),// Homepage()),munib
                              result: false);
                         });
                     },
@@ -921,7 +921,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: EdgeInsets.all(20.0.sp),
                     child: Container(
-                      height: 315.h,
+                      height: 319.h,
                       width:MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [

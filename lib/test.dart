@@ -89,7 +89,7 @@ class _TestState extends State<Test> {
                     onTap: () async {
                       await FirebaseAuth.instance.signOut().then((value) async {
                         Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (BuildContext context) => Login()),
+                            MaterialPageRoute(builder: (BuildContext context) => Login(loading: false,)),
                             result: false);
                       });
                     },

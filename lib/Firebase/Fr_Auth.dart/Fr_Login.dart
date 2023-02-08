@@ -31,7 +31,7 @@ class FrLoginService {
   try {
       isEmpty(email, password)
           ? onlogicErrorHandling(
-        //error: "Please enter your Information",
+        // error: "Please enter your Information",
         error: TextStrings.Invalid_email,
         providerGenerator: providerGenerator,
               buttonIndex: buttonIndex,
@@ -90,7 +90,9 @@ class FrLoginService {
 
     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
 
-    if(email!="example@gmail.com") {//braek point laga k check krna hai kidhr masla araha hai
+    if(email!="example@gmail.com") {
+      //braek point laga k check krna hai kidhr masla araha hai
+
          FirebaseFirestore.instance.collection('Companies').get().then((value) {
             value.docs.forEach((element) {
              active=false;
@@ -99,17 +101,22 @@ class FrLoginService {
              f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
                active = element.get("active");
                if(email==element.id){
+
+                  Login(loading: false,);
+
                  if (active == true) {
                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                      builder: (BuildContext context) => ScreenMain(password: password,),
                    ), (route) => false,);
-                 } else{
+                 }
+                 else{
                    FirebaseAuth.instance.signOut().then((value) async {
                      Navigator.of(context).pushReplacement(
-                         MaterialPageRoute(builder: (context) =>  Login()),
+                         MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
                          result: false);
                    });
-                 }}
+                 }
+               }
                else {
                  // element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
                  //   String a;
@@ -127,7 +134,10 @@ class FrLoginService {
                  String a; a=elemen.get('email');
                  print("laksjdhfkjsadf $a");
                  if(email==a){
-                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => EmployeeDashboard(admineamil: element.id,),), (route) => false,);
+                   Login(loading: false);
+                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                     builder: (BuildContext context) => EmployeeDashboard(admineamil: element.id,),),
+                         (route) => false,);
                  }
                }));
              });

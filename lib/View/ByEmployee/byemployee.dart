@@ -485,7 +485,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                         // Initial Value
                                         value: dropdownvalue1,
                                         // Down Arrow Icon
-                                        icon:  Row(children: [SizedBox(width: 112.w,), Icon(Icons.keyboard_arrow_down,size: 23.sp,)],),
+                                        icon:  Row(children: [SizedBox(width: 103.w,), Icon(Icons.keyboard_arrow_down,size: 23.sp,)],),
                                         // Array list of items
                                         items: items1.map((String items) {
                                           return DropdownMenuItem(
@@ -500,10 +500,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                             dropdownvalue1 = newValue!;
                                           });
                                           print("::::::::::: $dropdownvalue1 $days");
-
                                           dropdownfetchattendance(dropdownvalue1);
-
-
                                             },
                                           ),
                                         ],
@@ -701,9 +698,9 @@ class _ByEmployeeState extends State<ByEmployee> {
                                   addressout: attendance[index].addressout,
                                   date: attendance[index].date,
                                   time: time,
-                                   tabcount: 0,
-                                   datetime: days,
-                                   employe: attendance[index].employee,);
+                                  tabcount: 0,
+                                  datetime: days,
+                                  employe: attendance[index].employee,);
                               },
                             );
                           case ConnectionState.done:
@@ -889,7 +886,7 @@ class _ByEmployeeState extends State<ByEmployee> {
           for(int i=0;i<days.length;i++) {
             String b;
             b= '${days[i].year}-${days[i].month}-${days[i].day}';
-              //print("987987987987987987 $b");
+            //print("987987987987987987 $b");
             fetchattendance(b);
             // .get().then((value){
             //   value.docs.forEach((element) {
@@ -997,7 +994,8 @@ class _ByEmployeeState extends State<ByEmployee> {
                                   width: 1,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(50)),
-                      ))),
+                      ))
+              ),
               child: child!,
             );
           });
@@ -1465,7 +1463,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                 SizedBox(height: 20.h,),
                 Text("Time In Address",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
                 SizedBox(height: 7.h,),
-                CsMainInputField(
+                CsMainInputField12(
                   providerGenerator: providerGenerator,
                   width: MediaQuery.of(context).size.width,
                   // width: 287.w,
@@ -1473,10 +1471,8 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                   myhint: "Address which he/she check in",
                   prefixIcon: FontAwesomeIcons.locationDot,
                   isPassword: false,
-                  keyboardType: TextInputType.phone,
-                  bordercolor: providerGenerator.getVisibleError(index: 0)
-                      ? Colors.red
-                      : null,
+                  keyboardType: TextInputType.text,
+                  bordercolor: providerGenerator.getVisibleError(index: 0) ? Colors.red : null,
                   // bordercolor: providerGenerator.getVisibleError(index: 0)
                   //     ? Colors.red
                   //     : null,
@@ -1528,7 +1524,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                 SizedBox(height: 20.h,),
                 Text("Time Out Address",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
                 SizedBox(height: 7.h,),
-                CsMainInputField(
+                CsMainInputField12(
                   providerGenerator: providerGenerator,
                   width: MediaQuery.of(context).size.width,
                   //width: 287.w,
@@ -1537,9 +1533,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                   prefixIcon: FontAwesomeIcons.locationDot,
                   isPassword: false,
                   keyboardType: TextInputType.text,
-                  bordercolor: providerGenerator.getVisibleError(index: 0)
-                      ? Colors.red
-                      : null,
+                  bordercolor: providerGenerator.getVisibleError(index: 0) ? Colors.red : null,
                   // bordercolor: providerGenerator.getVisibleError(index: 0)
                   //     ? Colors.red
                   //     : null,

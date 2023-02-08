@@ -23,8 +23,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
-
+  Login({Key? key, required this.loading}) : super(key: key);
+  final bool loading;
   @override
   State<Login> createState() => _LoginState();
 }
@@ -32,6 +32,17 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController textEditingController1 = TextEditingController();
   TextEditingController textEditingController2 = TextEditingController();
+
+  bool load=false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      print("___________________");
+      load=widget.loading;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +70,6 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-
                   Positioned(
                     top: 0,
                     bottom: 0,
@@ -139,7 +149,6 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 25.h,
                           ),
-
                           CsMainInputField(
                             providerGenerator: providerGenerator,
                             width: 287.w,
@@ -155,11 +164,9 @@ class _LoginState extends State<Login> {
                             //     ? Colors.red
                             //     : null,
                           ),
-
                           SizedBox(
                             height: 20.h,
                           ),
-
                           CsMainInputField3(
                             providerGenerator: providerGenerator,
                             width: 287.w,
@@ -186,11 +193,9 @@ class _LoginState extends State<Login> {
                             //     ? Colors.red
                             //     : null,
                           ),
-
                           SizedBox(
                             height: 10.h,
                           ),
-
                           Visibility(
                             visible: providerGenerator.getVisibleError(index: 0),
                             child: Container(
@@ -203,21 +208,31 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
-
                           SizedBox(
                             height: 10.h,
                           ),
-
                           GestureDetector(
                             onTap: (){
+                              print("object +++++ $load");
                               // Navigator.pop(context);
+                              setState(() {
+                                load=true;
+                              });
+                              setState(() {
+                                load=true;
+                              });
                               FrLoginService(FirebaseAuth.instance).onTapSignIn(
                                   buttonIndex: 1,
                                   errorIndex: 0,
                                   context: context,
                                   email: textEditingController1.text.trim(),
                                   password: textEditingController2.text.trim(),
-                                  providerGenerator: providerGenerator);
+                                  providerGenerator: providerGenerator
+                              ).then((value) {
+                                setState(() {
+                                  load=false;
+                                });
+                              });
                                   // Navigator.push(
                                   //   context,
                                   //   MaterialPageRoute(builder: (context) => const ScreenMain()),
@@ -248,15 +263,17 @@ class _LoginState extends State<Login> {
                                   color: whiteClr,
                                 ),
                                 child:Center(
-                                  child: Text(TextStrings.Login,style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                  child: load == true ? CircularProgressIndicator(
+                                    backgroundColor: Colors.white,
+                                    strokeWidth: 1.5.w,
+                                  ):
+                                  Text(TextStrings.Login,style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                 )
                             ),
                           ),
-
                           SizedBox(
                             height: 20.h,
                           ),
-
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(

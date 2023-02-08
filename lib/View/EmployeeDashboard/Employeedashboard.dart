@@ -352,7 +352,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     onTap: () async {
                       await FirebaseAuth.instance.signOut().then((value) async {
                         Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (BuildContext context) =>  Login()),//Homepage()),munib
+                            MaterialPageRoute(builder: (BuildContext context) =>  Login(loading: false,)),//Homepage()),munib
                             result: false);
                       });
                     },
@@ -917,7 +917,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                 GestureDetector(
                                   onTap: () async {
                                     timinoutdicator==false ? marktimeoutAttendance(): null;
-                                    // .then((value) => initState());
+                                      // .then((value) => initState());
                                     },
                                   child: Container(
                                       height: 40.h,
@@ -2153,49 +2153,25 @@ class _ListOfRequest1State extends State<ListOfRequest1> {
                 SizedBox(
                   height: 15.h,
                 ),
-                Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                  child: CsMainInputField1(
-                    providerGenerator: widget.providerGenerator,
-                    width: 287.w,
-                    mycontroller: textEditingController,
-                    myhint: TextStrings.Search,
-                    prefixIcon: Icons.search,
-                    isPassword: false,
-                    keyboardType: TextInputType.emailAddress,
-                    bordercolor: widget.providerGenerator.getVisibleError(index: 0)
-                        ? Colors.red
-                        : null,
-                    // bordercolor: providerGenerator.getVisibleError(index: 0)
-                    //     ? Colors.red
-                    //     : null,
-                  ),
-                  // Container(
-                  //   height: 35.h,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   decoration: BoxDecoration(
-                  //     boxShadow: [
-                  //       BoxShadow(
-                  //         color: Colors.grey.withOpacity(0.4),
-                  //         spreadRadius: 2,
-                  //         blurRadius: 1,
-                  //         offset: const Offset(0, 2), // changes position of shadow
-                  //       ),
-                  //     ],
-                  //     borderRadius: BorderRadius.circular(20.sp),
-                  //     color: whiteClr,
-                  //   ),
-                  //   child: Row(
-                  //     children:  [
-                  //       SizedBox(width: 10.w,),
-                  //       Icon(Icons.search,size: 20.sp,color: greybackground,)
-                  //
-                  //
-                  //
-                  //     ],
-                  //   ),
-                  // ),
-                ),
+                // Padding(
+                //   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                //   child: CsMainInputField1(
+                //     providerGenerator: widget.providerGenerator,
+                //     width: 287.w,
+                //     mycontroller: textEditingController,
+                //     myhint: TextStrings.Search,
+                //     prefixIcon: Icons.search,
+                //     isPassword: false,
+                //     keyboardType: TextInputType.emailAddress,
+                //     bordercolor: widget.providerGenerator.getVisibleError(index: 0)
+                //         ? Colors.red
+                //         : null,
+                //     // bordercolor: providerGenerator.getVisibleError(index: 0)
+                //     //     ? Colors.red
+                //     //     : null,
+                //   ),
+                //
+                // ),
                 StreamBuilder(
                     stream: streamController.stream,
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -2309,7 +2285,7 @@ class NoOfRequest extends StatelessWidget {
           // );
         },
         child: Container(
-          height: 120.h,
+          height: 130.h,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             boxShadow: [
@@ -2329,7 +2305,6 @@ class NoOfRequest extends StatelessWidget {
               SizedBox(height: 6.h,),
               Row(
                 children:  [
-
                   SizedBox(width: 10.w,),
                   // Container(
                   //   height: 40.h,
@@ -2352,14 +2327,11 @@ class NoOfRequest extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-
                   Icon(FontAwesomeIcons.userTie,color: srpgradient2,),
-
                   Padding(
                     padding:EdgeInsets.symmetric(vertical: 4.0.h,horizontal: 10.w),
                     child: Text(subject,style: GoogleFonts.poppins(fontSize: 14.sp, color: iconcolor, fontWeight: FontWeight.w400),),
                   ),
-
                   const Spacer(),
                   approve==null? Row(
                     children: [
@@ -2380,22 +2352,18 @@ class NoOfRequest extends StatelessWidget {
                         Icon(FontAwesomeIcons.solidCheckCircle,color: Colors.greenAccent,)
                           ],
                          ),
-
-
                   SizedBox(width: 13.w,),
-
                   // Padding(
                   //   padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                   //   child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
                   // ),
-
                 ],
               ),
               Padding(
                 padding:EdgeInsets.symmetric(vertical: 4.0.h,horizontal: 11.w),
                 child: Container(
                   height:77.h,
-                  //color:Colors.lightGreen,
+                  // color:Colors.lightGreen,
                   child: Text(message,
                     style: GoogleFonts.poppins(fontSize: 9.sp, color: iconcolor, fontWeight: FontWeight.w400,),
                     maxLines: 6,
@@ -2804,6 +2772,7 @@ class _WriteLeaveState extends State<WriteLeave> {
 
                 GestureDetector(
                   onTap: (){
+
                      //Navigator.pop(context);
                     // FrLoginService(FirebaseAuth.instance).onTapSignIn(
                     //     buttonIndex: 1,
@@ -2812,6 +2781,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                     //     email: textEditingController1.text.trim(),
                     //     password: textEditingController2.text.trim(),
                     //     providerGenerator: providerGenerator);
+
                     if(textEditingController.text.isNotEmpty) {
 
                       FirebaseFirestore.instance
@@ -2825,7 +2795,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                             'date':'$time',
                             'subject': "${_selectedLocation}",
                             'message': "${textEditingController.text.trim()}",
-                            'approve': null}).then((value) => _showToast(context,'Message send successfully'))
+                            'approve': null}).then((value) => _showToast(context,'Leave request added successfully'))
                           .then((value) =>
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(builder: (BuildContext context) => EmployeeDashboard(admineamil: aadmin,)),// Homepage()),munib
@@ -2834,10 +2804,15 @@ class _WriteLeaveState extends State<WriteLeave> {
                       _showToast(context,'Please write some message');
                     }
 
+
+
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(builder: (context) => const ScreenMain()),
                     // );
+
+
+
                   },
                   child: Container(
                       height: 40.h,
@@ -2866,8 +2841,8 @@ class _WriteLeaveState extends State<WriteLeave> {
                       child:Center(
                         child: Text("Submit",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                       )
+                    ),
                   ),
-                ),
 
               ],
             ),
@@ -2933,13 +2908,14 @@ class _ByEmployee1State extends State<ByEmployee1> {
     setState(() {
       time='( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )';
     });
-   // fetchemployeattendance();
+    // fetchemployeattendance();
     fetchuser();
     getDaysInBetween(dateRange.start,dateRange.end);
     super.initState();
   }
 
   fetchemployeattendance(){
+
     // FirebaseFirestore.instance
     //     .collection('Companies')
     //     .doc('${user!.email.toString()}')
@@ -3660,19 +3636,19 @@ class _ByEmployee1State extends State<ByEmployee1> {
                             child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
-                          SizedBox(width: 80.w,),
+                          SizedBox(width: 100.w,),
                           Padding(
-                            padding:  EdgeInsets.only(left:10.0.w),
+                            padding:  EdgeInsets.only(left:.0.w),
                             child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
                           Spacer(),
                           Padding(
-                            padding:  EdgeInsets.only(left: 35.0.w),
+                            padding: EdgeInsets.only(left: 25.0.w),
                             child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
-                          SizedBox(width: 7.w,),
+                          SizedBox(width: 23.w,),
                           Padding(
                             padding: EdgeInsets.only(left: 10.0.w),
                             child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
@@ -4042,28 +4018,28 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 165.h,
+      height: 167.h,
       width: MediaQuery.of(context).size.width,
       //color: Colors.purpleAccent,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 3.0.w),
+        padding: EdgeInsets.symmetric(horizontal: 2.5.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 12.h,),
+            SizedBox(height: 10.h,),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
 
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 14.0.w),
+                  padding: EdgeInsets.only(left: 10.0.w),
                   child: Container(
-                    // color: Colors.lightBlue,
+                     //color: Colors.lightBlue,
                     alignment: Alignment.topLeft,
-                    width: 120.w,
-                    height: 141.h,
+                    width: 129.w,
+                    height: 155.h,
                     child: Column(
                       crossAxisAlignment:CrossAxisAlignment.start,
                       children: [
@@ -4112,7 +4088,7 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
                         width: 80.w,
                         //color: Colors.red,
                         child: Padding(
-                          padding:  EdgeInsets.only(left: 35.0.w),
+                          padding:  EdgeInsets.only(left: 10.0.w),
                           child: Column(
                             children: [
                               Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,

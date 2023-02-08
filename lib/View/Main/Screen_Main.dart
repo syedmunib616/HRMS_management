@@ -53,8 +53,10 @@ class _ScreenMainState extends State<ScreenMain> {
 
   @override
   Widget build(BuildContext context) {
+
     final storageFutureProvider = Provider.of<StorageFutureProvider>(context);
     // final providerQrCode = Provider.of<ProviderQrCode>(context);
+
     return Scaffold(
       body:
       // Stack(
@@ -160,11 +162,9 @@ class _ScreenMainState extends State<ScreenMain> {
                       color:curentindex==1? srpgradient2 : settingFontBackColor(context),
                     ),
                     Text("Reports",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==1? srpgradient2 :fontgrey,),),
-
                   ],
                 )),
             BottomNavigationBarItem(
-
                 backgroundColor: blackClr,
                 label: 'Request',
                 icon: Column(
@@ -210,9 +210,8 @@ class _ScreenMainState extends State<ScreenMain> {
             //       ],
             //     )),
           ]),
-
-    );
-  }
+        );
+      }
 
 }
 

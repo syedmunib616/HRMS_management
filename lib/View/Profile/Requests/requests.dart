@@ -52,15 +52,16 @@ class Requests extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pop(context);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0.sp),
-                          child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: (){
+                      //     Navigator.pop(context);
+                      //   },
+                      //   child: Padding(
+                      //     padding: EdgeInsets.all(8.0.sp),
+                      //     child: Image.asset('assets/doublearrow.png',height: 25.h,width: 25.w,),
+                      //   //child: Icon(FontAwesomeIcons.),
+                      //   ),
+                      // ),
                       Spacer(),
                       Text("Requests",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
@@ -385,7 +386,7 @@ class _ListOfRequestState extends State<ListOfRequest> {
           appBar: PreferredSize(
            preferredSize:  Size.fromHeight(94.0.h),
              child: Container(
-                height: 122.h,
+                height: 92.h,
                 width:MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -692,49 +693,49 @@ class _ListOfRequestState extends State<ListOfRequest> {
                   height: 15.h,
                 ),
 
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                  child: CsMainInputField1(
-                    providerGenerator: widget.providerGenerator,
-                    width: 287.w,
-                    mycontroller: widget.textEditingController1,
-                    myhint: TextStrings.Search,
-                    prefixIcon: Icons.search,
-                    isPassword: false,
-                    keyboardType: TextInputType.emailAddress,
-                    bordercolor: widget.providerGenerator.getVisibleError(index: 0)
-                        ? Colors.red
-                        : null,
-                    // bordercolor: providerGenerator.getVisibleError(index: 0)
-                    //     ? Colors.red
-                    //     : null,
-                  ),
-                  // Container(
-                  //   height: 35.h,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   decoration: BoxDecoration(
-                  //     boxShadow: [
-                  //       BoxShadow(
-                  //         color: Colors.grey.withOpacity(0.4),
-                  //         spreadRadius: 2,
-                  //         blurRadius: 1,
-                  //         offset: const Offset(0, 2), // changes position of shadow
-                  //       ),
-                  //     ],
-                  //     borderRadius: BorderRadius.circular(20.sp),
-                  //     color: whiteClr,
-                  //   ),
-                  //   child: Row(
-                  //     children:  [
-                  //       SizedBox(width: 10.w,),
-                  //       Icon(Icons.search,size: 20.sp,color: greybackground,)
-                  //
-                  //
-                  //
-                  //     ],
-                  //   ),
-                  // ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                //   child: CsMainInputField1(
+                //     providerGenerator: widget.providerGenerator,
+                //     width: 287.w,
+                //     mycontroller: widget.textEditingController1,
+                //     myhint: TextStrings.Search,
+                //     prefixIcon: Icons.search,
+                //     isPassword: false,
+                //     keyboardType: TextInputType.emailAddress,
+                //     bordercolor: widget.providerGenerator.getVisibleError(index: 0)
+                //         ? Colors.red
+                //         : null,
+                //     // bordercolor: providerGenerator.getVisibleError(index: 0)
+                //     //     ? Colors.red
+                //     //     : null,
+                //   ),
+                //   // Container(
+                //   //   height: 35.h,
+                //   //   width: MediaQuery.of(context).size.width,
+                //   //   decoration: BoxDecoration(
+                //   //     boxShadow: [
+                //   //       BoxShadow(
+                //   //         color: Colors.grey.withOpacity(0.4),
+                //   //         spreadRadius: 2,
+                //   //         blurRadius: 1,
+                //   //         offset: const Offset(0, 2), // changes position of shadow
+                //   //       ),
+                //   //     ],
+                //   //     borderRadius: BorderRadius.circular(20.sp),
+                //   //     color: whiteClr,
+                //   //   ),
+                //   //   child: Row(
+                //   //     children:  [
+                //   //       SizedBox(width: 10.w,),
+                //   //       Icon(Icons.search,size: 20.sp,color: greybackground,)
+                //   //
+                //   //
+                //   //
+                //   //     ],
+                //   //   ),
+                //   // ),
+                // ),
 
                 StreamBuilder(
                     stream: streamController.stream,

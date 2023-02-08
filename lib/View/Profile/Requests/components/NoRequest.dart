@@ -90,10 +90,30 @@ class NoOfRequest extends StatelessWidget {
               // ),
               Icon(Icons.person_pin,color: srpgradient2,size: 40.sp,),
               Padding(
-                padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                child: Text("$subject",style: GoogleFonts.poppins(fontSize: 15.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+                padding:EdgeInsets.symmetric(vertical: 2.0.h,horizontal: 20.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("$user",style: GoogleFonts.poppins(fontSize: 13.5.sp, color: iconcolor, fontWeight: FontWeight.w500),),
+
+                    Row(
+                      children: [
+                        Text("Subject : ",style: GoogleFonts.poppins(fontSize: 11.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+                        Text("$subject",style: GoogleFonts.poppins(fontSize: 10.sp, color: iconcolor, fontWeight: FontWeight.w300),),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               const Spacer(),
+              approve == null?SizedBox():Row(
+                children: [
+                  Text("Seen",style: GoogleFonts.poppins(fontSize: 8.sp, color: Colors.greenAccent, fontWeight: FontWeight.w400),),
+                  Icon(FontAwesomeIcons.checkDouble,size: 19.sp,color: Colors.greenAccent,),
+                ],
+              ),
+
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                 child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
@@ -177,43 +197,43 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                         },
                         child: Padding(
                           padding: EdgeInsets.all(8.0.sp),
-                          child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                          child: Image.asset('assets/doublearrow.png',height: 20.h,width: 20.w,),
                         ),
                       ),
                       Spacer(),
                       Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
-                      Container(
-                        width: 30.0.w,
-                        height: 30.0.h,
-                        // child: Stack(
-                        //   children: [
-                        //     ClipRRect(
-                        //       borderRadius: BorderRadius.circular(15.0.sp),
-                        //       child: Image.asset(
-                        //         'assets/user.jpg',
-                        //         width: 30.0.w,
-                        //         height: 30.0.h,
-                        //         fit: BoxFit.fill,
-                        //       ),
-                        //     ),
-                        //     Positioned(
-                        //       bottom: 1.5,
-                        //       right: 1.5,
-                        //       child: Container(
-                        //         height: 5.h,
-                        //         width: 5.w,
-                        //         //color:online,
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(5.sp),
-                        //           color: online,
-                        //         ),
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
-                      ),
-                      SizedBox(width: 15.w,)
+                      // Container(
+                      //   width: 30.0.w,
+                      //   height: 30.0.h,
+                      //   // child: Stack(
+                      //   //   children: [
+                      //   //     ClipRRect(
+                      //   //       borderRadius: BorderRadius.circular(15.0.sp),
+                      //   //       child: Image.asset(
+                      //   //         'assets/user.jpg',
+                      //   //         width: 30.0.w,
+                      //   //         height: 30.0.h,
+                      //   //         fit: BoxFit.fill,
+                      //   //       ),
+                      //   //     ),
+                      //   //     Positioned(
+                      //   //       bottom: 1.5,
+                      //   //       right: 1.5,
+                      //   //       child: Container(
+                      //   //         height: 5.h,
+                      //   //         width: 5.w,
+                      //   //         //color:online,
+                      //   //         decoration: BoxDecoration(
+                      //   //           borderRadius: BorderRadius.circular(5.sp),
+                      //   //           color: online,
+                      //   //         ),
+                      //   //       ),
+                      //   //     )
+                      //   //   ],
+                      //   // ),
+                      // ),
+                       SizedBox(width: 15.w,)
                     ],
                   ),
                   // Container(
@@ -479,7 +499,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                 Padding(
                   padding: EdgeInsets.only(top: 8.0.h,right: 20.w,left: 20.w),
                   child: Container(
-                    height: 172.h,
+                    height: 422.h,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -495,12 +515,12 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 10.0.h,right: 10.w,left: 20.w),
                           child: Column(
                             children: [
-
                               Row(
                                 children:  [
                                   const Spacer(),
@@ -508,7 +528,6 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                     style: GoogleFonts.poppins(fontSize: 9.sp, color: iconcolor, fontWeight: FontWeight.w500),),
                                 ],
                               ),
-
                               Row(
                                 children: [
                                   // Container(
@@ -531,18 +550,31 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                   // ),
                                   Icon(FontAwesomeIcons.userTie,color: srpgradient2,),
                                   SizedBox(width: 10.w,),
-                                  Text("${widget.user}",
-                                    style: GoogleFonts.poppins(fontSize: 12.sp,
-                                        color: iconcolor, fontWeight: FontWeight.w600),),
+                                  Column(
+                                    children: [
+                                      Text("${widget.user}",
+                                        style: GoogleFonts.poppins(fontSize: 12.sp,
+                                            color: iconcolor, fontWeight: FontWeight.w600),),
+                                      Text("Subject: ${widget.subject}",
+                                        style: GoogleFonts.poppins(fontSize: 10.sp,
+                                            color: iconcolor, fontWeight: FontWeight.w300),),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  widget.approve==null?SizedBox() : Text("${widget.approve==true ? "Approve":"Reject" }",
+                                    style: GoogleFonts.poppins(fontSize: 15.sp,
+                                        color: widget.approve ==false ?Colors.red :Colors.green, fontWeight: FontWeight.w300),),
+
                                 ],
                               ),
                             ],
                           ),
                         ),
                         SizedBox(height: 10.h,),
-                        Padding(
-                          padding: EdgeInsets.only(right: 20.w,left: 20.w),
-                          child: Text("${widget.message}",style: GoogleFonts.poppins(fontSize: 10.5.sp, color: iconcolor, fontWeight: FontWeight.w400,), maxLines: 4,
+                        Padding(padding: EdgeInsets.only(right: 20.w,left: 20.w),
+                          child:
+                          Text("${widget.message}",
+                            style: GoogleFonts.poppins(fontSize: 10.5.sp, color: iconcolor, fontWeight: FontWeight.w400,), maxLines: 44,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -573,7 +605,6 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                   ],
                                   borderRadius: BorderRadius.only( bottomLeft: Radius.circular(14.sp)),
                                   color: Colors.lightGreen,
-
                                 ),
                                 child: Center(
                                   child: Text("Accept", style: GoogleFonts.poppins(fontSize: 15.sp, color: whiteClr, fontWeight: FontWeight.w400,), maxLines: 4,
