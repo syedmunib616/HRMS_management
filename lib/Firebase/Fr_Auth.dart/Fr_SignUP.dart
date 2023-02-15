@@ -423,7 +423,14 @@ class FrSignUpService1 {
           //     MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,)),
           //     result: false);
         }).then((value) {
-          superadmin==false ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully'):CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',) ;
+
+          superadmin==false ?
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password)), result: false) :
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Test(password: password,)),);
+
+          superadmin==false
+              ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully')
+              : CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',);
         });
       });
     });
@@ -532,3 +539,4 @@ class FrSignUpService1 {
   //   }
 
 }
+

@@ -474,13 +474,13 @@ class _DepartmentListState extends State<DepartmentList> {
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(width: 15.w,),
+                                        SizedBox(width: 20.w,),
                                         Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
                                         Spacer(),
                                         Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
                                         Spacer(),
                                         Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
-                                        SizedBox(width: 15.w,)
+                                        SizedBox(width: 15.w,),
                                       ],
                                     ),
                                   ],

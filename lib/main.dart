@@ -20,6 +20,7 @@ import 'Theme/Theme_Style.dart';
 import 'View/signup/Sginup.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+
 void main()async {
    WidgetsFlutterBinding.ensureInitialized();
    Firebase.initializeApp();
@@ -27,6 +28,7 @@ void main()async {
    EasyLocalization.ensureInitialized();
 
    //WidgetsFlutterBinding.ensureInitialized();
+
 
     // EasyLocalization(
     //     supportedLocales: const [Locale('en', 'US'), Locale('fr', 'FR'), Locale('es', 'ES'), Locale('ru', 'RU'),Locale('zh', 'CN'),
@@ -38,6 +40,7 @@ void main()async {
     //     assetLoader: const CodegenLoader(),
     //     child: MyApp()
     // );
+   //runApp(WriteLeave(adminemail: '', providerGenerator: null,));
    runApp(MyApp());
 }
 

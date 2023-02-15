@@ -153,11 +153,13 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-
   }
 
+
+
   final userr = FirebaseAuth.instance.currentUser;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -473,11 +475,9 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                 //     ],
                 //   ),
                 // ),
-
                 SizedBox(
                   height: 15.h,
                 ),
-
                 // Padding(
                 //   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
                 //   child: CsMainInputField1(
@@ -495,7 +495,6 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                 //   ),
                 //
                 // ),
-
                 Padding(
                   padding: EdgeInsets.only(top: 8.0.h,right: 20.w,left: 20.w),
                   child: Container(
@@ -561,17 +560,17 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                     ],
                                   ),
                                   Spacer(),
-                                  widget.approve==null?SizedBox() : Text("${widget.approve==true ? "Approve":"Reject" }",
-                                    style: GoogleFonts.poppins(fontSize: 15.sp,
+                                  widget.approve==null? SizedBox() :
+                                  Text("${widget.approve==true ? "Approve":"Reject" }", style: GoogleFonts.poppins(fontSize: 15.sp,
                                         color: widget.approve ==false ?Colors.red :Colors.green, fontWeight: FontWeight.w300),),
-
                                 ],
                               ),
                             ],
                           ),
                         ),
                         SizedBox(height: 10.h,),
-                        Padding(padding: EdgeInsets.only(right: 20.w,left: 20.w),
+                        Padding(
+                          padding: EdgeInsets.only(right: 20.w,left: 20.w),
                           child:
                           Text("${widget.message}",
                             style: GoogleFonts.poppins(fontSize: 10.5.sp, color: iconcolor, fontWeight: FontWeight.w400,), maxLines: 44,
@@ -579,6 +578,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                           ),
                         ),
                         Spacer(),
+                        widget.approve !=null ? SizedBox() :
                         Row(
                           children:  [
                             GestureDetector(

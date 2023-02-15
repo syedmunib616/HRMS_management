@@ -813,15 +813,28 @@ class ShitfTimInAndOut extends StatelessWidget {
         children: [
           Row(
             children: [
-              SizedBox(width: 15.w,),
-              Text("$id",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+              SizedBox(width: 20.w,),
+              Container(
+                  //color: Colors.red,
+                  height: 20.h,
+                  width: 150.w,
+                  child: Text("$id",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),)),
               Spacer(),
-              Text("$timein",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
-              SizedBox(width: 40.w,),
-              Text("$timeout",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
+              Container(
+                  //color: Colors.yellow,
+                  height: 20.h,
+                  width: 50.w,
+                  child: Text("$timein",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),)),
+              SizedBox(width: 26.w,),
+              Container(
+                  alignment: Alignment.center,
+                  //color: Colors.green,
+                  height: 20.h,
+                  width: 50.w,
+                  child: Text("$timeout",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),)),
               // SizedBox(width: 27.w,),
               // Text("Active",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
-              SizedBox(width: 20.w,)
+              SizedBox(width: 17.w,),
             ],
           ),
           SizedBox(

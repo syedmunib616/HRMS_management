@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:hrmanagementapp/View/ByEmployee/byemployee.dart';
@@ -39,13 +40,16 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:provider/provider.dart';
+
 class EmployeeDashboard extends StatefulWidget {
   EmployeeDashboard({required this.admineamil,Key? key}) : super(key: key);
   String admineamil;
   @override
   State<EmployeeDashboard> createState() => _EmployeeDashboardState();
 }
+
 String aadmin='';
+
 class _EmployeeDashboardState extends State<EmployeeDashboard> {
 
     final _controller = PageController();
@@ -116,7 +120,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
 
     }
 
-
   void _getTime() {
     final DateTime now = DateTime.now();
     final String formattedDateTime = _formatDateTime(now);
@@ -126,7 +129,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       _timeString=_timeString.substring(10);
       });}
     }
-
 
   String _formatDateTime(DateTime dateTime) {
       return DateFormat('MM/dd/yyyy hh:mm:ss').format(dateTime);
@@ -140,8 +142,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   bool timinindicator=false;
   bool timinoutdicator=false;
   bool timininandoutdicator=false;
-
-
 
   fetchuser() async {
     print("%%%%%%%%%%%%%%%% $datestring");
@@ -212,6 +212,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       GetAddressFromLatLong1(position);});
       print("-------------------------------- $timeinshow $timeoutshow");
   }
+
   ////////////////////location fetching/////////////////////////
   final _advancedDrawerController = AdvancedDrawerController();
   String Address='';
@@ -247,26 +248,28 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     }
     return await Geolocator.getCurrentPosition();
   }
+
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
-    Address= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
-    setState(() {});
+    setState(() {  Address= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
+    });
   }
+
   Future<void> GetAddressFromLatLong1(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
-    Address1= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
-    setState(() {});
+    setState(() {
+      Address1= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
+    });
   }
   ///////////////////////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-
     return SafeArea(
       child: AdvancedDrawer(
         backdropColor: srpgradient2,
@@ -776,9 +779,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
-
-                                    timinindicator==false? markattimeintendance():null;
-
+                                    Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
                                     // Position position = await _determinePosition();
                                     // print(position.latitude);print(position.longitude);
                                     // GetAddressFromLatLong1(position);DateTime now = DateTime.now();
@@ -793,7 +794,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     //       });
                                     //     return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
                                     // }); //.then((value) => initState());
-
                                   },
                                   child: Container(
                                       height: 40.h,
@@ -916,7 +916,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
-                                    timinoutdicator==false ? marktimeoutAttendance(): null;
+                                     Address.isNotEmpty? timinoutdicator==false ? marktimeoutAttendance() : null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
                                       // .then((value) => initState());
                                     },
                                   child: Container(
@@ -1040,8 +1040,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
-                                    timinindicator ==false ?markattimeintendance() :null;
-                                     //.then((value) => initState());
+                                    Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
+                                      //.then((value) => initState());
                                   },
                                   child: Container(
                                       height: 40.h,
@@ -1722,6 +1722,16 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     );
   }
 
+  void _showToast(BuildContext context,String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('$text',style:GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient2)),
+          //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
   marktimeoutAttendance() async {
     print("............................................");
     setState(() {
@@ -1766,7 +1776,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
     });
   }
-
 
   void _handleMenuButtonPressed() {
     // NOTICE: Manage Advanced Drawer state through the Controller.
@@ -2333,7 +2342,7 @@ class NoOfRequest extends StatelessWidget {
                     child: Text(subject,style: GoogleFonts.poppins(fontSize: 14.sp, color: iconcolor, fontWeight: FontWeight.w400),),
                   ),
                   const Spacer(),
-                  approve==null? Row(
+                  approve==null ? Row(
                     children: [
                     Text("Pending",style: GoogleFonts.poppins(fontSize: 10.sp, color: Colors.lightBlue, fontWeight: FontWeight.w400),),
                     SizedBox(width: 3.w,),
@@ -2383,7 +2392,9 @@ class NoOfRequest extends StatelessWidget {
 
 
 class WriteLeave extends StatefulWidget {
-  WriteLeave({required this.providerGenerator, Key? key, required this.adminemail}) : super(key: key);
+  WriteLeave({
+    required this.providerGenerator,
+    Key? key, required this.adminemail}) : super(key: key);
   final String adminemail;
   ProviderGenerator providerGenerator;
 
@@ -2392,11 +2403,11 @@ class WriteLeave extends StatefulWidget {
 }
 
 class _WriteLeaveState extends State<WriteLeave> {
+
   TextEditingController textEditingController=TextEditingController();
   TextEditingController textEditingController1=TextEditingController();
-
   final user = FirebaseAuth.instance.currentUser;
-  final List<String> _locations = ['Casual Leave', 'Annual/Vacation Leave', 'Sick Leave', 'UnPaid Leave']; // Option 2
+  final List<String> _locations = ['Casual Leave', 'Annual Leave', 'Sick Leave', 'UnPaid Leave']; // Option 2
   String _selectedLocation = 'Casual Leave';
 
   DateTimeRange dateRange = DateTimeRange(
@@ -2542,7 +2553,6 @@ class _WriteLeaveState extends State<WriteLeave> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 10.h,),
-
                 GestureDetector(
                   onTap: () async {
                     pickDateRange();
@@ -2602,16 +2612,12 @@ class _WriteLeaveState extends State<WriteLeave> {
                         ),
                       ),
                     ),
-
                 SizedBox(height: 12.h,),
-
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4.w),
                   child: Text("Select Subject",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),),
                 ),
-
                 SizedBox(height: 10.h,),
-
                 Container(
                   height: 60.h,
                   width: 272.w,
@@ -2698,9 +2704,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                     //   ),
                     // ),
                   ),),
-
                 SizedBox(height: 25.h,),
-
                 Container(
                   height: 200.h,
                   decoration: BoxDecoration(
@@ -2767,13 +2771,11 @@ class _WriteLeaveState extends State<WriteLeave> {
                     ),
                   ),
                 ),
-
                 SizedBox(height: 20.h,),
-
                 GestureDetector(
                   onTap: (){
 
-                     //Navigator.pop(context);
+                    //Navigator.pop(context);
                     // FrLoginService(FirebaseAuth.instance).onTapSignIn(
                     //     buttonIndex: 1,
                     //     errorIndex: 0,
@@ -2783,7 +2785,6 @@ class _WriteLeaveState extends State<WriteLeave> {
                     //     providerGenerator: providerGenerator);
 
                     if(textEditingController.text.isNotEmpty) {
-
                       FirebaseFirestore.instance
                           .collection('Companies')
                           .doc('${widget.adminemail}')
@@ -2803,16 +2804,10 @@ class _WriteLeaveState extends State<WriteLeave> {
                     } else{
                       _showToast(context,'Please write some message');
                     }
-
-
-
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(builder: (context) => const ScreenMain()),
                     // );
-
-
-
                   },
                   child: Container(
                       height: 40.h,
@@ -2843,7 +2838,6 @@ class _WriteLeaveState extends State<WriteLeave> {
                       )
                     ),
                   ),
-
               ],
             ),
           ),
@@ -2851,6 +2845,7 @@ class _WriteLeaveState extends State<WriteLeave> {
       ),
     );
   }
+
   void _showToast(BuildContext context,String text) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
@@ -2860,6 +2855,7 @@ class _WriteLeaveState extends State<WriteLeave> {
       ),
     );
   }
+
 }
 
 
@@ -3607,7 +3603,8 @@ class _ByEmployee1State extends State<ByEmployee1> {
                 ),
               ),
             ),
-            body: days.isEmpty? SizedBox(): SingleChildScrollView(
+
+            body: days.isEmpty ? SizedBox(): SingleChildScrollView(
               child: Column(
                 children: [
                   SizedBox(height: 20.h,),
@@ -3711,7 +3708,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
                   ),
                 ),
 
-             //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+                //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
 
             // DefaultTabController(
             //   length: 1,
@@ -4009,11 +4006,7 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
     print("************ ${widget.employe}");
   }
 
-  fetchattendance(){
-
-
-
-  }
+  fetchattendance(){}
 
   @override
   Widget build(BuildContext context) {
@@ -4031,12 +4024,11 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 10.0.w),
                   child: Container(
-                     //color: Colors.lightBlue,
+                    //color: Colors.lightBlue,
                     alignment: Alignment.topLeft,
                     width: 129.w,
                     height: 155.h,
@@ -4061,7 +4053,6 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-
                       Padding(
                         padding: EdgeInsets.only(left: .0.w),
                         child: Column(
@@ -4135,7 +4126,8 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
                       SizedBox(width: 10.w,),
                     ],
                   ),
-                )
+                ),
+
               ],
             ),
           ],

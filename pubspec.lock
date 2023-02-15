@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  easy_api:
+    dependency: "direct dev"
+    description:
+      name: easy_api
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   easy_localization:
     dependency: "direct dev"
     description:

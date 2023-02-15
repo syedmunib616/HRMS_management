@@ -188,6 +188,7 @@ CSMainPopup4(
       //required VoidCallback onTap
     }) {
   showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (context) {
       return CsScreenUtilInit(
@@ -250,9 +251,9 @@ CSMainPopup4(
                   title: btnText,
                   onTap: () {
                     Navigator.pop(context);
-                     Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: superadmin)),
-                            result: false);
+                     // Navigator.of(context).pushReplacement(
+                     //        MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: superadmin)),
+                     //        result: false);
                   },
                 ),
 
@@ -354,6 +355,8 @@ CSMainPopup3(
     }) {
   showDialog(
     context: context,
+    barrierDismissible: false,
+
     builder: (context) {
       return CsScreenUtilInit(
         child: AlertDialog(
@@ -415,7 +418,7 @@ CSMainPopup3(
                   title: btnText,
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Test(password: superadmin,)),);
+                    // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Test(password: superadmin,)),);
                   },
                 ),
 

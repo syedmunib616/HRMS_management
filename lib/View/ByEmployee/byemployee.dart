@@ -201,7 +201,7 @@ class _ByEmployeeState extends State<ByEmployee> {
   DateTime? newDateTime1;
   StreamController<ListAttandance> streamController = StreamController.broadcast();
 
-  //late DateTime dateTime;
+  // late DateTime dateTime;
 
   //////////////////////////////////////////////////
 
@@ -473,38 +473,64 @@ class _ByEmployeeState extends State<ByEmployee> {
                                       ),
                                     ],
                                     borderRadius: BorderRadius.circular(5),
+                                    // color: Colors.purpleAccent,
                                     color: whiteClr,
                                   ),
                                   //color: Colors.purpleAccent,
-                                  child:  Row(
+                                  child:  Stack(
                                     children: [
-                                      SizedBox(width: 5.w,),
-                                      Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
-                                      SizedBox(width: 14.w,),
-                                      DropdownButton(
-                                        // Initial Value
-                                        value: dropdownvalue1,
-                                        // Down Arrow Icon
-                                        icon:  Row(children: [SizedBox(width: 103.w,), Icon(Icons.keyboard_arrow_down,size: 23.sp,)],),
-                                        // Array list of items
-                                        items: items1.map((String items) {
-                                          return DropdownMenuItem(
-                                            value: items,
-                                            child: Text(items),
-                                          );
-                                        }).toList(),
-                                        // After selecting the desired option,it will
-                                        // change button value to selected value
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            dropdownvalue1 = newValue!;
-                                          });
-                                          print("::::::::::: $dropdownvalue1 $days");
-                                          dropdownfetchattendance(dropdownvalue1);
-                                            },
-                                          ),
-                                        ],
+
+
+
+
+                                      Positioned(
+                                        top: 0,
+                                        bottom: 0,
+                                        left: 0,
+                                        right: 0,
+                                        child: Row(
+                                          children: [
+                                            SizedBox(width: 5.w,),
+                                            Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
+                                            SizedBox(width: 14.w,),
+                                            DropdownButton(
+                                              // Initial Value
+                                              value: dropdownvalue1,
+                                              // Down Arrow Icon
+                                              icon: Container(
+
+                                                height: 30.h,
+                                                width: 100.w,
+                                                  ),
+                                              // Array list of items
+                                              items: items1.map((String items) {
+                                                return DropdownMenuItem(
+                                                  value: items,
+                                                  child: Text(items),
+                                                );
+                                              }).toList(),
+                                              // After selecting the desired option,it will
+                                              // change button value to selected value
+                                              onChanged: (String? newValue) {
+                                                setState(() {
+                                                  dropdownvalue1 = newValue!;
+                                                });
+                                                print("::::::::::: $dropdownvalue1 $days");
+                                                dropdownfetchattendance(dropdownvalue1);
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                       ),
+
+                                      Positioned(
+                                        top: 5,
+                                          right: 10,
+                                          child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
+                                      ),
+
+                                    ],
+                                  ),
                                     ),
                                   // Row(
                                 //   children: [
@@ -641,29 +667,58 @@ class _ByEmployeeState extends State<ByEmployee> {
                       child: Row(
                         children: [
                           Padding(
-                            padding:  EdgeInsets.only(left: 15.0.w),
+                            padding: EdgeInsets.only(left: 15.0.w),
                             child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
-                          SizedBox(width: 100.w,),
+                          Spacer(),
+
                           Padding(
                             padding:  EdgeInsets.only(left:10.0.w),
                             child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
-                          Spacer(),
-                          Padding(
-                            padding:  EdgeInsets.only(left: 35.0.w),
-                            child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
-                                color: srpgradient2,fontWeight: FontWeight.w600),),
+
+                          SizedBox(width: 22.w,),
+
+                          // Padding(
+                          //   padding:  EdgeInsets.only(left: 35.0.w),
+                          //   child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
+                          //       color: srpgradient2,fontWeight: FontWeight.w600),),
+                          // ),
+
+                          Container(
+                            width: 50.w,
+                            //color: Colors.yellow,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
+                                    color: srpgradient2,fontWeight: FontWeight.w600),),
+                              ],
+                            ),
                           ),
-                          SizedBox(width: 14.w,),
-                          Padding(
-                            padding:  EdgeInsets.only(left: 10.0.w),
-                            child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
-                                color: srpgradient2,fontWeight: FontWeight.w600),),
+                          Container(
+                            width: 80.w,
+                            // color: Colors.red,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
+                                    color: srpgradient2,fontWeight: FontWeight.w600),),
+                              ],
+                            ),
                           ),
+
+
+                          // Padding(
+                          //   padding:  EdgeInsets.only(left: 10.0.w),
+                          //   child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
+                          //       color: srpgradient2,fontWeight: FontWeight.w600),),
+                          // ),
+
                           SizedBox(width: 5.w,),
+
                         ],
                       ),
                     ),
@@ -1152,6 +1207,7 @@ class _ByEmployeeState extends State<ByEmployee> {
 }
 
 class ListAttandance {
+
   ListAttandance({
     required this.employee,
     required this.date,
@@ -1159,19 +1215,23 @@ class ListAttandance {
     required this.addressIn,
     required this.timeout,
     required this.addressout,});
+
   String date;
   String timein;
   String addressIn;
   String timeout;
   String addressout;
   String employee;
+
 }
 
 class TabsforDesignationAbsentLateEarly extends StatefulWidget {
+
   const TabsforDesignationAbsentLateEarly({Key? key, required this.time,
     required this.tabcount, required this.datetime, required this.employe,
     required this.timein, required this.timeout, required this.addressin,
     required this.addressout, required this.date}) : super(key: key);
+
   final String time;
   final int tabcount;
   final List<DateTime> datetime;
@@ -1198,17 +1258,13 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
     print("************ ${widget.timeout} ${widget.timein}");
   }
 
-  fetchattendance(){
-
-
-
-  }
+  fetchattendance(){}
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-       widget.timeout.isEmpty || widget.timein.isEmpty? Navigator.push(context, MaterialPageRoute(builder: (context) =>
+       widget.timeout.isEmpty || widget.timein.isEmpty ? Navigator.push(context, MaterialPageRoute(builder: (context) =>
               EditSelectedAttendance(
                 employe: widget.employe,
                 addressin: widget.addressin,
@@ -1223,10 +1279,10 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
           ),):null;
       },
       child: Container(
-        height: 165.h,
+        height: 168.h,
         width: MediaQuery.of(context).size.width,
-         color: widget.timeout.isEmpty || widget.timein.isEmpty? Color(
-             0xffdbfdb8):Colors.transparent,
+         color: widget.timeout.isEmpty || widget.timein.isEmpty ?
+         const Color(0xffdbfdb8):Colors.transparent,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 3.0.w),
           child: Column(
@@ -1236,33 +1292,67 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
               SizedBox(height: 12.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 14.0.w),
                     child: Container(
-                      // color: Colors.lightBlue,
+                       //color: Colors.lightBlue,
                       alignment: Alignment.topLeft,
                       width: 120.w,
-                      height: 141.h,
+                      height: 156.h,
                       child: Column(
                         crossAxisAlignment:CrossAxisAlignment.start,
                         children: [
                           Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12.sp,
                               color: blackClr,fontWeight: FontWeight.w600),),
-                          Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
-                              color: blackClr,fontWeight: FontWeight.w400),),
-                          Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
-                              color: blackClr,fontWeight: FontWeight.w400),),
+                          RichText(
+                            text: TextSpan(
+                              // Note: Styles for TextSpans must be explicitly defined.
+                              // Child text spans will inherit styles from parent
+                              style:  TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(text: "Time In at : ",style: GoogleFonts.poppins(fontSize:10.sp,
+                                       color: blackClr,fontWeight: FontWeight.w600),),
+                                TextSpan(text: "${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
+                                       color: blackClr,fontWeight: FontWeight.w400),),
+                                // TextSpan(text: 'World', style: const TextStyle(fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              // Note: Styles for TextSpans must be explicitly defined.
+                              // Child text spans will inherit styles from parent
+                              style: const TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                TextSpan(text: "Time Out at : ",style: GoogleFonts.poppins(fontSize:10.sp,
+                                    color: blackClr,fontWeight: FontWeight.w600),),
+                                TextSpan(text: "${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
+                                    color: blackClr,fontWeight: FontWeight.w400),),
+                                 // TextSpan(text: 'World', style: const TextStyle(fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                          // Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
+                          //     color: blackClr,fontWeight: FontWeight.w400),),
+                          // Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
+                          //     color: blackClr,fontWeight: FontWeight.w400),),
                         ],
                       ),
                     ),
                   ),
                   Spacer(),
                   Container(
-                   // width: 230.w,
-                   // color: Colors.lightBlue,
-                   child: Row(
+                    // width: 230.w,
+                    // color: Colors.lightBlue,
+                    child: Row(
                      mainAxisAlignment: MainAxisAlignment.center,
                      crossAxisAlignment: CrossAxisAlignment.center,
                      children: [
@@ -1288,40 +1378,39 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                            ),
                         ),
                         Container(
-                          width: 80.w,
-                          //color: Colors.red,
-                          child: Padding(
-                             padding:  EdgeInsets.only(left: 35.0.w),
-                             child: Column(
-                               children: [
-                                 Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
-                                     color: srpgradient2,fontWeight: FontWeight.w600),),
-                                 // ClipRRect(
-                                 //   borderRadius: BorderRadius.circular(20.0.sp),
-                                 //   child: Image.asset(
-                                 //     'assets/user.jpg',
-                                 //     width: 40.0.w,
-                                 //     height: 40.0.h,
-                                 //     fit: BoxFit.fill,
-                                 //   ),
-                                 // ),
-                               ],
-                             ),
-                           ),
+                          width: 70.w,
+                           //color: Colors.red,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                  color: srpgradient2,fontWeight: FontWeight.w600),),
+                              // ClipRRect(
+                              //   borderRadius: BorderRadius.circular(20.0.sp),
+                              //   child: Image.asset(
+                              //     'assets/user.jpg',
+                              //     width: 40.0.w,
+                              //     height: 40.0.h,
+                              //     fit: BoxFit.fill,
+                              //   ),
+                              // ),
+                            ],
+                          ),
                         ),
-                       Container(
-                         width: 74.w,
+                        Container(
+                         width: 80.w,
                          height: 100.h,
-                          color: Colors.transparent,
-                         alignment: Alignment.center,
+                         color: Colors.transparent,
+                         //color: Colors.red,
+                         alignment: Alignment.centerRight,
                          child: Padding(
-                              padding:  EdgeInsets.only(left: 22.0.w),
+                              padding: EdgeInsets.only(left: 22.0.w,right: 2.w),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
                                       color: srpgradient2,fontWeight: FontWeight.w600),),
-                                  // ClipRRect(
+                                    // ClipRRect(
                                   //   borderRadius: BorderRadius.circular(20.0.sp),
                                   //   child: Image.asset(
                                   //     'assets/user.jpg',
@@ -1337,7 +1426,7 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                         SizedBox(width: 10.w,),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -1400,7 +1489,6 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-
     return CsScreenUtilInit(
       child: Scaffold(
         appBar: AppBar(
@@ -1422,7 +1510,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                 Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
                 SizedBox(height: 7.h,),
                 GestureDetector(
-                  onTap: ()async{
+                  onTap: () async {
                     TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay,);
                     if(newTime ==null) return;
                     setState(() {
@@ -1448,7 +1536,6 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                     ),
                     alignment: Alignment.center,
                     child: Row(
-
                       children: [
                         SizedBox(width: 20.w,),
                         const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
@@ -1514,8 +1601,6 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                         SizedBox(width: 10.w,),
                         OUT.isEmpty?Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
                         Text("   $OUT", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey, letterSpacing: 4.5.w,fontWeight: FontWeight.bold),),
-
-
                         Spacer(),
                       ],
                     ),
@@ -1568,6 +1653,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                 // ),
                 SizedBox(height: 10.h,),
                 GestureDetector(
+
                   onTap: () {
                       print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
                       print("&&&&&&&&&&& ${textEditingController1.text} ${textEditingController2.text}");
@@ -1584,8 +1670,8 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                         Navigator.of(context).pop();
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) =>  ByEmployee()), result: false);
-                      });
-                  },
+                      });},
+
                   child: Container(
                       height: 40.h,
                       width: MediaQuery.of(context).size.width,
