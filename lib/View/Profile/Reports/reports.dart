@@ -203,53 +203,53 @@ class Reports extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DailyAttendance()
-                          ),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/month.png",title: TextStrings.DailyAttendance,subtitle: TextStrings.CheckPresentsAbsentList,)
-                  ),
-                  SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LateComers()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/clock.png",title: TextStrings.LateComers,subtitle: TextStrings.GetLateComersList,)),
-                  SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => EarlyLeaves()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/hour.png",title: TextStrings.EarlyLeavers,subtitle: TextStrings.GetEarlyLeaversList,)),
-                  SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ByDepartment()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/office.png",title: TextStrings.ByDepartment,subtitle: TextStrings.AttendancebyDepartment,)),
-                  SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ByDesignation()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/identity.png",title: TextStrings.ByDesignation,subtitle: TextStrings.AttendancebyDesignation,)),
-                  SizedBox(height: 18.h,),
+                  // GestureDetector(
+                  //     onTap: (){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => DailyAttendance()
+                  //         ),
+                  //       );
+                  //     },
+                  //     child: SubReportsOrSubSettings(iconString: "assets/month.png",title: TextStrings.DailyAttendance,subtitle: TextStrings.CheckPresentsAbsentList,)
+                  // ),
+                  // SizedBox(height: 18.h,),
+                  // GestureDetector(
+                  //     onTap: (){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => LateComers()),
+                  //       );
+                  //     },
+                  //     child: SubReportsOrSubSettings(iconString: "assets/clock.png",title: TextStrings.LateComers,subtitle: TextStrings.GetLateComersList,)),
+                  // SizedBox(height: 18.h,),
+                  // GestureDetector(
+                  //     onTap: (){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => EarlyLeaves()),
+                  //       );
+                  //     },
+                  //     child: SubReportsOrSubSettings(iconString: "assets/hour.png",title: TextStrings.EarlyLeavers,subtitle: TextStrings.GetEarlyLeaversList,)),
+                  // SizedBox(height: 18.h,),
+                  // GestureDetector(
+                  //     onTap: (){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => ByDepartment()),
+                  //       );
+                  //     },
+                  //     child: SubReportsOrSubSettings(iconString: "assets/office.png",title: TextStrings.ByDepartment,subtitle: TextStrings.AttendancebyDepartment,)),
+                  // SizedBox(height: 18.h,),
+                  // GestureDetector(
+                  //     onTap: (){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => ByDesignation()),
+                  //       );
+                  //     },
+                  //     child: SubReportsOrSubSettings(iconString: "assets/identity.png",title: TextStrings.ByDesignation,subtitle: TextStrings.AttendancebyDesignation,)),
+                  // SizedBox(height: 18.h,),
                   GestureDetector(
                       onTap: (){
                         Navigator.push(
@@ -258,25 +258,26 @@ class Reports extends StatelessWidget {
                         );
                       },
                       child: SubReportsOrSubSettings(iconString: "assets/users.png",title: TextStrings.ByEmployee,subtitle: TextStrings.AttendancedataofspecifiedEmployees,)),
-                  SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PunchedVisit()),
-                              //Paswrd()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.PunchedVisits,subtitle: TextStrings.ListofPinchedVisits,)),
-                  SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Suspicious()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/pic.png",title: TextStrings.SuspiciousSelfies,subtitle: TextStrings.ListofPinchedVisits,)),
+                  // SizedBox(height: 18.h,),
+                  // GestureDetector(
+                  //     onTap: (){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => PunchedVisit()),
+                  //             //Paswrd()),
+                  //       );
+                  //     },
+                  //     child: SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.PunchedVisits,subtitle: TextStrings.ListofPinchedVisits,)),
+                  // SizedBox(height: 18.h,),
+                  // GestureDetector(
+                  //     onTap: (){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => Suspicious()),
+                  //       );
+                  //     },
+                  //     child: SubReportsOrSubSettings(iconString: "assets/pic.png",title: TextStrings.SuspiciousSelfies,subtitle: TextStrings.ListofPinchedVisits,)),
+                  //
                   SizedBox(height: 18.h,),
 
                   // GestureDetector(

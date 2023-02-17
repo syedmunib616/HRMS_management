@@ -37,7 +37,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:modal_bottom_sheet/src/bottom_sheet_route.dart' as mymodal;
+// import 'package:modal_bottom_sheet/src/bottom_sheet_route.dart' as mymodal;
 
 
 class Departments{
@@ -86,7 +86,6 @@ class _DepartmentListState extends State<DepartmentList> {
   }
 
   fetchListOfSocialMedia() async {
-
     String a,c;
     // departments.add(Departments("111", 'Finance'));
     // departments.add(Departments("112", 'Marketing'));
@@ -682,7 +681,6 @@ class _DepartmentListState extends State<DepartmentList> {
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
 
-
                   SizedBox(height: 30.h,),
 
                   Text("Add Department",
@@ -732,7 +730,6 @@ class _DepartmentListState extends State<DepartmentList> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-
                       GestureDetector(
                         onTap: (){
                             print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
@@ -826,8 +823,6 @@ class _DepartmentListState extends State<DepartmentList> {
                       // )
                     ],
                   ),
-
-
                 ],
               ),
             ),
@@ -835,7 +830,6 @@ class _DepartmentListState extends State<DepartmentList> {
         }
     );
   }
-
 
   showAlertDialog(BuildContext context) {
     // set up the buttons
@@ -864,13 +858,11 @@ class _DepartmentListState extends State<DepartmentList> {
         Navigator.of(context).pop();
       },
     );
-
     // Widget launchButton = TextButton(
     //   child: Text("Launch missile"),
     //   onPressed:  () {},
     // );
     // set up the AlertDialog
-
     AlertDialog alert = AlertDialog(
       title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
          content: Container(
@@ -982,8 +974,8 @@ class _DepartmentListState extends State<DepartmentList> {
         // );
       },
     );
-  }
 
+  }
 
 }
 
@@ -1029,7 +1021,6 @@ class _DepartmentList1State extends State<DepartmentList1> {
   }
 
   fetchListOfSocialMedia() async {
-
     String a,c;
     departments.add(Departments("111", 'Finance'));
     departments.add(Departments("112", 'Marketing'));
@@ -1118,10 +1109,10 @@ class _DepartmentList1State extends State<DepartmentList1> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
@@ -1285,7 +1276,6 @@ class _DepartmentList1State extends State<DepartmentList1> {
               ),
             ),
           ),
-
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment:CrossAxisAlignment.start,
@@ -1671,7 +1661,6 @@ class _DepartmentList1State extends State<DepartmentList1> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-
                       GestureDetector(
                         onTap: (){
                           print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");

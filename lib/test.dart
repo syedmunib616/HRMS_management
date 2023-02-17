@@ -10,6 +10,7 @@ import 'package:hrmanagementapp/View/DepartmentList/Departmentlist.dart';
 import 'package:hrmanagementapp/View/listofcompany/companylist.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/View/signup/Sginup.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Test extends StatefulWidget {
   Test({Key? key, required this.password}) : super(key: key);
@@ -112,16 +113,27 @@ class _TestState extends State<Test> {
                   //   title: Text('Settings'),
                   // ),
                   Spacer(),
-                  DefaultTextStyle(
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.white54,
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 16.0,
+                  GestureDetector(
+                    onTap: ()async{
+                      const url=  'https://github.com/syedmunib616/syedmunib/blob/main/privacy-policy.md';
+                      if(await canLaunch(url)){
+                        await launch(url,forceSafariVC: false );  //forceWebView is true now
+                      }
+                      else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: DefaultTextStyle(
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white54,
                       ),
-                      child: Text('Terms of Service | Privacy Policy'),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 16.0,
+                        ),
+                        child: const Text('Terms of Service | Privacy Policy'),
+                      ),
                     ),
                   ),
                 ],

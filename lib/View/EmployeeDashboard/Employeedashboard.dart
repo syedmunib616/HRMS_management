@@ -40,6 +40,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmployeeDashboard extends StatefulWidget {
   EmployeeDashboard({required this.admineamil,Key? key}) : super(key: key);
@@ -378,16 +379,27 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                   //   title: Text('Settings'),
                   // ),
                   const Spacer(),
-                  DefaultTextStyle(
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.white54,
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 16.0,
+                  GestureDetector(
+                    onTap: ()async{
+                    const url=  'https://github.com/syedmunib616/syedmunib/blob/main/privacy-policy.md';
+                    if(await canLaunch(url)){
+                      await launch(url,forceSafariVC: false );  //forceWebView is true now
+                    }
+                    else {
+                      throw 'Could not launch $url';
+                    }
+                    },
+                    child: DefaultTextStyle(
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white54,
                       ),
-                      child: const Text('Terms of Service | Privacy Policy'),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 16.0,
+                        ),
+                        child: const Text('Terms of Service | Privacy Policy'),
+                      ),
                     ),
                   ),
                 ],
