@@ -27,7 +27,6 @@ class SginUp extends StatefulWidget {
 
 class _SginUpState extends State<SginUp> {
 
-
   TextEditingController textEditingController1 = TextEditingController();
   TextEditingController textEditingController2 = TextEditingController();
   TextEditingController textEditingController3 = TextEditingController();
@@ -37,7 +36,6 @@ class _SginUpState extends State<SginUp> {
   TextEditingController textEditingController7 = TextEditingController();
   bool companyisalreadycreated=false;
   bool internetconnection=false;
-
 
   @override
   void initState() {
@@ -335,7 +333,9 @@ class _SginUpState extends State<SginUp> {
                                   child: Text(TextStrings.Sgin_Up, style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                 ),
                             ),
-                          ),],),),],),),),),),);}
+                          ),],),),],),),),),),
+    );
+  }
 
   String baseurl="https://test.srp.ai/api/resource/Company";
 
@@ -346,7 +346,6 @@ class _SginUpState extends State<SginUp> {
       Uri.parse('$baseurl'),
       headers: { "Content-Type": "application/json",
         "Authorization": "Token ecd1d920e3ad1e1:06de7da5ca2eee7"},
-
     ).then((value) {
       setState(() {
         internetconnection=true;
@@ -385,7 +384,22 @@ class _SginUpState extends State<SginUp> {
         "default_currency" : "PKR",
     };
 
+    var usercreation={
+      "email": "${textEditingController3.text}",
+      "first_name" : "${textEditingController1.text}",
+      "roles": [
+        {
+          "role" : "HR User",
+          "doctype" : "Has Role"
 
+        },
+        {
+          "role" : "HR Manager",
+          "doctype" : "Has Role"
+
+        }
+      ]
+    };
 
       for(int i=0;i<noofcompanies.length;i++){
         print("###### ${noofcompanies[i]}");
@@ -396,6 +410,7 @@ class _SginUpState extends State<SginUp> {
           }
         }
       if(companyisalreadycreated==false){
+
         FrSignUpService(FirebaseAuth.instance).onTapSignUP(
           email: textEditingController3.text.trim(),
           password: textEditingController5.text.trim(),
@@ -410,11 +425,14 @@ class _SginUpState extends State<SginUp> {
           print("kkkkkkkkkk");
           var res= await CreateCompany().postData(data,'register');
           var body=jsonDecode(res.body);
-
+        }).then((value) async {
+          var res= await CreateCompany().postcratetionofuser(usercreation,'register');
+          var body=jsonDecode(res.body);
         });
+
+
       }else{
         _showToast(context,"Company name already taken");
-
       }
 
 

@@ -285,7 +285,7 @@ class _HomeState extends State<Home> {
                   Spacer(),
 
                   GestureDetector(
-                    onTap: ()async{
+                    onTap: () async {
                       const url=  'https://github.com/syedmunib616/syedmunib/blob/main/privacy-policy.md';
                       if(await canLaunch(url)){
                         await launch(url,forceSafariVC: false );  //forceWebView is true now
