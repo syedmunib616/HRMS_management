@@ -14,8 +14,8 @@ import 'package:hrmanagementapp/test.dart';
 String globalemail='';
 class FrSignUpService {
   final FirebaseAuth firebaseAuth;
-
   FrSignUpService(this.firebaseAuth);
+
   bool isEmpty(String email, String password, String passwordConfirmation,String name, String companyname,String phonenumber,String website) {
     return email.trim().isEmpty ||
         password.trim().isEmpty ||
@@ -27,6 +27,7 @@ class FrSignUpService {
         ? true
         : false;
   }
+
   // To Sign UP
   Future onTapSignUP({
     required String email,
@@ -291,7 +292,6 @@ class FrSignUpService1 {
 
   // To Sign UP
   Future onTapSignUP({
-
     required String adminpassword,
     required String adminemail,
     required String email,

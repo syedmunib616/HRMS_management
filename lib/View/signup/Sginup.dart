@@ -287,11 +287,8 @@ class _SginUpState extends State<SginUp> {
                             //       });
                             //     }
                             //   }
-                            registercompany(providerGenerator);
+                              registercompany(providerGenerator);
                             }
-
-
-
                             // FrSignUpService(FirebaseAuth.instance).onTapSignUP(
                             //   email: textEditingController3.text.trim(),
                             //   password: textEditingController5.text.trim(),
@@ -303,7 +300,6 @@ class _SginUpState extends State<SginUp> {
                             //   context: context,
                             //   providerGenerator: providerGenerator,
                             // );
-
                           },
                           child: Container(
                                 height: 40.h,
@@ -341,7 +337,7 @@ class _SginUpState extends State<SginUp> {
 
   List<String> noofcompanies=[];
 
-  fetchdata()async {
+  fetchdata() async {
     var res = http.get(
       Uri.parse('$baseurl'),
       headers: { "Content-Type": "application/json",
@@ -358,9 +354,9 @@ class _SginUpState extends State<SginUp> {
           print("###### ${st.data[i].name}");
           noofcompanies.add(st.data[i].name);
         }
+
       }else{}
     });
-
     // if (res.statusCode == 200) {}
   }
 
@@ -376,15 +372,13 @@ class _SginUpState extends State<SginUp> {
 
 
   registercompany(ProviderGenerator providerGenerator ) async {
-
-    var data = {
+  var data = {
         "abbr" : "${textEditingController2.text}",
         "name":"${textEditingController2.text}",
         'company_name':"${textEditingController2.text}",
         "default_currency" : "PKR",
     };
-
-    var usercreation={
+  var usercreation={
       "email": "${textEditingController3.text}",
       "first_name" : "${textEditingController1.text}",
       "roles": [
@@ -400,6 +394,13 @@ class _SginUpState extends State<SginUp> {
         }
       ]
     };
+  var userpermission = {
+    "user": "${textEditingController3.text}", //(email)
+    "allow": "Company",	//(static company)
+    "for_value": "${textEditingController2.text}"   // (company name)
+    };
+
+
 
       for(int i=0;i<noofcompanies.length;i++){
         print("###### ${noofcompanies[i]}");
@@ -410,7 +411,6 @@ class _SginUpState extends State<SginUp> {
           }
         }
       if(companyisalreadycreated==false){
-
         FrSignUpService(FirebaseAuth.instance).onTapSignUP(
           email: textEditingController3.text.trim(),
           password: textEditingController5.text.trim(),
@@ -428,15 +428,15 @@ class _SginUpState extends State<SginUp> {
         }).then((value) async {
           var res= await CreateCompany().postcratetionofuser(usercreation,'register');
           var body=jsonDecode(res.body);
+        }).then((value) async{
+          var res= await CreateCompany().postpermissionofuser(userpermission,'register');
+          var body=jsonDecode(res.body);
         });
 
 
       }else{
         _showToast(context,"Company name already taken");
       }
-
-
-
   }
 
 

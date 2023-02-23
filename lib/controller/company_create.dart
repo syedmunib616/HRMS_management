@@ -10,6 +10,7 @@ const String authorization="Token ecd1d920e3ad1e1:06de7da5ca2eee7";
 
 class CreateCompany {
 
+
   postData(data,apirul) async {
     var fullurl=baseurl;
     var body= jsonEncode(data);
@@ -20,6 +21,7 @@ class CreateCompany {
          body:body
        );
   }
+
 
   postcratetionofuser(data,apirul) async {
     var fullurl=baseurl;
@@ -32,5 +34,20 @@ class CreateCompany {
     );
   }
 
-}
 
+  postpermissionofuser(data,apirul) async {
+    var fullurl=baseurl;
+    var body= jsonEncode(data);
+    return await http.post(
+        Uri.parse("$baseurl/User Permission"),
+        headers: {"Content-Type": contenttype,
+          "Authorization": authorization },
+        body:body
+    ).then((value) {
+      print("giudlkfjsad;lkg");
+
+    });
+  }
+
+
+}
