@@ -115,6 +115,7 @@ class FrSignUpService {
     final r = fb.reference().child("UserT");
     userid=uid.toString();
     List<Department> depaetment=[];
+
     //await UserT.doc(email).collection("Contacts").doc("$email").set({"email":"$email","role":"admin","uid":"$uid",});
     //await UserT.firestore.collection(email).doc().set({"admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber"});
 
@@ -218,8 +219,8 @@ class FrSignUpService {
         return "Signing up with Email and Password is not enabled.";
       default:
         return "An undefined Error happened.";
+      }
     }
-  }
 
 //   Future<bool> signUP({String? email, String? password}) async {
 //     bool isSignedIn = false;
@@ -259,6 +260,7 @@ class FrSignUpService {
 //       return true;
 //     }
 //   }
+
 }
 
 class Department{

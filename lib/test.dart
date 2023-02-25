@@ -114,7 +114,7 @@ class _TestState extends State<Test> {
                   // ),
                   Spacer(),
                   GestureDetector(
-                    onTap: ()async{
+                    onTap: () async {
                       const url=  'https://github.com/syedmunib616/syedmunib/blob/main/privacy-policy.md';
                       if(await canLaunch(url)){
                         await launch(url,forceSafariVC: false );  //forceWebView is true now
@@ -166,6 +166,7 @@ class _TestState extends State<Test> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+
                       GestureDetector(
                         onTap: _handleMenuButtonPressed,
                         // onTap: () async {
@@ -203,7 +204,7 @@ class _TestState extends State<Test> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Super Admin Panel",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                          Text( "Super Admin Panel",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                           SizedBox(
                             height: 2.h,
                           ),
@@ -248,128 +249,128 @@ class _TestState extends State<Test> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SginUp()),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(17.0.sp),
-                        child: Container(
-                          height: 115.h,
-                          width:139.w,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.4),
-                                spreadRadius: 2,
-                                blurRadius: 1,
-                                offset: const Offset(0, 2), // changes position of shadow
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SginUp()),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(17.0.sp),
+                          child: Container(
+                            height: 115.h,
+                            width:139.w,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.4),
+                                  spreadRadius: 2,
+                                  blurRadius: 1,
+                                  offset: const Offset(0, 2), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(6.sp),
+                              color: whiteClr,
+                            ),
+                            child: Center(
+                              child: Column(
+                                  children: [
+                                  SizedBox(height: 15.h,),
+                                  Icon(FontAwesomeIcons.building,size: 68.sp,color: srpgradient2,),
+                                  SizedBox(height: 10.h,),
+                                  Text("Create Company", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                  ],
+                                ),
                               ),
-                            ],
-                            borderRadius: BorderRadius.circular(6.sp),
-                            color: whiteClr,
+                            ),
                           ),
-                          child: Center(
-                            child: Column(
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Companylist(password: widget.password,)),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(17.0.sp),
+                          child: Container(
+                            height: 115.h,
+                            width:139.w,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.4),
+                                  spreadRadius: 2,
+                                  blurRadius: 1,
+                                  offset: const Offset(0, 2), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(6.sp),
+                              color: whiteClr,
+                            ),
+                            child: Center(
+                              child: Column(
                                 children: [
-                                SizedBox(height: 15.h,),
-                                Icon(FontAwesomeIcons.building,size: 68.sp,color: srpgradient2,),
-                                SizedBox(height: 10.h,),
-                                Text("Create Company", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                ],
+                                  SizedBox(height: 15.h,),
+                                  Icon(FontAwesomeIcons.listOl,size: 68.sp,color: srpgradient2,),
+                                  SizedBox(height: 10.h,),
+                                  Text("Company List", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
+                      ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Companylist(password: widget.password,)),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(17.0.sp),
-                        child: Container(
-                          height: 115.h,
-                          width:139.w,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.4),
-                                spreadRadius: 2,
-                                blurRadius: 1,
-                                offset: const Offset(0, 2), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(6.sp),
-                            color: whiteClr,
-                          ),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                SizedBox(height: 15.h,),
-                                Icon(FontAwesomeIcons.listOl,size: 68.sp,color: srpgradient2,),
-                                SizedBox(height: 10.h,),
-                                Text("Company List", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                ],
+                  SizedBox(
+                      height: 20.h,
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DepartmentList(password: widget.password,)),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(17.0.sp),
+                          child: Container(
+                            height: 115.h,
+                            width:139.w,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.4),
+                                  spreadRadius: 2,
+                                  blurRadius: 1,
+                                  offset: const Offset(0, 2), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(6.sp),
+                              color: whiteClr,
+                            ),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 15.h,),
+                                  Icon(FontAwesomeIcons.codeBranch,size: 68.sp,color: srpgradient2,),
+                                  SizedBox(height: 10.h,),
+                                  Text("Create Departments", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                SizedBox(
-                    height: 20.h,
-                ),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DepartmentList(password: widget.password,)),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(17.0.sp),
-                        child: Container(
-                          height: 115.h,
-                          width:139.w,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.4),
-                                spreadRadius: 2,
-                                blurRadius: 1,
-                                offset: const Offset(0, 2), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(6.sp),
-                            color: whiteClr,
-                          ),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                SizedBox(height: 15.h,),
-                                Icon(FontAwesomeIcons.codeBranch,size: 68.sp,color: srpgradient2,),
-                                SizedBox(height: 10.h,),
-                                Text("Create Departments", style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -960,6 +961,7 @@ class _TestState extends State<Test> {
 
 class Departments extends StatelessWidget {
   const Departments({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return const Center(
@@ -968,3 +970,4 @@ class Departments extends StatelessWidget {
   }
 
 }
+

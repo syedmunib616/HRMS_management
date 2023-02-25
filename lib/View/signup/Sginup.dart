@@ -1,5 +1,5 @@
-import 'dart:convert';
 
+import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,11 +44,11 @@ class _SginUpState extends State<SginUp> {
     fetchdata();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-  final providerGenerator = Provider.of<ProviderGenerator>(context);
+
+    final providerGenerator = Provider.of<ProviderGenerator>(context);
+
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
@@ -372,12 +372,14 @@ class _SginUpState extends State<SginUp> {
 
 
   registercompany(ProviderGenerator providerGenerator ) async {
-  var data = {
+
+    var data = {
         "abbr" : "${textEditingController2.text}",
         "name":"${textEditingController2.text}",
         'company_name':"${textEditingController2.text}",
         "default_currency" : "PKR",
     };
+
   var usercreation={
       "email": "${textEditingController3.text}",
       "first_name" : "${textEditingController1.text}",
@@ -385,23 +387,19 @@ class _SginUpState extends State<SginUp> {
         {
           "role" : "HR User",
           "doctype" : "Has Role"
-
         },
         {
           "role" : "HR Manager",
           "doctype" : "Has Role"
-
         }
       ]
     };
+
   var userpermission = {
     "user": "${textEditingController3.text}", //(email)
     "allow": "Company",	//(static company)
     "for_value": "${textEditingController2.text}"   // (company name)
     };
-
-
-
       for(int i=0;i<noofcompanies.length;i++){
         print("###### ${noofcompanies[i]}");
         if(textEditingController2.text==noofcompanies[i]){
@@ -432,8 +430,6 @@ class _SginUpState extends State<SginUp> {
           var res= await CreateCompany().postpermissionofuser(userpermission,'register');
           var body=jsonDecode(res.body);
         });
-
-
       }else{
         _showToast(context,"Company name already taken");
       }

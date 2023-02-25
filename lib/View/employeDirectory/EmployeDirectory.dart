@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:intl/date_symbol_data_local.dart'; // for other locales
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -14,6 +16,7 @@ import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
 import 'package:hrmanagementapp/View/Profile/Requests/components/NoRequest.dart';
 import 'package:hrmanagementapp/View/login/components/Cs_ErrorContainer.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
+import 'package:hrmanagementapp/controller/employe_creation.dart';
 import 'package:hrmanagementapp/test.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
@@ -785,6 +788,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   String reportings='Admin';
   bool reportingto = false;
   String email='';
+  String company_name='';
   bool isLoading = false;
   late final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
@@ -806,11 +810,23 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     fetchemploye();
     fetchDepartments();
     fetchshifts();
+    companyname();
     //textEditingController3.text="abcd123";
     setState(() {
       if(designationdropdownvalue=='Employee'){
         reportingto==true;
       }
+    });
+  }
+
+  companyname(){
+    FirebaseFirestore.instance.collection('Companies')
+        .doc(email).get().then((value) {
+
+
+          company_name= value.get('company_name');
+          setState(() {});
+          print("MMMMMMMMMMMMMMM $company_name");
     });
   }
 
@@ -1349,28 +1365,29 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                     });
 
                     if(isLoading==true){
-                    FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
-                      shifts: dropdownvalue1,
-                      adminemail: email,
-                      email: textEditingController1.text.trim(),
-                      password: textEditingController3.text.trim(),
-                      designation: designationdropdownvalue,
-                      //passwordConfirmation: textEditingController6.text.trim(),
-                      reportingto: reportings,
-                      name: textEditingController4.text.trim(),
-                      department: dropdownvalue,
-                      phonenumber: textEditingController2.text.trim(),
-                      context: context,
-                      providerGenerator: providerGenerator,
-                      adminpassword: widget.password,
-                      superadmin:widget.superadmin
-                      ).then((value) {
-                        setState(() {
-                          isLoading=false;
-                        });
-                      });
+                    // FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
+                    //   shifts: dropdownvalue1,
+                    //   adminemail: email,
+                    //   email: textEditingController1.text.trim(),
+                    //   password: textEditingController3.text.trim(),
+                    //   designation: designationdropdownvalue,
+                    //   //passwordConfirmation: textEditingController6.text.trim(),
+                    //   reportingto: reportings,
+                    //   name: textEditingController4.text.trim(),
+                    //   department: dropdownvalue,
+                    //   phonenumber: textEditingController2.text.trim(),
+                    //   context: context,
+                    //   providerGenerator: providerGenerator,
+                    //   adminpassword: widget.password,
+                    //   superadmin:widget.superadmin
+                    //   ).then((value) {
+                    //     setState(() {
+                    //       isLoading=false;
+                    //     });
+                    //   });
+                    createEmployee(providerGenerator);
                     }
-                      // print("lkajshfaslkjdf $email");
+                    // print("lkajshfaslkjdf $email");
                       // await UserT.where('email', isEqualTo: email).get().then((value) => value.docs.forEach((element) {
                       //   element.reference.collection("Employee").doc(textEditingController1.text.trim()).
                       //   set({"reportingto":"$reportings","designation":"$designationdropdownvalue","phonenumber":"${textEditingController2.text.trim()}","department":"$dropdownvalue",
@@ -1398,7 +1415,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                     // //   context,
                     // //   MaterialPageRoute(builder: (context) => const ScreenMain()),
                     // // );
-
                   },
                   child: Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 28.0.w),
@@ -1448,5 +1464,108 @@ class _CreateEmployeeState extends State<CreateEmployee> {
         ),
       ),
     );
+  }
+
+
+  createEmployee(ProviderGenerator providerGenerator ) async {
+    var now = DateTime.now();
+    initializeDateFormatting('es');
+    var data = {
+      "email": "${textEditingController1.text}", // (user email id)
+      "first_name" : "${textEditingController4.text}",         //(employee name)
+    };
+
+    var employee = {
+      "first_name" : "${textEditingController4.text}", //(employee name)
+      "company" : "$company_name", // (company name)
+      "gender" : "Male",
+      "date_of_birth" : "1997-01-03",
+      "date_of_joining" : "${now.day}-${now.month}-${now.year}",
+      "user_id" : "${textEditingController1.text}" //(user email id)
+    };
+
+    print("7777777777 ${now.day}-${now.month}-${now.year}");
+    // var usercreation={
+    //   "email": "${textEditingController3.text}",
+    //   "first_name" : "${textEditingController1.text}",
+    //   "roles": [
+    //     {
+    //       "role" : "HR User",
+    //       "doctype" : "Has Role"
+    //     },
+    //     {
+    //       "role" : "HR Manager",
+    //       "doctype" : "Has Role"
+    //     }
+    //   ]
+    // };
+    //
+    // var userpermission = {
+    //   "user": "${textEditingController3.text}", //(email)
+    //   "allow": "Company",	//(static company)
+    //   "for_value": "${textEditingController2.text}"   // (company name)
+    // };
+    FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
+        shifts: dropdownvalue1,
+        adminemail: email,
+        email: textEditingController1.text.trim(),
+        password: textEditingController3.text.trim(),
+        designation: designationdropdownvalue,
+        // passwordConfirmation: textEditingController6.text.trim(),
+        reportingto: reportings,
+        name: textEditingController4.text.trim(),
+        department: dropdownvalue,
+        phonenumber: textEditingController2.text.trim(),
+        context: context,
+        providerGenerator: providerGenerator,
+        adminpassword: widget.password,
+        superadmin:widget.superadmin
+      ).then((value) async{
+       print("employe create kkkkkkkkkk");
+          var res= await EmployeeCreation().postcratetionofemployeeuser(data,'register');
+      }).then((value) async{
+      var res= await EmployeeCreation().postcratetionofemployee(employee,'register');
+    }).then((value) {
+        setState(() {
+          isLoading=false;
+        });
+      });
+
+      // for(int i=0;i<noofcompanies.length;i++){
+    //   print("###### ${noofcompanies[i]}");
+    //   if(textEditingController2.text==noofcompanies[i]){
+    //     setState(() {
+    //       companyisalreadycreated=true;
+    //     });
+    //   }
+    // }
+    // if(companyisalreadycreated==false){
+    //   FrSignUpService(FirebaseAuth.instance).onTapSignUP(
+    //     email: textEditingController3.text.trim(),
+    //     password: textEditingController5.text.trim(),
+    //     passwordConfirmation: textEditingController6.text.trim(),
+    //     name: textEditingController1.text.trim(),
+    //     companyname: textEditingController2.text.trim(),
+    //     phonenumber: textEditingController4.text.trim(),
+    //     website: textEditingController7.text.trim(),
+    //     context: context,
+    //     providerGenerator: providerGenerator,
+    //   ).then((value) async {
+    //     print("kkkkkkkkkk");
+    //     var res= await CreateCompany().postData(data,'register');
+    //     var body=jsonDecode(res.body);
+    //   }).then((value) async {
+    //     var res= await CreateCompany().postcratetionofuser(usercreation,'register');
+    //     var body=jsonDecode(res.body);
+    //   }).then((value) async{
+    //     var res= await CreateCompany().postpermissionofuser(userpermission,'register');
+    //     var body=jsonDecode(res.body);
+    //   });
+    // }else{
+    //   _showToast(context,"Company name already taken");
+    // }
+
+
+
   }
 }
