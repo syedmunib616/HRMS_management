@@ -807,7 +807,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       }
       isLoading=false;
     });
-    fetchemploye();
+    //fetchemploye();
     fetchDepartments();
     fetchshifts();
     companyname();
@@ -1480,11 +1480,20 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       "company" : "$company_name", // (company name)
       "gender" : "Male",
       "date_of_birth" : "1997-01-03",
-      "date_of_joining" : "${now.day}-${now.month}-${now.year}",
+      "date_of_joining" : "${now.year}-${now.month}-${now.day}",
       "user_id" : "${textEditingController1.text}" //(user email id)
+
+
+    //
+    // "first_name" : "Testing", (employee name)
+    // "company" : "src", (company name)
+    // "gender" : "Female",
+    // "date_of_birth" : "1997-01-03",
+    // "date_of_joining" : "2022-06-08",
+    // "user_id" : "testy@xz.com" (user email id)
     };
 
-    print("7777777777 ${now.day}-${now.month}-${now.year}");
+
     // var usercreation={
     //   "email": "${textEditingController3.text}",
     //   "first_name" : "${textEditingController1.text}",
@@ -1505,6 +1514,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     //   "allow": "Company",	//(static company)
     //   "for_value": "${textEditingController2.text}"   // (company name)
     // };
+
     FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
         shifts: dropdownvalue1,
         adminemail: email,
@@ -1520,16 +1530,17 @@ class _CreateEmployeeState extends State<CreateEmployee> {
         providerGenerator: providerGenerator,
         adminpassword: widget.password,
         superadmin:widget.superadmin
-      ).then((value) async{
+      ).then((value) async {
        print("employe create kkkkkkkkkk");
           var res= await EmployeeCreation().postcratetionofemployeeuser(data,'register');
       }).then((value) async{
+      print("7777777777 ${company_name} ${now.day}-${now.month}-${now.year}");
       var res= await EmployeeCreation().postcratetionofemployee(employee,'register');
-    }).then((value) {
-        setState(() {
-          isLoading=false;
+      }).then((value) {
+          // setState(() {
+          //   isLoading=false;
+          // });
         });
-      });
 
       // for(int i=0;i<noofcompanies.length;i++){
     //   print("###### ${noofcompanies[i]}");
@@ -1564,8 +1575,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     // }else{
     //   _showToast(context,"Company name already taken");
     // }
-
-
 
   }
 }

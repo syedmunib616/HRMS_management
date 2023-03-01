@@ -31,9 +31,8 @@ class EmployeeCreation{
           "Authorization": authorization},
         body:body
     ).then((value) {
-
-
-      print("::::::::::::::::;;;;;;;;; $value");
+        var b=jsonDecode(value.body);
+        print("::::::::;;;;;;; $b");
     });
   }
 
