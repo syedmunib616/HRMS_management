@@ -427,7 +427,7 @@ class FrSignUpService1 {
         }).then((value) {
 
           superadmin==false ?
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password)), result: false) :
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,adminname: adminemail,)), result: false) :
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Test(password: password,)),);
 
           superadmin==false

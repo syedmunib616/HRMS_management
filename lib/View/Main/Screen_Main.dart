@@ -12,8 +12,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenMain extends StatefulWidget {
-  ScreenMain({Key? key, required this.password}) : super(key: key);
-   String password;
+  ScreenMain({Key? key, required this.password,required this.adminname }) : super(key: key);
+  String password;
+  final String adminname;
   @override
   State<ScreenMain> createState() => _ScreenMainState();
 }
@@ -32,7 +33,7 @@ class _ScreenMainState extends State<ScreenMain> {
       Home(password: widget.password),
       // Zoom(),
       Reports(),
-      Requests(),
+      Requests(adminname: widget.adminname,),
       // Log(),
       // Settings(password: password),
     ];

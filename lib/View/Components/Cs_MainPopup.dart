@@ -80,7 +80,7 @@ CSMainPopup(
                   onTap: () {
 
                     Navigator.pop(context);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  ScreenMain(password: '123',)),);
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  ScreenMain(password: '123',adminname: 'leave k page sy adminname araha hai or login tk ja raha hai wesy ye chez use nhi ho rahi ',)),);
 
                   },
                 ),

@@ -18,9 +18,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 
 class Requests extends StatelessWidget {
-  Requests({Key? key}) : super(key: key);
+  Requests({Key? key, required this.adminname}) : super(key: key);
   TextEditingController textEditingController1 = TextEditingController();
-
+  final String adminname;
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
@@ -196,13 +196,14 @@ class Requests extends StatelessWidget {
                     onTap: (){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ListOfRequest(Appbarheading: "Leave List",providerGenerator: providerGenerator, textEditingController1: textEditingController1)
+                        MaterialPageRoute(builder: (context) => ListOfRequest(adminname:adminname,Appbarheading: "Leave List",providerGenerator: providerGenerator, textEditingController1: textEditingController1)
                         ),
                       );
                     },
                     child: SubReportsOrSubSetting(icon:Icon(FontAwesomeIcons.message,size: 23.sp,color: srpgradient2,),
                       iconString: "assets/month.png",title: TextStrings.Leave,subtitle: TextStrings.CheckLeaveRequestList,)
                 ),
+
                 SizedBox(height: 18.h,),
                 // GestureDetector(
                 //     onTap: (){
@@ -310,26 +311,26 @@ class ListOfRequest extends StatefulWidget {
   const ListOfRequest({
     Key? key,
     required this.providerGenerator,
-    required this.textEditingController1, required this.Appbarheading,
+    required this.textEditingController1,
+    required this.Appbarheading,
+    required this.adminname,
   }) : super(key: key);
 
   final ProviderGenerator providerGenerator;
   final TextEditingController textEditingController1;
   final String Appbarheading;
-
+  final String adminname;
   @override
   State<ListOfRequest> createState() => _ListOfRequestState();
 }
 
 class _ListOfRequestState extends State<ListOfRequest> {
-
   final user = FirebaseAuth.instance.currentUser;
   List<ListOfLeavesByEmployee> listofleavebyemployee=[];
   StreamController<ListOfLeavesByEmployee> streamController = StreamController.broadcast();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchleave();
   }
@@ -688,11 +689,9 @@ class _ListOfRequestState extends State<ListOfRequest> {
                 //     ],
                 //   ),
                 // ),
-
                 SizedBox(
                   height: 15.h,
                 ),
-
                 // Padding(
                 //   padding: EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
                 //   child: CsMainInputField1(
@@ -736,7 +735,6 @@ class _ListOfRequestState extends State<ListOfRequest> {
                 //   //   ),
                 //   // ),
                 // ),
-
                 StreamBuilder(
                     stream: streamController.stream,
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -761,6 +759,8 @@ class _ListOfRequestState extends State<ListOfRequest> {
                                 // managetotalcontact = contact.length.toString();
                                 // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
                                 return NoOfRequest(
+                                  providerGenerator: widget.providerGenerator,
+                                  adminname: widget.adminname,
                                   leaveid: listofleavebyemployee[index].leavid,
                                   time: listofleavebyemployee[index].time,
                                   user: listofleavebyemployee[index].employee,
@@ -781,6 +781,8 @@ class _ListOfRequestState extends State<ListOfRequest> {
                                 physics: const BouncingScrollPhysics(),
                                 itemCount: listofleavebyemployee.length,
                                 itemBuilder: (context, index) =>  NoOfRequest(
+                                  providerGenerator: widget.providerGenerator,
+                                  adminname: widget.adminname,
                                   time: listofleavebyemployee[index].time,
                                   user: listofleavebyemployee[index].employee,
                                   subject: listofleavebyemployee[index].subject,

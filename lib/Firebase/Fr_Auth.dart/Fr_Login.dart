@@ -106,7 +106,7 @@ class FrLoginService {
 
                  if (active == true) {
                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                     builder: (BuildContext context) => ScreenMain(password: password,),
+                     builder: (BuildContext context) => ScreenMain(password: password,adminname: email,),
                    ), (route) => false,);
                  }
                  else{

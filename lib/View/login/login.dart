@@ -20,6 +20,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Login extends StatefulWidget {
@@ -32,12 +33,14 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController textEditingController1 = TextEditingController();
   TextEditingController textEditingController2 = TextEditingController();
+  bool _isChecked = false;
 
   bool load=false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _loadUserEmailPassword();
     setState(() {
       print("___________________");
       load=widget.loading;
@@ -87,7 +90,6 @@ class _LoginState extends State<Login> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-
                                 height: 40.h,
                                 width: 120.w,
                                 decoration: const BoxDecoration(
@@ -179,7 +181,6 @@ class _LoginState extends State<Login> {
                             bordercolor: providerGenerator.getVisibleError(index: 0)
                                 ? Colors.red
                                 : null,
-
                             onSubmite: (_) => FrLoginService(FirebaseAuth.instance)
                                 .onTapSignIn(
                                 buttonIndex: 1,
@@ -196,6 +197,40 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 10.h,
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                            SizedBox(
+                                height: 24.0,
+                                width: 24.0,
+                                child: Theme(
+                                  data: ThemeData(
+                                      unselectedWidgetColor: srpgradient2 // Your color
+                                  ),
+                                  child: Checkbox(
+                                      activeColor: srpgradient2,
+                                      value: _isChecked,
+                                      onChanged: (bool? val){
+                                        print("::::::::::::: $_isChecked");
+                                              if(textEditingController1.text.isNotEmpty && textEditingController2.text.isNotEmpty) {
+                                                setState(() {
+                                                  _isChecked = val!;
+                                                  _handleRemeberme(_isChecked);
+                                                });
+                                              }
+                                              else{
+                                                _showToast(context,"Enter email and password");
+                                              }
+                                      }),
+                                )),
+                            const SizedBox(width: 10.0),
+                            const Text("Remember Me",
+                                style: TextStyle(
+                                    color: Color(0xff646464),
+                                    fontSize: 12,
+                                    fontFamily: 'Rubic'),
+                            ),
+                          ]),
                           Visibility(
                             visible: providerGenerator.getVisibleError(index: 0),
                             child: Container(
@@ -231,6 +266,7 @@ class _LoginState extends State<Login> {
                               ).then((value) {
                                 setState(() {
                                   load=false;
+                                  _handleRemeberme(_isChecked);
                                 });
                               });
                                   // Navigator.push(
@@ -263,10 +299,14 @@ class _LoginState extends State<Login> {
                                   color: whiteClr,
                                 ),
                                 child:Center(
-                                  child: load == true ? CircularProgressIndicator(
-                                    backgroundColor: Colors.white,
-                                    strokeWidth: 1.5.w,
-                                  ):
+                                  child: load == true ? SizedBox(
+                                    height: 26,
+                                    width: 26,
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: Colors.white,
+                                      strokeWidth: 1.6.w,
+                                    ),
+                                  ) :
                                   Text(TextStrings.Login,style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                 )
                             ),
@@ -281,7 +321,9 @@ class _LoginState extends State<Login> {
                                   MaterialPageRoute(builder: (context) => const Forgotpassword()),
                                 );
                               },
-                              child: Text(TextStrings.Forgot_your_password,style: GoogleFonts.poppins(fontSize: 15.sp,color: linkclr,),)),
+                            child: Text(TextStrings.Forgot_your_password,
+                              style: GoogleFonts.poppins(fontSize: 15.sp,color: linkclr,),)
+                          ),
                         ],
                       ),
                     ),
@@ -293,8 +335,57 @@ class _LoginState extends State<Login> {
         ),
       );
     }
+
+  void _showToast(BuildContext context,String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('$text',style:GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2)),
+        //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
   }
 
+  void _handleRemeberme(bool value) {
+    _isChecked = value;
+    print("Handle Rember Me $_isChecked");
+    SharedPreferences.getInstance().then(
+          (prefs) {
+        prefs.setBool("remember_me", value);
+        prefs.setString('email', textEditingController1.text);
+        prefs.setString('password', textEditingController2.text);
+      },
+    );
+    setState(() {
+      _isChecked = value;
+    });
+  }
+
+  void _loadUserEmailPassword() async {
+    print("Load Email");
+      try {
+        SharedPreferences _prefs = await SharedPreferences.getInstance();
+        var _email = _prefs.getString("email") ?? "";
+        var _password = _prefs.getString("password") ?? "";
+        var _remeberMe = _prefs.getBool("remember_me") ?? false;
+
+        print(_remeberMe);
+        print(_email);
+        print(_password);
+
+        if (_remeberMe) {
+          setState(() {
+            _isChecked = true;
+          });
+          textEditingController1.text = _email ?? "";
+          textEditingController2.text = _password ?? "";
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+
+  }
 
 //munib
 // class Homepage extends StatefulWidget {
@@ -428,7 +519,6 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                           height: MediaQuery.of(context).size.height * 0.19,
                           width: MediaQuery.of(context).size.width * 0.30,
                         )),
-
                         // TextFormField(
                         //   controller: textEditingController1,
                         //   cursorColor: Colors.white,
@@ -438,7 +528,6 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                         //   // validator: (email)=>
                         //   // email !=null && EmailValidator.validate(email)? "Enter a valid email" : null,
                         // ),
-
                     Text(
                       "Enter your recovery email address",
                       //TextStrings.Enter_your_recovery_email_address.tr(),
@@ -901,7 +990,7 @@ class FrForgetService {
 
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (context) =>  ScreenMain(password: '123',),
+        builder: (context) =>  ScreenMain(password: '123',adminname: uid,),
       ),(route) => false,
     );
   }

@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Components/textfield.dart';
+import 'package:hrmanagementapp/View/EmployeeDashboard/Employeedashboard.dart';
+import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
 import 'package:hrmanagementapp/View/selectedLeave/SelectedLeave.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
@@ -15,22 +17,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class NoOfRequest extends StatelessWidget {
-   NoOfRequest({
-    Key? key, required this.user,
+  NoOfRequest({
+    Key? key,
+    required this.providerGenerator,
+    required this.user,
      required this.subject,
      required this.message,
      required this.approve,
      required this.time,
-     required this.leaveid
+     required this.leaveid,
+     required this.adminname,
   }) : super(key: key);
+  final ProviderGenerator providerGenerator;
 
-   final String leaveid;
-   final String time;
-   final String user;
-   final String subject;
-   final String message;
-    var   approve;
-
+  final String leaveid;
+  final String time;
+  final String user;
+  final String subject;
+  final String message;
+  var   approve;
+  final String adminname;
 
   TextEditingController textEditingController1 = TextEditingController();
 
@@ -45,7 +51,7 @@ class NoOfRequest extends StatelessWidget {
         onTap: (){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SelectedLeave1(leavid: leaveid,time: time,user: user,subject: subject,message: message,approve: approve,)),
+            MaterialPageRoute(builder: (context) => SelectedLeave1(providerGenerator: providerGenerator,adminname:adminname,leavid: leaveid,time: time,user: user,subject: subject,message: message,approve: approve,)),
           );
         },
         child: Container(
@@ -90,7 +96,7 @@ class NoOfRequest extends StatelessWidget {
               // ),
               Icon(Icons.person_pin,color: srpgradient2,size: 40.sp,),
               Padding(
-                padding:EdgeInsets.symmetric(vertical: 2.0.h,horizontal: 20.w),
+                padding: EdgeInsets.symmetric(vertical: 2.0.h,horizontal: 20.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +113,7 @@ class NoOfRequest extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              approve == null?SizedBox():Row(
+              approve == null ? SizedBox() : Row(
                 children: [
                   Text("Seen",style: GoogleFonts.poppins(fontSize: 8.sp, color: Colors.greenAccent, fontWeight: FontWeight.w400),),
                   Icon(FontAwesomeIcons.checkDouble,size: 19.sp,color: Colors.greenAccent,),
@@ -134,14 +140,20 @@ class SelectedLeave1 extends StatefulWidget {
   SelectedLeave1({Key? key, required this.user,
     required this.subject, required this.message,
     required this.approve, required this.time,
-    required this.leavid}) : super(key: key);
+    required this.leavid,required this.adminname,
+    required this.providerGenerator,
+
+
+
+  }) : super(key: key);
+  final ProviderGenerator providerGenerator;
   final String time;
   final String user;
   final String  subject;
   final String  message;
   final String  leavid;
   var approve;
-
+  final String adminname;
   @override
   State<SelectedLeave1> createState() => _SelectedLeave1State();
 }
@@ -155,16 +167,12 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
     super.initState();
   }
 
-
-
   final userr = FirebaseAuth.instance.currentUser;
-
-
+  bool pressed=false;
 
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
@@ -323,7 +331,6 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                 ],
               ),
             ),
-
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -579,7 +586,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                         ),
                         Spacer(),
                         widget.approve !=null ? SizedBox() :
-                        Row(
+                        pressed==false ? Row(
                           children:  [
                             GestureDetector(
                               child: Container(
@@ -621,7 +628,13 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                     .collection('Leaves')
                                     .doc('${widget.leavid}')
                                     .update({'approve': true}).then((value) {
+                                      setState(() {
+                                        pressed=true;
+                                      });
                                   _showToast(context,"Done");
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+
                                 });
                               },
                             ),
@@ -658,20 +671,42 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                 ),
                               ),
                               onTap: (){
-                                FirebaseFirestore.instance
+
+                                  FirebaseFirestore.instance
                                     .collection('Companies')
                                     .doc(userr!.email.toString())
                                     .collection("Employee")
                                     .doc('${widget.user}')
                                     .collection('Leaves')
                                     .doc('${widget.leavid}')
-                                    .update({'approve': false}).then((value) {
-                                  _showToast(context,"Done");
-                                });
+                                    .update({'approve': false})
+                                    .then((value) {
+                                      
+                                      setState(() { pressed=true; });
+                                      _showToast(context,"Done");
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+
+                                    // Navigator.pushAndRemoveUntil(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => ListOfRequest1(adminemail: widget.adminname, providerGenerator: providerGenerator,)
+                                    //     ),
+                                    //     ModalRoute.withName("/Home")
+                                    // );
+
+                                  // Navigator.pushAndRemoveUntil(context,
+                                  //           MaterialPageRoute(builder: (context) {
+                                  //             return ListOfRequest1(adminemail: widget.adminname, providerGenerator: providerGenerator,);
+                                  //
+                                  //           }));
+
+                                  });
+
                               },
                             ),
                           ],
-                        ),
+                        ) : SizedBox(),
                       ],
                     ),
                   ),
@@ -684,6 +719,8 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
     );
   }
 
+
+
   void _showToast(BuildContext context,String text) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
@@ -693,6 +730,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
       ),
     );
   }
+
 
 
 

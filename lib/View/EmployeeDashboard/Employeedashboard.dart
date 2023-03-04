@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'package:hrmanagementapp/Model/firbaseModel/employeeAttendance.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:hrmanagementapp/View/ByEmployee/byemployee.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
@@ -2199,10 +2200,7 @@ class _ListOfRequest1State extends State<ListOfRequest1> {
                       print("%%%%%%%%% $snapshot");
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
-                          return const Text(
-                            " null",
-                            style: TextStyle(color: Colors.white),
-                          );
+                          return const Text(" null", style: TextStyle(color: Colors.white),);
                         case ConnectionState.waiting:
                           return const SizedBox();
                         case ConnectionState.active:
@@ -2271,6 +2269,7 @@ class _ListOfRequest1State extends State<ListOfRequest1> {
               );
             },
           ),
+
         ),
       ),
     );

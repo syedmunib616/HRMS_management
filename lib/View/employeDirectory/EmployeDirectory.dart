@@ -1354,16 +1354,14 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 ),
                 GestureDetector(
                   onTap: (){
-
                     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
                     final user=FirebaseAuth.instance.currentUser;
-                    print("${textEditingController1.text.trim()} ${textEditingController3.text.trim()} ${designationdropdownvalue} ${textEditingController4.text.trim()} "
+                    print("${textEditingController1.text.trim()} ${textEditingController3.text.trim()}"
+                        " ${designationdropdownvalue} ${textEditingController4.text.trim()}"
                         "${dropdownvalue} ${textEditingController2.text.trim()} ${reportings}");
-
                     setState(() {
                       isLoading=true;
                     });
-
                     if(isLoading==true){
                     // FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
                     //   shifts: dropdownvalue1,
@@ -1445,7 +1443,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                         child:  Center(
                           child:
                           isLoading==true? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),):
-
                           Text("Create Employee",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                         )
                     ),
@@ -1460,6 +1457,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
             // : const Center(
             //   child: CircularProgressIndicator(),
             // ),
+
           ),
         ),
       ),
@@ -1474,17 +1472,14 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       "email": "${textEditingController1.text}", // (user email id)
       "first_name" : "${textEditingController4.text}",         //(employee name)
     };
-
     var employee = {
       "first_name" : "${textEditingController4.text}", //(employee name)
       "company" : "$company_name", // (company name)
       "gender" : "Male",
       "date_of_birth" : "1997-01-03",
       "date_of_joining" : "${now.year}-${now.month}-${now.day}",
-      "user_id" : "${textEditingController1.text}" //(user email id)
-
-
-    //
+      "user_id" : "${textEditingController1.text}",
+    //(user email id)
     // "first_name" : "Testing", (employee name)
     // "company" : "src", (company name)
     // "gender" : "Female",
@@ -1492,7 +1487,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     // "date_of_joining" : "2022-06-08",
     // "user_id" : "testy@xz.com" (user email id)
     };
-
 
     // var usercreation={
     //   "email": "${textEditingController3.text}",
@@ -1542,7 +1536,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
           // });
         });
 
-      // for(int i=0;i<noofcompanies.length;i++){
+    // for(int i=0;i<noofcompanies.length;i++){
     //   print("###### ${noofcompanies[i]}");
     //   if(textEditingController2.text==noofcompanies[i]){
     //     setState(() {
