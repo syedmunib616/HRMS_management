@@ -1759,17 +1759,18 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
         .update({"TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":"$Address"})
         .then((value) {
-      setState(() {
-        timinoutdicator=false;
-        timeoutshow=false;
-        timeinshow=true;
-      });
-      return CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time Out Completed");
+        setState(() {
+          timinoutdicator=false;
+          timeoutshow=false;
+          timeinshow=true;
+        });
+        return CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time Out Completed");
     });
   }
 
   markattimeintendance()async{
-    print("ggggrrrrrrrrrrrr wwwwwwwwwwaaaaaaaaaaa ");
+    print("ggggrrrrrrrrrrrrwwwwwwwwwwaaaaaaaaaaa");
+
     setState(() {
       timinindicator=true;
     });
@@ -1781,12 +1782,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
         .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
         .then((value) {
-      setState(() {
-        timinindicator=false;
-        timeinshow=false;
-        timeoutshow=true;
-      });
-      return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
+        setState(() {
+          timinindicator=false;
+          timeinshow=false;
+          timeoutshow=true;
+        });
+        return CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
     });
   }
 
@@ -1799,7 +1800,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
 }
 
 class ListofLeaves{
-  ListofLeaves({required this.subject,required this.message,required this.approve});
+  ListofLeaves({
+    required this.subject,
+    required this.message,
+    required this.approve,
+  });
+
   final String  subject;
   final String  message;
    var approve;

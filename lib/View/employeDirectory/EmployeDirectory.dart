@@ -612,7 +612,8 @@ class _EditEmployeeState extends State<EditEmployee> {
                       Container(
                         color: Colors.grey,
                         width: MediaQuery.of(context).size.width,
-                        height: 1,),
+                        height: 1,
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
                         child: Row(
@@ -643,7 +644,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
                         child: Row(
                           children: [
-                            Text("Desgination : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                            Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
                             Text("$designation", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
                           ],
                         ),
@@ -651,7 +652,8 @@ class _EditEmployeeState extends State<EditEmployee> {
                       Container(
                         color: Colors.grey,
                         width: MediaQuery.of(context).size.width,
-                        height: 1,),
+                        height: 1,
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
                         child: Row(
@@ -661,8 +663,6 @@ class _EditEmployeeState extends State<EditEmployee> {
                           ],
                         ),
                       ),
-
-
                     ],
                   ),
                 ),
@@ -822,8 +822,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   companyname(){
     FirebaseFirestore.instance.collection('Companies')
         .doc(email).get().then((value) {
-
-
           company_name= value.get('company_name');
           setState(() {});
           print("MMMMMMMMMMMMMMM $company_name");
@@ -1479,7 +1477,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       "date_of_birth" : "1997-01-03",
       "date_of_joining" : "${now.year}-${now.month}-${now.day}",
       "user_id" : "${textEditingController1.text}",
-    //(user email id)
+      //(user email id)
     // "first_name" : "Testing", (employee name)
     // "company" : "src", (company name)
     // "gender" : "Female",

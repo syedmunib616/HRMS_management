@@ -32,13 +32,13 @@ class _ScreenMainState extends State<ScreenMain> {
     screens = <Widget>[
       Home(password: widget.password),
       // Zoom(),
-      Reports(),
+      // Reports(),
       Requests(adminname: widget.adminname,),
       // Log(),
       // Settings(password: password),
     ];
     print("{{{{{{{{{{{{ $password ${widget.password}");
-
+  
     password=widget.password;
 
   }
@@ -62,7 +62,6 @@ class _ScreenMainState extends State<ScreenMain> {
       body:
       // Stack(
       //   children: [
-
       IndexedStack(
         index: curentindex,
         children: screens,
@@ -146,25 +145,25 @@ class _ScreenMainState extends State<ScreenMain> {
                       'assets/home.png',
                       height: 24,
                       width: 24,
-                      color:curentindex==0? srpgradient2 : settingFontBackColor(context),
+                      color: curentindex==0? srpgradient2 : settingFontBackColor(context),
                     ),
                     Text("Home",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==0? srpgradient2 :fontgrey,),),
                   ],
                 )),
-            BottomNavigationBarItem(
-                backgroundColor: blackClr,
-                label: 'Reports',
-                icon: Column(
-                  children: [
-                    Image.asset(
-                      'assets/analytics.png',
-                      height: 24,
-                      width: 24,
-                      color:curentindex==1? srpgradient2 : settingFontBackColor(context),
-                    ),
-                    Text("Reports",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==1? srpgradient2 :fontgrey,),),
-                  ],
-                )),
+            // BottomNavigationBarItem(
+            //     backgroundColor: blackClr,
+            //     label: 'Reports',
+            //     icon: Column(
+            //       children: [
+            //         Image.asset(
+            //           'assets/analytics.png',
+            //           height: 24,
+            //           width: 24,
+            //           color:curentindex==1? srpgradient2 : settingFontBackColor(context),
+            //         ),
+            //         Text("Reports",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==1? srpgradient2 :fontgrey,),),
+            //       ],
+            //     )),
             BottomNavigationBarItem(
                 backgroundColor: blackClr,
                 label: 'Request',

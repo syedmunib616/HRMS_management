@@ -16,6 +16,7 @@ import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/pie_chart
 import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/pie_chart_sample2.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/piechart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hrmanagementapp/View/Profile/Reports/reports.dart';
 import 'package:hrmanagementapp/View/Shifts/shifts.dart';
 import 'package:hrmanagementapp/View/changepassword/Changepassword.dart';
 import 'package:hrmanagementapp/View/employeDirectory/EmployeDirectory.dart';
@@ -187,6 +188,18 @@ class _HomeState extends State<Home> {
                     width: MediaQuery.of(context).size.width,
                     color: Colors.white,),
                   SizedBox(height: 20.h,),
+
+                  ListTile(
+                    onTap: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Reports()),
+                      );
+                    },
+                    leading: Icon(FontAwesomeIcons.chartColumn,size: 20.sp,color: whiteClr,),
+                    title: Text('Reports'),
+                  ),
+
 
                   ListTile(
                     onTap: () async {

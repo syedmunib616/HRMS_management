@@ -65,7 +65,7 @@ class FrLoginService {
           errorIndex: errorIndex,
         );
       }
-  }
+    }
 
   CollectionReference f=FirebaseFirestore.instance.collection("Companies");
   final user=FirebaseAuth.instance.currentUser;
@@ -89,27 +89,24 @@ class FrLoginService {
       print("---------------- $email");
 
     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
-
     if(email!="example@gmail.com") {
       //braek point laga k check krna hai kidhr masla araha hai
-
          FirebaseFirestore.instance.collection('Companies').get().then((value) {
             value.docs.forEach((element) {
              active=false;
-             //admin_name.add(element.id);
+             // admin_name.add(element.id);
              print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
              f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
                active = element.get("active");
                if(email==element.id){
-
-                  Login(loading: false,);
-
+                 Login(loading: false,);
                  if (active == true) {
                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                      builder: (BuildContext context) => ScreenMain(password: password,adminname: email,),
                    ), (route) => false,);
                  }
                  else{
+                   print("yyyyyy active status is $active");
                    FirebaseAuth.instance.signOut().then((value) async {
                      Navigator.of(context).pushReplacement(
                          MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
@@ -130,16 +127,28 @@ class FrLoginService {
                  // }));
                }
              })).then((value) {
-               element.reference.collection("Employee").get().then((value) => value.docs.forEach((elemen) {
-                 String a; a=elemen.get('email');
-                 print("laksjdhfkjsadf $a");
-                 if(email==a){
-                   Login(loading: false);
-                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                     builder: (BuildContext context) => EmployeeDashboard(admineamil: element.id,),),
-                         (route) => false,);
+               if(active == true){
+                 element.reference.collection("Employee").get().then((value) =>
+                     value.docs.forEach((elemen){
+                       String a;
+                       a = elemen.get('email');
+                       print("laksjdhfkjsadf $a");
+                       if (email == a) {
+                         Login(loading: false);
+                         Navigator.of(context).pushAndRemoveUntil(
+                           MaterialPageRoute(
+                             builder: (BuildContext context) =>
+                                 EmployeeDashboard(admineamil: element.id,),),
+                               (route) => false,);
+                       }
+                     }));
                  }
-               }));
+               else {
+                   print("yyyyyy active status is $active");
+                   FirebaseAuth.instance.signOut().then((value) async {
+                     Navigator.of(context).pushReplacement(
+                         MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
+                       result: false);});}
              });
            });
          });
@@ -403,7 +412,6 @@ class FrLoginService {
   }
 
   //Google Sign in
-
   // Future<void> signinwithgoogle(BuildContext context)async {
   //   CollectionReference UserT = FirebaseFirestore.instance.collection("UserT");
   //   final user = FirebaseAuth.instance.currentUser;

@@ -89,7 +89,7 @@ class _ByEmployeeState extends State<ByEmployee> {
   void initState() {
     DateTimeRange dateRange = DateTimeRange(
       start: DateTime(DateTime.now().year,DateTime.now().month,1),
-      end: DateTime(DateTime.now().year,DateTime.now().month,28),
+      end: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day),
     );
     dateTime = DateTime.now();
     duration = const Duration(minutes: 10);
@@ -641,7 +641,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                     ),
                   ),
                 ),
-
             body: days.isEmpty? SizedBox() : SingleChildScrollView(
               child: Column(
                 children: [
@@ -954,10 +953,10 @@ class _ByEmployeeState extends State<ByEmployee> {
       }
     }
 
+
   late DateTimeRange dateTimeRange =dateRange;
   List<DateTime> days = [];
   List<ListAttandance> attendance=[];
-
   // checatt(String date){
   //   for(int i=0;i<attendance.length;i++){
   //     print("gg ${attendance[i].date} ||||||||||||||||| $date");
@@ -973,8 +972,6 @@ class _ByEmployeeState extends State<ByEmployee> {
 ////////new code for fecting attendance by color////////////////////////////////////////////
   List<String> alldates=[];
   List<EmployeeAttendance> allattendance=[];
-
-
   fectchalldate() async {
     setState(() {
       attendance=[];
@@ -1068,13 +1065,12 @@ class _ByEmployeeState extends State<ByEmployee> {
     //       });
     //     });
   }
-
-
-
   List<Abc> dateinstring=[];
+
+
   // fetchattendance(String date) async {
   //   print("||||||||||||||||| $date");
-  //   //checatt(date);
+  //   // checatt(date);
   //   print("kkkkkkkkkk $date $dropdownvalue1");
   //   String a,b;
   //   setState(() {  hasAttendance=false; });
@@ -1085,6 +1081,7 @@ class _ByEmployeeState extends State<ByEmployee> {
   //       .doc(dropdownvalue1)
   //       .collection('Attendance')
   //       .get().then((value) {
+  //         String j;
   //     value.docs.forEach((element) {
   //       a=element.id;
   //       // for(int i=0;i<attendance.length;i++){
@@ -1108,8 +1105,27 @@ class _ByEmployeeState extends State<ByEmployee> {
   //       //
   //       // attendance.sort((a,b) => a.date.compareTo(b.date));
   //
-  //       dateinstring.add(Abc(name: dropdownvalue1, date: a));
+  //       bool hoja=false;
   //
+  //       if(date==a) {
+  //         dateinstring.add(Abc(name: dropdownvalue1, date: a));
+  //       }else{
+  //         setState(() {
+  //           hoja=false;
+  //         });
+  //         for(int i=0;i<dateinstring.length;i++){
+  //           if(date==dateinstring[i]){
+  //             setState(() {
+  //               hoja=true;
+  //             });
+  //           }
+  //           if(hoja==true){}
+  //           else{
+  //             dateinstring.add(Abc(name: dropdownvalue1, date: a));
+  //             print("tttttttttttttt# ${dateinstring.length}");
+  //           }
+  //         }
+  //       }
   //       // if(date==a){
   //       //   // print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
   //       //   // setState(() {
@@ -1141,19 +1157,19 @@ class _ByEmployeeState extends State<ByEmployee> {
   //       //   streamController.stream;
   //       // });
   //     });
-  //     //print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring} :::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
   //
-  //     for(int i=0;i<dateinstring.length;i++){
-  //       print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring[i].name} ${dateinstring[i].date} :::::::::::: \n");
-  //
-  //     }
-  //     print(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
-  //
+  //      // print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring.length} :::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
+  //      //
+  //      // // for(int i=0;i<dateinstring.length;i++){
+  //      // //   print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring[i].name} ${dateinstring[i].date} :::::::::::: \n");
+  //      // // }
+  //      //
+  //      // print(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
   //
   //   }).then((value) {
   //
   //
-  //    // print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring} :::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
+  //     print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring.length} :::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
   //
   //     // for(int i=0;i<dateinstring.length;i++){
   //     //   print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring[i].name} :::: ${dateinstring[i].date}");
@@ -1240,10 +1256,10 @@ class _ByEmployeeState extends State<ByEmployee> {
               });
             }
           else{
-             // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
+              // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
              // streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
               setState(() { hasAttendance=true; });
-                // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
+              // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
                 print("1111111111111");
               }
               setState(() {
@@ -1353,6 +1369,7 @@ class _ByEmployeeState extends State<ByEmployee> {
       });
 
       print(":::::::::: PRINT :::::::::::: ${startDate.month} ${days[i].year}-${days[i].month}-${days[i].day}");
+
     }
   }
 

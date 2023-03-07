@@ -48,6 +48,14 @@ class _LoginState extends State<Login> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    textEditingController1.text;
+    textEditingController2.text;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
     return SafeArea(
@@ -486,6 +494,7 @@ class Forgotpassword extends StatefulWidget {
 
 class _ForgotpasswordState extends State<Forgotpassword> {
   TextEditingController textEditingController1 = TextEditingController();
+  //final providerGenerator = Provider.of<ProviderGenerator>;
 
   @override
   void dispose() {
@@ -496,6 +505,15 @@ class _ForgotpasswordState extends State<Forgotpassword> {
 
   late bool visibleError = false;
   //forget password
+
+  @override
+  void initState() {
+
+    // TODO: implement initState
+    super.initState();
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -549,7 +567,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                       prefixIcon: Icons.email_outlined,
                       isPassword: false,
                       keyboardType: TextInputType.emailAddress,
-                      bordercolor: providerGenerator.getVisibleError(index: 0)
+                      bordercolor: providerGenerator.getVisibleError(index: 1)
                           ? Colors.red
                           : null,
                       // bordercolor: providerGenerator.getVisibleError(index: 0)
@@ -567,14 +585,14 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                     // ),
                     // ),
                     Visibility(
-                      visible: providerGenerator.getVisibleError(index: 0),
+                      visible: providerGenerator.getVisibleError(index: 1),
                       child: Container(
                         width: double.infinity.w,
                         margin: EdgeInsets.symmetric(
                           horizontal: 21.w,
                         ),
                         child: CsErrorContainer(
-                          errorMsg: providerGenerator.getErrorMessage(index: 0),
+                          errorMsg: providerGenerator.getErrorMessage(index: 1),
                         ),
                       ),
                     ),
@@ -594,7 +612,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                       children: [
                         Text(
                            "Send",
-                          //TextStrings.Send_Code.tr(),
+                          // TextStrings.Send_Code.tr(),
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
@@ -909,6 +927,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
   //       builder: (BuildContext context) => ScreenAddName(),
   //     ),
   //     (route) => false);
+
 }
 
 class FrForgetService {
