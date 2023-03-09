@@ -6,7 +6,8 @@ const String baseurl = "https://test.srp.ai/api/resource";
 
 const String contenttype="application/json";
 
-const String authorization= "Token ecd1d920e3ad1e1:06de7da5ca2eee7";
+//const String authorization= "Token ecd1d920e3ad1e1:06de7da5ca2eee7";
+const String authorization= "Token ecd1d920e3ad1e1:a2ff84b0c13f746";
 
 class CreateCompany {
 
@@ -45,9 +46,11 @@ class CreateCompany {
         body:body
     ).then((value) {
       print("giudlkfjsad;lkg");
-
     });
   }
 
 
+
+
 }
+

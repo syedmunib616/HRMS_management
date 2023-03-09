@@ -407,34 +407,32 @@ class _SginUpState extends State<SginUp> {
             companyisalreadycreated=true;
             });
           }
+         }
+          if(companyisalreadycreated==false){
+            FrSignUpService(FirebaseAuth.instance).onTapSignUP(
+              email: textEditingController3.text.trim(),
+              password: textEditingController5.text.trim(),
+              passwordConfirmation: textEditingController6.text.trim(),
+              name: textEditingController1.text.trim(),
+              companyname: textEditingController2.text.trim(),
+              phonenumber: textEditingController4.text.trim(),
+              website: textEditingController7.text.trim(),
+              context: context,
+              providerGenerator: providerGenerator,
+            ).then((value) async {
+              print("kkkkkkkkkk");
+              var res= await CreateCompany().postData(data,'register');
+              var body=jsonDecode(res.body);
+            }).then((value) async {
+              var res= await CreateCompany().postcratetionofuser(usercreation,'register');
+              var body=jsonDecode(res.body);
+            }).then((value) async{
+              var res= await CreateCompany().postpermissionofuser(userpermission,'register');
+              var body=jsonDecode(res.body);
+            });
+          }else{
+            _showToast(context,"Company name already taken");
+          }
         }
-      if(companyisalreadycreated==false){
-        FrSignUpService(FirebaseAuth.instance).onTapSignUP(
-          email: textEditingController3.text.trim(),
-          password: textEditingController5.text.trim(),
-          passwordConfirmation: textEditingController6.text.trim(),
-          name: textEditingController1.text.trim(),
-          companyname: textEditingController2.text.trim(),
-          phonenumber: textEditingController4.text.trim(),
-          website: textEditingController7.text.trim(),
-          context: context,
-          providerGenerator: providerGenerator,
-        ).then((value) async {
-          print("kkkkkkkkkk");
-          var res= await CreateCompany().postData(data,'register');
-          var body=jsonDecode(res.body);
-        }).then((value) async {
-          var res= await CreateCompany().postcratetionofuser(usercreation,'register');
-          var body=jsonDecode(res.body);
-        }).then((value) async{
-          var res= await CreateCompany().postpermissionofuser(userpermission,'register');
-          var body=jsonDecode(res.body);
-        });
-      }else{
-        _showToast(context,"Company name already taken");
-      }
-  }
-
-
 }
 

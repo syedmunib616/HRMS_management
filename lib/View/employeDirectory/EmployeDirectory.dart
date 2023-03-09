@@ -1466,10 +1466,12 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   createEmployee(ProviderGenerator providerGenerator ) async {
     var now = DateTime.now();
     initializeDateFormatting('es');
+
     var data = {
       "email": "${textEditingController1.text}", // (user email id)
       "first_name" : "${textEditingController4.text}",         //(employee name)
     };
+
     var employee = {
       "first_name" : "${textEditingController4.text}", //(employee name)
       "company" : "$company_name", // (company name)
@@ -1477,7 +1479,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       "date_of_birth" : "1997-01-03",
       "date_of_joining" : "${now.year}-${now.month}-${now.day}",
       "user_id" : "${textEditingController1.text}",
-      //(user email id)
+    //(user email id)
     // "first_name" : "Testing", (employee name)
     // "company" : "src", (company name)
     // "gender" : "Female",
@@ -1506,33 +1508,49 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     //   "allow": "Company",	//(static company)
     //   "for_value": "${textEditingController2.text}"   // (company name)
     // };
-
     FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
-        shifts: dropdownvalue1,
-        adminemail: email,
-        email: textEditingController1.text.trim(),
-        password: textEditingController3.text.trim(),
-        designation: designationdropdownvalue,
-        // passwordConfirmation: textEditingController6.text.trim(),
-        reportingto: reportings,
-        name: textEditingController4.text.trim(),
-        department: dropdownvalue,
-        phonenumber: textEditingController2.text.trim(),
-        context: context,
-        providerGenerator: providerGenerator,
-        adminpassword: widget.password,
-        superadmin:widget.superadmin
-      ).then((value) async {
-       print("employe create kkkkkkkkkk");
-          var res= await EmployeeCreation().postcratetionofemployeeuser(data,'register');
-      }).then((value) async{
-      print("7777777777 ${company_name} ${now.day}-${now.month}-${now.year}");
-      var res= await EmployeeCreation().postcratetionofemployee(employee,'register');
-      }).then((value) {
-          // setState(() {
-          //   isLoading=false;
-          // });
-        });
+            shifts: dropdownvalue1,
+            adminemail: email,
+            email: textEditingController1.text.trim(),
+            password: textEditingController3.text.trim(),
+            designation: designationdropdownvalue,
+            // passwordConfirmation: textEditingController6.text.trim(),
+            reportingto: reportings,
+            name: textEditingController4.text.trim(),
+            department: dropdownvalue,
+            phonenumber: textEditingController2.text.trim(),
+            context: context,
+            providerGenerator: providerGenerator,
+            adminpassword: widget.password,
+            superadmin:widget.superadmin
+          ).then((value) async {
+           print("employe create kkkkkkkkkk");
+              var res= await EmployeeCreation().postcratetionofemployeeuser(data,'register');
+          }).then((value) async{
+            print("7777777777 ${company_name} ${now.day}-${now.month}-${now.year}");
+            var res= await EmployeeCreation().postcratetionofemployee(employee,'register');
+          }).then((value)async {
+              String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "taha"]]""";
+              var res= await EmployeeCreation().allEmployeesGet('', api);
+              // setState(() {
+              //   isLoading=false;
+              // });
+          }).then((value) {
+
+          //FirebaseFirestore.instance.collection("Companies").doc(email).snapshots().where();
+
+          FirebaseFirestore.instance.collection("Companies").where('email',isEqualTo:'$email').
+          snapshots().forEach((element) {});
+      
+          FirebaseFirestore.instance.collection("Companies").doc(email).collection('Employee').doc(textEditingController1.text.trim())
+          .set({});
+
+          });
+
+
+
+
+
 
     // for(int i=0;i<noofcompanies.length;i++){
     //   print("###### ${noofcompanies[i]}");

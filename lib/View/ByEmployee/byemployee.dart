@@ -671,21 +671,17 @@ class _ByEmployeeState extends State<ByEmployee> {
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
                           Spacer(),
-
                           Padding(
                             padding:  EdgeInsets.only(left:10.0.w),
                             child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
-
                           SizedBox(width: 22.w,),
-
                           // Padding(
                           //   padding:  EdgeInsets.only(left: 35.0.w),
                           //   child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
                           //       color: srpgradient2,fontWeight: FontWeight.w600),),
                           // ),
-
                           Container(
                             width: 50.w,
                             //color: Colors.yellow,
@@ -708,16 +704,12 @@ class _ByEmployeeState extends State<ByEmployee> {
                               ],
                             ),
                           ),
-
-
                           // Padding(
                           //   padding:  EdgeInsets.only(left: 10.0.w),
                           //   child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
                           //       color: srpgradient2,fontWeight: FontWeight.w600),),
                           // ),
-
                           SizedBox(width: 5.w,),
-
                         ],
                       ),
                     ),
@@ -940,15 +932,10 @@ class _ByEmployeeState extends State<ByEmployee> {
           for(int i=0;i<days.length;i++){
             String b;
             b= '${days[i].year}-${days[i].month}-${days[i].day}';
-            // print("987987987987987987 $b");
+
             fetchattendance(b);
-            // .get().then((value){
-            //   value.docs.forEach((element) {
-            //       a=element.id.toString();
-            //       print("yayayyayayayayayayay $a");
-            //     });
-            //   });
           }
+          //fetchattendance();
         }
       }
     }
@@ -972,6 +959,8 @@ class _ByEmployeeState extends State<ByEmployee> {
 ////////new code for fecting attendance by color////////////////////////////////////////////
   List<String> alldates=[];
   List<EmployeeAttendance> allattendance=[];
+
+
   fectchalldate() async {
     setState(() {
       attendance=[];
@@ -1024,11 +1013,6 @@ class _ByEmployeeState extends State<ByEmployee> {
               }}
           });
 
-
-
-
-
-
             }).then((value) {
                 allattendance.add(EmployeeAttendance(employeename: a, empAttendance: attendance));
               });
@@ -1068,10 +1052,7 @@ class _ByEmployeeState extends State<ByEmployee> {
   List<Abc> dateinstring=[];
 
 
-  // fetchattendance(String date) async {
-  //   print("||||||||||||||||| $date");
-  //   // checatt(date);
-  //   print("kkkkkkkkkk $date $dropdownvalue1");
+  // fetchattendance() async {
   //   String a,b;
   //   setState(() {  hasAttendance=false; });
   //   await FirebaseFirestore.instance
@@ -1082,6 +1063,7 @@ class _ByEmployeeState extends State<ByEmployee> {
   //       .collection('Attendance')
   //       .get().then((value) {
   //         String j;
+  //
   //     value.docs.forEach((element) {
   //       a=element.id;
   //       // for(int i=0;i<attendance.length;i++){
@@ -1105,27 +1087,44 @@ class _ByEmployeeState extends State<ByEmployee> {
   //       //
   //       // attendance.sort((a,b) => a.date.compareTo(b.date));
   //
-  //       bool hoja=false;
+  //       for(int i=0;i<days.length;i++){
   //
-  //       if(date==a) {
-  //         dateinstring.add(Abc(name: dropdownvalue1, date: a));
-  //       }else{
-  //         setState(() {
-  //           hoja=false;
-  //         });
-  //         for(int i=0;i<dateinstring.length;i++){
-  //           if(date==dateinstring[i]){
-  //             setState(() {
-  //               hoja=true;
-  //             });
-  //           }
-  //           if(hoja==true){}
-  //           else{
-  //             dateinstring.add(Abc(name: dropdownvalue1, date: a));
-  //             print("tttttttttttttt# ${dateinstring.length}");
-  //           }
+  //         print("llllllllll ${days[i]}");
+  //
+  //         if(days[i]==a){
+  //
+  //         }else{
+  //
   //         }
+  //
   //       }
+  //
+  //
+  //
+  //       bool hoja = false;
+  //
+  //       // if(date==a) {
+  //       //   dateinstring.add(Abc(name: dropdownvalue1, date: a));
+  //       // }else{
+  //       //   setState(() {
+  //       //     hoja=false;
+  //       //   });
+  //       //   for(int i=0;i<dateinstring.length;i++){
+  //       //     if(date==dateinstring[i]){
+  //       //       setState(() {
+  //       //         hoja=true;
+  //       //       });
+  //       //     }
+  //       //     if(hoja==true){}
+  //       //     else{
+  //       //       dateinstring.add(Abc(name: dropdownvalue1, date: a));
+  //       //       print("tttttttttttttt ${dateinstring.length}");
+  //       //     }
+  //       //   }
+  //       // }
+  //
+  //
+  //
   //       // if(date==a){
   //       //   // print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
   //       //   // setState(() {
@@ -1156,8 +1155,8 @@ class _ByEmployeeState extends State<ByEmployee> {
   //       // setState(() {
   //       //   streamController.stream;
   //       // });
-  //     });
   //
+  //     });
   //      // print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring.length} :::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
   //      //
   //      // // for(int i=0;i<dateinstring.length;i++){
@@ -1165,16 +1164,11 @@ class _ByEmployeeState extends State<ByEmployee> {
   //      // // }
   //      //
   //      // print(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
-  //
   //   }).then((value) {
-  //
-  //
   //     print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring.length} :::::::::::: \n::::::::::\n::::::::::\n::::::::::\n\n");
-  //
   //     // for(int i=0;i<dateinstring.length;i++){
   //     //   print("brrrrrreeeeeeaaaaakkkkkkk ${dateinstring[i].name} :::: ${dateinstring[i].date}");
   //     // }
-  //
   //   });
   // }
 
@@ -1185,9 +1179,7 @@ class _ByEmployeeState extends State<ByEmployee> {
     //checatt(date);
     print("kkkkkkkkkk $date $dropdownvalue1");
     String a,b;
-
     setState(() {  hasAttendance=false; });
-
     await FirebaseFirestore.instance
           .collection('Companies')
           .doc('${user!.email.toString()}')
@@ -1564,8 +1556,7 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                 date: widget.date,
                 tabcount: widget.tabcount,
                 time: widget.time,
-              )
-          ),):null;
+              )),) : null;
       },
       child: Container(
         height: 168.h,
@@ -1586,7 +1577,7 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                   Padding(
                     padding: EdgeInsets.only(left: 14.0.w),
                     child: Container(
-                       //color: Colors.lightBlue,
+                      // color: Colors.lightBlue,
                       alignment: Alignment.topLeft,
                       width: 120.w,
                       height: 156.h,
@@ -1810,7 +1801,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                   },
                   child: Container(
                     height: 40.h,
-                    width: MediaQuery.of(context).size.width*0.57,
+                    width: MediaQuery.of(context).size.width*0.6,
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -1829,7 +1820,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                         SizedBox(width: 20.w,),
                         const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
                         SizedBox(width: 10.w,),
-                        IN.isEmpty?Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
+                        IN.isEmpty ? Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
                         Text("   $IN", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey, letterSpacing: 4.5.w,fontWeight: FontWeight.bold),),
                         Spacer(),
                       ],
@@ -1868,7 +1859,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                   },
                   child: Container(
                     height: 40.h,
-                    width: MediaQuery.of(context).size.width*0.57,
+                    width: MediaQuery.of(context).size.width*0.6,
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
