@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:hrmanagementapp/Model/ModelAPI/EmployeeGet.dart';
 import 'package:intl/date_symbol_data_local.dart'; // for other locales
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -1508,6 +1509,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     //   "allow": "Company",	//(static company)
     //   "for_value": "${textEditingController2.text}"   // (company name)
     // };
+    var l;
     FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
             shifts: dropdownvalue1,
             adminemail: email,
@@ -1524,31 +1526,22 @@ class _CreateEmployeeState extends State<CreateEmployee> {
             adminpassword: widget.password,
             superadmin:widget.superadmin
           ).then((value) async {
-           print("employe create kkkkkkkkkk");
+              print("employe create kkkkkkkkkk");
               var res= await EmployeeCreation().postcratetionofemployeeuser(data,'register');
           }).then((value) async{
             print("7777777777 ${company_name} ${now.day}-${now.month}-${now.year}");
             var res= await EmployeeCreation().postcratetionofemployee(employee,'register');
           }).then((value)async {
-              String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "taha"]]""";
-              var res= await EmployeeCreation().allEmployeesGet('', api);
+              String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+              var res= await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}",email);
               // setState(() {
               //   isLoading=false;
               // });
-          }).then((value) {
-
-          //FirebaseFirestore.instance.collection("Companies").doc(email).snapshots().where();
-
-          FirebaseFirestore.instance.collection("Companies").where('email',isEqualTo:'$email').
-          snapshots().forEach((element) {});
-      
-          FirebaseFirestore.instance.collection("Companies").doc(email).collection('Employee').doc(textEditingController1.text.trim())
-          .set({});
-
           });
 
+          //String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "taha"]]""";
 
-
+          // var res = await EmployeeCreation().allEmployeesGet('', api);
 
 
 

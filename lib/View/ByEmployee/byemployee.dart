@@ -84,7 +84,6 @@ class _ByEmployeeState extends State<ByEmployee> {
   final user = FirebaseAuth.instance.currentUser;
 
 
-
   @override
   void initState() {
     DateTimeRange dateRange = DateTimeRange(
@@ -672,7 +671,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                           ),
                           Spacer(),
                           Padding(
-                            padding:  EdgeInsets.only(left:10.0.w),
+                            padding: EdgeInsets.only(left:10.0.w),
                             child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
                                 color: srpgradient2,fontWeight: FontWeight.w600),),
                           ),
@@ -1249,7 +1248,7 @@ class _ByEmployeeState extends State<ByEmployee> {
             }
           else{
               // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
-             // streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
+              // streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
               setState(() { hasAttendance=true; });
               // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
                 print("1111111111111");
