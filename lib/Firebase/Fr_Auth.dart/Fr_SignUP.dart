@@ -291,7 +291,6 @@ class FrSignUpService1 {
     return user;
   }
 
-
   // To Sign UP
   Future onTapSignUP({
     required String adminpassword,
@@ -352,7 +351,7 @@ class FrSignUpService1 {
           ),
         );
       } on FirebaseAuthException catch (error) {
-           //print(error.code);
+          // print(error.code);
           onlogicErrorHandling(
           error: onFirebaseErrorHandling(error.code),
           providerGenerator: providerGenerator,
@@ -386,7 +385,7 @@ class FrSignUpService1 {
     required BuildContext context,
     required bool superadmin
     }) async {
-
+    var now = new DateTime.now();
     //Active Error Ui
     onHideError(providerGenerator);
     globalemail=email.toString();
@@ -408,8 +407,12 @@ class FrSignUpService1 {
 
     FirebaseFirestore.instance.collection("Companies").doc(adminemail).collection('Employee').doc(email)
     .set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
-      "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts'});
+      "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts', 'generatedId':''}).then((value) {
 
+    });
+    FirebaseFirestore.instance.collection("Companies")
+        .doc(adminemail).collection('Employee')
+        .doc(email).collection("Attendance").doc('${now.year}-${now.month}-${now.day}').set({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"","TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":""});
      // UserT.where('email', isEqualTo: adminemail).firestore.collection("Empoloyee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
      //  "name":"$name","email":"$email","uid":"$uid",});
 
@@ -430,7 +433,7 @@ class FrSignUpService1 {
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,adminname: adminemail,)), result: false) :
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Test(password: password,)),);
 
-          superadmin==false
+          superadmin == false
               ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully')
               : CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',);
         });

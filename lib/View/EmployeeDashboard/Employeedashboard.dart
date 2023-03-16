@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:hrmanagementapp/Model/firbaseModel/employeeAttendance.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
@@ -7,6 +6,7 @@ import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Components/textfield.dart';
 import 'package:hrmanagementapp/View/Profile/Requests/components/NoRequest.dart';
 import 'package:hrmanagementapp/View/Profile/Requests/requests.dart';
+import 'package:hrmanagementapp/controller/markAttendance.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -137,6 +137,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   }
 
   final user = FirebaseAuth.instance.currentUser;
+
+  String generatedId='';
   bool itis=false;
   bool timeinshow=false;
   bool timeoutshow=false;
@@ -151,8 +153,10 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
          .collection('Companies')
          .doc('${admin}').collection("Employee")
          .doc('${user!.email.toString()}').get().then((value) {
-     name= value.get('name');
-     department= value.get('designation');
+           name= value.get('name');
+           department= value.get('designation');
+           generatedId=value.get('generatedId');
+           setState(() {});
      print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $name $department');
     }).then((value) async {
       FirebaseFirestore.instance.collection('Companies')
@@ -162,19 +166,16 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
        print(":::::::::::: ${element.id}");
        if(datestring=="${element.id}"){
         print("jjjjjjjjjjjjjj");
-                setState(() {
-                  itis=true;
-                });
-         }});
+        setState(() {itis=true;});}});
        }).then((value) {
        if(itis==false){
-
           FirebaseFirestore.instance.collection('Companies')
               .doc('${admin}').collection("Employee")
               .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
             .set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
             setState(() {timeinshow=true; timeoutshow=false;});}
-       else{ FirebaseFirestore.instance.collection('Companies')
+       else{
+         FirebaseFirestore.instance.collection('Companies')
              .doc('${admin}').collection("Employee")
              .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').snapshots()
              .forEach((element) { String a,b;
@@ -182,10 +183,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                b=element.get('TimeOut');
                print("######## $a $b");
                if(a.isNotEmpty && b.isEmpty) {
-                 setState(() {
-                    timeinshow=false;
-                    timeoutshow=true;
-                  });}
+                 setState(() {timeinshow=false;timeoutshow=true;});}
                else if(a.isEmpty && b.isEmpty) {
                  setState(() {
                    timeinshow=true;
@@ -254,7 +252,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
+
     Placemark place=placemark[0];
+
     setState(() {  Address= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
     });
   }
@@ -1158,6 +1158,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 // ),
               ],
             ),
+
           ),
           // appBar: AppBar(
           //   title: const Text('Advanced Drawer Example'),
@@ -1746,8 +1747,15 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   }
 
   marktimeoutAttendance() async {
-    print("............................................");
-    setState(() {
+    DateTime noww = DateTime.now();
+    print("ggggrrrrrrrrrrrrwwwwwwwwwwaaaaaaaaaaa");
+    var data={
+      "employee": "$generatedId",
+      "employee_name": "$name",
+      "log_type": "OUT",
+      "time": "${noww.year.toString()}-${noww.month.toString()}-${noww.day.toString()} ${noww.hour.toString() + ":" + noww.minute.toString() + ":" + noww.second.toString()}"
+      // "2023-03-02 12:42:53"
+    };    setState(() {
       timinoutdicator=true;
     });
     FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
@@ -1759,6 +1767,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
         .update({"TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":"$Address"})
         .then((value) {
+            var res = MarkAttendance().timeOut(data,'');
+         })
+        .then((value) {
         setState(() {
           timinoutdicator=false;
           timeoutshow=false;
@@ -1769,8 +1780,16 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   }
 
   markattimeintendance()async{
+    DateTime noww = DateTime.now();
     print("ggggrrrrrrrrrrrrwwwwwwwwwwaaaaaaaaaaa");
+    var data={
+      "employee": "$generatedId",
+      "employee_name": "$name",
+      "log_type": "IN",
+      "time": "${noww.year.toString()}-${noww.month.toString()}-${noww.day.toString()} ${noww.hour.toString() + ":" + noww.minute.toString() + ":" + noww.second.toString()}"
+      // "2023-03-02 12:42:53"
 
+    };
     setState(() {
       timinindicator=true;
     });
@@ -1781,6 +1800,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         .collection('Companies').doc('${admin}').collection("Employee")
         .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
         .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
+        .then((value) {
+           var res = MarkAttendance().timeIn(data,'');
+         })
         .then((value) {
         setState(() {
           timinindicator=false;
@@ -2251,7 +2273,6 @@ class _ListOfRequest1State extends State<ListOfRequest1> {
               ],
             ),
           ),
-
           floatingActionButton: FloatingActionButton(
             child: Container(
               width: 60,

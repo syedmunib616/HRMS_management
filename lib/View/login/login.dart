@@ -494,7 +494,7 @@ class Forgotpassword extends StatefulWidget {
 
 class _ForgotpasswordState extends State<Forgotpassword> {
   TextEditingController textEditingController1 = TextEditingController();
-  //final providerGenerator = Provider.of<ProviderGenerator>;
+  // final providerGenerator = Provider.of<ProviderGenerator>;
 
   @override
   void dispose() {
@@ -504,14 +504,12 @@ class _ForgotpasswordState extends State<Forgotpassword> {
   }
 
   late bool visibleError = false;
-  //forget password
+  //forget pass word
 
   @override
   void initState() {
-
     // TODO: implement initState
     super.initState();
-
   }
 
 
@@ -625,7 +623,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                             // resetpassword();
                             FrForgetService(FirebaseAuth.instance).onTapSignIn(
                                 buttonIndex: 1,
-                                errorIndex: 0,
+                                errorIndex: 1,
                                 context: context,
                                 email: textEditingController1.text.trim(),
                                 providerGenerator: providerGenerator);

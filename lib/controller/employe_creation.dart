@@ -68,7 +68,8 @@ class EmployeeCreation{
             // snapshots().forEach((element) {});
             FirebaseFirestore.instance.collection("Companies").
             doc(adminemail).collection('Employee').
-            doc(email).update({"generatedId":"${emp.data[i].name}"}).then((value) {
+            doc(email).
+            update({"generatedId":"${emp.data[i].name}"}).then((value) {
               print("IUIUIUIUIU ");
             });
           }

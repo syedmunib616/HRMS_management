@@ -1510,6 +1510,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     //   "for_value": "${textEditingController2.text}"   // (company name)
     // };
     var l;
+
     FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
             shifts: dropdownvalue1,
             adminemail: email,
@@ -1527,13 +1528,13 @@ class _CreateEmployeeState extends State<CreateEmployee> {
             superadmin:widget.superadmin
           ).then((value) async {
               print("employe create kkkkkkkkkk");
-              var res= await EmployeeCreation().postcratetionofemployeeuser(data,'register');
+              var res = await EmployeeCreation().postcratetionofemployeeuser(data,'register');
           }).then((value) async{
             print("7777777777 ${company_name} ${now.day}-${now.month}-${now.year}");
-            var res= await EmployeeCreation().postcratetionofemployee(employee,'register');
+            var res = await EmployeeCreation().postcratetionofemployee(employee,'register');
           }).then((value)async {
               String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
-              var res= await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}",email);
+              var res = await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}",email);
               // setState(() {
               //   isLoading=false;
               // });

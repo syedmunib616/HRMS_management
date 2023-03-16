@@ -103,7 +103,7 @@ class _SginUpState extends State<SginUp> {
                           height: 28.h,
                         ),
                         Text(
-                          "${TextStrings.Sgin_Up} to continue",
+                          "Create Company to continue",
                           style: GoogleFonts.poppins(fontSize: 15.sp,color: settingFontBackColor(context),fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
@@ -239,7 +239,7 @@ class _SginUpState extends State<SginUp> {
                           providerGenerator: providerGenerator,
                           width: 287.w,
                           mycontroller: textEditingController6,
-                          myhint: TextStrings.ConformPassword,
+                          myhint: "Confirm Password",
                           prefixIcon: Icons.lock,
                           isPassword: true,
                           obscureIndex: 2,
@@ -326,7 +326,7 @@ class _SginUpState extends State<SginUp> {
                                   color: whiteClr,
                                 ),
                                 child: Center(
-                                  child: Text(TextStrings.Sgin_Up, style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                  child: Text("Create Company", style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                 ),
                             ),
                           ),],),),],),),),),),
@@ -434,5 +434,6 @@ class _SginUpState extends State<SginUp> {
             _showToast(context,"Company name already taken");
           }
         }
+
 }
 

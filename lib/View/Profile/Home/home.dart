@@ -390,7 +390,7 @@ class _HomeState extends State<Home> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                            Text("Onboarding progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                             SizedBox(
                               height: 2.h,
                             ),
