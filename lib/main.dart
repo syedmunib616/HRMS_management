@@ -42,6 +42,7 @@ void main()async {
     // );
    //runApp(WriteLeave(adminemail: '', providerGenerator: null,));
    runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
