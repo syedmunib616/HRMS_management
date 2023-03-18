@@ -212,436 +212,8 @@ class _ByEmployeeState extends State<ByEmployee> {
     return SafeArea(
         child: CsScreenUtilInit(
           child: Scaffold(
-            // appBar: PreferredSize(
-            //   preferredSize: Size.fromHeight(110.0.h),
-            //   child: Container(
-            //     child:  Container(
-            //       height: 300.h,
-            //       width:MediaQuery.of(context).size.width,
-            //       decoration: BoxDecoration(
-            //         boxShadow: [
-            //           BoxShadow(
-            //             color: Colors.grey.withOpacity(0.4),
-            //             spreadRadius: 2,
-            //             blurRadius: 1,
-            //             offset: const Offset(0, 2), // changes position of shadow
-            //           ),
-            //         ],
-            //         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-            //         color: whiteClr,
-            //           //color: Colors.cyanAccent
-            //       ),
-            //       child: Stack(
-            //           children:[
-            //             Positioned(
-            //               top: 0,
-            //               bottom: 0,
-            //               left: 0,
-            //               right: 0,
-            //               child: Column(
-            //                   children:[
-            //                     SizedBox(height: 15.h,),
-            //                     Container(
-            //                       //color: Colors.black45,
-            //                       alignment:Alignment.center ,
-            //                       width: 185.w,
-            //                       child: Text("Employee Wise Attendance",
-            //                         style: GoogleFonts.poppins(fontSize:12.sp,
-            //                             color: Colors.black, fontWeight: FontWeight.w500),),
-            //                     ),
-            //                     SizedBox(height: 10.h,),
-            //                     Row(
-            //                       children: [
-            //                         Spacer(),
-            //                         GestureDetector(
-            //                           onTap: () async {
-            //                             //DatePickerTitle(date: dateTime);
-            //                             // _showRangePicker(context);
-            //                             // showDateRangePicker(
-            //                             //     context: context,
-            //                             //     firstDate: DateTime(2000),
-            //                             //     lastDate: DateTime(2200),
-            //                             //     builder: (context, child) {
-            //                             //       return Theme(
-            //                             //         data: ThemeData.light().copyWith(
-            //                             //             colorScheme: const ColorScheme.light(
-            //                             //                 onPrimary: Colors.white, // selected text color
-            //                             //                 onSurface: srpgradient3, // default text color
-            //                             //                 primary: srpgradient2 // circle color
-            //                             //                 // onPrimary: Colors.black, // selected text color
-            //                             //                 // onSurface: Colors.amberAccent, // default text color
-            //                             //                 // primary: Colors.lightBlue // circle color
-            //                             //             ),
-            //                             //             dialogBackgroundColor: Colors.white,
-            //                             //             textButtonTheme: TextButtonThemeData(
-            //                             //                 style: TextButton.styleFrom(
-            //                             //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
-            //                             //                         color: srpgradient2, fontWeight: FontWeight.w500),
-            //                             //                     primary: srpgradient2, // color of button's letters
-            //                             //                     //backgroundColor: Colors.white60, // Background color
-            //                             //                     //backgroundColor: Colors.white, // Background color
-            //                             //                     shape: RoundedRectangleBorder(
-            //                             //                         side: const BorderSide(
-            //                             //                             color: Colors.transparent,
-            //                             //                             width: 1,
-            //                             //                             style: BorderStyle.solid),
-            //                             //                         borderRadius: BorderRadius.circular(50))
-            //                             //                 ))),
-            //                             //         child: child!,
-            //                             //       );
-            //                             //     });
-            //
-            //                             pickDateRange();
-            //                             // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
-            //                             // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
-            //                             // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
-            //                             // final String formatted = serverFormater.format(displayDate);
-            //                             // var a,b,c;
-            //                             // newDateTime = await buildShowRoundedDatePicker(context);
-            //                             // a=newDateTime?.day.toString();
-            //                             // b=newDateTime?.month.toString();
-            //                             // c=newDateTime?.year.toString();
-            //                             // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-            //                             //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-            //                             //   a="0$a";
-            //                             // }
-            //                             // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-            //                             //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-            //                             //   b="0$b";
-            //                             // }
-            //                             // print("guddi teri ma ka $a $b $c");
-            //                             // print(newDateTime);
-            //                             // if (newDateTime != null) {
-            //                             //   setState(() {
-            //                             //
-            //                             //     time= "$c-$b-$a";
-            //                             //     dateTime = newDateTime!;
-            //                             //   });
-            //                             //   print("${dateTime.month}");
-            //                             // }
-            //                           },
-            //                           child: Container(
-            //                             height: 36.0.h,
-            //                             //width: 125.w,
-            //                             width: MediaQuery.of(context).size.width,
-            //                             //color: Colors.purpleAccent,
-            //                             child: Row(
-            //                               mainAxisAlignment: MainAxisAlignment.center,
-            //                               children: [
-            //                                 Container(
-            //                                   //width: 125.w,
-            //                                   width: 300.w,
-            //                                   height: 42.0.h,
-            //                                   decoration: BoxDecoration(
-            //                                     boxShadow: [
-            //                                       BoxShadow(
-            //                                         color: Colors.grey.withOpacity(0.2),
-            //                                         spreadRadius: 2,
-            //                                         blurRadius: 1,
-            //                                         offset: const Offset(0, 2), // changes position of shadow
-            //                                       ),
-            //                                     ],
-            //                                     borderRadius: BorderRadius.circular(5),
-            //                                     color: whiteClr,
-            //                                   ),
-            //                                   child: Padding(
-            //                                     padding: EdgeInsets.all( 3.5.sp),
-            //                                     child: Row(
-            //                                       children: [
-            //                                         Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-            //                                         Spacer(),
-            //                                         Column(
-            //                                           children: [
-            //                                             Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                                              Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-            //                                            // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-            //                                           ],
-            //                                         ),
-            //                                         const Spacer(),
-            //                                         Container(
-            //                                           height: 15.h,
-            //                                           width: 15.w,
-            //                                           //color: Colors.purpleAccent,
-            //                                           child: Icon(Icons.keyboard_arrow_down,size:22.sp,color: iconcolor,),),
-            //                                         SizedBox(width: 10.w,)
-            //                                       ],
-            //                                     ),
-            //                                   ),
-            //                                 ),
-            //                               ],
-            //                             ),
-            //                           ),
-            //                         ),
-            //                         Spacer(),
-            //                         // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
-            //                         // Spacer(),
-            //                         // GestureDetector(
-            //                         //   onTap: () async {
-            //                         //     //DatePickerTitle(date: dateTime);
-            //                         //     // _showRangePicker(context);
-            //                         //     var a,b,c;
-            //                         //     newDateTime1 = await buildShowRoundedDatePicker(context);
-            //                         //
-            //                         //     a=newDateTime1?.day.toString();
-            //                         //     b=newDateTime1?.month.toString();
-            //                         //     c=newDateTime1?.year.toString();
-            //                         //
-            //                         //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-            //                         //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-            //                         //       a="0$a";
-            //                         //     }
-            //                         //
-            //                         //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-            //                         //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-            //                         //       b="0$b";
-            //                         //     }
-            //                         //
-            //                         //     print("guddi teri ma ka $a $b $c");
-            //                         //
-            //                         //     print(newDateTime1);
-            //                         //     if (newDateTime1 != null) {
-            //                         //       setState(() {
-            //                         //         // time=newDateTime.toString();
-            //                         //         // time=time.substring(0,time.length-13);
-            //                         //         time1 = "$c-$b-$a";
-            //                         //         dateTime1 = newDateTime1!;
-            //                         //       });
-            //                         //       print("${dateTime1.month}");
-            //                         //     }
-            //                         //   },
-            //                         //   child: Container(
-            //                         //     height: 36.0.h,
-            //                         //     width: 125.w,
-            //                         //     child: Row(
-            //                         //       mainAxisAlignment: MainAxisAlignment.center,
-            //                         //       children: [
-            //                         //         Container(
-            //                         //           width: 125.w,
-            //                         //           height: 42.0.h,
-            //                         //           decoration: BoxDecoration(
-            //                         //             boxShadow: [
-            //                         //               BoxShadow(
-            //                         //                 color: Colors.grey.withOpacity(0.2),
-            //                         //                 spreadRadius: 2,
-            //                         //                 blurRadius: 1,
-            //                         //                 offset: const Offset(0, 2), // changes position of shadow
-            //                         //               ),
-            //                         //             ],
-            //                         //             borderRadius: BorderRadius.circular(5),
-            //                         //             color: whiteClr,
-            //                         //           ),
-            //                         //           child: Padding(
-            //                         //             padding: EdgeInsets.all( 3.5.sp),
-            //                         //             child: Row(
-            //                         //               children: [
-            //                         //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-            //                         //                 SizedBox(width: 10.w,),
-            //                         //                 Column(
-            //                         //                   children: [
-            //                         //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                         //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-            //                         //                   ],
-            //                         //                 ),
-            //                         //                 const Spacer(),
-            //                         //                 Container(
-            //                         //                   height: 15.h,
-            //                         //                   width: 15.w,
-            //                         //                   //color: Colors.purpleAccent,
-            //                         //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
-            //                         //               ],
-            //                         //             ),
-            //                         //           ),
-            //                         //         ),
-            //                         //       ],
-            //                         //     ),
-            //                         //   ),
-            //                         // ),
-            //                         // Spacer(),
-            //                         ],
-            //                       ),
-            //
-            //                     SizedBox(height: 12.h,),
-            //
-            //                     Container(
-            //                       height: 30.h,
-            //                       width: 300.w,
-            //                       decoration: BoxDecoration(
-            //                         boxShadow: [
-            //                           BoxShadow(
-            //                             color: Colors.grey.withOpacity(0.2),
-            //                             spreadRadius: 2,
-            //                             blurRadius: 1,
-            //                             offset: const Offset(0, 2), // changes position of shadow
-            //                           ),
-            //                         ],
-            //                         borderRadius: BorderRadius.circular(5),
-            //                         // color: Colors.purpleAccent,
-            //                         color: whiteClr,
-            //                       ),
-            //                       //color: Colors.purpleAccent,
-            //                       child:  Stack(
-            //                         children: [
-            //
-            //                           Positioned(
-            //                             top: 0,
-            //                             bottom: 0,
-            //                             left: 0,
-            //                             right: 0,
-            //                             child: Row(
-            //                               children: [
-            //                                 SizedBox(width: 5.w,),
-            //                                 Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
-            //                                 SizedBox(width: 14.w,),
-            //                                 DropdownButton(
-            //                                   // Initial Value
-            //                                   value: dropdownvalue1,
-            //                                   // Down Arrow Icon
-            //                                   icon: Container(
-            //
-            //                                     height: 30.h,
-            //                                     width: 100.w,
-            //                                       ),
-            //                                   // Array list of items
-            //                                   items: items1.map((String items) {
-            //                                     return DropdownMenuItem(
-            //                                       value: items,
-            //                                       child: Text(items),
-            //                                     );
-            //                                   }).toList(),
-            //                                   // After selecting the desired option,it will
-            //                                   // change button value to selected value
-            //                                   onChanged: (String? newValue) {
-            //                                     setState(() {
-            //                                       dropdownvalue1 = newValue!;
-            //                                     });
-            //                                     print("::::::::::: $dropdownvalue1 $days");
-            //                                     dropdownfetchattendance(dropdownvalue1);
-            //                                   },
-            //                                 ),
-            //                               ],
-            //                             ),
-            //                           ),
-            //
-            //                           Positioned(
-            //                             top: 5,
-            //                               right: 10,
-            //                               child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
-            //                           ),
-            //
-            //                         ],
-            //                       ),
-            //                         ),
-            //                       // Row(
-            //                     //   children: [
-            //                     //     Spacer(),
-            //                     //     GestureDetector(
-            //                     //       onTap: (){
-            //                     //         showAlertDialog(context);
-            //                     //       },
-            //                     //       child: Container(
-            //                     //         height: 37.h,
-            //                     //         width: 149.w,
-            //                     //         decoration: BoxDecoration(
-            //                     //           boxShadow: [
-            //                     //             BoxShadow(
-            //                     //               color: Colors.grey.withOpacity(0.25),
-            //                     //               spreadRadius: 1,
-            //                     //               blurRadius: 1,
-            //                     //               offset: const Offset(0, 2), // changes position of shadow
-            //                     //             ),
-            //                     //           ],
-            //                     //           borderRadius: BorderRadius.circular(5.sp),
-            //                     //           color: whiteClr,
-            //                     //         ),
-            //                     //         child: Row(
-            //                     //           mainAxisAlignment: MainAxisAlignment.start,
-            //                     //           children: [
-            //                     //             Padding(
-            //                     //               padding: const EdgeInsets.only(left: 8.0),
-            //                     //               child: SizedBox(
-            //                     //                 height: 25.h,
-            //                     //                 width: 25.w,
-            //                     //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
-            //                     //               ),
-            //                     //             ),
-            //                     //             Spacer(),
-            //                     //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                     //             Spacer(),
-            //                     //             SizedBox(width: 4.w,),
-            //                     //
-            //                     //           ],
-            //                     //         ),
-            //                     //       ),
-            //                     //     ),
-            //                     //     Spacer(),
-            //                     //     GestureDetector(
-            //                     //       onTap: (){
-            //                     //         showAlertDialog(context);
-            //                     //       },
-            //                     //       child: Container(
-            //                     //         height: 37.h,
-            //                     //         width: 149.w,
-            //                     //         decoration: BoxDecoration(
-            //                     //           boxShadow: [
-            //                     //             BoxShadow(
-            //                     //               color: Colors.grey.withOpacity(0.25),
-            //                     //               spreadRadius: 1,
-            //                     //               blurRadius: 1,
-            //                     //               offset: const Offset(0, 2), // changes position of shadow
-            //                     //             ),
-            //                     //           ],
-            //                     //           borderRadius: BorderRadius.circular(5.sp),
-            //                     //           color: whiteClr,
-            //                     //         ),
-            //                     //         child: Row(
-            //                     //           mainAxisAlignment: MainAxisAlignment.start,
-            //                     //           children: [
-            //                     //             Padding(
-            //                     //               padding: const EdgeInsets.only(left: 8.0),
-            //                     //               child: SizedBox(
-            //                     //                 height: 25.h,
-            //                     //                 width: 25.w,
-            //                     //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
-            //                     //               ),
-            //                     //             ),
-            //                     //             Spacer(),
-            //                     //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                     //             Spacer(),
-            //                     //             SizedBox(width: 4.w,),
-            //                     //
-            //                     //           ],
-            //                     //         ),
-            //                     //       ),
-            //                     //     ),
-            //                     //     Spacer(),
-            //                     //   ],
-            //                     // ),
-            //                      ]
-            //                    ),
-            //                  ),
-            //               Positioned(
-            //                 top: 6,
-            //                 left: 4,
-            //                 child: GestureDetector(
-            //                   onTap: (){
-            //                     Navigator.pop(context);
-            //                   },
-            //                   child: Container(
-            //                     //color: Colors.yellow,
-            //                     child: Padding(
-            //                       padding: EdgeInsets.only(left: 10.w,top: 8.h),
-            //                       child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
-            //                     ),
-            //                   ),
-            //                 ),
-            //               ),
-            //             ]
-            //           ),
-            //         ),
-            //       ),
-            //     ),
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(145.0.h),
+              preferredSize: Size.fromHeight(150.0.h),
               child: Container(
                 child:  Container(
                   height: 300.h,
@@ -657,11 +229,10 @@ class _ByEmployeeState extends State<ByEmployee> {
                     ],
                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
                     color: whiteClr,
-                    //color: Colors.cyanAccent
+                      //color: Colors.cyanAccent
                   ),
                   child: Stack(
                       children:[
-
                         Positioned(
                           top: 0,
                           bottom: 0,
@@ -669,9 +240,9 @@ class _ByEmployeeState extends State<ByEmployee> {
                           right: 0,
                           child: Column(
                               children:[
-                                SizedBox(height: 11.h,),
+                                SizedBox(height: 15.h,),
                                 Container(
-                                  // color: Colors.black45,
+                                  //color: Colors.black45,
                                   alignment:Alignment.center ,
                                   width: 185.w,
                                   child: Text("Employee Wise Attendance",
@@ -681,7 +252,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                 SizedBox(height: 10.h,),
                                 Row(
                                   children: [
-                                    SizedBox(width: 55.w,),
+                                    Spacer(),
                                     GestureDetector(
                                       onTap: () async {
                                         //DatePickerTitle(date: dateTime);
@@ -749,19 +320,17 @@ class _ByEmployeeState extends State<ByEmployee> {
                                         //   print("${dateTime.month}");
                                         // }
                                       },
-                                      ////Calender Container///////
-                                      child:
-                                      Container(
+                                      child: Container(
                                         height: 36.0.h,
-                                        width: 275.w,
-                                        //width: MediaQuery.of(context).size.width,
-                                        //
+                                        //width: 125.w,
+                                        width: MediaQuery.of(context).size.width,
+                                        //color: Colors.purpleAccent,
                                         child: Row(
-                                          // mainAxisAlignment: MainAxisAlignment.,
-                                          children: [SizedBox(height: 12.h,),
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
                                             Container(
                                               //width: 125.w,
-                                              width: 270.w,
+                                              width: 300.w,
                                               height: 42.0.h,
                                               decoration: BoxDecoration(
                                                 boxShadow: [
@@ -776,7 +345,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                                 color: whiteClr,
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsets.all( 2.5.sp),
+                                                padding: EdgeInsets.all( 3.5.sp),
                                                 child: Row(
                                                   children: [
                                                     Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
@@ -784,8 +353,8 @@ class _ByEmployeeState extends State<ByEmployee> {
                                                     Column(
                                                       children: [
                                                         Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                                        Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                                        // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                         Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                       // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
                                                       ],
                                                     ),
                                                     const Spacer(),
@@ -888,13 +457,14 @@ class _ByEmployeeState extends State<ByEmployee> {
                                     //   ),
                                     // ),
                                     // Spacer(),
-                                  ],
-                                ),
+                                    ],
+                                  ),
+
                                 SizedBox(height: 12.h,),
-                                ////All container////
+
                                 Container(
                                   height: 30.h,
-                                  width: 272.w,
+                                  width: 300.w,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -908,7 +478,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                     // color: Colors.purpleAccent,
                                     color: whiteClr,
                                   ),
-                                  // color: Colors.purpleAccent,
+                                  //color: Colors.purpleAccent,
                                   child:  Stack(
                                     children: [
 
@@ -921,20 +491,23 @@ class _ByEmployeeState extends State<ByEmployee> {
                                           children: [
                                             SizedBox(width: 5.w,),
                                             Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
-                                            SizedBox(width: 5.w,),
+                                            SizedBox(width: 14.w,),
                                             DropdownButton(
                                               // Initial Value
                                               value: dropdownvalue1,
                                               // Down Arrow Icon
                                               icon: Container(
+
                                                 height: 30.h,
-                                                width: 80.w,
-                                              ),
+                                                width: 100.w,
+                                                  ),
                                               // Array list of items
                                               items: items1.map((String items) {
                                                 return DropdownMenuItem(
                                                   value: items,
-                                                  child: Text(items),
+                                                  child: SizedBox(
+                                                      width: 130.w,
+                                                      child: Text(items)),
                                                 );
                                               }).toList(),
                                               // After selecting the desired option,it will
@@ -950,70 +523,91 @@ class _ByEmployeeState extends State<ByEmployee> {
                                           ],
                                         ),
                                       ),
-                                      Container(
-                                        child: Positioned(
-                                            top: 5,
-                                            right: 10,
-                                            child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
-                                        ),
+
+                                      Positioned(
+                                        top: 5,
+                                          right: 10,
+                                          child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
                                       ),
+
                                     ],
                                   ),
-                                ),
-                                SizedBox(height: 10.h,),
+                                    ),
+                                SizedBox(height: 5.h,),
                                 Container(
-                                  margin: new EdgeInsets.only(left: 200.0),
-                                  height: 30.h,
-                                  width: 90.w,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.2),
-                                        spreadRadius: 2,
-                                        blurRadius: 1,
-                                        offset: const Offset(0, 2), // changes position of shadow
-                                      ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(5),
-                                    // color: Colors.purpleAccent,
-                                    color: whiteClr,
-                                  ),
+                                  //color: Colors.yellow,
+                                  height: 49.h,
+                                  width: MediaQuery.of(context).size.width*0.8,
+                                  child: Row(
+                                      mainAxisAlignment:  MainAxisAlignment.end,
+                                      children: [
+                                        GestureDetector(
 
-                                  // color: Colors.purpleAccent,
-
-                                  child:  Row(mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [GestureDetector(
-                                      onTap: () {
-                                        dropdownfetchattendance(dropdownvalue1);
-                                      },
-                                      child:
-                                      const Icon(
-                                        size: 32,
-                                        Icons.remove_red_eye_outlined,
-                                        color: srpgradient2,
-                                      ),
-                                      ),
-                                      SizedBox(width: 10.w,),
-                                      Text("Show" ,textAlign: TextAlign.center, style: GoogleFonts.poppins(fontSize: 13.sp, color:blackClr,fontWeight: FontWeight.w400,letterSpacing:2 ),),
-
-                                      // Positioned(
-                                      //   top: 0,
-                                      //   bottom: 0,
-                                      //   left: 0,
-                                      //   right: 0,
-                                      //   child: Row(
-                                      //     children: [
-                                      //       // SizedBox(width: 90.w,),
-                                      //       // Text("Show" ,textAlign: TextAlign.center, style: GoogleFonts.poppins(fontSize: 9.sp, color:blackClr,fontWeight: FontWeight.bold,),),
-                                      //       // // Icon(FontAwesomeIcons.eye,size: 20.sp,color: srpgradient2,),
-                                      //       // SizedBox(width: 90.w,),
-                                      //     ],
-                                      //   ),
-                                      // ),
-                                    ],
+                                          child: Container(
+                                            width:72.w,
+                                            height: 35.h,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(color: Colors.grey.withOpacity(0.2),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 1,
+                                                  offset: const Offset(0, 2),
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: whiteClr,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(width: 5.h,),
+                                                 Icon(
+                                                  size: 23.sp,
+                                                  Icons.remove_red_eye_outlined,
+                                                  color: srpgradient2,
+                                                ),
+                                                SizedBox(width: 5.h,),
+                                                shownhichalyga==true? SizedBox(
+                                                  height: 20,
+                                                  width: 20,
+                                                  child: CircularProgressIndicator(
+                                                    backgroundColor: Colors.white,
+                                                    strokeWidth: 1.6.w,
+                                                  ),
+                                                ) :  Text("Show" ,style: GoogleFonts.poppins(fontSize: 11.sp, color:blackClr,),),
+                                                // Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+                                                // Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                              ],
+                                            ),
+                                          ),
+                                          onTap:() => {
+                                            attendance.clear(),
+                                            print("rukja yarr $shownhichalyga"),
+                                            shownhichalyga == false?
+                                            Future.delayed(const Duration(milliseconds: 90), () {
+                                              attendance.clear();
+                                              attendance.clear();
+                                              shownhichalyga == false ? Future.delayed(const Duration(milliseconds: 150), () {
+                                                attendance.clear();
+                                                shownhichalyga == false ? dropdownfetchattendance(dropdownvalue1) : print("ik");
+                                              }):print("ik");
+                                            })
+                                                :print("taha ")
+                                            },
+                                        ),
+                                        // Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                        //  child: Container(
+                                        //    color: coverBackClr,
+                                        //    height: 40.h,
+                                        //    width: 1.w ,
+                                        //  ),
+                                        // ),
+                                        // SizedBox(
+                                        //   width: 12.w,
+                                        // )
+                                      ]
                                   ),
                                 ),
-                                // Row(
+                                  // Row(
                                 //   children: [
                                 //     Spacer(),
                                 //     GestureDetector(
@@ -1098,87 +692,617 @@ class _ByEmployeeState extends State<ByEmployee> {
                                 //     Spacer(),
                                 //   ],
                                 // ),
-                              ]
-                          ),
-                        ),
-                        // SizedBox(width: 15.w,),
-                        /////////Ukasha Start////////
-/////////////////2nd/////
-//                         Container(
-//                           color: Colors.red,
-//                           height: 120.h,
-//                           width: 100.w,
-//                           child: Row(
-//                               mainAxisAlignment:  MainAxisAlignment.end,
-//                           children: [
-//                             Container(
-//                               width:57.w,
-//                               height: 35.h,
-//                               decoration: BoxDecoration(
-//                                 boxShadow: [
-//                                   BoxShadow(color: Colors.grey.withOpacity(0.2),
-//                                     spreadRadius: 2,
-//                                     blurRadius: 1,
-//                                     offset: const Offset(0, 2),
-//                                   ),
-//                                 ],
-//                                   borderRadius: BorderRadius.circular(5),
-//                                   color: whiteClr,
-//                               ),
-//                               child: Column(
-//                                 children: [SizedBox(height: 5.h,),
-//                                   GestureDetector(
-//                                     onTap: () => { dropdownfetchattendance(dropdownvalue1)},
-//                                     child: const Icon(
-//                                       size: 15,
-//                                       Icons.remove_red_eye_outlined,
-//                                       color: srpgradient2,
-//
-//                                     ),
-//                                   ),
-//                                   Text("Show" ,style: GoogleFonts.poppins(fontSize: 9.sp, color:blackClr,fontWeight: FontWeight.bold),),
-//                                   // Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-//                                   // Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-//                                 ],
-//                               ),
-//                             ),
-//                             // Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
-//                             //  child: Container(
-//                             //    color: coverBackClr,
-//                             //    height: 40.h,
-//                             //    width: 1.w ,
-//                             //  ),
-//                             // ),
-//                             SizedBox(
-//                               width: 12.w,
-//                             )
-//                             ]
-//                           ),
-//                         ),
+                                 ]
+                               ),
+                             ),
 
-                        //////Ukasha End////////
-                        // isky andr kam nhi hona
-                        Positioned(
-                          top: 6,
-                          left: 4,
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              //color: Colors.yellow,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 10.w,top: 8.h),
-                                child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+                          Positioned(
+                            top: 6,
+                            left: 4,
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                //color: Colors.yellow,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10.w,top: 8.h),
+                                  child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ]
+                        ]
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
+//             appBar: PreferredSize(
+//               preferredSize: Size.fromHeight(145.0.h),
+//               child: Container(
+//                 child:  Container(
+//                   height: 300.h,
+//                   width:MediaQuery.of(context).size.width,
+//                   decoration: BoxDecoration(
+//                     boxShadow: [
+//                       BoxShadow(
+//                         color: Colors.grey.withOpacity(0.4),
+//                         spreadRadius: 2,
+//                         blurRadius: 1,
+//                         offset: const Offset(0, 2), // changes position of shadow
+//                       ),
+//                     ],
+//                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+//                     color: whiteClr,
+//                     //color: Colors.cyanAccent
+//                   ),
+//                   child: Stack(
+//                       children:[
+//
+//                         Positioned(
+//                           top: 0,
+//                           bottom: 0,
+//                           left: 0,
+//                           right: 0,
+//                           child: Column(
+//                               children:[
+//                                 SizedBox(height: 11.h,),
+//                                 Container(
+//                                   // color: Colors.black45,
+//                                   alignment:Alignment.center ,
+//                                   width: 185.w,
+//                                   child: Text("Employee Wise Attendance",
+//                                     style: GoogleFonts.poppins(fontSize:12.sp,
+//                                         color: Colors.black, fontWeight: FontWeight.w500),),
+//                                 ),
+//                                 SizedBox(height: 10.h,),
+//                                 Row(
+//                                   children: [
+//                                     SizedBox(width: 55.w,),
+//                                     GestureDetector(
+//                                       onTap: () async {
+//                                         //DatePickerTitle(date: dateTime);
+//                                         // _showRangePicker(context);
+//                                         // showDateRangePicker(
+//                                         //     context: context,
+//                                         //     firstDate: DateTime(2000),
+//                                         //     lastDate: DateTime(2200),
+//                                         //     builder: (context, child) {
+//                                         //       return Theme(
+//                                         //         data: ThemeData.light().copyWith(
+//                                         //             colorScheme: const ColorScheme.light(
+//                                         //                 onPrimary: Colors.white, // selected text color
+//                                         //                 onSurface: srpgradient3, // default text color
+//                                         //                 primary: srpgradient2 // circle color
+//                                         //                 // onPrimary: Colors.black, // selected text color
+//                                         //                 // onSurface: Colors.amberAccent, // default text color
+//                                         //                 // primary: Colors.lightBlue // circle color
+//                                         //             ),
+//                                         //             dialogBackgroundColor: Colors.white,
+//                                         //             textButtonTheme: TextButtonThemeData(
+//                                         //                 style: TextButton.styleFrom(
+//                                         //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
+//                                         //                         color: srpgradient2, fontWeight: FontWeight.w500),
+//                                         //                     primary: srpgradient2, // color of button's letters
+//                                         //                     //backgroundColor: Colors.white60, // Background color
+//                                         //                     //backgroundColor: Colors.white, // Background color
+//                                         //                     shape: RoundedRectangleBorder(
+//                                         //                         side: const BorderSide(
+//                                         //                             color: Colors.transparent,
+//                                         //                             width: 1,
+//                                         //                             style: BorderStyle.solid),
+//                                         //                         borderRadius: BorderRadius.circular(50))
+//                                         //                 ))),
+//                                         //         child: child!,
+//                                         //       );
+//                                         //     });
+//
+//                                         pickDateRange();
+//                                         // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+//                                         // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
+//                                         // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
+//                                         // final String formatted = serverFormater.format(displayDate);
+//                                         // var a,b,c;
+//                                         // newDateTime = await buildShowRoundedDatePicker(context);
+//                                         // a=newDateTime?.day.toString();
+//                                         // b=newDateTime?.month.toString();
+//                                         // c=newDateTime?.year.toString();
+//                                         // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+//                                         //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+//                                         //   a="0$a";
+//                                         // }
+//                                         // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+//                                         //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+//                                         //   b="0$b";
+//                                         // }
+//                                         // print("guddi teri ma ka $a $b $c");
+//                                         // print(newDateTime);
+//                                         // if (newDateTime != null) {
+//                                         //   setState(() {
+//                                         //
+//                                         //     time= "$c-$b-$a";
+//                                         //     dateTime = newDateTime!;
+//                                         //   });
+//                                         //   print("${dateTime.month}");
+//                                         // }
+//                                       },
+//                                       ////Calender Container///////
+//                                       child:
+//                                       Container(
+//                                         height: 36.0.h,
+//                                         width: 275.w,
+//                                         //width: MediaQuery.of(context).size.width,
+//                                         //
+//                                         child: Row(
+//                                           // mainAxisAlignment: MainAxisAlignment.,
+//                                           children: [SizedBox(height: 12.h,),
+//                                             Container(
+//                                               //width: 125.w,
+//                                               width: 270.w,
+//                                               height: 42.0.h,
+//                                               decoration: BoxDecoration(
+//                                                 boxShadow: [
+//                                                   BoxShadow(
+//                                                     color: Colors.grey.withOpacity(0.2),
+//                                                     spreadRadius: 2,
+//                                                     blurRadius: 1,
+//                                                     offset: const Offset(0, 2), // changes position of shadow
+//                                                   ),
+//                                                 ],
+//                                                 borderRadius: BorderRadius.circular(5),
+//                                                 color: whiteClr,
+//                                               ),
+//                                               child: Padding(
+//                                                 padding: EdgeInsets.all( 2.5.sp),
+//                                                 child: Row(
+//                                                   children: [
+//                                                     Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+//                                                     Spacer(),
+//                                                     Column(
+//                                                       children: [
+//                                                         Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+//                                                         Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+//                                                         // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+//                                                       ],
+//                                                     ),
+//                                                     const Spacer(),
+//                                                     Container(
+//                                                       height: 15.h,
+//                                                       width: 15.w,
+//                                                       //color: Colors.purpleAccent,
+//                                                       child: Icon(Icons.keyboard_arrow_down,size:22.sp,color: iconcolor,),),
+//                                                     SizedBox(width: 10.w,)
+//                                                   ],
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                           ],
+//                                         ),
+//                                       ),
+//                                     ),
+//                                     Spacer(),
+//                                     // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
+//                                     // Spacer(),
+//                                     // GestureDetector(
+//                                     //   onTap: () async {
+//                                     //     //DatePickerTitle(date: dateTime);
+//                                     //     // _showRangePicker(context);
+//                                     //     var a,b,c;
+//                                     //     newDateTime1 = await buildShowRoundedDatePicker(context);
+//                                     //
+//                                     //     a=newDateTime1?.day.toString();
+//                                     //     b=newDateTime1?.month.toString();
+//                                     //     c=newDateTime1?.year.toString();
+//                                     //
+//                                     //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+//                                     //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+//                                     //       a="0$a";
+//                                     //     }
+//                                     //
+//                                     //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+//                                     //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+//                                     //       b="0$b";
+//                                     //     }
+//                                     //
+//                                     //     print("guddi teri ma ka $a $b $c");
+//                                     //
+//                                     //     print(newDateTime1);
+//                                     //     if (newDateTime1 != null) {
+//                                     //       setState(() {
+//                                     //         // time=newDateTime.toString();
+//                                     //         // time=time.substring(0,time.length-13);
+//                                     //         time1 = "$c-$b-$a";
+//                                     //         dateTime1 = newDateTime1!;
+//                                     //       });
+//                                     //       print("${dateTime1.month}");
+//                                     //     }
+//                                     //   },
+//                                     //   child: Container(
+//                                     //     height: 36.0.h,
+//                                     //     width: 125.w,
+//                                     //     child: Row(
+//                                     //       mainAxisAlignment: MainAxisAlignment.center,
+//                                     //       children: [
+//                                     //         Container(
+//                                     //           width: 125.w,
+//                                     //           height: 42.0.h,
+//                                     //           decoration: BoxDecoration(
+//                                     //             boxShadow: [
+//                                     //               BoxShadow(
+//                                     //                 color: Colors.grey.withOpacity(0.2),
+//                                     //                 spreadRadius: 2,
+//                                     //                 blurRadius: 1,
+//                                     //                 offset: const Offset(0, 2), // changes position of shadow
+//                                     //               ),
+//                                     //             ],
+//                                     //             borderRadius: BorderRadius.circular(5),
+//                                     //             color: whiteClr,
+//                                     //           ),
+//                                     //           child: Padding(
+//                                     //             padding: EdgeInsets.all( 3.5.sp),
+//                                     //             child: Row(
+//                                     //               children: [
+//                                     //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+//                                     //                 SizedBox(width: 10.w,),
+//                                     //                 Column(
+//                                     //                   children: [
+//                                     //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+//                                     //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+//                                     //                   ],
+//                                     //                 ),
+//                                     //                 const Spacer(),
+//                                     //                 Container(
+//                                     //                   height: 15.h,
+//                                     //                   width: 15.w,
+//                                     //                   //color: Colors.purpleAccent,
+//                                     //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+//                                     //               ],
+//                                     //             ),
+//                                     //           ),
+//                                     //         ),
+//                                     //       ],
+//                                     //     ),
+//                                     //   ),
+//                                     // ),
+//                                     // Spacer(),
+//                                   ],
+//                                 ),
+//                                 SizedBox(height: 12.h,),
+//                                 ////All container////
+//                                 Container(
+//                                   height: 30.h,
+//                                   width: 272.w,
+//                                   decoration: BoxDecoration(
+//                                     boxShadow: [
+//                                       BoxShadow(
+//                                         color: Colors.grey.withOpacity(0.2),
+//                                         spreadRadius: 2,
+//                                         blurRadius: 1,
+//                                         offset: const Offset(0, 2), // changes position of shadow
+//                                       ),
+//                                     ],
+//                                     borderRadius: BorderRadius.circular(5),
+//                                     // color: Colors.purpleAccent,
+//                                     color: whiteClr,
+//                                   ),
+//                                   // color: Colors.purpleAccent,
+//                                   // child:  Stack(
+//                                   //   children: [
+//                                   //
+//                                   //     Positioned(
+//                                   //       top: 0,
+//                                   //       bottom: 0,
+//                                   //       left: 0,
+//                                   //       right: 0,
+//                                   //       child: Container(
+//                                   //         child: Row(
+//                                   //           children: [
+//                                   //             SizedBox(width: 5.w,),
+//                                   //             Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
+//                                   //             SizedBox(width: 5.w,),
+//                                   //             DropdownButton(
+//                                   //               // Initial Value
+//                                   //               value: dropdownvalue1,
+//                                   //               // Down Arrow Icon
+//                                   //               icon: Container(
+//                                   //                 height: 30.h,
+//                                   //                 width: 80.w,
+//                                   //               ),
+//                                   //               // Array list of items
+//                                   //               items: items1.map((String items) {
+//                                   //                 return DropdownMenuItem(
+//                                   //                   value: items,
+//                                   //                   child: Text(items),
+//                                   //                 );
+//                                   //               }).toList(),
+//                                   //               // After selecting the desired option,it will
+//                                   //               // change button value to selected value
+//                                   //               onChanged: (String? newValue) {
+//                                   //                 setState(() {
+//                                   //                   dropdownvalue1 = newValue!;
+//                                   //                 });
+//                                   //                 print("::::::::::: $dropdownvalue1 $days");
+//                                   //                 dropdownfetchattendance(dropdownvalue1);
+//                                   //               },
+//                                   //             ),
+//                                   //           ],
+//                                   //         ),
+//                                   //       ),
+//                                   //     ),
+//                                   //     Container(
+//                                   //       child: Positioned(
+//                                   //           top: 5,
+//                                   //           right: 10,
+//                                   //           child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
+//                                   //       ),
+//                                   //     ),
+//                                   //   ],
+//                                   // ),
+//                                   child:  Stack(
+//                                     children: [
+//                                       Positioned(
+//                                                                   top: 0,
+//                                                                   bottom: 0,
+//                                                                   left: 0,
+//                                                                   right: 0,
+//                                                                   child: Row(
+//                                                                     children: [
+//                                                                       SizedBox(width: 5.w,),
+//                                                                       Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
+//                                                                       SizedBox(width: 14.w,),
+//                                                                       DropdownButton(
+//                                                                         // Initial Value
+//                                                                         value: dropdownvalue1,
+//                                                                         // Down Arrow Icon
+//                                                                         icon: Container(
+//
+//                                                                           height: 30.h,
+//                                                                           width: 100.w,
+//                                                                             ),
+//                                                                         // Array list of items
+//                                                                         items: items1.map((String items) {
+//                                                                           return DropdownMenuItem(
+//                                                                             value: items,
+//                                                                             child: Text(items),
+//                                                                           );
+//                                                                         }).toList(),
+//                                                                         // After selecting the desired option,it will
+//                                                                         // change button value to selected value
+//                                                                         onChanged: (String? newValue) {
+//                                                                           setState(() {
+//                                                                             dropdownvalue1 = newValue!;
+//                                                                           });
+//                                                                           print("::::::::::: $dropdownvalue1 $days");
+//                                                                           dropdownfetchattendance(dropdownvalue1);
+//                                                                         },
+//                                                                       ),
+//                                                                     ],
+//                                                                   ),
+//                                                                 ),
+//                                       Positioned(
+//                                                                   top: 5,
+//                                                                     right: 10,
+//                                                                     child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
+//                                                                 ),
+//                                       ],
+//                                   ),
+//                                 ),
+//                                 SizedBox(height: 10.h,),
+//                                 Container(
+//                                   margin: EdgeInsets.only(left: 200.0),
+//                                   height: 30.h,
+//                                   width: 90.w,
+//                                   decoration: BoxDecoration(
+//                                     boxShadow: [
+//                                       BoxShadow(
+//                                         color: Colors.grey.withOpacity(0.2),
+//                                         spreadRadius: 2,
+//                                         blurRadius: 1,
+//                                         offset: const Offset(0, 2), // changes position of shadow
+//                                       ),
+//                                     ],
+//                                     borderRadius: BorderRadius.circular(5),
+//                                     // color: Colors.purpleAccent,
+//                                     color: whiteClr,
+//                                   ),
+//                                   // color: Colors.purpleAccent,
+//                                   child:  Row(mainAxisAlignment: MainAxisAlignment.center,
+//                                     children: [
+//                                       GestureDetector(
+//                                         onTap: () {
+//                                           dropdownfetchattendance(dropdownvalue1);
+//                                         },
+//                                       child: const Icon(
+//                                         size: 32,
+//                                         Icons.remove_red_eye_outlined,
+//                                         color: srpgradient2,
+//                                       ),
+//                                       ),
+//                                       SizedBox(width: 10.w,),
+//                                       Text("Show" ,textAlign: TextAlign.center, style: GoogleFonts.poppins(fontSize: 13.sp, color:blackClr,fontWeight: FontWeight.w400,letterSpacing:2 ),),
+//                                       // Positioned(
+//                                       //   top: 0,
+//                                       //   bottom: 0,
+//                                       //   left: 0,
+//                                       //   right: 0,
+//                                       //   child: Row(
+//                                       //     children: [
+//                                       //       // SizedBox(width: 90.w,),
+//                                       //       // Text("Show" ,textAlign: TextAlign.center, style: GoogleFonts.poppins(fontSize: 9.sp, color:blackClr,fontWeight: FontWeight.bold,),),
+//                                       //       // // Icon(FontAwesomeIcons.eye,size: 20.sp,color: srpgradient2,),
+//                                       //       // SizedBox(width: 90.w,),
+//                                       //     ],
+//                                       //   ),
+//                                       // ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                                 // Row(
+//                                 //   children: [
+//                                 //     Spacer(),
+//                                 //     GestureDetector(
+//                                 //       onTap: (){
+//                                 //         showAlertDialog(context);
+//                                 //       },
+//                                 //       child: Container(
+//                                 //         height: 37.h,
+//                                 //         width: 149.w,
+//                                 //         decoration: BoxDecoration(
+//                                 //           boxShadow: [
+//                                 //             BoxShadow(
+//                                 //               color: Colors.grey.withOpacity(0.25),
+//                                 //               spreadRadius: 1,
+//                                 //               blurRadius: 1,
+//                                 //               offset: const Offset(0, 2), // changes position of shadow
+//                                 //             ),
+//                                 //           ],
+//                                 //           borderRadius: BorderRadius.circular(5.sp),
+//                                 //           color: whiteClr,
+//                                 //         ),
+//                                 //         child: Row(
+//                                 //           mainAxisAlignment: MainAxisAlignment.start,
+//                                 //           children: [
+//                                 //             Padding(
+//                                 //               padding: const EdgeInsets.only(left: 8.0),
+//                                 //               child: SizedBox(
+//                                 //                 height: 25.h,
+//                                 //                 width: 25.w,
+//                                 //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
+//                                 //               ),
+//                                 //             ),
+//                                 //             Spacer(),
+//                                 //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+//                                 //             Spacer(),
+//                                 //             SizedBox(width: 4.w,),
+//                                 //
+//                                 //           ],
+//                                 //         ),
+//                                 //       ),
+//                                 //     ),
+//                                 //     Spacer(),
+//                                 //     GestureDetector(
+//                                 //       onTap: (){
+//                                 //         showAlertDialog(context);
+//                                 //       },
+//                                 //       child: Container(
+//                                 //         height: 37.h,
+//                                 //         width: 149.w,
+//                                 //         decoration: BoxDecoration(
+//                                 //           boxShadow: [
+//                                 //             BoxShadow(
+//                                 //               color: Colors.grey.withOpacity(0.25),
+//                                 //               spreadRadius: 1,
+//                                 //               blurRadius: 1,
+//                                 //               offset: const Offset(0, 2), // changes position of shadow
+//                                 //             ),
+//                                 //           ],
+//                                 //           borderRadius: BorderRadius.circular(5.sp),
+//                                 //           color: whiteClr,
+//                                 //         ),
+//                                 //         child: Row(
+//                                 //           mainAxisAlignment: MainAxisAlignment.start,
+//                                 //           children: [
+//                                 //             Padding(
+//                                 //               padding: const EdgeInsets.only(left: 8.0),
+//                                 //               child: SizedBox(
+//                                 //                 height: 25.h,
+//                                 //                 width: 25.w,
+//                                 //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
+//                                 //               ),
+//                                 //             ),
+//                                 //             Spacer(),
+//                                 //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+//                                 //             Spacer(),
+//                                 //             SizedBox(width: 4.w,),
+//                                 //
+//                                 //           ],
+//                                 //         ),
+//                                 //       ),
+//                                 //     ),
+//                                 //     Spacer(),
+//                                 //   ],
+//                                 // ),
+//                               ]
+//                           ),
+//                         ),
+//                         // SizedBox(width: 15.w,),
+//                         /////////Ukasha Start////////
+// /////////////////2nd/////
+// //                         Container(
+// //                           color: Colors.red,
+// //                           height: 120.h,
+// //                           width: 100.w,
+// //                           child: Row(
+// //                               mainAxisAlignment:  MainAxisAlignment.end,
+// //                           children: [
+// //                             Container(
+// //                               width:57.w,
+// //                               height: 35.h,
+// //                               decoration: BoxDecoration(
+// //                                 boxShadow: [
+// //                                   BoxShadow(color: Colors.grey.withOpacity(0.2),
+// //                                     spreadRadius: 2,
+// //                                     blurRadius: 1,
+// //                                     offset: const Offset(0, 2),
+// //                                   ),
+// //                                 ],
+// //                                   borderRadius: BorderRadius.circular(5),
+// //                                   color: whiteClr,
+// //                               ),
+// //                               child: Column(
+// //                                 children: [SizedBox(height: 5.h,),
+// //                                   GestureDetector(
+// //                                     onTap: () => { dropdownfetchattendance(dropdownvalue1)},
+// //                                     child: const Icon(
+// //                                       size: 15,
+// //                                       Icons.remove_red_eye_outlined,
+// //                                       color: srpgradient2,
+// //
+// //                                     ),
+// //                                   ),
+// //                                   Text("Show" ,style: GoogleFonts.poppins(fontSize: 9.sp, color:blackClr,fontWeight: FontWeight.bold),),
+// //                                   // Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+// //                                   // Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+// //                                 ],
+// //                               ),
+// //                             ),
+// //                             // Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
+// //                             //  child: Container(
+// //                             //    color: coverBackClr,
+// //                             //    height: 40.h,
+// //                             //    width: 1.w ,
+// //                             //  ),
+// //                             // ),
+// //                             SizedBox(
+// //                               width: 12.w,
+// //                             )
+// //                             ]
+// //                           ),
+// //                         ),
+//
+//                         //////Ukasha End////////
+//                         // isky andr kam nhi hona
+//                         Positioned(
+//                           top: 6,
+//                           left: 4,
+//                           child: GestureDetector(
+//                             onTap: (){
+//                               Navigator.pop(context);
+//                             },
+//                             child: Container(
+//                               //color: Colors.yellow,
+//                               child: Padding(
+//                                 padding: EdgeInsets.only(left: 10.w,top: 8.h),
+//                                 child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+//                               ),
+//                             ),
+//                           ),
+//                         ),
+//                       ]
+//                   ),
+//                 ),
+//               ),
+//             ),
             body: days.isEmpty? SizedBox() : SingleChildScrollView(
               child: Column(
                 children: [
@@ -1353,10 +1477,22 @@ class _ByEmployeeState extends State<ByEmployee> {
       );
     }
 
+   bool shownhichalyga=false;
+
   dropdownfetchattendance(String dropdownvalue1){
       if(dropdownvalue1=='All'){
         setState(() {
+          shownhichalyga=true;
+          // streamController.onPause;
+          // streamController.close();
+          streamController.onCancel;
+          streamController.stream;
           attendance=[];
+          attendance.clear();
+          // attendance.removeRange(0, attendance.length);
+          // for(int i=0;i<attendance.length;i++){
+          //   attendance.removeAt(i);
+          // }
         });
         FirebaseFirestore.instance
             .collection('Companies')
@@ -1401,6 +1537,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                     });
                     setState(() {
                       streamController.stream;
+                      shownhichalyga=false;
                     });
                   }}});});
             //     FirebaseFirestore.instance
@@ -1457,19 +1594,34 @@ class _ByEmployeeState extends State<ByEmployee> {
             //
             //   });
             // });
-          });});}
+          });}).then((value) {
+            print("false hogaya ");
+            setState(() {
+
+            });
+        });}
       else{
         if(days.isEmpty){}
         else {
           String a;
           setState(() {
+            shownhichalyga=true;
+            // streamController.onPause;
+            // streamController.close();
+            streamController.onCancel;
+            streamController.stream;
             attendance=[];
+            attendance.clear();
+            // attendance.removeRange(0, attendance.length);
+            // for(int i=0;i<attendance.length;i++){
+            //   attendance.removeAt(i);
+            // }
             print("iiiiiiiiiiiiiiiii ${attendance.length}");
             //streamController.isPaused;
           });
           for(int i=0;i<days.length;i++){
             String b;
-            b= '${days[i].year}-${days[i].month}-${days[i].day}';
+            b = '${days[i].year}-${days[i].month}-${days[i].day}';
 
             fetchattendance(b);
           }
@@ -1773,6 +1925,8 @@ class _ByEmployeeState extends State<ByEmployee> {
                     attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
                     streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
                     print("///////////// $attendance");
+              }).then((value) {
+                shownhichalyga=false;
               });
               setState(() {
                 streamController.stream;
@@ -1826,6 +1980,7 @@ class _ByEmployeeState extends State<ByEmployee> {
               }).then((value) {
                 setState(() {
                 streamController.stream;
+                shownhichalyga=false;
               });
             });
         }
@@ -2065,7 +2220,7 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
   void initState() {
     // TODO: implement initState
     super.initState();
-    //print("uuuuuuuuuuuuuuu ${widget.time} ${widget.tabcount}");
+    // print("uuuuuuuuuuuuuuu ${widget.time} ${widget.tabcount}");
     print("############ ${widget.employe}");
     print("************ ${widget.timeout} ${widget.timein}");
   }
@@ -2121,7 +2276,7 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                             text: TextSpan(
                               // Note: Styles for TextSpans must be explicitly defined.
                               // Child text spans will inherit styles from parent
-                              style:  TextStyle(
+                              style:  const TextStyle(
                                 fontSize: 14.0,
                                 color: Colors.black,
                               ),
