@@ -50,26 +50,26 @@ class NameEditprofilepic extends StatelessWidget {
                     fit: BoxFit.fill,
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    height: 20.h,
-                    width: 20.w,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          srpgradient1,
-                          srpgradient2,
-                          srpgradient3
-                        ],
-                      ), borderRadius: BorderRadius.circular(8.5.sp),
-                    ),
-                    child:Icon(Icons.add_a_photo_rounded,size: 12.sp,color: Colors.white,),
-                  ),
-                )
+                // Positioned(
+                //   bottom: 0,
+                //   right: 0,
+                //   child: Container(
+                //     height: 20.h,
+                //     width: 20.w,
+                //     decoration: BoxDecoration(
+                //       gradient: const LinearGradient(
+                //         begin: Alignment.topCenter,
+                //         end: Alignment.bottomCenter,
+                //         colors: [
+                //           srpgradient1,
+                //           srpgradient2,
+                //           srpgradient3
+                //         ],
+                //       ), borderRadius: BorderRadius.circular(8.5.sp),
+                //     ),
+                //     child:Icon(Icons.add_a_photo_rounded,size: 12.sp,color: Colors.white,),
+                //   ),
+                // )
               ],
             ),
           ),

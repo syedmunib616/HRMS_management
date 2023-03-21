@@ -38,9 +38,7 @@ class _ScreenMainState extends State<ScreenMain> {
       // Settings(password: password),
     ];
     print("{{{{{{{{{{{{ $password ${widget.password}");
-  
     password=widget.password;
-
   }
 
   //List<Widget>

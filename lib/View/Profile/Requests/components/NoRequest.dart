@@ -568,7 +568,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                   ),
                                   Spacer(),
                                   widget.approve==null? SizedBox() :
-                                  Text("${widget.approve==true ? "Approve":"Reject" }", style: GoogleFonts.poppins(fontSize: 15.sp,
+                                  Text("${widget.approve==true ? "Approved":"Reject" }", style: GoogleFonts.poppins(fontSize: 15.sp,
                                         color: widget.approve ==false ?Colors.red :Colors.green, fontWeight: FontWeight.w300),),
                                 ],
                               ),

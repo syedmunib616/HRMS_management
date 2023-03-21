@@ -24,9 +24,8 @@ import 'package:firebase_core/firebase_core.dart';
 void main()async {
    WidgetsFlutterBinding.ensureInitialized();
    Firebase.initializeApp();
-   //WidgetsFlutterBinding.ensureInitialized;
+   // WidgetsFlutterBinding.ensureInitialized;
    EasyLocalization.ensureInitialized();
-
    //WidgetsFlutterBinding.ensureInitialized();
 
 
@@ -42,7 +41,6 @@ void main()async {
     // );
    //runApp(WriteLeave(adminemail: '', providerGenerator: null,));
    runApp(MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -103,7 +101,6 @@ class MyApp extends StatelessWidget {
                   // localizationsDelegates: context.localizationDelegates,
                   // supportedLocales: context.supportedLocales,
                   // locale: context.locale,
-
                 ),
               ),
             ],
@@ -118,12 +115,15 @@ class MyApp extends StatelessWidget {
     //   home: const ScreenSplach(),
     // );
   }
+
 }
 
 class ScreenSplach extends StatefulWidget {
+
   const ScreenSplach({Key? key}) : super(key: key);
   @override
   State<ScreenSplach> createState() => _ScreenSplachState();
+
 }
 
 class _ScreenSplachState extends State<ScreenSplach> {
@@ -182,8 +182,8 @@ class _ScreenSplachState extends State<ScreenSplach> {
         ),
       );
     }
-  }
 
+}
 
 
 // class GoogleSignInProvider extends ChangeNotifier{

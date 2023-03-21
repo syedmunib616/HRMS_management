@@ -42,6 +42,9 @@ import 'package:flutter/material.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+//import 'package:hrmanagementapp/controller/createleave/createleave.dart';
+
+ import 'package:hrmanagementapp/controller/createleave.dart';
 
 class EmployeeDashboard extends StatefulWidget {
   EmployeeDashboard({required this.admineamil,Key? key}) : super(key: key);
@@ -155,7 +158,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
          .doc('${user!.email.toString()}').get().then((value) {
            name= value.get('name');
            department= value.get('designation');
-           generatedId=value.get('generatedId');
+            generatedId=value.get('generatedId');
            setState(() {});
      print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $name $department');
     }).then((value) async {
@@ -995,7 +998,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
                           child: Container(
-                            height: 35.h,
+                            height: 36.h,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
@@ -2456,7 +2459,9 @@ class _WriteLeaveState extends State<WriteLeave> {
   late DateTimeRange dateTimeRange =dateRange;
   List<DateTime> days = [];
   String time='';
-
+  String fromdate='';
+  String todate='';
+  String generatedid='';
   // List<ListAttandance> attendance=[];
 
   Future pickDateRange() async {
@@ -2500,6 +2505,8 @@ class _WriteLeaveState extends State<WriteLeave> {
     if(newDateRange==null) return;
     setState(() => dateTimeRange=newDateRange);
     setState(() {
+      fromdate='${dateTimeRange.start.year}-${dateTimeRange.start.month}-${dateTimeRange.start.day}';
+      todate='${dateTimeRange.end.year}-${dateTimeRange.end.month}-${dateTimeRange.end.day}';
       time='( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )';
     });
     getDaysInBetween(dateTimeRange.start, dateTimeRange.end);
@@ -2519,10 +2526,24 @@ class _WriteLeaveState extends State<WriteLeave> {
     // TODO: implement initState
     super.initState();
     setState(() {
+      fromdate='${dateTimeRange.start.year}-${dateTimeRange.start.month}-${dateTimeRange.start.day}';
+      todate='${dateTimeRange.end.year}-${dateTimeRange.end.month}-${dateTimeRange.end.day}';
       time='( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )';
     });
+    fetchuser();
   }
 
+
+
+  fetchuser() async {
+    FirebaseFirestore.instance
+        .collection('Companies')
+        .doc('${widget.adminemail}').collection("Employee")
+        .doc('${user!.email.toString()}').get().then((value) {
+      generatedid=value.get('generatedId');
+      setState(() {});
+      print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $generatedid ');
+    });}
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -2596,60 +2617,112 @@ class _WriteLeaveState extends State<WriteLeave> {
                     pickDateRange();
                   },
                   child: Container(
-                        height: 60.0.h,
-                        //width: 125.w,
-                        width: MediaQuery.of(context).size.width,
-                        //color: Colors.purpleAccent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              // width: 125.w,
-                              width: 272.w,
-                              height: 62.0.h,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 2,
-                                    blurRadius: 1,
-                                    offset: const Offset(0, 2), // changes position of shadow
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.circular(5),
-                                color: whiteClr,
+                    height: 36.0.h,
+                    //width: 125.w,
+                    width: MediaQuery.of(context).size.width,
+                    //color: Colors.purpleAccent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          //width: 125.w,
+                          width: 300.w,
+                          height: 42.0.h,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 2,
+                                blurRadius: 1,
+                                offset: const Offset(0, 2), // changes position of shadow
                               ),
-                              child: Padding(
-                                padding: EdgeInsets.all(3.5.sp),
-                                child: Row(
+                            ],
+                            borderRadius: BorderRadius.circular(5),
+                            color: whiteClr,
+                          ),
+                          //////Ukasha code Start///////////
+                          child: Padding(
+                            padding: EdgeInsets.all( 3.5.sp),
+                            child: Row(
+                              children: [
+                                Icon(FontAwesomeIcons.calendarDays,size: 17.sp,color: srpgradient2,),
+                                Spacer(),
+                                Column(
                                   children: [
-                                    SizedBox(width: 15.w,),
-                                    Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-                                    Spacer(),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Text("Select Date", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                        Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                        // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    Container(
-                                      height: 25.h,
-                                      width: 25.w,
-                                      // color: Colors.purpleAccent,
-                                      child: Icon(Icons.arrow_drop_down,size:24.sp,),),
-                                    SizedBox(width: 9.w,),
+                                    Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                    Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                    // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
                                   ],
                                 ),
-                              ),
+                                const Spacer(),
+                                Container(
+                                  height: 15.h,
+                                  width: 15.w,
+                                  //color: Colors.purpleAccent,
+                                  child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
+                  ),
+                ),
+                  // Container(
+                  //       height: 60.0.h,
+                  //       //width: 125.w,
+                  //       width: MediaQuery.of(context).size.width,
+                  //       //color: Colors.purpleAccent,
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: [
+                  //           Container(
+                  //             // width: 125.w,
+                  //             width: 272.w,
+                  //             height: 62.0.h,
+                  //             decoration: BoxDecoration(
+                  //               boxShadow: [
+                  //                 BoxShadow(
+                  //                   color: Colors.grey.withOpacity(0.2),
+                  //                   spreadRadius: 2,
+                  //                   blurRadius: 1,
+                  //                   offset: const Offset(0, 2), // changes position of shadow
+                  //                 ),
+                  //               ],
+                  //               borderRadius: BorderRadius.circular(5),
+                  //               color: whiteClr,
+                  //             ),
+                  //             child: Padding(
+                  //               padding: EdgeInsets.all(3.5.sp),
+                  //               child: Row(
+                  //                 children: [
+                  //                   SizedBox(width: 15.w,),
+                  //                   Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+                  //                   Spacer(),
+                  //                   Column(
+                  //                     mainAxisAlignment: MainAxisAlignment.center,
+                  //                     crossAxisAlignment: CrossAxisAlignment.center,
+                  //                     children: [
+                  //                       Text("Select Date", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                  //                       Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                  //                       // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                  //                     ],
+                  //                   ),
+                  //                   const Spacer(),
+                  //                   Container(
+                  //                     height: 25.h,
+                  //                     width: 25.w,
+                  //                     // color: Colors.purpleAccent,
+                  //                     child: Icon(Icons.arrow_drop_down,size:24.sp,),),
+                  //                   SizedBox(width: 9.w,),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //  ),
                 SizedBox(height: 12.h,),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4.w),
@@ -2812,7 +2885,6 @@ class _WriteLeaveState extends State<WriteLeave> {
                 SizedBox(height: 20.h,),
                 GestureDetector(
                   onTap: (){
-
                     //Navigator.pop(context);
                     // FrLoginService(FirebaseAuth.instance).onTapSignIn(
                     //     buttonIndex: 1,
@@ -2821,7 +2893,6 @@ class _WriteLeaveState extends State<WriteLeave> {
                     //     email: textEditingController1.text.trim(),
                     //     password: textEditingController2.text.trim(),
                     //     providerGenerator: providerGenerator);
-
                     if(textEditingController.text.isNotEmpty) {
                       FirebaseFirestore.instance
                           .collection('Companies')
@@ -2834,12 +2905,26 @@ class _WriteLeaveState extends State<WriteLeave> {
                             'date':'$time',
                             'subject': "${_selectedLocation}",
                             'message': "${textEditingController.text.trim()}",
-                            'approve': null}).then((value) => _showToast(context,'Leave request added successfully'))
+                            'approve': null})
+                            .then((value) async{
+                              var data =
+                                {
+                                  "leave_type": "$_selectedLocation",
+                                  "employee" : "$generatedid",
+                                  "from_date": "$fromdate",
+                                  "to_date": "$todate",
+                                  "leave_approver": "${widget.adminemail}",
+                                  "description":"${textEditingController.text.trim()}"
+                                };
+
+                            var res = await LeaveCreate().createleave(data,'');
+
+                          }).then((value) => _showToast(context,'Leave request added successfully'))
                           .then((value) =>
-                          Navigator.of(context).pushReplacement(
+                            Navigator.of(context).pushReplacement(
                               MaterialPageRoute(builder: (BuildContext context) => EmployeeDashboard(admineamil: aadmin,)),// Homepage()),munib
                               result: false));
-                    } else{
+                    }else{
                       _showToast(context,'Please write some message');
                     }
                     // Navigator.push(
@@ -2883,6 +2968,11 @@ class _WriteLeaveState extends State<WriteLeave> {
       ),
     );
   }
+
+
+
+
+
 
   void _showToast(BuildContext context,String text) {
     final scaffold = ScaffoldMessenger.of(context);

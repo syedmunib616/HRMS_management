@@ -5,6 +5,7 @@ import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_MainButton.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
+import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/test.dart';
 
 
@@ -80,8 +81,7 @@ CSMainPopup(
                   onTap: () {
 
                     Navigator.pop(context);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  ScreenMain(password: '123',adminname: 'leave k page sy adminname araha hai or login tk ja raha hai wesy ye chez use nhi ho rahi ',)),);
-
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Login(loading: false,),));
                   },
                 ),
               ],

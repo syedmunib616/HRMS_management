@@ -689,72 +689,80 @@ class Empolyee extends StatelessWidget {
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 10.0.h,horizontal: 20.w),
-      child: GestureDetector(
-        onTap: (){
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => SelectedLeave()),
-          // );
-          print("akjsdhfkajdsf ${email}");
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => EditEmployee(email: email,superadmin: superadmin,companyemail: companyemail,)),
-          );
-        },
+      padding:  EdgeInsets.symmetric(vertical: 1.0.h,horizontal: 1.w),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: (){
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => SelectedLeave()),
+              // );
+              print("akjsdhfkajdsf ${email}");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditEmployee(email: email,superadmin: superadmin,companyemail: companyemail,)),
+              );
+            },
 
-        child: Container(
-          height: 55.h,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 2,
-                blurRadius: 1,
-                offset: const Offset(0, 2), // changes position of shadow
+            child: Container(
+              height: 55.h,
+              width: MediaQuery.of(context).size.width,
+              // decoration: BoxDecoration(
+              //   boxShadow: [
+              //     BoxShadow(
+              //       color: Colors.grey.withOpacity(0.4),
+              //       spreadRadius: 2,
+              //       blurRadius: 1,
+              //       offset: const Offset(0, 2), // changes position of shadow
+              //     ),
+              //   ],
+              //  // borderRadius: BorderRadius.circular(1.sp),
+              //   color: whiteClr,
+              // ),
+              child: Row(
+                children:  [
+                  SizedBox(width: 20.w,),
+                  Container(
+                    height: 40.h,
+                    width: 40.w,
+                    //color: Colors.lightGreen,
+                    // decoration: BoxDecoration(
+                    //   boxShadow: [
+                    //     BoxShadow(
+                    //       color: Colors.grey.withOpacity(0.2),
+                    //       spreadRadius: 2,
+                    //       blurRadius: 1,
+                    //       offset: const Offset(0, 2),
+                    //     ),
+                    //   ],
+                    //   borderRadius: BorderRadius.circular(20.sp),
+                    //   color: Colors.lightGreen,
+                    //   image: const DecorationImage(
+                    //       image: AssetImage('assets/user.jpg',),
+                    //       fit: BoxFit.fill
+                    //   ),
+                    // ),
+                    child: Icon(Icons.person,size: 30.sp,color: srpgradient2,),
+                  ),
+                  Padding(
+                    padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                    child: Text("$name" ,style: GoogleFonts.poppins(fontSize: 15.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                    child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
+                  ),
+                ],
               ),
-            ],
-            borderRadius: BorderRadius.circular(10.sp),
-            color: whiteClr,
+            ),
           ),
-          child: Row(
-            children:  [
-              SizedBox(width: 20.w,),
-              Container(
-                height: 40.h,
-                width: 40.w,
-                //color: Colors.lightGreen,
-                // decoration: BoxDecoration(
-                //   boxShadow: [
-                //     BoxShadow(
-                //       color: Colors.grey.withOpacity(0.2),
-                //       spreadRadius: 2,
-                //       blurRadius: 1,
-                //       offset: const Offset(0, 2),
-                //     ),
-                //   ],
-                //   borderRadius: BorderRadius.circular(20.sp),
-                //   color: Colors.lightGreen,
-                //   image: const DecorationImage(
-                //       image: AssetImage('assets/user.jpg',),
-                //       fit: BoxFit.fill
-                //   ),
-                // ),
-                child: Icon(Icons.person,size: 30.sp,color: srpgradient2,),
-              ),
-              Padding(
-                padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                child: Text("$name" ,style: GoogleFonts.poppins(fontSize: 15.sp, color: iconcolor, fontWeight: FontWeight.w400),),
-              ),
-              const Spacer(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
-              ),
-            ],
+          Container(
+            height: 1,
+            color: Colors.grey,
           ),
-        ),
+        ],
       ),
     );
   }
@@ -1115,7 +1123,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             child: Icon(FontAwesomeIcons.peopleArrows,size: 23.sp,color: subTitleClr,),
                           ),
                         ),
-                        SizedBox(width: 20.w,),
+                        SizedBox(width: 23.w,),
                         DropdownButtonHideUnderline(
                           child: DropdownButton(
                             style: GoogleFonts.poppins(fontSize:10.sp,
@@ -1125,7 +1133,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             icon:  Container(
                                 height: 20.h,
                                 alignment: Alignment.topRight,
-                                width: 170.w,
+                                width: 164.w,
                                 //color: Colors.purpleAccent,
                                 child: Icon(Icons.keyboard_arrow_down)),
                             items:items1.map((String items) {
@@ -1178,7 +1186,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             child: Icon(FontAwesomeIcons.building,size: 23.sp,color: subTitleClr,),
                           ),
                         ),
-                        SizedBox(width: 20.w,),
+                        SizedBox(width: 25.w,),
                         DropdownButtonHideUnderline(
                           child: DropdownButton(
                             style: GoogleFonts.poppins(fontSize:10.sp,
@@ -1186,22 +1194,22 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             elevation: 0,
                             value: dropdownvalue,
                             icon:  Container(
-                              height: 20.h,
-                              alignment: Alignment.topRight,
-                              width: 200.w,
-                              //color: Colors.purpleAccent,
-                              child: Icon(Icons.keyboard_arrow_down)),
-                              items:items.map((String items) {
+                                height: 20.h,
+                                alignment: Alignment.topRight,
+                                width: 200.w,
+                                //color: Colors.purpleAccent,
+                                child: Icon(Icons.keyboard_arrow_down)),
+                            items:items.map((String items) {
                               return DropdownMenuItem(
                                   value: items,
                                   child: Text(items)
                               );
-                             }
+                            }
                             ).toList(),
                             onChanged: (String? newValue){
                               setState(() {
                                 dropdownvalue = newValue!;
-                                }
+                              }
                               );
                             },
                           ),
@@ -1241,7 +1249,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             child: Icon(FontAwesomeIcons.userTie,size: 23.sp,color: subTitleClr,),
                           ),
                         ),
-                        SizedBox(width: 20.w,),
+                        SizedBox(width: 25.w,),
                         DropdownButtonHideUnderline(
                           child: DropdownButton(
                             style: GoogleFonts.poppins(fontSize:10.sp, color: fontgrey,fontWeight: FontWeight.w400),
@@ -1265,10 +1273,10 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                                 designationdropdownvalue = newValue!;
                                 if(designationdropdownvalue == 'Employee'){
                                   print("asdasdaasdasd $reportingto");
-                                    reportingto=true;
+                                  reportingto=true;
                                   print("qweqw $reportingto");
-                                  }
                                 }
+                              }
                               );
                             },
                           ),
@@ -1325,13 +1333,13 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                               return DropdownMenuItem(
                                   value: items,
                                   child: Text(items)
-                                    );
-                                 }
-                              ).toList(),
+                              );
+                            }
+                            ).toList(),
                             onChanged: (String? newValue){
                               setState(() {
                                 reportings = newValue!;
-                                }
+                              }
                               );
                             },
                           ),
@@ -1351,6 +1359,270 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                           errorMsg:
                           providerGenerator.getErrorMessage(index: 2))),
                 ),
+                // Padding(
+                //   padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                //   child: Container(
+                //     height: 37.h,
+                //     width: MediaQuery.of(context).size.width,
+                //     decoration: BoxDecoration(
+                //       boxShadow: [
+                //         BoxShadow(
+                //           color: Colors.grey.withOpacity(0.25),
+                //           spreadRadius: 1,
+                //           blurRadius: 1,
+                //           offset: const Offset(0, 2), // changes position of shadow
+                //         ),
+                //       ],
+                //       borderRadius: BorderRadius.circular(5.sp),
+                //       color: whiteClr,
+                //     ),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.start,
+                //       children: [
+                //         Padding(
+                //           padding: const EdgeInsets.only(left: 8.0),
+                //           child: SizedBox(
+                //             height: 25.h,
+                //             width: 25.w,
+                //             child: Icon(FontAwesomeIcons.peopleArrows,size: 23.sp,color: subTitleClr,),
+                //           ),
+                //         ),
+                //         SizedBox(width: 20.w,),
+                //         DropdownButtonHideUnderline(
+                //           child: DropdownButton(
+                //             style: GoogleFonts.poppins(fontSize:10.sp,
+                //                 color: fontgrey,fontWeight: FontWeight.w400),
+                //             elevation: 0,
+                //             value: dropdownvalue1,
+                //             icon:  Container(
+                //                 height: 20.h,
+                //                 alignment: Alignment.topRight,
+                //                 width: 170.w,
+                //                 //color: Colors.purpleAccent,
+                //                 child: Icon(Icons.keyboard_arrow_down)),
+                //             items:items1.map((String items) {
+                //               return DropdownMenuItem(
+                //                   value: items,
+                //                   child: Text(items)
+                //               );
+                //             }
+                //             ).toList(),
+                //             onChanged: (String? newValue){
+                //               setState(() {
+                //                 dropdownvalue1 = newValue!;
+                //               }
+                //               );
+                //             },
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20.h,
+                // ),
+                // Padding(
+                //   padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                //   child: Container(
+                //     height: 37.h,
+                //     width: MediaQuery.of(context).size.width,
+                //     decoration: BoxDecoration(
+                //       boxShadow: [
+                //         BoxShadow(
+                //           color: Colors.grey.withOpacity(0.25),
+                //           spreadRadius: 1,
+                //           blurRadius: 1,
+                //           offset: const Offset(0, 2), // changes position of shadow
+                //         ),
+                //       ],
+                //       borderRadius: BorderRadius.circular(5.sp),
+                //       color: whiteClr,
+                //     ),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.start,
+                //       children: [
+                //         Padding(
+                //           padding: const EdgeInsets.only(left: 8.0),
+                //           child: SizedBox(
+                //             height: 25.h,
+                //             width: 25.w,
+                //             child: Icon(FontAwesomeIcons.building,size: 23.sp,color: subTitleClr,),
+                //           ),
+                //         ),
+                //         SizedBox(width: 20.w,),
+                //         DropdownButtonHideUnderline(
+                //           child: DropdownButton(
+                //             style: GoogleFonts.poppins(fontSize:10.sp,
+                //                 color: fontgrey,fontWeight: FontWeight.w400),
+                //             elevation: 0,
+                //             value: dropdownvalue,
+                //             icon:  Container(
+                //               height: 20.h,
+                //               alignment: Alignment.topRight,
+                //               width: 200.w,
+                //               //color: Colors.purpleAccent,
+                //               child: Icon(Icons.keyboard_arrow_down)),
+                //               items:items.map((String items) {
+                //               return DropdownMenuItem(
+                //                   value: items,
+                //                   child: Text(items)
+                //               );
+                //              }
+                //             ).toList(),
+                //             onChanged: (String? newValue){
+                //               setState(() {
+                //                 dropdownvalue = newValue!;
+                //                 }
+                //               );
+                //             },
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20.h,
+                // ),
+                // Padding(
+                //   padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                //   child: Container(
+                //     height: 37.h,
+                //     width: MediaQuery.of(context).size.width,
+                //     decoration: BoxDecoration(
+                //       boxShadow: [
+                //         BoxShadow(
+                //           color: Colors.grey.withOpacity(0.25),
+                //           spreadRadius: 1,
+                //           blurRadius: 1,
+                //           offset: const Offset(0, 2), // changes position of shadow
+                //         ),
+                //       ],
+                //       borderRadius: BorderRadius.circular(5.sp),
+                //       color: whiteClr,
+                //     ),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.start,
+                //       children: [
+                //         Padding(
+                //           padding: const EdgeInsets.only(left: 8.0),
+                //           child: SizedBox(
+                //             height: 25.h,
+                //             width: 25.w,
+                //             child: Icon(FontAwesomeIcons.userTie,size: 23.sp,color: subTitleClr,),
+                //           ),
+                //         ),
+                //         SizedBox(width: 20.w,),
+                //         DropdownButtonHideUnderline(
+                //           child: DropdownButton(
+                //             style: GoogleFonts.poppins(fontSize:10.sp, color: fontgrey,fontWeight: FontWeight.w400),
+                //             elevation: 0,
+                //             value: designationdropdownvalue,
+                //             icon:  Container(
+                //                 height: 20.h,
+                //                 alignment: Alignment.topRight,
+                //                 width: 200.w,
+                //                 //color: Colors.purpleAccent,
+                //                 child: Icon(Icons.keyboard_arrow_down)),
+                //             items:designationitems.map((String items) {
+                //               return DropdownMenuItem(
+                //                   value: items,
+                //                   child: Text(items)
+                //               );
+                //             }
+                //             ).toList(),
+                //             onChanged: (String? newValue){
+                //               setState(() {
+                //                 designationdropdownvalue = newValue!;
+                //                 if(designationdropdownvalue == 'Employee'){
+                //                   print("asdasdaasdasd $reportingto");
+                //                     reportingto=true;
+                //                   print("qweqw $reportingto");
+                //                   }
+                //                 }
+                //               );
+                //             },
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20.h,
+                // ),
+                // reportingto==true ? Padding(
+                //   padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                //   child: Container(
+                //     height: 37.h,
+                //     width: MediaQuery.of(context).size.width,
+                //     decoration: BoxDecoration(
+                //       boxShadow: [
+                //         BoxShadow(
+                //           color: Colors.grey.withOpacity(0.25),
+                //           spreadRadius: 1,
+                //           blurRadius: 1,
+                //           offset: const Offset(0, 2), // changes position of shadow
+                //         ),
+                //       ],
+                //       borderRadius: BorderRadius.circular(5.sp),
+                //       color: whiteClr,
+                //     ),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.start,
+                //       children: [
+                //         Padding(
+                //           padding: const EdgeInsets.only(left: 8.0),
+                //           child: SizedBox(
+                //             height: 25.h,
+                //             width: 25.w,
+                //             child: Icon(FontAwesomeIcons.userTie,size: 23.sp,color: subTitleClr,),
+                //           ),
+                //         ),
+                //         SizedBox(width: 20.w,),
+                //         DropdownButtonHideUnderline(
+                //           child: DropdownButton(
+                //             style: GoogleFonts.poppins(fontSize:10.sp,
+                //                 color: fontgrey,fontWeight: FontWeight.w400),
+                //             elevation: 0,
+                //             value: reportings,
+                //             icon:  Container(
+                //                 height: 20.h,
+                //                 alignment: Alignment.topRight,
+                //                 width: 215.w,
+                //                 // color: Colors.purpleAccent,
+                //                 child: Icon(Icons.keyboard_arrow_down)),
+                //             items:reporting.map((String items) {
+                //               return DropdownMenuItem(
+                //                   value: items,
+                //                   child: Text(items)
+                //                     );
+                //                  }
+                //               ).toList(),
+                //             onChanged: (String? newValue){
+                //               setState(() {
+                //                 reportings = newValue!;
+                //                 }
+                //               );
+                //             },
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // )  :  SizedBox(),
+                // reportingto==true ? SizedBox(
+                //   height: 20.h,
+                // ) : SizedBox(),
+                // Visibility(
+                //   visible: providerGenerator.getVisibleError(index: 2),
+                //   child: Container(
+                //       margin: EdgeInsets.only(top: 19.h, bottom: 27.h),
+                //       child: CsErrorContainer(
+                //           errorMsg:
+                //           providerGenerator.getErrorMessage(index: 2))),
+                // ),
                 GestureDetector(
                   onTap: (){
                     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
@@ -1470,7 +1742,8 @@ class _CreateEmployeeState extends State<CreateEmployee> {
 
     var data = {
       "email": "${textEditingController1.text}", // (user email id)
-      "first_name" : "${textEditingController4.text}",         //(employee name)
+      "first_name" : "${textEditingController4.text}", //(employee name)
+      "new_password": "${textEditingController3.text.trim()}"
     };
 
     var employee = {
@@ -1480,7 +1753,10 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       "date_of_birth" : "1997-01-03",
       "date_of_joining" : "${now.year}-${now.month}-${now.day}",
       "user_id" : "${textEditingController1.text}",
-    //(user email id)
+      "default_shift" : "day shift",
+      "leave_approver" :"$email",
+      "holiday_list" : "2023",
+      //(user email id)
     // "first_name" : "Testing", (employee name)
     // "company" : "src", (company name)
     // "gender" : "Female",

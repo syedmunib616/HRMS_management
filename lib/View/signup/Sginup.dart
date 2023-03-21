@@ -347,8 +347,8 @@ class _SginUpState extends State<SginUp> {
         internetconnection=true;
       });
       if(internetconnection==true){
-        var r=jsonDecode(value.body);
-        var st=Companies.fromJson(r);
+        var r = jsonDecode(value.body);
+        var st = Companies.fromJson(r);
 
         for(int i=0;i<st.data.length;i++){
           print("###### ${st.data[i].name}");
@@ -380,26 +380,36 @@ class _SginUpState extends State<SginUp> {
         "default_currency" : "PKR",
     };
 
-  var usercreation={
-      "email": "${textEditingController3.text}",
-      "first_name" : "${textEditingController1.text}",
-      "roles": [
-        {
-          "role" : "HR User",
-          "doctype" : "Has Role"
-        },
-        {
-          "role" : "HR Manager",
-          "doctype" : "Has Role"
-        }
-      ]
-    };
+    var usercreation = {
+        "email": "${textEditingController3.text}",
+        "first_name" : "${textEditingController1.text}",
+        "roles": [
+          {
+            "role" : "HR User",
+            "doctype" : "Has Role"
+          },
+          {
+            "role" : "Translator",
+            "doctype" : "Has Role"
+          },
+          {
+            "role" : "HR Manager",
+            "doctype" : "Has Role"
+          },
+          {
+            "role" : "Leave Approver",
+            "doctype" : "Has Role"
+          }
+        ],
+        "new_password" : "${textEditingController5.text.trim()}"
+      };
 
   var userpermission = {
     "user": "${textEditingController3.text}", //(email)
     "allow": "Company",	//(static company)
     "for_value": "${textEditingController2.text}"   // (company name)
     };
+
       for(int i=0;i<noofcompanies.length;i++){
         print("###### ${noofcompanies[i]}");
         if(textEditingController2.text==noofcompanies[i]){
@@ -426,11 +436,11 @@ class _SginUpState extends State<SginUp> {
             }).then((value) async {
               var res= await CreateCompany().postcratetionofuser(usercreation,'register');
               var body=jsonDecode(res.body);
-            }).then((value) async{
+            }).then((value) async {
               var res= await CreateCompany().postpermissionofuser(userpermission,'register');
               var body=jsonDecode(res.body);
             });
-          }else{
+          } else{
             _showToast(context,"Company name already taken");
           }
         }

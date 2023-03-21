@@ -6,11 +6,10 @@ const String baseurl = "https://test.srp.ai/api/resource";
 
 const String contenttype="application/json";
 
-//const String authorization= "Token ecd1d920e3ad1e1:06de7da5ca2eee7";
-const String authorization= "Token ecd1d920e3ad1e1:a2ff84b0c13f746";
+// const String authorization= "Token ecd1d920e3ad1e1:06de7da5ca2eee7";
+const String authorization= "Token 12af30621a945a6:e02bd8701e9aaa3";
 
 class CreateCompany {
-
 
   postData(data,apirul) async {
     var fullurl=baseurl;
@@ -23,7 +22,6 @@ class CreateCompany {
        );
   }
 
-
   postcratetionofuser(data,apirul) async {
     var fullurl=baseurl;
     var body= jsonEncode(data);
@@ -35,7 +33,6 @@ class CreateCompany {
     );
   }
 
-
   postpermissionofuser(data,apirul) async {
     var fullurl=baseurl;
     var body= jsonEncode(data);
@@ -43,14 +40,11 @@ class CreateCompany {
         Uri.parse("$baseurl/User Permission"),
         headers: {"Content-Type": contenttype,
           "Authorization": authorization },
-        body:body
+        body:body,
     ).then((value) {
       print("giudlkfjsad;lkg");
     });
   }
-
-
-
 
 }
 

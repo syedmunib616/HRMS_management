@@ -83,7 +83,6 @@ class _ByEmployeeState extends State<ByEmployee> {
   bool timeoutshow=false;
   final user = FirebaseAuth.instance.currentUser;
 
-
   @override
   void initState() {
     DateTimeRange dateRange = DateTimeRange(
@@ -213,7 +212,7 @@ class _ByEmployeeState extends State<ByEmployee> {
         child: CsScreenUtilInit(
           child: Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(150.0.h),
+              preferredSize: Size.fromHeight(155.0.h),
               child: Container(
                 child:  Container(
                   height: 300.h,
@@ -290,7 +289,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                                         //         child: child!,
                                         //       );
                                         //     });
-
                                         pickDateRange();
                                         // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
                                         // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
@@ -497,10 +495,9 @@ class _ByEmployeeState extends State<ByEmployee> {
                                               value: dropdownvalue1,
                                               // Down Arrow Icon
                                               icon: Container(
-
                                                 height: 30.h,
                                                 width: 100.w,
-                                                  ),
+                                              ),
                                               // Array list of items
                                               items: items1.map((String items) {
                                                 return DropdownMenuItem(
@@ -523,15 +520,13 @@ class _ByEmployeeState extends State<ByEmployee> {
                                           ],
                                         ),
                                       ),
-
-                                      Positioned(
-                                        top: 5,
-                                          right: 10,
-                                          child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
+                                    Positioned(
+                                            top: 5,
+                                              right: 10,
+                                              child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
+                                          ),
+                                        ],
                                       ),
-
-                                    ],
-                                  ),
                                     ),
                                 SizedBox(height: 5.h,),
                                 Container(
@@ -542,7 +537,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                                       mainAxisAlignment:  MainAxisAlignment.end,
                                       children: [
                                         GestureDetector(
-
                                           child: Container(
                                             width:72.w,
                                             height: 35.h,
@@ -1477,7 +1471,7 @@ class _ByEmployeeState extends State<ByEmployee> {
       );
     }
 
-   bool shownhichalyga=false;
+  bool shownhichalyga=false;
 
   dropdownfetchattendance(String dropdownvalue1){
       if(dropdownvalue1=='All'){
@@ -1537,7 +1531,10 @@ class _ByEmployeeState extends State<ByEmployee> {
                     });
                     setState(() {
                       streamController.stream;
+                      // Future.delayed(const Duration(milliseconds: 10), () {
                       shownhichalyga=false;
+                      // });
+
                     });
                   }}});});
             //     FirebaseFirestore.instance
@@ -1880,7 +1877,6 @@ class _ByEmployeeState extends State<ByEmployee> {
           .get().then((value) {
           value.docs.forEach((element) {
           a=element.id;
-
           // print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
 
           // for(int i=0;i<attendance.length;i++){
@@ -1903,13 +1899,14 @@ class _ByEmployeeState extends State<ByEmployee> {
           // }
           //
           // attendance.sort((a,b) => a.date.compareTo(b.date));
-
           if(date==a){
+
               // print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-               // setState(() {
+              // setState(() {
               //   attendance=[];
               //   //streamController.isPaused;
               // });
+
               FirebaseFirestore.instance
                   .collection('Companies')
                   .doc('${user!.email.toString()}')
@@ -1939,9 +1936,7 @@ class _ByEmployeeState extends State<ByEmployee> {
               // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
                 print("1111111111111");
               }
-              setState(() {
-                streamController.stream;
-              });
+              setState(() {  streamController.stream;    });
               });
            }).then((value) {
              // setState(() {
@@ -1981,9 +1976,9 @@ class _ByEmployeeState extends State<ByEmployee> {
                 setState(() {
                 streamController.stream;
                 shownhichalyga=false;
+                });
               });
-            });
-        }
+  }
 
   bool againcheck=false;
   bool hasAttendance=false;
@@ -2193,12 +2188,10 @@ String date;
 }
 
 class TabsforDesignationAbsentLateEarly extends StatefulWidget {
-
   const TabsforDesignationAbsentLateEarly({Key? key, required this.time,
     required this.tabcount, required this.datetime, required this.employe,
     required this.timein, required this.timeout, required this.addressin,
     required this.addressout, required this.date}) : super(key: key);
-
   final String time;
   final int tabcount;
   final List<DateTime> datetime;
@@ -2211,7 +2204,6 @@ class TabsforDesignationAbsentLateEarly extends StatefulWidget {
 
   @override
   State<TabsforDesignationAbsentLateEarly> createState() => _TabsforDesignationAbsentLateEarlyState();
-
 }
 
 class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAbsentLateEarly> {
@@ -2377,14 +2369,14 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                                   Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
                                       color: srpgradient2,fontWeight: FontWeight.w600),),
                                     // ClipRRect(
-                                  //   borderRadius: BorderRadius.circular(20.0.sp),
-                                  //   child: Image.asset(
-                                  //     'assets/user.jpg',
-                                  //     width: 40.0.w,
-                                  //     height: 40.0.h,
-                                  //     fit: BoxFit.fill,
-                                  //   ),
-                                  // ),
+                                    //   borderRadius: BorderRadius.circular(20.0.sp),
+                                    //   child: Image.asset(
+                                    //     'assets/user.jpg',
+                                    //     width: 40.0.w,
+                                    //     height: 40.0.h,
+                                    //     fit: BoxFit.fill,
+                                    //   ),
+                                    // ),
                                 ],
                               )
                             ),
@@ -2531,9 +2523,9 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                 Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
                 SizedBox(height: 7.h,),
                 GestureDetector(
-                  onTap: ()async{
+                  onTap: () async {
                     TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay1,);
-                    if(newTime ==null) return;
+                    if(newTime == null) return;
                     setState(() {
                       timeOfDay1=newTime;
                       OUT='${timeOfDay1.hour}:${timeOfDay1.minute}:00';
@@ -2557,7 +2549,6 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                     ),
                     alignment: Alignment.center,
                     child: Row(
-
                       children: [
                         SizedBox(width: 20.w,),
                         const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
@@ -2616,7 +2607,6 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                 // ),
                 SizedBox(height: 10.h,),
                 GestureDetector(
-
                   onTap: () {
                       print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
                       print("&&&&&&&&&&& ${textEditingController1.text} ${textEditingController2.text}");
@@ -2634,7 +2624,6 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) =>  ByEmployee()), result: false);
                       });},
-
                   child: Container(
                       height: 40.h,
                       width: MediaQuery.of(context).size.width,
