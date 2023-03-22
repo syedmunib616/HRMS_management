@@ -33,16 +33,15 @@ class EmailandName{
   String Name;
 }
 
-
 class EmployeeDirectory extends StatefulWidget {
   EmployeeDirectory({Key? key, required this.password, required this.superadmin, required this.compnayemail}) : super(key: key);
   final String password;
   final bool superadmin;
   final String compnayemail;
 
-
   @override
   State<EmployeeDirectory> createState() => _EmployeeDirectoryState();
+
 }
 
 class _EmployeeDirectoryState extends State<EmployeeDirectory> {
@@ -358,11 +357,10 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
 }
 
 class EditEmployee extends StatefulWidget {
-  const EditEmployee({Key? key,required this.email, required this.superadmin, required this.companyemail}) : super(key: key);
+  const EditEmployee({Key? key, required this.email, required this.superadmin, required this.companyemail}) : super(key: key);
   final String email ;
   final bool superadmin;
   final String companyemail;
-
   @override
   State<EditEmployee> createState() => _EditEmployeeState();
 }
@@ -377,6 +375,8 @@ class _EditEmployeeState extends State<EditEmployee> {
   String name='';
   String phonenumber='';
   String reportingto='';
+  bool active=false;
+  CollectionReference UserT = FirebaseFirestore.instance.collection("Companies");
 
   @override
   void initState() {
@@ -386,7 +386,6 @@ class _EditEmployeeState extends State<EditEmployee> {
     //fetchemploye();
   }
 
-
   fetchemploye() async {
     //////////////////////////////////////////////
     print("kjhsadlkjf ${user!.email.toString()}");
@@ -394,13 +393,14 @@ class _EditEmployeeState extends State<EditEmployee> {
       element.reference.collection("Employee").where('email',isEqualTo: '${widget.email}').get().then((value) => value.docs.forEach((element) {
         String a,b;
         a=element.get('email');
-        //print("uuuuuuu $a");
+
         name=element.get('name');
         email=element.get('email');
         designation=element.get('designation');
         phonenumber=element.get('phonenumber');
         department=element.get('department');
-        print("uuuuuuu $name $email $department $designation");
+        active=element.get('active');
+        print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
         setState(() {});
         // element.reference.collection(widget.email).get().then((value) => value.docs.forEach((element) {
         //   name=element.get('name');
@@ -417,8 +417,6 @@ class _EditEmployeeState extends State<EditEmployee> {
       }));
     }));
   }
-
-
 
   fetchemploye1() async {
     //////////////////////////////////////////////
@@ -433,7 +431,8 @@ class _EditEmployeeState extends State<EditEmployee> {
         designation=element.get('designation');
         phonenumber=element.get('phonenumber');
         department=element.get('department');
-        print("uuuuuuu $name $email $department $designation");
+        //active=element.get('active');
+        print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
         setState(() {});
         // element.reference.collection(widget.email).get().then((value) => value.docs.forEach((element) {
         //   name=element.get('name');
@@ -451,7 +450,6 @@ class _EditEmployeeState extends State<EditEmployee> {
     }));
   }
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -459,7 +457,6 @@ class _EditEmployeeState extends State<EditEmployee> {
         child: Scaffold(
 
           appBar: AppBar(
-
             leading: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
@@ -493,7 +490,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Spacer(),
-                          Row(
+                        Row(
                             children: [
                               //Icon(FontAwesomeIcons.user),
                               Text(" Profile",style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
@@ -546,7 +543,6 @@ class _EditEmployeeState extends State<EditEmployee> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       Container(
                         height:140.h,
                         width: MediaQuery.of(context).size.width,
@@ -577,9 +573,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                           child: Icon(FontAwesomeIcons.userTie,size: 65.sp,color: srpgradient2,),
                         ),
                       ),
-
                       SizedBox(height: 38.h,),
-
                       // const TextField(
                       //   decoration: InputDecoration(
                       //     labelText: "Name",
@@ -664,6 +658,37 @@ class _EditEmployeeState extends State<EditEmployee> {
                           ],
                         ),
                       ),
+                      Container(
+                        color: Colors.grey,
+                        width: MediaQuery.of(context).size.width,
+                        height: 1,
+                      ),
+                      widget.superadmin==false? Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+                        child: Row(
+                          children: [
+                            Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
+                            SizedBox(width: 20.w,),
+                            Switch.adaptive(
+                              activeColor: inputBackColor(context),
+                              inactiveThumbColor: settingButtonBackColor(context),
+                              inactiveTrackColor: subTitleClr,
+                              activeTrackColor: buttonBackColor(context),
+                              value: active,
+                              onChanged: (valu) async {
+                                // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                                //
+                                // }
+                                await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                                  setState(() {
+                                    active = valu;
+                                  });
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ) : SizedBox(),
                     ],
                   ),
                 ),
@@ -685,6 +710,7 @@ class Empolyee extends StatelessWidget {
   final String name;
   final bool superadmin;
   final String companyemail;
+
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
@@ -704,7 +730,6 @@ class Empolyee extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => EditEmployee(email: email,superadmin: superadmin,companyemail: companyemail,)),
               );
             },
-
             child: Container(
               height: 55.h,
               width: MediaQuery.of(context).size.width,
@@ -1722,6 +1747,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 SizedBox(
                   height: 20.h,
                 ),
+
               ],
             ),
 

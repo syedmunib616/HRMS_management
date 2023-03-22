@@ -90,7 +90,7 @@ class FrLoginService {
 
     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
     if(email!="example@gmail.com") {
-      //braek point laga k check krna hai kidhr masla araha hai
+         // braek point laga k check krna hai kidhr masla araha hai
          FirebaseFirestore.instance.collection('Companies').get().then((value) {
             value.docs.forEach((element) {
              active=false;
@@ -130,25 +130,45 @@ class FrLoginService {
                if(active == true){
                  element.reference.collection("Employee").get().then((value) =>
                      value.docs.forEach((elemen){
+
                        String a;
+                       bool empactive=false;
                        a = elemen.get('email');
-                       print("laksjdhfkjsadf $a");
-                       if (email == a) {
+                       empactive=elemen.get('active');
+
+
+
+                       if (email == a && empactive==true) {
+
+                         print("laksjdhfkjsadf $a $empactive");
                          Login(loading: false);
-                         Navigator.of(context).pushAndRemoveUntil(
-                           MaterialPageRoute(
+                         Navigator.of(context).pushAndRemoveUntil( MaterialPageRoute(
                              builder: (BuildContext context) =>
-                                 EmployeeDashboard(admineamil: element.id,),),
-                               (route) => false,);
-                       }
+                                 EmployeeDashboard(admineamil: element.id,),), (route) => false,);
+
+                       }else{}
+
+
+                       // else{
+                       //   Navigator.of(context).pushReplacement(
+                       //       MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
+                       //       result: false);
+                       // }
+                       //   FirebaseAuth.instance.signOut().then((value) async {
+                       //
+                       //
+                       // }
                      }));
                  }
                else {
+
                    print("yyyyyy active status is $active");
                    FirebaseAuth.instance.signOut().then((value) async {
                      Navigator.of(context).pushReplacement(
                          MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
-                       result: false);});}
+                       result: false);});
+
+               }
              });
            });
          });

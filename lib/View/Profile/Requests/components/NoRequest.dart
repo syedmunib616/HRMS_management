@@ -17,6 +17,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class NoOfRequest extends StatelessWidget {
+
   NoOfRequest({
     Key? key,
     required this.providerGenerator,
@@ -28,8 +29,8 @@ class NoOfRequest extends StatelessWidget {
      required this.leaveid,
      required this.adminname,
   }) : super(key: key);
-  final ProviderGenerator providerGenerator;
 
+  final ProviderGenerator providerGenerator;
   final String leaveid;
   final String time;
   final String user;
@@ -133,18 +134,12 @@ class NoOfRequest extends StatelessWidget {
   }
 }
 
-
-
-
 class SelectedLeave1 extends StatefulWidget {
   SelectedLeave1({Key? key, required this.user,
     required this.subject, required this.message,
     required this.approve, required this.time,
     required this.leavid,required this.adminname,
     required this.providerGenerator,
-
-
-
   }) : super(key: key);
   final ProviderGenerator providerGenerator;
   final String time;

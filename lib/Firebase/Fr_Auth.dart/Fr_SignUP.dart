@@ -407,19 +407,17 @@ class FrSignUpService1 {
 
     FirebaseFirestore.instance.collection("Companies").doc(adminemail).collection('Employee').doc(email)
     .set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
-      "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts', 'generatedId':''}).then((value) {
-
+      "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts', 'generatedId':'', 'active':true}).then((value) {
     });
     FirebaseFirestore.instance.collection("Companies")
         .doc(adminemail).collection('Employee')
         .doc(email).collection("Attendance").doc('${now.year}-${now.month}-${now.day}').set({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"","TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":""});
      // UserT.where('email', isEqualTo: adminemail).firestore.collection("Empoloyee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
      //  "name":"$name","email":"$email","uid":"$uid",});
-
      UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
       print("kkklklklkk $email $adminemail ${password}");
       element.reference.collection("Employee").doc(email).set({'shift':'$shifts',"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
-        "name":"$name","email":"$email","uid":"$uid",});
+        "name":"$name","email":"$email","uid":"$uid",'shift':'$shifts', 'generatedId':'', 'active':true});
       })).then((value) async {
       await FirebaseAuth.instance.signOut().then((value) async {
         print("iiiiiiiiii ${user!.email.toString()} ll $adminemail JJ ${password}");
@@ -434,8 +432,9 @@ class FrSignUpService1 {
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Test(password: password,)),);
 
           superadmin == false
-              ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully')
-              : CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',);
+          ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully')
+          : CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',);
+
         });
       });
     });
@@ -467,8 +466,6 @@ class FrSignUpService1 {
       ..setErrorMessage(value: error, index: errorIndex)
       ..setLoadingValue(value: false, index: 0);
   }
-
-
 
   //check Empty Value
   bool isMatched(String password, String passwordConfirmation) {

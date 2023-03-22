@@ -220,6 +220,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   final _advancedDrawerController = AdvancedDrawerController();
   String Address='';
   String Address1='';
+
   Future<Position> _determinePosition() async {
   bool serviceEnabled;
   LocationPermission permission;
@@ -270,6 +271,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       Address1= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
     });
   }
+
   ///////////////////////////////////////////////////////////////////////
 
   @override
@@ -411,9 +413,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
             ),
           ),
         ),
-
         child: Scaffold(
-
           appBar: PreferredSize(
             preferredSize:  Size.fromHeight(94.0.h),
             child: Container(
@@ -492,7 +492,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
               ),
             ),
           ),
-
           body: SingleChildScrollView(
             child:
             // timeinshow == false && timeoutshow == false ?
@@ -715,6 +714,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 // SizedBox(
                 //   height: 10.h,
                 // ),
+
                 timeinshow==true ? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
@@ -850,7 +850,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     ),
                   ),
                 ) : SizedBox(),
-
                 timeoutshow==true ? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
@@ -975,7 +974,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     ),
                   ),
                 ) : SizedBox(),
-
                 timeinshow==false && timeoutshow==false ? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
@@ -1102,6 +1100,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 SizedBox(
                   height: 20.h,
                 ),
+
                 // Padding(
                 //   padding: EdgeInsets.all(20.0.sp),
                 //   child: Container(
@@ -1161,7 +1160,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 // ),
               ],
             ),
-
           ),
           // appBar: AppBar(
           //   title: const Text('Advanced Drawer Example'),
