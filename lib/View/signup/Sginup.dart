@@ -39,7 +39,6 @@ class _SginUpState extends State<SginUp> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchdata();
   }
@@ -52,6 +51,36 @@ class _SginUpState extends State<SginUp> {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
+            appBar: AppBar(
+              leading:
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
+                  child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
+                ),
+              ),
+              backgroundColor: Colors.transparent,
+              flexibleSpace:  Container(
+                height: 102.h,
+                width:MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.01),
+                      spreadRadius: 2,
+                      blurRadius: 1,
+                      offset: const Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                  color: whiteClr,
+                ),
+
+              ),
+            ),
           body: Padding(
             padding:  EdgeInsets.symmetric(horizontal: 40.0.w),
             child: Container(
@@ -83,7 +112,7 @@ class _SginUpState extends State<SginUp> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 45.h,
+                          height: 25.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +129,7 @@ class _SginUpState extends State<SginUp> {
                           ],
                         ),
                         SizedBox(
-                          height: 28.h,
+                          height: 25.h,
                         ),
                         Text(
                           "Create Company to continue",
@@ -180,7 +209,7 @@ class _SginUpState extends State<SginUp> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        CsMainInputField(
+                        CsMainInputField122(
                           providerGenerator: providerGenerator,
                           width: 287.w,
                           mycontroller: textEditingController4,
@@ -262,12 +291,6 @@ class _SginUpState extends State<SginUp> {
                                   errorMsg:
                                   providerGenerator.getErrorMessage(index: 2))),
                         ),
-                        // Visibility(
-                        //   visible: !providerGenerator.getVisibleError(index: 2),
-                        //   child: SizedBox(
-                        //     height: 32.h,
-                        //   ),
-                        // ),
                         SizedBox(
                             height: 10.h,
                         ),
@@ -330,6 +353,7 @@ class _SginUpState extends State<SginUp> {
                                 ),
                             ),
                           ),],),),],),),),),),
+
     );
   }
 

@@ -573,7 +573,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                       //     : null,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     // Visibility(
                     //   //visible: visibleError,
@@ -582,17 +582,22 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                     //   child: CsErrorContainer(errorMsg: providerGenerator.getErrorMessage(index: 0),
                     // ),
                     // ),
+
                     Visibility(
                       visible: providerGenerator.getVisibleError(index: 1),
                       child: Container(
                         width: double.infinity.w,
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 21.w,
+                        margin: EdgeInsets.only(
+                          left: 3.w,
+                          right: 25.w
                         ),
                         child: CsErrorContainer(
                           errorMsg: providerGenerator.getErrorMessage(index: 1),
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     const Text(
                       //TextStrings.We_will_send_you_an_email_to_set.tr(),

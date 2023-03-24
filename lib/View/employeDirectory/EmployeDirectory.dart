@@ -1747,7 +1747,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 SizedBox(
                   height: 20.h,
                 ),
-
               ],
             ),
 

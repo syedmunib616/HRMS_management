@@ -119,11 +119,9 @@ class MyApp extends StatelessWidget {
 }
 
 class ScreenSplach extends StatefulWidget {
-
   const ScreenSplach({Key? key}) : super(key: key);
   @override
   State<ScreenSplach> createState() => _ScreenSplachState();
-
 }
 
 class _ScreenSplachState extends State<ScreenSplach> {
@@ -150,6 +148,7 @@ class _ScreenSplachState extends State<ScreenSplach> {
       child: Scaffold(
           body: Stack(
             children: [
+
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -177,13 +176,13 @@ class _ScreenSplachState extends State<ScreenSplach> {
                   ),
                 ),
               ),
+
             ],
           )
         ),
       );
     }
-
-}
+  }
 
 
 // class GoogleSignInProvider extends ChangeNotifier{

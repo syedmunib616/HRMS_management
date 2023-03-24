@@ -130,24 +130,28 @@ class FrLoginService {
                if(active == true){
                  element.reference.collection("Employee").get().then((value) =>
                      value.docs.forEach((elemen){
-
                        String a;
                        bool empactive=false;
                        a = elemen.get('email');
-                       empactive=elemen.get('active');
 
-
-
-                       if (email == a && empactive==true) {
-
+                       if (email == a ) {
                          print("laksjdhfkjsadf $a $empactive");
-                         Login(loading: false);
-                         Navigator.of(context).pushAndRemoveUntil( MaterialPageRoute(
-                             builder: (BuildContext context) =>
-                                 EmployeeDashboard(admineamil: element.id,),), (route) => false,);
+                         empactive=elemen.get('active');
+                         if(empactive==true) {
+                           Login(loading: false);
+                           Navigator.of(context).pushAndRemoveUntil(
+                             MaterialPageRoute(
+                               builder: (BuildContext context) =>
+                                   EmployeeDashboard(
+                                     admineamil: element.id,),), (
+                               route) => false,);
+                         }
+                         else{
+                           print("not allowed");
+                         }
+                       }
 
-                       }else{}
-
+                       else{}
 
                        // else{
                        //   Navigator.of(context).pushReplacement(

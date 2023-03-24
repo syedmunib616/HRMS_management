@@ -142,6 +142,7 @@ class _TestState extends State<Test> {
           ),
         ),
         child: Scaffold(
+
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(94.0.h),
             child: Container(
@@ -246,11 +247,14 @@ class _TestState extends State<Test> {
               ),
             ),
           ),
+
           body: SingleChildScrollView(
             child: Column(
               children: [
                   Row(
                     children: [
+
+                      Spacer(),
                       GestureDetector(
                         onTap: (){
                           Navigator.push(
@@ -288,6 +292,7 @@ class _TestState extends State<Test> {
                             ),
                           ),
                       ),
+                      Spacer(),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -325,6 +330,8 @@ class _TestState extends State<Test> {
                             ),
                           ),
                         ),
+                      Spacer(),
+
                       ],
                     ),
                   SizedBox(
@@ -332,6 +339,7 @@ class _TestState extends State<Test> {
                   ),
                   Row(
                     children: [
+                      Spacer(),
                       GestureDetector(
                         onTap: (){
                           Navigator.push(
@@ -369,11 +377,20 @@ class _TestState extends State<Test> {
                             ),
                           ),
                         ),
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.all(17.0.sp),
+                        child: Container(
+                          height: 115.h,
+                          width:139.w,
+                        ),
+                      ),
                       ],
                     ),
                 ],
               ),
             ),
+
           // appBar: AppBar(
           //   title: const Text('Advanced Drawer Example'),
           //   leading: IconButton(

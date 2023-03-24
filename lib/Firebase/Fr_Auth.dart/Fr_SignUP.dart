@@ -149,7 +149,7 @@ class FrSignUpService {
               'DepartmentsName':'${depaetment[i].departmentname}'});
           }
         });
-      }).then((value) => CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is createed"));
+      }).then((value) => CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is created"));
 
       // });
 
