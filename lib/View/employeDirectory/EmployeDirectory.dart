@@ -595,6 +595,37 @@ class _EditEmployeeState extends State<EditEmployee> {
                       //   //
                       //   keyboardType: TextInputType.number,
                       // ),
+                      widget.superadmin==false? Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+                        child: Row(
+                          children: [
+                            Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
+                            SizedBox(width: 20.w,),
+                            Switch.adaptive(
+                              activeColor: inputBackColor(context),
+                              inactiveThumbColor: settingButtonBackColor(context),
+                              inactiveTrackColor: subTitleClr,
+                              activeTrackColor: buttonBackColor(context),
+                              value: active,
+                              onChanged: (valu) async {
+                                // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                                //
+                                // }
+                                await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                                  setState(() {
+                                    active = valu;
+                                  });
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ) : SizedBox(),
+                      Container(
+                        color: Colors.grey,
+                        width: MediaQuery.of(context).size.width,
+                        height: 1,
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
                         child: Row(
@@ -634,7 +665,8 @@ class _EditEmployeeState extends State<EditEmployee> {
                       Container(
                         color: Colors.grey,
                         width: MediaQuery.of(context).size.width,
-                        height: 1,),
+                        height: 1,
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
                         child: Row(
@@ -663,32 +695,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                         width: MediaQuery.of(context).size.width,
                         height: 1,
                       ),
-                      widget.superadmin==false? Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
-                        child: Row(
-                          children: [
-                            Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
-                            SizedBox(width: 20.w,),
-                            Switch.adaptive(
-                              activeColor: inputBackColor(context),
-                              inactiveThumbColor: settingButtonBackColor(context),
-                              inactiveTrackColor: subTitleClr,
-                              activeTrackColor: buttonBackColor(context),
-                              value: active,
-                              onChanged: (valu) async {
-                                // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
-                                //
-                                // }
-                                await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
-                                  setState(() {
-                                    active = valu;
-                                  });
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ) : SizedBox(),
+
                     ],
                   ),
                 ),
@@ -730,56 +737,97 @@ class Empolyee extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => EditEmployee(email: email,superadmin: superadmin,companyemail: companyemail,)),
               );
             },
+            // child: Container(
+            //   height: 55.h,
+            //   width: MediaQuery.of(context).size.width,
+            //   // decoration: BoxDecoration(
+            //   //   boxShadow: [
+            //   //     BoxShadow(
+            //   //       color: Colors.grey.withOpacity(0.4),
+            //   //       spreadRadius: 2,
+            //   //       blurRadius: 1,
+            //   //       offset: const Offset(0, 2), // changes position of shadow
+            //   //     ),
+            //   //   ],
+            //   //  // borderRadius: BorderRadius.circular(1.sp),
+            //   //   color: whiteClr,
+            //   // ),
+            //   child: Row(
+            //     children:  [
+            //       SizedBox(width: 20.w,),
+            //       Container(
+            //         height: 40.h,
+            //         width: 40.w,
+            //         //color: Colors.lightGreen,
+            //         // decoration: BoxDecoration(
+            //         //   boxShadow: [
+            //         //     BoxShadow(
+            //         //       color: Colors.grey.withOpacity(0.2),
+            //         //       spreadRadius: 2,
+            //         //       blurRadius: 1,
+            //         //       offset: const Offset(0, 2),
+            //         //     ),
+            //         //   ],
+            //         //   borderRadius: BorderRadius.circular(20.sp),
+            //         //   color: Colors.lightGreen,
+            //         //   image: const DecorationImage(
+            //         //       image: AssetImage('assets/user.jpg',),
+            //         //       fit: BoxFit.fill
+            //         //   ),
+            //         // ),
+            //         child: Icon(Icons.person,size: 30.sp,color: srpgradient2,),
+            //       ),
+            //       Padding(
+            //         padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+            //         child: Text("$name" ,style: GoogleFonts.poppins(fontSize: 15.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+            //       ),
+            //       const Spacer(),
+            //       Padding(
+            //         padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+            //         child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             child: Container(
               height: 55.h,
               width: MediaQuery.of(context).size.width,
-              // decoration: BoxDecoration(
-              //   boxShadow: [
-              //     BoxShadow(
-              //       color: Colors.grey.withOpacity(0.4),
-              //       spreadRadius: 2,
-              //       blurRadius: 1,
-              //       offset: const Offset(0, 2), // changes position of shadow
-              //     ),
-              //   ],
-              //  // borderRadius: BorderRadius.circular(1.sp),
-              //   color: whiteClr,
-              // ),
+
               child: Row(
                 children:  [
-                  SizedBox(width: 20.w,),
+                  SizedBox(width: 20.w,height: 10,),
                   Container(
-                    height: 40.h,
-                    width: 40.w,
-                    //color: Colors.lightGreen,
-                    // decoration: BoxDecoration(
-                    //   boxShadow: [
-                    //     BoxShadow(
-                    //       color: Colors.grey.withOpacity(0.2),
-                    //       spreadRadius: 2,
-                    //       blurRadius: 1,
-                    //       offset: const Offset(0, 2),
-                    //     ),
-                    //   ],
-                    //   borderRadius: BorderRadius.circular(20.sp),
-                    //   color: Colors.lightGreen,
-                    //   image: const DecorationImage(
-                    //       image: AssetImage('assets/user.jpg',),
-                    //       fit: BoxFit.fill
-                    //   ),
-                    // ),
-                    child: Icon(Icons.person,size: 30.sp,color: srpgradient2,),
+                    height: 50.h,
+                    width: 50.w,
+                    child: Icon(Icons.person,size: 50.sp,color: srpgradient2,),
                   ),
                   Padding(
-                    padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                    child: Text("$name" ,style: GoogleFonts.poppins(fontSize: 15.sp, color: iconcolor, fontWeight: FontWeight.w400),),
-                  ),
+                    padding:EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("$name",style: GoogleFonts.poppins(fontSize: 13.sp, color: iconcolor, fontWeight: FontWeight.w700),),
+                        Text("$email",style: GoogleFonts.poppins(fontSize: 13.sp, color: iconcolor, fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),),
+
                   const Spacer(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                    child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
+                  CircleAvatar(
+                    radius: 15.sp,
+                    backgroundColor:Colors.grey.shade400,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.chevron_right_sharp,
+                        color:  Colors.white,
+                        size: 15.sp,
+                      ),
+                      onPressed: () {},
+                    ),
                   ),
+
+                  SizedBox(width: 10.w,),
                 ],
+
               ),
             ),
           ),
@@ -1103,19 +1151,38 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 SizedBox(
                   height: 20.h,
                 ),
+                // CsMainInputField3(
+                //   providerGenerator: providerGenerator,
+                //   width: 287.w,
+                //   mycontroller: textEditingController3,
+                //   myhint: TextStrings.Password,
+                //   prefixIcon: Icons.lock,
+                //   // isPassword: true,
+                //   isPassword: false,
+                //   obscureIndex: 2,
+                //   keyboardType: TextInputType.visiblePassword,
+                //   bordercolor: providerGenerator.getVisibleError(index: 0)
+                //       ? Colors.red
+                //       : null,
+                // ),
+
+
                 CsMainInputField3(
                   providerGenerator: providerGenerator,
-                  width: 287.w,
+                  width: 288.w,
                   mycontroller: textEditingController3,
                   myhint: TextStrings.Password,
                   prefixIcon: Icons.lock,
-                  // isPassword: true,
-                  isPassword: false,
+                  isPassword: true,
                   obscureIndex: 2,
                   keyboardType: TextInputType.visiblePassword,
                   bordercolor: providerGenerator.getVisibleError(index: 0)
                       ? Colors.red
                       : null,
+                  // kkkk
+                  // bordercolor: providerGenerator.getVisibleError(index: 0)
+                  //     ? Colors.red
+                  //     : null,
                 ),
                 SizedBox(
                   height: 20.h,
@@ -1811,8 +1878,12 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     //   "for_value": "${textEditingController2.text}"   // (company name)
     // };
     var l;
-
-    FrSignUpService1(FirebaseAuth.instance).onTapSignUP(
+    final list= await FirebaseAuth.instance.fetchSignInMethodsForEmail(textEditingController1.text.trim());
+    if(list.isNotEmpty){
+      _showToast(context,'An account with that email exists already!');
+    }
+    else{
+    FrSignUpService1(FirebaseAuth.instance,context).onTapSignUP(
             shifts: dropdownvalue1,
             adminemail: email,
             email: textEditingController1.text.trim(),
@@ -1839,8 +1910,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
               // setState(() {
               //   isLoading=false;
               // });
-          });
-
+          });}
           //String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "taha"]]""";
 
           // var res = await EmployeeCreation().allEmployeesGet('', api);
@@ -1880,6 +1950,15 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     // }else{
     //   _showToast(context,"Company name already taken");
     // }
+  }
 
+  void _showToast(BuildContext context,String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('$text',),
+        //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
   }
 }

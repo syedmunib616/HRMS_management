@@ -96,8 +96,9 @@ class NoOfRequest extends StatelessWidget {
               //   ),
               // ),
               Icon(Icons.person_pin,color: srpgradient2,size: 40.sp,),
+              //ukahsa
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 2.0.h,horizontal: 20.w),
+                padding: EdgeInsets.symmetric(vertical: 2.0.h,horizontal: 15.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -106,7 +107,7 @@ class NoOfRequest extends StatelessWidget {
 
                     Row(
                       children: [
-                        Text("Subject : ",style: GoogleFonts.poppins(fontSize: 11.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+                        Text("Subject : ",style: GoogleFonts.poppins(fontSize: 10.sp, color: iconcolor, fontWeight: FontWeight.w400),),
                         Text("$subject",style: GoogleFonts.poppins(fontSize: 10.sp, color: iconcolor, fontWeight: FontWeight.w300),),
                       ],
                     ),
@@ -116,14 +117,41 @@ class NoOfRequest extends StatelessWidget {
               const Spacer(),
               approve == null ? SizedBox() : Row(
                 children: [
-                  Text("Seen",style: GoogleFonts.poppins(fontSize: 8.sp, color: Colors.greenAccent, fontWeight: FontWeight.w400),),
-                  Icon(FontAwesomeIcons.checkDouble,size: 19.sp,color: Colors.greenAccent,),
+                  Text("Seen",style: GoogleFonts.poppins(fontSize: 5.sp, color: Colors.greenAccent, fontWeight: FontWeight.w400),),
+                  Icon(FontAwesomeIcons.checkDouble,size: 15.sp,color: Colors.greenAccent,),
                 ],
               ),
 
+
+
+              // Padding(
+              //   padding: EdgeInsets.symmetric(vertical: 2.0.h,horizontal: 20.w),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       Text("$user",style: GoogleFonts.poppins(fontSize: 13.5.sp, color: iconcolor, fontWeight: FontWeight.w500),),
+              //
+              //       Row(
+              //         children: [
+              //           Text("Subject : ",style: GoogleFonts.poppins(fontSize: 11.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+              //           Text("$subject",style: GoogleFonts.poppins(fontSize: 10.sp, color: iconcolor, fontWeight: FontWeight.w300),),
+              //         ],
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // const Spacer(),
+              // approve == null ? SizedBox() : Row(
+              //   children: [
+              //     Text("Seen",style: GoogleFonts.poppins(fontSize: 8.sp, color: Colors.greenAccent, fontWeight: FontWeight.w400),),
+              //     Icon(FontAwesomeIcons.checkDouble,size: 19.sp,color: Colors.greenAccent,),
+              //   ],
+              // ),
+
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
+               // child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
               ),
 
             ],

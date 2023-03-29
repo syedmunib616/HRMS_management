@@ -253,7 +253,9 @@ class _TestState extends State<Test> {
               children: [
                   Row(
                     children: [
-
+                      SizedBox(
+                        width: 5.w,
+                      ),
                       Spacer(),
                       GestureDetector(
                         onTap: (){
@@ -331,11 +333,15 @@ class _TestState extends State<Test> {
                           ),
                         ),
                       Spacer(),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+
 
                       ],
                     ),
                   SizedBox(
-                      height: 20.h,
+                      height: 10.h,
                   ),
                   Row(
                     children: [
@@ -384,6 +390,9 @@ class _TestState extends State<Test> {
                           height: 115.h,
                           width:139.w,
                         ),
+                      ),
+                      SizedBox(
+                        width: 1.w,
                       ),
                       ],
                     ),

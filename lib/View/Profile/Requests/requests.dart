@@ -48,7 +48,7 @@ class Requests extends StatelessWidget {
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 20.h,),
+                  SizedBox(height: 40.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -65,36 +65,36 @@ class Requests extends StatelessWidget {
                       Spacer(),
                       Text("Requests",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
-                      Container(
-                        width: 30.0.w,
-                        height: 30.0.h,
-                        // child: Stack(
-                        //   children: [
-                        //     ClipRRect(
-                        //       borderRadius: BorderRadius.circular(15.0.sp),
-                        //       child: Image.asset(
-                        //         'assets/user.jpg',
-                        //         width: 30.0.w,
-                        //         height: 30.0.h,
-                        //         fit: BoxFit.fill,
-                        //       ),
-                        //     ),
-                        //     Positioned(
-                        //       bottom: 1.5,
-                        //       right: 1.5,
-                        //       child: Container(
-                        //         height: 5.h,
-                        //         width: 5.w,
-                        //         //color:online,
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(5.sp),
-                        //           color: online,
-                        //         ),
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
-                      ),
+                      // Container(
+                      //   width: 30.0.w,
+                      //   height: 30.0.h,
+                      //   // child: Stack(
+                      //   //   children: [
+                      //   //     ClipRRect(
+                      //   //       borderRadius: BorderRadius.circular(15.0.sp),
+                      //   //       child: Image.asset(
+                      //   //         'assets/user.jpg',
+                      //   //         width: 30.0.w,
+                      //   //         height: 30.0.h,
+                      //   //         fit: BoxFit.fill,
+                      //   //       ),
+                      //   //     ),
+                      //   //     Positioned(
+                      //   //       bottom: 1.5,
+                      //   //       right: 1.5,
+                      //   //       child: Container(
+                      //   //         height: 5.h,
+                      //   //         width: 5.w,
+                      //   //         //color:online,
+                      //   //         decoration: BoxDecoration(
+                      //   //           borderRadius: BorderRadius.circular(5.sp),
+                      //   //           color: online,
+                      //   //         ),
+                      //   //       ),
+                      //   //     )
+                      //   //   ],
+                      //   // ),
+                      // ),
                       SizedBox(width: 15.w,),
                     ],
                   ),
@@ -188,7 +188,6 @@ class Requests extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.0.w),
             child: Column(
               children: [
-
                 SizedBox(
                   height: 20.h,
                 ),

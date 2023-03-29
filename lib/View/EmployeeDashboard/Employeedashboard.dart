@@ -1763,7 +1763,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         .doc('${user!.email.toString()}');
     Position position = await _determinePosition();
     print(position.latitude);print(position.longitude);
-    GetAddressFromLatLong(position);DateTime now = DateTime.now();
+    GetAddressFromLatLong(position);
+    DateTime now = DateTime.now();
     FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
         .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
         .update({"TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":"$Address"})
@@ -1789,7 +1790,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       "log_type": "IN",
       "time": "${noww.year.toString()}-${noww.month.toString()}-${noww.day.toString()} ${noww.hour.toString() + ":" + noww.minute.toString() + ":" + noww.second.toString()}"
       // "2023-03-02 12:42:53"
-
     };
     setState(() {
       timinindicator=true;

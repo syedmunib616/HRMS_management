@@ -66,10 +66,20 @@ class Reports extends StatelessWidget {
                       //   ),
                       // ),
 
-                      Spacer(),
-
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                         // color: Colors.yellow,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 10.w,top: 8.h,right: 5.w),
+                            child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 120.w,),
                       Text("Report",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
-
                       Spacer(),
 
                       // Container(

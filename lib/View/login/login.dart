@@ -159,7 +159,7 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 25.h,
                           ),
-                          CsMainInputField(
+                          CsMainInputFieldover(
                             providerGenerator: providerGenerator,
                             width: 287.w,
                             mycontroller: textEditingController1,
@@ -177,7 +177,7 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 20.h,
                           ),
-                          CsMainInputField3(
+                          CsMainInputField32(
                             providerGenerator: providerGenerator,
                             width: 287.w,
                             mycontroller: textEditingController2,
@@ -504,15 +504,29 @@ class _ForgotpasswordState extends State<Forgotpassword> {
   }
 
   late bool visibleError = false;
-  //forget pass word
 
+  //forget pass word
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
   }
 
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   final providerGenerator = Provider.of<ProviderGenerator>(context);
+  //   // ProviderGenerator().errorVisible[2]=false;
+  //   providerGenerator.setVisibleError(value: false, index: 1);
+  //   // providerGenerator.notifyListeners();
+  //   // Access _counter here
+  // }
 
+  final _formKey = GlobalKey<FormState>();
+  String _email='';
+  bool err=false;
+  String errmesg='';
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
@@ -520,228 +534,331 @@ class _ForgotpasswordState extends State<Forgotpassword> {
         body: SingleChildScrollView(
           child: Center(
             child: SafeArea(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
 
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                    ),
-                    Center( child: Image.asset(
-                          "assets/logo.png",
-                          height: MediaQuery.of(context).size.height * 0.19,
-                          width: MediaQuery.of(context).size.width * 0.30,
-                        )),
-                        // TextFormField(
-                        //   controller: textEditingController1,
-                        //   cursorColor: Colors.white,
-                        //   textInputAction: TextInputAction.done,
-                        //   decoration: InputDecoration(labelText: 'Email'),
-                        //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                        //   // validator: (email)=>
-                        //   // email !=null && EmailValidator.validate(email)? "Enter a valid email" : null,
-                        // ),
-                    Text(
-                      "Enter your recovery email address",
-                      //TextStrings.Enter_your_recovery_email_address.tr(),
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 17.sp,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
                       ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                    CsMainInputField(
-                      providerGenerator: providerGenerator,
-                      width: 287.w,
-                      mycontroller: textEditingController1,
-                      //myhint: TextStrings.Enter_your_email_address.tr(),
-                      myhint: "Enter your email address",
-                      prefixIcon: Icons.email_outlined,
-                      isPassword: false,
-                      keyboardType: TextInputType.emailAddress,
-                      bordercolor: providerGenerator.getVisibleError(index: 1)
-                          ? Colors.red
-                          : null,
-                      // bordercolor: providerGenerator.getVisibleError(index: 0)
-                      //     ? Colors.red
-                      //     : null,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    // Visibility(
-                    //   //visible: visibleError,
-                    //   visible: providerGenerator.getVisibleError(index: 0),
-                    //
-                    //   child: CsErrorContainer(errorMsg: providerGenerator.getErrorMessage(index: 0),
-                    // ),
-                    // ),
-
-                    Visibility(
-                      visible: providerGenerator.getVisibleError(index: 1),
-                      child: Container(
-                        width: double.infinity.w,
-                        margin: EdgeInsets.only(
-                          left: 3.w,
-                          right: 25.w
-                        ),
-                        child: CsErrorContainer(
-                          errorMsg: providerGenerator.getErrorMessage(index: 1),
+                      Center( child: Image.asset(
+                            "assets/logo.png",
+                            height: MediaQuery.of(context).size.height * 0.19,
+                            width: MediaQuery.of(context).size.width * 0.30,
+                          )),
+                          // TextFormField(
+                          //   controller: textEditingController1,
+                          //   cursorColor: Colors.white,
+                          //   textInputAction: TextInputAction.done,
+                          //   decoration: InputDecoration(labelText: 'Email'),
+                          //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                          //   // validator: (email)=>
+                          //   // email !=null && EmailValidator.validate(email)? "Enter a valid email" : null,
+                          // ),
+                      Text(
+                        "Enter your recovery email address",
+                        //TextStrings.Enter_your_recovery_email_address.tr(),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 17.sp,
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      //TextStrings.We_will_send_you_an_email_to_set.tr(),
-                      "We will send you an email to reset your new password",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
                       ),
-                    ),
-                    SizedBox(
-                      height: 90.h,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                           "Send",
-                          // TextStrings.Send_Code.tr(),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20.sp,
+                      // CsMainInputField(
+                      //   providerGenerator: providerGenerator,
+                      //   width: 287.w,
+                      //   mycontroller: textEditingController1,
+                      //   //myhint: TextStrings.Enter_your_email_address.tr(),
+                      //   myhint: "Enter your email address",
+                      //   prefixIcon: Icons.email_outlined,
+                      //   isPassword: false,
+                      //   keyboardType: TextInputType.emailAddress,
+                      //   bordercolor: providerGenerator.getVisibleError(index: 1)
+                      //       ? Colors.red
+                      //       : null,
+                      //   // bordercolor: providerGenerator.getVisibleError(index: 0)
+                      //   //     ? Colors.red
+                      //   //     : null,
+                      // ),
+
+                      CsScreenUtilInit(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 0.8,
+                                blurRadius: 1,
+                                offset: const Offset(0, 0), // changes position of shadow
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(8.2),
+                            color: whiteClr,
                           ),
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            // resetpassword();
-                            FrForgetService(FirebaseAuth.instance).onTapSignIn(
-                                buttonIndex: 1,
-                                errorIndex: 1,
-                                context: context,
-                                email: textEditingController1.text.trim(),
-                                providerGenerator: providerGenerator);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              //color: Colors.black,
-                              borderRadius: BorderRadius.circular(20),
-                              gradient: const LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  srpgradient1,
-                                  srpgradient2,
-                                  srpgradient3
-                                ],
+                          height: 47.h,
+                          width:287.w,
+                          child: TextFormField(
+                            textAlignVertical:TextAlignVertical.bottom ,
+                            maxLines: 1,
+                            keyboardType: TextInputType.emailAddress,
+                            controller:  textEditingController1,
+                            obscureText: false,
+                            validator: (value) {
+
+                              if (value!.isEmpty) {
+                                setState(() {
+                                  err=true;
+                                  errmesg='Invalid Email';
+                                });
+                              //  return 'Email is required';
+                              }
+                              else if(!value.contains('@')){
+                                setState(() {
+                                  err=true;
+                                  errmesg='Invalid email format';
+                                });
+                              }
+
+                              // else if (isValidEmail(value)) {
+                              //   print("sssss");
+                              //   setState(() {
+                              //     err=true;
+                              //     errmesg='Invalid email format';
+                              //   });
+                              //   //return 'Invalid email format';
+                              // }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _email = value!;
+                            },
+                            // onFieldSubmitted: onSubmite ?? (_) {},
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: whiteClr,
+                              contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+                              hintText: 'Enter your email address',
+                              // hintStyle: TextStyle(
+                              //   fontSize: 15.0.sp,
+                              //   fontWeight: FontWeight.w400,
+                              //   color: blackClr.withOpacity(0.8),
+                              // ),
+                              hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
+                              prefixIcon: Icon(
+                                Icons.email_outlined,
+                                color: blackClr.withOpacity(0.6),
+                                size: 20.sp,
+                              ),
+                              suffixIcon: null,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(width: 1.0, color: Colors.white),
+                                //  BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(width: 1.0, color:  Colors.white),
+                                //BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
                               ),
                             ),
-                            height: 37.sp,
-                            width: 37.sp,
-                            child: const Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                            ),
                           ),
                         ),
-                        // CsMainInputField(
-                        //   providerGenerator: providerGenerator,
-                        //   width: 287.w,
-                        //   mycontroller: textEditingController1,
-                        //   myhint: 'Enter your email address',
-                        //   prefixIcon: Icons.email_outlined,
-                        //   isPassword: false,
-                        //   keyboardType: TextInputType.emailAddress,
-                        //   bordercolor: providerGenerator.getVisibleError(index: 0)
-                        //       ? Colors.red
-                        //       : null,
-                        // ),
-                      ],
-                    ),
+                      ),
 
-                    // ElevatedButton(
-                    //   onPressed: (){
-                    //     resetpassword();
-                    //   },
-                    //   style: ElevatedButton.styleFrom(maximumSize: Size.fromHeight(50)),
-                    //   child: Text("Reset Password"),
-                    //
-                    //
-                    // ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      // Visibility(
+                      //   //visible: visibleError,
+                      //   visible: providerGenerator.getVisibleError(index: 0),
+                      //
+                      //   child: CsErrorContainer(errorMsg: providerGenerator.getErrorMessage(index: 0),
+                      // ),
+                      // ),
 
-                    // GestureDetector(
-                    //   onTap: (){
-                    //     resetpassword();
-                    //   },
-                    //   child: Container(
-                    //     alignment: Alignment.center,
-                    //     width: 329.w,
-                    //     height: 68.h,
-                    //     padding: EdgeInsets.symmetric(horizontal: 18.w),
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(15),
-                    //       color: Colors.white,
-                    //       boxShadow: [
-                    //         BoxShadow(
-                    //           color: Colors.black.withOpacity(0.4),
-                    //           spreadRadius: 2,
-                    //           blurRadius: 5,
-                    //           offset: const Offset(0, 2), // changes position of shadow
-                    //         ),
-                    //       ],
-                    //     ),
-                    //     child: Row(
-                    //       children: [
-                    //         // Image.asset(
-                    //         //   leadingImagePath,
-                    //         //   height: 28.h,
-                    //         //   width: 39.w,
-                    //         // ),
-                    //        Icon(Icons.email_outlined,size: 26.sp,),
-                    //         SizedBox(
-                    //           width: 24.w,
-                    //         ),
-                    //         Expanded(
-                    //           child: Text(
-                    //            " data",
-                    //             style: TextStyle(
-                    //               color: Colors.black,
-                    //               fontWeight: FontWeight.w600,
-                    //               fontSize: 20.sp,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         SizedBox(
-                    //           width: 27.w,
-                    //         ),
-                    //         // SvgPicture.asset(
-                    //         //   'assets/Link/Email.svg',
-                    //         //   height: 16.h,
-                    //         //   width: 18.w,
-                    //         //   color: fontColor ?? blackClr,
-                    //         // )
-                    //       ],
-                    //     ),
-                    //   ),
-                    // )
-                  ],
+                      Visibility(
+                        visible: err,
+                        child: Container(
+                          width: double.infinity.w,
+                          margin: EdgeInsets.only(
+                            left: 3.w,
+                            right: 25.w
+                          ),
+                          child: CsErrorContainer(
+                            errorMsg: errmesg,
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        //TextStrings.We_will_send_you_an_email_to_set.tr(),
+                        "We will send you an email to reset your new password",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 90.h,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                             "Send",
+                            // TextStrings.Send_Code.tr(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 20.sp,
+                            ),
+                          ),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                FrForgetService(FirebaseAuth.instance).onTapSignIn(
+                                    buttonIndex: 1,
+                                    errorIndex: 1,
+                                    context: context,
+                                    email: textEditingController1.text.trim(),
+                                    providerGenerator: providerGenerator);
+                                // Do something with the valid email
+                              }
+                              // resetpassword();
+                              // FrForgetService(FirebaseAuth.instance).onTapSignIn(
+                              //     buttonIndex: 1,
+                              //     errorIndex: 1,
+                              //     context: context,
+                              //     email: textEditingController1.text.trim(),
+                              //     providerGenerator: providerGenerator);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                //color: Colors.black,
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    srpgradient1,
+                                    srpgradient2,
+                                    srpgradient3
+                                  ],
+                                ),
+                              ),
+                              height: 37.sp,
+                              width: 37.sp,
+                              child: const Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          // CsMainInputField(
+                          //   providerGenerator: providerGenerator,
+                          //   width: 287.w,
+                          //   mycontroller: textEditingController1,
+                          //   myhint: 'Enter your email address',
+                          //   prefixIcon: Icons.email_outlined,
+                          //   isPassword: false,
+                          //   keyboardType: TextInputType.emailAddress,
+                          //   bordercolor: providerGenerator.getVisibleError(index: 0)
+                          //       ? Colors.red
+                          //       : null,
+                          // ),
+                        ],
+                      ),
+                      // ElevatedButton(
+                      //   onPressed: (){
+                      //     resetpassword();
+                      //   },
+                      //   style: ElevatedButton.styleFrom(maximumSize: Size.fromHeight(50)),
+                      //   child: Text("Reset Password"),
+                      //
+                      //
+                      // ),
+
+                      // GestureDetector(
+                      //   onTap: (){
+                      //     resetpassword();
+                      //   },
+                      //   child: Container(
+                      //     alignment: Alignment.center,
+                      //     width: 329.w,
+                      //     height: 68.h,
+                      //     padding: EdgeInsets.symmetric(horizontal: 18.w),
+                      //     decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(15),
+                      //       color: Colors.white,
+                      //       boxShadow: [
+                      //         BoxShadow(
+                      //           color: Colors.black.withOpacity(0.4),
+                      //           spreadRadius: 2,
+                      //           blurRadius: 5,
+                      //           offset: const Offset(0, 2), // changes position of shadow
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     child: Row(
+                      //       children: [
+                      //         // Image.asset(
+                      //         //   leadingImagePath,
+                      //         //   height: 28.h,
+                      //         //   width: 39.w,
+                      //         // ),
+                      //        Icon(Icons.email_outlined,size: 26.sp,),
+                      //         SizedBox(
+                      //           width: 24.w,
+                      //         ),
+                      //         Expanded(
+                      //           child: Text(
+                      //            " data",
+                      //             style: TextStyle(
+                      //               color: Colors.black,
+                      //               fontWeight: FontWeight.w600,
+                      //               fontSize: 20.sp,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         SizedBox(
+                      //           width: 27.w,
+                      //         ),
+                      //         // SvgPicture.asset(
+                      //         //   'assets/Link/Email.svg',
+                      //         //   height: 16.h,
+                      //         //   width: 18.w,
+                      //         //   color: fontColor ?? blackClr,
+                      //         // )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ));
        }
+
+        bool isValidEmail(String email) {
+          // Use a regular expression to check if the email is valid
+          return RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+        }
       //
 // late String? errorMsg = '';
 // Future resetpassword() async {
@@ -1018,11 +1135,11 @@ class FrForgetService {
   }
 
   // Reading Error Value on the Screen
-  onlogicErrorHandling(
-      {required String error,
+  onlogicErrorHandling({
+        required String error,
         required ProviderGenerator providerGenerator,
         required int buttonIndex,
-        required int errorIndex}) {
+        required int errorIndex,}) {
     //Active Error Ui
     providerGenerator.setVisibleError(value: true, index: errorIndex);
     providerGenerator.setErrorMessage(value: error, index: errorIndex);

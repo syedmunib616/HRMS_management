@@ -271,7 +271,8 @@ class Department{
 
 class FrSignUpService1 {
   final FirebaseAuth firebaseAuth;
-  FrSignUpService1(this.firebaseAuth);
+  final BuildContext context;
+  FrSignUpService1(this.firebaseAuth, this.context);
 
   //check Empty Value
   bool isEmpty(String email, String password,String name, String department,String phonenumber,String designation,String shifts) {
@@ -317,9 +318,9 @@ class FrSignUpService1 {
           errorIndex: 1,
           errorIndex2: 2,) : !isRegExpValid(email)
             ? onlogicErrorHandling(
-          error: "Your email is Invalid",
-          providerGenerator: providerGenerator,
-          errorIndex: 1,)
+              error: "Your email is Invalid",
+              providerGenerator: providerGenerator,
+              errorIndex: 1,)
             //     : !isMatched(password, passwordConfirmation)
             //     ? onlogicErrorHandling(
             //   error: "Your Password is not Matched",
@@ -327,7 +328,13 @@ class FrSignUpService1 {
             //   errorIndex: 2,
             // )
             :
-        signIn(email,password)
+            // await firebaseAuth
+            //   .createUserWithEmailAndPassword(
+            //     email: email,
+            //     password: password,
+            //   );
+            signIn(email,password)
+            //
             // await firebaseAuth
             //   .createUserWithEmailAndPassword(
             //     email: email,
@@ -335,7 +342,7 @@ class FrSignUpService1 {
             //   )
             .then((value) =>
             onSuccessSignUP(
-              shifts: shifts,
+            shifts: shifts,
             password: adminpassword,
             adminemail: adminemail,
             name: name,
@@ -351,12 +358,15 @@ class FrSignUpService1 {
           ),
         );
       } on FirebaseAuthException catch (error) {
-          // print(error.code);
-          onlogicErrorHandling(
-          error: onFirebaseErrorHandling(error.code),
-          providerGenerator: providerGenerator,
-          errorIndex: 2,
-        );
+
+            print("jjjjjjjjjjjjj");
+            print(error.code);
+            onlogicErrorHandling(
+            error: onFirebaseErrorHandling(error.code),
+            providerGenerator: providerGenerator,
+            errorIndex: 2,
+            );
+
       }
   }
 
@@ -409,6 +419,7 @@ class FrSignUpService1 {
     .set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
       "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts', 'generatedId':'', 'active':true}).then((value) {
     });
+
     FirebaseFirestore.instance.collection("Companies")
         .doc(adminemail).collection('Employee')
         .doc(email).collection("Attendance").doc('${now.year}-${now.month}-${now.day}').set({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"","TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":""});
@@ -434,17 +445,14 @@ class FrSignUpService1 {
           superadmin == false
           ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully')
           : CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',);
-
         });
       });
     });
-
     // await UserT.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
     //   element.reference.collection("Employee").doc(email).
     //   set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
     //     "name":"$name","email":"$email","uid":"$uid",});
     // })).then((value) => Navigator.pop(context));
-
   }
 
   // Reading Error Value on the Screen
@@ -453,7 +461,7 @@ class FrSignUpService1 {
     required ProviderGenerator providerGenerator,
     required int errorIndex,
     int? errorIndex2,
-    }) {
+  }) {
     if (errorIndex2 != null) {
       providerGenerator
         ..setVisibleError(value: true, index: errorIndex2)
@@ -488,6 +496,7 @@ class FrSignUpService1 {
         return "Your email address appears to be malformed.";
 
       case "email-already-in-use":
+
         return "An account with that email exists already!";
 
       case "weak-password":
@@ -499,6 +508,16 @@ class FrSignUpService1 {
       default:
         return "An undefined Error happened.";
     }
+  }
+
+  void _showToast(BuildContext context,String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('$text',),
+        //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
   }
 
   //   Future<bool> signUP({String? email, String? password}) async {
