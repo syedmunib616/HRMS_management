@@ -181,7 +181,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
          FirebaseFirestore.instance.collection('Companies')
              .doc('${admin}').collection("Employee")
              .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring').snapshots()
-             .forEach((element) { String a,b;
+             .forEach((element) {
+               String a,b;
                a=element.get('TimeIn');
                b=element.get('TimeOut');
                print("######## $a $b");
@@ -212,7 +213,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
           //.set({"TimeOut":"","TimeOutAddress":"","TimeIn":"","TimeInAddress":""});
       Position position = await _determinePosition();
       GetAddressFromLatLong(position);
-      GetAddressFromLatLong1(position);});
+      GetAddressFromLatLong1(position);
+
+    });
       print("-------------------------------- $timeinshow $timeoutshow");
   }
 
@@ -253,13 +256,52 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     return await Geolocator.getCurrentPosition();
   }
 
+  refreshlocation() async {
+      bool serviceEnabled;
+      LocationPermission permission;
+
+      // Test if location services are enabled.
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        // Location services are not enabled don't continue
+        // accessing the position and request users of the
+        // App to enable the location services.
+        return Future.error('Location services are disabled.');
+      }
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          // Permissions are denied, next time you could try
+          // requesting permissions again (this is also where
+          // Android's shouldShowRequestPermissionRationale
+          // returned true. According to Android guidelines
+          // your App should show an explanatory UI now.
+          return Future.error('Location permissions are denied');
+        }
+      }
+      if (permission == LocationPermission.deniedForever) {
+        // Permissions are denied forever, handle appropriately.
+        return Future.error(
+            'Location permissions are permanently denied, we cannot request permissions.');
+      }
+      return await Geolocator.getCurrentPosition().then((value) {
+        Position position = value;
+        GetAddressFromLatLong(position);
+        GetAddressFromLatLong1(position);
+      });
+    }
+
+
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
 
     Placemark place=placemark[0];
 
-    setState(() {  Address= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
+    setState(() {
+      Address= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
+    reload=false;
     });
   }
 
@@ -269,14 +311,17 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     Placemark place=placemark[0];
     setState(() {
       Address1= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
+      reload=false;
     });
   }
 
+  bool reload=false;
   ///////////////////////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
+
     return SafeArea(
       child: AdvancedDrawer(
         backdropColor: srpgradient2,
@@ -756,22 +801,46 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                   height: 25.h,
                                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
-                                Container(
-                                  height: 27.h,
-                                  width: 27.w,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0),
-                                        spreadRadius: 0,
-                                        blurRadius: 1,
-                                        offset: const Offset(0, 2), // changes position of shadow
+                                GestureDetector(
+                                  onTap: ()async{
+                                    print("::::::::::::%%::::::::");
+                                    // Position position = await _determinePosition();
+                                    // GetAddressFromLatLong(position);
+                                    // GetAddressFromLatLong1(position);
+                                    setState(() {
+                                      if(reload==false) {
+                                        reload = true;
+                                        Future.delayed(const Duration(milliseconds: 250), () {
+                                          refreshlocation();
+                                        });
+
+                                      }
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 27.h,
+                                    width: 27.w,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0),
+                                          spreadRadius: 0,
+                                          blurRadius: 1,
+                                          offset: const Offset(0, 2), // changes position of shadow
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(15.sp),
+                                      color: greybackground,
+                                    ),
+                                    child: reload ==true ?SizedBox(
+                                      height: 5.h,
+                                      width: 5.w,
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.white,
+                                        strokeWidth: 1.w,
                                       ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(15.sp),
-                                    color: greybackground,
+                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
                                   ),
-                                  child: Icon(FontAwesomeIcons.userTie, size:17.sp, color: whiteClr,),
                                 ),
                               ],
                             ),
@@ -892,22 +961,46 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     height: 25.h,
                                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
-                                Container(
-                                  height: 27.h,
-                                  width: 27.w,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0),
-                                        spreadRadius: 0,
-                                        blurRadius: 1,
-                                        offset: const Offset(0, 2), // changes position of shadow
+                                GestureDetector(
+                                  onTap: ()async{
+                                    print("::::::::::::%%::::::::");
+                                    // Position position = await _determinePosition();
+                                    // GetAddressFromLatLong(position);
+                                    // GetAddressFromLatLong1(position);
+                                    setState(() {
+                                     if(reload==false) {
+                                       reload = true;
+                                       Future.delayed(const Duration(milliseconds: 250), () {
+                                         refreshlocation();
+                                       });
+
+                                     }
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 27.h,
+                                    width: 27.w,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0),
+                                          spreadRadius: 0,
+                                          blurRadius: 1,
+                                          offset: const Offset(0, 2), // changes position of shadow
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(15.sp),
+                                      color: greybackground,
+                                    ),
+                                    child: reload ==true ?SizedBox(
+                                      height: 5.h,
+                                      width: 5.w,
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.white,
+                                        strokeWidth: 1.w,
                                       ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(15.sp),
-                                    color: greybackground,
+                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
                                   ),
-                                  child: Icon(FontAwesomeIcons.userTie, size:17.sp, color: whiteClr,),
                                 ),
                               ],
                             ),
@@ -1015,22 +1108,46 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     height: 25.h,
                                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
-                                Container(
-                                  height: 27.h,
-                                  width: 27.w,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0),
-                                        spreadRadius: 0,
-                                        blurRadius: 1,
-                                        offset: const Offset(0, 2), // changes position of shadow
+                                GestureDetector(
+                                  onTap: ()async{
+                                    print("::::::::::::%%::::::::");
+                                    // Position position = await _determinePosition();
+                                    // GetAddressFromLatLong(position);
+                                    // GetAddressFromLatLong1(position);
+                                    setState(() {
+                                      if(reload==false) {
+                                        reload = true;
+                                        Future.delayed(const Duration(milliseconds: 250), () {
+                                          refreshlocation();
+                                        });
+
+                                      }
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 27.h,
+                                    width: 27.w,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0),
+                                          spreadRadius: 0,
+                                          blurRadius: 1,
+                                          offset: const Offset(0, 2), // changes position of shadow
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(15.sp),
+                                      color: greybackground,
+                                    ),
+                                    child: reload ==true ?SizedBox(
+                                      height: 5.h,
+                                      width: 5.w,
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.white,
+                                        strokeWidth: 1.w,
                                       ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(15.sp),
-                                    color: greybackground,
+                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
                                   ),
-                                  child: Icon(FontAwesomeIcons.userTie, size:17.sp, color: whiteClr,),
                                 ),
                               ],
                             ),
@@ -1055,7 +1172,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                 GestureDetector(
                                   onTap: () async {
                                     Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
-                                      //.then((value) => initState());
+                                     //.then((value) => initState());
                                   },
                                   child: Container(
                                       height: 40.h,
@@ -1158,28 +1275,28 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 //     ),
                 //   ),
                 // ),
-              ],
+                ],
+              ),
             ),
+            // appBar: AppBar(
+            //   title: const Text('Advanced Drawer Example'),
+            //   leading: IconButton(
+            //     onPressed: _handleMenuButtonPressed,
+            //     icon: ValueListenableBuilder<AdvancedDrawerValue>(
+            //       valueListenable: _advancedDrawerController,
+            //       builder: (_, value, __) {
+            //         return AnimatedSwitcher(
+            //           duration: Duration(milliseconds: 250),
+            //           child: Icon(
+            //             value.visible ? Icons.clear : Icons.menu,
+            //             key: ValueKey<bool>(value.visible),
+            //           ),
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
           ),
-          // appBar: AppBar(
-          //   title: const Text('Advanced Drawer Example'),
-          //   leading: IconButton(
-          //     onPressed: _handleMenuButtonPressed,
-          //     icon: ValueListenableBuilder<AdvancedDrawerValue>(
-          //       valueListenable: _advancedDrawerController,
-          //       builder: (_, value, __) {
-          //         return AnimatedSwitcher(
-          //           duration: Duration(milliseconds: 250),
-          //           child: Icon(
-          //             value.visible ? Icons.clear : Icons.menu,
-          //             key: ValueKey<bool>(value.visible),
-          //           ),
-          //         );
-          //       },
-          //     ),
-          //   ),
-          // ),
-        ),
         // child: Scaffold(
         //   body: SingleChildScrollView(
         //     child: Column(
@@ -1781,7 +1898,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     });
   }
 
-  markattimeintendance()async{
+  markattimeintendance() async {
     DateTime noww = DateTime.now();
     print("ggggrrrrrrrrrrrrwwwwwwwwwwaaaaaaaaaaa");
     var data={
@@ -1831,7 +1948,7 @@ class ListofLeaves{
 
   final String  subject;
   final String  message;
-   var approve;
+  var approve;
 }
 
 class ListOfRequest1 extends StatefulWidget {
@@ -2274,6 +2391,7 @@ class _ListOfRequest1State extends State<ListOfRequest1> {
               ],
             ),
           ),
+
           floatingActionButton: FloatingActionButton(
             child: Container(
               width: 60,
@@ -2531,8 +2649,6 @@ class _WriteLeaveState extends State<WriteLeave> {
     fetchuser();
   }
 
-
-
   fetchuser() async {
     FirebaseFirestore.instance
         .collection('Companies')
@@ -2541,7 +2657,9 @@ class _WriteLeaveState extends State<WriteLeave> {
       generatedid=value.get('generatedId');
       setState(() {});
       print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $generatedid ');
-    });}
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -2620,7 +2738,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                     width: MediaQuery.of(context).size.width,
                     //color: Colors.purpleAccent,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
                           //width: 125.w,

@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_SignUP.dart';
 import 'package:hrmanagementapp/Model/ModelAPI/no_of_companies.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
+import 'package:hrmanagementapp/View/Components/Cs_MainButton.dart';
+import 'package:hrmanagementapp/View/Components/Cs_MainPopup.dart';
 import 'package:hrmanagementapp/View/Components/textfield.dart';
 import 'package:hrmanagementapp/View/login/components/Cs_ErrorContainer.dart';
 import 'package:hrmanagementapp/controller/company_create.dart';
@@ -19,7 +21,8 @@ import '../Components/Cs_ScreenUtilInit.dart';
 import 'package:http/http.dart' as http;
 
 class SginUp extends StatefulWidget {
-  SginUp({Key? key}) : super(key: key);
+  SginUp({required this.password,Key? key}) : super(key: key);
+  String password;
 
   @override
   State<SginUp> createState() => _SginUpState();
@@ -36,11 +39,15 @@ class _SginUpState extends State<SginUp> {
   TextEditingController textEditingController7 = TextEditingController();
   bool companyisalreadycreated=false;
   bool internetconnection=false;
+  bool isLoading = false;
+  bool checkingtextfeild=false;
+  String errmsg='';
 
   @override
   void initState() {
     super.initState();
     fetchdata();
+    isLoading=false;
   }
 
   @override
@@ -49,7 +56,7 @@ class _SginUpState extends State<SginUp> {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
-            appBar: AppBar(
+          appBar: AppBar(
               leading:
               GestureDetector(
                 onTap: () {
@@ -78,6 +85,21 @@ class _SginUpState extends State<SginUp> {
                 ),
 
               ),
+              // title:CsMainButton(
+              //   height: 35.h,
+              //   width: 106.w,
+              //   fontSize: 18.sp,
+              //   backClr: srpgradient2,
+              //   fontClr: buttonFontColor(context),
+              //   title: "btnText",
+              //   onTap: () {
+              //     CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is created",password:"adminpassword ");
+              //     // Navigator.pop(context);
+              //     // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Test(password:password,)), (Route<dynamic> route) => route.isFirst);
+              //     // Navigator.pop(context);
+              //     // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Companylist(password:password ,)),);
+              //   },
+              // ) ,
             ),
           body: SingleChildScrollView(
             child: Padding(
@@ -290,11 +312,19 @@ class _SginUpState extends State<SginUp> {
                                     errorMsg:
                                     providerGenerator.getErrorMessage(index: 2))),
                           ),
+                          Visibility(
+                            visible:checkingtextfeild,
+                            child: Container(
+                                margin: EdgeInsets.only(top: 19.h, bottom: 27.h),
+                                child: CsErrorContainer(errorMsg:errmsg)),
+                          ),
                           SizedBox(
                               height: 8.h,
                           ),
                           GestureDetector(
-                            onTap: (){
+                            onTap: ()async{
+                              final list= await FirebaseAuth.instance.fetchSignInMethodsForEmail(textEditingController3.text.trim());
+
                               print("kljhsadlkjf");
                               if(internetconnection==false){
                                 fetchdata();
@@ -309,7 +339,49 @@ class _SginUpState extends State<SginUp> {
                               //       });
                               //     }
                               //   }
-                                registercompany(providerGenerator);
+                                if(textEditingController1.text.isEmpty ||textEditingController2.text.isEmpty||textEditingController3.text.isEmpty||textEditingController4.text.isEmpty) {
+                                 print("lllll");
+                                  setState(() {
+                                    checkingtextfeild=true;
+                                    errmsg="Please enter information";
+                                  });
+                                }else if(!textEditingController3.text.toString().contains('@')){
+                                  print("::::kkkk ${textEditingController3.text.toString()}");
+                                  setState(() {
+                                    checkingtextfeild=true;
+                                    errmsg="Invalid email format";
+                                  });
+                                }else if(!RegExp(r'^\d{6}$').hasMatch(textEditingController5.text.trim().toString()) && !RegExp(r'^\d{6}$').hasMatch(textEditingController6.text.trim().toString())){
+                                  setState(() {
+                                    checkingtextfeild=true;
+                                    errmsg="Password is not strong enough";
+                                  });
+                                }
+                                else if(textEditingController5.text.trim().toString() != textEditingController6.text.trim().toString()){
+                                  print("::::iiiiiiiiiiiiiiiii");
+
+                                  setState(() {
+                                    checkingtextfeild=true;
+                                    errmsg="Your Password is not Matched";
+                                  });
+                                }else if (list.isNotEmpty) {
+                                  print("::::ppppppppppp");
+                                  setState(() {
+                                    checkingtextfeild=true;
+                                    errmsg="An account with that email exists already!";
+                                  });
+                                }
+                                else{
+                                    setState(() { isLoading=true; });
+                                    Future.delayed(const Duration(seconds: 7),(){
+                                      if (!mounted) return;
+                                      setState(() {
+                                        isLoading=false;
+                                        // _showToast(context,"Check your internet connection and retry");
+                                      });
+                                    });
+                                    registercompany(providerGenerator);
+                                 }
                               }
                               // FrSignUpService(FirebaseAuth.instance).onTapSignUP(
                               //   email: textEditingController3.text.trim(),
@@ -348,12 +420,11 @@ class _SginUpState extends State<SginUp> {
                                     color: whiteClr,
                                   ),
                                   child: Center(
-                                    child: Text("Create Company", style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                    child: isLoading==true ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue,),) :Text("Create Company", style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                   ),
                               ),
                             ),],),),],),),),
           ),),),
-
     );
   }
 
@@ -373,12 +444,10 @@ class _SginUpState extends State<SginUp> {
       if(internetconnection==true){
         var r = jsonDecode(value.body);
         var st = Companies.fromJson(r);
-
         for(int i=0;i<st.data.length;i++){
           print("###### ${st.data[i].name}");
           noofcompanies.add(st.data[i].name);
         }
-
       }else{}
     });
     // if (res.statusCode == 200) {}
@@ -427,7 +496,7 @@ class _SginUpState extends State<SginUp> {
         "new_password" : "${textEditingController5.text.trim()}"
       };
 
-  var userpermission = {
+    var userpermission = {
     "user": "${textEditingController3.text}", //(email)
     "allow": "Company",	//(static company)
     "for_value": "${textEditingController2.text}"   // (company name)
@@ -452,6 +521,7 @@ class _SginUpState extends State<SginUp> {
               website: textEditingController7.text.trim(),
               context: context,
               providerGenerator: providerGenerator,
+              adminpassword:widget.password
             ).then((value) async {
               print("kkkkkkkkkk");
               var res= await CreateCompany().postData(data,'register');
@@ -461,7 +531,14 @@ class _SginUpState extends State<SginUp> {
               var body=jsonDecode(res.body);
             }).then((value) async {
               var res= await CreateCompany().postpermissionofuser(userpermission,'register');
-              var body=jsonDecode(res.body);
+              //var body=jsonDecode(res.body);
+            }).then((value) {
+              if (!mounted) return;
+              setState(() {
+                isLoading=false;
+              });
+
+              // CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is created",password:widget.password );
             });
           } else{
             _showToast(context,"Company name already taken");

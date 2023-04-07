@@ -49,7 +49,7 @@ class CsMainInputField extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.2),
           color: whiteClr,
         ),
-        height: 46.h,
+        height: 51.h,
         width: width.w,
         child: TextFormField(
           textAlignVertical:TextAlignVertical.bottom ,
@@ -470,7 +470,7 @@ class CsMainInputField3 extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.2),
           color: whiteClr,
         ),
-        height: 46.h,
+        height: 51.h,
         width: width.w,
         child: TextFormField(
           textAlignVertical:TextAlignVertical.bottom ,
@@ -575,7 +575,7 @@ class CsMainInputField4 extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.2),
           color: whiteClr,
         ),
-        height: 40.h,
+        height: 51.h,
         width: width.w,
         child: TextFormField(
           textAlignVertical:TextAlignVertical.bottom ,

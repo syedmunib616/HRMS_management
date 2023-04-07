@@ -109,7 +109,13 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchuser();
+    Future.delayed(const Duration(seconds: 2), () {
+
+      // Here you can write your code
+      fetchuser();
+
+    });
+
   }
 
   String a='';
@@ -123,6 +129,10 @@ class _HomeState extends State<Home> {
           setState(() {});
     });
   }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +191,10 @@ class _HomeState extends State<Home> {
                     //   'assets/user.jpg',
                     // ),
                   ),
-                  Text('${a}',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                  Padding(
+                    padding:EdgeInsets.symmetric(horizontal :18.0.w),
+                    child: Text('${a}',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                  ),
                   SizedBox(height: 45.h,),
                   Container(
                     height: 1,

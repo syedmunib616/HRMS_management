@@ -23,8 +23,9 @@ class Companyinfo{
   late String admin_name;
   late String email;
   late bool active;
+  late String website;
 
-  Companyinfo({required this.companyname,required this.company_phonenumber,required this.active,required this.admin_name,required this.email});
+  Companyinfo({required this.website,required this.companyname,required this.company_phonenumber,required this.active,required this.admin_name,required this.email});
 
 }
 
@@ -77,9 +78,9 @@ class _CompanylistState extends State<Companylist> {
             website=element.get("website");
             adminname=element.get('admin_name');
 
-            list.add(Companyinfo(companyname: companyname,
+            list.add(Companyinfo(website:website ,companyname: companyname,
                 company_phonenumber: company_phonenumber,active: active,admin_name: adminname,email: email));
-            streamController.add(Companyinfo(companyname: companyname,
+            streamController.add(Companyinfo(website:website,companyname: companyname,
                 company_phonenumber: company_phonenumber,active: active,admin_name: adminname,email: email));
 
             print("kkkkkkkjjjjjjj $companyname $email $company_phonenumber $website");
@@ -116,15 +117,32 @@ class _CompanylistState extends State<Companylist> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: srpgradient2,
         title: Text("Company List",style: GoogleFonts.poppins(fontSize: 15.sp, color: Colors.white, fontWeight: FontWeight.w400),),
       ),
-
       body: Column(
         children: [
           SizedBox(height: 18.h,),
+          TextButton.icon(icon: RotatedBox(quarterTurns: 1,child: Icon(Icons.compare_arrows,size: 28,),),
+            label: Text("A-Z",
+              style: TextStyle(fontSize: 16),
+            ),
+            onPressed: (){
+              for(int i=0;i<list.length;i++){
+                list.sort((a, b){ //sorting in ascending order
+                  return a.companyname.compareTo(b.companyname);
+                });
+                print("${list[i].companyname}");
+                // list.add(Companyinfo(companyname: list[i].companyname, company_phonenumber: company_phonenumber, active: active, admin_name: admin_name, email: email))
+              }
+              setState(() {
+
+              });
+              // print("$list");
+             // setState(() => isDescending = !isDescending);
+            },
+          ),
           StreamBuilder(
               stream: streamController.stream,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -147,7 +165,7 @@ class _CompanylistState extends State<Companylist> {
                               separatorBuilder: (context, index) => const Divider(color: Colors.white),
                               itemCount: list.length,
                               itemBuilder:(BuildContext context, int index){
-                                return NoOfReques(password:widget.password ,adminname: list[index].admin_name,website: website,companyname: list[index].companyname,phonenumber:list[index].company_phonenumber, active: list[index].active,email: list[index].email,);
+                                return NoOfReques(password:widget.password ,adminname: list[index].admin_name,website: list[index].website,companyname: list[index].companyname,phonenumber:list[index].company_phonenumber, active: list[index].active,email: list[index].email,);
                             }
                            ),
                           );
@@ -156,10 +174,10 @@ class _CompanylistState extends State<Companylist> {
                           ? const CircularProgressIndicator() :
                       Expanded(
                         child: ListView.separated(
-                            separatorBuilder: (context, index) => Divider(color: Colors.white),
+                            separatorBuilder: (context, index) => const Divider(color: Colors.white),
                             itemCount: list.length,
-                            itemBuilder:(BuildContext context, int index){
-                            return NoOfReques(password:widget.password ,adminname: list[index].admin_name,website: website,companyname: list[index].companyname,phonenumber:list[index].company_phonenumber, active: list[index].active, email: list[index].email,);
+                            itemBuilder:(BuildContext context, int index) {
+                            return NoOfReques(password:widget.password ,adminname: list[index].admin_name,website: list[index].website,companyname: list[index].companyname,phonenumber:list[index].company_phonenumber, active: list[index].active, email: list[index].email,);
                           }
                         ),
                       );
@@ -205,7 +223,7 @@ class NoOfReques extends StatelessWidget {
           );
         },
         child: Container(
-          height: 55.h,
+          height: 57.h,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             boxShadow: [
@@ -246,8 +264,11 @@ class NoOfReques extends StatelessWidget {
               Icon(FontAwesomeIcons.building,size: 30.sp,color: dotDesctiveClr,),
               SizedBox(width: 5.w,),
               Padding(
-                padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                child: Text("$companyname",style: GoogleFonts.poppins(fontSize: 15.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+                padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 10.w),
+                child: Container(
+                  width: 207.w,
+                  // color: Colors.green,
+                  child: Text("$companyname",style: GoogleFonts.poppins(fontSize: 15.sp, color: iconcolor, fontWeight: FontWeight.w400),)),
               ),
               const Spacer(),
               Padding(
@@ -488,6 +509,7 @@ class _SelectedCompanyState extends State<SelectedCompany> {
               SizedBox(height: 10.h,),
               GestureDetector(
                 onTap: () {
+                  if(textEditingController1.text.toString().isNotEmpty && textEditingController2.text.toString().isNotEmpty && textEditingController3.text.toString().isNotEmpty &&textEditingController4.text.toString().isNotEmpty){
                   UserT.doc(widget.email).update({
                     "company_name":"${textEditingController1.text.toString()}",
                     "phone_number":"${textEditingController2.text.toString()}",
@@ -496,6 +518,9 @@ class _SelectedCompanyState extends State<SelectedCompany> {
                   }).then((value) {
                     print("ppppppppppppp ${widget.email} ${textEditingController4.text.toString()}");
                   });
+                  }else{
+                    _showToast(context,"Please enter all feilds");
+                  }
                   // Navigator.pop(context);
                   // FrLoginService(FirebaseAuth.instance).onTapSignIn(
                   //     buttonIndex: 1,
@@ -541,6 +566,15 @@ class _SelectedCompanyState extends State<SelectedCompany> {
             ],
           ),
         ),
+      ),
+    );
+  }
+  void _showToast(BuildContext context,String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('$text',style:GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2)),
+        //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
   }

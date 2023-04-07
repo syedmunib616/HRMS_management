@@ -603,7 +603,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                             borderRadius: BorderRadius.circular(8.2),
                             color: whiteClr,
                           ),
-                          height: 47.h,
+                          height: 51.h,
                           width:287.w,
                           child: TextFormField(
                             textAlignVertical:TextAlignVertical.bottom ,
@@ -612,7 +612,6 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                             controller:  textEditingController1,
                             obscureText: false,
                             validator: (value) {
-
                               if (value!.isEmpty) {
                                 setState(() {
                                   err=true;
@@ -726,15 +725,26 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                           ),
                           const Spacer(),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async{
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                FrForgetService(FirebaseAuth.instance).onTapSignIn(
-                                    buttonIndex: 1,
-                                    errorIndex: 1,
-                                    context: context,
-                                    email: textEditingController1.text.trim(),
-                                    providerGenerator: providerGenerator);
+                                final list= await FirebaseAuth.instance.fetchSignInMethodsForEmail(textEditingController1.text.trim());
+                                if (list.isNotEmpty) {
+                                  // ignore: use_build_context_synchronously
+                                  FrForgetService(FirebaseAuth.instance).onTapSignIn(
+                                      buttonIndex: 1,
+                                      errorIndex: 1,
+                                      context: context,
+                                      email: textEditingController1.text.trim(),
+                                      providerGenerator: providerGenerator);
+                                      // _showToast(context, 'An account with that email exists already!');
+                                }
+                                else {
+                                setState(() {
+                                  err=true;
+                                  errmesg="An account with that email doesn't  exists already";
+                                });
+                                }
                                 // Do something with the valid email
                               }
                               // resetpassword();
@@ -1067,19 +1077,19 @@ class FrForgetService {
 
     try {
       if (isEmpty(email)) {
-        onlogicErrorHandling(
-          error: "Please enter your Information",
-          providerGenerator: providerGenerator,
-          buttonIndex: buttonIndex,
-          errorIndex: errorIndex,
-        );
+        // onlogicErrorHandling(
+        //   error: "Please enter your Information",
+        //   providerGenerator: providerGenerator,
+        //   buttonIndex: buttonIndex,
+        //   errorIndex: errorIndex,
+        // );
       } else if (!isRegExpValid(email)) {
-        onlogicErrorHandling(
-          error: "Your email is Invalid",
-          providerGenerator: providerGenerator,
-          buttonIndex: buttonIndex,
-          errorIndex: errorIndex,
-        );
+        // onlogicErrorHandling(
+        //   error: "Your email is Invalid",
+        //   providerGenerator: providerGenerator,
+        //   buttonIndex: buttonIndex,
+        //   errorIndex: errorIndex,
+        // );
       } else{
         await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
         CSMainPopup(

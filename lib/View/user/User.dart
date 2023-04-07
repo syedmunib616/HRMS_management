@@ -445,7 +445,7 @@ class ProfileField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-          height: 30.h,
+          height: 40.h,
           width: 305.w,
           //color: Colors.grey.shade200,
           decoration: BoxDecoration(
@@ -458,8 +458,15 @@ class ProfileField extends StatelessWidget {
               Text("$heading",
               style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
               Spacer(),
-              Text("$text",
-                style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w600),),
+              Container(
+              //  alignment: Alignment.topRight,
+                //color: Colors.blue,
+                width: 190.w,
+                child: Text(
+
+                  "$text",
+                  style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w600),overflow: TextOverflow.clip,),
+              ),
               SizedBox(width: 10.w,),
             ],
           ),

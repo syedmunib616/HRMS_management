@@ -1,9 +1,8 @@
 import 'dart:convert';
-// ignore: depend_on_referenced_packages
+// ignore:  depend_on_referenced_packages
 import 'package:hrmanagementapp/Model/ModelAPI/EmployeeGet.dart';
 import 'package:hrmanagementapp/controller/company_create.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:http/http.dart' as http;
 
 
@@ -23,7 +22,6 @@ class EmployeeCreation{
     });
   }
 
-
   postcratetionofemployee(data,apirul) async {
     var fullurl=baseurl;
     var body= jsonEncode(data);
@@ -35,17 +33,16 @@ class EmployeeCreation{
         },
         body:body
       ).then((value) {
-          var b=jsonDecode(value.body);
+          var b = jsonDecode(value.body);
           print("::::::::;;;;;;; $b");
       });
   }
-
-
 
   Future<Employeeget?> allEmployeesGet(data,apirul,String email,String adminemail) async {
 
     var fullurl=baseurl;
     var body= jsonEncode(data);
+
     await http.get(
         Uri.parse("$apirul"),
         headers: {
@@ -74,8 +71,7 @@ class EmployeeCreation{
             });
           }
 
-          }
-
+         }
           // return
       });
     }

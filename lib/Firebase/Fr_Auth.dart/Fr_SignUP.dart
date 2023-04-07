@@ -7,9 +7,9 @@ import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:hrmanagementapp/View/Components/Cs_MainPopup.dart';
 import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:hrmanagementapp/View/employeDirectory/EmployeDirectory.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/test.dart';
-
 
 String globalemail='';
 class FrSignUpService {
@@ -30,6 +30,7 @@ class FrSignUpService {
 
   // To Sign UP
   Future onTapSignUP({
+    required String adminpassword,
     required String email,
     required String password,
     required String passwordConfirmation,
@@ -67,7 +68,12 @@ class FrSignUpService {
                         email: email,
                         password: password,
                       ).then(
-                        (value) => onSuccessSignUP(name: name,companyname: companyname,phonenumber: phonenumber,website: website,
+                        (value) => onSuccessSignUP(
+                          adminpassword: adminpassword,
+                          name: name,
+                          companyname: companyname,
+                          phonenumber: phonenumber,
+                          website: website,
                           email: value.user!.email.toString(),
                           uid: value.user!.uid,
                           providerGenerator: providerGenerator,
@@ -95,6 +101,7 @@ class FrSignUpService {
 
   // Reading Error Value on the Screen
   onSuccessSignUP({
+    required String adminpassword,
     required String phonenumber,
     required String companyname,
     required String name,
@@ -120,7 +127,7 @@ class FrSignUpService {
     //await UserT.firestore.collection(email).doc().set({"admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber"});
 
     // await UserT.doc(email).collection("Employee").doc("$email").set({"email":"$email","role":"admin","uid":"$uid","name":"$name"});
-    
+
     // depaetment.add(Department(departid: '111', departmentname: 'Finance',));
     // depaetment.add(Department(departid: '112', departmentname: 'Marketing',));
     // depaetment.add(Department(departid: '113', departmentname: 'IT',));
@@ -149,7 +156,7 @@ class FrSignUpService {
               'DepartmentsName':'${depaetment[i].departmentname}'});
           }
         });
-      }).then((value) => CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is created"));
+      }).then((value) => CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is created",password:adminpassword ));
 
       // });
 
@@ -358,7 +365,6 @@ class FrSignUpService1 {
           ),
         );
       } on FirebaseAuthException catch (error) {
-
             print("jjjjjjjjjjjjj");
             print(error.code);
             onlogicErrorHandling(
@@ -366,7 +372,6 @@ class FrSignUpService1 {
             providerGenerator: providerGenerator,
             errorIndex: 2,
             );
-
       }
   }
 
@@ -422,7 +427,7 @@ class FrSignUpService1 {
 
     FirebaseFirestore.instance.collection("Companies")
         .doc(adminemail).collection('Employee')
-        .doc(email).collection("Attendance").doc('${now.year}-${now.month}-${now.day}').set({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"","TimeOut":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeOutAddress":""});
+        .doc(email).collection("Attendance").doc('${now.year}-${now.month}-${now.day}').set({"TimeIn":"","TimeInAddress":"","TimeOut":"","TimeOutAddress":""});
      // UserT.where('email', isEqualTo: adminemail).firestore.collection("Empoloyee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
      //  "name":"$name","email":"$email","uid":"$uid",});
      UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
@@ -439,6 +444,9 @@ class FrSignUpService1 {
         }).then((value) {
 
           superadmin==false ?
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => EmployeeDirectory(password: password,compnayemail: adminemail,superadmin: superadmin,)), result: false):
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => EmployeeDirectory(password: password,compnayemail: adminemail,superadmin: superadmin,)), result: false);
+
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,adminname: adminemail,)), result: false) :
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Test(password: password,)),);
 
@@ -525,7 +533,6 @@ class FrSignUpService1 {
   //     try {
   //       await firebaseAuth.createUserWithEmailAndPassword(
   //           email: email!, password: password!);
-
   //       isSignedIn = true;
   //     } on FirebaseAuthException catch (e) {
   //       print(e.message);
@@ -534,14 +541,12 @@ class FrSignUpService1 {
   //     print("is Created" + isSignedIn.toString());
   //     return isSignedIn;
   //   }
-
   // // Returns true if email address is in use.
   //   static Future<bool> checkIfEmailInUse(String email) async {
   //     try {
   //       // Fetch sign-in methods for the email address
   //       final list =
   //           await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
-
   //       // In case list is not empty
   //       if (list.isNotEmpty) {
   //         // Return true because there is an existing

@@ -705,7 +705,7 @@ class _DepartmentListState extends State<DepartmentList> {
                     //     : null,
                   ),
 
-                  SizedBox(height: 10.h,),
+                  SizedBox(height: 30.h,),
 
                   CsMainInputField4(
                     // providerGenerator: providerGenerator,
@@ -791,13 +791,13 @@ class _DepartmentListState extends State<DepartmentList> {
                       SizedBox( width: 10.w, ),
 
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.of(context).pop();
                         },
                         child: Container(
                           height: 50.h,
                           width: 150.w,
-                          //color: Colors.yellow,
+                          // color: Colors.yellow,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             boxShadow: [
@@ -821,6 +821,7 @@ class _DepartmentListState extends State<DepartmentList> {
                       //     Navigator.of(context).pop();
                       //   },
                       // )
+
                     ],
                   ),
                 ],

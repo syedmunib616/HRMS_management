@@ -87,26 +87,36 @@ class FrLoginService {
       providerGenerator.setVisibleError(index: errorIndex, value: false);
       providerGenerator.setLoadingValue(value: false, index: buttonIndex);
       print("---------------- $email");
+      bool dontrun=false;
 
-    CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
-    if(email!="example@gmail.com") {
+      CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
+
+      if(email!="example@gmail.com") {
          // braek point laga k check krna hai kidhr masla araha hai
          FirebaseFirestore.instance.collection('Companies').get().then((value) {
             value.docs.forEach((element) {
              active=false;
              // admin_name.add(element.id);
              print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
+
              f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
+               bool ptanhi=false;
                active = element.get("active");
+              // ptanhi= element.get("active");
+               print("aaaaaaaaaaa $active ${element.id}");
                if(email==element.id){
-                 Login(loading: false,);
-                 if (active == true) {
+
+                  if (active == true) {
+                  // if (ptanhi == true) {
+                   dontrun=true;
+                   Login(loading: false,);
                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                      builder: (BuildContext context) => ScreenMain(password: password,adminname: email,),
                    ), (route) => false,);
                  }
                  else{
-                   print("yyyyyy active status is $active");
+                   Login(loading: false,);
+                   print("yyyyyyyyyyyyyyyy active status is $active");
                    FirebaseAuth.instance.signOut().then((value) async {
                      Navigator.of(context).pushReplacement(
                          MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
@@ -127,51 +137,49 @@ class FrLoginService {
                  // }));
                }
              })).then((value) {
-               if(active == true){
-                 element.reference.collection("Employee").get().then((value) =>
-                     value.docs.forEach((elemen){
-                       String a;
-                       bool empactive=false;
-                       a = elemen.get('email');
-
-                       if (email == a ) {
-                         print("laksjdhfkjsadf $a $empactive");
-                         empactive=elemen.get('active');
-                         if(empactive==true) {
-                           Login(loading: false);
-                           Navigator.of(context).pushAndRemoveUntil(
-                             MaterialPageRoute(
-                               builder: (BuildContext context) =>
-                                   EmployeeDashboard(
-                                     admineamil: element.id,),), (
-                               route) => false,);
+               print("7777777777777777777777777777777777777777777777777777777 $dontrun");
+               if (dontrun == true) {}
+               else{
+                 if(active == true){
+                   element.reference.collection("Employee").get().then((value) =>
+                       value.docs.forEach((elemen){
+                         String a;
+                         bool empactive=false;
+                         a = elemen.get('email');
+                         if (email == a ) {
+                           print("laksjdhfkjsadf $a $empactive");
+                           empactive=elemen.get('active');
+                           if(empactive==true) {
+                             Login(loading: false);
+                             Navigator.of(context).pushAndRemoveUntil(
+                               MaterialPageRoute(
+                                 builder: (BuildContext context) =>
+                                     EmployeeDashboard(
+                                       admineamil: element.id,),), (route) => false,);
+                           }
+                           else{
+                             print("not allowed");
+                           }
                          }
-                         else{
-                           print("not allowed");
-                         }
-                       }
-
-                       else{}
-
-                       // else{
-                       //   Navigator.of(context).pushReplacement(
-                       //       MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
-                       //       result: false);
-                       // }
-                       //   FirebaseAuth.instance.signOut().then((value) async {
-                       //
-                       //
-                       // }
-                     }));
+                         else{}
+                         // else{
+                         //   Navigator.of(context).pushReplacement(
+                         //       MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
+                         //       result: false);
+                         // }
+                         //   FirebaseAuth.instance.signOut().then((value) async {
+                         //
+                         //
+                         // }
+                       }));
                  }
-               else {
-
+                 else {
                    print("yyyyyy active status is $active");
                    FirebaseAuth.instance.signOut().then((value) async {
                      Navigator.of(context).pushReplacement(
                          MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
-                       result: false);});
-
+                         result: false);});
+                 }
                }
              });
            });
@@ -272,7 +280,7 @@ class FrLoginService {
               // });
             //EmployeeDashboard()
        }
-    else if(email=="example@gmail.com"){
+      else if(email=="example@gmail.com"){
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
     builder: (BuildContext context) => Test(password: password,),
     ),(route) => false, );}
@@ -422,7 +430,7 @@ class FrLoginService {
       case "invalid-email":
         return TextStrings.Invalid_email.tr();
       case "wrong-password":
-        //return TextStrings.You_have_entered_an_invalid_password.tr();
+          // return TextStrings.You_have_entered_an_invalid_password.tr();
           return "You have entered an invalid password";
       case "user-not-found":
         return "User with this email doesn't exist.";

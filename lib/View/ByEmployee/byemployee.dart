@@ -495,16 +495,18 @@ class _ByEmployeeState extends State<ByEmployee> {
                                               value: dropdownvalue1,
                                               // Down Arrow Icon
                                               icon: Container(
+                                              //  color: Colors.green,
                                                 height: 30.h,
-                                                width: 100.w,
+                                                width: 1.w,
                                               ),
                                               // Array list of items
                                               items: items1.map((String items) {
                                                 return DropdownMenuItem(
                                                   value: items,
-                                                  child: SizedBox(
-                                                      width: 130.w,
-                                                      child: Text(items)),
+                                                  child: Container(
+                                                      width: 229.w,
+                                                     // color: Colors.blue,
+                                                      child: Text(items,style: GoogleFonts.poppins(fontSize: 12.sp, color:blackClr,),)),
                                                 );
                                               }).toList(),
                                               // After selecting the desired option,it will
@@ -1475,199 +1477,166 @@ class _ByEmployeeState extends State<ByEmployee> {
       );
     }
 
-
-
   bool shownhichalyga=false;
-
   List<String> datesofattendance=[];
   List<DateTime> datesList = [];
 
-
-  dropdownfetchattendance(String dropdownvalue1){
-    if(dropdownvalue1=='All'){
-      setState(() {
-        shownhichalyga=true;
-        // streamController.onPause;
-        // streamController.close();
-        streamController.onCancel;
-        streamController.stream;
-        attendance=[];
-        attendance.clear();
-        // attendance.removeRange(0, attendance.length);
-        // for(int i=0;i<attendance.length;i++){
-        //   attendance.removeAt(i);
-        // }
-      });
-      FirebaseFirestore.instance
-          .collection('Companies')
-          .doc('${user!.email.toString()}')
-          .collection("Employee").get().then((value) {
-        value.docs.forEach((element) {
-          String a;
-          a = element.id;
-          FirebaseFirestore.instance
-              .collection('Companies')
-              .doc(user!.email.toString())
-              .collection("Employee")
-              .doc(a).collection('Attendance')
-              .get()
-              .then((value) {
-            value.docs.forEach((element) {
-              datesofattendance.clear();
-              for(int i=0;i<days.length;i++) {
-                String b;
-                b = '${days[i].year}-${days[i].month}-${days[i].day}';
-                // print("munib ${b}");
-                if(b==element.id){
-               //   print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-                  // setState(() {
-                  //   attendance=[];
-                  //   //streamController.isPaused;
-                  // });
-
-                  datesofattendance.add(b);
-
-                  //
-                  //
-                  //  FirebaseFirestore.instance
-                  //     .collection('Companies')
-                  //     .doc('${user!.email.toString()}')
-                  //     .collection("Employee")
-                  //     .doc(a)
-                  //     .collection('Attendance')
-                  //     .doc('$b').get().then((value) {
-                  //   String e,f,g,h,j;
-                  //   e=value.get('TimeIn');
-                  //   f=value.get('TimeInAddress');
-                  //   g=value.get('TimeOut');
-                  //   h=value.get('TimeOutAddress');
-                  //
-                  //
-                  //
-                  //
-                  //   attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-                  //   streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-                  //
-                  //
-                  //   // print("///////////// ${attendance[i].date}");
-                  //
-                  // });
-                  // setState(() {
-                  //   streamController.stream;
-                  //   // Future.delayed(const Duration(milliseconds: 10), () {
-                  //   shownhichalyga=false;
-                  //   // });
-                  //
-                  // });
-                  }
-                }});
-              }).then((value) {
-
-            for (String dateString in datesofattendance) {
-              DateFormat inputFormat = DateFormat('dd-MM-yyyy');
-              DateTime date = inputFormat.parse(dateString);
-              print("$dateString");
-              datesList.add(date);
-            }
-
-            for(int i=0;i<datesList.length;i++){
-              print("uu ${datesList[i].year}-${datesList[i].month}-${datesList[i].day}");
-            }
-
-          });
-          //     FirebaseFirestore.instance
-          //         .collection('Companies')
-          //         .doc('${user!.email.toString()}')
-          //         .collection("Employee")
-          //         .doc(dropdownvalue1)
-          //         .collection('Attendance')
-          //
-          //         .get().then((value) {
-          //       value.docs.forEach((element) {
-          //         a=element.id;
-          //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
-          //
-          //         if(date==a){
-          //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-          //
-          //           // setState(() {
-          //           //   attendance=[];
-          //           //   //streamController.isPaused;
-          //           // });
-          //
-          //           FirebaseFirestore.instance
-          //               .collection('Companies')
-          //               .doc('${user!.email.toString()}')
-          //               .collection("Employee")
-          //               .doc(dropdownvalue1)
-          //               .collection('Attendance')
-          //               .doc('$date').get().then((value) {
-          //             String e,f,g,h,j;
-          //             e=value.get('TimeIn');
-          //             f=value.get('TimeInAddress');
-          //             g=value.get('TimeOut');
-          //             h=value.get('TimeOutAddress');
-          //
-          //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-          //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-          //
-          //             print("///////////// $attendance");
-          //           });
-          //           setState(() {
-          //             streamController.stream;
-          //           });
-          //         }
-          //         else{
-          //           print("1111111111111");
-          //         }
-          //         setState(() {
-          //           streamController.stream;
-          //         });
-          //       });
-          //     });
-          //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
-          //
-          //   });
-          // });
-        });}).then((value) {
-        print("false hogaya ");
-        setState(() {
-
-        });
-      });}
-    else{
-      if(days.isEmpty){}
-      else {
-        String a;
-        setState(() {
-          shownhichalyga=true;
-          // streamController.onPause;
-          // streamController.close();
-          streamController.onCancel;
-          streamController.stream;
-          attendance=[];
-          attendance.clear();
-          // attendance.removeRange(0, attendance.length);
-          // for(int i=0;i<attendance.length;i++){
-          //   attendance.removeAt(i);
-          // }
-          print("iiiiiiiiiiiiiiiii ${attendance.length}");
-          //streamController.isPaused;
-        });
-        for(int i=0;i<days.length;i++){
-          String b;
-          b = '${days[i].year}-${days[i].month}-${days[i].day}';
-
-          fetchattendance(b);
-        }
-        //fetchattendance();
-      }
-    }
-  }
-
-
   // dropdownfetchattendance(String dropdownvalue1){
-  //     if(dropdownvalue1=='All'){
+  //   if(dropdownvalue1=='All'){
+  //     setState(() {
+  //       shownhichalyga=true;
+  //       // streamController.onPause;
+  //       // streamController.close();
+  //       streamController.onCancel;
+  //       streamController.stream;
+  //       attendance=[];
+  //       attendance.clear();
+  //       // attendance.removeRange(0, attendance.length);
+  //       // for(int i=0;i<attendance.length;i++){
+  //       //   attendance.removeAt(i);
+  //       // }
+  //     });
+  //     FirebaseFirestore.instance
+  //         .collection('Companies')
+  //         .doc('${user!.email.toString()}')
+  //         .collection("Employee").get().then((value) {
+  //       value.docs.forEach((element) {
+  //         String a;
+  //         a = element.id;
+  //         print("usssssssseeeeeeeerrrrrr $a");
+  //         FirebaseFirestore.instance
+  //             .collection('Companies')
+  //             .doc(user!.email.toString())
+  //             .collection("Employee")
+  //             .doc(a).collection('Attendance')
+  //             .get()
+  //             .then((value) {
+  //           value.docs.forEach((element) {
+  //             datesofattendance.clear();
+  //             for(int i=0;i<days.length;i++) {
+  //               String b;
+  //               b = '${days[i].year}-${days[i].month}-${days[i].day}';
+  //                print("munib ${b}");
+  //               if(b==element.id){
+  //                 //   print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+  //                 // setState(() {
+  //                 //   attendance=[];
+  //                 //   //streamController.isPaused;
+  //                 // });
+  //
+  //                 datesofattendance.add(b);
+  //
+  //                 //  FirebaseFirestore.instance
+  //                 //     .collection('Companies')
+  //                 //     .doc('${user!.email.toString()}')
+  //                 //     .collection("Employee")
+  //                 //     .doc(a)
+  //                 //     .collection('Attendance')
+  //                 //     .doc('$b').get().then((value) {
+  //                 //   String e,f,g,h,j;
+  //                 //   e=value.get('TimeIn');
+  //                 //   f=value.get('TimeInAddress');
+  //                 //   g=value.get('TimeOut');
+  //                 //   h=value.get('TimeOutAddress');
+  //                 //
+  //                 //
+  //                 //
+  //                 //
+  //                 //   attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+  //                 //   streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+  //                 //
+  //                 //
+  //                 //   // print("///////////// ${attendance[i].date}");
+  //                 //
+  //                 // });
+  //                 // setState(() {
+  //                 //   streamController.stream;
+  //                 //   // Future.delayed(const Duration(milliseconds: 10), () {
+  //                 //   shownhichalyga=false;
+  //                 //   // });
+  //                 //
+  //                 // });
+  //
+  //               }
+  //               }});
+  //             }).then((value) {
+  //
+  //           for (String dateString in datesofattendance) {
+  //             DateFormat inputFormat = DateFormat('yyyy-MM-dd');
+  //             DateTime date = inputFormat.parse(dateString);
+  //             print("jjjjjj $dateString");
+  //             datesList.add(date);
+  //           }
+  //
+  //           for(int i=0;i<datesList.length;i++){
+  //             print("uu ${datesList[i].year}-${datesList[i].month}-${datesList[i].day}");
+  //           }
+  //
+  //         });
+  //         //     FirebaseFirestore.instance
+  //         //         .collection('Companies')
+  //         //         .doc('${user!.email.toString()}')
+  //         //         .collection("Employee")
+  //         //         .doc(dropdownvalue1)
+  //         //         .collection('Attendance')
+  //         //
+  //         //         .get().then((value) {
+  //         //       value.docs.forEach((element) {
+  //         //         a=element.id;
+  //         //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
+  //         //
+  //         //         if(date==a){
+  //         //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+  //         //
+  //         //           // setState(() {
+  //         //           //   attendance=[];
+  //         //           //   //streamController.isPaused;
+  //         //           // });
+  //         //
+  //         //           FirebaseFirestore.instance
+  //         //               .collection('Companies')
+  //         //               .doc('${user!.email.toString()}')
+  //         //               .collection("Employee")
+  //         //               .doc(dropdownvalue1)
+  //         //               .collection('Attendance')
+  //         //               .doc('$date').get().then((value) {
+  //         //             String e,f,g,h,j;
+  //         //             e=value.get('TimeIn');
+  //         //             f=value.get('TimeInAddress');
+  //         //             g=value.get('TimeOut');
+  //         //             h=value.get('TimeOutAddress');
+  //         //
+  //         //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+  //         //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+  //         //
+  //         //             print("///////////// $attendance");
+  //         //           });
+  //         //           setState(() {
+  //         //             streamController.stream;
+  //         //           });
+  //         //         }
+  //         //         else{
+  //         //           print("1111111111111");
+  //         //         }
+  //         //         setState(() {
+  //         //           streamController.stream;
+  //         //         });
+  //         //       });
+  //         //     });
+  //         //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
+  //         //
+  //         //   });
+  //         // });
+  //       });}).then((value) {
+  //       print("false hogaya ");
+  //       setState(() {
+  //
+  //       });
+  //     });}
+  //   else{
+  //     if(days.isEmpty){}
+  //     else {
+  //       String a;
   //       setState(() {
   //         shownhichalyga=true;
   //         // streamController.onPause;
@@ -1680,145 +1649,176 @@ class _ByEmployeeState extends State<ByEmployee> {
   //         // for(int i=0;i<attendance.length;i++){
   //         //   attendance.removeAt(i);
   //         // }
+  //         print("iiiiiiiiiiiiiiiii ${attendance.length}");
+  //         //streamController.isPaused;
   //       });
-  //       FirebaseFirestore.instance
-  //           .collection('Companies')
-  //           .doc('${user!.email.toString()}')
-  //           .collection("Employee").get().then((value) {
-  //         value.docs.forEach((element) {
-  //           String a;
-  //           a = element.id;
-  //           FirebaseFirestore.instance
-  //               .collection('Companies')
-  //               .doc(user!.email.toString())
-  //               .collection("Employee")
-  //               .doc(a).collection('Attendance')
-  //               .get()
-  //               .then((value) {
-  //             value.docs.forEach((element) {
-  //               for(int i=0;i<days.length;i++) {
-  //                 String b;
-  //                 b= '${days[i].year}-${days[i].month}-${days[i].day}';
-  //                 print("munib ${b}");
-  //                 if(b==element.id){
-  //                   print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-  //                   // setState(() {
-  //                   //   attendance=[];
-  //                   //   //streamController.isPaused;
-  //                   // });
-  //                   FirebaseFirestore.instance
-  //                       .collection('Companies')
-  //                       .doc('${user!.email.toString()}')
-  //                       .collection("Employee")
-  //                       .doc(a)
-  //                       .collection('Attendance')
-  //                       .doc('$b').get().then((value) {
-  //                     String e,f,g,h,j;
-  //                     e=value.get('TimeIn');
-  //                     f=value.get('TimeInAddress');
-  //                     g=value.get('TimeOut');
-  //                     h=value.get('TimeOutAddress');
-  //                     attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-  //                     streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-  //                    // print("///////////// ${attendance[i].date}");
-  //                   });
-  //                   setState(() {
-  //                     streamController.stream;
-  //                     // Future.delayed(const Duration(milliseconds: 10), () {
-  //                     shownhichalyga=false;
-  //                     // });
+  //       for(int i=0;i<days.length;i++){
+  //         String b;
+  //         b = '${days[i].year}-${days[i].month}-${days[i].day}';
   //
-  //                   });
-  //                 }}});});
-  //           //     FirebaseFirestore.instance
-  //           //         .collection('Companies')
-  //           //         .doc('${user!.email.toString()}')
-  //           //         .collection("Employee")
-  //           //         .doc(dropdownvalue1)
-  //           //         .collection('Attendance')
-  //           //
-  //           //         .get().then((value) {
-  //           //       value.docs.forEach((element) {
-  //           //         a=element.id;
-  //           //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
-  //           //
-  //           //         if(date==a){
-  //           //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-  //           //
-  //           //           // setState(() {
-  //           //           //   attendance=[];
-  //           //           //   //streamController.isPaused;
-  //           //           // });
-  //           //
-  //           //           FirebaseFirestore.instance
-  //           //               .collection('Companies')
-  //           //               .doc('${user!.email.toString()}')
-  //           //               .collection("Employee")
-  //           //               .doc(dropdownvalue1)
-  //           //               .collection('Attendance')
-  //           //               .doc('$date').get().then((value) {
-  //           //             String e,f,g,h,j;
-  //           //             e=value.get('TimeIn');
-  //           //             f=value.get('TimeInAddress');
-  //           //             g=value.get('TimeOut');
-  //           //             h=value.get('TimeOutAddress');
-  //           //
-  //           //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-  //           //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-  //           //
-  //           //             print("///////////// $attendance");
-  //           //           });
-  //           //           setState(() {
-  //           //             streamController.stream;
-  //           //           });
-  //           //         }
-  //           //         else{
-  //           //           print("1111111111111");
-  //           //         }
-  //           //         setState(() {
-  //           //           streamController.stream;
-  //           //         });
-  //           //       });
-  //           //     });
-  //           //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
-  //           //
-  //           //   });
-  //           // });
-  //         });}).then((value) {
-  //           print("false hogaya ");
-  //           setState(() {
-  //
-  //           });
-  //       });}
-  //     else{
-  //       if(days.isEmpty){}
-  //       else {
-  //         String a;
-  //         setState(() {
-  //           shownhichalyga=true;
-  //           // streamController.onPause;
-  //           // streamController.close();
-  //           streamController.onCancel;
-  //           streamController.stream;
-  //           attendance=[];
-  //           attendance.clear();
-  //           // attendance.removeRange(0, attendance.length);
-  //           // for(int i=0;i<attendance.length;i++){
-  //           //   attendance.removeAt(i);
-  //           // }
-  //           print("iiiiiiiiiiiiiiiii ${attendance.length}");
-  //           //streamController.isPaused;
-  //         });
-  //         for(int i=0;i<days.length;i++){
-  //           String b;
-  //           b = '${days[i].year}-${days[i].month}-${days[i].day}';
-  //
-  //           fetchattendance(b);
-  //         }
-  //         //fetchattendance();
+  //         fetchattendance(b);
   //       }
+  //       //fetchattendance();
   //     }
   //   }
+  // }
+
+
+  dropdownfetchattendance(String dropdownvalue1) {
+    if(dropdownvalue1=='All'){
+        setState(() {
+          shownhichalyga=true;
+          // streamController.onPause;
+          // streamController.close();
+          streamController.onCancel;
+          streamController.stream;
+          attendance=[];
+          attendance.clear();
+          // attendance.removeRange(0, attendance.length);
+          // for(int i=0;i<attendance.length;i++){
+          //   attendance.removeAt(i);
+          // }
+        });
+        FirebaseFirestore.instance
+            .collection('Companies')
+            .doc('${user!.email.toString()}')
+            .collection("Employee").get().then((value) {
+          value.docs.forEach((element) {
+            String a;
+            a = element.id;
+            FirebaseFirestore.instance
+                .collection('Companies')
+                .doc(user!.email.toString())
+                .collection("Employee")
+                .doc(a).collection('Attendance')
+                .get()
+                .then((value) {
+              value.docs.forEach((element) {
+                for(int i=0;i<days.length;i++) {
+                  String b;
+                  b= '${days[i].year}-${days[i].month}-${days[i].day}';
+                  print("munib ${b}");
+                  if(b==element.id){
+                    print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+                    // setState(() {
+                    //   attendance=[];
+                    //   //streamController.isPaused;
+                    // });
+                    FirebaseFirestore.instance
+                        .collection('Companies')
+                        .doc('${user!.email.toString()}')
+                        .collection("Employee")
+                        .doc(a)
+                        .collection('Attendance')
+                        .doc('$b').get().then((value) {
+                      String e,f,g,h,j;
+                      e=value.get('TimeIn');
+                      f=value.get('TimeInAddress');
+                      g=value.get('TimeOut');
+                      h=value.get('TimeOutAddress');
+                      attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                      streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                      // print("///////////// ${attendance[i].date}");
+                    });
+
+                    setState(() {
+                      streamController.stream;
+                      // Future.delayed(const Duration(milliseconds: 10), () {
+                      shownhichalyga=false;
+                      // });
+                    });
+
+                  }}});});
+            //     FirebaseFirestore.instance
+            //         .collection('Companies')
+            //         .doc('${user!.email.toString()}')
+            //         .collection("Employee")
+            //         .doc(dropdownvalue1)
+            //         .collection('Attendance')
+            //
+            //         .get().then((value) {
+            //       value.docs.forEach((element) {
+            //         a=element.id;
+            //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
+            //
+            //         if(date==a){
+            //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+            //
+            //           // setState(() {
+            //           //   attendance=[];
+            //           //   //streamController.isPaused;
+            //           // });
+            //
+            //           FirebaseFirestore.instance
+            //               .collection('Companies')
+            //               .doc('${user!.email.toString()}')
+            //               .collection("Employee")
+            //               .doc(dropdownvalue1)
+            //               .collection('Attendance')
+            //               .doc('$date').get().then((value) {
+            //             String e,f,g,h,j;
+            //             e=value.get('TimeIn');
+            //             f=value.get('TimeInAddress');
+            //             g=value.get('TimeOut');
+            //             h=value.get('TimeOutAddress');
+            //
+            //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+            //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+            //
+            //             print("///////////// $attendance");
+            //           });
+            //           setState(() {
+            //             streamController.stream;
+            //           });
+            //         }
+            //         else{
+            //           print("1111111111111");
+            //         }
+            //         setState(() {
+            //           streamController.stream;
+            //         });
+            //       });
+            //     });
+            //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
+            //
+            //   });
+            // });
+          });}).then((value) {
+            print("false hogaya ");
+            setState(() {
+
+            });
+        });}
+    else{
+        if(days.isEmpty){}
+        else {
+          String a;
+          setState(() {
+            shownhichalyga=true;
+            // streamController.onPause;
+            // streamController.close();
+            streamController.onCancel;
+            streamController.stream;
+            attendance=[];
+            attendance.clear();
+            // attendance.removeRange(0, attendance.length);
+            // for(int i=0;i<attendance.length;i++){
+            //   attendance.removeAt(i);
+            // }
+            print("iiiiiiiiiiiiiiiii ${attendance.length}");
+            //streamController.isPaused;
+
+          });
+          for(int i=0;i<days.length;i++){
+            String b;
+            b = '${days[i].year}-${days[i].month}-${days[i].day}';
+
+            fetchattendance(b);
+          }
+          //fetchattendance();
+        }
+      }
+    }
 
 
   late DateTimeRange dateTimeRange =dateRange;
@@ -1835,11 +1835,9 @@ class _ByEmployeeState extends State<ByEmployee> {
   //     }
   //   }
   // }
-
-////////new code for fecting attendance by color////////////////////////////////////////////
+  ////////new code for fecting attendance by color////////////////////////////////////////////
   List<String> alldates=[];
   List<EmployeeAttendance> allattendance=[];
-
 
   fectchalldate() async {
     setState(() {
@@ -1882,15 +1880,14 @@ class _ByEmployeeState extends State<ByEmployee> {
                       f=value.get('TimeInAddress');
                       g=value.get('TimeOut');
                       h=value.get('TimeOutAddress');
-                   attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-                   // streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                      attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                    // streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
                    });
-                // setState(() {
-                //   streamController.stream;
-                // });
+                   // setState(() {
+                   //   streamController.stream;
+                   // });
               }}
           });
-
             }).then((value) {
                 allattendance.add(EmployeeAttendance(employeename: a, empAttendance: attendance));
               });
@@ -1922,8 +1919,8 @@ class _ByEmployeeState extends State<ByEmployee> {
     //       });
     //     });
   }
-  List<Abc> dateinstring=[];
 
+  List<Abc> dateinstring=[];
 
   // fetchattendance() async {
   //   String a,b;
@@ -2045,8 +2042,6 @@ class _ByEmployeeState extends State<ByEmployee> {
   //   });
   // }
 
-
-
   fetchattendance(String date) async {
     print("||||||||||||||||| $date");
     //checatt(date);
@@ -2093,13 +2088,11 @@ class _ByEmployeeState extends State<ByEmployee> {
           //
           // attendance.sort((a,b) => a.date.compareTo(b.date));
           if(date==a){
-
               // print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
               // setState(() {
               //   attendance=[];
               //   //streamController.isPaused;
               // });
-
               FirebaseFirestore.instance
                   .collection('Companies')
                   .doc('${user!.email.toString()}')
@@ -2385,6 +2378,7 @@ class TabsforDesignationAbsentLateEarly extends StatefulWidget {
     required this.tabcount, required this.datetime, required this.employe,
     required this.timein, required this.timeout, required this.addressin,
     required this.addressout, required this.date}) : super(key: key);
+
   final String time;
   final int tabcount;
   final List<DateTime> datetime;

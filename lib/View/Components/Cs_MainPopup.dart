@@ -5,15 +5,12 @@ import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_MainButton.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
+import 'package:hrmanagementapp/View/listofcompany/companylist.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/test.dart';
 
-
-CSMainPopup(
-    {required BuildContext context,
-    required String btnText,
-    required String popMessag,
-    //required VoidCallback onTap
+CSMainPopup({required BuildContext context, required String btnText, required String popMessag,
+    // required VoidCallback onTap
     }) {
   showDialog(
     context: context,
@@ -98,9 +95,11 @@ CSMainPopup1(
     {required BuildContext context,
       required String btnText,
       required String popMessag,
+      required String password,
       //required VoidCallback onTap
     }) {
   showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (context) {
       return CsScreenUtilInit(
@@ -164,9 +163,11 @@ CSMainPopup1(
                   fontClr: buttonFontColor(context),
                   title: btnText,
                   onTap: () {
-
-                    Navigator.pop(context);
-                    //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Test(password:'' ,)),);
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Test(password: password,)),);
+                     // Navigator.pop(context);
+                     // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Test(password:password,)), (Route<dynamic> route) => route.isFirst);
+                     // Navigator.pop(context);
+                     //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Companylist(password:password ,)),);
 
                   },
                 ),

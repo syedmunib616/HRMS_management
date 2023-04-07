@@ -142,7 +142,6 @@ class _TestState extends State<Test> {
           ),
         ),
         child: Scaffold(
-
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(94.0.h),
             child: Container(
@@ -247,7 +246,6 @@ class _TestState extends State<Test> {
               ),
             ),
           ),
-
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -261,7 +259,7 @@ class _TestState extends State<Test> {
                         onTap: (){
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SginUp()),
+                            MaterialPageRoute(builder: (context) => SginUp(password: widget.password,)),
                           );
                         },
                         child: Padding(
