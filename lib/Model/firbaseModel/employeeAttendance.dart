@@ -10,13 +10,16 @@ class ListAttandance {
     required this.timein,
     required this.addressIn,
     required this.timeout,
-    required this.addressout,});
+    required this.addressout,
+    required this.name
+  });
   String date;
   String timein;
   String addressIn;
   String timeout;
   String addressout;
   String employee;
+  String name;
 }
 
 class EmployeeAttendance{

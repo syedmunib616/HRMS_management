@@ -60,7 +60,11 @@ class ByEmployee extends StatefulWidget {
   @override
   State<ByEmployee> createState() => _ByEmployeeState();
 }
-
+class NameAndEmail{
+  NameAndEmail({required this.name,required this.email});
+  String name;
+  String email;
+}
 class _ByEmployeeState extends State<ByEmployee> {
 
   late DateTime dateTime;
@@ -103,11 +107,13 @@ class _ByEmployeeState extends State<ByEmployee> {
     //fectchalldate();
   }
 
+  List<NameAndEmail> name_email=[];
   // Initial Selected Value
   String dropdownvalue1 = 'All';
 
   // List of items in our dropdown menu
   var items1 = ['All',];
+  var items2 = [];
 
 
   DateTimeRange dateRange = DateTimeRange(
@@ -126,9 +132,15 @@ class _ByEmployeeState extends State<ByEmployee> {
         .then((value) {
           value.docs.forEach((element) {
             a=element.get('email');
+            b=element.get('name');
+
+            name_email.add(NameAndEmail(name: b,email: a));
+
             items1.add(a);
+            items2.add(b);
             setState(() { items1; });
-            print("++++++++++++++++++ $a");
+            print("++++++++++++++++++ $a $b");
+
           });
       });
     //     .doc('${user!.email.toString()}').get().then((value) {
@@ -201,7 +213,7 @@ class _ByEmployeeState extends State<ByEmployee> {
   DateTime? newDateTime;
   DateTime? newDateTime1;
   StreamController<ListAttandance> streamController = StreamController.broadcast();
-
+  int totalattendance=0;
   // late DateTime dateTime;
 
   //////////////////////////////////////////////////
@@ -536,8 +548,12 @@ class _ByEmployeeState extends State<ByEmployee> {
                                   height: 49.h,
                                   width: MediaQuery.of(context).size.width*0.8,
                                   child: Row(
-                                      mainAxisAlignment:  MainAxisAlignment.end,
+                                      // mainAxisAlignment:  MainAxisAlignment.end,
                                       children: [
+
+                                        Text("Total Count of Attendance: ${attendance.length}",style: GoogleFonts.poppins(fontSize:12.sp,
+                                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                                        Spacer(),
                                         GestureDetector(
                                           child: Container(
                                             width:72.w,
@@ -585,12 +601,13 @@ class _ByEmployeeState extends State<ByEmployee> {
                                               shownhichalyga == false ? Future.delayed(const Duration(milliseconds: 150), () {
                                                 attendance.clear();
                                                 shownhichalyga == false ? dropdownfetchattendance(dropdownvalue1) : print("ik");
-                                              }):print("ik");
-                                            })
+                                                }) : print("ik");
+                                              })
                                                 :print("taha ")
                                             },
-                                        ),
-                                        // Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          ),
+
+                                          // Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                         //  child: Container(
                                         //    color: coverBackClr,
                                         //    height: 40.h,
@@ -600,9 +617,10 @@ class _ByEmployeeState extends State<ByEmployee> {
                                         // SizedBox(
                                         //   width: 12.w,
                                         // )
-                                      ]
-                                  ),
-                                ),
+
+                                        ],
+                                      ),
+                                    ),
                                   // Row(
                                 //   children: [
                                 //     Spacer(),
@@ -1400,6 +1418,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                   // managetotalcontact = contact.length.toString();
                                   // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
                                  return TabsforDesignationAbsentLateEarly(
+                                   name:attendance[index].name ,
                                   timein: attendance[index].timein,
                                   timeout: attendance[index].timeout,
                                   addressin: attendance[index].addressIn,
@@ -1420,6 +1439,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                   physics: const BouncingScrollPhysics(),
                                   itemCount: attendance.length,
                                   itemBuilder: (context, index) => TabsforDesignationAbsentLateEarly(
+                                    name:attendance[index].name ,
                                     timein: attendance[index].timein,
                                     timeout: attendance[index].timeout,
                                     addressin: attendance[index].addressIn,
@@ -1480,6 +1500,8 @@ class _ByEmployeeState extends State<ByEmployee> {
   bool shownhichalyga=false;
   List<String> datesofattendance=[];
   List<DateTime> datesList = [];
+
+
 
   // dropdownfetchattendance(String dropdownvalue1){
   //   if(dropdownvalue1=='All'){
@@ -1716,12 +1738,31 @@ class _ByEmployeeState extends State<ByEmployee> {
                       f=value.get('TimeInAddress');
                       g=value.get('TimeOut');
                       h=value.get('TimeOutAddress');
-                      attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-                      streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                      for(int i=0;i<name_email.length;i++) {
+                        if(name_email[i].email==a){
+                          attendance.add(ListAttandance(name:name_email[i].name ,employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                          streamController.add(ListAttandance(name:name_email[i].name,employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+
+                        }
+                      }
+
+                      setState(() {
+
+                        for(int i=0;i<attendance.length;i++){
+                          if(attendance[i].timein.isEmpty){
+                            attendance.removeAt(i);
+                          }
+                        }
+
+                        totalattendance=attendance.length;
+
+                      });
+
                       // print("///////////// ${attendance[i].date}");
                     });
 
                     setState(() {
+                      totalattendance=attendance.length;
                       streamController.stream;
                       // Future.delayed(const Duration(milliseconds: 10), () {
                       shownhichalyga=false;
@@ -1880,8 +1921,15 @@ class _ByEmployeeState extends State<ByEmployee> {
                       f=value.get('TimeInAddress');
                       g=value.get('TimeOut');
                       h=value.get('TimeOutAddress');
-                      attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-                    // streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                      for(int i=0;i<name_email.length;i++) {
+                        if(name_email[i].email==a){
+                          attendance.add(ListAttandance(name:name_email[i].name ,employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                          //streamController.add(ListAttandance(name:name_email[i].name,employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+
+                        }
+                      }
+                      // attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                      // streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
                    });
                    // setState(() {
                    //   streamController.stream;
@@ -2105,9 +2153,31 @@ class _ByEmployeeState extends State<ByEmployee> {
                     f=value.get('TimeInAddress');
                     g=value.get('TimeOut');
                     h=value.get('TimeOutAddress');
-                    attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-                    streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+
+                    for(int i=0;i<name_email.length;i++) {
+                      print("bnbnbnbnbn ");
+                      if(name_email[i].email=='$dropdownvalue1'){
+
+                        attendance.add(ListAttandance(name:name_email[i].name,employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                        streamController.add(ListAttandance(name:name_email[i].name,employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                      }
+                    }
+
+                    // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                    // streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+
+
                     print("///////////// $attendance");
+                  setState(() {
+                    // for(int i=0;i<attendance.length;i++){
+                    //   if(attendance[i].timein.isEmpty){
+                    //     attendance.removeAt(i);
+                    //   }
+                    // }
+
+                    totalattendance=attendance.length;
+                  });
+
               }).then((value) {
                 shownhichalyga=false;
               });
@@ -2119,10 +2189,10 @@ class _ByEmployeeState extends State<ByEmployee> {
               // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
               // streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
               setState(() { hasAttendance=true; });
-              // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
+                // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
                 print("1111111111111");
               }
-              setState(() {  streamController.stream;    });
+              setState(() {  streamController.stream;  });
               });
            }).then((value) {
              // setState(() {
@@ -2377,7 +2447,7 @@ class TabsforDesignationAbsentLateEarly extends StatefulWidget {
   const TabsforDesignationAbsentLateEarly({Key? key, required this.time,
     required this.tabcount, required this.datetime, required this.employe,
     required this.timein, required this.timeout, required this.addressin,
-    required this.addressout, required this.date}) : super(key: key);
+    required this.addressout, required this.date, required this.name}) : super(key: key);
 
   final String time;
   final int tabcount;
@@ -2388,7 +2458,7 @@ class TabsforDesignationAbsentLateEarly extends StatefulWidget {
   final String addressin;
   final String addressout;
   final String date;
-
+  final String name;
   @override
   State<TabsforDesignationAbsentLateEarly> createState() => _TabsforDesignationAbsentLateEarlyState();
 }
@@ -2424,7 +2494,7 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
               )),) : null;
       },
       child: Container(
-        height: 168.h,
+        height: 172.h,
         width: MediaQuery.of(context).size.width,
          color: widget.timeout.isEmpty || widget.timein.isEmpty ?
          const Color(0xffdbfdb8):Colors.transparent,
@@ -2445,17 +2515,19 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                       // color: Colors.lightBlue,
                       alignment: Alignment.topLeft,
                       width: 120.w,
-                      height: 156.h,
+                      height: 160.h,
                       child: Column(
                         crossAxisAlignment:CrossAxisAlignment.start,
                         children: [
-                          Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12.sp,
+                          Text("${widget.name}",style: GoogleFonts.poppins(fontSize:12.sp,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                          Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:11.sp,
                               color: blackClr,fontWeight: FontWeight.w600),),
                           RichText(
                             text: TextSpan(
                               // Note: Styles for TextSpans must be explicitly defined.
                               // Child text spans will inherit styles from parent
-                              style:  const TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14.0,
                                 color: Colors.black,
                               ),

@@ -1096,8 +1096,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
             child: Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child:
-              // isLoading==false?
+              child: // isLoading==false?
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -1206,6 +1205,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   SizedBox(
                     height: 20.h,
                   ),
+
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 26.w),
                     child: Container(
@@ -1266,9 +1266,11 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                       ),
                     ),
                   ),
+
                   SizedBox(
                     height: 20.h,
                   ),
+
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 26.w),
                     child: Container(
@@ -1331,6 +1333,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                       ),
                     ),
                   ),
+
                   SizedBox(
                     height: 20.h,
                   ),
@@ -1756,9 +1759,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                       print("${textEditingController1.text.trim()} ${textEditingController3.text.trim()}"
                           "${designationdropdownvalue} ${textEditingController4.text.trim()}"
                           "${dropdownvalue} ${textEditingController2.text.trim()} ${reportings}");
-                      setState(() {
-                        isLoading=true;
-                      });
+                      setState(() { isLoading=true; });
                       Future.delayed(Duration(seconds: 7),(){
                         setState(() {
                           isLoading=false;
@@ -1802,6 +1803,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                         )
                     ),
                   ),
+
                   // GestureDetector(
                   //   onTap: (){
                   //     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
@@ -1901,6 +1903,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   SizedBox(
                     height: 20.h,
                   ),
+
                 ],
               ),
 
@@ -1965,6 +1968,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     //   "allow": "Company",	//(static company)
     //   "for_value": "${textEditingController2.text}"   // (company name)
     // };
+
     var l;
       if(textEditingController1.text.isEmpty ||textEditingController2.text.isEmpty||textEditingController3.text.isEmpty||textEditingController4.text.isEmpty) {
       setState(() {

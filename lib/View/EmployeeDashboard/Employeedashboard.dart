@@ -3154,6 +3154,8 @@ class _ByEmployee1State extends State<ByEmployee1> {
     super.initState();
   }
 
+
+
   fetchemployeattendance(){
 
     // FirebaseFirestore.instance
@@ -3256,8 +3258,8 @@ class _ByEmployee1State extends State<ByEmployee1> {
               g=value.get('TimeOut');
               h=value.get('TimeOutAddress');
 
-              attendance.add(ListAttandance(employee: user!.email.toString() ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-              streamController.add(ListAttandance(employee: user!.email.toString(), date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+              attendance.add(ListAttandance(name:'',employee: user!.email.toString() ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+              streamController.add(ListAttandance(name:'',employee: user!.email.toString(), date: b, timein: e, addressIn: f, timeout: g, addressout: h));
               print("///////////// $attendance");
 
             });
@@ -3272,7 +3274,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
 
   // Initial Selected Value
   String dropdownvalue1 = 'All';
-
+  List<NameAndEmail> name_email=[];
   // List of items in our dropdown menu
   var items1 = [
     'All',
@@ -3294,11 +3296,15 @@ class _ByEmployee1State extends State<ByEmployee1> {
         .then((value) {
       value.docs.forEach((element) {
         a=element.get('email');
+        b=element.get('name');
         items1.add(a);
+
+        name_email.add(NameAndEmail(name: b,email: a));
         setState(() { items1; });
         print("++++++++++++++++++ $a");
       });
     });
+
     //     .doc('${user!.email.toString()}').get().then((value) {
     //   name= value.get('name');
     //   department= value.get('designation');
@@ -3355,6 +3361,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
     //     });
     //   }});
     //});
+
   }
 
   // checkdate() {
@@ -4042,8 +4049,8 @@ class _ByEmployee1State extends State<ByEmployee1> {
             g=value.get('TimeOut');
             h=value.get('TimeOutAddress');
 
-            attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-            streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+            attendance.add(ListAttandance(name :'',employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+            streamController.add(ListAttandance(name :'',employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
 
             print("///////////// $attendance");
           });
@@ -4371,7 +4378,6 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
                     ],
                   ),
                 ),
-
               ],
             ),
           ],
