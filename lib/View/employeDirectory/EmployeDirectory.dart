@@ -422,6 +422,12 @@ class _EditEmployeeState extends State<EditEmployee> {
   bool active=false;
   CollectionReference UserT = FirebaseFirestore.instance.collection("Companies");
 
+  TextEditingController name1=TextEditingController();
+  TextEditingController email1=TextEditingController();
+  TextEditingController designation1=TextEditingController();
+  TextEditingController phonenumber1=TextEditingController();
+  TextEditingController department1=TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -444,7 +450,16 @@ class _EditEmployeeState extends State<EditEmployee> {
         phonenumber=element.get('phonenumber');
         department=element.get('department');
         active=element.get('active');
-        print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
+
+        name1.text=element.get('name');
+        email1.text=element.get('email');
+        designation1.text=element.get('designation');
+        phonenumber1.text=element.get('phonenumber');
+        department1.text=element.get('department');
+
+        print("uuuuuuu ${name1.text} ${email1.text} ${designation1.text} ${phonenumber1.text} ${department1.text}");
+
+        //print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
         setState(() {});
         // element.reference.collection(widget.email).get().then((value) => value.docs.forEach((element) {
         //   name=element.get('name');
@@ -535,11 +550,11 @@ class _EditEmployeeState extends State<EditEmployee> {
                       children: [
                         Spacer(),
                         Row(
-                            children: [
-                              //Icon(FontAwesomeIcons.user),
-                              Text(" Profile",style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
-                            ],
-                          ),
+                           children: [
+                                //Icon(FontAwesomeIcons.user),
+                                Text(" Profile",style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+                             ],
+                           ),
                         Spacer(),
                       ],
                     ),
@@ -664,6 +679,87 @@ class _EditEmployeeState extends State<EditEmployee> {
                           ],
                         ),
                       ) : SizedBox(),
+                      // Container(
+                      //   color: Colors.grey,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   height: 1,
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                      //   child: Row(
+                      //     children: [
+                      //       Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                      //       TextField(
+                      //         controller: name1,
+                      //       )                          ],
+                      //   ),
+                      // ),
+                      // Container(
+                      //   color: Colors.grey,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   height: 1,
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                      //   child: Row(
+                      //     children: [
+                      //       Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                      //       Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Container(
+                      //   color: Colors.grey,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   height: 1,),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                      //   child: Row(
+                      //     children: [
+                      //       Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                      //       TextField(
+                      //         controller: phonenumber1,
+                      //       )                          ],
+                      //   ),
+                      // ),
+                      // Container(
+                      //   color: Colors.grey,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   height: 1,
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                      //   child: Row(
+                      //     children: [
+                      //       Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                      //       TextField(
+                      //         controller: designation1,
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
+                      // Container(
+                      //   color: Colors.grey,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   height: 1,
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                      //   child: Row(
+                      //     children: [
+                      //       Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                      //       TextField(
+                      //         controller: department1,
+                      //       )
+                      //       //Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Container(
+                      //   color: Colors.grey,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   height: 1,
+                      // ),
                       Container(
                         color: Colors.grey,
                         width: MediaQuery.of(context).size.width,
@@ -738,13 +834,11 @@ class _EditEmployeeState extends State<EditEmployee> {
                         width: MediaQuery.of(context).size.width,
                         height: 1,
                       ),
-
                     ],
                   ),
                 ),
               ],
             ),
-
           )
         )
       );

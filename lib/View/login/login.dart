@@ -700,6 +700,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                       const SizedBox(
                         height: 10,
                       ),
+
                       const Text(
                         //TextStrings.We_will_send_you_an_email_to_set.tr(),
                         "We will send you an email to reset your new password",
@@ -728,7 +729,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                             onTap: () async{
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                final list= await FirebaseAuth.instance.fetchSignInMethodsForEmail(textEditingController1.text.trim());
+                                  final list= await FirebaseAuth.instance.fetchSignInMethodsForEmail(textEditingController1.text.trim());
                                 if (list.isNotEmpty) {
                                   // ignore: use_build_context_synchronously
                                   FrForgetService(FirebaseAuth.instance).onTapSignIn(

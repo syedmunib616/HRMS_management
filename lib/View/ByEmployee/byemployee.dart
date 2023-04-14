@@ -2166,7 +2166,6 @@ class _ByEmployeeState extends State<ByEmployee> {
                     // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
                     // streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
 
-
                     print("///////////// $attendance");
                   setState(() {
                     // for(int i=0;i<attendance.length;i++){

@@ -292,27 +292,30 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       });
     }
 
-
   Future<void> GetAddressFromLatLong(Position position) async {
+
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
-
     Placemark place=placemark[0];
-
+    Placemark place1=placemark[1];
     setState(() {
-      Address= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
-    reload=false;
+      Address= '${place.thoroughfare!.isEmpty ? place1.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place1.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place1.locality}, ${place.postalCode}';
+      reload=false;
     });
+
   }
 
   Future<void> GetAddressFromLatLong1(Position position) async {
+
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
+    Placemark place1=placemark[1];
     setState(() {
-      Address1= '${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
+      Address1= '${place.thoroughfare!.isEmpty ? place1.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place1.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place1.locality}, ${place.postalCode}';
       reload=false;
     });
+
   }
 
   bool reload=false;
@@ -919,6 +922,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     ),
                   ),
                 ) : SizedBox(),
+
                 timeoutshow==true ? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
@@ -1025,7 +1029,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                 GestureDetector(
                                   onTap: () async {
                                      Address.isNotEmpty? timinoutdicator==false ? marktimeoutAttendance() : null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
-                                      // .then((value) => initState());
+                                     // .then((value) => initState());
                                     },
                                   child: Container(
                                       height: 40.h,
@@ -1067,10 +1071,11 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     ),
                   ),
                 ) : SizedBox(),
+
                 timeinshow==false && timeoutshow==false ? Padding(
                   padding: EdgeInsets.all(20.0.sp),
                   child: Container(
-                    height: 151.h,
+                    height: 151.1.h,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -1085,11 +1090,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                       color: whiteClr,
                     ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
                           child: Container(
-                            height: 36.h,
+                            height: 35.h,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
@@ -1097,8 +1103,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
@@ -1160,33 +1166,33 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 104.h,
+                          height: 105.h,
                           child: Padding(
                             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
                             child: Column(
                               children: [
-                                Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
                                   height: 10.h,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
-                                    Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
-                                     //.then((value) => initState());
+                                    Address.isNotEmpty? timinoutdicator==false ? marktimeoutAttendance() : null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
+                                    // .then((value) => initState());
                                   },
                                   child: Container(
                                       height: 40.h,
                                       width: 295.w,
                                       decoration: BoxDecoration(
-                                        gradient: const LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [
-                                            srpgradient1,
-                                            srpgradient2,
-                                            srpgradient3
-                                          ],
-                                        ),
+                                        // gradient: const LinearGradient(
+                                        //   begin: Alignment.topCenter,
+                                        //   end: Alignment.bottomCenter,
+                                        //   colors: [
+                                        //     srpgradient1,
+                                        //     srpgradient2,
+                                        //     srpgradient3
+                                        //   ],
+                                        // ),
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
@@ -1196,13 +1202,13 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                           ),
                                         ],
                                         borderRadius: BorderRadius.circular(8.2),
-                                        color: whiteClr,
+                                        color: Colors.red,
                                       ),
                                       child:Center(
-                                        child:
-                                        timinindicator==true
-                                        ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                        : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                        child: timinoutdicator==true
+                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+
                                       )
                                   ),
                                 ),
@@ -1214,11 +1220,160 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     ),
                   ),
                 ) : SizedBox(),
+
+                // timeinshow==false && timeoutshow==false ? Padding(
+                //   padding: EdgeInsets.all(20.0.sp),
+                //   child: Container(
+                //     height: 151.h,
+                //     width:MediaQuery.of(context).size.width,
+                //     decoration: BoxDecoration(
+                //       boxShadow: [
+                //         BoxShadow(
+                //           color: Colors.grey.withOpacity(0.4),
+                //           spreadRadius: 2,
+                //           blurRadius: 1,
+                //           offset: const Offset(0, 2), // changes position of shadow
+                //         ),
+                //       ],
+                //       borderRadius: BorderRadius.circular(6.sp),
+                //       color: whiteClr,
+                //     ),
+                //     child: Column(
+                //       children: [
+                //         Padding(
+                //           padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                //           child: Container(
+                //             height: 36.h,
+                //             width: MediaQuery.of(context).size.width,
+                //             child: Row(
+                //               children: [
+                //                 Column(
+                //                   crossAxisAlignment: CrossAxisAlignment.start,
+                //                   children: [
+                //                     SizedBox(height: 5.h,),
+                //                     Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //                     Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                //                   ],
+                //                 ),
+                //                 const Spacer(),
+                //                 Container(
+                //                   // color: Colors.purpleAccent,
+                //                     width: 92.w,
+                //                     height: 25.h,
+                //                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                //                 const Spacer(),
+                //                 GestureDetector(
+                //                   onTap: ()async{
+                //                     print("::::::::::::%%::::::::");
+                //                     // Position position = await _determinePosition();
+                //                     // GetAddressFromLatLong(position);
+                //                     // GetAddressFromLatLong1(position);
+                //                     setState(() {
+                //                       if(reload==false) {
+                //                         reload = true;
+                //                         Future.delayed(const Duration(milliseconds: 250), () {
+                //                           refreshlocation();
+                //                         });
+                //
+                //                       }
+                //                     });
+                //                   },
+                //                   child: Container(
+                //                     height: 27.h,
+                //                     width: 27.w,
+                //                     decoration: BoxDecoration(
+                //                       boxShadow: [
+                //                         BoxShadow(
+                //                           color: Colors.grey.withOpacity(0),
+                //                           spreadRadius: 0,
+                //                           blurRadius: 1,
+                //                           offset: const Offset(0, 2), // changes position of shadow
+                //                         ),
+                //                       ],
+                //                       borderRadius: BorderRadius.circular(15.sp),
+                //                       color: greybackground,
+                //                     ),
+                //                     child: reload ==true ?SizedBox(
+                //                       height: 5.h,
+                //                       width: 5.w,
+                //                       child: CircularProgressIndicator(
+                //                         backgroundColor: Colors.white,
+                //                         strokeWidth: 1.w,
+                //                       ),
+                //                     ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                //                   ),
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //         ),
+                //         Container(
+                //           height: 1,
+                //           width: MediaQuery.of(context).size.width,
+                //           color: coverBackClr,
+                //         ),
+                //         SizedBox(
+                //           width: MediaQuery.of(context).size.width,
+                //           height: 104.h,
+                //           child: Padding(
+                //             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                //             child: Column(
+                //               children: [
+                //                 Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //                 SizedBox(
+                //                   height: 10.h,
+                //                 ),
+                //                 GestureDetector(
+                //                   onTap: () async {
+                //                     Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
+                //                      //.then((value) => initState());
+                //                   },
+                //                   child: Container(
+                //                       height: 40.h,
+                //                       width: 295.w,
+                //                       decoration: BoxDecoration(
+                //                         gradient: const LinearGradient(
+                //                           begin: Alignment.topCenter,
+                //                           end: Alignment.bottomCenter,
+                //                           colors: [
+                //                             srpgradient1,
+                //                             srpgradient2,
+                //                             srpgradient3
+                //                           ],
+                //                         ),
+                //                         boxShadow: [
+                //                           BoxShadow(
+                //                             color: Colors.grey.withOpacity(0.5),
+                //                             spreadRadius: 1,
+                //                             blurRadius: 1,
+                //                             offset: const Offset(0, 0), // changes position of shadow
+                //                           ),
+                //                         ],
+                //                         borderRadius: BorderRadius.circular(8.2),
+                //                         color: whiteClr,
+                //                       ),
+                //                       child:Center(
+                //                         child:
+                //                         timinindicator==true
+                //                         ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                //                         : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                //                       )
+                //                   ),
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ) : SizedBox(),
+
                 SizedBox(
                   height: 20.h,
                 ),
 
-                // Padding(
+                  // Padding(
                 //   padding: EdgeInsets.all(20.0.sp),
                 //   child: Container(
                 //     height: 95.h,
@@ -1873,9 +2028,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       "log_type": "OUT",
       "time": "${noww.year.toString()}-${noww.month.toString()}-${noww.day.toString()} ${noww.hour.toString() + ":" + noww.minute.toString() + ":" + noww.second.toString()}"
       // "2023-03-02 12:42:53"
-    };    setState(() {
-      timinoutdicator=true;
-    });
+    }; setState(() {
+          timinoutdicator=true;
+       });
     FirebaseFirestore.instance.collection('Companies').doc('${admin}').collection("Employee")
         .doc('${user!.email.toString()}');
     Position position = await _determinePosition();
@@ -1892,7 +2047,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         setState(() {
           timinoutdicator=false;
           timeoutshow=false;
-          timeinshow=true;
+          //timeinshow=true;
+          timeinshow=false;
         });
         return CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time Out Completed");
     });
@@ -2545,9 +2701,6 @@ class NoOfRequest extends StatelessWidget {
   }
 }
 
-
-
-
 class WriteLeave extends StatefulWidget {
   WriteLeave({
     required this.providerGenerator,
@@ -3101,10 +3254,6 @@ class _WriteLeaveState extends State<WriteLeave> {
   }
 
 }
-
-
-
-
 
 class ByEmployee1 extends StatefulWidget {
   ByEmployee1({required this.admin ,Key? key}) : super(key: key);
@@ -4224,7 +4373,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
   }
 
 }
-
 
 class TabsforDesignationAbsentLateEarly1 extends StatefulWidget {
   const TabsforDesignationAbsentLateEarly1({Key? key, required this.time,
