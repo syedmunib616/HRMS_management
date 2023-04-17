@@ -128,7 +128,7 @@ class _ScreenSplachState extends State<ScreenSplach> {
 
   @override
   void initState() {
-    // TODO: implement initState
+   // TODO: implement initState
 
     //FrLoginService(FirebaseAuth.instance).signinwithgoogle(context);
     //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Homepage()),);
@@ -136,7 +136,7 @@ class _ScreenSplachState extends State<ScreenSplach> {
                   //Timer(const Duration(milliseconds: 490),
           Timer(const Duration(milliseconds: 4900),
           () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-          //  builder: (BuildContext context) => const ScreenBoarding())));
+   //  builder: (BuildContext context) => const ScreenBoarding())));
           // builder: (BuildContext context) => SelectCountry())));
           builder: (BuildContext context) => Login(loading: false,),)));
     super.initState();
@@ -164,6 +164,7 @@ class _ScreenSplachState extends State<ScreenSplach> {
                   ),
                 ),
               ),
+
               Positioned(
                 top: 340,
                 child: Container(

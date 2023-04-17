@@ -101,15 +101,15 @@ class FrSignUpService {
 
   // Reading Error Value on the Screen
   onSuccessSignUP({
-    required String adminpassword,
-    required String phonenumber,
-    required String companyname,
-    required String name,
-    required String email,
-    required String uid,
-    required String website,
-    required ProviderGenerator providerGenerator,
-    required BuildContext context,
+      required String adminpassword,
+      required String phonenumber,
+      required String companyname,
+      required String name,
+      required String email,
+      required String uid,
+      required String website,
+      required ProviderGenerator providerGenerator,
+      required BuildContext context,
   }) async {
     // Active Error Ui
     onHideError(providerGenerator);
@@ -131,7 +131,6 @@ class FrSignUpService {
     // depaetment.add(Department(departid: '111', departmentname: 'Finance',));
     // depaetment.add(Department(departid: '112', departmentname: 'Marketing',));
     // depaetment.add(Department(departid: '113', departmentname: 'IT',));
-
 
     print("dev py dala wA HAI ${email}");
 

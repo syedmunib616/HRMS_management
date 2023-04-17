@@ -205,7 +205,6 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                       }
                     ),
               ),
-
               Positioned(
                 top: 0,
                 left: 0,
@@ -420,6 +419,8 @@ class _EditEmployeeState extends State<EditEmployee> {
   String phonenumber='';
   String reportingto='';
   bool active=false;
+  bool load=false;
+
   CollectionReference UserT = FirebaseFirestore.instance.collection("Companies");
 
   TextEditingController name1=TextEditingController();
@@ -443,24 +444,28 @@ class _EditEmployeeState extends State<EditEmployee> {
       element.reference.collection("Employee").where('email',isEqualTo: '${widget.email}').get().then((value) => value.docs.forEach((element) {
         String a,b;
         a=element.get('email');
-
         name=element.get('name');
         email=element.get('email');
         designation=element.get('designation');
         phonenumber=element.get('phonenumber');
         department=element.get('department');
         active=element.get('active');
-
-        name1.text=element.get('name');
-        email1.text=element.get('email');
-        designation1.text=element.get('designation');
-        phonenumber1.text=element.get('phonenumber');
-        department1.text=element.get('department');
+        // name1.text=element.get('name');
+        // email1.text=element.get('email');
+        // designation1.text=element.get('designation');
+        // phonenumber1.text=element.get('phonenumber');
+        // department1.text=element.get('department');
 
         print("uuuuuuu ${name1.text} ${email1.text} ${designation1.text} ${phonenumber1.text} ${department1.text}");
 
-        //print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
-        setState(() {});
+        // print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
+        setState(() {
+          name1.text=name;
+          email1.text=email;
+          designation1.text=designation;
+          phonenumber1.text=phonenumber;
+          department1.text=department;
+        });
         // element.reference.collection(widget.email).get().then((value) => value.docs.forEach((element) {
         //   name=element.get('name');
         //   email=element.get('email');
@@ -476,6 +481,7 @@ class _EditEmployeeState extends State<EditEmployee> {
       }));
     }));
   }
+
 
   fetchemploye1() async {
     //////////////////////////////////////////////
@@ -509,12 +515,12 @@ class _EditEmployeeState extends State<EditEmployee> {
     }));
   }
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: CsScreenUtilInit(
         child: Scaffold(
-
           appBar: AppBar(
             leading: GestureDetector(
                 onTap: () {
@@ -562,7 +568,6 @@ class _EditEmployeeState extends State<EditEmployee> {
                 ),
               ),
             ),
-
           body: Stack(
               children: [
                 Positioned(
@@ -570,7 +575,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                   left: 0,
                    right: 0,
                    child: Container(
-                      height: 200.h,
+                      height: 150.h,
                       width: MediaQuery.of(context).size.width,
                      decoration: BoxDecoration(
                        boxShadow: [
@@ -595,23 +600,268 @@ class _EditEmployeeState extends State<EditEmployee> {
                      ),
                    )
                 ),
+                // Positioned(
+                //   top: 100,
+                //   bottom: 1,
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       Container(
+                //         height:140.h,
+                //         width: MediaQuery.of(context).size.width,
+                //         child: Container(
+                //           width: 130.h,
+                //           height: 130.w,
+                //           decoration: BoxDecoration(
+                //             color: Colors.white,
+                //               border: Border.all(
+                //                   width: 4,
+                //                   color: Theme.of(context).scaffoldBackgroundColor),
+                //               boxShadow: [
+                //                 BoxShadow(
+                //                     spreadRadius: 2,
+                //                     blurRadius: 10,
+                //                     color: Colors.black.withOpacity(0.15),
+                //                     offset: const Offset(0, 10))
+                //               ],
+                //               shape: BoxShape.circle,
+                //
+                //               // image: const DecorationImage(
+                //               //     fit: BoxFit.cover,
+                //               //     image: NetworkImage(
+                //               //       "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+                //               //     ))
+                //
+                //           ),
+                //           child: Icon(FontAwesomeIcons.userTie,size: 65.sp,color: srpgradient2,),
+                //         ),
+                //       ),
+                //       SizedBox(height: 38.h,),
+                //       // const TextField(
+                //       //   decoration: InputDecoration(
+                //       //     labelText: "Name",
+                //       //     border: OutlineInputBorder(
+                //       //         borderSide: BorderSide(color: Colors.teal)),
+                //       //     hintText: 'Input Name',
+                //       //   ),
+                //       //  // controller: displayNameController,
+                //       //   keyboardType: TextInputType.name,
+                //       // ),
+                //       // const TextField(
+                //       //   decoration: InputDecoration(
+                //       //     labelText: "Age",
+                //       //     border: OutlineInputBorder(
+                //       //         borderSide: BorderSide(color: Colors.teal)),
+                //       //     hintText: 'Input Age',
+                //       //   ),
+                //       //  // controller: ageController,
+                //       //   //
+                //       //   keyboardType: TextInputType.number,
+                //       // ),
+                //       widget.superadmin==false? Padding(
+                //         padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+                //         child: Row(
+                //           children: [
+                //             Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
+                //             SizedBox(width: 20.w,),
+                //             Switch.adaptive(
+                //               activeColor: inputBackColor(context),
+                //               inactiveThumbColor: settingButtonBackColor(context),
+                //               inactiveTrackColor: subTitleClr,
+                //               activeTrackColor: buttonBackColor(context),
+                //               value: active,
+                //               onChanged: (valu) async {
+                //                 // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                //                 //
+                //                 // }
+                //                 await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                //                   setState(() {
+                //                     active = valu;
+                //                   });
+                //                 });
+                //               },
+                //             ),
+                //           ],
+                //         ),
+                //       ) : SizedBox(),
+                //       // Container(
+                //       //   color: Colors.grey,
+                //       //   width: MediaQuery.of(context).size.width,
+                //       //   height: 1,
+                //       // ),
+                //       // Padding(
+                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //       //   child: Row(
+                //       //     children: [
+                //       //       Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //       //       TextField(
+                //       //         controller: name1,
+                //       //       )                          ],
+                //       //   ),
+                //       // ),
+                //       // Container(
+                //       //   color: Colors.grey,
+                //       //   width: MediaQuery.of(context).size.width,
+                //       //   height: 1,
+                //       // ),
+                //       // Padding(
+                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //       //   child: Row(
+                //       //     children: [
+                //       //       Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //       //       Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                //       //     ],
+                //       //   ),
+                //       // ),
+                //       // Container(
+                //       //   color: Colors.grey,
+                //       //   width: MediaQuery.of(context).size.width,
+                //       //   height: 1,),
+                //       // Padding(
+                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //       //   child: Row(
+                //       //     children: [
+                //       //       Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //       //       TextField(
+                //       //         controller: phonenumber1,
+                //       //       )                          ],
+                //       //   ),
+                //       // ),
+                //       // Container(
+                //       //   color: Colors.grey,
+                //       //   width: MediaQuery.of(context).size.width,
+                //       //   height: 1,
+                //       // ),
+                //       // Padding(
+                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //       //   child: Row(
+                //       //     children: [
+                //       //       Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //       //       TextField(
+                //       //         controller: designation1,
+                //       //       )
+                //       //     ],
+                //       //   ),
+                //       // ),
+                //       // Container(
+                //       //   color: Colors.grey,
+                //       //   width: MediaQuery.of(context).size.width,
+                //       //   height: 1,
+                //       // ),
+                //       // Padding(
+                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //       //   child: Row(
+                //       //     children: [
+                //       //       Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //       //       TextField(
+                //       //         controller: department1,
+                //       //       )
+                //       //       //Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                //       //     ],
+                //       //   ),
+                //       // ),
+                //       // Container(
+                //       //   color: Colors.grey,
+                //       //   width: MediaQuery.of(context).size.width,
+                //       //   height: 1,
+                //       // ),
+                //       Container(
+                //         color: Colors.grey,
+                //         width: MediaQuery.of(context).size.width,
+                //         height: 1,
+                //       ),
+                //       Padding(
+                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //         child: Row(
+                //           children: [
+                //             Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //             Text("$name", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                //           ],
+                //         ),
+                //       ),
+                //       Container(
+                //         color: Colors.grey,
+                //         width: MediaQuery.of(context).size.width,
+                //         height: 1,
+                //       ),
+                //       Padding(
+                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //         child: Row(
+                //           children: [
+                //             Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //             Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                //           ],
+                //         ),
+                //       ),
+                //       Container(
+                //         color: Colors.grey,
+                //         width: MediaQuery.of(context).size.width,
+                //         height: 1,),
+                //       Padding(
+                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //         child: Row(
+                //           children: [
+                //             Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //             Text("$phonenumber", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                //           ],
+                //         ),
+                //       ),
+                //       Container(
+                //         color: Colors.grey,
+                //         width: MediaQuery.of(context).size.width,
+                //         height: 1,
+                //       ),
+                //       Padding(
+                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //         child: Row(
+                //           children: [
+                //             Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //             Text("$designation", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                //           ],
+                //         ),
+                //       ),
+                //       Container(
+                //         color: Colors.grey,
+                //         width: MediaQuery.of(context).size.width,
+                //         height: 1,
+                //       ),
+                //       Padding(
+                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                //         child: Row(
+                //           children: [
+                //             Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                //             Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                //           ],
+                //         ),
+                //       ),
+                //       Container(
+                //         color: Colors.grey,
+                //         width: MediaQuery.of(context).size.width,
+                //         height: 1,
+                //       ),
+                //
+                //
+                //
+                //     ],
+                //   ),
+                // ),
+                widget.superadmin==false ?
                 Positioned(
                   top: 100,
                   bottom: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height:140.h,
-                        width: MediaQuery.of(context).size.width,
-                        child: Container(
-                          width: 130.h,
-                          height: 130.w,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                              border: Border.all(
-                                  width: 4,
-                                  color: Theme.of(context).scaffoldBackgroundColor),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height:140.h,
+                          width: MediaQuery.of(context).size.width,
+                          child: Container(
+                            width: 130.h,
+                            height: 130.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(width: 4, color: Theme.of(context).scaffoldBackgroundColor),
                               boxShadow: [
                                 BoxShadow(
                                     spreadRadius: 2,
@@ -626,6 +876,291 @@ class _EditEmployeeState extends State<EditEmployee> {
                               //     image: NetworkImage(
                               //       "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
                               //     ))
+
+                            ),
+                            child: Icon(FontAwesomeIcons.userTie,size: 65.sp,color: srpgradient2,),
+                          ),
+                        ),
+                        SizedBox(height: 38.h,),
+                        // const TextField(
+                        //   decoration: InputDecoration(
+                        //     labelText: "Name",
+                        //     border: OutlineInputBorder(
+                        //         borderSide: BorderSide(color: Colors.teal)),
+                        //     hintText: 'Input Name',
+                        //   ),
+                        //  // controller: displayNameController,
+                        //   keyboardType: TextInputType.name,
+                        // ),
+                        // const TextField(
+                        //   decoration: InputDecoration(
+                        //     labelText: "Age",
+                        //     border: OutlineInputBorder(
+                        //         borderSide: BorderSide(color: Colors.teal)),
+                        //     hintText: 'Input Age',
+                        //   ),
+                        //  // controller: ageController,
+                        //   //
+                        //   keyboardType: TextInputType.number,
+                        // ),
+                        widget.superadmin==false? Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+                          child: Row(
+                            children: [
+                              Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
+                              SizedBox(width: 20.w,),
+                              Switch.adaptive(
+                                activeColor: inputBackColor(context),
+                                inactiveThumbColor: settingButtonBackColor(context),
+                                inactiveTrackColor: subTitleClr,
+                                activeTrackColor: buttonBackColor(context),
+                                value: active,
+                                onChanged: (valu) async {
+                                  // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                                  //
+                                  // }
+                                  await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                                    setState(() {
+                                      active = valu;
+                                    });
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ) : SizedBox(),
+                        // Container(
+                        //   color: Colors.grey,
+                        //   width: MediaQuery.of(context).size.width,
+                        //   height: 1,
+                        // ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                        //   child: Row(
+                        //     children: [
+                        //       Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                        //       TextField(
+                        //         controller: name1,
+                        //       )                          ],
+                        //   ),
+                        // ),
+                        // Container(
+                        //   color: Colors.grey,
+                        //   width: MediaQuery.of(context).size.width,
+                        //   height: 1,
+                        // ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                        //   child: Row(
+                        //     children: [
+                        //       Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                        //       Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                        //     ],
+                        //   ),
+                        // ),
+                        // Container(
+                        //   color: Colors.grey,
+                        //   width: MediaQuery.of(context).size.width,
+                        //   height: 1,),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                        //   child: Row(
+                        //     children: [
+                        //       Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                        //       TextField(
+                        //         controller: phonenumber1,
+                        //       )                          ],
+                        //   ),
+                        // ),
+                        // Container(
+                        //   color: Colors.grey,
+                        //   width: MediaQuery.of(context).size.width,
+                        //   height: 1,
+                        // ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                        //   child: Row(
+                        //     children: [
+                        //       Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                        //       TextField(
+                        //         controller: designation1,
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
+                        // Container(
+                        //   color: Colors.grey,
+                        //   width: MediaQuery.of(context).size.width,
+                        //   height: 1,
+                        // ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                        //   child: Row(
+                        //     children: [
+                        //       Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                        //       TextField(
+                        //         controller: department1,
+                        //       )
+                        //       //Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                        //     ],
+                        //   ),
+                        // ),
+                        // Container(
+                        //   color: Colors.grey,
+                        //   width: MediaQuery.of(context).size.width,
+                        //   height: 1,
+                        // ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                          child: Row(
+                            children: [
+                              Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                              Text("${email1.text}", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.5.w,vertical: 4.h),
+                          child: Container(
+                            height: 55.h,
+                            width: MediaQuery.of(context).size.width,
+                            //  color: Colors.green,
+                            child: TextField(
+                              controller: name1,
+                              decoration: InputDecoration(
+                                labelText: "Name",
+                                labelStyle: GoogleFonts.poppins(fontSize: 13.sp,color: srpgradient2,letterSpacing: 1.5),
+                              ),
+                            )
+                          ),
+                        ),
+                        // Padding(
+                        //   padding:  EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
+                        //   child: Container(
+                        //       height: 40.h,
+                        //       width: MediaQuery.of(context).size.width,
+                        //     //  color: Colors.blue,
+                        //       child: TextField(controller: designation1,)
+                        //   ),
+                        // ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.5.w,vertical: 4.h),
+                          child: Container(
+                              height: 55.h,
+                              width: MediaQuery.of(context).size.width,
+                              //  color: Colors.green,
+                              child: TextField(
+                                controller: designation1,
+                                decoration: InputDecoration(
+                                  labelText: "Designation",
+                                  labelStyle: GoogleFonts.poppins(fontSize: 13.sp,color: srpgradient2,letterSpacing: 1.5),
+                                ),
+                              )
+                          ),
+                        ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
+                        //   child: Container(
+                        //       height: 40.h,
+                        //       width: MediaQuery.of(context).size.width,
+                        //       // color: Colors.yellow,
+                        //       child: TextField(controller: phonenumber1,)
+                        //   ),
+                        // ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.5.w,vertical: 4.h),
+                          child: Container(
+                              height: 55.h,
+                              width: MediaQuery.of(context).size.width,
+                              //  color: Colors.green,
+                              child: TextField(
+                                controller: phonenumber1,
+                                decoration: InputDecoration(
+                                  labelText: "Phone Number",
+                                  labelStyle: GoogleFonts.poppins(fontSize: 13.sp,color: srpgradient2,letterSpacing: 1.5),
+                                ),
+                              )
+                          ),
+                        ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
+                        //   child: Container(
+                        //       height: 40.h,
+                        //       width: MediaQuery.of(context).size.width,
+                        //      // color: Colors.purpleAccent,
+                        //       child: TextField(controller: department1,)
+                        //   ),
+                        // ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.5.w,vertical: 4.h),
+                          child: Container(
+                              height: 55.h,
+                              width: MediaQuery.of(context).size.width,
+                              //  color: Colors.green,
+                              child: TextField(
+                                controller: department1,
+                                decoration: InputDecoration(
+                                  labelText: "Department",
+                                  labelStyle: GoogleFonts.poppins(fontSize: 13.sp,color: srpgradient2,letterSpacing: 1.5),
+                                ),
+                              )
+                          ),
+                        ),
+                        SizedBox(height: 10.h,),
+                        GestureDetector(
+                          onTap: (){
+
+                            // name=element.get('name');
+                            // email=element.get('email');
+                            // designation=element.get('designation');
+                            // phonenumber=element.get('phonenumber');
+                            // department=element.get('department');
+
+                            f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+                            element.reference.collection("Employee")
+                                .doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
+                            }));
+                          },
+                          child: BtnSave(load: load),
+                        ),
+
+                        SizedBox(height: 20.h,)
+
+                      ],
+                    ),
+                  ),
+                ):
+                Positioned(
+                  top: 100,
+                  bottom: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height:140.h,
+                        width: MediaQuery.of(context).size.width,
+                        child: Container(
+                          width: 130.h,
+                          height: 130.w,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                width: 4,
+                                color: Theme.of(context).scaffoldBackgroundColor),
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  color: Colors.black.withOpacity(0.15),
+                                  offset: const Offset(0, 10))
+                            ],
+                            shape: BoxShape.circle,
+
+                            // image: const DecorationImage(
+                            //     fit: BoxFit.cover,
+                            //     image: NetworkImage(
+                            //       "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+                            //     ))
 
                           ),
                           child: Icon(FontAwesomeIcons.userTie,size: 65.sp,color: srpgradient2,),
@@ -834,9 +1369,13 @@ class _EditEmployeeState extends State<EditEmployee> {
                         width: MediaQuery.of(context).size.width,
                         height: 1,
                       ),
+
+
+
                     ],
                   ),
                 ),
+
               ],
             ),
           )
@@ -844,6 +1383,58 @@ class _EditEmployeeState extends State<EditEmployee> {
       );
     }
   }
+
+class BtnSave extends StatelessWidget {
+  const BtnSave({
+    super.key,
+    required this.load,
+  });
+
+  final bool load;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:  EdgeInsets.only(left: 10,right: 100),
+      child: Container(
+          height: 40.h,
+          width: 140,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                srpgradient1,
+                srpgradient2,
+                srpgradient3
+              ],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: const Offset(0, 0), // changes position of shadow
+              ),
+            ],
+            borderRadius: BorderRadius.circular(8.2),
+            color: whiteClr,
+          ),
+          child:Center(
+            child: load == true ? SizedBox(
+              height: 26,
+              width: 26,
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.white,
+                strokeWidth: 1.6.w,
+              ),
+            ) :
+            Text("Save",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+          )
+      ),
+    );
+  }
+}
 
 class Empolyee extends StatelessWidget {
   Empolyee({
@@ -870,7 +1461,7 @@ class Empolyee extends StatelessWidget {
               child: Row(
                 children:  [
                   SizedBox(width: 20.w,height: 10,),
-                  Container(
+                  Container (
                     height: 50.h,
                     width: 50.w,
                     child: Icon(Icons.person,size: 50.sp,color: srpgradient2,),
@@ -884,7 +1475,6 @@ class Empolyee extends StatelessWidget {
                         ),
                       ],
                     ),),
-
                   const Spacer(),
                   // CircleAvatar(
                   //   radius: 15.sp,
@@ -912,13 +1502,11 @@ class Empolyee extends StatelessWidget {
                           context,
                           MaterialPageRoute(builder: (context) => EditEmployee(email: email,superadmin: superadmin,companyemail: companyemail,)),
                         );
-
                       },
                     ),
                   ),
                   SizedBox(width: 10.w,),
                 ],
-
               ),
             ),
             onTap: (){
@@ -926,7 +1514,6 @@ class Empolyee extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => EditEmployee(email: email,superadmin: superadmin,companyemail: companyemail,)),
               );
-
             },
           ),
           Container(
@@ -937,7 +1524,6 @@ class Empolyee extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class CreateEmployee extends StatefulWidget {
@@ -2177,3 +2763,4 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   }
 
 }
+
