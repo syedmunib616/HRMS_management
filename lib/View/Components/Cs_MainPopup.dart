@@ -9,11 +9,15 @@ import 'package:hrmanagementapp/View/listofcompany/companylist.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/test.dart';
 
-CSMainPopup({required BuildContext context, required String btnText, required String popMessag,
-    // required VoidCallback onTap
+CSMainPopup(
+    {required BuildContext context,
+     required String btnText,
+     required String popMessag,
+     // required VoidCallback onTap
     }) {
   showDialog(
     context: context,
+    barrierDismissible: false,
     builder: (context) {
       return CsScreenUtilInit(
         child: AlertDialog(
@@ -40,6 +44,7 @@ CSMainPopup({required BuildContext context, required String btnText, required St
                 SizedBox(
                   height: 15.h,
                 ),
+
                 Text(
                   'Success!',
                   textAlign: TextAlign.center,
@@ -50,9 +55,11 @@ CSMainPopup({required BuildContext context, required String btnText, required St
                     fontSize: 24.sp,
                   ),
                 ),
+
                 SizedBox(
                   height: 20.h,
                 ),
+
                 Text(
                   popMessag,
                   textAlign: TextAlign.center,
@@ -93,10 +100,10 @@ CSMainPopup({required BuildContext context, required String btnText, required St
 
 CSMainPopup1(
     {required BuildContext context,
-      required String btnText,
-      required String popMessag,
-      required String password,
-      //required VoidCallback onTap
+     required String btnText,
+     required String popMessag,
+     required String password,
+     //required VoidCallback onTap
     }) {
   showDialog(
     barrierDismissible: false,
@@ -268,11 +275,12 @@ CSMainPopup4(
   );
 }
 
+
 CSMainPopup2(
     {required BuildContext context,
-      required String btnText,
-      required String popMessag,
-      //required VoidCallback onTap
+     required String btnText,
+     required String popMessag,
+     //required VoidCallback onTap
     }) {
   showDialog(
     context: context,
@@ -346,6 +354,7 @@ CSMainPopup2(
     },
   );
 }
+
 
 CSMainPopup3(
     { required BuildContext context,
@@ -432,9 +441,6 @@ CSMainPopup3(
     },
   );
 }
-
-
-
 
 
 // import 'package:flutter/material.dart';

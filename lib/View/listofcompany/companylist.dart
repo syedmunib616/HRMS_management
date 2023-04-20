@@ -69,7 +69,6 @@ class _CompanylistState extends State<Companylist> {
       value.docs.forEach((element) async{
         if(element.id=="example@gmail.com"){}
         else{
-
         await UserT.where('email', isEqualTo: element.id.toString()).get().then((value) => value.docs.forEach((element) {
             active=element.get("active");
             companyname=element.get("company_name");
@@ -124,8 +123,8 @@ class _CompanylistState extends State<Companylist> {
       body: Column(
         children: [
           SizedBox(height: 18.h,),
-          TextButton.icon(icon: RotatedBox(quarterTurns: 1,child: Icon(Icons.compare_arrows,size: 28,),),
-            label: Text("A-Z",
+          TextButton.icon(icon: const RotatedBox(quarterTurns: 1,child: Icon(Icons.compare_arrows,size: 28,),),
+            label: const Text("A-Z",
               style: TextStyle(fontSize: 16),
             ),
             onPressed: (){
@@ -155,7 +154,7 @@ class _CompanylistState extends State<Companylist> {
                         ),
                       );
                     case ConnectionState.waiting:
-                      return SizedBox();
+                      return const SizedBox();
                     case ConnectionState.active:
                       //print("RRRRRRRRRRR ${list}");
                       return (snapshot.hasData == false)
@@ -172,7 +171,7 @@ class _CompanylistState extends State<Companylist> {
                     case ConnectionState.done:
                       return (snapshot.hasData == false)
                           ? const CircularProgressIndicator() :
-                      Expanded(
+                            Expanded(
                         child: ListView.separated(
                             separatorBuilder: (context, index) => const Divider(color: Colors.white),
                             itemCount: list.length,
@@ -182,14 +181,14 @@ class _CompanylistState extends State<Companylist> {
                         ),
                       );
                     default:
-                      return Expanded(child: Text("default", style: TextStyle(color: Colors.white)));
+                      return const Expanded(child: Text("default", style: TextStyle(color: Colors.white)));
                   }
                 }
-          )
-        ],
-      ),
-    );
-  }
+              )
+            ],
+          ),
+        );
+      }
 
 }
 
@@ -353,7 +352,7 @@ class _SelectedCompanyState extends State<SelectedCompany> {
                 children: [
                   Text("Email : ",style: GoogleFonts.poppins(fontSize: 14.sp, color:srpgradient2,),),
                   Text("${widget.email}",style: GoogleFonts.poppins(fontSize: 14.sp, color:Colors.black,),),
-                  Spacer(),
+                  const Spacer(),
                   GestureDetector(
                     onTap: () {
                       // UserT.doc(widget.email).update({

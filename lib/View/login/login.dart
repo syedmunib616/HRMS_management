@@ -710,9 +710,11 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                           fontSize: 12,
                         ),
                       ),
+
                       SizedBox(
                         height: 90.h,
                       ),
+
                       Row(
                         children: [
                           Text(
@@ -724,6 +726,7 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                               fontSize: 20.sp,
                             ),
                           ),
+
                           const Spacer(),
                           GestureDetector(
                             onTap: () async{

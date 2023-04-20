@@ -1109,22 +1109,38 @@ class _EditEmployeeState extends State<EditEmployee> {
                         SizedBox(height: 10.h,),
                         GestureDetector(
                           onTap: (){
-
                             // name=element.get('name');
                             // email=element.get('email');
                             // designation=element.get('designation');
                             // phonenumber=element.get('phonenumber');
                             // department=element.get('department');
 
-                            f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
-                            element.reference.collection("Employee")
-                                .doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
-                            }));
+                            Future.delayed(const Duration(seconds: 5), () {
+                              setState(() {
+                                load=false;
+                              });
+                            });
+                            setState(() {
+                              load=true;
+                            });
+
+                             f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+                             element.reference.collection("Employee")
+                                 .doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
+                             })).then((value) {
+
+                             setState(() {
+                                load=false;
+                             });
+
+                             CSMainPopup2(context: context,btnText: "Ok",popMessag: "Added Successfully");
+
+                            });
                           },
                           child: BtnSave(load: load),
                         ),
 
-                        SizedBox(height: 20.h,)
+                        SizedBox(height: 20.h,),
 
                       ],
                     ),
@@ -1369,7 +1385,6 @@ class _EditEmployeeState extends State<EditEmployee> {
                         width: MediaQuery.of(context).size.width,
                         height: 1,
                       ),
-
 
 
                     ],

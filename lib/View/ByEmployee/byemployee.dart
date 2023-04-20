@@ -517,7 +517,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                                                   value: items,
                                                   child: Container(
                                                       width: 229.w,
-                                                     // color: Colors.blue,
+                                                      // color: Colors.blue,
                                                       child: Text(items,style: GoogleFonts.poppins(fontSize: 12.sp, color:blackClr,),)),
                                                 );
                                               }).toList(),
@@ -592,6 +592,13 @@ class _ByEmployeeState extends State<ByEmployee> {
                                             ),
                                           ),
                                           onTap:() => {
+                                          Future.delayed(const Duration(seconds: 7), () {
+
+                                          setState(() {
+                                            shownhichalyga=false;
+                                          });
+
+                                          }),
                                             attendance.clear(),
                                             print("rukja yarr $shownhichalyga"),
                                             shownhichalyga == false?
@@ -2237,13 +2244,14 @@ class _ByEmployeeState extends State<ByEmployee> {
 
   bool againcheck=false;
   bool hasAttendance=false;
+  DateTime _startDate = DateTime.now();
 
   Future pickDateRange() async {
       DateTimeRange?  newDateRange = await showDateRangePicker(
           context: context,
           initialDateRange: dateRange,
           firstDate: DateTime(2000),
-          lastDate: DateTime(2100),
+          lastDate:_startDate,
           builder: (context, child) {
             return Theme(
               data: ThemeData.light().copyWith(

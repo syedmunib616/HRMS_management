@@ -2731,6 +2731,7 @@ class _WriteLeaveState extends State<WriteLeave> {
   String fromdate='';
   String todate='';
   String generatedid='';
+  bool load=false;
   // List<ListAttandance> attendance=[];
 
   Future pickDateRange() async {
@@ -3083,7 +3084,8 @@ class _WriteLeaveState extends State<WriteLeave> {
                     //     ),
                     //   ),
                     // ),
-                  ),),
+                  ),
+                ),
                 SizedBox(height: 25.h,),
                 Container(
                   height: 200.h,
@@ -3162,46 +3164,58 @@ class _WriteLeaveState extends State<WriteLeave> {
                     //     email: textEditingController1.text.trim(),
                     //     password: textEditingController2.text.trim(),
                     //     providerGenerator: providerGenerator);
-                    if(textEditingController.text.isNotEmpty) {
-                      FirebaseFirestore.instance
-                          .collection('Companies')
-                          .doc('${widget.adminemail}')
-                          .collection("Employee")
-                          .doc(user!.email.toString())
-                          .collection('Leaves')
-                          .doc()
-                          .set({
-                            'date':'$time',
-                            'subject': "${_selectedLocation}",
-                            'message': "${textEditingController.text.trim()}",
-                            'approve': null})
-                            .then((value) async{
-                              var data =
-                                {
-                                  "leave_type": "$_selectedLocation",
-                                  "employee" : "$generatedid",
-                                  "from_date": "$fromdate",
-                                  "to_date": "$todate",
-                                  "leave_approver": "${widget.adminemail}",
-                                  "description":"${textEditingController.text.trim()}"
-                                };
+                    Future.delayed(const Duration(seconds: 3), () {
+                      setState(() {
+                         load=false;
+                      });
+                    });
 
-                            var res = await LeaveCreate().createleave(data,'');
+                    if(load==true){}else{
+                      if(textEditingController.text.isNotEmpty) {
+                        setState(() {
+                          load=true;
+                        });
+                        FirebaseFirestore.instance
+                            .collection('Companies')
+                            .doc('${widget.adminemail}')
+                            .collection("Employee")
+                            .doc(user!.email.toString())
+                            .collection('Leaves')
+                            .doc()
+                            .set({
+                              'date':'$time',
+                              'subject': "${_selectedLocation}",
+                              'message': "${textEditingController.text.trim()}",
+                              'approve': null})
+                              .then((value) async{
+                                var data =
+                                  {
+                                    "leave_type": "$_selectedLocation",
+                                    "employee" : "$generatedid",
+                                    "from_date": "$fromdate",
+                                    "to_date": "$todate",
+                                    "leave_approver": "${widget.adminemail}",
+                                    "description":"${textEditingController.text.trim()}"
+                                  };
 
-                          }).then((value) => _showToast(context,'Leave request added successfully'))
-                          .then((value) =>
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (BuildContext context) => EmployeeDashboard(admineamil: aadmin,)),// Homepage()),munib
-                              result: false));
-                    }else{
-                      _showToast(context,'Please write some message');
+                              var res = await LeaveCreate().createleave(data,'');
+
+                              }).then((value) => _showToast(context,'Leave request added successfully'))
+                              .then((value) =>
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (BuildContext context) => EmployeeDashboard(admineamil: aadmin,)),// Homepage()),munib
+                                result: false));
+                      }
+                      else{
+                        _showToast(context,'Please write some message');
+                      }
                     }
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(builder: (context) => const ScreenMain()),
                     // );
                   },
-                  child: Container(
+                    child: Container(
                       height: 40.h,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
@@ -3225,23 +3239,18 @@ class _WriteLeaveState extends State<WriteLeave> {
                         borderRadius: BorderRadius.circular(8.2),
                         color: whiteClr,
                       ),
-                      child:Center(
-                        child: Text("Submit",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                      child: Center(
+                        child:load==true ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),):Text("Submit", style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                       )
                     ),
                   ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
-
-
-
-
-
+      );
+    }
 
   void _showToast(BuildContext context,String text) {
     final scaffold = ScaffoldMessenger.of(context);
@@ -3263,7 +3272,6 @@ class ByEmployee1 extends StatefulWidget {
 }
 
 class _ByEmployee1State extends State<ByEmployee1> {
-
   late DateTime dateTime;
   late DateTime dateTime1;
   late Duration duration;
@@ -3437,6 +3445,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
   fetchuser() async {
     String a,b,c;
     print("%%%%%%%%%%%%%%%% $datestring");
+
     FirebaseFirestore.instance
         .collection('Companies')
         .doc('${user!.email.toString()}')
@@ -3446,11 +3455,13 @@ class _ByEmployee1State extends State<ByEmployee1> {
       value.docs.forEach((element) {
         a=element.get('email');
         b=element.get('name');
-        items1.add(a);
 
+        items1.add(a);
         name_email.add(NameAndEmail(name: b,email: a));
+
         setState(() { items1; });
         print("++++++++++++++++++ $a");
+
       });
     });
 
@@ -3580,7 +3591,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
                                     Spacer(),
                                     GestureDetector(
                                       onTap: () async {
-
                                         //DatePickerTitle(date: dateTime);
                                         // _showRangePicker(context);
                                         // showDateRangePicker(
@@ -3616,9 +3626,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
                                         //         child: child!,
                                         //       );
                                         //     });
-
                                         pickDateRange();
-
                                         // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
                                         // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
                                         // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
@@ -3646,7 +3654,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
                                         //   });
                                         //   print("${dateTime.month}");
                                         // }
-
                                       },
                                       child: Container(
                                         height: 36.0.h,
@@ -4004,7 +4011,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
               ),
             ),
 
-            body: days.isEmpty ? SizedBox(): SingleChildScrollView(
+            body: days.isEmpty ? SizedBox() : SingleChildScrollView(
               child: Column(
                 children: [
                   SizedBox(height: 20.h,),
@@ -4149,7 +4156,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
     );
   }
 
-
   late DateTimeRange dateTimeRange =dateRange;
   List<DateTime> days = [];
   List<ListAttandance> attendance=[];
@@ -4271,7 +4277,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
       days=[];
     });
     for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
-      //if(startDate.month==1 ||startDate.month==2 ||startDate.month==3 ||startDate.month==4 ||startDate.month==5 ||startDate.month==6 ||startDate.month==7 ||startDate.month==8 ||startDate.month==9 )
+      // if(startDate.month==1 ||startDate.month==2 ||startDate.month==3 ||startDate.month==4 ||startDate.month==5 ||startDate.month==6 ||startDate.month==7 ||startDate.month==8 ||startDate.month==9 )
       days.add(startDate.add(Duration(days: i)));
       print(":::::::::: PRINT :::::::::::: ${startDate.month} ${days[i].year}-${days[i].month}-${days[i].day}");
     }
@@ -4533,5 +4539,6 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
       ),
     );
   }
+
 }
 
