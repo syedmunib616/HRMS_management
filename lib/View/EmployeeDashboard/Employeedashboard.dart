@@ -3187,7 +3187,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                               'subject': "${_selectedLocation}",
                               'message': "${textEditingController.text.trim()}",
                               'approve': null})
-                              .then((value) async{
+                              .then((value) async {
                                 var data =
                                   {
                                     "leave_type": "$_selectedLocation",
@@ -3195,7 +3195,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                                     "from_date": "$fromdate",
                                     "to_date": "$todate",
                                     "leave_approver": "${widget.adminemail}",
-                                    "description":"${textEditingController.text.trim()}"
+                                    "description":"${textEditingController.text.trim()}",
                                   };
 
                               var res = await LeaveCreate().createleave(data,'');
@@ -4010,7 +4010,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
                 ),
               ),
             ),
-
             body: days.isEmpty ? SizedBox() : SingleChildScrollView(
               child: Column(
                 children: [
@@ -4114,8 +4113,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
                     ],
                   ),
                 ),
-
-                //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+            // TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
 
             // DefaultTabController(
             //   length: 1,
@@ -4160,7 +4158,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
   List<DateTime> days = [];
   List<ListAttandance> attendance=[];
 
-  fetchattendance(String date)async{
+  fetchattendance(String date) async {
     print("kkkkkkkkkk $date $dropdownvalue1");
     String a,b;
 
@@ -4170,7 +4168,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
         .collection("Employee")
         .doc(dropdownvalue1)
         .collection('Attendance')
-    // .doc(date)
+         // .doc(date)
     // .get()
     // .then((value) {
     //   a=value.get('TimeIn');
@@ -4182,7 +4180,6 @@ class _ByEmployee1State extends State<ByEmployee1> {
       value.docs.forEach((element) {
         a=element.id;
         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
-
         if(date==a){
           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
 
@@ -4216,9 +4213,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
         else{
           print("1111111111111");
         }
-        setState(() {
-          streamController.stream;
-        });
+        setState(() { streamController.stream; });
       });
     });
   }

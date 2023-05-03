@@ -146,7 +146,7 @@ class FrSignUpService {
       });
 
     }).then((value) {
-
+      DateTime now=DateTime.now();
       UserT.doc(email).set({"email":"$email","admin_name":"$name","company_name":"$companyname",
         "phone_number":"$phonenumber","active":true,"super":false,"website":"$website"}).then((value) {
           for(int i=0;i<depaetment.length;i++){
@@ -154,11 +154,15 @@ class FrSignUpService {
                 .set({'DepartmentsID':'${depaetment[i].departid}',
               'DepartmentsName':'${depaetment[i].departmentname}'});
           }
+        }).then((value) {
+        UserT.doc(email).collection('Employee').doc('$email').set({"email":"$email","name":"$name","phone_number":"$phonenumber","active":true,"department":"","designation":"","generatedId":"","reportingto":"","shift":"","uid":""})
+          .then((value) {
+            UserT.doc(email).collection('Employee').doc('$email').collection('Attendance').doc('${now.year}-${now.month}-${now.day}').set({'TimeIn':'','TimeInAddress':'','TimeOut':'','TimeOutAddress':'',});
+          }).then((value) =>CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is created",password:adminpassword ));
         });
-      }).then((value) => CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is created",password:adminpassword ));
+      });
 
       // });
-
       // Navigator.of(context).pushAndRemoveUntil(
       //   MaterialPageRoute(
       //     builder: (context) =>  ScreenMain(),
@@ -173,7 +177,7 @@ class FrSignUpService {
     required ProviderGenerator providerGenerator,
     required int errorIndex,
     int? errorIndex2,
-  }) {
+    }) {
     if (errorIndex2 != null) {
       providerGenerator
         ..setVisibleError(value: true, index: errorIndex2)
@@ -197,8 +201,9 @@ class FrSignUpService {
   //       ? true
   //       : false;
   // }
-
   //check Empty Value
+
+
   bool isMatched(String password, String passwordConfirmation) {
     return password.trim() == passwordConfirmation.trim() ? true : false;
   }

@@ -151,8 +151,7 @@ class FrLoginService {
                            empactive=elemen.get('active');
                            if(empactive==true) {
                              Login(loading: false);
-                             Navigator.of(context).pushAndRemoveUntil(
-                               MaterialPageRoute(
+                             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                                  builder: (BuildContext context) =>
                                      EmployeeDashboard(
                                        admineamil: element.id,),), (route) => false,);
@@ -171,7 +170,7 @@ class FrLoginService {
                          //
                          //
                          // }
-                       }));
+                       }));//SRP0324@
                  }
                  else {
                    print("yyyyyy active status is $active");
@@ -438,9 +437,98 @@ class FrLoginService {
         return "User with this email has been disabled.";
       case "operation-not-allowed":
         return "Signing in with Email and Password is not enabled.";
+
+      /////////////////////////////////////////////////////////////////////////////////
+
+      case "email-already-in-use":
+        return "The email address is already in use by another account Slow Internet restart the app..";
+
+      case "weak-password":
+        return "The password is too weak slow Internet restart the app.";
+
+      case "credential-already-in-use":
+        return "This credential is already associated with a different user account.";
+
+      case "invalid-credential":
+        return "The supplied auth credential is malformed or has expired slow Internet restart the app.";
+
+      case "account-exists-with-different-credential":
+        return "Different sign-in credentials slow Internet restart the app.";
+
+      case "auth-domain-config-required":
+        return "A domain URL must be provided in the Firebase Console slow Internet restart the app.";
+
+      case "timeout":
+        return "The operation has timed out slow Internet restart the app.";
+
+      case "missing-android-pkg-name":
+        return "Slow Internet restart the app Android Package Name";
+
+      case "missing-continue-uri":
+        return "Slow Internet restart the app a continue URL must be provided in the request.";
+
+      case "missing-ios-bundle-id":
+        return "Slow Internet restart the app an iOS Bundle ID must be provided if an App Store ID is provided.";
+
+      case "dynamic-link-not-activated":
+        return "Slow Internet restart the app please activate Dynamic Links ";
+
+      case "invalid-continue-uri":
+        return "The continue URL provided in the request is invalid.";
+
+      case "unauthorized-continue-uri":
+        return "Slow Internet restart the app Whitelist the domain";
+
+      case "invalid-dynamic-link-domain":
+        return "Slow Internet restart the app dynamic link domain is not configured or authorized";
+
+      case "rejected-credential":
+        return "Slow Internet restart the app and the request contains malformed or mismatching credentials.";
+
+      case "invalid-email-verified":
+        return "Slow Internet restart the app and the email does not correspond to the user's email.";
+
+      case "unsupported-persistence-type":
+        return "Slow Internet restart the app and the current environment does not support the specified persistence type.";
+
+      case "popup-blocked":
+        return "Slow Internet restart the app and the operation was blocked by a browser popup blocker.";
+
+      case "popup-closed-by-user":
+        return "Slow Internet restart the app the popup window was closed";
+
+      case "account-exists-with-different-credential":
+        return "Slow Internet restart the app an account already exists with the same email address ";
+
+      case "provider-already-linked":
+        return "Slow Internet restart the app!";
+
+      case "requires-recent-login":
+        return "This operation is sensitive and requires recent authentication. Log in again before retrying this request.";
+
+      case "firebase-auth":
+        return "Slow Internet restart the app.";
+
       default:
-        return "An undefined Error happened.";
+        return "Check your internet and restart the application";
     }
+
+    // switch (error) {
+    //   case "invalid-email":
+    //     return TextStrings.Invalid_email.tr();
+    //   case "wrong-password":
+    //   // return TextStrings.You_have_entered_an_invalid_password.tr();
+    //     return "You have entered an invalid password";
+    //   case "user-not-found":
+    //     return "User with this email doesn't exist.";
+    //   case "user-disabled":
+    //     return "User with this email has been disabled.";
+    //   case "operation-not-allowed":
+    //     return "Signing in with Email and Password is not enabled.";
+    //
+    //   default:
+    //     return "An undefined Error happened.";
+    // }
   }
 
   //Google Sign in
@@ -601,3 +689,72 @@ class FrLoginService {
 //     });
 //   }
 // }
+
+// case "email-already-in-use":
+// return "The email address is already in use by another account.";
+//
+// case "weak-password":
+// return "The password is too weak.";
+//
+// case "credential-already-in-use":
+// return "This credential is already associated with a different user account.";
+//
+// case "invalid-credential":
+// return "The supplied auth credential is malformed or has expired.";
+//
+// case "account-exists-with-different-credential":
+// return "There exists an account with the same email address but different sign-in credentials.";
+//
+// case "auth-domain-config-required":
+// return "A domain URL must be provided in the Firebase Console.";
+//
+// case "timeout":
+// return "The operation has timed out.";
+//
+// case "missing-android-pkg-name":
+// return "An Android Package Name must be provided if the Android App is required to be installed.";
+//
+// case "missing-continue-uri":
+// return "A continue URL must be provided in the request.";
+//
+// case "missing-ios-bundle-id":
+// return "An iOS Bundle ID must be provided if an App Store ID is provided.";
+//
+// case "dynamic-link-not-activated":
+// return "Please activate Dynamic Links in the Firebase Console and agree to the terms and conditions.";
+//
+// case "invalid-continue-uri":
+// return "The continue URL provided in the request is invalid.";
+//
+// case "unauthorized-continue-uri":
+// return "The domain of the continue URL is not whitelisted. Whitelist the domain in the Firebase console.";
+//
+// case "invalid-dynamic-link-domain":
+// return "The provided dynamic link domain is not configured or authorized for the current project.";
+//
+// case "rejected-credential":
+// return "The request contains malformed or mismatching credentials.";
+//
+// case "invalid-email-verified":
+// return "The email address provided is invalid or does not correspond to the user's email.";
+//
+// case "unsupported-persistence-type":
+// return "The current environment does not support the specified persistence type.";
+//
+// case "popup-blocked":
+// return "The operation was blocked by a browser popup blocker.";
+//
+// case "popup-closed-by-user":
+// return "The popup window was closed by the user before the operation could complete.";
+//
+// case "account-exists-with-different-credential":
+// return "An account already exists with the same email address but different sign-in credentials.";
+//
+// case "provider-already-linked":
+// return "This credential is already associated with a different user account.";
+//
+// case "requires-recent-login":
+// return "This operation is sensitive and requires recent authentication. Log in again before retrying this request.";
+//
+// case "firebase-auth":
+// return "An internal error occurred while attempting to perform the requested operation.";

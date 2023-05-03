@@ -55,9 +55,7 @@ class _CompanylistState extends State<Companylist> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    setState(() {
-
-    });
+    setState(() {});
     fetchListOfSocialMedia();
   }
 

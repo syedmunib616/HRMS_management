@@ -133,9 +133,7 @@ class _ByEmployeeState extends State<ByEmployee> {
           value.docs.forEach((element) {
             a=element.get('email');
             b=element.get('name');
-
             name_email.add(NameAndEmail(name: b,email: a));
-
             items1.add(a);
             items2.add(b);
             setState(() { items1; });
@@ -2474,11 +2472,13 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
 
   @override
   void initState() {
+
     // TODO: implement initState
     super.initState();
     // print("uuuuuuuuuuuuuuu ${widget.time} ${widget.tabcount}");
     print("############ ${widget.employe}");
     print("************ ${widget.timeout} ${widget.timein}");
+
   }
 
   fetchattendance(){}
@@ -2679,6 +2679,7 @@ class EditSelectedAttendance extends StatefulWidget {
 }
 
 class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
+
   TextEditingController textEditingController1 = TextEditingController();
   TextEditingController textEditingController2 = TextEditingController();
   TextEditingController textEditingController3 = TextEditingController();
