@@ -2,12 +2,13 @@ import 'dart:convert';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 
-const String baseurl = "https://test.srp.ai/api/resource";
+ String baseurl = "https://test.srp.ai/api/resource";
 
-const String contenttype="application/json";
+ String contenttype="application/json";
 
-// const String authorization= "Token ecd1d920e3ad1e1:06de7da5ca2eee7";
-const String authorization= "Token 12af30621a945a6:e02bd8701e9aaa3";
+ // const String authorization= "Token ecd1d920e3ad1e1:06de7da5ca2eee7";
+
+ String authorization= "Token 12af30621a945a6:e02bd8701e9aaa3";
 
 class CreateCompany {
 
@@ -16,8 +17,10 @@ class CreateCompany {
     var body= jsonEncode(data);
     return await http.post(
          Uri.parse("$baseurl/Company"),
-         headers: { "Content-Type": contenttype,
-           "Authorization": authorization},
+         headers: {
+           "Content-Type": contenttype,
+           "Authorization": authorization
+          },
          body:body
        );
   }
@@ -27,8 +30,10 @@ class CreateCompany {
     var body= jsonEncode(data);
     return await http.post(
         Uri.parse("$baseurl/User"),
-        headers: { "Content-Type": contenttype,
-          "Authorization": authorization},
+        headers: {
+          "Content-Type": contenttype,
+          "Authorization": authorization
+        },
         body:body
     );
   }

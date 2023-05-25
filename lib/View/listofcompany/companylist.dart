@@ -67,7 +67,7 @@ class _CompanylistState extends State<Companylist> {
       value.docs.forEach((element) async{
         if(element.id=="example@gmail.com"){}
         else{
-        await UserT.where('email', isEqualTo: element.id.toString()).get().then((value) => value.docs.forEach((element) {
+          UserT.where('email', isEqualTo: element.id.toString()).get().then((value) => value.docs.forEach((element) {
             active=element.get("active");
             companyname=element.get("company_name");
             email=element.get("email");
@@ -81,6 +81,7 @@ class _CompanylistState extends State<Companylist> {
                 company_phonenumber: company_phonenumber,active: active,admin_name: adminname,email: email));
 
             print("kkkkkkkjjjjjjj $companyname $email $company_phonenumber $website");
+
 
             // element.reference.collection("Linkstore").get().then((value) => value.docs.forEach((element) {
             //   element.data().forEach((a, b) {
@@ -313,6 +314,8 @@ class _SelectedCompanyState extends State<SelectedCompany> {
   TextEditingController textEditingController4 = TextEditingController();
   TextEditingController textEditingController5 = TextEditingController();
   TextEditingController textEditingController6 = TextEditingController();
+  TextEditingController textEditingController7 = TextEditingController();
+  TextEditingController textEditingController8 = TextEditingController();
   CollectionReference UserT = FirebaseFirestore.instance.collection("Companies");
   final user = FirebaseAuth.instance.currentUser;
   bool active=true;
@@ -330,11 +333,33 @@ class _SelectedCompanyState extends State<SelectedCompany> {
       textEditingController3.text=widget.website;
       textEditingController4.text=widget.adminname;
      });
-      print("%%%%%%%%% $email");
+      print("%%%%%%%%% $email");fetcherp();
   }
+
+
+  fetcherp(){
+    UserT.get().then((value)  {
+      value.docs.forEach((element) async{
+        if(element.id=="example@gmail.com"){}
+        else{
+          if(element.id.toString()==email){
+           UserT.where('email', isEqualTo: element.id.toString()).get().
+            then((value) => value.docs.forEach((element) {
+             textEditingController7.text=element.get('erpurl');
+             textEditingController8.text=element.get('authorizationkey');
+              setState(() {});
+            })
+           );
+          }
+        }
+      });
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
+
     final providerGenerator = Provider.of<ProviderGenerator>(context);
 
     return Scaffold(
@@ -475,6 +500,52 @@ class _SelectedCompanyState extends State<SelectedCompany> {
                 //     ? Colors.red
                 //     : null,
               ),
+              SizedBox(height: 24.h,),
+              Text("Optional Fields",style: GoogleFonts.poppins(fontSize: 12.sp,color:  Colors.black ,),),
+              SizedBox(height: 3.h,),
+              Container(
+                height: 1,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.grey,
+              ),
+              SizedBox(height: 17.h,),
+              Text("ERP URL",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
+              SizedBox(height: 7.h,),
+              CsMainInputField(
+                providerGenerator: providerGenerator,
+                width: MediaQuery.of(context).size.width,
+                // width: 287.w,
+                mycontroller: textEditingController7,
+                myhint: "ERP URL",
+                prefixIcon: FontAwesomeIcons.earthAsia,
+                isPassword: false,
+                keyboardType: TextInputType.text,
+                bordercolor: providerGenerator.getVisibleError(index: 0)
+                    ? Colors.red
+                    : null,
+                // bordercolor: providerGenerator.getVisibleError(index: 0)
+                //     ? Colors.red
+                //     : null,
+              ),
+              SizedBox(height: 20.h,),
+              Text("Authorization",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
+              SizedBox(height: 7.h,),
+              CsMainInputField(
+                providerGenerator: providerGenerator,
+                width: MediaQuery.of(context).size.width,
+                //width: 287.w,
+                mycontroller: textEditingController8,
+                myhint: "Authorization",
+                prefixIcon: FontAwesomeIcons.fingerprint,
+                isPassword: false,
+                keyboardType: TextInputType.text,
+                bordercolor: providerGenerator.getVisibleError(index: 0)
+                    ? Colors.red
+                    : null,
+                // bordercolor: providerGenerator.getVisibleError(index: 0)
+                //     ? Colors.red
+                //     : null,
+              ),
               SizedBox(height: 15.h,),
               Row(
                 children: [
@@ -507,16 +578,19 @@ class _SelectedCompanyState extends State<SelectedCompany> {
               GestureDetector(
                 onTap: () {
                   if(textEditingController1.text.toString().isNotEmpty && textEditingController2.text.toString().isNotEmpty && textEditingController3.text.toString().isNotEmpty &&textEditingController4.text.toString().isNotEmpty){
-                  UserT.doc(widget.email).update({
-                    "company_name":"${textEditingController1.text.toString()}",
-                    "phone_number":"${textEditingController2.text.toString()}",
-                    "website":"${textEditingController3.text.toString()}",
-                    "admin_name":"${textEditingController4.text.toString()}",
-                  }).then((value) {
-                    print("ppppppppppppp ${widget.email} ${textEditingController4.text.toString()}");
-                  });
-                  }else{
-                    _showToast(context,"Please enter all feilds");
+                    UserT.doc(widget.email).update({
+                      "company_name":"${textEditingController1.text.toString()}",
+                      "phone_number":"${textEditingController2.text.toString()}",
+                      "website":"${textEditingController3.text.toString()}",
+                      "admin_name":"${textEditingController4.text.toString()}",
+                      "authorizationkey":"${textEditingController8.text.trim()}",
+                      "erpurl":"${textEditingController7.text.trim()}",
+                    }).then((value) {
+                      print("ppppppppppppp ${widget.email} ${textEditingController4.text.toString()}");
+                    });
+                  }
+                  else{
+                    _showToast(context,"Please enter all mandatory fields");
                   }
                   // Navigator.pop(context);
                   // FrLoginService(FirebaseAuth.instance).onTapSignIn(
@@ -566,6 +640,7 @@ class _SelectedCompanyState extends State<SelectedCompany> {
       ),
     );
   }
+
   void _showToast(BuildContext context,String text) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
@@ -575,4 +650,5 @@ class _SelectedCompanyState extends State<SelectedCompany> {
       ),
     );
   }
+
 }

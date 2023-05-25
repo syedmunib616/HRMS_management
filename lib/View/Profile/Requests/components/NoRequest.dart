@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_Login.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Components/textfield.dart';
@@ -643,9 +644,11 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                 ),
                               ),
                               onTap: (){
+                                print("::::::::::::::::; ${userr?.email.toString()} $admin__email ${widget.user} ${widget.leavid}");
+
                                 FirebaseFirestore.instance
                                     .collection('Companies')
-                                    .doc(userr!.email.toString())
+                                    .doc('${mainuser==true ? userr!.email.toString() : admin__email}')
                                     .collection("Employee")
                                     .doc('${widget.user}')
                                     .collection('Leaves')
@@ -697,7 +700,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
 
                                   FirebaseFirestore.instance
                                     .collection('Companies')
-                                    .doc(userr!.email.toString())
+                                    .doc('${mainuser==true ? userr!.email.toString() : admin__email}')
                                     .collection("Employee")
                                     .doc('${widget.user}')
                                     .collection('Leaves')
@@ -709,7 +712,6 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                       _showToast(context,"Done");
                                       Navigator.pop(context);
                                       Navigator.pop(context);
-
                                     // Navigator.pushAndRemoveUntil(
                                     //     context,
                                     //     MaterialPageRoute(
@@ -723,9 +725,7 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                                   //             return ListOfRequest1(adminemail: widget.adminname, providerGenerator: providerGenerator,);
                                   //
                                   //           }));
-
                                   });
-
                               },
                             ),
                           ],

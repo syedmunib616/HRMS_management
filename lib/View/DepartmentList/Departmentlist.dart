@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_Login.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Components/textfield.dart';
@@ -1093,7 +1094,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
     }
     else{
       FirebaseFirestore.instance.collection('Companies')
-          .doc(user!.email.toString())
+          .doc("${mainuser ==true ? user!.email.toString():admin__email}")
           .collection('Departments')
           .get()
           .then((value) => value.docs.forEach((element) {

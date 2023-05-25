@@ -56,11 +56,9 @@ class EmployeeDashboard extends StatefulWidget {
 String aadmin='';
 
 class _EmployeeDashboardState extends State<EmployeeDashboard> {
-
     final _controller = PageController();
     final _duration = const Duration(milliseconds: 300);
     final _curve = Curves.easeInOutCubic;
-
     final _pages = const [
       LineChartPage(),
       LineChartPage2(),
@@ -110,7 +108,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
 
 
         DateTime date = DateTime(now.year, m, now.day);
-        //DateTime date = DateTime(now.year, now.month, now.day);
+        // DateTime date = DateTime(now.year, now.month, now.day);
         DateTime time1 = DateTime(now.hour, now.minute, now.second);
 
         datestring='${now.year}-$m-${now.day}';
@@ -138,7 +136,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   String _formatDateTime(DateTime dateTime) {
       return DateFormat('MM/dd/yyyy hh:mm:ss').format(dateTime);
   }
-
   final user = FirebaseAuth.instance.currentUser;
 
   String generatedId='';

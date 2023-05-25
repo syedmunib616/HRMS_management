@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_Login.dart';
 import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_SignUP.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
 import 'package:hrmanagementapp/View/Components/Cs_MainPopup.dart';
@@ -38,6 +39,9 @@ class FrSignUpService {
     required String companyname,
     required String phonenumber,
     required String website,
+    required String erpurl,
+    required String authorizationkey,
+
     required BuildContext context,
     required ProviderGenerator providerGenerator,
   }) async {
@@ -69,6 +73,9 @@ class FrSignUpService {
                         password: password,
                       ).then(
                         (value) => onSuccessSignUP(
+                          erpurl: erpurl,
+                          authorizationkey: authorizationkey,
+                          password: password,
                           adminpassword: adminpassword,
                           name: name,
                           companyname: companyname,
@@ -80,6 +87,7 @@ class FrSignUpService {
                           context: context,
                         ),
                       );
+
     } on FirebaseAuthException catch (error) {
       //print(error.code);
       onlogicErrorHandling(
@@ -88,6 +96,7 @@ class FrSignUpService {
         errorIndex: 2,
       );
     }
+
   }
 
   onHideError(ProviderGenerator providerGenerator) {
@@ -106,8 +115,11 @@ class FrSignUpService {
       required String companyname,
       required String name,
       required String email,
+      required String password,
       required String uid,
       required String website,
+      required String erpurl,
+      required String authorizationkey,
       required ProviderGenerator providerGenerator,
       required BuildContext context,
   }) async {
@@ -146,16 +158,17 @@ class FrSignUpService {
       });
 
     }).then((value) {
+
       DateTime now=DateTime.now();
-      UserT.doc(email).set({"email":"$email","admin_name":"$name","company_name":"$companyname",
-        "phone_number":"$phonenumber","active":true,"super":false,"website":"$website"}).then((value) {
+      UserT.doc(email).set({"erpurl":"$erpurl","authorizationkey":"$authorizationkey","email":"$email","admin_name":"$name","company_name":"$companyname",
+        "phone_number":"$phonenumber","active":true,"super":false,"website":"$website","mainuser":true,"admin":true,"password":"$password"}).then((value) {
           for(int i=0;i<depaetment.length;i++){
             UserT.doc(email).collection('Departments').doc('${depaetment[i].departid}')
                 .set({'DepartmentsID':'${depaetment[i].departid}',
               'DepartmentsName':'${depaetment[i].departmentname}'});
           }
         }).then((value) {
-        UserT.doc(email).collection('Employee').doc('$email').set({"email":"$email","name":"$name","phone_number":"$phonenumber","active":true,"department":"","designation":"","generatedId":"","reportingto":"","shift":"","uid":""})
+        UserT.doc(email).collection('Employee').doc('$email').set({"email":"$email","name":"$name","phonenumber":"$phonenumber","active":true,"department":"","designation":"","generatedId":"","reportingto":"","shift":"","uid":"","admin":true})
           .then((value) {
             UserT.doc(email).collection('Employee').doc('$email').collection('Attendance').doc('${now.year}-${now.month}-${now.day}').set({'TimeIn':'','TimeInAddress':'','TimeOut':'','TimeOutAddress':'',});
           }).then((value) =>CSMainPopup1(context: context,btnText: "Ok",popMessag: "The company is created",password:adminpassword ));
@@ -168,7 +181,6 @@ class FrSignUpService {
       //     builder: (context) =>  ScreenMain(),
       //     //builder: (context) =>  YourName(email: email.toString(),),
       //   ),(route) => false,);
-
   }
 
   // Reading Error Value on the Screen
@@ -305,6 +317,7 @@ class FrSignUpService1 {
 
   // To Sign UP
   Future onTapSignUP({
+    required bool employe_or_admin,
     required String adminpassword,
     required String adminemail,
     required String email,
@@ -353,6 +366,9 @@ class FrSignUpService1 {
             //   )
             .then((value) =>
             onSuccessSignUP(
+                emp_password: password,
+                emp_email: email,
+            employe_or_admin:employe_or_admin,
             shifts: shifts,
             password: adminpassword,
             adminemail: adminemail,
@@ -390,6 +406,9 @@ class FrSignUpService1 {
 
   // Reading Error Value on the Screen
   onSuccessSignUP({
+    required emp_password,
+    required emp_email,
+    required bool employe_or_admin,
     required String shifts,
     required String password,
     required String adminemail,
@@ -426,7 +445,7 @@ class FrSignUpService1 {
 
     FirebaseFirestore.instance.collection("Companies").doc(adminemail).collection('Employee').doc(email)
     .set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
-      "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts', 'generatedId':'', 'active':true}).then((value) {
+      "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts', 'generatedId':'', 'active':true,"admin":employe_or_admin}).then((value) {
     });
 
     FirebaseFirestore.instance.collection("Companies")
@@ -437,7 +456,7 @@ class FrSignUpService1 {
      UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
       print("kkklklklkk $email $adminemail ${password}");
       element.reference.collection("Employee").doc(email).set({'shift':'$shifts',"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
-        "name":"$name","email":"$email","uid":"$uid",'shift':'$shifts', 'generatedId':'', 'active':true});
+        "name":"$name","email":"$email","uid":"$uid",'shift':'$shifts', 'generatedId':'', 'active':true,"admin":employe_or_admin});
       })).then((value) async {
       await FirebaseAuth.instance.signOut().then((value) async {
         print("iiiiiiiiii ${user!.email.toString()} ll $adminemail JJ ${password}");
@@ -450,21 +469,23 @@ class FrSignUpService1 {
           superadmin==false ?
           // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => EmployeeDirectory(password: password,compnayemail: adminemail,superadmin: superadmin,)), result: false):
           // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => EmployeeDirectory(password: password,compnayemail: adminemail,superadmin: superadmin,)), result: false);
-
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,adminname: adminemail,)), result: false) :
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Test(password: password,)),);
 
           superadmin == false
           ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully')
           : CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',);
+
         });
       });
     });
+
     // await UserT.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
     //   element.reference.collection("Employee").doc(email).
     //   set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
     //     "name":"$name","email":"$email","uid":"$uid",});
     // })).then((value) => Navigator.pop(context));
+
   }
 
   // Reading Error Value on the Screen
@@ -570,3 +591,308 @@ class FrSignUpService1 {
 
 }
 
+
+class FrSignUpService2 {
+  final FirebaseAuth firebaseAuth;
+  final BuildContext context;
+  FrSignUpService2(this.firebaseAuth, this.context);
+
+  //check Empty Value
+  bool isEmpty(String email, String password,String name, String department,String phonenumber,String designation,String shifts) {
+    return email.trim().isEmpty ||
+           password.trim().isEmpty ||
+           designation.trim().isEmpty ||
+           name.trim().isEmpty ||
+           department.trim().isEmpty ||
+           phonenumber.trim().isEmpty || shifts.trim().isEmpty ? true : false;
+  }
+
+  signIn(String email, String password) async {
+    var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email, password: password);
+    return user;
+  }
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // To Sign UP
+  Future onTapSignUP({
+     required bool employe_or_admin,
+    required String adminpassword,
+    required String adminemail,
+    required String email,
+    required String password,
+    required String name,
+    required String department,
+    required String phonenumber,
+    required String designation,
+    required String reportingto,
+    required String shifts,
+    required BuildContext context,
+    required ProviderGenerator providerGenerator,
+    required bool superadmin
+  }) async {
+    // firebaseAuth.setSettings(
+    //     appVerificationDisabledForTesting: false,
+    //     // signInFlow: 'popup',
+    //     forceRecaptchaFlow: true,);
+    print("mery [pas kuch or ata hao $adminemail");
+    onHideError(providerGenerator);
+    providerGenerator.setLoadingValue(value: true, index: 0);
+    try {
+      isEmpty(email, password, name,department,phonenumber,designation,shifts)
+          ? onlogicErrorHandling(
+        error: "Please enter your Information",
+        providerGenerator: providerGenerator,
+        errorIndex: 1,
+        errorIndex2: 2,) : !isRegExpValid(email)
+          ? onlogicErrorHandling(
+        error: "Your email is Invalid",
+        providerGenerator: providerGenerator,
+        errorIndex: 1,)
+      //     : !isMatched(password, passwordConfirmation)
+      //     ? onlogicErrorHandling(
+      //   error: "Your Password is not Matched",
+      //   providerGenerator: providerGenerator,
+      //   errorIndex: 2,
+      // )
+          :
+      // await firebaseAuth
+      //   .createUserWithEmailAndPassword(
+      //     email: email,
+      //     password: password,
+      //   );
+      // signIn(email,password)
+      firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      )
+      //
+      // await firebaseAuth
+      //   .createUserWithEmailAndPassword(
+      //     email: email,
+      //     password: password,
+      //   )
+          .then((value) =>
+          onSuccessSignUP(
+            emp_email: email,
+               emp_password: password,
+               employe_or_admin:employe_or_admin,
+              shifts: shifts,
+              password: adminpassword,
+              adminemail: adminemail,
+              name: name,
+              department: department,
+              phonenumber: phonenumber,
+              email: value.user!.email.toString(),
+              uid: value.user!.uid,
+              providerGenerator: providerGenerator,
+              context: context,
+              designation: designation,
+              reportingto: reportingto,
+              superadmin: superadmin
+          ),
+      );
+    } on FirebaseAuthException catch (error) {
+      print("jjjjjjjjjjjjj");
+      print(error.code);
+      onlogicErrorHandling(
+        error: onFirebaseErrorHandling(error.code),
+        providerGenerator: providerGenerator,
+        errorIndex: 2,
+      );
+    }
+  }
+
+  onHideError(ProviderGenerator providerGenerator) {
+    providerGenerator
+      ..setErrorMessage(index: 1, value: '')
+      ..setVisibleError(index: 1, value: false)
+      ..setErrorMessage(index: 2, value: '')
+      ..setVisibleError(index: 2, value: false)
+      ..setLoadingValue(value: false, index: 0);
+  }
+
+  // Reading Error Value on the Screen
+    onSuccessSignUP({
+    required emp_email,
+    required emp_password,
+    required bool employe_or_admin,
+    required String shifts,
+    required String password,
+    required String adminemail,
+    required String reportingto,
+    required String designation,
+    required String phonenumber,
+    required String department,
+    required String name,
+    required String email,
+    required String uid,
+    required ProviderGenerator providerGenerator,
+    required BuildContext context,
+    required bool superadmin
+  }) async {
+    var now = new DateTime.now();
+    //Active Error Ui
+    onHideError(providerGenerator);
+    globalemail=email.toString();
+    print("the uid is this : " + uid);
+    CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
+    final user=FirebaseAuth.instance.currentUser;
+    String userid='';
+    final fb = FirebaseDatabase.instance;
+    final r = fb.reference().child("UserT");
+    userid=uid.toString();
+
+    // await UserT.where('email', isEqualTo: email).get().then((value) => value.docs.forEach((element) {
+    //   element.reference.collection("Employee").doc(textEditingController1.text.trim()).
+    //   set({"reportingto":"$reportings","designation":"$designationdropdownvalue","phonenumber":"${textEditingController2.text.trim()}","department":"$dropdownvalue",
+    //     "name":"${textEditingController4.text.trim()}","email":"${textEditingController1.text.trim()}",});
+    // }));
+    //await UserT.doc(email).collection("Contacts").doc("$email").set({"email":"$email","role":"admin","uid":"$uid",});
+    //await UserT.firestore.collection(email).doc().set({"admin_name":"$name","company_name":"$companyname","phone_number":"$phonenumber"});
+
+    FirebaseFirestore.instance.collection("Companies").doc(adminemail).collection('Employee').doc(email)
+        .set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+      "name":"$name","email":"$email","uid":"$uid", 'shift':'$shifts', 'generatedId':'', 'active':true}).then((value) {
+    });
+
+    FirebaseFirestore.instance.collection("Companies")
+        .doc(adminemail).collection('Employee')
+        .doc(email).collection("Attendance").doc('${now.year}-${now.month}-${now.day}').set({"TimeIn":"","TimeInAddress":"","TimeOut":"","TimeOutAddress":""});
+    //  UserT.where('email', isEqualTo: adminemail).firestore.collection("Empoloyee").doc(email).set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+    //  "name":"$name","email":"$email","uid":"$uid",});
+    UserT.where('email', isEqualTo: adminemail).get().then((value) => value.docs.forEach((element) {
+      print("kkklklklkk $email $adminemail ${password}");
+      element.reference.collection("Employee").doc(email).set({'shift':'$shifts',"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+        "name":"$name","email":"$email","uid":"$uid",'shift':'$shifts', 'generatedId':'', 'active':true,"admin":employe_or_admin});
+    })).then((value) async {
+      await FirebaseAuth.instance.signOut().then((value) async {
+        print("iiiiiiiiii $employemail ll $adminemail JJ ${password} kk $employepassword");
+        firebaseAuth.signInWithEmailAndPassword( email: employemail.isEmpty ? "$adminemail":"$employemail", password: employepassword.isEmpty ?password:employepassword, ).then((value) {
+          // Navigator.of(context).pushReplacement(
+          //     MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,)),
+          //     result: false);
+        }).then((value) {
+
+          superadmin==false ?
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => EmployeeDirectory(password: password,compnayemail: adminemail,superadmin: superadmin,)), result: false):
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => EmployeeDirectory(password: password,compnayemail: adminemail,superadmin: superadmin,)), result: false);
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => ScreenMain(password: password,adminname: adminemail,)), result: false) :
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Test(password: password,)),);
+
+          superadmin == false
+              ? CSMainPopup4(superadmin: password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully')
+              : CSMainPopup3(superadmin:password,context: context, btnText: 'OK', popMessag: 'Employee Created Successfully',);
+
+        });
+      });
+    });
+    // await UserT.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+    //   element.reference.collection("Employee").doc(email).
+    //   set({"reportingto":"$reportingto","designation":"$designation","phonenumber":"$phonenumber","department":"$department",
+    //     "name":"$name","email":"$email","uid":"$uid",});
+    // })).then((value) => Navigator.pop(context));
+  }
+
+  // Reading Error Value on the Screen
+  onlogicErrorHandling({
+    required String error,
+    required ProviderGenerator providerGenerator,
+    required int errorIndex,
+    int? errorIndex2,
+  }) {
+    if (errorIndex2 != null) {
+      providerGenerator
+        ..setVisibleError(value: true, index: errorIndex2)
+        ..setErrorMessage(value: error, index: errorIndex2);
+    }
+
+    //Active Error Ui
+    providerGenerator
+      ..setVisibleError(value: true, index: errorIndex)
+      ..setErrorMessage(value: error, index: errorIndex)
+      ..setLoadingValue(value: false, index: 0);
+  }
+
+  //check Empty Value
+  bool isMatched(String password, String passwordConfirmation) {
+    return password.trim() == passwordConfirmation.trim() ? true : false;
+  }
+
+  // check RegExp Validation for email
+  bool isRegExpValid(String value) {
+    return RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(value.trim())
+        ? true
+        : false;
+  }
+
+  //Handling Firebase Error Value
+  String onFirebaseErrorHandling(String error) {
+    switch (error) {
+      case "invalid-email":
+        return "Your email address appears to be malformed.";
+
+      case "email-already-in-use":
+
+        return "An account with that email exists already!";
+
+      case "weak-password":
+        return "password is not strong enough";
+
+      case "operation-not-allowed":
+        return "Signing up with Email and Password is not enabled.";
+
+      default:
+        return "An undefined Error happened.";
+    }
+  }
+
+  void _showToast(BuildContext context,String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('$text',),
+        //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
+//   Future<bool> signUP({String? email, String? password}) async {
+//     bool isSignedIn = false;
+//     try {
+//       await firebaseAuth.createUserWithEmailAndPassword(
+//           email: email!, password: password!);
+//       isSignedIn = true;
+//     } on FirebaseAuthException catch (e) {
+//       print(e.message);
+//       isSignedIn = false;
+//     }
+//     print("is Created" + isSignedIn.toString());
+//     return isSignedIn;
+//   }
+// // Returns true if email address is in use.
+//   static Future<bool> checkIfEmailInUse(String email) async {
+//     try {
+//       // Fetch sign-in methods for the email address
+//       final list =
+//           await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+//       // In case list is not empty
+//       if (list.isNotEmpty) {
+//         // Return true because there is an existing
+//         // user using the email address
+//         return true;
+//       } else {
+//         // Return false because email adress is not in use
+//         return false;
+//       }
+//     } catch (error) {
+//       // Handle error
+//       // ...
+//       print(error.toString());
+//       return true;
+//     }
+//   }
+
+}

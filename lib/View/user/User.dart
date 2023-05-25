@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_Login.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
@@ -32,9 +33,8 @@ class _ProfileState extends State<Profile> {
   String website='';
 
   fetchuser() async {
-    FirebaseFirestore.instance
-        .collection('Companies')
-        .doc('${user!.email.toString()}').get().then((value) {
+    FirebaseFirestore.instance.collection('Companies')
+        .doc('${mainuser ==true ?user!.email.toString(): admin__email}').get().then((value) {
       comapanyname=value.get('company_name');
       adminname=value.get('admin_name');
       email=value.get('email');
@@ -48,6 +48,7 @@ class _ProfileState extends State<Profile> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    mainuser;
     fetchuser();
   }
 

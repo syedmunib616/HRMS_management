@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_Login.dart';
 import 'package:hrmanagementapp/Model/ModelAPI/EmployeeGet.dart';
+import 'package:hrmanagementapp/controller/company_create.dart';
 import 'package:intl/date_symbol_data_local.dart'; // for other locales
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,35 +56,34 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
   List<EmailandName> reporting=[];
   var email=[];
   List<EmailandName> _searchResult = [];
-
+  String companyadmin='';
   String password='';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(":::::::::: $password ${widget.password}");
+    setState(() {
+      widget.superadmin==true? companyadmin=widget.compnayemail:mainuser==true ? companyadmin=widget.compnayemail:companyadmin=admin__email;
+    });
+    print("::::::::::$companyadmin $password ${widget.password}");
     password=widget.password;
-    widget.superadmin==false? fetchemploye() : fetchemploye1();
+    widget.superadmin==false ? fetchemploye() : fetchemploye1();
   }
 
   fetchemploye1() async {
-
     //////////////////////////////////////////////
-    print("kjhsadlkjf ${widget.compnayemail.toString()}");
+    print("kjhsadlkjfiii ${widget.compnayemail.toString()}");
     await f.where('email', isEqualTo: widget.compnayemail.toString()).get().then((value) => value.docs.forEach((element) {
       element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
         String a,b;
         a=element.get('name');
         // reporting.add(a);
-
         b=element.get('email');
         email.add(b);
-
         reporting.add(EmailandName(Name: a,Email: b));
         print("uuuuuuu $a");
         setState(() {});
-
       }));
     }));
   }
@@ -90,22 +91,56 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
 
   fetchemploye() async {
     //////////////////////////////////////////////
-    print("kjhsadlkjf ${user!.email.toString()}");
-    await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
-       element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
-         String a,b;
 
-         a=element.get('name');
-         // reporting.add(a);
 
-         b=element.get('email');
-         email.add(b);
 
-         print("uuuuuuu $a");
-         reporting.add(EmailandName(Name: a,Email: b));
-         setState(() {}); }));}));
+
+    // print("kjhsadlkjf ${user!.email.toString()}");
+    // await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+    //    element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+    //      String a,b;
+    //
+    //      a=element.get('name');
+    //      // reporting.add(a);
+    //
+    //      b=element.get('email');
+    //      email.add(b);
+    //
+    //      print("uuuuuuu $a");
+    //      reporting.add(EmailandName(Name: a,Email: b));
+    //      setState(() {}); }));}));
+   // mainuser==true ?  fetchUsersFromEmployeePanel(): fecthUsersFromMainUser();
+    mainuser==true ?  fecthUsersFromMainUser() :fetchUsersFromEmployeePanel();
   }
 
+  fetchUsersFromEmployeePanel() async {
+    print(":::::::::::::::$admin__email");
+
+    await f.where('email', isEqualTo: admin__email).get().then((value) => value.docs.forEach((element) {
+      element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+        String a,b;
+        a=element.get('name');
+        // reporting.add(a);
+        b=element.get('email');
+        email.add(b);
+        print("uuuuuuu $a");
+        reporting.add(EmailandName(Name: a,Email: b));
+        setState(() {}); }));}));
+  }
+
+  fecthUsersFromMainUser() async {
+    print("???????????????$admin__email");
+    await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+      element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
+        String a,b;
+        a=element.get('name');
+        // reporting.add(a);
+        b=element.get('email');
+        email.add(b);
+        print("uuuuuuu $a");
+        reporting.add(EmailandName(Name: a,Email: b));
+        setState(() {}); }));}));
+  }
 
   onSearchTextChanged(String text) async {
     _searchResult.clear();
@@ -120,7 +155,6 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
     });
     setState(() {});
   }
-
 
 
   @override
@@ -174,7 +208,6 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
               ),
             ),
           ),
-
           body: Stack(
             children: [
               reporting.length==null ? SizedBox(): Positioned(
@@ -186,8 +219,10 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                 ListView.builder(
                     itemCount: _searchResult.length,
                     itemBuilder: (BuildContext contet, index) {
+
                       return Empolyee(
-                        companyemail: widget.compnayemail,
+                       // companyemail: widget.compnayemail,
+                        companyemail: companyadmin,
                         superadmin:widget.superadmin,
                         email: _searchResult[index].Email,
                         name: _searchResult[index].Name,
@@ -197,8 +232,10 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                 ListView.builder(
                     itemCount: reporting.length,
                     itemBuilder: (BuildContext contet,index){
+                      print('jjjjjooooooooo $companyadmin');
                       return Empolyee(
-                        companyemail: widget.compnayemail,
+                        //companyemail: widget.compnayemail,
+                              companyemail: companyadmin,
                               superadmin:widget.superadmin,
                               email: reporting[index].Email,
                               name: reporting[index].Name,);
@@ -394,14 +431,13 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                   //   ),
                   // ),
                 );
-  }
+    }
 
 }
 
 class EditEmployee extends StatefulWidget {
-  const EditEmployee({Key? key, required this.email, required this.superadmin, required this.companyemail})
-      : super(key: key);
-  final String email ;
+  const EditEmployee({Key? key, required this.email, required this.superadmin, required this.companyemail}) : super(key: key);
+  final String email;
   final bool superadmin;
   final String companyemail;
   @override
@@ -411,7 +447,6 @@ class EditEmployee extends StatefulWidget {
 class _EditEmployeeState extends State<EditEmployee> {
   final user=FirebaseAuth.instance.currentUser;
   CollectionReference f=FirebaseFirestore.instance.collection("Companies");
-
   String department='';
   String designation='';
   String email='';
@@ -420,6 +455,7 @@ class _EditEmployeeState extends State<EditEmployee> {
   String reportingto='';
   bool active=false;
   bool load=false;
+  bool adminuser=false;
 
   CollectionReference UserT = FirebaseFirestore.instance.collection("Companies");
 
@@ -434,13 +470,58 @@ class _EditEmployeeState extends State<EditEmployee> {
     // TODO: implement initState
     super.initState();
     widget.superadmin==false? fetchemploye(): fetchemploye1();
-    //fetchemploye();
+    // fetchemploye();
   }
 
   fetchemploye() async {
     //////////////////////////////////////////////
-    print("kjhsadlkjf ${user!.email.toString()}");
-    await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+    // print("kjhsadlkjf ${user!.email.toString()}");
+    // await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+    //   element.reference.collection("Employee").where('email',isEqualTo: '${widget.email}').get().then((value) => value.docs.forEach((element) {
+    //     String a,b;
+    //     a=element.get('email');
+    //     name=element.get('name');
+    //     email=element.get('email');
+    //     designation=element.get('designation');
+    //     phonenumber=element.get('phonenumber');
+    //     department=element.get('department');
+    //     active=element.get('active');
+    //
+    //     // name1.text=element.get('name');
+    //     // email1.text=element.get('email');
+    //     // designation1.text=element.get('designation');
+    //     // phonenumber1.text=element.get('phonenumber');
+    //     // department1.text=element.get('department');
+    //
+    //     print("uuuuuuu ${name1.text} ${email1.text} ${designation1.text} ${phonenumber1.text} ${department1.text}");
+    //
+    //     // print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
+    //     setState(() {
+    //       name1.text=name;
+    //       email1.text=email;
+    //       designation1.text=designation;
+    //       phonenumber1.text=phonenumber;
+    //       department1.text=department;
+    //     });
+    //     // element.reference.collection(widget.email).get().then((value) => value.docs.forEach((element) {
+    //     //   name=element.get('name');
+    //     //   email=element.get('email');
+    //     //   department=element.get('designation');
+    //     //   designation=element.get('phonenumber');
+    //     //   print("uuuuuuu $name $email $department $designation");
+    //     //   setState(() {});
+    //     //
+    //     //
+    //     //     }
+    //     //   )
+    //     // );
+    //   }));
+    // }));
+    mainuser==true?fetchThroughMainUser():fetchThroughEmployeeAdminUser();
+  }
+
+  fetchThroughMainUser(){
+    f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
       element.reference.collection("Employee").where('email',isEqualTo: '${widget.email}').get().then((value) => value.docs.forEach((element) {
         String a,b;
         a=element.get('email');
@@ -450,6 +531,7 @@ class _EditEmployeeState extends State<EditEmployee> {
         phonenumber=element.get('phonenumber');
         department=element.get('department');
         active=element.get('active');
+        adminuser=element.get('admin');
         // name1.text=element.get('name');
         // email1.text=element.get('email');
         // designation1.text=element.get('designation');
@@ -482,21 +564,68 @@ class _EditEmployeeState extends State<EditEmployee> {
     }));
   }
 
-
-  fetchemploye1() async {
-    //////////////////////////////////////////////
-    print("kjhsadlkjf ${user!.email.toString()}");
-    await f.where('email', isEqualTo: widget.companyemail).get().then((value) => value.docs.forEach((element) {
+  fetchThroughEmployeeAdminUser(){
+    f.where('email', isEqualTo: admin__email).get().then((value) => value.docs.forEach((element) {
       element.reference.collection("Employee").where('email',isEqualTo: '${widget.email}').get().then((value) => value.docs.forEach((element) {
         String a,b;
         a=element.get('email');
-        //print("uuuuuuu $a");
         name=element.get('name');
         email=element.get('email');
         designation=element.get('designation');
         phonenumber=element.get('phonenumber');
         department=element.get('department');
-        //active=element.get('active');
+        active=element.get('active');
+        adminuser=element.get('admin');
+
+        // name1.text=element.get('name');
+        // email1.text=element.get('email');
+        // designation1.text=element.get('designation');
+        // phonenumber1.text=element.get('phonenumber');
+        // department1.text=element.get('department');
+
+        print("uuuuuuu ${name1.text} ${email1.text} ${designation1.text} ${phonenumber1.text} ${department1.text}");
+
+        // print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
+
+        setState(() {
+          name1.text=name;
+          email1.text=email;
+          designation1.text=designation;
+          phonenumber1.text=phonenumber;
+          department1.text=department;
+        });
+        // element.reference.collection(widget.email).get().then((value) => value.docs.forEach((element) {
+        //   name=element.get('name');
+        //   email=element.get('email');
+        //   department=element.get('designation');
+        //   designation=element.get('phonenumber');
+        //   print("uuuuuuu $name $email $department $designation");
+        //   setState(() {});
+        //
+        //
+        //     }
+        //   )
+        // );
+      }));
+    }));
+  }
+
+  fetchemploye1()async{
+    //////////////////////////////////////////////
+    print("iiiiiiiiii ${widget.companyemail}");
+
+    print("kjhsadlkjf ${widget.email} ${widget.companyemail} ${user!.email.toString()}");
+    await f.where('email', isEqualTo: widget.companyemail).get().then((value) => value.docs.forEach((element) {
+      element.reference.collection("Employee").where('email',isEqualTo: '${widget.email}').get().then((value) => value.docs.forEach((element) {
+        String a,b;
+        a=element.get('email');
+        // print("uuuuuuu $a");
+        name=element.get('name');
+        email=element.get('email');
+        designation=element.get('designation');
+        phonenumber=element.get('phonenumber');
+        department=element.get('department');
+        // active=element.get('active');
         print("uuuuuuu ${widget.companyemail} $name $email $department $designation");
         setState(() {});
         // element.reference.collection(widget.email).get().then((value) => value.docs.forEach((element) {
@@ -557,7 +686,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                         Spacer(),
                         Row(
                            children: [
-                                //Icon(FontAwesomeIcons.user),
+                                // Icon(FontAwesomeIcons.user),
                                 Text(" Profile",style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
                              ],
                            ),
@@ -845,8 +974,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                 //     ],
                 //   ),
                 // ),
-                widget.superadmin==false ?
-                Positioned(
+                widget.superadmin==false ? Positioned(
                   top: 100,
                   bottom: 1,
                   child: SingleChildScrollView(
@@ -919,7 +1047,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                                   // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
                                   //
                                   // }
-                                  await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                                  await UserT.doc("${mainuser ==true ? user!.email.toString():admin__email}").collection('Employee').doc('$email').update({"active":valu}).then((value) {
                                     setState(() {
                                       active = valu;
                                     });
@@ -929,6 +1057,34 @@ class _EditEmployeeState extends State<EditEmployee> {
                             ],
                           ),
                         ) : SizedBox(),
+                        widget.superadmin==false? Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+                          child: Row(
+                            children: [
+                              Text("Make Admin",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
+                              SizedBox(width: 20.w,),
+                              Switch.adaptive(
+                                activeColor: inputBackColor(context),
+                                inactiveThumbColor: settingButtonBackColor(context),
+                                inactiveTrackColor: subTitleClr,
+                                activeTrackColor: buttonBackColor(context),
+                                value: adminuser,
+                                onChanged: (valu) async {
+                                  // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                                  //
+                                  // }
+                                  await UserT.doc("${mainuser ==true ? user!.email.toString():admin__email}").collection('Employee').doc('$email').update({"admin":valu}).then((value) {
+                                    setState(() {
+                                      adminuser = valu;
+                                    });
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ) : SizedBox(),
+                        //Text(":::::::::::::"),
+
                         // Container(
                         //   color: Colors.grey,
                         //   width: MediaQuery.of(context).size.width,
@@ -1024,12 +1180,13 @@ class _EditEmployeeState extends State<EditEmployee> {
                           child: Container(
                             height: 55.h,
                             width: MediaQuery.of(context).size.width,
-                            //  color: Colors.green,
+                            // color: Colors.green,
                             child: TextField(
                               controller: name1,
                               decoration: InputDecoration(
                                 labelText: "Name",
-                                labelStyle: GoogleFonts.poppins(fontSize: 13.sp,color: srpgradient2,letterSpacing: 1.5),
+                                labelStyle: GoogleFonts.poppins(fontSize: 13.sp,
+                                    color: srpgradient2,letterSpacing: 1.5),
                               ),
                             )
                           ),
@@ -1074,6 +1231,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                               width: MediaQuery.of(context).size.width,
                               //  color: Colors.green,
                               child: TextField(
+                                keyboardType:TextInputType.phone ,
                                 controller: phonenumber1,
                                 decoration: InputDecoration(
                                   labelText: "Phone Number",
@@ -1096,7 +1254,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                           child: Container(
                               height: 55.h,
                               width: MediaQuery.of(context).size.width,
-                              //  color: Colors.green,
+                              // color: Colors.green,
                               child: TextField(
                                 controller: department1,
                                 decoration: InputDecoration(
@@ -1115,27 +1273,25 @@ class _EditEmployeeState extends State<EditEmployee> {
                             // phonenumber=element.get('phonenumber');
                             // department=element.get('department');
 
-                            Future.delayed(const Duration(seconds: 5), () {
-                              setState(() {
-                                load=false;
-                              });
-                            });
-                            setState(() {
-                              load=true;
-                            });
-
-                             f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
-                             element.reference.collection("Employee")
-                                 .doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
-                             })).then((value) {
-
-                             setState(() {
-                                load=false;
+                             Future.delayed( const Duration(seconds: 5), () {
+                                setState(() {
+                                  load=false;
+                                });
                              });
 
-                             CSMainPopup2(context: context,btnText: "Ok",popMessag: "Added Successfully");
+                             setState(() {
+                               load=true;
+                             });
 
-                            });
+                             mainuser==true ? saveThroughMainUser() : saveThroughEmployeeAdminUser();
+
+                             // f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+                             // element.reference.collection("Employee").doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
+                             // })).then((value) {
+                             // setState(() {load=false;});
+                             // CSMainPopup2(context: context,btnText: "Ok",popMessag: "Added Successfully");
+                             // });
+
                           },
                           child: BtnSave(load: load),
                         ),
@@ -1145,8 +1301,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                       ],
                     ),
                   ),
-                ):
-                Positioned(
+                ): Positioned(
                   top: 100,
                   bottom: 1,
                   child: Column(
@@ -1204,7 +1359,10 @@ class _EditEmployeeState extends State<EditEmployee> {
                       //   //
                       //   keyboardType: TextInputType.number,
                       // ),
-                      widget.superadmin==false? Padding(
+
+
+
+                      widget.superadmin==false ? Padding(
                         padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
                         child: Row(
                           children: [
@@ -1230,6 +1388,38 @@ class _EditEmployeeState extends State<EditEmployee> {
                           ],
                         ),
                       ) : SizedBox(),
+
+
+
+                      // widget.superadmin==false ? Padding(
+                      //   padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+                      //   child: Row(
+                      //     children: [
+                      //       Text("Services ",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
+                      //       SizedBox(width: 20.w,),
+                      //       Switch.adaptive(
+                      //         activeColor: inputBackColor(context),
+                      //         inactiveThumbColor: settingButtonBackColor(context),
+                      //         inactiveTrackColor: subTitleClr,
+                      //         activeTrackColor: buttonBackColor(context),
+                      //         value: active,
+                      //         onChanged: (valu) async {
+                      //           // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                      //           //
+                      //           // }
+                      //           await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                      //             setState(() {
+                      //               active = valu;
+                      //             });
+                      //           });
+                      //         },
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ) : SizedBox(),
+
+
+
                       // Container(
                       //   color: Colors.grey,
                       //   width: MediaQuery.of(context).size.width,
@@ -1390,12 +1580,29 @@ class _EditEmployeeState extends State<EditEmployee> {
                     ],
                   ),
                 ),
-
               ],
             ),
           )
         )
       );
+    }
+
+  saveThroughMainUser(){
+    f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+      element.reference.collection("Employee").doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
+      })).then((value) {
+      setState(() {load=false;});
+      CSMainPopup2(context: context,btnText: "Ok",popMessag: "Added Successfully");
+    });
+  }
+
+  saveThroughEmployeeAdminUser(){
+    f.where('email', isEqualTo: admin__email).get().then((value) => value.docs.forEach((element) {
+      element.reference.collection("Employee").doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
+      })).then((value) {
+      setState(() {load=false;});
+      CSMainPopup2(context: context,btnText: "Ok",popMessag: "Added Successfully");
+      });
     }
   }
 
@@ -1600,12 +1807,15 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     });
   }
 
+  bool mainnuser=false;
+
   companyname(){
     FirebaseFirestore.instance.collection('Companies')
-        .doc(email).get().then((value) {
+        .doc("${mainuser==true ?email: admin__email.isEmpty ? email:admin__email}").get().then((value) {
           company_name= value.get('company_name');
+          mainnuser=value.get('mainuser');
           setState(() {});
-          print("MMMMMMMMMMMMMMM $company_name");
+          print("MMMMMMMMMMMMMMM $company_name $mainnuser");
     });
   }
 
@@ -1670,7 +1880,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       // }));
       // });
     FirebaseFirestore.instance.collection('Companies')
-        .doc(email).collection('Departments')
+        .doc("${"${mainuser==true ?email: admin__email.isEmpty ? email:admin__email}"}").collection('Departments')
         .get().then((value) {
           value.docs.forEach((element) {
             String a;
@@ -1685,7 +1895,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
 
   fetchshifts(){
     FirebaseFirestore.instance.collection('Companies')
-        .doc(email).collection('Shifts')
+        .doc("${"${mainuser==true ?email: admin__email.isEmpty ? email:admin__email}"}").collection('Shifts')
         .get().then((value) {
       value.docs.forEach((element) {
         String a,b,c;
@@ -1704,11 +1914,13 @@ class _CreateEmployeeState extends State<CreateEmployee> {
   bool active=false;
   bool checkingtextfeild=false;
   String errmsg='';
+  bool aChecked = false;
+  bool bChecked = false;
 
   fetchemploye() async {
     //////////////////////////////////////////////
     print("kjhsadlkjf ${user!.email.toString()}");
-    await f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+    await f.where('email', isEqualTo: "${"${mainuser==true ?email: admin__email.isEmpty ? email:admin__email}"}").get().then((value) => value.docs.forEach((element) {
       element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
         String a;
         a=element.get('email');
@@ -1932,8 +2144,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                           SizedBox(width: 23.w,),
                           DropdownButtonHideUnderline(
                             child: DropdownButton(
-                              style: GoogleFonts.poppins(fontSize:10.sp,
-                                  color: fontgrey,fontWeight: FontWeight.w400),
+                              style: GoogleFonts.poppins(fontSize:10.sp, color: fontgrey,fontWeight: FontWeight.w400),
                               elevation: 0,
                               value: dropdownvalue1,
                               icon:  Container(
@@ -2175,6 +2386,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             errorMsg:
                             providerGenerator.getErrorMessage(index: 2))),
                   ),
+
                   Visibility(
                     visible:checkingtextfeild,
                     child: Container(
@@ -2446,9 +2658,46 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   //           errorMsg:
                   //           providerGenerator.getErrorMessage(index: 2))),
                   // ),
-
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text("Admin",style:  GoogleFonts.poppins(fontSize:10.sp,
+                        color: fontgrey,fontWeight: FontWeight.w400),),
+                      IconButton(
+                        icon: Icon(
+                          aChecked ? Icons.check_box : Icons.check_box_outline_blank,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            aChecked = !aChecked;
+                            if (aChecked) {
+                              bChecked = false;
+                            }
+                          });
+                        },
+                      ),
+                      Text("Employee",style:  GoogleFonts.poppins(fontSize:10.sp,
+                          color: fontgrey,fontWeight: FontWeight.w400),),
+                      IconButton(
+                        icon: Icon(
+                          bChecked ? Icons.check_box : Icons.check_box_outline_blank,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            bChecked = !bChecked;
+                            if (bChecked) {
+                              aChecked = false;
+                            }
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5.h,),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       CollectionReference UserT = FirebaseFirestore.instance.collection("Companies");
                       final user = FirebaseAuth.instance.currentUser;
                       print("${textEditingController1.text.trim()} ${textEditingController3.text.trim()}"
@@ -2461,7 +2710,16 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                         });
                       });
                       {
-                        createEmployee(providerGenerator);
+                        if(aChecked==false && bChecked==false){
+                          _showToast(context,"Please select employee or admin.");
+                        }
+                        else {
+                          print("$mainuser");
+                          mainuser == false
+                              ? createEmployee1(providerGenerator)
+                              : createEmployee(providerGenerator);
+                        }
+                         //createEmployee(providerGenerator);
                       }
                     },
                     child: Padding(
@@ -2498,7 +2756,6 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                         )
                     ),
                   ),
-
                   // GestureDetector(
                   //   onTap: (){
                   //     CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
@@ -2598,14 +2855,12 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   SizedBox(
                     height: 20.h,
                   ),
-
                 ],
               ),
 
               // : const Center(
               //   child: CircularProgressIndicator(),
               // ),
-
             ),
           ),
         ),
@@ -2613,8 +2868,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     );
   }
 
+  createEmployee(ProviderGenerator providerGenerator) async {
+    print("createEmployee $company_name ::::::::::::::::::");
 
-  createEmployee(ProviderGenerator providerGenerator ) async {
     var now = DateTime.now();
     initializeDateFormatting('es');
 
@@ -2677,8 +2933,166 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       }
       else{
         FrSignUpService1(FirebaseAuth.instance, context).onTapSignUP(
+            employe_or_admin:aChecked,
             shifts: dropdownvalue1,
-            adminemail: email,
+            adminemail: mainuser ==true ? email: admin__email,
+            email: textEditingController1.text.trim(),
+            password: textEditingController3.text.trim(),
+            designation: designationdropdownvalue,
+            // passwordConfirmation: textEditingController6.text.trim(),
+            reportingto: reportings,
+            name: textEditingController4.text.trim(),
+            department: dropdownvalue,
+            phonenumber: textEditingController2.text.trim(),
+            context: context,
+            providerGenerator: providerGenerator,
+            adminpassword: mainuser == true ? widget.password : admin__password,
+            superadmin: widget.superadmin
+        ).then((value) async {
+
+          print("employe create kkkkkkkkkk");
+          var res = await EmployeeCreation().postcratetionofemployeeuser(data, 'register');
+
+        }).then((value) async {
+
+          print("7777777777 ${company_name} ${now.day}-${now.month}-${now.year}");
+          var res = await EmployeeCreation().postcratetionofemployee(employee, 'register');
+
+        }).then((value) async {
+
+          String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+          var res = await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}", email);
+
+          // setState(() {
+          //   isLoading=false;
+          // });
+        });
+      }
+    }
+    else{
+      print("gufddi  bhen 11111 ${textEditingController1.text}");
+      checkingtextfeild=true;
+      errmsg="Invalid Email format";
+    }
+
+    // else{
+    //
+    //
+    //     print("gufddi  bhen ${textEditingController1.text}");
+    //
+    //     if(textEditingController1.text.toString().contains('@')) {
+    //
+    //     }
+    //
+    //
+    // }
+          //String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "taha"]]""";
+
+          // var res = await EmployeeCreation().allEmployeesGet('', api);
+
+
+
+    // for(int i=0;i<noofcompanies.length;i++){
+    //   print("###### ${noofcompanies[i]}");
+    //   if(textEditingController2.text==noofcompanies[i]){
+    //     setState(() {
+    //       companyisalreadycreated=true;
+    //     });
+    //   }
+    // }
+    // if(companyisalreadycreated==false){
+    //   FrSignUpService(FirebaseAuth.instance).onTapSignUP(
+    //     email: textEditingController3.text.trim(),
+    //     password: textEditingController5.text.trim(),
+    //     passwordConfirmation: textEditingController6.text.trim(),
+    //     name: textEditingController1.text.trim(),
+    //     companyname: textEditingController2.text.trim(),
+    //     phonenumber: textEditingController4.text.trim(),
+    //     website: textEditingController7.text.trim(),
+    //     context: context,
+    //     providerGenerator: providerGenerator,
+    //   ).then((value) async {
+    //     print("kkkkkkkkkk");
+    //     var res= await CreateCompany().postData(data,'register');
+    //     var body=jsonDecode(res.body);
+    //   }).then((value) async {
+    //     var res= await CreateCompany().postcratetionofuser(usercreation,'register');
+    //     var body=jsonDecode(res.body);
+    //   }).then((value) async{
+    //     var res= await CreateCompany().postpermissionofuser(userpermission,'register');
+    //     var body=jsonDecode(res.body);
+    //   });
+    // }else{
+    //   _showToast(context,"Company name already taken");
+    // }
+  }
+
+  createEmployee1(ProviderGenerator providerGenerator ) async {
+    print("createEmployee1:::::::::::::::::: $admin__email??? $email");
+    var now = DateTime.now();
+
+    initializeDateFormatting('es');
+
+    var data = {
+      "email": "${textEditingController1.text}", // (user email id)
+      "first_name" : "${textEditingController4.text}", //(employee name)
+      "new_password": "${textEditingController3.text.trim()}"
+    };
+    var employee = {
+      "first_name" : "${textEditingController4.text}", //(employee name)
+      "company" : "$company_name", // (company name)
+      "gender" : "Male",
+      "date_of_birth" : "1997-01-03",
+      "date_of_joining" : "${now.year}-${now.month}-${now.day}",
+      "user_id" : "${textEditingController1.text}",
+      "default_shift" : "day shift",
+      "leave_approver" :"$email",
+      "holiday_list" : "2023",
+      //(user email id)
+      // "first_name" : "Testing", (employee name)
+      // "company" : "src", (company name)
+      // "gender" : "Female",
+      // "date_of_birth" : "1997-01-03",
+      // "date_of_joining" : "2022-06-08",
+      // "user_id" : "testy@xz.com" (user email id)
+    };
+
+    // var usercreation={
+    //   "email": "${textEditingController3.text}",
+    //   "first_name" : "${textEditingController1.text}",
+    //   "roles": [
+    //     {
+    //       "role" : "HR User",
+    //       "doctype" : "Has Role"
+    //     },
+    //     {
+    //       "role" : "HR Manager",
+    //       "doctype" : "Has Role"
+    //     }
+    //   ]
+    // };
+    //
+    // var userpermission = {
+    //   "user": "${textEditingController3.text}", //(email)
+    //   "allow": "Company",	//(static company)
+    //   "for_value": "${textEditingController2.text}"   // (company name)
+    // };
+    var l;
+    if(textEditingController1.text.isEmpty ||textEditingController2.text.isEmpty||textEditingController3.text.isEmpty||textEditingController4.text.isEmpty) {
+      setState(() {
+        checkingtextfeild=true;
+        errmsg="Please enter information";
+      });
+    }else if(textEditingController1.text.toString().contains('@')){
+      final list= await FirebaseAuth.instance.fetchSignInMethodsForEmail(textEditingController1.text.trim());
+      if (list.isNotEmpty) {
+        _showToast(context, 'An account with that email exists already!');
+      }
+      else{
+        FrSignUpService2(FirebaseAuth.instance, context).onTapSignUP(
+          employe_or_admin: aChecked,
+            shifts: dropdownvalue1,
+            adminemail: mainuser==false ?admin__email.isEmpty? email: admin__email:email,
             email: textEditingController1.text.trim(),
             password: textEditingController3.text.trim(),
             designation: designationdropdownvalue,
@@ -2701,9 +3115,8 @@ class _CreateEmployeeState extends State<CreateEmployee> {
           var res = await EmployeeCreation().postcratetionofemployee(
               employee, 'register');
         }).then((value) async {
-          String api = """https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
-          var res = await EmployeeCreation().allEmployeesGet(
-              '', api, "${textEditingController1.text}", email);
+          String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+          var res = await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}", email);
           // setState(() {
           //   isLoading=false;
           // });
@@ -2726,9 +3139,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
     //
     //
     // }
-          //String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "taha"]]""";
+    //String api="""https://test.srp.ai/api/resource/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "taha"]]""";
 
-          // var res = await EmployeeCreation().allEmployeesGet('', api);
+    // var res = await EmployeeCreation().allEmployeesGet('', api);
 
 
 

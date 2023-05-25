@@ -182,8 +182,9 @@ class _ScreenSplachState extends State<ScreenSplach> {
           )
         ),
       );
-    }
   }
+
+}
 
 
 // class GoogleSignInProvider extends ChangeNotifier{

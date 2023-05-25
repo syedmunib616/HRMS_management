@@ -18,7 +18,8 @@ class EmployeeCreation{
           "Authorization": authorization},
           body:body
     ).then((value) {
-      print("*****************^^^^^^^^^^^^^");
+      var b = jsonDecode(value.body);
+      print("*****************^^^^^^^^^^^^^ $b");
     });
   }
 
@@ -59,7 +60,7 @@ class EmployeeCreation{
 
           // print("Mmunib :::::: ${emp.data[i].userId}");
           // print("oooooooooooooooooooo ${emp.data[i].name}");
-
+          print("ijaaaaaaazzt ::::::::; ${emp.data[i].userId} :::: ${email}");
           if(emp.data[i].userId==email){
             // FirebaseFirestore.instance.collection("Companies").where('email',isEqualTo:'$email').
             // snapshots().forEach((element) {});
@@ -70,7 +71,6 @@ class EmployeeCreation{
               print("IUIUIUIUIU ");
             });
           }
-
          }
           // return
       });

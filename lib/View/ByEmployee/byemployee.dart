@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_Login.dart';
+import 'package:hrmanagementapp/Model/firbaseModel/employeeAttendance.dart';
 import 'package:hrmanagementapp/Model/firbaseModel/employeeAttendance.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/ByDesignation/bydesignation.dart';
@@ -54,6 +56,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+// import 'package:hrmanagementapp/Model/firbaseModel/employeeAttendance.dart';
+
 
 class ByEmployee extends StatefulWidget {
   ByEmployee({Key? key}) : super(key: key);
@@ -126,7 +130,7 @@ class _ByEmployeeState extends State<ByEmployee> {
     print("%%%%%%%%%%%%%%%% $datestring");
     FirebaseFirestore.instance
         .collection('Companies')
-        .doc('${user!.email.toString()}')
+        .doc('${mainuser==true ?user!.email.toString():admin__email}')
         .collection("Employee")
         .get()
         .then((value) {
@@ -1695,27 +1699,22 @@ class _ByEmployeeState extends State<ByEmployee> {
     if(dropdownvalue1=='All'){
         setState(() {
           shownhichalyga=true;
-          // streamController.onPause;
-          // streamController.close();
           streamController.onCancel;
           streamController.stream;
           attendance=[];
           attendance.clear();
-          // attendance.removeRange(0, attendance.length);
-          // for(int i=0;i<attendance.length;i++){
-          //   attendance.removeAt(i);
-          // }
+
         });
         FirebaseFirestore.instance
             .collection('Companies')
-            .doc('${user!.email.toString()}')
+            .doc('${mainuser ==true? user!.email.toString():admin__email}')
             .collection("Employee").get().then((value) {
           value.docs.forEach((element) {
             String a;
             a = element.id;
             FirebaseFirestore.instance
                 .collection('Companies')
-                .doc(user!.email.toString())
+                .doc('${mainuser ==true? user!.email.toString():admin__email}')
                 .collection("Employee")
                 .doc(a).collection('Attendance')
                 .get()
@@ -1727,13 +1726,10 @@ class _ByEmployeeState extends State<ByEmployee> {
                   print("munib ${b}");
                   if(b==element.id){
                     print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-                    // setState(() {
-                    //   attendance=[];
-                    //   //streamController.isPaused;
-                    // });
+
                     FirebaseFirestore.instance
                         .collection('Companies')
-                        .doc('${user!.email.toString()}')
+                        .doc('${'${mainuser ==true? user!.email.toString():admin__email}'}')
                         .collection("Employee")
                         .doc(a)
                         .collection('Attendance')
@@ -1763,72 +1759,15 @@ class _ByEmployeeState extends State<ByEmployee> {
 
                       });
 
-                      // print("///////////// ${attendance[i].date}");
                     });
 
                     setState(() {
                       totalattendance=attendance.length;
                       streamController.stream;
-                      // Future.delayed(const Duration(milliseconds: 10), () {
                       shownhichalyga=false;
-                      // });
                     });
 
                   }}});});
-            //     FirebaseFirestore.instance
-            //         .collection('Companies')
-            //         .doc('${user!.email.toString()}')
-            //         .collection("Employee")
-            //         .doc(dropdownvalue1)
-            //         .collection('Attendance')
-            //
-            //         .get().then((value) {
-            //       value.docs.forEach((element) {
-            //         a=element.id;
-            //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
-            //
-            //         if(date==a){
-            //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-            //
-            //           // setState(() {
-            //           //   attendance=[];
-            //           //   //streamController.isPaused;
-            //           // });
-            //
-            //           FirebaseFirestore.instance
-            //               .collection('Companies')
-            //               .doc('${user!.email.toString()}')
-            //               .collection("Employee")
-            //               .doc(dropdownvalue1)
-            //               .collection('Attendance')
-            //               .doc('$date').get().then((value) {
-            //             String e,f,g,h,j;
-            //             e=value.get('TimeIn');
-            //             f=value.get('TimeInAddress');
-            //             g=value.get('TimeOut');
-            //             h=value.get('TimeOutAddress');
-            //
-            //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-            //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-            //
-            //             print("///////////// $attendance");
-            //           });
-            //           setState(() {
-            //             streamController.stream;
-            //           });
-            //         }
-            //         else{
-            //           print("1111111111111");
-            //         }
-            //         setState(() {
-            //           streamController.stream;
-            //         });
-            //       });
-            //     });
-            //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
-            //
-            //   });
-            // });
           });}).then((value) {
             print("false hogaya ");
             setState(() {
@@ -1841,18 +1780,12 @@ class _ByEmployeeState extends State<ByEmployee> {
           String a;
           setState(() {
             shownhichalyga=true;
-            // streamController.onPause;
-            // streamController.close();
             streamController.onCancel;
             streamController.stream;
             attendance=[];
             attendance.clear();
-            // attendance.removeRange(0, attendance.length);
-            // for(int i=0;i<attendance.length;i++){
-            //   attendance.removeAt(i);
-            // }
+
             print("iiiiiiiiiiiiiiiii ${attendance.length}");
-            //streamController.isPaused;
 
           });
           for(int i=0;i<days.length;i++){
@@ -1870,18 +1803,6 @@ class _ByEmployeeState extends State<ByEmployee> {
   late DateTimeRange dateTimeRange =dateRange;
   List<DateTime> days = [];
   List<ListAttandance> attendance=[];
-  // checatt(String date){
-  //   for(int i=0;i<attendance.length;i++){
-  //     print("gg ${attendance[i].date} ||||||||||||||||| $date");
-  //     if(attendance[i].date=="$date"){
-  //       if(attendance[i].timein.isEmpty && attendance[i].addressIn.isEmpty){
-  //         attendance.removeAt(i);
-  //
-  //       }
-  //     }
-  //   }
-  // }
-  ////////new code for fecting attendance by color////////////////////////////////////////////
   List<String> alldates=[];
   List<EmployeeAttendance> allattendance=[];
 
@@ -1891,14 +1812,14 @@ class _ByEmployeeState extends State<ByEmployee> {
     });
     FirebaseFirestore.instance
         .collection('Companies')
-        .doc('${user!.email.toString()}')
+        .doc('${mainuser ==true? user!.email.toString():admin__email}')
         .collection("Employee").get().then((value) {
       value.docs.forEach((element) {
         String a;
         a = element.id;
         FirebaseFirestore.instance
             .collection('Companies')
-            .doc(user!.email.toString())
+            .doc('${mainuser ==true? user!.email.toString():admin__email}')
             .collection("Employee")
             .doc(a).collection('Attendance')
             .get()
@@ -1916,7 +1837,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                 // });
                 FirebaseFirestore.instance
                     .collection('Companies')
-                    .doc('${user!.email.toString()}')
+                    .doc('${mainuser ==true? user!.email.toString():admin__email}')
                     .collection("Employee")
                     .doc(a)
                     .collection('Attendance')
@@ -2097,58 +2018,26 @@ class _ByEmployeeState extends State<ByEmployee> {
 
   fetchattendance(String date) async {
     print("||||||||||||||||| $date");
-    //checatt(date);
+
     print("kkkkkkkkkk $date $dropdownvalue1");
     String a,b;
     setState(() {  hasAttendance=false; });
     await FirebaseFirestore.instance
           .collection('Companies')
-          .doc('${user!.email.toString()}')
+          .doc('${'${mainuser ==true? user!.email.toString():admin__email}'}')
           .collection("Employee")
           .doc(dropdownvalue1)
           .collection('Attendance')
-          // .doc(date)
-          // .get()
-          // .then((value) {
-          //   a=value.get('TimeIn');
-          //   b=value.get('TimeInAddress');
-          //   print("time pora ho gaya hai $a $b");
-          //
-          // });
+
           .get().then((value) {
           value.docs.forEach((element) {
           a=element.id;
-          // print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
 
-          // for(int i=0;i<attendance.length;i++){
-          //
-          //   DateTime dt1=DateTime.parse(attendance[i].date);
-          //   DateTime dt2=DateTime.parse(attendance[i+1].date);
-          //
-          //   print("$dt1 _______________ $dt2");
-          //
-          //
-          //   // attendance.sort((a,b) {
-          //   //
-          //   //  List<DateTime> a=[];
-          //   //  a = dt1.compareTo(dt2);
-          //   //
-          //   //
-          //   //   return dt1.compareTo(dt2);
-          //   // });
-          //
-          // }
-          //
-          // attendance.sort((a,b) => a.date.compareTo(b.date));
           if(date==a){
-              // print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-              // setState(() {
-              //   attendance=[];
-              //   //streamController.isPaused;
-              // });
+
               FirebaseFirestore.instance
                   .collection('Companies')
-                  .doc('${user!.email.toString()}')
+                  .doc('${mainuser ==true? user!.email.toString():admin__email}')
                   .collection("Employee")
                   .doc(dropdownvalue1)
                   .collection('Attendance')
@@ -2167,18 +2056,8 @@ class _ByEmployeeState extends State<ByEmployee> {
                         streamController.add(ListAttandance(name:name_email[i].name,employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
                       }
                     }
-
-                    // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-                    // streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-
                     print("///////////// $attendance");
                   setState(() {
-                    // for(int i=0;i<attendance.length;i++){
-                    //   if(attendance[i].timein.isEmpty){
-                    //     attendance.removeAt(i);
-                    //   }
-                    // }
-
                     totalattendance=attendance.length;
                   });
 
@@ -2190,26 +2069,14 @@ class _ByEmployeeState extends State<ByEmployee> {
               });
             }
           else{
-              // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
-              // streamController.add(ListAttandance(employee: dropdownvalue1, date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
+
               setState(() { hasAttendance=true; });
-                // attendance.add(ListAttandance(employee:dropdownvalue1 ,date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
                 print("1111111111111");
               }
               setState(() {  streamController.stream;  });
               });
            }).then((value) {
-             // setState(() {
-             //   hasAttendance=false;
-             // });
-             // print("555555555555 calender: $date}");
-             //
-             // for(int i=0;i<attendance.length;i++){
-             //   print("loop: ${attendance[i].date}");
-             //      if(attendance[i].date=="$date"){
-             //        //print("555555555555 calender: $date loop: ${attendance[i].date}");
-             //         setState(() { hasAttendance=true; });
-             //      }}
+
            }).then((value) {
            if(hasAttendance==true){
              attendance.forEach((element) {
@@ -2222,16 +2089,10 @@ class _ByEmployeeState extends State<ByEmployee> {
              });
            }
            else{
-             // for(int i=0;i<attendance.length;i++){
-             //   if(attendance[i].date=="$date"){}
-             //   else{
-             //   }
-             // }
+
            }
             }).then((value) {
-                // againcheck == true ? null :
-                // streamController.add(ListAttandance(employee:dropdownvalue1, date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
-                // attendance.add(ListAttandance(employee:dropdownvalue1, date: date, timein: "", addressIn: "", timeout: "", addressout: ""));
+
               }).then((value) {
                 setState(() {
                 streamController.stream;
@@ -2295,7 +2156,6 @@ class _ByEmployeeState extends State<ByEmployee> {
   getDaysInBetween(DateTime startDate, DateTime endDate) {
     setState(() { days=[]; });
     for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
-      // if(startDate.month==1 ||startDate.month==2 ||startDate.month==3 ||startDate.month==4 ||startDate.month==5 ||startDate.month==6 ||startDate.month==7 ||startDate.month==8 ||startDate.month==9 )
       days.add(startDate.add(Duration(days: i)));
 
       days.sort((a,b) {
@@ -2877,7 +2737,7 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
                   onTap: () {
                       print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
                       print("&&&&&&&&&&& ${textEditingController1.text} ${textEditingController2.text}");
-                      UserT.doc("${user!.email.toString()}")
+                      UserT.doc('${mainuser ==true? user!.email.toString():admin__email}')
                           .collection('Employee').doc("${widget.employe}")
                           .collection('Attendance').doc('${widget.date}')
                           .update({

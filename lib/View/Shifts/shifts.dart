@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrmanagementapp/Firebase/Fr_Auth.dart/Fr_Login.dart';
 import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/Provider/providergenerator.dart';
@@ -42,10 +43,11 @@ class _ShiftsState extends State<Shifts> {
     // TODO: implement initState
     super.initState();
     fetchshifts();
+    mainuser;
   }
 
   fetchshifts(){
-    UserT.doc("${user!.email.toString()}")
+    UserT.doc("${mainuser ==true ? user!.email.toString():admin__email}")
         .collection('Shifts').get().then((value) {
           value.docs.forEach((element) {
             String a,b,c;
@@ -585,12 +587,12 @@ class _ShiftsState extends State<Shifts> {
                           print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
                           if(textEditingController1.text.trim().isNotEmpty ) {
                             print("&&&&&&&&&&& ${textEditingController1.text} ${textEditingController2.text}");
-                            UserT.doc("${user!.email.toString()}")
+                            UserT.doc("${mainuser==true ? user!.email.toString() : admin__email}")
                             .collection('Shifts').doc(textEditingController1.text.trim())
                             .set({'ShiftID': textEditingController1.text.trim(),
                               'ShiftTimeIn': "${timeOfDay.hour}:${timeOfDay.minute}:00",
                               'ShiftTimeOut': "${timeOfDay1.hour}:${timeOfDay1.minute}:00",
-                            }).then((value) {
+                             }).then((value) {
                               print("///////////// ${textEditingController1.text} ${textEditingController2.text}");
                               Navigator.of(context).pop();
                               Navigator.of(context).pushReplacement(
@@ -618,9 +620,8 @@ class _ShiftsState extends State<Shifts> {
                             style: GoogleFonts.poppins(fontSize: 15.sp,
                                 color: Colors.white,fontWeight: FontWeight.w400),),
                         ),
-                      ),
-
-                  // TextButton(
+                  ),
+                      // TextButton(
                       //   child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
                       //   onPressed:  () {
                       //     print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
