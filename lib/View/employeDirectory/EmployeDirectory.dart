@@ -3038,6 +3038,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       "first_name" : "${textEditingController4.text}", //(employee name)
       "new_password": "${textEditingController3.text.trim()}"
     };
+
     var employee = {
       "first_name" : "${textEditingController4.text}", //(employee name)
       "company" : "$company_name", // (company name)
@@ -3110,8 +3111,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
           var res = await EmployeeCreation().postcratetionofemployeeuser(
               data, 'register');
         }).then((value) async {
-          print(
-              "7777777777 ${company_name} ${now.day}-${now.month}-${now.year}");
+          print("7777777777 ${company_name} ${now.day}-${now.month}-${now.year}");
           var res = await EmployeeCreation().postcratetionofemployee(
               employee, 'register');
         }).then((value) async {

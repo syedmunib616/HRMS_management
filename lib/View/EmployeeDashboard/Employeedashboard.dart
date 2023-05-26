@@ -6,6 +6,8 @@ import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Components/textfield.dart';
 import 'package:hrmanagementapp/View/Profile/Requests/components/NoRequest.dart';
 import 'package:hrmanagementapp/View/Profile/Requests/requests.dart';
+import 'package:hrmanagementapp/controller/company_create.dart';
+import 'package:hrmanagementapp/controller/employe_creation.dart';
 import 'package:hrmanagementapp/controller/markAttendance.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:intl/intl.dart';
@@ -119,9 +121,47 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         // datestring=datestring.substring(0, datestring.length - 13);
       }
       print("*-/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/  $time");
-      fetchuser();
-
+      //fetchuser();
+      fetchandpostgeneratedid();
     }
+
+  fetchandpostgeneratedid() async {
+
+    FirebaseFirestore.instance
+        .collection('Companies')
+        .doc('${admin}').get()
+        .then((valu) {
+      String company_name='';
+      company_name=valu.get('company_name');
+      FirebaseFirestore.instance
+          .collection('Companies')
+          .doc('${admin}').collection("Employee")
+          .doc('${user!.email.toString()}').get().then((value)async {
+
+
+        generatedId=value.get('generatedId');
+
+        if(generatedId.isEmpty){
+          String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+          var res = await EmployeeCreation().allEmployeesGet('', api, "${user!.email.toString()}", admin)
+              .then((value) {
+            fetchuser();
+          });
+        }else{
+          fetchuser();
+        }
+
+      });
+
+    });
+
+
+
+
+   // String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+   // var res = await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}", email);
+  }
+
 
   void _getTime() {
     final DateTime now = DateTime.now();
@@ -136,6 +176,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   String _formatDateTime(DateTime dateTime) {
       return DateFormat('MM/dd/yyyy hh:mm:ss').format(dateTime);
   }
+
   final user = FirebaseAuth.instance.currentUser;
 
   String generatedId='';
@@ -184,7 +225,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                b=element.get('TimeOut');
                print("######## $a $b");
                if(a.isNotEmpty && b.isEmpty) {
-                 setState(() {timeinshow=false;timeoutshow=true;});}
+                 setState(() {timeinshow=false;timeoutshow=true;});
+               }
                else if(a.isEmpty && b.isEmpty) {
                  setState(() {
                    timeinshow=true;
@@ -290,7 +332,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     }
 
   Future<void> GetAddressFromLatLong(Position position) async {
-
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
@@ -299,11 +340,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       Address= '${place.thoroughfare!.isEmpty ? place1.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place1.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place1.locality}, ${place.postalCode}';
       reload=false;
     });
-
   }
 
   Future<void> GetAddressFromLatLong1(Position position) async {
-
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
@@ -312,7 +351,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       Address1= '${place.thoroughfare!.isEmpty ? place1.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place1.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place1.locality}, ${place.postalCode}';
       reload=false;
     });
-
   }
 
   bool reload=false;
@@ -321,7 +359,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-
     return SafeArea(
       child: AdvancedDrawer(
         backdropColor: srpgradient2,
