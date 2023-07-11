@@ -144,20 +144,14 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         if(generatedId.isEmpty){
           String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
           var res = await EmployeeCreation().allEmployeesGet('', api, "${user!.email.toString()}", admin)
-              .then((value) {
+          .then((value) {
             fetchuser();
           });
         }else{
           fetchuser();
         }
-
       });
-
     });
-
-
-
-
    // String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
    // var res = await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}", email);
   }

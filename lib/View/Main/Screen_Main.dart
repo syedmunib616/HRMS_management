@@ -335,6 +335,7 @@ class _ScreenMainState extends State<ScreenMain> {
           ]),
         );
       }
+
 }
 
 
@@ -425,12 +426,11 @@ class _ScreenMain1State extends State<ScreenMain1> {
                             FirebaseFirestore.instance.collection('Companies').doc(element.id).collection('Employee').get().then((value){
                               value.docs.forEach((elemen) {
                                 if(elemen.id== user!.email.toString()){
-                                  setState(() {
+                                    setState(() {
                                     FirebaseFirestore.instance.collection('Companies').doc(element.id).collection('Employee')
                                         .doc(elemen.id).get().then((value) async{
                                       String generatedId='';
                                       generatedId=value.get('generatedId');
-
                                       print("::::::::::::::::: iii $generatedId iii $company_name");
                                       if(generatedId.isEmpty){
                                         String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";

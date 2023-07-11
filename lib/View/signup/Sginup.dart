@@ -59,8 +59,7 @@ class _SginUpState extends State<SginUp> {
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: AppBar(
-              leading:
-              GestureDetector(
+              leading: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -104,6 +103,7 @@ class _SginUpState extends State<SginUp> {
               // ) ,
             ),
           body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             child: Padding(
               padding:  EdgeInsets.symmetric(horizontal: 40.0.w),
               child: Container(
@@ -131,367 +131,370 @@ class _SginUpState extends State<SginUp> {
                       bottom: 0,
                       left: 0,
                       right: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 25.h,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 17.h,
-                                width: 40.w,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage('assets/logo.png'),
-                                        fit: BoxFit.contain)
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 25.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 17.h,
+                                  width: 40.w,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage('assets/logo.png'),
+                                          fit: BoxFit.contain)
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          Text(
-                            "Create Company to continue",
-                            style: GoogleFonts.poppins(fontSize: 15.sp,color: settingFontBackColor(context),fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          CsMainInputField(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController1,
-                            myhint: TextStrings.Name,
-                            prefixIcon: Icons.person,
-                            isPassword: false,
-                            keyboardType: TextInputType.emailAddress,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          CsMainInputField(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController2,
-                            myhint: TextStrings.Company_name,
-                            prefixIcon: Icons.business,
-                            isPassword: false,
-                            keyboardType: TextInputType.emailAddress,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          CsMainInputField(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController3,
-                            myhint: TextStrings.Email,
-                            prefixIcon: Icons.mail,
-                            isPassword: false,
-                            keyboardType: TextInputType.emailAddress,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          providerGenerator.getErrorMessage(index: 1) == "Please enter your Information" ? SizedBox() :
-                          Visibility(
-                            visible: providerGenerator.getVisibleError(index: 1),
-                            child: Container(
-                                margin: EdgeInsets.symmetric(vertical: 12.h),
-                                child: CsErrorContainer(
-                                    errorMsg:
-                                    providerGenerator.getErrorMessage(index: 1))),
-                          ),
-                          // Visibility(
-                          //   visible: !providerGenerator.getVisibleError(index: 1),
-                          //   child: SizedBox(
-                          //     height: 22.h,
-                          //   ),
-                          // ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          CsMainInputField122(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController4,
-                            myhint: TextStrings.Phone_No,
-                            prefixIcon: Icons.call,
-                            isPassword: false,
-                            keyboardType: TextInputType.phone,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          CsMainInputField(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController7,
-                            myhint: "Website",
-                            prefixIcon: FontAwesomeIcons.globe,
-                            isPassword: false,
-                            keyboardType: TextInputType.url,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          CsMainInputField(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController5,
-                            myhint: TextStrings.Password,
-                            prefixIcon: Icons.lock,
-                            isPassword: true,
-                            obscureIndex: 1,
-                            keyboardType: TextInputType.emailAddress,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          CsMainInputField(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController6,
-                            myhint: "Confirm Password",
-                            prefixIcon: Icons.lock,
-                            isPassword: true,
-                            obscureIndex: 2,
-                            keyboardType: TextInputType.emailAddress,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          CsMainInputField(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController8,
-                            myhint: "URL of ERP",
-                            prefixIcon: FontAwesomeIcons.earthAsia,
-                            isPassword: false,
-                            obscureIndex: 1,
-                            keyboardType: TextInputType.emailAddress,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          CsMainInputField(
-                            providerGenerator: providerGenerator,
-                            width: 287.w,
-                            mycontroller: textEditingController9,
-                            myhint: "Authorization key",
-                            prefixIcon: FontAwesomeIcons.fingerprint,
-                            isPassword: false,
-                            obscureIndex: 2,
-                            keyboardType: TextInputType.emailAddress,
-                            bordercolor: providerGenerator.getVisibleError(index: 0)
-                                ? Colors.red
-                                : null,
-                            // bordercolor: providerGenerator.getVisibleError(index: 0)
-                            //     ? Colors.red
-                            //     : null,
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Visibility(
-                            visible: providerGenerator.getVisibleError(index: 2),
-                            child: Container(
-                                margin: EdgeInsets.only(top: 19.h, bottom: 27.h),
-                                child: CsErrorContainer(
-                                    errorMsg:
-                                    providerGenerator.getErrorMessage(index: 2))),
-                          ),
-                          Visibility(
-                            visible:checkingtextfeild,
-                            child: Container(
-                                margin: EdgeInsets.only(top: 19.h, bottom: 27.h),
-                                child: CsErrorContainer(errorMsg:errmsg)),
-                          ),
-                          SizedBox(
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Text(
+                              "Create Company to continue",
+                              style: GoogleFonts.poppins(fontSize: 15.sp,color: settingFontBackColor(context),fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            CsMainInputField(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController1,
+                              myhint: TextStrings.Name,
+                              prefixIcon: Icons.person,
+                              isPassword: false,
+                              keyboardType: TextInputType.emailAddress,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            CsMainInputField(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController2,
+                              myhint: TextStrings.Company_name,
+                              prefixIcon: Icons.business,
+                              isPassword: false,
+                              keyboardType: TextInputType.emailAddress,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            CsMainInputField(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController3,
+                              myhint: TextStrings.Email,
+                              prefixIcon: Icons.mail,
+                              isPassword: false,
+                              keyboardType: TextInputType.emailAddress,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
                               height: 8.h,
-                          ),
-                          GestureDetector(
-                            onTap: () async {
+                            ),
+                            providerGenerator.getErrorMessage(index: 1) == "Please enter your Information" ? SizedBox() :
+                            Visibility(
+                              visible: providerGenerator.getVisibleError(index: 1),
+                              child: Container(
+                                  margin: EdgeInsets.symmetric(vertical: 12.h),
+                                  child: CsErrorContainer(
+                                      errorMsg:
+                                      providerGenerator.getErrorMessage(index: 1))),
+                            ),
+                            // Visibility(
+                            //   visible: !providerGenerator.getVisibleError(index: 1),
+                            //   child: SizedBox(
+                            //     height: 22.h,
+                            //   ),
+                            // ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            CsMainInputField122(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController4,
+                              myhint: TextStrings.Phone_No,
+                              prefixIcon: Icons.call,
+                              isPassword: false,
+                              keyboardType: TextInputType.phone,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            CsMainInputField(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController7,
+                              myhint: "Website",
+                              prefixIcon: FontAwesomeIcons.globe,
+                              isPassword: false,
+                              keyboardType: TextInputType.url,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            CsMainInputField(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController5,
+                              myhint: TextStrings.Password,
+                              prefixIcon: Icons.lock,
+                              isPassword: true,
+                              obscureIndex: 1,
+                              keyboardType: TextInputType.emailAddress,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            CsMainInputField(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController6,
+                              myhint: "Confirm Password",
+                              prefixIcon: Icons.lock,
+                              isPassword: true,
+                              obscureIndex: 2,
+                              keyboardType: TextInputType.emailAddress,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            CsMainInputField(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController8,
+                              myhint: "URL of ERP",
+                              prefixIcon: FontAwesomeIcons.earthAsia,
+                              isPassword: false,
+                              obscureIndex: 1,
+                              keyboardType: TextInputType.emailAddress,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            CsMainInputField(
+                              providerGenerator: providerGenerator,
+                              width: 287.w,
+                              mycontroller: textEditingController9,
+                              myhint: "Authorization key",
+                              prefixIcon: FontAwesomeIcons.fingerprint,
+                              isPassword: false,
+                              obscureIndex: 2,
+                              keyboardType: TextInputType.emailAddress,
+                              bordercolor: providerGenerator.getVisibleError(index: 0)
+                                  ? Colors.red
+                                  : null,
+                              // bordercolor: providerGenerator.getVisibleError(index: 0)
+                              //     ? Colors.red
+                              //     : null,
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            Visibility(
+                              visible: providerGenerator.getVisibleError(index: 2),
+                              child: Container(
+                                  margin: EdgeInsets.only(top: 19.h, bottom: 27.h),
+                                  child: CsErrorContainer(
+                                      errorMsg:
+                                      providerGenerator.getErrorMessage(index: 2))),
+                            ),
+                            Visibility(
+                              visible:checkingtextfeild,
+                              child: Container(
+                                  margin: EdgeInsets.only(top: 19.h, bottom: 27.h),
+                                  child: CsErrorContainer(errorMsg:errmsg)),
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            GestureDetector(
+                              onTap: () async {
 
-                              print("kljhsadlkjf");
-                              if(internetconnection==false){
-                                //fetchdata();
-                                _showToast(context,"Check your internet connection");
-                              }
-                              else{
-                              // for(int i=0;i<noofcompanies.length;i++){
-                              //   print("###### ${noofcompanies[i]}");
-                              //   if(textEditingController2.text==noofcompanies[i]){
-                              //       setState(() {
-                              //         companyisalreadycreated=true;
-                              //       });
-                              //     }
-                              //   }
-                              if(textEditingController3.text.toString().contains('@')) {
-                                final list = await FirebaseAuth.instance.fetchSignInMethodsForEmail(textEditingController3.text.trim().isEmpty?"facebook@gmail.com":textEditingController3.text.trim());
-                                if (textEditingController1.text.isEmpty || textEditingController2.text.isEmpty || textEditingController3.text.isEmpty || textEditingController4.text.isEmpty) {
-                                  print("lllll");
-                                  setState(() {
-                                    checkingtextfeild = true;
-                                    errmsg = "Please enter information";
-                                  });
-                                }
-                                else if (!textEditingController3.text.toString().contains('@')) {
-                                  print("::::kkkk ${textEditingController3.text
-                                      .toString()}");
-                                  setState(() {
-                                    checkingtextfeild = true;
-                                    errmsg = "Invalid email format";
-                                  });
-                                }
-                                else if (!RegExp(r'^\d{6}$').hasMatch(textEditingController5.text.trim().toString()) && !RegExp(r'^\d{6}$').hasMatch(textEditingController6.text.trim().toString())) {
-                                  setState(() {
-                                    checkingtextfeild = true;
-                                    errmsg = "Password is not strong enough";
-                                  });
-                                }
-                                else if (textEditingController5.text.trim().toString() != textEditingController6.text.trim().toString()) {
-                                  print("::::iiiiiiiiiiiiiiiii");
+                                // print("kljhsadlkjf");
+                                // if(internetconnection==true){
+                                //   //fetchdata();
+                                //   _showToast(context,"Check your internet connection");
+                                // }
+                                // else{
+                                // for(int i=0;i<noofcompanies.length;i++){
+                                //   print("###### ${noofcompanies[i]}");
+                                //   if(textEditingController2.text==noofcompanies[i]){
+                                //       setState(() {
+                                //         companyisalreadycreated=true;
+                                //       });
+                                //     }
+                                //   }
+                                if(textEditingController3.text.toString().contains('@')) {
+                                  final list = await FirebaseAuth.instance.fetchSignInMethodsForEmail(textEditingController3.text.trim().isEmpty?"facebook@gmail.com":textEditingController3.text.trim());
+                                  if (textEditingController1.text.isEmpty || textEditingController2.text.isEmpty || textEditingController3.text.isEmpty || textEditingController4.text.isEmpty) {
+                                    print("lllll");
+                                    setState(() {
+                                      checkingtextfeild = true;
+                                      errmsg = "Please enter information";
+                                    });
+                                  }
+                                  else if (!textEditingController3.text.toString().contains('@')) {
+                                    print("::::kkkk ${textEditingController3.text
+                                        .toString()}");
+                                    setState(() {
+                                      checkingtextfeild = true;
+                                      errmsg = "Invalid email format";
+                                    });
+                                  }
+                                  else if (!RegExp(r'^\d{6}$').hasMatch(textEditingController5.text.trim().toString()) && !RegExp(r'^\d{6}$').hasMatch(textEditingController6.text.trim().toString())) {
+                                    setState(() {
+                                      checkingtextfeild = true;
+                                      errmsg = "Password is not strong enough";
+                                    });
+                                  }
+                                  else if (textEditingController5.text.trim().toString() != textEditingController6.text.trim().toString()) {
+                                    print("::::iiiiiiiiiiiiiiiii");
 
-                                  setState(() {
-                                    checkingtextfeild = true;
-                                    errmsg = "Your Password is not Matched";
-                                  });
+                                    setState(() {
+                                      checkingtextfeild = true;
+                                      errmsg = "Your Password is not Matched";
+                                    });
 
-                                }
-                                else if (list.isNotEmpty) {
-                                  print("::::ppppppppppp");
+                                  }
+                                  else if (list.isNotEmpty) {
+                                    print("::::ppppppppppp");
 
-                                  setState(() {
-                                    checkingtextfeild = true;
-                                    errmsg =
-                                    "An account with that email exists already!";
-                                  });
+                                    setState(() {
+                                      checkingtextfeild = true;
+                                      errmsg =
+                                      "An account with that email exists already!";
+                                    });
 
+                                  }
+                                  else {
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    Future.delayed(
+                                        const Duration(seconds: 7), () {
+                                      if (!mounted) return;
+                                      setState(() {
+                                        isLoading = false;
+                                        // _showToast(context,"Check your internet connection and retry");
+                                      });
+                                    });
+                                    setState(() {
+                                      baseurl=textEditingController8.text.trim().toString();
+                                      authorization=textEditingController9.text.trim().toString();
+                                    });
+                                    registercompany(providerGenerator);
+                                  }
                                 }
                                 else {
-                                  setState(() {
-                                    isLoading = true;
-                                  });
-                                  Future.delayed(
-                                      const Duration(seconds: 7), () {
-                                    if (!mounted) return;
+                                    print("::::kkkk ${textEditingController3.text.toString()}");
                                     setState(() {
-                                      isLoading = false;
-                                      // _showToast(context,"Check your internet connection and retry");
+                                      checkingtextfeild = true;
+                                      errmsg = "Invalid email format";
                                     });
-                                  });
-                                  setState(() {
-                                    baseurl=textEditingController8.text.trim().toString();
-                                    authorization=textEditingController9.text.trim().toString();
-                                  });
-                                  registercompany(providerGenerator);
-                                }
-                              }
-                              else {
-                                  print("::::kkkk ${textEditingController3.text.toString()}");
-                                  setState(() {
-                                    checkingtextfeild = true;
-                                    errmsg = "Invalid email format";
-                                  });
-                                }
-                              }
+                                  }
+                               // }
 
-                              // FrSignUpService(FirebaseAuth.instance).onTapSignUP(
-                              //   email: textEditingController3.text.trim(),
-                              //   password: textEditingController5.text.trim(),
-                              //   passwordConfirmation: textEditingController6.text.trim(),
-                              //   name: textEditingController1.text.trim(),
-                              //   companyname: textEditingController2.text.trim(),
-                              //   phonenumber: textEditingController4.text.trim(),
-                              //   website: textEditingController7.text.trim(),
-                              //   context: context,
-                              //   providerGenerator: providerGenerator,
-                              // );
+                                // FrSignUpService(FirebaseAuth.instance).onTapSignUP(
+                                //   email: textEditingController3.text.trim(),
+                                //   password: textEditingController5.text.trim(),
+                                //   passwordConfirmation: textEditingController6.text.trim(),
+                                //   name: textEditingController1.text.trim(),
+                                //   companyname: textEditingController2.text.trim(),
+                                //   phonenumber: textEditingController4.text.trim(),
+                                //   website: textEditingController7.text.trim(),
+                                //   context: context,
+                                //   providerGenerator: providerGenerator,
+                                // );
 
-                            },
-                            child: Container(
-                                  height: 40.h,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        srpgradient1,
-                                        srpgradient2,
-                                        srpgradient3,
-                                      ],
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 1,
-                                        blurRadius: 1,
-                                        offset: const Offset(0, 0), // changes position of shadow
+                              },
+                              child: Container(
+                                    height: 40.h,
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          srpgradient1,
+                                          srpgradient2,
+                                          srpgradient3,
+                                        ],
                                       ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(8.2),
-                                    color: whiteClr,
-                                  ),
-                                  child: Center(
-                                    child: isLoading==true ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue,),) :Text("Create Company", style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
-                                  ),
-                              ),
-                          ),
-                        ],
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 1,
+                                          blurRadius: 1,
+                                          offset: const Offset(0, 0), // changes position of shadow
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(8.2),
+                                      color: whiteClr,
+                                    ),
+                                    child: Center(
+                                      child: isLoading==true ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue,),) :Text("Create Company", style: GoogleFonts.poppins(fontSize: 15.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                    ),
+                                ),
+                            ),
+
+                          ],
+                        ),
                       ),
                     ),
                   ],

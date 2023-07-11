@@ -7,6 +7,8 @@ import 'package:hrmanagementapp/View/Components/Cs_ScreenUtilInit.dart';
 import 'package:hrmanagementapp/View/Components/textfield.dart';
 import 'package:hrmanagementapp/View/Profile/Requests/components/NoRequest.dart';
 import 'package:hrmanagementapp/View/Profile/Requests/requests.dart';
+import 'package:hrmanagementapp/controller/company_create.dart';
+import 'package:hrmanagementapp/controller/employe_creation.dart';
 import 'package:hrmanagementapp/controller/markAttendance.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:intl/intl.dart';
@@ -1780,6 +1782,7 @@ class _HomeState extends State<Home> {
     // _advancedDrawerController.value = AdvancedDrawerValue.visible();
     _advancedDrawerController.showDrawer();
   }
+
 }
 
 
@@ -1833,6 +1836,38 @@ class _Home1State extends State<Home1> {
       fetchuser();
     });
 
+  }
+
+
+  fetchandpostgeneratedid() async {
+
+    FirebaseFirestore.instance
+        .collection('Companies')
+        .doc('${'${mainuser==false ? admin__email  :user!.email.toString()}'}').get()
+        .then((valu) {
+      String company_name='';
+      company_name=valu.get('company_name');
+      FirebaseFirestore.instance
+          .collection('Companies')
+          .doc('${'${mainuser==false ? admin__email  :user!.email.toString()}'}').collection("Employee")
+          .doc('${user!.email.toString()}').get().then((value)async {
+
+        String generatedId='';
+        generatedId=value.get('generatedId');
+
+        if(generatedId.isEmpty){
+          String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+          var res = await EmployeeCreation().allEmployeesGet('', api, "${user!.email.toString()}", '${mainuser==false ? admin__email  :user!.email.toString()}')
+              .then((value) {
+            fetchuser();
+          });
+        }else{
+          fetchuser();
+        }
+      });
+    });
+    // String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+    // var res = await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}", email);
   }
 
   String a='';
@@ -3717,6 +3752,38 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
     print("*-/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/  $time");
     fetchuser();
 
+  }
+
+
+  fetchandpostgeneratedid() async {
+
+    FirebaseFirestore.instance
+        .collection('Companies')
+        .doc('${admin}').get()
+        .then((valu) {
+      String company_name='';
+      company_name=valu.get('company_name');
+      FirebaseFirestore.instance
+          .collection('Companies')
+          .doc('${admin}').collection("Employee")
+          .doc('${user!.email.toString()}').get().then((value)async {
+
+
+        generatedId=value.get('generatedId');
+
+        if(generatedId.isEmpty){
+          String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+          var res = await EmployeeCreation().allEmployeesGet('', api, "${user!.email.toString()}", admin)
+              .then((value) {
+            fetchuser();
+          });
+        }else{
+          fetchuser();
+        }
+      });
+    });
+    // String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+    // var res = await EmployeeCreation().allEmployeesGet('', api, "${textEditingController1.text}", email);
   }
 
   void _getTime() {
