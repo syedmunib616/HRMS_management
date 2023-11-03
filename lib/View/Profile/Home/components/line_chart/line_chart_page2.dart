@@ -8,7 +8,8 @@ import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/samples/
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LineChartPage2 extends StatelessWidget {
-  const LineChartPage2({super.key});
+  const LineChartPage2({key});
+  // const LineChartPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class LineChartPage2 extends StatelessWidget {
                   SizedBox(height: 10),
                   LineChartSample5(),
                   SizedBox(height: 18),
-                  LineChartSample8(),
+                //  LineChartSample8(),
                 ],
               ),
             ),

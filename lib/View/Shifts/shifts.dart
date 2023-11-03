@@ -23,7 +23,7 @@ class ShiftsList{
 class Shifts extends StatefulWidget {
   Shifts({Key? key, required this.password}) : super(key: key);
 
-  final String password;
+   String password;
 
   @override
   State<Shifts> createState() => _ShiftsState();
@@ -72,13 +72,13 @@ class _ShiftsState extends State<Shifts> {
                 Navigator.pop(context);
               },
               child: Padding(
-                padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
-                child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
+                padding: EdgeInsets.only(left: 17.0,right: 17,bottom: 24),
+                child: Image.asset('assets/doublearrow.png',height: 10,width: 10,),
               ),
             ),
             backgroundColor: Colors.transparent,
             flexibleSpace:  Container(
-              height: 102.h,
+              height: 102,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -89,34 +89,34 @@ class _ShiftsState extends State<Shifts> {
                     offset: const Offset(0, 2), // changes position of shadow
                   ),
                 ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 color: whiteClr,
               ),
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center ,
                 children: [
-                  SizedBox(height: 26.h,),
+                  SizedBox(height: 26,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // Padding(
                       //   padding: EdgeInsets.all(8.0.sp),
-                      //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                      //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30,),
                       // ),
                       Spacer(),
-                      Text("Shifts", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                      Text("Shifts", style: GoogleFonts.poppins(fontSize: 15,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
                       // Container(
-                      //   width: 30.0.w,
-                      //   height: 30.0.h,
+                      //   width: 30.0,
+                      //   height: 30.0,
                       //   // child: Stack(
                       //   //   children: [
                       //   //     ClipRRect(
                       //   //       borderRadius: BorderRadius.circular(15.0.sp),
                       //   //       child: Image.asset(
                       //   //         'assets/user.jpg',
-                      //   //         width: 30.0.w,
-                      //   //         height: 30.0.h,
+                      //   //         width: 30.0,
+                      //   //         height: 30.0,
                       //   //         fit: BoxFit.fill,
                       //   //       ),
                       //   //     ),
@@ -124,8 +124,8 @@ class _ShiftsState extends State<Shifts> {
                       //   //       bottom: 1.5,
                       //   //       right: 1.5,
                       //   //       child: Container(
-                      //   //         height: 5.h,
-                      //   //         width: 5.w,
+                      //   //         height: 5,
+                      //   //         width: 5,
                       //   //         //color:online,
                       //   //         decoration: BoxDecoration(
                       //   //           borderRadius: BorderRadius.circular(5.sp),
@@ -139,14 +139,14 @@ class _ShiftsState extends State<Shifts> {
                     ],
                   ),
                   // Container(
-                  //   height: 50.h,
+                  //   height: 50,
                   //   width: MediaQuery.of(context).size.width,
                   //   child: Row(
                   //     mainAxisAlignment: MainAxisAlignment.center,
                   //     children: [
                   //       Container(
-                  //         width: 80.w,
-                  //         height: 40.h,
+                  //         width: 80,
+                  //         height: 40,
                   //         decoration: BoxDecoration(
                   //           boxShadow: [
                   //             BoxShadow(
@@ -161,7 +161,7 @@ class _ShiftsState extends State<Shifts> {
                   //         ),
                   //         child: Column(
                   //           children: [
-                  //             SizedBox(height: 5.h,),
+                  //             SizedBox(height: 5,),
                   //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
                   //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                   //           ],
@@ -171,13 +171,13 @@ class _ShiftsState extends State<Shifts> {
                   //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   //         child: Container(
                   //           color: coverBackClr,
-                  //           height: 40.h,
-                  //           width: 1.w,
+                  //           height: 40,
+                  //           width: 1,
                   //         ),
                   //       ),
                   //       Container(
-                  //         width: 240.w,
-                  //         height: 40.h,
+                  //         width: 240,
+                  //         height: 40,
                   //         decoration: BoxDecoration(
                   //           boxShadow: [
                   //             BoxShadow(
@@ -197,8 +197,8 @@ class _ShiftsState extends State<Shifts> {
                   //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                   //               Spacer(),
                   //               Container(
-                  //                 height: 20.h,
-                  //                 width: 20.w,
+                  //                 height: 20,
+                  //                 width: 20,
                   //                 decoration: BoxDecoration(
                   //                   boxShadow: [
                   //                     BoxShadow(
@@ -229,7 +229,7 @@ class _ShiftsState extends State<Shifts> {
               crossAxisAlignment:CrossAxisAlignment.start ,
               children: [
                 // Container(
-                //   height: 102.h,
+                //   height: 102,
                 //   width:MediaQuery.of(context).size.width,
                 //   decoration: BoxDecoration(
                 //     boxShadow: [
@@ -246,28 +246,28 @@ class _ShiftsState extends State<Shifts> {
                 //   child: Column(
                 //     crossAxisAlignment:CrossAxisAlignment.center ,
                 //     children: [
-                //       SizedBox(height: 20.h,),
+                //       SizedBox(height: 20,),
                 //       Row(
                 //         mainAxisAlignment: MainAxisAlignment.center,
                 //         children: [
                 //           Padding(
                 //             padding: EdgeInsets.all(8.0.sp),
-                //             child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                //             child: Image.asset('assets/mainmenu.png',height: 30,width: 30,),
                 //           ),
                 //           Spacer(),
                 //           Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
                 //           Spacer(),
                 //           Container(
-                //             width: 30.0.w,
-                //             height: 30.0.h,
+                //             width: 30.0,
+                //             height: 30.0,
                 //             // child: Stack(
                 //             //   children: [
                 //             //     ClipRRect(
                 //             //       borderRadius: BorderRadius.circular(15.0.sp),
                 //             //       child: Image.asset(
                 //             //         'assets/user.jpg',
-                //             //         width: 30.0.w,
-                //             //         height: 30.0.h,
+                //             //         width: 30.0,
+                //             //         height: 30.0,
                 //             //         fit: BoxFit.fill,
                 //             //       ),
                 //             //     ),
@@ -275,8 +275,8 @@ class _ShiftsState extends State<Shifts> {
                 //             //       bottom: 1.5,
                 //             //       right: 1.5,
                 //             //       child: Container(
-                //             //         height: 5.h,
-                //             //         width: 5.w,
+                //             //         height: 5,
+                //             //         width: 5,
                 //             //         //color:online,
                 //             //         decoration: BoxDecoration(
                 //             //           borderRadius: BorderRadius.circular(5.sp),
@@ -287,18 +287,18 @@ class _ShiftsState extends State<Shifts> {
                 //             //   ],
                 //             // ),
                 //           ),
-                //           SizedBox(width: 15.w,)
+                //           SizedBox(width: 15,)
                 //         ],
                 //       ),
                 //       // Container(
-                //       //   height: 50.h,
+                //       //   height: 50,
                 //       //   width: MediaQuery.of(context).size.width,
                 //       //   child: Row(
                 //       //     mainAxisAlignment: MainAxisAlignment.center,
                 //       //     children: [
                 //       //       Container(
-                //       //         width: 80.w,
-                //       //         height: 40.h,
+                //       //         width: 80,
+                //       //         height: 40,
                 //       //         decoration: BoxDecoration(
                 //       //           boxShadow: [
                 //       //             BoxShadow(
@@ -313,7 +313,7 @@ class _ShiftsState extends State<Shifts> {
                 //       //         ),
                 //       //         child: Column(
                 //       //           children: [
-                //       //             SizedBox(height: 5.h,),
+                //       //             SizedBox(height: 5,),
                 //       //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
                 //       //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                 //       //           ],
@@ -323,13 +323,13 @@ class _ShiftsState extends State<Shifts> {
                 //       //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 //       //         child: Container(
                 //       //           color: coverBackClr,
-                //       //           height: 40.h,
-                //       //           width: 1.w,
+                //       //           height: 40,
+                //       //           width: 1,
                 //       //         ),
                 //       //       ),
                 //       //       Container(
-                //       //         width: 240.w,
-                //       //         height: 40.h,
+                //       //         width: 240,
+                //       //         height: 40,
                 //       //         decoration: BoxDecoration(
                 //       //           boxShadow: [
                 //       //             BoxShadow(
@@ -349,8 +349,8 @@ class _ShiftsState extends State<Shifts> {
                 //       //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                 //       //               Spacer(),
                 //       //               Container(
-                //       //                 height: 20.h,
-                //       //                 width: 20.w,
+                //       //                 height: 20,
+                //       //                 width: 20,
                 //       //                 decoration: BoxDecoration(
                 //       //                   boxShadow: [
                 //       //                     BoxShadow(
@@ -376,13 +376,13 @@ class _ShiftsState extends State<Shifts> {
                 //   ),
                 // ),
                 SizedBox(
-                  height: 15.h,
+                  height: 15,
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding:  EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
                   child:
                   Container(
-                    height: 26.h,
+                    height: 26,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -393,27 +393,27 @@ class _ShiftsState extends State<Shifts> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(17.sp),
+                      borderRadius: BorderRadius.circular(17),
                       color: whiteClr,
                     ),
                     child: Row(
                       children:  [
-                        SizedBox(width: 20.w,),
-                        Text("Shifts",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                        SizedBox(width: 20,),
+                        Text("Shifts",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
                         Spacer(),
-                        SizedBox(width: 20.w,),
-                        Text("Start Time",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                        SizedBox(width: 20.w,),
-                        Text("End Time",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                        // SizedBox(width: 20.w,),
-                        // Text("Status",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                        SizedBox(width: 15.w,),
+                        SizedBox(width: 20,),
+                        Text("Start Time",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
+                        SizedBox(width: 20,),
+                        Text("End Time",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
+                        // SizedBox(width: 20,),
+                        // Text("Status",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
+                        SizedBox(width: 15,),
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 15.h,
+                  height: 15,
                 ),
                 shiftlist.isNotEmpty ? Container(
                   height: MediaQuery.of(context).size.height,
@@ -434,7 +434,7 @@ class _ShiftsState extends State<Shifts> {
               height: 60,
               child: Icon(
                 Icons.add,
-                size: 25.sp,
+                size: 25,
               ),
               decoration: const BoxDecoration(
                   shape: BoxShape.circle,
@@ -470,18 +470,18 @@ class _ShiftsState extends State<Shifts> {
             //could change this to Color(0xFF737373),
             // so you don't have to change MaterialApp canvasColor
             child: Container(
-              height: 110.h,
-              width: 300.w,
+              height: 110,
+              width: 300,
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30.h,),
-                  Text("Add Shifts",style: GoogleFonts.poppins(fontSize: 20.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
-                  SizedBox(height: 20.h,),
+                  SizedBox(height: 30,),
+                  Text("Add Shifts",style: GoogleFonts.poppins(fontSize: 20,color: srpgradient2,fontWeight: FontWeight.w400),),
+                  SizedBox(height: 20,),
                   CsMainInputField4(
                     // providerGenerator: providerGenerator,
-                    width: 287.w,
+                    width: 287,
                     mycontroller: textEditingController1,
                     // myhint: TextStrings.Enter_your_email_address.tr(),
                     myhint: "Shift ID",
@@ -495,7 +495,7 @@ class _ShiftsState extends State<Shifts> {
                     //     ? Colors.red
                     //     : null,
                   ),
-                  SizedBox(height: 20.h,),
+                  SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -508,8 +508,8 @@ class _ShiftsState extends State<Shifts> {
                           print("lakjsdhfalkjs ${timeOfDay}");
                         },
                         child: Container(
-                          height: 50.h,
-                          width: 150.w,
+                          height: 50,
+                          width: 150,
                           //color: Colors.yellow,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -521,13 +521,13 @@ class _ShiftsState extends State<Shifts> {
                                 offset: const Offset(0, 2), // changes position of shadow
                               ),
                             ],
-                            borderRadius: BorderRadius.circular(6.sp),
+                            borderRadius: BorderRadius.circular(6),
                             color: srpgradient2,
                           ),
-                          child: Text("Time In",style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.w400),),
+                          child: Text("Time In",style: GoogleFonts.poppins(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w400),),
                         ),
                       ),
-                      SizedBox(width: 10.w,),
+                      SizedBox(width: 10,),
                       GestureDetector(
                         onTap: () async {
                           TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay1,);
@@ -536,8 +536,8 @@ class _ShiftsState extends State<Shifts> {
                           print("lakjsdhfalkjs ${timeOfDay1} ${timeOfDay1.hour} ${timeOfDay1.minute}");
                         },
                         child: Container(
-                          height: 50.h,
-                          width: 150.w,
+                          height: 50,
+                          width: 150,
                           //color: Colors.yellow,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -549,11 +549,11 @@ class _ShiftsState extends State<Shifts> {
                                 offset: const Offset(0, 2), // changes position of shadow
                               ),
                             ],
-                            borderRadius: BorderRadius.circular(6.sp),
+                            borderRadius: BorderRadius.circular(6),
                             color: srpgradient2,
                           ),
                           child: Text("Time Out",
-                            style: GoogleFonts.poppins(fontSize: 15.sp,
+                            style: GoogleFonts.poppins(fontSize: 15,
                                 color: Colors.white,fontWeight: FontWeight.w400),),
                         ),
                       ),
@@ -562,7 +562,7 @@ class _ShiftsState extends State<Shifts> {
 
                   // CsMainInputField4(
                   //   // providerGenerator: providerGenerator,
-                  //   width: 287.w,
+                  //   width: 287,
                   //   mycontroller: textEditingController2,
                   //   // myhint: TextStrings.Enter_your_email_address.tr(),
                   //   myhint: "Department Name",
@@ -576,7 +576,7 @@ class _ShiftsState extends State<Shifts> {
                   //   //     ? Colors.red
                   //   //     : null,
                   // ),
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.center,
                   //   crossAxisAlignment: CrossAxisAlignment.center,
@@ -600,8 +600,8 @@ class _ShiftsState extends State<Shifts> {
                                   result: false); }); }
                           },
                         child: Container(
-                          height: 50.h,
-                          width: 150.w,
+                          height: 50,
+                          width: 150,
                           // color: Colors.yellow,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -613,11 +613,11 @@ class _ShiftsState extends State<Shifts> {
                                 offset: const Offset(0, 2), // changes position of shadow
                               ),
                             ],
-                            borderRadius: BorderRadius.circular(6.sp),
+                            borderRadius: BorderRadius.circular(6),
                             color: srpgradient2,
                           ),
                           child: Text("Create Shift",
-                            style: GoogleFonts.poppins(fontSize: 15.sp,
+                            style: GoogleFonts.poppins(fontSize: 15,
                                 color: Colors.white,fontWeight: FontWeight.w400),),
                         ),
                   ),
@@ -641,14 +641,14 @@ class _ShiftsState extends State<Shifts> {
                       //     }
                       //   },
                       // ),
-                  //     SizedBox( width: 10.w, ),
+                  //     SizedBox( width: 10, ),
                   //     GestureDetector(
                   //       onTap: (){
                   //         Navigator.of(context).pop();
                   //       },
                   //       child: Container(
-                  //         height: 50.h,
-                  //         width: 150.w,
+                  //         height: 50,
+                  //         width: 150,
                   //         //color: Colors.yellow,
                   //         alignment: Alignment.center,
                   //         decoration: BoxDecoration(
@@ -690,14 +690,14 @@ class _ShiftsState extends State<Shifts> {
 
     // set up the buttons
     Widget remindButton = TextButton(
-      child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      child: Text("Create",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
       onPressed:  () {
         Navigator.pop(context);
       },
     );
 
     Widget cancelButton = TextButton(
-      child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
       onPressed:  () {
         Navigator.pop(context);
       },
@@ -710,16 +710,16 @@ class _ShiftsState extends State<Shifts> {
     // set up the AlertDialog
 
     AlertDialog alert = AlertDialog(
-      title: Text("Add Shift",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      title: Text("Add Shift",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
       content: Container(
-        height: 140.h,
-        width: 300.w,
+        height: 140,
+        width: 300,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             CsMainInputField4(
               // providerGenerator: providerGenerator,
-              width: 287.w,
+              width: 287,
               mycontroller: textEditingController1,
               // myhint: TextStrings.Enter_your_email_address.tr(),
               myhint: "ID",
@@ -733,10 +733,10 @@ class _ShiftsState extends State<Shifts> {
               //     ? Colors.red
               //     : null,
             ),
-            SizedBox(height: 10.h,),
+            SizedBox(height: 10,),
             CsMainInputField4(
               // providerGenerator: providerGenerator,
-              width: 287.w,
+              width: 287,
               mycontroller: textEditingController2,
               // myhint: TextStrings.Enter_your_email_address.tr(),
               myhint: "Shift Start Time",
@@ -750,10 +750,10 @@ class _ShiftsState extends State<Shifts> {
               //     ? Colors.red
               //     : null,
             ),
-            SizedBox(height: 10.h,),
+            SizedBox(height: 10,),
             CsMainInputField4(
               // providerGenerator: providerGenerator,
-              width: 287.w,
+              width: 287,
               mycontroller: textEditingController2,
               // myhint: TextStrings.Enter_your_email_address.tr(),
               myhint: "Shift End Time",
@@ -808,38 +808,38 @@ class ShitfTimInAndOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+      padding:  EdgeInsets.symmetric(vertical: 8.0,horizontal: 20.w),
       child: Column(
         crossAxisAlignment:CrossAxisAlignment.start ,
         children: [
           Row(
             children: [
-              SizedBox(width: 20.w,),
+              SizedBox(width: 20,),
               Container(
                   //color: Colors.red,
-                  height: 20.h,
-                  width: 150.w,
-                  child: Text("$id",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),)),
+                  height: 20,
+                  width: 150,
+                  child: Text("$id",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),)),
               Spacer(),
               Container(
                   //color: Colors.yellow,
-                  height: 20.h,
-                  width: 50.w,
-                  child: Text("$timein",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),)),
-              SizedBox(width: 26.w,),
+                  height: 20,
+                  width: 50,
+                  child: Text("$timein",style: GoogleFonts.poppins(fontSize: 11,color: online,fontWeight: FontWeight.w400),)),
+              SizedBox(width: 26,),
               Container(
                   alignment: Alignment.center,
                   //color: Colors.green,
-                  height: 20.h,
-                  width: 50.w,
-                  child: Text("$timeout",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),)),
-              // SizedBox(width: 27.w,),
-              // Text("Active",style: GoogleFonts.poppins(fontSize: 11.sp,color: online,fontWeight: FontWeight.w400),),
-              SizedBox(width: 17.w,),
+                  height: 20,
+                  width: 50,
+                  child: Text("$timeout",style: GoogleFonts.poppins(fontSize: 11,color: online,fontWeight: FontWeight.w400),)),
+              // SizedBox(width: 27,),
+              // Text("Active",style: GoogleFonts.poppins(fontSize: 11,color: online,fontWeight: FontWeight.w400),),
+              SizedBox(width: 17,),
             ],
           ),
           SizedBox(
-            height: 15.h,
+            height: 15,
           ),
         ],
       ),

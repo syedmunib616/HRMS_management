@@ -53,7 +53,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // }
 
 class PieChartSample2 extends StatefulWidget {
-  const PieChartSample2({super.key});
+  const PieChartSample2({key});
+  // const PieChartSample2({super.key});
 
   @override
   State<StatefulWidget> createState() => PieChart2State();
@@ -116,7 +117,7 @@ class PieChart2State extends State {
   }
 
   myFuntion(){
-    
+
     FirebaseFirestore.instance
         .collection('Companies')
         .doc('${mainuser ==true? user!.email.toString():admin__email}')
@@ -288,7 +289,7 @@ class PieChart2State extends State {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.3,
+      aspectRatio: 1.4,
       child: Card(
         color: Colors.white,
         child: Row(
@@ -319,7 +320,7 @@ class PieChart2State extends State {
                       show: false,
                     ),
                     sectionsSpace: 0,
-                    centerSpaceRadius: 82.sp,
+                    centerSpaceRadius: 82,
                     sections: showingSections(),
                   ),
                 ),
@@ -335,7 +336,7 @@ class PieChart2State extends State {
                   isSquare: true,
                 ),
                 SizedBox(
-                  height: 2.h,
+                  height: 2,
                 ),
                 const Indicator(
                   color: srpgradient2,
@@ -343,7 +344,7 @@ class PieChart2State extends State {
                   isSquare: true,
                 ),
                 SizedBox(
-                  height: 2.h,
+                  height: 2,
                 ),
                 const Indicator(
                   color: srpgradient3,
@@ -351,7 +352,7 @@ class PieChart2State extends State {
                   isSquare: true,
                 ),
                 SizedBox(
-                  height: 12.h,
+                  height: 12,
                 ),
               ],
             ),
@@ -376,7 +377,7 @@ class PieChart2State extends State {
             value: 40,
             title: '40%',
             radius: radius,
-            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+            titleStyle: GoogleFonts.poppins(fontSize: 13.5,color: whiteClr,fontWeight: FontWeight.w500),
             // TextStyle(
             //   fontSize: fontSize,
             //   fontWeight: FontWeight.bold,
@@ -389,7 +390,7 @@ class PieChart2State extends State {
             value: 30,
             title: '30%',
             radius: radius,
-            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+            titleStyle: GoogleFonts.poppins(fontSize: 13.5,color: whiteClr,fontWeight: FontWeight.w500),
 
           );
         case 2:
@@ -398,7 +399,7 @@ class PieChart2State extends State {
             value: 30,
             title: '15%',
             radius: radius,
-            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+            titleStyle: GoogleFonts.poppins(fontSize: 13.5,color: whiteClr,fontWeight: FontWeight.w500),
 
           );
         // case 3:
@@ -415,13 +416,15 @@ class PieChart2State extends State {
       }
     });
   }
+
 }
 
 
 
 
 class PieChartSample21 extends StatefulWidget {
-  const PieChartSample21({super.key});
+  const PieChartSample21({key});
+  // const PieChartSample21({super.key});
 
   @override
   State<StatefulWidget> createState() => PieChart21State();
@@ -433,7 +436,7 @@ class PieChart21State extends State {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.35,
+      aspectRatio: 1.4,
       child: Card(
 
         color: Colors.white,
@@ -466,7 +469,7 @@ class PieChart21State extends State {
                       show: false,
                     ),
                     sectionsSpace: 0,
-                    centerSpaceRadius: 82.sp,
+                    centerSpaceRadius: 82,
                     sections: showingSections(),
                   ),
                 ),
@@ -482,7 +485,7 @@ class PieChart21State extends State {
                   isSquare: true,
                 ),
                 SizedBox(
-                  height: 2.h,
+                  height: 2,
                 ),
                 const Indicator(
                   color: srpgradient2,
@@ -490,7 +493,7 @@ class PieChart21State extends State {
                   isSquare: true,
                 ),
                 SizedBox(
-                  height: 2.h,
+                  height: 2,
                 ),
                 const Indicator(
                   color: srpgradient3,
@@ -498,7 +501,7 @@ class PieChart21State extends State {
                   isSquare: true,
                 ),
                 SizedBox(
-                  height: 12.h,
+                  height: 12,
                 ),
               ],
             ),
@@ -523,7 +526,7 @@ class PieChart21State extends State {
             value: 40,
             title: '40%',
             radius: radius,
-            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+            titleStyle: GoogleFonts.poppins(fontSize: 14,color: whiteClr,fontWeight: FontWeight.w500),
             // TextStyle(
             //   fontSize: fontSize,
             //   fontWeight: FontWeight.bold,
@@ -536,7 +539,7 @@ class PieChart21State extends State {
             value: 30,
             title: '30%',
             radius: radius,
-            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+            titleStyle: GoogleFonts.poppins(fontSize: 14,color: whiteClr,fontWeight: FontWeight.w500),
 
           );
         case 2:
@@ -545,7 +548,7 @@ class PieChart21State extends State {
             value: 30,
             title: '15%',
             radius: radius,
-            titleStyle: GoogleFonts.poppins(fontSize: 13.5.sp,color: whiteClr,fontWeight: FontWeight.w500),
+            titleStyle: GoogleFonts.poppins(fontSize: 14,color: whiteClr,fontWeight: FontWeight.w500),
           );
       // case 3:
       //   return PieChartSectionData(
@@ -565,7 +568,8 @@ class PieChart21State extends State {
 
 
 class PieChartEmployee extends StatefulWidget {
-  const PieChartEmployee({super.key});
+  const PieChartEmployee({key});
+  // const PieChartEmployee({super.key});
 
   @override
   State<StatefulWidget> createState() =>PieChartEmployeeState();

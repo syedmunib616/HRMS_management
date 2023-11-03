@@ -2,7 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LineChartSample4 extends StatelessWidget {
-  const LineChartSample4({super.key});
+  const LineChartSample4({key});
+  // const LineChartSample4({super.key});
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     String text;

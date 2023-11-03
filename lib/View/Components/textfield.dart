@@ -35,8 +35,7 @@ class CsMainInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CsScreenUtilInit(
-      child: Container(
+    return Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -49,8 +48,8 @@ class CsMainInputField extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.2),
           color: whiteClr,
         ),
-        height: 51.h,
-        width: width.w,
+        height: 51,
+        width: width,
         child: TextFormField(
           textAlignVertical:TextAlignVertical.bottom ,
           maxLines: maxline ?? 1,
@@ -61,18 +60,18 @@ class CsMainInputField extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: whiteClr,
-            contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+            contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 18),
             hintText: myhint,
             // hintStyle: TextStyle(
             //   fontSize: 15.0.sp,
             //   fontWeight: FontWeight.w400,
             //   color: blackClr.withOpacity(0.8),
             // ),
-            hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
+            hintStyle: GoogleFonts.poppins(fontSize: 14,color: fontgrey),
             prefixIcon: Icon(
               prefixIcon,
               color: blackClr.withOpacity(0.6),
-              size: 20.sp,
+              size: 20,
             ),
             suffixIcon: isPassword ? GestureDetector(
                     onTap: () {
@@ -87,7 +86,7 @@ class CsMainInputField extends StatelessWidget {
                           ? Icons.visibility_off_rounded
                           : Icons.visibility_rounded,
                       color: subTitleClr.withOpacity(0.6),
-                      size: 17.sp,
+                      size: 17,
                     ),
                   ) : null,
             focusedBorder: OutlineInputBorder(
@@ -102,11 +101,11 @@ class CsMainInputField extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
 }
+
 
 class CsMainInputField12 extends StatelessWidget {
   const CsMainInputField12(
@@ -137,71 +136,69 @@ class CsMainInputField12 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CsScreenUtilInit(
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: const Offset(0, 0), // changes position of shadow
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: const Offset(0, 0), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(8.2),
+        color: whiteClr,
+      ),
+      height: MediaQuery.of(context).size.height*0.11,
+      width: width,
+      child: TextFormField(
+        textAlignVertical:TextAlignVertical.bottom,
+        maxLines: maxline ?? 3,
+        keyboardType: keyboardType,
+        controller: mycontroller,
+        obscureText: isPassword ? providerGenerator.getObscurText(index: obscureIndex!) : false,
+        onFieldSubmitted: onSubmite ?? (_) {},
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: whiteClr,
+          contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 18),
+          hintText: myhint,
+          // hintStyle: TextStyle(
+          //   fontSize: 15.0.sp,
+          //   fontWeight: FontWeight.w400,
+          //   color: blackClr.withOpacity(0.8),
+          // ),
+          hintStyle: GoogleFonts.poppins(fontSize: 14,color: Colors.grey),
+          prefixIcon: Icon(
+            prefixIcon,
+            color: blackClr.withOpacity(0.6),
+            size: 22,
+          ),
+          suffixIcon: isPassword ? GestureDetector(
+            onTap: () {
+              providerGenerator.setObscurText(
+                  value: false, index: obscureIndex!);
+              Future.delayed(
+                  const Duration(milliseconds: 1000),
+                      () => providerGenerator.setObscurText(
+                      value: true, index: obscureIndex!));},
+            child: Icon(
+              providerGenerator.getObscurText(index: obscureIndex!)
+                  ? Icons.visibility_off_rounded
+                  : Icons.visibility_rounded,
+              color: subTitleClr.withOpacity(0.6),
+              size: 18,
             ),
-          ],
-          borderRadius: BorderRadius.circular(8.2),
-          color: whiteClr,
-        ),
-        height: 92.h,
-        width: width.w,
-        child: TextFormField(
-          textAlignVertical:TextAlignVertical.bottom,
-          maxLines: maxline ?? 3,
-          keyboardType: keyboardType,
-          controller: mycontroller,
-          obscureText: isPassword ? providerGenerator.getObscurText(index: obscureIndex!) : false,
-          onFieldSubmitted: onSubmite ?? (_) {},
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: whiteClr,
-            contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
-            hintText: myhint,
-            // hintStyle: TextStyle(
-            //   fontSize: 15.0.sp,
-            //   fontWeight: FontWeight.w400,
-            //   color: blackClr.withOpacity(0.8),
-            // ),
-            hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
-            prefixIcon: Icon(
-              prefixIcon,
-              color: blackClr.withOpacity(0.6),
-              size: 20.sp,
-            ),
-            suffixIcon: isPassword ? GestureDetector(
-              onTap: () {
-                providerGenerator.setObscurText(
-                    value: false, index: obscureIndex!);
-                Future.delayed(
-                    const Duration(milliseconds: 1000),
-                        () => providerGenerator.setObscurText(
-                        value: true, index: obscureIndex!));},
-              child: Icon(
-                providerGenerator.getObscurText(index: obscureIndex!)
-                    ? Icons.visibility_off_rounded
-                    : Icons.visibility_rounded,
-                color: subTitleClr.withOpacity(0.6),
-                size: 17.sp,
-              ),
-            ) : null,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-              BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-              BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
-            ),
+          ) : null,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+            BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+            BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
           ),
         ),
       ),
@@ -209,6 +206,109 @@ class CsMainInputField12 extends StatelessWidget {
   }
 
 }
+
+
+// class CsMainInputField12 extends StatelessWidget {
+//   const CsMainInputField12(
+//       {Key? key,
+//         required this.prefixIcon,
+//         required this.mycontroller,
+//         required this.isPassword,
+//         required this.keyboardType,
+//         required this.width,
+//         required this.providerGenerator,
+//         this.bordercolor,
+//         this.obscureIndex,
+//         this.maxline,
+//         this.onSubmite,
+//         required this.myhint})
+//       : super(key: key);
+//   final TextEditingController mycontroller;
+//   final String myhint;
+//   final bool isPassword;
+//   final IconData prefixIcon;
+//   final Color? bordercolor;
+//   final int? maxline;
+//   final int? obscureIndex;
+//   final TextInputType keyboardType;
+//   final double width;
+//   final Function(String?)? onSubmite;
+//   final ProviderGenerator providerGenerator;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return CsScreenUtilInit(
+//       child: Container(
+//         decoration: BoxDecoration(
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.grey.withOpacity(0.5),
+//               spreadRadius: 1,
+//               blurRadius: 1,
+//               offset: const Offset(0, 0), // changes position of shadow
+//             ),
+//           ],
+//           borderRadius: BorderRadius.circular(8.2),
+//           color: whiteClr,
+//         ),
+//         height: 92.h,
+//         width: width.w,
+//         child: TextFormField(
+//           textAlignVertical:TextAlignVertical.bottom,
+//           maxLines: maxline ?? 3,
+//           keyboardType: keyboardType,
+//           controller: mycontroller,
+//           obscureText: isPassword ? providerGenerator.getObscurText(index: obscureIndex!) : false,
+//           onFieldSubmitted: onSubmite ?? (_) {},
+//           decoration: InputDecoration(
+//             filled: true,
+//             fillColor: whiteClr,
+//             contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+//             hintText: myhint,
+//             // hintStyle: TextStyle(
+//             //   fontSize: 15.0.sp,
+//             //   fontWeight: FontWeight.w400,
+//             //   color: blackClr.withOpacity(0.8),
+//             // ),
+//             hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: Colors.grey),
+//             prefixIcon: Icon(
+//               prefixIcon,
+//               color: blackClr.withOpacity(0.6),
+//               size: 20.sp,
+//             ),
+//             suffixIcon: isPassword ? GestureDetector(
+//               onTap: () {
+//                 providerGenerator.setObscurText(
+//                     value: false, index: obscureIndex!);
+//                 Future.delayed(
+//                     const Duration(milliseconds: 1000),
+//                         () => providerGenerator.setObscurText(
+//                         value: true, index: obscureIndex!));},
+//               child: Icon(
+//                 providerGenerator.getObscurText(index: obscureIndex!)
+//                     ? Icons.visibility_off_rounded
+//                     : Icons.visibility_rounded,
+//                 color: subTitleClr.withOpacity(0.6),
+//                 size: 17.sp,
+//               ),
+//             ) : null,
+//             focusedBorder: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(10),
+//               borderSide:
+//               BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+//             ),
+//             enabledBorder: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(10),
+//               borderSide:
+//               BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+//
+// }
 
 
 
@@ -262,11 +362,8 @@ class CsMainInputField1 extends StatelessWidget {
           maxLines: maxline ?? 1,
           keyboardType: keyboardType,
           controller: mycontroller,
-          obscureText: isPassword
-              ? providerGenerator.getObscurText(index: obscureIndex!)
-              : false,
+          obscureText: isPassword ? providerGenerator.getObscurText(index: obscureIndex!) : false,
           onFieldSubmitted: onSubmite ?? (_) {},
-
           decoration: InputDecoration(
             filled: true,
             fillColor: whiteClr,
@@ -316,7 +413,6 @@ class CsMainInputField1 extends StatelessWidget {
       ),
     );
   }
-
 }
 
 
@@ -456,8 +552,7 @@ class CsMainInputField3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CsScreenUtilInit(
-      child: Container(
+    return Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -470,8 +565,8 @@ class CsMainInputField3 extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.2),
           color: whiteClr,
         ),
-        height: 51.h,
-        width: width.w,
+        height: 51,
+        width: width,
         child: TextFormField(
           textAlignVertical:TextAlignVertical.bottom ,
           maxLines: maxline ?? 1,
@@ -484,7 +579,7 @@ class CsMainInputField3 extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: whiteClr,
-            contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+            contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 18),
             hintText: myhint,
             // hintStyle: TextStyle(
             //   fontSize: 15.0.sp,
@@ -495,7 +590,7 @@ class CsMainInputField3 extends StatelessWidget {
             prefixIcon: Icon(
               prefixIcon,
               color: subTitleClr,
-              size: 20.sp,
+              size: 20,
             ),
             suffixIcon: isPassword ? GestureDetector(
               onTap: () {
@@ -526,8 +621,7 @@ class CsMainInputField3 extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
 }
@@ -561,78 +655,149 @@ class CsMainInputField4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CsScreenUtilInit(
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: const Offset(0, 0), // changes position of shadow
-            ),
-          ],
-          borderRadius: BorderRadius.circular(8.2),
-          color: whiteClr,
-        ),
-        height: 51.h,
-        width: width.w,
-        child: TextFormField(
-          textAlignVertical:TextAlignVertical.bottom ,
-          maxLines: maxline ?? 1,
-          keyboardType: keyboardType,
-          controller: mycontroller,
-          // obscureText: isPassword
-          //     ? providerGenerator.getObscurText(index: obscureIndex!)
-          //     : false,
-          onFieldSubmitted: onSubmite ?? (_) {},
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: whiteClr,
-            contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
-            hintText: myhint,
-            // hintStyle: TextStyle(
-            //   fontSize: 15.0.sp,
-            //   fontWeight: FontWeight.w400,
-            //   color: blackClr.withOpacity(0.8),
-            // ),
-            hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
-            prefixIcon: Icon(
-              prefixIcon,
-              color: subTitleClr,
-              size: 20.sp,
-            ),
-            // suffixIcon: isPassword ? GestureDetector(
-            //   onTap: () {
-            //     providerGenerator.setObscurText(value: false, index: obscureIndex!);
-            //     Future.delayed(
-            //         const Duration(milliseconds: 1000),
-            //             () => providerGenerator.setObscurText(value: true, index: obscureIndex!));
-            //
-            //   },
-            //   child: Icon(
-            //     providerGenerator.getObscurText(index: obscureIndex!)
-            //         ? Icons.visibility_off_rounded
-            //         : Icons.visibility_rounded,
-            //     color: subTitleClr.withOpacity(0.6),
-            //     //color: srpgradient2.withOpacity(0.6),
-            //     size: 17.sp,
-            //   ),
-            // ) : null,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-              BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-              BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+    return Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: const Offset(0, 0), // changes position of shadow
+              ),
+            ],
+            borderRadius: BorderRadius.circular(8.2),
+            color: whiteClr,
+          ),
+          height: 51.h,
+          width: width.w,
+          child: TextFormField(
+            textAlignVertical:TextAlignVertical.bottom ,
+            maxLines: maxline ?? 1,
+            keyboardType: keyboardType,
+            controller: mycontroller,
+            // obscureText: isPassword
+            //     ? providerGenerator.getObscurText(index: obscureIndex!)
+            //     : false,
+            onFieldSubmitted: onSubmite ?? (_) {},
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: whiteClr,
+              contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+              hintText: myhint,
+              // hintStyle: TextStyle(
+              //   fontSize: 15.0.sp,
+              //   fontWeight: FontWeight.w400,
+              //   color: blackClr.withOpacity(0.8),
+              // ),
+              hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
+              prefixIcon: Icon(
+                prefixIcon,
+                color: subTitleClr,
+                size: 20.sp,
+              ),
+              // suffixIcon: isPassword ? GestureDetector(
+              //   onTap: () {
+              //     providerGenerator.setObscurText(value: false, index: obscureIndex!);
+              //     Future.delayed(
+              //         const Duration(milliseconds: 1000),
+              //             () => providerGenerator.setObscurText(value: true, index: obscureIndex!));
+              //
+              //   },
+              //   child: Icon(
+              //     providerGenerator.getObscurText(index: obscureIndex!)
+              //         ? Icons.visibility_off_rounded
+              //         : Icons.visibility_rounded,
+              //     color: subTitleClr.withOpacity(0.6),
+              //     //color: srpgradient2.withOpacity(0.6),
+              //     size: 17.sp,
+              //   ),
+              // ) : null,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        );
+
+    //   CsScreenUtilInit(
+    //   child: Container(
+    //     decoration: BoxDecoration(
+    //       boxShadow: [
+    //         BoxShadow(
+    //           color: Colors.grey.withOpacity(0.5),
+    //           spreadRadius: 1,
+    //           blurRadius: 1,
+    //           offset: const Offset(0, 0), // changes position of shadow
+    //         ),
+    //       ],
+    //       borderRadius: BorderRadius.circular(8.2),
+    //       color: whiteClr,
+    //     ),
+    //     height: 51.h,
+    //     width: width.w,
+    //     child: TextFormField(
+    //       textAlignVertical:TextAlignVertical.bottom ,
+    //       maxLines: maxline ?? 1,
+    //       keyboardType: keyboardType,
+    //       controller: mycontroller,
+    //       // obscureText: isPassword
+    //       //     ? providerGenerator.getObscurText(index: obscureIndex!)
+    //       //     : false,
+    //       onFieldSubmitted: onSubmite ?? (_) {},
+    //       decoration: InputDecoration(
+    //         filled: true,
+    //         fillColor: whiteClr,
+    //         contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+    //         hintText: myhint,
+    //         // hintStyle: TextStyle(
+    //         //   fontSize: 15.0.sp,
+    //         //   fontWeight: FontWeight.w400,
+    //         //   color: blackClr.withOpacity(0.8),
+    //         // ),
+    //         hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
+    //         prefixIcon: Icon(
+    //           prefixIcon,
+    //           color: subTitleClr,
+    //           size: 20.sp,
+    //         ),
+    //         // suffixIcon: isPassword ? GestureDetector(
+    //         //   onTap: () {
+    //         //     providerGenerator.setObscurText(value: false, index: obscureIndex!);
+    //         //     Future.delayed(
+    //         //         const Duration(milliseconds: 1000),
+    //         //             () => providerGenerator.setObscurText(value: true, index: obscureIndex!));
+    //         //
+    //         //   },
+    //         //   child: Icon(
+    //         //     providerGenerator.getObscurText(index: obscureIndex!)
+    //         //         ? Icons.visibility_off_rounded
+    //         //         : Icons.visibility_rounded,
+    //         //     color: subTitleClr.withOpacity(0.6),
+    //         //     //color: srpgradient2.withOpacity(0.6),
+    //         //     size: 17.sp,
+    //         //   ),
+    //         // ) : null,
+    //         focusedBorder: OutlineInputBorder(
+    //           borderRadius: BorderRadius.circular(10),
+    //           borderSide:
+    //           BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+    //         ),
+    //         enabledBorder: OutlineInputBorder(
+    //           borderRadius: BorderRadius.circular(10),
+    //           borderSide:
+    //           BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
 }
@@ -669,8 +834,7 @@ class CsMainInputField121 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return CsScreenUtilInit(
-      child: Container(
+    return Container(
         // decoration: BoxDecoration(
         //   boxShadow: [
         //     BoxShadow(
@@ -684,8 +848,8 @@ class CsMainInputField121 extends StatelessWidget {
         //   color: whiteClr,
         //   //color: Colors.red
         // ),
-        height: 67.h,
-        width: width.w,
+        height: 67,
+        width: width,
         child: TextFormField(
           textAlignVertical:TextAlignVertical.bottom ,
           maxLines: maxline ?? 1,
@@ -697,7 +861,7 @@ class CsMainInputField121 extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: whiteClr,
-            contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+            contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 18),
             hintText: myhint,
             // hintStyle: TextStyle(
             //   fontSize: 15.0.sp,
@@ -737,8 +901,7 @@ class CsMainInputField121 extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
 
   }
 
@@ -879,71 +1042,69 @@ class CsMainInputFieldover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CsScreenUtilInit(
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 0.8,
-              blurRadius: 1,
-              offset: const Offset(0, 0), // changes position of shadow
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 0.8,
+            blurRadius: 1,
+            offset: const Offset(0, 0), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(8.2),
+        color: whiteClr,
+      ),
+      height: 51.h,
+      width: width.w,
+      child: TextFormField(
+        textAlignVertical:TextAlignVertical.bottom ,
+        maxLines: maxline ?? 1,
+        keyboardType: keyboardType,
+        controller: mycontroller,
+        obscureText: isPassword ? providerGenerator.getObscurText(index: obscureIndex!) : false,
+        onFieldSubmitted: onSubmite ?? (_) {},
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: whiteClr,
+          contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+          hintText: myhint,
+          // hintStyle: TextStyle(
+          //   fontSize: 15.0.sp,
+          //   fontWeight: FontWeight.w400,
+          //   color: blackClr.withOpacity(0.8),
+          // ),
+          hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
+          prefixIcon: Icon(
+            prefixIcon,
+            color: blackClr.withOpacity(0.6),
+            size: 20.sp,
+          ),
+          suffixIcon: isPassword ? GestureDetector(
+            onTap: () {
+              providerGenerator.setObscurText(
+                  value: false, index: obscureIndex!);
+              Future.delayed(
+                  const Duration(milliseconds: 1000),
+                      () => providerGenerator.setObscurText(
+                      value: true, index: obscureIndex!));},
+            child: Icon(
+              providerGenerator.getObscurText(index: obscureIndex!)
+                  ? Icons.visibility_off_rounded
+                  : Icons.visibility_rounded,
+              color: subTitleClr.withOpacity(0.6),
+              size: 17.sp,
             ),
-          ],
-          borderRadius: BorderRadius.circular(8.2),
-          color: whiteClr,
-        ),
-        height: 51.h,
-        width: width.w,
-        child: TextFormField(
-          textAlignVertical:TextAlignVertical.bottom ,
-          maxLines: maxline ?? 1,
-          keyboardType: keyboardType,
-          controller: mycontroller,
-          obscureText: isPassword ? providerGenerator.getObscurText(index: obscureIndex!) : false,
-          onFieldSubmitted: onSubmite ?? (_) {},
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: whiteClr,
-            contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
-            hintText: myhint,
-            // hintStyle: TextStyle(
-            //   fontSize: 15.0.sp,
-            //   fontWeight: FontWeight.w400,
-            //   color: blackClr.withOpacity(0.8),
-            // ),
-            hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
-            prefixIcon: Icon(
-              prefixIcon,
-              color: blackClr.withOpacity(0.6),
-              size: 20.sp,
-            ),
-            suffixIcon: isPassword ? GestureDetector(
-              onTap: () {
-                providerGenerator.setObscurText(
-                    value: false, index: obscureIndex!);
-                Future.delayed(
-                    const Duration(milliseconds: 1000),
-                        () => providerGenerator.setObscurText(
-                        value: true, index: obscureIndex!));},
-              child: Icon(
-                providerGenerator.getObscurText(index: obscureIndex!)
-                    ? Icons.visibility_off_rounded
-                    : Icons.visibility_rounded,
-                color: subTitleClr.withOpacity(0.6),
-                size: 17.sp,
-              ),
-            ) : null,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-              BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-              BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
-            ),
+          ) : null,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+            BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+            BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
           ),
         ),
       ),
@@ -982,74 +1143,72 @@ class CsMainInputField32 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CsScreenUtilInit(
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 0.9,
-              blurRadius: 1,
-              offset: const Offset(0, 0), // changes position of shadow
-            ),
-          ],
-          borderRadius: BorderRadius.circular(8.2),
-          color: whiteClr,
-        ),
-        height: 51.h,
-        width: width.w,
-        child: TextFormField(
-          textAlignVertical:TextAlignVertical.bottom ,
-          maxLines: maxline ?? 1,
-          keyboardType: keyboardType,
-          controller: mycontroller,
-          obscureText: isPassword
-              ? providerGenerator.getObscurText(index: obscureIndex!)
-              : false,
-          onFieldSubmitted: onSubmite ?? (_) {},
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: whiteClr,
-            contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
-            hintText: myhint,
-            // hintStyle: TextStyle(
-            //   fontSize: 15.0.sp,
-            //   fontWeight: FontWeight.w400,
-            //   color: blackClr.withOpacity(0.8),
-            // ),
-            hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
-            prefixIcon: Icon(
-              prefixIcon,
-              color: subTitleClr,
-              size: 20.sp,
-            ),
-            suffixIcon: isPassword ? GestureDetector(
-              onTap: () {
-                providerGenerator.setObscurText(value: false, index: obscureIndex!);
-                Future.delayed(
-                    const Duration(milliseconds: 1000),
-                        () => providerGenerator.setObscurText(value: true, index: obscureIndex!));
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 0.9,
+            blurRadius: 1,
+            offset: const Offset(0, 0), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(8.2),
+        color: whiteClr,
+      ),
+      height: 51.h,
+      width: width.w,
+      child: TextFormField(
+        textAlignVertical:TextAlignVertical.bottom ,
+        maxLines: maxline ?? 1,
+        keyboardType: keyboardType,
+        controller: mycontroller,
+        obscureText: isPassword
+            ? providerGenerator.getObscurText(index: obscureIndex!)
+            : false,
+        onFieldSubmitted: onSubmite ?? (_) {},
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: whiteClr,
+          contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+          hintText: myhint,
+          // hintStyle: TextStyle(
+          //   fontSize: 15.0.sp,
+          //   fontWeight: FontWeight.w400,
+          //   color: blackClr.withOpacity(0.8),
+          // ),
+          hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
+          prefixIcon: Icon(
+            prefixIcon,
+            color: subTitleClr,
+            size: 20.sp,
+          ),
+          suffixIcon: isPassword ? GestureDetector(
+            onTap: () {
+              providerGenerator.setObscurText(value: false, index: obscureIndex!);
+              Future.delayed(
+                  const Duration(milliseconds: 1000),
+                      () => providerGenerator.setObscurText(value: true, index: obscureIndex!));
 
-              },
-              child: Icon(
-                providerGenerator.getObscurText(index: obscureIndex!)
-                    ? Icons.visibility_off_rounded
-                    : Icons.visibility_rounded,
-                color: subTitleClr.withOpacity(0.6),
-                //color: srpgradient2.withOpacity(0.6),
-                size: 17.sp,
-              ),
-            ) : null,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-              BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+            },
+            child: Icon(
+              providerGenerator.getObscurText(index: obscureIndex!)
+                  ? Icons.visibility_off_rounded
+                  : Icons.visibility_rounded,
+              color: subTitleClr.withOpacity(0.6),
+              //color: srpgradient2.withOpacity(0.6),
+              size: 17.sp,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-              BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
-            ),
+          ) : null,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+            BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+            BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
           ),
         ),
       ),

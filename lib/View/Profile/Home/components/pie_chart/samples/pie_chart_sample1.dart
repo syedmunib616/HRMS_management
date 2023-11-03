@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/indicator.dart';
 
 class PieChartSample1 extends StatefulWidget {
-  const PieChartSample1({super.key});
+  const PieChartSample1({key});
+  // const PieChartSample1({super.key});
 
   @override
   State<StatefulWidget> createState() => PieChartSample1State();

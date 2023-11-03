@@ -10,7 +10,8 @@ class _LineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return LineChart(
       isShowingMainData ? sampleData1 : sampleData2,
-      swapAnimationDuration: const Duration(milliseconds: 250),
+       swapAnimationDuration: const Duration(milliseconds: 250),
+      //duration: const Duration(milliseconds: 250),
     );
   }
 
@@ -288,7 +289,8 @@ class _LineChart extends StatelessWidget {
 }
 
 class LineChartSample1 extends StatefulWidget {
-  const LineChartSample1({super.key});
+  const LineChartSample1({key});
+  // const LineChartSample1({super.key});
 
   @override
   State<StatefulWidget> createState() => LineChartSample1State();

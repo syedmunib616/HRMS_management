@@ -10,6 +10,7 @@ import 'package:hrmanagementapp/View/Main/Screen_Main.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
 import 'package:hrmanagementapp/translation/locale_keys.g.dart';
 import 'package:hrmanagementapp/test.dart';
+import 'package:get/get.dart';
 
 String employemail='';
 String employepassword='';
@@ -38,14 +39,14 @@ class FrLoginService {
       isEmpty(email, password)
           ? onlogicErrorHandling(
         // error: "Please enter your Information",
-        error: TextStrings.Invalid_email,
+        error: 'Invalid email',
         providerGenerator: providerGenerator,
               buttonIndex: buttonIndex,
               errorIndex: errorIndex,
             )
           : !isRegExpValid(email)
               ? onlogicErrorHandling(
-                  error: TextStrings.Invalid_email,
+                  error: 'Invalid email',
                   providerGenerator: providerGenerator,
                   buttonIndex: buttonIndex,
                   errorIndex: errorIndex,
@@ -99,208 +100,15 @@ class FrLoginService {
       bool dontrun=false;
 
       CollectionReference UserT=  FirebaseFirestore.instance.collection("Companies");
-      //   if(email!="example@gmail.com") {
-    //      // braek point laga k check krna hai kidhr masla araha hai
-    //      FirebaseFirestore.instance.collection('Companies').get().then((value) {
-    //         value.docs.forEach((element) {
-    //          active=false;
-    //          // admin_name.add(element.id);
-    //          print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
-    //
-    //          f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
-    //            bool ptanhi=false;
-    //            active = element.get("active");
-    //           // ptanhi= element.get("active");
-    //            print("aaaaaaaaaaa $active ${element.id}");
-    //            if(email==element.id){
-    //
-    //               if (active == true) {
-    //               // if (ptanhi == true) {
-    //                dontrun=true;
-    //                Login(loading: false,);
-    //                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    //                  builder: (BuildContext context) => ScreenMain(password: password,adminname: email,),
-    //                ), (route) => false,);
-    //              }
-    //              else{
-    //                Login(loading: false,);
-    //                print("yyyyyyyyyyyyyyyy active status is $active");
-    //                FirebaseAuth.instance.signOut().then((value) async {
-    //                  Navigator.of(context).pushReplacement(
-    //                      MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
-    //                      result: false);
-    //                });
-    //              }
-    //            }
-    //            else {
-    //              // element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
-    //              //   String a;
-    //              //   a=element.get('email');
-    //              //   print("laksjdhfkjsadf $a");
-    //              //   if(email==a){
-    //              //     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    //              //       builder: (BuildContext context) => EmployeeDashboard(),
-    //              //     ), (route) => false,);
-    //              //   }
-    //              // }));
-    //            }
-    //          })).then((value) {
-    //            print("7777777777777777777777777777777777777777777777777777777 $dontrun");
-    //            if (dontrun == true) {}
-    //            else{
-    //              if(active == true){
-    //                element.reference.collection("Employee").get().then((value) =>
-    //                    value.docs.forEach((elemen){
-    //                      String a;
-    //                      bool empactive=false;
-    //                      a = elemen.get('email');
-    //                      if (email == a ) {
-    //                        print("laksjdhfkjsadf $a $empactive");
-    //                        empactive=elemen.get('active');
-    //                        if(empactive==true) {
-    //                          Login(loading: false);
-    //                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    //                              builder: (BuildContext context) =>
-    //                                  EmployeeDashboard(
-    //                                    admineamil: element.id,),), (route) => false,);
-    //                        }
-    //                        else{
-    //                          print("not allowed");
-    //                        }
-    //                      }
-    //                      else{}
-    //                      // else{
-    //                      //   Navigator.of(context).pushReplacement(
-    //                      //       MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
-    //                      //       result: false);
-    //                      // }
-    //                      //   FirebaseAuth.instance.signOut().then((value) async {
-    //                      //
-    //                      //
-    //                      // }
-    //                    }));//SRP0324@
-    //              }
-    //              else {
-    //                print("yyyyyy active status is $active");
-    //                FirebaseAuth.instance.signOut().then((value) async {
-    //                  Navigator.of(context).pushReplacement(
-    //                      MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
-    //                      result: false);});
-    //              }
-    //            }
-    //          });
-    //        });
-    //      });
-    //      // final QuerySnapshot result =await FirebaseFirestore.instance.collection('Companies').get()
-    //      //   final List<DocumentSnapshot> documents = result.docs;
-    //      //
-    //      //   if(active==true){
-    //      //      active=false;
-    //      //    documents.forEach((element) {
-    //      //      //admin_name.add(element.id);
-    //      //      print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
-    //      //      f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
-    //      //        print("::::::::::::::::::::: ${element.id}");
-    //      //        active = element.get("active");
-    //      //          if(email==element.id){
-    //      //            if (active == true) {
-    //      //                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    //      //                  builder: (BuildContext context) => ScreenMain(password: password,),
-    //      //                ), (route) => false,);
-    //      //              }
-    //      //            else{
-    //      //               FirebaseAuth.instance.signOut().then((value) async {
-    //      //                  Navigator.of(context).pushReplacement(
-    //      //                      MaterialPageRoute(builder: (context) => const Homepage()),
-    //      //                      result: false);
-    //      //                });
-    //      //              }
-    //      //          }
-    //      //          else {
-    //      //
-    //      //            element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
-    //      //            String a;
-    //      //            a=element.get('email');
-    //      //            print("laksjdhfkjsadf $a");
-    //      //
-    //      //            if(email==a){
-    //      //              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    //      //                builder: (BuildContext context) => EmployeeDashboard(),), (route) => false,);
-    //      //            }
-    //      //
-    //      //          }));
-    //      //
-    //      //        }
-    //      //        }));
-    //      //       });
-    //      //    }
-    //      //
-    //      //   else{
-    //      //     documents.forEach((element) {
-    //      //       active=false;
-    //      //      //admin_name.add(element.id);
-    //      //        print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
-    //      //        f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
-    //      //          active = element.get("active");
-    //      //          if(email==element.id){
-    //      //              if (active == true) {
-    //      //                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    //      //                  builder: (BuildContext context) => ScreenMain(password: password,),
-    //      //                ), (route) => false,);
-    //      //              }
-    //      //              else{
-    //      //                FirebaseAuth.instance.signOut().then((value) async {
-    //      //                  Navigator.of(context).pushReplacement(
-    //      //                      MaterialPageRoute(builder: (context) =>  Login()),
-    //      //                      result: false);
-    //      //                });
-    //      //              }}
-    //      //          else {
-    //      //              element.reference.collection("Employee").get().then((value) => value.docs.forEach((element) {
-    //      //                String a;
-    //      //                a=element.get('email');
-    //      //                print("laksjdhfkjsadf $a");
-    //      //                if(email==a){
-    //      //                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    //      //                    builder: (BuildContext context) => EmployeeDashboard(),
-    //      //                  ), (route) => false,);
-    //      //                }
-    //      //              }));
-    //      //            }
-    //      //          }));
-    //      //           });
-    //      //        }
-    //         // await f.where('email', isEqualTo: email).get().then((value) =>
-    //           //     value.docs.forEach((element) {
-    //           //       active = element.get("active");
-    //           //       print("ghghghghgh $active");
-    //           //     }))
-    //           //     .then((value) async {
-    //           //
-    //           // }).then((value) async {
-    //           //     // print("88888888888888888888 $admin_name");
-    //           //     // await FirebaseAuth.instance.signOut().then((value) async {
-    //           //     // Navigator.of(context).pushReplacement(
-    //           //     //     MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
-    //           //     //     result: false);
-    //           //     // });
-    //           // });
-    //         //EmployeeDashboard()
-    //    }
-    //   else if(email=="example@gmail.com"){
-    // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-    // builder: (BuildContext context) => Test(password: password,),
-    // ),(route) => false, );}
+
       if(email!="example@gmail.com") {
         // braek point laga k check krna hai kidhr masla araha hai
         FirebaseFirestore.instance.collection('Companies').get().then((value) {
           value.docs.forEach((element) {
             active=false;
             // admin_name.add(element.id);
-            print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
-
-            f.where('email', isEqualTo: element.id).get().then((value) => value.docs.forEach((element) {
-
+            //print("^^^^^^^^^^^^^^^^^^^^^^^^^^ ${element.id}  ${element}");
+            f.where('email', isEqualTo: element.id).get().then((val) => val.docs.forEach((element) {
               bool ptanhi=false;
               active = element.get("active");
               admin = element.get("admin");
@@ -308,7 +116,7 @@ class FrLoginService {
               admin_email = element.get("email");
               admin__password=admin_password;
               // ptanhi= element.get("active");
-              print("aaaaaaaaaaa $active ${element.id}");
+              //print("aaaaaaaaaaa $active ${element.id}");
               if(email==element.id){
                 if (active == true) {
                   // if (ptanhi == true) {
@@ -346,113 +154,26 @@ class FrLoginService {
                 // }));
               }
               })).then((value) async{
-              print("7777777777777777777777777777777777777777777777777777777 $dontrun");
+               print("7777777777777777777777777777777777777777777777777777777 $dontrun");
               if (dontrun == true) {}
               else{
                 if(active == true){
-                  // FirebaseFirestore.instance.collection('Companies').doc(element.id).collection('Employee')
-                  //     .get().then((value) {
-                  //   value.docs.forEach((elemen){
 
-                  //     String a;
-                  //     bool empactive=false;
-                  //     bool admin=false;
-                  //     a = elemen.get('email');
-                  //     admin = elemen.get('admin');
-                  //     if (email == a ) {
-                  //
-                  //       empactive = elemen.get('active');
-                  //       if(empactive==true) {
-                  //         print("laksjdhfkjsadf $admin $a $empactive");
-                  //         if(admin==true){
-                  //           Login(loading: false,);
-                  //           // ek bol bna agr true ho to char global variable main  betha
-                  //           employemail=email;
-                  //           admin__email=admin_email;
-                  //           print("::::::::[][][][]:::::::::: $employemail $admin__password");
-                  //
-                  //           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                  //             builder: (BuildContext context) => ScreenMain1(employee_email: email,
-                  //               employee_password: password,adminpassword: admin_password,
-                  //               adminname: admin_email,),
-                  //           ), (route) => false,);
-                  //         }else {
-                  //           Login(loading: false);
-                  //           Navigator.of(context).pushAndRemoveUntil(
-                  //             MaterialPageRoute(
-                  //               builder: (BuildContext context) =>
-                  //                   EmployeeDashboard(admineamil: element.id,),), (route) => false,);
-                  //         }
-                  //       }
-                  //       else{
-                  //         print("not allowed");
-                  //       }
-                  //     }
-                  //     else{}
-                  //   });
-                  // });
-                  print("::::::${element.id}");
-                  // final QuerySnapshot snapshot = await FirebaseFirestore.instance
-                  //     .collection('Companies').doc(element.id).collection('Employee')
-                  //     .get();
-                  // snapshot.docs.forEach((elemen){
-                  //   print("cahcahcahcahcahca");
-                  //   String a;
-                  //   bool empactive=false;
-                  //   bool admin=false;
-                  //   a = elemen.get('email');
-                  //
-                  //   if (email == a ) {
-                  //     admin = elemen.get('admin');
-                  //     empactive = elemen.get('active');
-                  //     if(empactive==true) {
-                  //       print("laksdjdhfkjsadf $admin $a $empactive");
-                  //       if(admin==true){
-                  //         mainuser=false;
-                  //         Login(loading: false,);
-                  //         // ek bol bna agr true ho to char global variable main  betha
-                  //         employemail=email;
-                  //         admin__email=admin_email;
-                  //         employepassword = password;
-                  //         print("::::::::[][][][]::::::::: $employemail LL $admin_email KK $employepassword ||| $admin__password ");
-                  //
-                  //         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                  //           builder: (BuildContext context) => ScreenMain1(employee_email: email,
-                  //             employee_password: password,adminpassword: admin_password,
-                  //             adminname: admin_email,),
-                  //         ), (route) => false,);
-                  //
-                  //       }else {
-                  //         Login(loading: false);
-                  //         Navigator.of(context).pushAndRemoveUntil(
-                  //           MaterialPageRoute(
-                  //             builder: (BuildContext context) =>
-                  //                 EmployeeDashboard(admineamil: element.id,),), (route) => false,);
-                  //       }
-                  //     }
-                  //     else{
-                  //       print("not allowed");
-                  //     }
-                  //   }
-                  //   else{}
-                  // });
                     FirebaseFirestore.instance
                       .collection('Companies').doc(element.id).collection('Employee')
                       .get().then((value) {
-                        if(value==null) {}
-                        else
-                     value.docs.forEach((elemen){
-                       print("cahcahcahcahcahca ${element.id} ::::::: ${elemen.id}");
+                      admin__email=element.id;
+                       value.docs.forEach((elemen){
+                       // print("cahcahcahcahcahca ${element.id} ::::::: ${elemen.id}");
                        String a;
                        bool empactive=false;
                        bool admin=false;
                        a = elemen.get('email');
-
                        if (email == a ) {
                          admin = elemen.get('admin');
                          empactive = elemen.get('active');
                          if(empactive==true) {
-                           print("laksdjdhfkjsadf $admin $a $empactive");
+                          // print("laksdjdhfkjsadf $admin $a $empactive");
                            if(admin==true){
                              mainuser=false;
                              Login(loading: false,);
@@ -460,20 +181,41 @@ class FrLoginService {
                              employemail=email;
                              admin__email=admin_email;
                              employepassword = password;
-                             print("::::::::[][][][]::::::::: $employemail LL $admin_email KK $employepassword ||| $admin__password ");
-
+                             print("::::::::[][][][]:::::::::$email hh $employemail LL $admin_email KK $employepassword ||| $admin__password ");
                              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                                builder: (BuildContext context) => ScreenMain1(employee_email: email,
                                  employee_password: password,adminpassword: admin_password,
                                  adminname: admin_email,),
                              ), (route) => false,);
-
-                           }else {
+                           }
+                           else {
+                             //String ab=element.id;
+                             //print(":::: $ab ::: ${element.id} :::: ");
                              Login(loading: false);
-                             Navigator.of(context).pushAndRemoveUntil(
-                               MaterialPageRoute(
-                                 builder: (BuildContext context) =>
-                                     EmployeeDashboard(admineamil: element.id,),), (route) => false,);
+                             // print(":::superherp ${element.id} ::: :::$admin__email");
+                            //    Get.offAll(
+                            //        EmployeeDashboard(admineamil: admin__email,)
+                            //    );
+                             Get.offAll(() =>  EmployeeDashboard(admineamil: element.id,));
+                               //184573
+
+                             // Builder(
+                             //   builder: (BuildContext context) {
+                             //     Navigator.of(context).pushAndRemoveUntil(
+                             //       MaterialPageRoute(
+                             //         builder: (BuildContext context) => EmployeeDashboard(admineamil: element.id,),
+                             //       ),
+                             //           (route) => false,
+                             //     );
+                             //   },
+                             // );
+
+                                 // Navigator.of(context).pushAndRemoveUntil(
+                                 //   MaterialPageRoute(
+                                 //     builder: (BuildContext context) =>
+                                 //         EmployeeDashboard(
+                                 //           admineamil: element.id,),), (
+                                 //     route) => false,);
                            }
                          }
                          else{
@@ -483,9 +225,7 @@ class FrLoginService {
                        else{}
                      });
 
-
                    });
-
                   // element.reference.collection("Employee").get().then((value) =>
                   //
                   //     value.docs.forEach((elemen){
@@ -581,10 +321,10 @@ class FrLoginService {
                   print("yyyyyy active status is $active");
                   FirebaseAuth.instance.signOut().then((value) async {
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) =>  Login(loading: false,)),
+                        MaterialPageRoute(builder: (context) =>
+                            Login(loading: false,)),
                         result: false);});
                 }
-
               }
             });
           });
@@ -836,7 +576,7 @@ class FrLoginService {
   String onFirebaseErrorHandling(String error) {
     switch (error) {
       case "invalid-email":
-        return TextStrings.Invalid_email.tr();
+        return 'Invalid email';
       case "wrong-password":
           // return TextStrings.You_have_entered_an_invalid_password.tr();
           return "You have entered an invalid password";
@@ -1074,13 +814,13 @@ class FrLoginService1 {
       isEmpty(email, password)
           ? onlogicErrorHandling(
         // error: "Please enter your Information",
-        error: TextStrings.Invalid_email,
+        error: 'Invalid email',
         providerGenerator: providerGenerator,
         buttonIndex: buttonIndex,
         errorIndex: errorIndex,
       ) : !isRegExpValid(email)
           ? onlogicErrorHandling(
-        error: TextStrings.Invalid_email,
+        error: 'Invalid email',
         providerGenerator: providerGenerator,
         buttonIndex: buttonIndex,
         errorIndex: errorIndex,
@@ -1822,7 +1562,7 @@ class FrLoginService1 {
   String onFirebaseErrorHandling(String error) {
     switch (error) {
       case "invalid-email":
-        return TextStrings.Invalid_email.tr();
+        return 'Invalid email';
       case "wrong-password":
       // return TextStrings.You_have_entered_an_invalid_password.tr();
         return "You have entered an invalid password";

@@ -30,7 +30,7 @@ import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/p
 import 'package:hrmanagementapp/View/Profile/Home/components/piechart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
-import 'package:flutter_zoom_drawer/config.dart';
+// import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -50,7 +50,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class EmployeeDashboard extends StatefulWidget {
   EmployeeDashboard({required this.admineamil,Key? key}) : super(key: key);
-  String admineamil;
+  String admineamil='';
   @override
   State<EmployeeDashboard> createState() => _EmployeeDashboardState();
 }
@@ -83,10 +83,15 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   void initState() {
       // TODO: implement initState
       super.initState();
-      print("aaaaaaa $aadmin");
+      print("::::jfhgs  ${widget.admineamil}");
       setState(() {
         aadmin=widget.admineamil;
       });
+      setState(() {
+        aadmin=widget.admineamil;
+        print("aaaaaaa $aadmin");
+      });
+      print("aaaaaaa $aadmin");
       initializeDateFormatting();
       DateTime now = DateTime.now();
       _timeString = _formatDateTime(now);
@@ -98,8 +103,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       setState(() {
       user_name=user!.email.toString();
       admin=widget.admineamil;  });
-
-
+      print("aaaaaaa $aadmin ::: $admin $user_name");
       if(now.month==01||now.month==02||now.month==03
           ||now.month==04||now.month==05||now.month==06
           ||now.month==07||now.month==08||now.month==09) {
@@ -119,9 +123,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         // time='${now.hour}:${now.minute}';
         // datestring=date.toString();
         // datestring=datestring.substring(0, datestring.length - 13);
+      }else{
+        datestring='${now.year}-${now.month}-${now.day}';
       }
+
       print("*-/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/  $time");
-      //fetchuser();
+      //  fetchuser();
       fetchandpostgeneratedid();
     }
 
@@ -133,23 +140,26 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         .then((valu) {
       String company_name='';
       company_name=valu.get('company_name');
+      print(":::lean on  ${company_name} ${user!.email.toString()}");
       FirebaseFirestore.instance
           .collection('Companies')
           .doc('${admin}').collection("Employee")
           .doc('${user!.email.toString()}').get().then((value)async {
 
 
-        generatedId=value.get('generatedId');
-
-        if(generatedId.isEmpty){
-          String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
-          var res = await EmployeeCreation().allEmployeesGet('', api, "${user!.email.toString()}", admin)
-          .then((value) {
-            fetchuser();
-          });
-        }else{
-          fetchuser();
-        }
+       // generatedId=value.get('generatedId');
+        print(":::lean on  ${company_name} ::: ${user!.email.toString()} :::${generatedId} :: $admin");
+        fetchuser();
+        // if(generatedId.isEmpty){
+        //   String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
+        //   var res = await EmployeeCreation().allEmployeesGet('', api, "${user!.email.toString()}", admin)
+        //   .then((value) {
+        //     fetchuser();
+        //   });
+        // }
+        // else{
+        //   fetchuser();
+        // }
       });
     });
    // String api = """$baseurl/Employee?fields=["name", "first_name","user_id"]&filters=[["company", "=", "$company_name"]]""";
@@ -183,7 +193,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   bool timininandoutdicator=false;
 
   fetchuser() async {
-    print("%%%%%%%%%%%%%%%% $datestring");
+   // print("%%%%%%%%%%%%%%%% $datestring");
      FirebaseFirestore.instance
          .collection('Companies')
          .doc('${admin}').collection("Employee")
@@ -192,15 +202,15 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
            department= value.get('designation');
             generatedId=value.get('generatedId');
            setState(() {});
-     print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $name $department');
+     //print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $name $department');
     }).then((value) async {
       FirebaseFirestore.instance.collection('Companies')
        .doc('${admin}').collection("Employee")
        .doc('${user!.email.toString()}').collection("Attendance").get().then((value) {
        value.docs.forEach((element) {
-       print(":::::::::::: ${element.id}");
+       //print(":::::::::::: ${element.id}");
        if(datestring=="${element.id}"){
-        print("jjjjjjjjjjjjjj");
+        //print("jjjjjjjjjjjjjj");
         setState(() {itis=true;});}});
        }).then((value) {
        if(itis==false){
@@ -217,7 +227,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                String a,b;
                a=element.get('TimeIn');
                b=element.get('TimeOut');
-               print("######## $a $b");
+               print("######## ${element.id} $a $b");
                if(a.isNotEmpty && b.isEmpty) {
                  setState(() {timeinshow=false;timeoutshow=true;});
                }
@@ -249,7 +259,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       GetAddressFromLatLong1(position);
 
     });
-      print("-------------------------------- $timeinshow $timeoutshow");
+      //print("-------------------------------- $timeinshow $timeoutshow");
   }
 
   ////////////////////location fetching/////////////////////////
@@ -329,9 +339,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
-    Placemark place1=placemark[1];
+    //Placemark place1=placemark[1];
     setState(() {
-      Address= '${place.thoroughfare!.isEmpty ? place1.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place1.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place1.locality}, ${place.postalCode}';
+      Address= '${place.thoroughfare!.isEmpty ? place.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place.locality}, ${place.postalCode}';
       reload=false;
     });
   }
@@ -340,9 +350,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
-    Placemark place1=placemark[1];
+    //Placemark place1=placemark[1];
     setState(() {
-      Address1= '${place.thoroughfare!.isEmpty ? place1.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place1.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place1.locality}, ${place.postalCode}';
+      Address1= '${place.thoroughfare!.isEmpty ? place.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place.locality}, ${place.postalCode}';
       reload=false;
     });
   }
@@ -353,6 +363,1721 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
+    // return SafeArea(
+    //   child: AdvancedDrawer(
+    //     backdropColor: srpgradient2,
+    //     controller: _advancedDrawerController,
+    //     animationCurve: Curves.easeInOut,
+    //     animationDuration: const Duration(milliseconds: 300),
+    //     animateChildDecoration: true,
+    //     rtlOpening: false, // openScale: 1.0,
+    //     disabledGestures: false,
+    //     childDecoration: const BoxDecoration(
+    //       // NOTICE: Uncomment if you want to add shadow behind the page.
+    //       // Keep in mind that it may cause animation jerks.
+    //       // boxShadow: <BoxShadow>[
+    //       //   BoxShadow(
+    //       //     color: Colors.black12,
+    //       //     blurRadius: 0.0,
+    //       //   ),
+    //       // ],
+    //
+    //       // gradient: const LinearGradient(
+    //       // begin: Alignment.topCenter,
+    //       // end: Alignment.bottomCenter,
+    //       // colors: [
+    //       // srpgradient1,
+    //       // srpgradient2,
+    //       // srpgradient3
+    //       // ],),
+    //       borderRadius: const BorderRadius.all(Radius.circular(16)),
+    //     ),
+    //     drawer: SafeArea(
+    //       child: Container(
+    //         child: ListTileTheme(
+    //           textColor: Colors.white,
+    //           iconColor: Colors.white,
+    //           child: Column(
+    //             mainAxisSize: MainAxisSize.max,
+    //             children: [
+    //               Container(
+    //                 width: 128.0,
+    //                 height: 128.0,
+    //                 margin:  EdgeInsets.only(
+    //                   top: 24.0.h,
+    //                   bottom: 10.0.h,
+    //                   // top: 24.0,
+    //                   // bottom: 10.0,
+    //                 ),
+    //                 clipBehavior: Clip.antiAlias,
+    //                 decoration: const BoxDecoration(
+    //                   color: Colors.black26,
+    //                   shape: BoxShape.circle,
+    //                 ),
+    //                 child: Icon(FontAwesomeIcons.user,
+    //                   size: 80.sp,
+    //                   //size: 80,
+    //                   color: whiteClr,),
+    //                 // child: Image.asset(
+    //                 //   'assets/user.jpg',
+    //                 // ),
+    //               ),
+    //               Text('${name}',style: GoogleFonts.poppins(
+    //                 fontSize: 14.5.sp,
+    //                 //fontSize: 14.5,
+    //                 color: Colors.white,),),
+    //               SizedBox(
+    //                // height: 45,
+    //                 height: 45.h,
+    //               ),
+    //               Container(
+    //                 height: 1,
+    //                 width: MediaQuery.of(context).size.width,
+    //                 color: Colors.white,),
+    //               SizedBox(
+    //                 height: 20.h,
+    //                 //height: 20,
+    //               ),
+    //               ListTile(
+    //                 onTap: () async {
+    //                   Navigator.push(
+    //                     context,
+    //                     MaterialPageRoute(builder: (context) => ByEmployee1(admin: widget.admineamil,)),
+    //                   );
+    //                 },
+    //                 leading: Icon(FontAwesomeIcons.clock,
+    //                   size: 20.sp,
+    //                  // size: 20,
+    //                   color: whiteClr,),
+    //                 title: Text('Check Attendance',style: GoogleFonts.poppins(
+    //                   fontSize: 14.5.sp,
+    //                   //fontSize: 14.5,
+    //                   color: Colors.white,),),
+    //               ),
+    //               ListTile(
+    //                 onTap: () async {
+    //                   Navigator.push(
+    //                     context,
+    //                     MaterialPageRoute(builder: (context) => ListOfRequest1(adminemail: widget.admineamil,providerGenerator: providerGenerator,)),
+    //                   );
+    //                 },
+    //                 leading: Icon(FontAwesomeIcons.addressCard,
+    //                   size: 20.sp,
+    //                   //size: 20,
+    //                   color: whiteClr,),
+    //                 title: Text('Leave',style: GoogleFonts.poppins(
+    //                   //fontSize: 14.5,
+    //                   fontSize: 14.5.sp,
+    //                   color: Colors.white,),),
+    //               ),
+    //               ListTile(
+    //                 onTap: () async {
+    //                   await FirebaseAuth.instance.signOut().then((value) async {
+    //                     Navigator.of(context).pushReplacement(
+    //                         MaterialPageRoute(builder: (BuildContext context) =>  Login(loading: false,)),//Homepage()),munib
+    //                         result: false);
+    //                   });
+    //                 },
+    //                 leading: Icon(FontAwesomeIcons.rightToBracket,
+    //                   //size: 20,
+    //                   size: 20.sp,
+    //                   color: whiteClr,),
+    //                 title:  Text('Logout',style: GoogleFonts.poppins(
+    //                     fontSize: 14.5.sp,
+    //                     //fontSize: 14.5,
+    //                     color: Colors.white),),
+    //               ),
+    //               // ListTile(
+    //               //   onTap: () {},
+    //               //   leading: Icon(Icons.account_circle_rounded),
+    //               //   title: Text('Profile'),
+    //               // ),
+    //               // ListTile(
+    //               //   onTap: () {},
+    //               //   leading: Icon(Icons.favorite),
+    //               //   title: Text('Favourites'),
+    //               // ),
+    //               // ListTile(
+    //               //   onTap: () {},
+    //               //   leading: Icon(Icons.settings),
+    //               //   title: Text('Settings'),
+    //               // ),
+    //               const Spacer(),
+    //               GestureDetector(
+    //                 onTap: ()async{
+    //                 const url=  'https://github.com/syedmunib616/syedmunib/blob/main/privacy-policy.md';
+    //                 if(await canLaunch(url)){
+    //                   await launch(url,forceSafariVC: false );  //forceWebView is true now
+    //                 }
+    //                 else {
+    //                   throw 'Could not launch $url';
+    //                 }
+    //                 },
+    //                 child: DefaultTextStyle(
+    //                   style: const TextStyle(
+    //                     fontSize: 12,
+    //                     color: Colors.white54,
+    //                   ),
+    //                   child: Container(
+    //                     margin: const EdgeInsets.symmetric(
+    //                       vertical: 16.0,
+    //                     ),
+    //                     child: const Text('Terms of Service | Privacy Policy'),
+    //                   ),
+    //                 ),
+    //               ),
+    //             ],
+    //           ),
+    //         ),
+    //       ),
+    //     ),
+    //     child: Scaffold(
+    //       appBar: PreferredSize(
+    //         preferredSize:  Size.fromHeight(94.0.h),
+    //         child: Container(
+    //           height: 102.h,
+    //           width:MediaQuery.of(context).size.width,
+    //           decoration: BoxDecoration(
+    //             boxShadow: [
+    //               BoxShadow(
+    //                 color: Colors.grey.withOpacity(0.4),
+    //                 spreadRadius: 2,
+    //                 blurRadius: 1,
+    //                 offset: const Offset(0, 2), // changes position of shadow
+    //               ),
+    //             ],
+    //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+    //             color: whiteClr,
+    //           ),
+    //           child: Column(
+    //             crossAxisAlignment:CrossAxisAlignment.center,
+    //             children: [
+    //               const Spacer(),
+    //               Row(
+    //                 mainAxisAlignment: MainAxisAlignment.center,
+    //                 children: [
+    //                   GestureDetector(
+    //                     onTap: _handleMenuButtonPressed,
+    //                     // onTap: () async {
+    //                     //
+    //                     //   _handleMenuButtonPressed;
+    //                     //
+    //                     //   // await FirebaseAuth.instance.signOut().then((value) async {
+    //                     //   //  Navigator.of(context).pushReplacement(
+    //                     //   //      MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
+    //                     //   //      result: false);
+    //                     //   // });
+    //                     // },
+    //                     child: Padding(
+    //                       padding: EdgeInsets.all(10.0.sp),
+    //                       child: ValueListenableBuilder<AdvancedDrawerValue>(
+    //                         valueListenable: _advancedDrawerController,
+    //                         builder: (_, value, __) {
+    //                           return AnimatedSwitcher(
+    //                             duration: const Duration(milliseconds: 250),
+    //                             child: Icon(
+    //                               value.visible ? Icons.clear : Icons.menu,
+    //                               key: ValueKey<bool>(value.visible),
+    //                             ),
+    //                           );
+    //                         },
+    //                       ),
+    //                     ),
+    //                     // child: Padding(
+    //                     //   padding: EdgeInsets.all(8.0.sp),
+    //                     //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+    //                     // ),
+    //                   ),
+    //                   const Spacer(),
+    //                   Text("$user_name",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //                   const Spacer(),
+    //                   SizedBox(width: 30.w,),
+    //                 ],
+    //               ),
+    //
+    //               Container(
+    //                 height: 30.h,
+    //                 width: MediaQuery.of(context).size.width,
+    //                 child: Row(
+    //                   mainAxisAlignment: MainAxisAlignment.center,
+    //                   children: const [
+    //
+    //                   ],
+    //                 ),
+    //               ),
+    //
+    //             ],
+    //           ),
+    //         ),
+    //       ),
+    //       body: SingleChildScrollView(
+    //         child:
+    //         // timeinshow == false && timeoutshow == false ?
+    //         // Container(
+    //         //   // color: Colors.purpleAccent,
+    //         //   height: MediaQuery.of(context).size.height,
+    //         //   width: MediaQuery.of(context).size.width,
+    //         //   child:Center(child: Text("Attendance is Marked",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),),
+    //         // ) :
+    //         Column(
+    //           children: [
+    //             // Container(
+    //             //   height: 102.h,
+    //             //   width:MediaQuery.of(context).size.width,
+    //             //   decoration: BoxDecoration(
+    //             //     boxShadow: [
+    //             //       BoxShadow(
+    //             //         color: Colors.grey.withOpacity(0.4),
+    //             //         spreadRadius: 2,
+    //             //         blurRadius: 1,
+    //             //         offset: const Offset(0, 2), // changes position of shadow
+    //             //       ),
+    //             //     ],
+    //             //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+    //             //     color: whiteClr,
+    //             //   ),
+    //             //   child: Column(
+    //             //     crossAxisAlignment:CrossAxisAlignment.center,
+    //             //     children: [
+    //             //       Row(
+    //             //         mainAxisAlignment: MainAxisAlignment.center,
+    //             //         children: [
+    //             //           GestureDetector(
+    //             //             onTap: () async {
+    //             //
+    //             //               _handleMenuButtonPressed;
+    //             //
+    //             //               // await FirebaseAuth.instance.signOut().then((value) async {
+    //             //               //  Navigator.of(context).pushReplacement(
+    //             //               //      MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
+    //             //               //      result: false);
+    //             //               // });
+    //             //             },
+    //             //             child: Padding(
+    //             //               padding: EdgeInsets.all(8.0.sp),
+    //             //               child: ValueListenableBuilder<AdvancedDrawerValue>(
+    //             //                 valueListenable: _advancedDrawerController,
+    //             //                 builder: (_, value, __) {
+    //             //                   return AnimatedSwitcher(
+    //             //                     duration: Duration(milliseconds: 250),
+    //             //                     child: Icon(
+    //             //                       value.visible ? Icons.clear : Icons.menu,
+    //             //                       key: ValueKey<bool>(value.visible),
+    //             //                     ),
+    //             //                   );
+    //             //                 },
+    //             //               ),
+    //             //             ),
+    //             //             // child: Padding(
+    //             //             //   padding: EdgeInsets.all(8.0.sp),
+    //             //             //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+    //             //             // ),
+    //             //           ),
+    //             //           Spacer(),
+    //             //           Column(
+    //             //             mainAxisAlignment: MainAxisAlignment.center,
+    //             //             children: [
+    //             //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //             //               SizedBox(
+    //             //                 height: 2.h,
+    //             //               ),
+    //             //               Container(
+    //             //                 height: 8.h,
+    //             //                 width: 130.w,
+    //             //                 decoration: BoxDecoration(
+    //             //                   borderRadius: BorderRadius.circular(20.sp),
+    //             //                   color: greyOpenClr,
+    //             //                 ),
+    //             //                 child: Stack(
+    //             //                   children: [
+    //             //                     Positioned(
+    //             //                       top:0,
+    //             //                       bottom: 0,
+    //             //                       left: 0,
+    //             //                       right: 60,
+    //             //                       child: Container(
+    //             //                         decoration: BoxDecoration(
+    //             //                           borderRadius: BorderRadius.circular(20.sp),
+    //             //                           color: srpgradient2,
+    //             //                         ),
+    //             //                         height: 11.h,
+    //             //                         width: 133.w,
+    //             //                       ),
+    //             //                     )
+    //             //                   ],
+    //             //                 ),
+    //             //               )
+    //             //             ],
+    //             //           ),
+    //             //           Spacer(),
+    //             //           Container(
+    //             //             width: 30.0.w,
+    //             //             height: 30.0.h,
+    //             //             child: Stack(
+    //             //               children: [
+    //             //                 ClipRRect(
+    //             //                   borderRadius: BorderRadius.circular(15.0.sp),
+    //             //                   child: Image.asset(
+    //             //                     'assets/user.jpg',
+    //             //                     width: 30.0.w,
+    //             //                     height: 30.0.h,
+    //             //                     fit: BoxFit.fill,
+    //             //                   ),
+    //             //                 ),
+    //             //                 Positioned(
+    //             //                   bottom: 1.5,
+    //             //                   right: 1.5,
+    //             //                   child: Container(
+    //             //                     height: 5.h,
+    //             //                     width: 5.w,
+    //             //                     //color:online,
+    //             //                     decoration: BoxDecoration(
+    //             //                       borderRadius: BorderRadius.circular(5.sp),
+    //             //                       color: online,
+    //             //                     ),
+    //             //                   ),
+    //             //                 )
+    //             //               ],
+    //             //             ),
+    //             //           ),
+    //             //           SizedBox(width: 15.w,)
+    //             //         ],
+    //             //       ),
+    //             //
+    //             //       Container(
+    //             //         height: 50.h,
+    //             //         width: MediaQuery.of(context).size.width,
+    //             //         child: Row(
+    //             //           mainAxisAlignment: MainAxisAlignment.center,
+    //             //           children: [
+    //             //             Container(
+    //             //               width: 80.w,
+    //             //               height: 40.h,
+    //             //               decoration: BoxDecoration(
+    //             //                 boxShadow: [
+    //             //                   BoxShadow(
+    //             //                     color: Colors.grey.withOpacity(0.2),
+    //             //                     spreadRadius: 2,
+    //             //                     blurRadius: 1,
+    //             //                     offset: const Offset(0, 2), // changes position of shadow
+    //             //                   ),
+    //             //                 ],
+    //             //                 borderRadius: BorderRadius.circular(5),
+    //             //                 color: whiteClr,
+    //             //               ),
+    //             //               child: Column(
+    //             //                 children: [
+    //             //                   SizedBox(height: 5.h,),
+    //             //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+    //             //                   Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //             //
+    //             //                 ],
+    //             //               ),
+    //             //             ),
+    //             //             Padding(
+    //             //               padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    //             //               child: Container(
+    //             //                 color: coverBackClr,
+    //             //                 height: 40.h,
+    //             //                 width: 1.w,
+    //             //               ),
+    //             //             ),
+    //             //             Container(
+    //             //               width: 240.w,
+    //             //               height: 40.h,
+    //             //               decoration: BoxDecoration(
+    //             //                 boxShadow: [
+    //             //                   BoxShadow(
+    //             //                     color: Colors.grey.withOpacity(0.2),
+    //             //                     spreadRadius: 2,
+    //             //                     blurRadius: 1,
+    //             //                     offset: const Offset(0, 2), // changes position of shadow
+    //             //                   ),
+    //             //                 ],
+    //             //                 borderRadius: BorderRadius.circular(5),
+    //             //                 color: whiteClr,
+    //             //               ),
+    //             //               child: Padding(
+    //             //                 padding: EdgeInsets.all( 10.sp),
+    //             //                 child: Row(
+    //             //                   children: [
+    //             //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //             //                     Spacer(),
+    //             //                     Container(
+    //             //                       height: 20.h,
+    //             //                       width: 20.w,
+    //             //                       decoration: BoxDecoration(
+    //             //                         boxShadow: [
+    //             //                           BoxShadow(
+    //             //                             color: Colors.grey.withOpacity(0),
+    //             //                             spreadRadius: 0,
+    //             //                             blurRadius: 1,
+    //             //                             offset: const Offset(0, 2), // changes position of shadow
+    //             //                           ),
+    //             //                         ],
+    //             //                         borderRadius: BorderRadius.circular(15.sp),
+    //             //                         color: greybackground,
+    //             //                       ),
+    //             //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+    //             //                   ],
+    //             //                 ),
+    //             //               ),
+    //             //             ),
+    //             //           ],
+    //             //         ),
+    //             //       )
+    //             //     ],
+    //             //   ),
+    //             // ),
+    //             // SizedBox(
+    //             //   height: 10.h,
+    //             // ),
+    //
+    //             timeinshow==true ? Padding(
+    //               padding: EdgeInsets.all(20.0.sp),
+    //               child: Container(
+    //                 height: 151.h,
+    //                 width:MediaQuery.of(context).size.width,
+    //                 decoration: BoxDecoration(
+    //                   boxShadow: [
+    //                     BoxShadow(
+    //                       color: Colors.grey.withOpacity(0.4),
+    //                       spreadRadius: 2,
+    //                       blurRadius: 1,
+    //                       offset: const Offset(0, 2), // changes position of shadow
+    //                     ),
+    //                   ],
+    //                   borderRadius: BorderRadius.circular(6.sp),
+    //                   color: whiteClr,
+    //                 ),
+    //                 child: Column(
+    //                   children: [
+    //                     Padding(
+    //                       padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+    //                       child: Container(
+    //                         height: 35.h,
+    //                         width: MediaQuery.of(context).size.width,
+    //                         child: Row(
+    //                           children: [
+    //                             Column(
+    //                               crossAxisAlignment: CrossAxisAlignment.start,
+    //                               children: [
+    //                                 SizedBox(height: 5.h,),
+    //                                 Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //                                 Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+    //                               ],
+    //                             ),
+    //                             const Spacer(),
+    //                             Container(
+    //                               // color: Colors.purpleAccent,
+    //                               width: 92.w,
+    //                               height: 25.h,
+    //                                 child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+    //                             const Spacer(),
+    //                             GestureDetector(
+    //                               onTap: ()async{
+    //                                 print("::::::::::::%%::::::::");
+    //                                 // Position position = await _determinePosition();
+    //                                 // GetAddressFromLatLong(position);
+    //                                 // GetAddressFromLatLong1(position);
+    //                                 setState(() {
+    //                                   if(reload==false) {
+    //                                     reload = true;
+    //                                     Future.delayed(const Duration(milliseconds: 250), () {
+    //                                       refreshlocation();
+    //                                     });
+    //
+    //                                   }
+    //                                 });
+    //                               },
+    //                               child: Container(
+    //                                 height: 27.h,
+    //                                 width: 27.w,
+    //                                 decoration: BoxDecoration(
+    //                                   boxShadow: [
+    //                                     BoxShadow(
+    //                                       color: Colors.grey.withOpacity(0),
+    //                                       spreadRadius: 0,
+    //                                       blurRadius: 1,
+    //                                       offset: const Offset(0, 2), // changes position of shadow
+    //                                     ),
+    //                                   ],
+    //                                   borderRadius: BorderRadius.circular(15.sp),
+    //                                   color: greybackground,
+    //                                 ),
+    //                                 child: reload ==true ?SizedBox(
+    //                                   height: 5.h,
+    //                                   width: 5.w,
+    //                                   child: CircularProgressIndicator(
+    //                                     backgroundColor: Colors.white,
+    //                                     strokeWidth: 1.w,
+    //                                   ),
+    //                                 ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+    //                               ),
+    //                             ),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     Container(
+    //                       height: 1,
+    //                       width: MediaQuery.of(context).size.width,
+    //                       color: coverBackClr,
+    //                     ),
+    //                     SizedBox(
+    //                       width: MediaQuery.of(context).size.width,
+    //                       height: 104.h,
+    //                       child: Padding(
+    //                         padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+    //                         child: Column(
+    //                           children: [
+    //                             Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //                             SizedBox(
+    //                               height: 10.h,
+    //                             ),
+    //                             GestureDetector(
+    //                               onTap: () async {
+    //                                 Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
+    //                                 // Position position = await _determinePosition();
+    //                                 // print(position.latitude);print(position.longitude);
+    //                                 // GetAddressFromLatLong1(position);DateTime now = DateTime.now();
+    //                                 // FirebaseFirestore.instance
+    //                                 //     .collection('Companies').doc('${admin}').collection("Employee")
+    //                                 //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
+    //                                 //     .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
+    //                                 //     .then((value) {
+    //                                 //       setState(() {
+    //                                 //         timeinshow=false;
+    //                                 //         timeoutshow=true;
+    //                                 //       });
+    //                                 //     return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
+    //                                 // }); //.then((value) => initState());
+    //                               },
+    //                               child: Container(
+    //                                   height: 40.h,
+    //                                   width: 295.w,
+    //                                   decoration: BoxDecoration(
+    //                                     gradient: const LinearGradient(
+    //                                       begin: Alignment.topCenter,
+    //                                       end: Alignment.bottomCenter,
+    //                                       colors: [
+    //                                         srpgradient1,
+    //                                         srpgradient2,
+    //                                         srpgradient3
+    //                                       ],
+    //                                     ),
+    //                                     boxShadow: [
+    //                                       BoxShadow(
+    //                                         color: Colors.grey.withOpacity(0.5),
+    //                                         spreadRadius: 1,
+    //                                         blurRadius: 1,
+    //                                         offset: const Offset(0, 0), // changes position of shadow
+    //                                      ),
+    //                                     ],
+    //                                     borderRadius: BorderRadius.circular(8.2),
+    //                                     color: whiteClr,
+    //                                   ),
+    //                                   child:Center(
+    //                                     child:  timinindicator==true
+    //                                         ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+    //                                         : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+    //                                   )
+    //                               ),
+    //                             ),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ) : SizedBox(),
+    //
+    //             timeoutshow==true ? Padding(
+    //               padding: EdgeInsets.all(20.0.sp),
+    //               child: Container(
+    //                 height: 151.1.h,
+    //                 width:MediaQuery.of(context).size.width,
+    //                 decoration: BoxDecoration(
+    //                   boxShadow: [
+    //                     BoxShadow(
+    //                       color: Colors.grey.withOpacity(0.4),
+    //                       spreadRadius: 2,
+    //                       blurRadius: 1,
+    //                       offset: const Offset(0, 2), // changes position of shadow
+    //                     ),
+    //                   ],
+    //                   borderRadius: BorderRadius.circular(6.sp),
+    //                   color: whiteClr,
+    //                   ),
+    //                  child: Column(
+    //                   mainAxisAlignment: MainAxisAlignment.center,
+    //                   children: [
+    //                     Padding(
+    //                       padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+    //                       child: Container(
+    //                         height: 35.h,
+    //                         width: MediaQuery.of(context).size.width,
+    //                         child: Row(
+    //                           children: [
+    //                             Column(
+    //                               crossAxisAlignment: CrossAxisAlignment.start,
+    //                               children: [
+    //                                 SizedBox(height: 5.h,),
+    //                                 Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //                                 Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+    //                               ],
+    //                             ),
+    //                             const Spacer(),
+    //                             Container(
+    //                               // color: Colors.purpleAccent,
+    //                                 width: 92.w,
+    //                                 height: 25.h,
+    //                                 child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+    //                             const Spacer(),
+    //                             GestureDetector(
+    //                               onTap: ()async{
+    //                                 print("::::::::::::%%::::::::");
+    //                                 // Position position = await _determinePosition();
+    //                                 // GetAddressFromLatLong(position);
+    //                                 // GetAddressFromLatLong1(position);
+    //                                 setState(() {
+    //                                  if(reload==false) {
+    //                                    reload = true;
+    //                                    Future.delayed(const Duration(milliseconds: 250), () {
+    //                                      refreshlocation();
+    //                                    });
+    //
+    //                                  }
+    //                                 });
+    //                               },
+    //                               child: Container(
+    //                                 height: 27.h,
+    //                                 width: 27.w,
+    //                                 decoration: BoxDecoration(
+    //                                   boxShadow: [
+    //                                     BoxShadow(
+    //                                       color: Colors.grey.withOpacity(0),
+    //                                       spreadRadius: 0,
+    //                                       blurRadius: 1,
+    //                                       offset: const Offset(0, 2), // changes position of shadow
+    //                                     ),
+    //                                   ],
+    //                                   borderRadius: BorderRadius.circular(15.sp),
+    //                                   color: greybackground,
+    //                                 ),
+    //                                 child: reload ==true ?SizedBox(
+    //                                   height: 5.h,
+    //                                   width: 5.w,
+    //                                   child: CircularProgressIndicator(
+    //                                     backgroundColor: Colors.white,
+    //                                     strokeWidth: 1.w,
+    //                                   ),
+    //                                 ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+    //                               ),
+    //                             ),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     Container(
+    //                       height: 1,
+    //                       width: MediaQuery.of(context).size.width,
+    //                       color: coverBackClr,
+    //                     ),
+    //                     SizedBox(
+    //                       width: MediaQuery.of(context).size.width,
+    //                       height: 105.h,
+    //                       child: Padding(
+    //                         padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+    //                         child: Column(
+    //                           children: [
+    //                             Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //                             SizedBox(
+    //                               height: 10.h,
+    //                             ),
+    //                             GestureDetector(
+    //                               onTap: () async {
+    //                                  Address.isNotEmpty? timinoutdicator==false ? marktimeoutAttendance() : null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
+    //                                  // .then((value) => initState());
+    //                                 },
+    //                               child: Container(
+    //                                   height: 40.h,
+    //                                   width: 295.w,
+    //                                   decoration: BoxDecoration(
+    //                                     // gradient: const LinearGradient(
+    //                                     //   begin: Alignment.topCenter,
+    //                                     //   end: Alignment.bottomCenter,
+    //                                     //   colors: [
+    //                                     //     srpgradient1,
+    //                                     //     srpgradient2,
+    //                                     //     srpgradient3
+    //                                     //   ],
+    //                                     // ),
+    //                                     boxShadow: [
+    //                                       BoxShadow(
+    //                                         color: Colors.grey.withOpacity(0.5),
+    //                                         spreadRadius: 1,
+    //                                         blurRadius: 1,
+    //                                         offset: const Offset(0, 0), // changes position of shadow
+    //                                       ),
+    //                                     ],
+    //                                     borderRadius: BorderRadius.circular(8.2),
+    //                                     color: Colors.red,
+    //                                   ),
+    //                                   child:Center(
+    //                                     child: timinoutdicator==true
+    //                                         ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+    //                                         : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+    //
+    //                                 )
+    //                               ),
+    //                             ),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ) : SizedBox(),
+    //
+    //             timeinshow==false && timeoutshow==false ? Padding(
+    //               padding: EdgeInsets.all(20.0.sp),
+    //               child: Container(
+    //                 height: 151.2.h,
+    //                 width:MediaQuery.of(context).size.width,
+    //                 decoration: BoxDecoration(
+    //                   boxShadow: [
+    //                     BoxShadow(
+    //                       color: Colors.grey.withOpacity(0.4),
+    //                       spreadRadius: 2,
+    //                       blurRadius: 1,
+    //                       offset: const Offset(0, 2), // changes position of shadow
+    //                     ),
+    //                   ],
+    //                   borderRadius: BorderRadius.circular(6.sp),
+    //                   color: whiteClr,
+    //                 ),
+    //                 child: Column(
+    //                   mainAxisAlignment: MainAxisAlignment.center,
+    //                   children: [
+    //                     Padding(
+    //                       padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+    //                       child: Container(
+    //                         height: 35.h,
+    //                         width: MediaQuery.of(context).size.width,
+    //                         child: Row(
+    //                           children: [
+    //                             Column(
+    //                               crossAxisAlignment: CrossAxisAlignment.start,
+    //                               children: [
+    //                                 SizedBox(height: 5.h,),
+    //                                 Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //                                 Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+    //                               ],
+    //                             ),
+    //                             const Spacer(),
+    //                             Container(
+    //                               // color: Colors.purpleAccent,
+    //                                 width: 92.w,
+    //                                 height: 25.h,
+    //                                 child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+    //                             const Spacer(),
+    //                             GestureDetector(
+    //                               onTap: ()async{
+    //                                 print("::::::::::::%%::::::::");
+    //                                 // Position position = await _determinePosition();
+    //                                 // GetAddressFromLatLong(position);
+    //                                 // GetAddressFromLatLong1(position);
+    //                                 setState(() {
+    //                                   if(reload==false) {
+    //                                     reload = true;
+    //                                     Future.delayed(const Duration(milliseconds: 250), () {
+    //                                       refreshlocation();
+    //                                     });
+    //
+    //                                   }
+    //                                 });
+    //                               },
+    //                               child: Container(
+    //                                 height: 27.h,
+    //                                 width: 27.w,
+    //                                 decoration: BoxDecoration(
+    //                                   boxShadow: [
+    //                                     BoxShadow(
+    //                                       color: Colors.grey.withOpacity(0),
+    //                                       spreadRadius: 0,
+    //                                       blurRadius: 1,
+    //                                       offset: const Offset(0, 2), // changes position of shadow
+    //                                     ),
+    //                                   ],
+    //                                   borderRadius: BorderRadius.circular(15.sp),
+    //                                   color: greybackground,
+    //                                 ),
+    //                                 child: reload ==true ?SizedBox(
+    //                                   height: 5.h,
+    //                                   width: 5.w,
+    //                                   child: CircularProgressIndicator(
+    //                                     backgroundColor: Colors.white,
+    //                                     strokeWidth: 1.w,
+    //                                   ),
+    //                                 ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+    //                               ),
+    //                             ),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     Container(
+    //                       height: 1,
+    //                       width: MediaQuery.of(context).size.width,
+    //                       color: coverBackClr,
+    //                     ),
+    //                     SizedBox(
+    //                       width: MediaQuery.of(context).size.width,
+    //                       height: 105.h,
+    //                       child: Padding(
+    //                         padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+    //                         child: Column(
+    //                           children: [
+    //                             Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //                             SizedBox(
+    //                               height: 10.h,
+    //                             ),
+    //                             GestureDetector(
+    //                               onTap: () async {
+    //                                 Address.isNotEmpty? timinoutdicator==false ? marktimeoutAttendance() : null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
+    //                                 // .then((value) => initState());
+    //                               },
+    //                               child: Container(
+    //                                   height: 40.h,
+    //                                   width: 295.w,
+    //                                   decoration: BoxDecoration(
+    //                                     // gradient: const LinearGradient(
+    //                                     //   begin: Alignment.topCenter,
+    //                                     //   end: Alignment.bottomCenter,
+    //                                     //   colors: [
+    //                                     //     srpgradient1,
+    //                                     //     srpgradient2,
+    //                                     //     srpgradient3
+    //                                     //   ],
+    //                                     // ),
+    //                                     boxShadow: [
+    //                                       BoxShadow(
+    //                                         color: Colors.grey.withOpacity(0.5),
+    //                                         spreadRadius: 1,
+    //                                         blurRadius: 1,
+    //                                         offset: const Offset(0, 0), // changes position of shadow
+    //                                       ),
+    //                                     ],
+    //                                     borderRadius: BorderRadius.circular(8.2),
+    //                                     color: Colors.red,
+    //                                   ),
+    //                                   child:Center(
+    //                                     child: timinoutdicator==true
+    //                                         ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+    //                                         : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+    //
+    //                                   )
+    //                               ),
+    //                             ),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ) : SizedBox(),
+    //
+    //             // timeinshow==false && timeoutshow==false ? Padding(
+    //             //   padding: EdgeInsets.all(20.0.sp),
+    //             //   child: Container(
+    //             //     height: 151.h,
+    //             //     width:MediaQuery.of(context).size.width,
+    //             //     decoration: BoxDecoration(
+    //             //       boxShadow: [
+    //             //         BoxShadow(
+    //             //           color: Colors.grey.withOpacity(0.4),
+    //             //           spreadRadius: 2,
+    //             //           blurRadius: 1,
+    //             //           offset: const Offset(0, 2), // changes position of shadow
+    //             //         ),
+    //             //       ],
+    //             //       borderRadius: BorderRadius.circular(6.sp),
+    //             //       color: whiteClr,
+    //             //     ),
+    //             //     child: Column(
+    //             //       children: [
+    //             //         Padding(
+    //             //           padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+    //             //           child: Container(
+    //             //             height: 36.h,
+    //             //             width: MediaQuery.of(context).size.width,
+    //             //             child: Row(
+    //             //               children: [
+    //             //                 Column(
+    //             //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //             //                   children: [
+    //             //                     SizedBox(height: 5.h,),
+    //             //                     Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //             //                     Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+    //             //                   ],
+    //             //                 ),
+    //             //                 const Spacer(),
+    //             //                 Container(
+    //             //                   // color: Colors.purpleAccent,
+    //             //                     width: 92.w,
+    //             //                     height: 25.h,
+    //             //                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+    //             //                 const Spacer(),
+    //             //                 GestureDetector(
+    //             //                   onTap: ()async{
+    //             //                     print("::::::::::::%%::::::::");
+    //             //                     // Position position = await _determinePosition();
+    //             //                     // GetAddressFromLatLong(position);
+    //             //                     // GetAddressFromLatLong1(position);
+    //             //                     setState(() {
+    //             //                       if(reload==false) {
+    //             //                         reload = true;
+    //             //                         Future.delayed(const Duration(milliseconds: 250), () {
+    //             //                           refreshlocation();
+    //             //                         });
+    //             //
+    //             //                       }
+    //             //                     });
+    //             //                   },
+    //             //                   child: Container(
+    //             //                     height: 27.h,
+    //             //                     width: 27.w,
+    //             //                     decoration: BoxDecoration(
+    //             //                       boxShadow: [
+    //             //                         BoxShadow(
+    //             //                           color: Colors.grey.withOpacity(0),
+    //             //                           spreadRadius: 0,
+    //             //                           blurRadius: 1,
+    //             //                           offset: const Offset(0, 2), // changes position of shadow
+    //             //                         ),
+    //             //                       ],
+    //             //                       borderRadius: BorderRadius.circular(15.sp),
+    //             //                       color: greybackground,
+    //             //                     ),
+    //             //                     child: reload ==true ?SizedBox(
+    //             //                       height: 5.h,
+    //             //                       width: 5.w,
+    //             //                       child: CircularProgressIndicator(
+    //             //                         backgroundColor: Colors.white,
+    //             //                         strokeWidth: 1.w,
+    //             //                       ),
+    //             //                     ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+    //             //                   ),
+    //             //                 ),
+    //             //               ],
+    //             //             ),
+    //             //           ),
+    //             //         ),
+    //             //         Container(
+    //             //           height: 1,
+    //             //           width: MediaQuery.of(context).size.width,
+    //             //           color: coverBackClr,
+    //             //         ),
+    //             //         SizedBox(
+    //             //           width: MediaQuery.of(context).size.width,
+    //             //           height: 104.h,
+    //             //           child: Padding(
+    //             //             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+    //             //             child: Column(
+    //             //               children: [
+    //             //                 Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //             //                 SizedBox(
+    //             //                   height: 10.h,
+    //             //                 ),
+    //             //                 GestureDetector(
+    //             //                   onTap: () async {
+    //             //                     Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
+    //             //                      //.then((value) => initState());
+    //             //                   },
+    //             //                   child: Container(
+    //             //                       height: 40.h,
+    //             //                       width: 295.w,
+    //             //                       decoration: BoxDecoration(
+    //             //                         gradient: const LinearGradient(
+    //             //                           begin: Alignment.topCenter,
+    //             //                           end: Alignment.bottomCenter,
+    //             //                           colors: [
+    //             //                             srpgradient1,
+    //             //                             srpgradient2,
+    //             //                             srpgradient3
+    //             //                           ],
+    //             //                         ),
+    //             //                         boxShadow: [
+    //             //                           BoxShadow(
+    //             //                             color: Colors.grey.withOpacity(0.5),
+    //             //                             spreadRadius: 1,
+    //             //                             blurRadius: 1,
+    //             //                             offset: const Offset(0, 0), // changes position of shadow
+    //             //                           ),
+    //             //                         ],
+    //             //                         borderRadius: BorderRadius.circular(8.2),
+    //             //                         color: whiteClr,
+    //             //                       ),
+    //             //                       child:Center(
+    //             //                         child:
+    //             //                         timinindicator==true
+    //             //                         ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+    //             //                         : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+    //             //                       )
+    //             //                   ),
+    //             //                 ),
+    //             //               ],
+    //             //             ),
+    //             //           ),
+    //             //         ),
+    //             //       ],
+    //             //     ),
+    //             //   ),
+    //             // ) : SizedBox(),
+    //
+    //             SizedBox(
+    //               height: 20.h,
+    //             ),
+    //
+    //               // Padding(
+    //             //   padding: EdgeInsets.all(20.0.sp),
+    //             //   child: Container(
+    //             //     height: 95.h,
+    //             //     width: MediaQuery.of(context).size.width,
+    //             //     //color: Colors.lightGreen,
+    //             //     decoration: BoxDecoration(
+    //             //       boxShadow: [
+    //             //         BoxShadow(
+    //             //           color: Colors.grey.withOpacity(0.4),
+    //             //           spreadRadius: 2,
+    //             //           blurRadius: 1,
+    //             //           offset: const Offset(0, 2), // changes position of shadow
+    //             //         ),
+    //             //       ],
+    //             //       borderRadius: BorderRadius.circular(6.sp),
+    //             //       color: whiteClr,
+    //             //     ),
+    //             //     child: Column(
+    //             //       crossAxisAlignment: CrossAxisAlignment.start,
+    //             //       children:[
+    //             //         Padding(
+    //             //           padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
+    //             //           child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //             //         ),
+    //             //         Container(
+    //             //           height: 1,
+    //             //           color: greyOpenClr,
+    //             //           width: MediaQuery.of(context).size.width,
+    //             //         ),
+    //             //         SizedBox(height: 15.h,),
+    //             //         Row(
+    //             //           children: [
+    //             //             SizedBox(width: 11.w,),
+    //             //             Container(
+    //             //               // color: Colors.purpleAccent,
+    //             //                 height: 30.h,
+    //             //                 width: 95.w,
+    //             //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+    //             //             SizedBox(width: 10.w,),
+    //             //             Container(
+    //             //               //color: Colors.purpleAccent,
+    //             //                 height: 30.h,
+    //             //                 width: 95.w,
+    //             //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+    //             //             SizedBox(width: 10.w,),
+    //             //             Container(
+    //             //               // color: Colors.purpleAccent,
+    //             //                 height: 30.h,
+    //             //                 width: 95.w,
+    //             //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+    //             //           ],
+    //             //         )
+    //             //       ],
+    //             //     ),
+    //             //   ),
+    //             // ),
+    //             ],
+    //           ),
+    //         ),
+    //         // appBar: AppBar(
+    //         //   title: const Text('Advanced Drawer Example'),
+    //         //   leading: IconButton(
+    //         //     onPressed: _handleMenuButtonPressed,
+    //         //     icon: ValueListenableBuilder<AdvancedDrawerValue>(
+    //         //       valueListenable: _advancedDrawerController,
+    //         //       builder: (_, value, __) {
+    //         //         return AnimatedSwitcher(
+    //         //           duration: Duration(milliseconds: 250),
+    //         //           child: Icon(
+    //         //             value.visible ? Icons.clear : Icons.menu,
+    //         //             key: ValueKey<bool>(value.visible),
+    //         //           ),
+    //         //         );
+    //         //       },
+    //         //     ),
+    //         //   ),
+    //         // ),
+    //       ),
+    //     // child: Scaffold(
+    //     //   body: SingleChildScrollView(
+    //     //     child: Column(
+    //     //       children: [
+    //     //         Container(
+    //     //           height: 102.h,
+    //     //           width:MediaQuery.of(context).size.width,
+    //     //           decoration: BoxDecoration(
+    //     //             boxShadow: [
+    //     //               BoxShadow(
+    //     //                 color: Colors.grey.withOpacity(0.4),
+    //     //                 spreadRadius: 2,
+    //     //                 blurRadius: 1,
+    //     //                 offset: const Offset(0, 2), // changes position of shadow
+    //     //               ),
+    //     //             ],
+    //     //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+    //     //             color: whiteClr,
+    //     //           ),
+    //     //           child: Column(
+    //     //            crossAxisAlignment:CrossAxisAlignment.center,
+    //     //             children: [
+    //     //               Row(
+    //     //                 mainAxisAlignment: MainAxisAlignment.center,
+    //     //                 children: [
+    //     //                   GestureDetector(
+    //     //                     onTap: () async {
+    //     //
+    //     //                       _handleMenuButtonPressed;
+    //     //
+    //     //                       // await FirebaseAuth.instance.signOut().then((value) async {
+    //     //                       //  Navigator.of(context).pushReplacement(
+    //     //                       //      MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
+    //     //                       //      result: false);
+    //     //                       // });
+    //     //                     },
+    //     //                    child: Padding(
+    //     //                      padding: EdgeInsets.all(8.0.sp),
+    //     //                      child: ValueListenableBuilder<AdvancedDrawerValue>(
+    //     //                        valueListenable: _advancedDrawerController,
+    //     //                        builder: (_, value, __) {
+    //     //                          return AnimatedSwitcher(
+    //     //                            duration: Duration(milliseconds: 250),
+    //     //                            child: Icon(
+    //     //                              value.visible ? Icons.clear : Icons.menu,
+    //     //                              key: ValueKey<bool>(value.visible),
+    //     //                            ),
+    //     //                          );
+    //     //                        },
+    //     //                      ),
+    //     //                    ),
+    //     //                     // child: Padding(
+    //     //                     //   padding: EdgeInsets.all(8.0.sp),
+    //     //                     //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+    //     //                     // ),
+    //     //                   ),
+    //     //                   Spacer(),
+    //     //                   Column(
+    //     //                     mainAxisAlignment: MainAxisAlignment.center,
+    //     //                     children: [
+    //     //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                       SizedBox(
+    //     //                         height: 2.h,
+    //     //                       ),
+    //     //                       Container(
+    //     //                         height: 8.h,
+    //     //                         width: 130.w,
+    //     //                         decoration: BoxDecoration(
+    //     //                           borderRadius: BorderRadius.circular(20.sp),
+    //     //                           color: greyOpenClr,
+    //     //                         ),
+    //     //                         child: Stack(
+    //     //                           children: [
+    //     //                             Positioned(
+    //     //                                 top:0,
+    //     //                                 bottom: 0,
+    //     //                                 left: 0,
+    //     //                                 right: 60,
+    //     //                                 child: Container(
+    //     //                                   decoration: BoxDecoration(
+    //     //                                     borderRadius: BorderRadius.circular(20.sp),
+    //     //                                     color: srpgradient2,
+    //     //                                   ),
+    //     //                                   height: 11.h,
+    //     //                                   width: 133.w,
+    //     //                                 ),
+    //     //                               )
+    //     //                             ],
+    //     //                           ),
+    //     //                         )
+    //     //                       ],
+    //     //                     ),
+    //     //                   Spacer(),
+    //     //                   Container(
+    //     //                     width: 30.0.w,
+    //     //                     height: 30.0.h,
+    //     //                     child: Stack(
+    //     //                       children: [
+    //     //                         ClipRRect(
+    //     //                           borderRadius: BorderRadius.circular(15.0.sp),
+    //     //                           child: Image.asset(
+    //     //                             'assets/user.jpg',
+    //     //                             width: 30.0.w,
+    //     //                             height: 30.0.h,
+    //     //                             fit: BoxFit.fill,
+    //     //                           ),
+    //     //                         ),
+    //     //                         Positioned(
+    //     //                           bottom: 1.5,
+    //     //                           right: 1.5,
+    //     //                           child: Container(
+    //     //                             height: 5.h,
+    //     //                             width: 5.w,
+    //     //                             //color:online,
+    //     //                             decoration: BoxDecoration(
+    //     //                               borderRadius: BorderRadius.circular(5.sp),
+    //     //                               color: online,
+    //     //                             ),
+    //     //                           ),
+    //     //                         )
+    //     //                       ],
+    //     //                     ),
+    //     //                   ),
+    //     //                   SizedBox(width: 15.w,)
+    //     //                 ],
+    //     //               ),
+    //     //
+    //     //               Container(
+    //     //                 height: 50.h,
+    //     //                 width: MediaQuery.of(context).size.width,
+    //     //                 child: Row(
+    //     //                   mainAxisAlignment: MainAxisAlignment.center,
+    //     //                   children: [
+    //     //                     Container(
+    //     //                       width: 80.w,
+    //     //                       height: 40.h,
+    //     //                       decoration: BoxDecoration(
+    //     //                         boxShadow: [
+    //     //                           BoxShadow(
+    //     //                             color: Colors.grey.withOpacity(0.2),
+    //     //                             spreadRadius: 2,
+    //     //                             blurRadius: 1,
+    //     //                             offset: const Offset(0, 2), // changes position of shadow
+    //     //                           ),
+    //     //                         ],
+    //     //                         borderRadius: BorderRadius.circular(5),
+    //     //                         color: whiteClr,
+    //     //                       ),
+    //     //                       child: Column(
+    //     //                         children: [
+    //     //                           SizedBox(height: 5.h,),
+    //     //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+    //     //                           Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //     //
+    //     //                         ],
+    //     //                       ),
+    //     //                     ),
+    //     //                     Padding(
+    //     //                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    //     //                       child: Container(
+    //     //                         color: coverBackClr,
+    //     //                         height: 40.h,
+    //     //                         width: 1.w,
+    //     //                       ),
+    //     //                     ),
+    //     //                     Container(
+    //     //                       width: 240.w,
+    //     //                       height: 40.h,
+    //     //                       decoration: BoxDecoration(
+    //     //                         boxShadow: [
+    //     //                           BoxShadow(
+    //     //                             color: Colors.grey.withOpacity(0.2),
+    //     //                             spreadRadius: 2,
+    //     //                             blurRadius: 1,
+    //     //                             offset: const Offset(0, 2), // changes position of shadow
+    //     //                           ),
+    //     //                         ],
+    //     //                         borderRadius: BorderRadius.circular(5),
+    //     //                         color: whiteClr,
+    //     //                       ),
+    //     //                      child: Padding(
+    //     //                        padding: EdgeInsets.all( 10.sp),
+    //     //                        child: Row(
+    //     //                          children: [
+    //     //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //     //                            Spacer(),
+    //     //                            Container(
+    //     //                              height: 20.h,
+    //     //                              width: 20.w,
+    //     //                              decoration: BoxDecoration(
+    //     //                                boxShadow: [
+    //     //                                  BoxShadow(
+    //     //                                    color: Colors.grey.withOpacity(0),
+    //     //                                    spreadRadius: 0,
+    //     //                                    blurRadius: 1,
+    //     //                                    offset: const Offset(0, 2), // changes position of shadow
+    //     //                                  ),
+    //     //                                ],
+    //     //                                borderRadius: BorderRadius.circular(15.sp),
+    //     //                                color: greybackground,
+    //     //                              ),
+    //     //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+    //     //                          ],
+    //     //                        ),
+    //     //                      ),
+    //     //                     ),
+    //     //                   ],
+    //     //                 ),
+    //     //               )
+    //     //             ],
+    //     //           ),
+    //     //         ),
+    //     //         SizedBox(
+    //     //           height: 10.h,
+    //     //         ),
+    //     //         Padding(
+    //     //           padding: EdgeInsets.all(20.0.sp),
+    //     //           child: Container(
+    //     //             height: 115.h,
+    //     //             width:MediaQuery.of(context).size.width,
+    //     //             decoration: BoxDecoration(
+    //     //               boxShadow: [
+    //     //                 BoxShadow(
+    //     //                   color: Colors.grey.withOpacity(0.4),
+    //     //                   spreadRadius: 2,
+    //     //                   blurRadius: 1,
+    //     //                   offset: const Offset(0, 2), // changes position of shadow
+    //     //                 ),
+    //     //               ],
+    //     //               borderRadius: BorderRadius.circular(6.sp),
+    //     //               color: whiteClr,
+    //     //             ),
+    //     //             child: Column(
+    //     //               children: [
+    //     //                 Padding(
+    //     //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+    //     //                   child: Container(
+    //     //                     height: 25.h,
+    //     //                     width: MediaQuery.of(context).size.width,
+    //     //                     child: Row(
+    //     //                       children: [
+    //     //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                         Spacer(),
+    //     //                         Container(
+    //     //                           height: 17.h,
+    //     //                           width: 17.w,
+    //     //                           decoration: BoxDecoration(
+    //     //                             boxShadow: [
+    //     //                               BoxShadow(
+    //     //                                 color: Colors.grey.withOpacity(0),
+    //     //                                 spreadRadius: 0,
+    //     //                                 blurRadius: 1,
+    //     //                                 offset: const Offset(0, 2), // changes position of shadow
+    //     //                               ),
+    //     //                             ],
+    //     //                             borderRadius: BorderRadius.circular(15.sp),
+    //     //                             color: greybackground,
+    //     //                           ),
+    //     //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+    //     //                       ],
+    //     //                     ),
+    //     //                   ),
+    //     //                 ),
+    //     //                 Container(
+    //     //                   height: 1,
+    //     //                   width: MediaQuery.of(context).size.width,
+    //     //                   color: coverBackClr,
+    //     //                 ),
+    //     //                 SizedBox(
+    //     //                   width: MediaQuery.of(context).size.width,
+    //     //                   height: 78.h,
+    //     //                   child: Padding(
+    //     //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20.h),
+    //     //                     child: Row(
+    //     //                       children: [
+    //     //                         Column(
+    //     //                           children: [
+    //     //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
+    //     //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                           ],
+    //     //                         ),
+    //     //                         Spacer(),
+    //     //                         Column(
+    //     //                           children: [
+    //     //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
+    //     //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                           ],
+    //     //                         ),
+    //     //                         Spacer(),
+    //     //                         Column(
+    //     //                           children: [
+    //     //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
+    //     //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                           ],
+    //     //                         ),
+    //     //                       ],
+    //     //                     ),
+    //     //                   ),
+    //     //                 ),
+    //     //               ],
+    //     //             ),
+    //     //           ),
+    //     //         ),
+    //     //         Padding(
+    //     //           padding: EdgeInsets.all(20.0.sp),
+    //     //           child: Container(
+    //     //             height: 305.h,
+    //     //             width:MediaQuery.of(context).size.width,
+    //     //             decoration: BoxDecoration(
+    //     //               boxShadow: [
+    //     //                 BoxShadow(
+    //     //                   color: Colors.grey.withOpacity(0.4),
+    //     //                   spreadRadius: 2,
+    //     //                   blurRadius: 1,
+    //     //                   offset: const Offset(0, 2), // changes position of shadow
+    //     //                 ),
+    //     //               ],
+    //     //               borderRadius: BorderRadius.circular(6.sp),
+    //     //               color: whiteClr,
+    //     //             ),
+    //     //             child: Column(
+    //     //               children: [
+    //     //                 Padding(
+    //     //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+    //     //                   child: Container(
+    //     //                     height: 25.h,
+    //     //                     width: MediaQuery.of(context).size.width,
+    //     //                     child: Row(
+    //     //                       children: [
+    //     //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                         const Spacer(),
+    //     //                         Container(
+    //     //                           height: 17.h,
+    //     //                           width: 17.w,
+    //     //                           decoration: BoxDecoration(
+    //     //                             boxShadow: [
+    //     //                               BoxShadow(
+    //     //                                 color: Colors.grey.withOpacity(0),
+    //     //                                 spreadRadius: 0,
+    //     //                                 blurRadius: 1,
+    //     //                                 offset: const Offset(0, 2), // changes position of shadow
+    //     //                               ),
+    //     //                             ],
+    //     //                             borderRadius: BorderRadius.circular(15.sp),
+    //     //                             color: greybackground,
+    //     //                           ),
+    //     //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+    //     //                       ],
+    //     //                     ),
+    //     //                   ),
+    //     //                 ),
+    //     //                 Container(
+    //     //                   height: 1,
+    //     //                   width: MediaQuery.of(context).size.width,
+    //     //                   color: coverBackClr,
+    //     //                 ),
+    //     //                 SizedBox(
+    //     //                   width: MediaQuery.of(context).size.width,
+    //     //                   height: 74.h,
+    //     //                   child: Padding(
+    //     //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
+    //     //                     child: Row(
+    //     //                       children: [
+    //     //                         Column(
+    //     //                           children: [
+    //     //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
+    //     //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //
+    //     //                           ],
+    //     //                         ),
+    //     //                         Spacer(),
+    //     //                         Column(
+    //     //                           children: [
+    //     //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
+    //     //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //
+    //     //                           ],
+    //     //                         ),
+    //     //                         Spacer(),
+    //     //                         Column(
+    //     //                           children: [
+    //     //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
+    //     //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                           ],
+    //     //                         ),
+    //     //                       ],
+    //     //                     ),
+    //     //                   ),
+    //     //                 ),
+    //     //                 Container(
+    //     //                   height: 1,
+    //     //                   width: MediaQuery.of(context).size.width,
+    //     //                   color: coverBackClr,
+    //     //                 ),
+    //     //                 LineChartSample3(),
+    //     //               ],
+    //     //             ),
+    //     //           ),
+    //     //         ),
+    //     //         Padding(
+    //     //           padding: EdgeInsets.all(20.0.sp),
+    //     //           child: Container(
+    //     //             height: 315.h,
+    //     //             width:MediaQuery.of(context).size.width,
+    //     //             decoration: BoxDecoration(
+    //     //               boxShadow: [
+    //     //                 BoxShadow(
+    //     //                   color: Colors.grey.withOpacity(0.4),
+    //     //                   spreadRadius: 2,
+    //     //                   blurRadius: 1,
+    //     //                   offset: const Offset(0, 2), // changes position of shadow
+    //     //                 ),
+    //     //               ],
+    //     //               borderRadius: BorderRadius.circular(6.sp),
+    //     //               color: whiteClr,
+    //     //             ),
+    //     //             child: Column(
+    //     //               children: [
+    //     //                 Padding(
+    //     //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+    //     //                   child: Container(
+    //     //                     height: 25.h,
+    //     //                     width: MediaQuery.of(context).size.width,
+    //     //                     child: Row(
+    //     //                       children: [
+    //     //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                         const Spacer(),
+    //     //
+    //     //                       ],
+    //     //                     ),
+    //     //                   ),
+    //     //                 ),
+    //     //                 Container(
+    //     //                   height: 1,
+    //     //                   width: MediaQuery.of(context).size.width,
+    //     //                   color: coverBackClr,
+    //     //                 ),
+    //     //                 Stack(
+    //     //                   children: [
+    //     //                     PieChartSample2(),
+    //     //                     Positioned(
+    //     //                         top: 127,
+    //     //                         left: 92,
+    //     //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+    //     //                   ],
+    //     //                 ),
+    //     //               ],
+    //     //             ),
+    //     //           ),
+    //     //         ),
+    //     //         Padding(
+    //     //           padding: EdgeInsets.all(20.0.sp),
+    //     //           child: Container(
+    //     //             height: 315.h,
+    //     //             width:MediaQuery.of(context).size.width,
+    //     //             decoration: BoxDecoration(
+    //     //               boxShadow: [
+    //     //                 BoxShadow(
+    //     //                   color: Colors.grey.withOpacity(0.4),
+    //     //                   spreadRadius: 2,
+    //     //                   blurRadius: 1,
+    //     //                   offset: const Offset(0, 2), // changes position of shadow
+    //     //                 ),
+    //     //               ],
+    //     //               borderRadius: BorderRadius.circular(6.sp),
+    //     //               color: whiteClr,
+    //     //             ),
+    //     //             child: Column(
+    //     //               children: [
+    //     //                 Padding(
+    //     //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+    //     //                   child: Container(
+    //     //                     height: 25.h,
+    //     //                     width: MediaQuery.of(context).size.width,
+    //     //                     child: Row(
+    //     //                       children: [
+    //     //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                         const Spacer(),
+    //     //
+    //     //                       ],
+    //     //                     ),
+    //     //                   ),
+    //     //                 ),
+    //     //                 Container(
+    //     //                   height: 1,
+    //     //                   width: MediaQuery.of(context).size.width,
+    //     //                   color: coverBackClr,
+    //     //                 ),
+    //     //                 Stack(
+    //     //                   children: [
+    //     //                     PieChartSample21(),
+    //     //                     Positioned(
+    //     //                         top: 127,
+    //     //                         left: 92,
+    //     //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+    //     //                   ],
+    //     //                 ),
+    //     //               ],
+    //     //             ),
+    //     //           ),
+    //     //         ),
+    //     //         Padding(
+    //     //           padding: EdgeInsets.all(20.0.sp),
+    //     //           child: Container(
+    //     //             height: 95.h,
+    //     //             width: MediaQuery.of(context).size.width,
+    //     //             //color: Colors.lightGreen,
+    //     //             decoration: BoxDecoration(
+    //     //               boxShadow: [
+    //     //                 BoxShadow(
+    //     //                   color: Colors.grey.withOpacity(0.4),
+    //     //                   spreadRadius: 2,
+    //     //                   blurRadius: 1,
+    //     //                   offset: const Offset(0, 2), // changes position of shadow
+    //     //                 ),
+    //     //               ],
+    //     //               borderRadius: BorderRadius.circular(6.sp),
+    //     //               color: whiteClr,
+    //     //             ),
+    //     //             child: Column(
+    //     //               crossAxisAlignment: CrossAxisAlignment.start,
+    //     //               children:[
+    //     //                 Padding(
+    //     //                   padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
+    //     //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                 ),
+    //     //                 Container(
+    //     //                   height: 1,
+    //     //                   color: greyOpenClr,
+    //     //                   width: MediaQuery.of(context).size.width,
+    //     //                 ),
+    //     //                 SizedBox(height: 15.h,),
+    //     //                 Row(
+    //     //                   children: [
+    //     //                     SizedBox(width: 11.w,),
+    //     //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                     SizedBox(width: 10.w,),
+    //     //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                     SizedBox(width: 10.w,),
+    //     //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //     //                   ],
+    //     //                 )
+    //     //               ],
+    //     //             ),
+    //     //           ),
+    //     //         ),
+    //     //         SizedBox(
+    //     //           height: 20.h,
+    //     //         ),
+    //     //       ],
+    //     //     ),
+    //     //   ),
+    //     // ),
+    //   ),
+    // );
+
     return SafeArea(
       child: AdvancedDrawer(
         backdropColor: srpgradient2,
@@ -394,26 +2119,40 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     width: 128.0,
                     height: 128.0,
                     margin:  EdgeInsets.only(
-                      top: 24.0.h,
-                      bottom: 10.0.h,
+                      // top: 24.0.h,
+                      // bottom: 10.0.h,
+                      top: 24.0,
+                      bottom: 10.0,
                     ),
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.user, size: 80.sp, color: whiteClr,),
+                    child: Icon(FontAwesomeIcons.user,
+                      //size: 80.sp,
+                      size: 80,
+                      color: whiteClr,),
                     // child: Image.asset(
                     //   'assets/user.jpg',
                     // ),
                   ),
-                  Text('${name}',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
-                  SizedBox(height: 45.h,),
+                  Text('${name}',style: GoogleFonts.poppins(
+                    //fontSize: 14.5.sp,
+                    fontSize: 14.5,
+                    color: Colors.white,),),
+                  SizedBox(
+                    height: 45,
+                    // height: 45.h,
+                  ),
                   Container(
                     height: 1,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.white,),
-                  SizedBox(height: 20.h,),
+                  SizedBox(
+                    //height: 20.h,
+                    height: 20,
+                  ),
                   ListTile(
                     onTap: () async {
                       Navigator.push(
@@ -421,8 +2160,14 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         MaterialPageRoute(builder: (context) => ByEmployee1(admin: widget.admineamil,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.clock,size: 20.sp,color: whiteClr,),
-                    title: Text('Check Attendance',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                    leading: Icon(FontAwesomeIcons.clock,
+                      //size: 20.sp,
+                      size: 20,
+                      color: whiteClr,),
+                    title: Text('Check Attendance',style: GoogleFonts.poppins(
+                      //fontSize: 14.5.sp,
+                      fontSize: 14.5,
+                      color: Colors.white,),),
                   ),
                   ListTile(
                     onTap: () async {
@@ -431,19 +2176,31 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         MaterialPageRoute(builder: (context) => ListOfRequest1(adminemail: widget.admineamil,providerGenerator: providerGenerator,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.addressCard,size: 20.sp,color: whiteClr,),
-                    title: Text('Leave',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                    leading: Icon(FontAwesomeIcons.addressCard,
+                      //size: 20.sp,
+                      size: 20,
+                      color: whiteClr,),
+                    title: Text('Leave',style: GoogleFonts.poppins(
+                      fontSize: 14.5,
+                      //fontSize: 14.5.sp,
+                      color: Colors.white,),),
                   ),
                   ListTile(
                     onTap: () async {
                       await FirebaseAuth.instance.signOut().then((value) async {
                         Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (BuildContext context) =>  Login(loading: false,)),//Homepage()),munib
+                            MaterialPageRoute(builder: (BuildContext context) =>  Login(loading: false,)), //Homepage()),munib
                             result: false);
                       });
                     },
-                    leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
-                    title:  Text('Logout',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white),),
+                    leading: Icon(FontAwesomeIcons.rightToBracket,
+                      size: 20,
+                      //size: 20.sp,
+                      color: whiteClr,),
+                    title:  Text('Logout',style: GoogleFonts.poppins(
+                      //fontSize: 14.5.sp,
+                        fontSize: 14.5,
+                        color: Colors.white),),
                   ),
                   // ListTile(
                   //   onTap: () {},
@@ -462,14 +2219,14 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                   // ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: ()async{
-                    const url=  'https://github.com/syedmunib616/syedmunib/blob/main/privacy-policy.md';
-                    if(await canLaunch(url)){
-                      await launch(url,forceSafariVC: false );  //forceWebView is true now
-                    }
-                    else {
-                      throw 'Could not launch $url';
-                    }
+                    onTap: () async {
+                      const url=  'https://github.com/syedmunib616/syedmunib/blob/main/privacy-policy.md';
+                      if(await canLaunch(url)){
+                        await launch(url,forceSafariVC: false );  //forceWebView is true now
+                      }
+                      else {
+                        throw 'Could not launch $url';
+                      }
                     },
                     child: DefaultTextStyle(
                       style: const TextStyle(
@@ -491,9 +2248,10 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         ),
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
+            //preferredSize:  Size.fromHeight(94.0.h),
+            preferredSize:  Size.fromHeight(94.0),
             child: Container(
-              height: 102.h,
+              height: 102,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -504,7 +2262,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     offset: const Offset(0, 2), // changes position of shadow
                   ),
                 ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                borderRadius: BorderRadius.only(
+                  // bottomLeft: Radius.circular(20.sp),
+                  // bottomRight: Radius.circular(20.sp)
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)
+                ),
                 color: whiteClr,
               ),
               child: Column(
@@ -527,7 +2290,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         //   // });
                         // },
                         child: Padding(
-                          padding: EdgeInsets.all(10.0.sp),
+                          //padding: EdgeInsets.all(10.0.sp),
+                          padding: EdgeInsets.all(10.0),
                           child: ValueListenableBuilder<AdvancedDrawerValue>(
                             valueListenable: _advancedDrawerController,
                             builder: (_, value, __) {
@@ -547,14 +2311,20 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         // ),
                       ),
                       const Spacer(),
-                      Text("$user_name",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                      Text("$user_name",style: GoogleFonts.poppins(
+                        //fontSize: 10.5.sp,
+                          fontSize: 10.5,
+                          color: fontgrey,fontWeight: FontWeight.w500),),
                       const Spacer(),
-                      SizedBox(width: 30.w,),
+                      //SizedBox(width: 30.w,),
+                      SizedBox(width: 30,),
+
                     ],
                   ),
 
                   Container(
-                    height: 30.h,
+                    //height: 30.h,
+                    height: 30,
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -570,231 +2340,16 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
           ),
           body: SingleChildScrollView(
             child:
-            // timeinshow == false && timeoutshow == false ?
-            // Container(
-            //   // color: Colors.purpleAccent,
-            //   height: MediaQuery.of(context).size.height,
-            //   width: MediaQuery.of(context).size.width,
-            //   child:Center(child: Text("Attendance is Marked",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),),
-            // ) :
+
             Column(
               children: [
-                // Container(
-                //   height: 102.h,
-                //   width:MediaQuery.of(context).size.width,
-                //   decoration: BoxDecoration(
-                //     boxShadow: [
-                //       BoxShadow(
-                //         color: Colors.grey.withOpacity(0.4),
-                //         spreadRadius: 2,
-                //         blurRadius: 1,
-                //         offset: const Offset(0, 2), // changes position of shadow
-                //       ),
-                //     ],
-                //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-                //     color: whiteClr,
-                //   ),
-                //   child: Column(
-                //     crossAxisAlignment:CrossAxisAlignment.center,
-                //     children: [
-                //       Row(
-                //         mainAxisAlignment: MainAxisAlignment.center,
-                //         children: [
-                //           GestureDetector(
-                //             onTap: () async {
-                //
-                //               _handleMenuButtonPressed;
-                //
-                //               // await FirebaseAuth.instance.signOut().then((value) async {
-                //               //  Navigator.of(context).pushReplacement(
-                //               //      MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
-                //               //      result: false);
-                //               // });
-                //             },
-                //             child: Padding(
-                //               padding: EdgeInsets.all(8.0.sp),
-                //               child: ValueListenableBuilder<AdvancedDrawerValue>(
-                //                 valueListenable: _advancedDrawerController,
-                //                 builder: (_, value, __) {
-                //                   return AnimatedSwitcher(
-                //                     duration: Duration(milliseconds: 250),
-                //                     child: Icon(
-                //                       value.visible ? Icons.clear : Icons.menu,
-                //                       key: ValueKey<bool>(value.visible),
-                //                     ),
-                //                   );
-                //                 },
-                //               ),
-                //             ),
-                //             // child: Padding(
-                //             //   padding: EdgeInsets.all(8.0.sp),
-                //             //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                //             // ),
-                //           ),
-                //           Spacer(),
-                //           Column(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                //               SizedBox(
-                //                 height: 2.h,
-                //               ),
-                //               Container(
-                //                 height: 8.h,
-                //                 width: 130.w,
-                //                 decoration: BoxDecoration(
-                //                   borderRadius: BorderRadius.circular(20.sp),
-                //                   color: greyOpenClr,
-                //                 ),
-                //                 child: Stack(
-                //                   children: [
-                //                     Positioned(
-                //                       top:0,
-                //                       bottom: 0,
-                //                       left: 0,
-                //                       right: 60,
-                //                       child: Container(
-                //                         decoration: BoxDecoration(
-                //                           borderRadius: BorderRadius.circular(20.sp),
-                //                           color: srpgradient2,
-                //                         ),
-                //                         height: 11.h,
-                //                         width: 133.w,
-                //                       ),
-                //                     )
-                //                   ],
-                //                 ),
-                //               )
-                //             ],
-                //           ),
-                //           Spacer(),
-                //           Container(
-                //             width: 30.0.w,
-                //             height: 30.0.h,
-                //             child: Stack(
-                //               children: [
-                //                 ClipRRect(
-                //                   borderRadius: BorderRadius.circular(15.0.sp),
-                //                   child: Image.asset(
-                //                     'assets/user.jpg',
-                //                     width: 30.0.w,
-                //                     height: 30.0.h,
-                //                     fit: BoxFit.fill,
-                //                   ),
-                //                 ),
-                //                 Positioned(
-                //                   bottom: 1.5,
-                //                   right: 1.5,
-                //                   child: Container(
-                //                     height: 5.h,
-                //                     width: 5.w,
-                //                     //color:online,
-                //                     decoration: BoxDecoration(
-                //                       borderRadius: BorderRadius.circular(5.sp),
-                //                       color: online,
-                //                     ),
-                //                   ),
-                //                 )
-                //               ],
-                //             ),
-                //           ),
-                //           SizedBox(width: 15.w,)
-                //         ],
-                //       ),
-                //
-                //       Container(
-                //         height: 50.h,
-                //         width: MediaQuery.of(context).size.width,
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.center,
-                //           children: [
-                //             Container(
-                //               width: 80.w,
-                //               height: 40.h,
-                //               decoration: BoxDecoration(
-                //                 boxShadow: [
-                //                   BoxShadow(
-                //                     color: Colors.grey.withOpacity(0.2),
-                //                     spreadRadius: 2,
-                //                     blurRadius: 1,
-                //                     offset: const Offset(0, 2), // changes position of shadow
-                //                   ),
-                //                 ],
-                //                 borderRadius: BorderRadius.circular(5),
-                //                 color: whiteClr,
-                //               ),
-                //               child: Column(
-                //                 children: [
-                //                   SizedBox(height: 5.h,),
-                //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                //                   Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                //
-                //                 ],
-                //               ),
-                //             ),
-                //             Padding(
-                //               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                //               child: Container(
-                //                 color: coverBackClr,
-                //                 height: 40.h,
-                //                 width: 1.w,
-                //               ),
-                //             ),
-                //             Container(
-                //               width: 240.w,
-                //               height: 40.h,
-                //               decoration: BoxDecoration(
-                //                 boxShadow: [
-                //                   BoxShadow(
-                //                     color: Colors.grey.withOpacity(0.2),
-                //                     spreadRadius: 2,
-                //                     blurRadius: 1,
-                //                     offset: const Offset(0, 2), // changes position of shadow
-                //                   ),
-                //                 ],
-                //                 borderRadius: BorderRadius.circular(5),
-                //                 color: whiteClr,
-                //               ),
-                //               child: Padding(
-                //                 padding: EdgeInsets.all( 10.sp),
-                //                 child: Row(
-                //                   children: [
-                //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                //                     Spacer(),
-                //                     Container(
-                //                       height: 20.h,
-                //                       width: 20.w,
-                //                       decoration: BoxDecoration(
-                //                         boxShadow: [
-                //                           BoxShadow(
-                //                             color: Colors.grey.withOpacity(0),
-                //                             spreadRadius: 0,
-                //                             blurRadius: 1,
-                //                             offset: const Offset(0, 2), // changes position of shadow
-                //                           ),
-                //                         ],
-                //                         borderRadius: BorderRadius.circular(15.sp),
-                //                         color: greybackground,
-                //                       ),
-                //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
-                //                   ],
-                //                 ),
-                //               ),
-                //             ),
-                //           ],
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 10.h,
-                // ),
 
                 timeinshow==true ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  //padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 151.h,
+                    height: 151,
+                    //height: 151.h,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -805,32 +2360,52 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      //borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding: EdgeInsets.symmetric(
+                            // horizontal: 20.0.sp,
+                            // vertical: 5.sp
+                              horizontal: 20.0,
+                              vertical: 5
+                          ),
                           child: Container(
-                            height: 35.h,
+                            //height: 35.h,
+                            height: 35,
+
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    SizedBox(
+                                      //height: 5.h,
+                                      height: 5,
+                                    ),
+                                    Text(name.isEmpty?'':name, style: GoogleFonts.poppins(
+                                        fontSize: 10.5,
+                                        color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department, style: GoogleFonts.poppins(
+                                        fontSize: 8,
+                                        color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
                                   // color: Colors.purpleAccent,
-                                  width: 92.w,
-                                  height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                    width: 92,
+                                    height: 25,
+                                    // width: 92.w,
+                                    // height: 25.h,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(
+                                      //fontSize: 18.sp,
+                                        fontSize: 18,
+                                        color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: ()async{
@@ -849,8 +2424,10 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     });
                                   },
                                   child: Container(
-                                    height: 27.h,
-                                    width: 27.w,
+                                    // height: 27.h,
+                                    // width: 27.w,
+                                    height: 27,
+                                    width: 27,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -860,17 +2437,22 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(
+                                        // 15.sp
+                                          15
+                                      ),
                                       color: greybackground,
                                     ),
                                     child: reload ==true ?SizedBox(
-                                      height: 5.h,
-                                      width: 5.w,
+                                      // height: 5.h,
+                                      // width: 5.w,
+                                      height: 5,
+                                      width: 5,
                                       child: CircularProgressIndicator(
                                         backgroundColor: Colors.white,
-                                        strokeWidth: 1.w,
+                                        strokeWidth: 1,
                                       ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                                   ),
                                 ),
                               ],
@@ -884,36 +2466,22 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 104.h,
+                          height: 104,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0,vertical: 12),
                             child: Column(
                               children: [
-                                Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
-                                  height: 10.h,
+                                  height: 10,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
                                     Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
-                                    // Position position = await _determinePosition();
-                                    // print(position.latitude);print(position.longitude);
-                                    // GetAddressFromLatLong1(position);DateTime now = DateTime.now();
-                                    // FirebaseFirestore.instance
-                                    //     .collection('Companies').doc('${admin}').collection("Employee")
-                                    //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
-                                    //     .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
-                                    //     .then((value) {
-                                    //       setState(() {
-                                    //         timeinshow=false;
-                                    //         timeoutshow=true;
-                                    //       });
-                                    //     return   CSMainPopup2(context: context,btnText: "Ok",popMessag: "Time In Completed");
-                                    // }); //.then((value) => initState());
                                   },
                                   child: Container(
-                                      height: 40.h,
-                                      width: 295.w,
+                                      height: 40,
+                                      width: 295,
                                       decoration: BoxDecoration(
                                         gradient: const LinearGradient(
                                           begin: Alignment.topCenter,
@@ -930,15 +2498,15 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                             spreadRadius: 1,
                                             blurRadius: 1,
                                             offset: const Offset(0, 0), // changes position of shadow
-                                         ),
+                                          ),
                                         ],
                                         borderRadius: BorderRadius.circular(8.2),
                                         color: whiteClr,
                                       ),
                                       child:Center(
                                         child:  timinindicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                            ? SizedBox(height: 15, width: 15, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time In",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                       )
                                   ),
                                 ),
@@ -952,9 +2520,10 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                 ) : SizedBox(),
 
                 timeoutshow==true ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 151.1.h,
+                    // height: 151.1,
+                      height: MediaQuery.of(context).size.height*0.21,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -965,182 +2534,33 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
-                      color: whiteClr,
-                      ),
-                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
-                          child: Container(
-                            height: 35.h,
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Container(
-                                  // color: Colors.purpleAccent,
-                                    width: 92.w,
-                                    height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
-                                const Spacer(),
-                                GestureDetector(
-                                  onTap: ()async{
-                                    print("::::::::::::%%::::::::");
-                                    // Position position = await _determinePosition();
-                                    // GetAddressFromLatLong(position);
-                                    // GetAddressFromLatLong1(position);
-                                    setState(() {
-                                     if(reload==false) {
-                                       reload = true;
-                                       Future.delayed(const Duration(milliseconds: 250), () {
-                                         refreshlocation();
-                                       });
-
-                                     }
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 27.h,
-                                    width: 27.w,
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0),
-                                          spreadRadius: 0,
-                                          blurRadius: 1,
-                                          offset: const Offset(0, 2), // changes position of shadow
-                                        ),
-                                      ],
-                                      borderRadius: BorderRadius.circular(15.sp),
-                                      color: greybackground,
-                                    ),
-                                    child: reload ==true ?SizedBox(
-                                      height: 5.h,
-                                      width: 5.w,
-                                      child: CircularProgressIndicator(
-                                        backgroundColor: Colors.white,
-                                        strokeWidth: 1.w,
-                                      ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 1,
-                          width: MediaQuery.of(context).size.width,
-                          color: coverBackClr,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: 105.h,
-                          child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
-                            child: Column(
-                              children: [
-                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                GestureDetector(
-                                  onTap: () async {
-                                     Address.isNotEmpty? timinoutdicator==false ? marktimeoutAttendance() : null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
-                                     // .then((value) => initState());
-                                    },
-                                  child: Container(
-                                      height: 40.h,
-                                      width: 295.w,
-                                      decoration: BoxDecoration(
-                                        // gradient: const LinearGradient(
-                                        //   begin: Alignment.topCenter,
-                                        //   end: Alignment.bottomCenter,
-                                        //   colors: [
-                                        //     srpgradient1,
-                                        //     srpgradient2,
-                                        //     srpgradient3
-                                        //   ],
-                                        // ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 1,
-                                            blurRadius: 1,
-                                            offset: const Offset(0, 0), // changes position of shadow
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.circular(8.2),
-                                        color: Colors.red,
-                                      ),
-                                      child:Center(
-                                        child: timinoutdicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
-
-                                    )
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ) : SizedBox(),
-
-                timeinshow==false && timeoutshow==false ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
-                  child: Container(
-                    height: 151.1.h,
-                    width:MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.4),
-                          spreadRadius: 2,
-                          blurRadius: 1,
-                          offset: const Offset(0, 2), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 35.h,
+                            height: 35,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    SizedBox(height: 5,),
+                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
-                                  // color: Colors.purpleAccent,
-                                    width: 92.w,
-                                    height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                    // color: Colors.purpleAccent,
+                                    width: 92,
+                                    height: 25,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: ()async{
@@ -1154,13 +2574,12 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                         Future.delayed(const Duration(milliseconds: 250), () {
                                           refreshlocation();
                                         });
-
                                       }
                                     });
                                   },
                                   child: Container(
-                                    height: 27.h,
-                                    width: 27.w,
+                                    height: 27,
+                                    width: 27,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -1170,17 +2589,17 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
                                     child: reload ==true ?SizedBox(
-                                      height: 5.h,
-                                      width: 5.w,
+                                      height: 5,
+                                      width: 5,
                                       child: CircularProgressIndicator(
                                         backgroundColor: Colors.white,
-                                        strokeWidth: 1.w,
+                                        strokeWidth: 1,
                                       ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                                   ),
                                 ),
                               ],
@@ -1194,14 +2613,14 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 105.h,
+                          height: 105,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0,vertical: 12),
                             child: Column(
                               children: [
-                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
-                                  height: 10.h,
+                                  height: 10,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
@@ -1209,18 +2628,10 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                     // .then((value) => initState());
                                   },
                                   child: Container(
-                                      height: 40.h,
-                                      width: 295.w,
+                                      height: 40,
+                                      width: 295,
                                       decoration: BoxDecoration(
-                                        // gradient: const LinearGradient(
-                                        //   begin: Alignment.topCenter,
-                                        //   end: Alignment.bottomCenter,
-                                        //   colors: [
-                                        //     srpgradient1,
-                                        //     srpgradient2,
-                                        //     srpgradient3
-                                        //   ],
-                                        // ),
+
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
@@ -1234,8 +2645,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                       ),
                                       child:Center(
                                         child: timinoutdicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                            ? SizedBox(height: 15, width: 15, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
 
                                       )
                                   ),
@@ -1249,790 +2660,153 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                   ),
                 ) : SizedBox(),
 
-                // timeinshow==false && timeoutshow==false ? Padding(
-                //   padding: EdgeInsets.all(20.0.sp),
-                //   child: Container(
-                //     height: 151.h,
-                //     width:MediaQuery.of(context).size.width,
-                //     decoration: BoxDecoration(
-                //       boxShadow: [
-                //         BoxShadow(
-                //           color: Colors.grey.withOpacity(0.4),
-                //           spreadRadius: 2,
-                //           blurRadius: 1,
-                //           offset: const Offset(0, 2), // changes position of shadow
-                //         ),
-                //       ],
-                //       borderRadius: BorderRadius.circular(6.sp),
-                //       color: whiteClr,
-                //     ),
-                //     child: Column(
-                //       children: [
-                //         Padding(
-                //           padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
-                //           child: Container(
-                //             height: 36.h,
-                //             width: MediaQuery.of(context).size.width,
-                //             child: Row(
-                //               children: [
-                //                 Column(
-                //                   crossAxisAlignment: CrossAxisAlignment.start,
-                //                   children: [
-                //                     SizedBox(height: 5.h,),
-                //                     Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                //                     Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
-                //                   ],
-                //                 ),
-                //                 const Spacer(),
-                //                 Container(
-                //                   // color: Colors.purpleAccent,
-                //                     width: 92.w,
-                //                     height: 25.h,
-                //                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
-                //                 const Spacer(),
-                //                 GestureDetector(
-                //                   onTap: ()async{
-                //                     print("::::::::::::%%::::::::");
-                //                     // Position position = await _determinePosition();
-                //                     // GetAddressFromLatLong(position);
-                //                     // GetAddressFromLatLong1(position);
-                //                     setState(() {
-                //                       if(reload==false) {
-                //                         reload = true;
-                //                         Future.delayed(const Duration(milliseconds: 250), () {
-                //                           refreshlocation();
-                //                         });
-                //
-                //                       }
-                //                     });
-                //                   },
-                //                   child: Container(
-                //                     height: 27.h,
-                //                     width: 27.w,
-                //                     decoration: BoxDecoration(
-                //                       boxShadow: [
-                //                         BoxShadow(
-                //                           color: Colors.grey.withOpacity(0),
-                //                           spreadRadius: 0,
-                //                           blurRadius: 1,
-                //                           offset: const Offset(0, 2), // changes position of shadow
-                //                         ),
-                //                       ],
-                //                       borderRadius: BorderRadius.circular(15.sp),
-                //                       color: greybackground,
-                //                     ),
-                //                     child: reload ==true ?SizedBox(
-                //                       height: 5.h,
-                //                       width: 5.w,
-                //                       child: CircularProgressIndicator(
-                //                         backgroundColor: Colors.white,
-                //                         strokeWidth: 1.w,
-                //                       ),
-                //                     ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
-                //                   ),
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                //         ),
-                //         Container(
-                //           height: 1,
-                //           width: MediaQuery.of(context).size.width,
-                //           color: coverBackClr,
-                //         ),
-                //         SizedBox(
-                //           width: MediaQuery.of(context).size.width,
-                //           height: 104.h,
-                //           child: Padding(
-                //             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
-                //             child: Column(
-                //               children: [
-                //                 Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                //                 SizedBox(
-                //                   height: 10.h,
-                //                 ),
-                //                 GestureDetector(
-                //                   onTap: () async {
-                //                     Address1.isNotEmpty? timinindicator==false ? markattimeintendance(): null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
-                //                      //.then((value) => initState());
-                //                   },
-                //                   child: Container(
-                //                       height: 40.h,
-                //                       width: 295.w,
-                //                       decoration: BoxDecoration(
-                //                         gradient: const LinearGradient(
-                //                           begin: Alignment.topCenter,
-                //                           end: Alignment.bottomCenter,
-                //                           colors: [
-                //                             srpgradient1,
-                //                             srpgradient2,
-                //                             srpgradient3
-                //                           ],
-                //                         ),
-                //                         boxShadow: [
-                //                           BoxShadow(
-                //                             color: Colors.grey.withOpacity(0.5),
-                //                             spreadRadius: 1,
-                //                             blurRadius: 1,
-                //                             offset: const Offset(0, 0), // changes position of shadow
-                //                           ),
-                //                         ],
-                //                         borderRadius: BorderRadius.circular(8.2),
-                //                         color: whiteClr,
-                //                       ),
-                //                       child:Center(
-                //                         child:
-                //                         timinindicator==true
-                //                         ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                //                         : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
-                //                       )
-                //                   ),
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ) : SizedBox(),
+                timeinshow==false && timeoutshow==false ? Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Container(
+                    height: 151.2,
+                    width:MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.4),
+                          spreadRadius: 2,
+                          blurRadius: 1,
+                          offset: const Offset(0, 2), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(6),
+                      color: whiteClr,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
+                          child: Container(
+                            height: 35,
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 5,),
+                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                  ],
+                                ),
+                                const Spacer(),
+                                Container(
+                                  // color: Colors.purpleAccent,
+                                    width: 92,
+                                    height: 25,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                const Spacer(),
+                                GestureDetector(
+                                  onTap: ()async{
+                                    print("::::::::::::%%::::::::");
+                                    // Position position = await _determinePosition();
+                                    // GetAddressFromLatLong(position);
+                                    // GetAddressFromLatLong1(position);
+                                    setState(() {
+                                      if(reload==false) {
+                                        reload = true;
+                                        Future.delayed(const Duration(milliseconds: 250), () {
+                                          refreshlocation();
+                                        });
+                                      }
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 27,
+                                    width: 27,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0),
+                                          spreadRadius: 0,
+                                          blurRadius: 1,
+                                          offset: const Offset(0, 2), // changes position of shadow
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: greybackground,
+                                    ),
+                                    child: reload ==true ?SizedBox(
+                                      height: 5,
+                                      width: 5,
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.white,
+                                        strokeWidth: 1,
+                                      ),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 1,
+                          width: MediaQuery.of(context).size.width,
+                          color: coverBackClr,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 105,
+                          child: Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0,vertical: 12),
+                            child: Column(
+                              children: [
+                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    Address.isNotEmpty? timinoutdicator==false ? marktimeoutAttendance() : null:_showToast(context,"Check your internet connection or you did not give permssion to access your location");
+                                    // .then((value) => initState());
+                                  },
+                                  child: Container(
+                                      height: 40,
+                                      width: 295,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: const Offset(0, 0), // changes position of shadow
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.circular(8.2),
+                                        color: Colors.red,
+                                      ),
+                                      child:Center(
+                                        child: timinoutdicator==true
+                                            ? SizedBox(height: 15, width: 15, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+
+                                      )
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ) : SizedBox(),
 
                 SizedBox(
-                  height: 20.h,
+                  height: 20
                 ),
 
-                  // Padding(
-                //   padding: EdgeInsets.all(20.0.sp),
-                //   child: Container(
-                //     height: 95.h,
-                //     width: MediaQuery.of(context).size.width,
-                //     //color: Colors.lightGreen,
-                //     decoration: BoxDecoration(
-                //       boxShadow: [
-                //         BoxShadow(
-                //           color: Colors.grey.withOpacity(0.4),
-                //           spreadRadius: 2,
-                //           blurRadius: 1,
-                //           offset: const Offset(0, 2), // changes position of shadow
-                //         ),
-                //       ],
-                //       borderRadius: BorderRadius.circular(6.sp),
-                //       color: whiteClr,
-                //     ),
-                //     child: Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children:[
-                //         Padding(
-                //           padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-                //           child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                //         ),
-                //         Container(
-                //           height: 1,
-                //           color: greyOpenClr,
-                //           width: MediaQuery.of(context).size.width,
-                //         ),
-                //         SizedBox(height: 15.h,),
-                //         Row(
-                //           children: [
-                //             SizedBox(width: 11.w,),
-                //             Container(
-                //               // color: Colors.purpleAccent,
-                //                 height: 30.h,
-                //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
-                //             SizedBox(width: 10.w,),
-                //             Container(
-                //               //color: Colors.purpleAccent,
-                //                 height: 30.h,
-                //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
-                //             SizedBox(width: 10.w,),
-                //             Container(
-                //               // color: Colors.purpleAccent,
-                //                 height: 30.h,
-                //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
-                //           ],
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                ],
-              ),
+              ],
             ),
-            // appBar: AppBar(
-            //   title: const Text('Advanced Drawer Example'),
-            //   leading: IconButton(
-            //     onPressed: _handleMenuButtonPressed,
-            //     icon: ValueListenableBuilder<AdvancedDrawerValue>(
-            //       valueListenable: _advancedDrawerController,
-            //       builder: (_, value, __) {
-            //         return AnimatedSwitcher(
-            //           duration: Duration(milliseconds: 250),
-            //           child: Icon(
-            //             value.visible ? Icons.clear : Icons.menu,
-            //             key: ValueKey<bool>(value.visible),
-            //           ),
-            //         );
-            //       },
-            //     ),
-            //   ),
-            // ),
           ),
-        // child: Scaffold(
-        //   body: SingleChildScrollView(
-        //     child: Column(
-        //       children: [
-        //         Container(
-        //           height: 102.h,
-        //           width:MediaQuery.of(context).size.width,
-        //           decoration: BoxDecoration(
-        //             boxShadow: [
-        //               BoxShadow(
-        //                 color: Colors.grey.withOpacity(0.4),
-        //                 spreadRadius: 2,
-        //                 blurRadius: 1,
-        //                 offset: const Offset(0, 2), // changes position of shadow
-        //               ),
-        //             ],
-        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-        //             color: whiteClr,
-        //           ),
-        //           child: Column(
-        //            crossAxisAlignment:CrossAxisAlignment.center,
-        //             children: [
-        //               Row(
-        //                 mainAxisAlignment: MainAxisAlignment.center,
-        //                 children: [
-        //                   GestureDetector(
-        //                     onTap: () async {
-        //
-        //                       _handleMenuButtonPressed;
-        //
-        //                       // await FirebaseAuth.instance.signOut().then((value) async {
-        //                       //  Navigator.of(context).pushReplacement(
-        //                       //      MaterialPageRoute(builder: (BuildContext context) => const Homepage()),
-        //                       //      result: false);
-        //                       // });
-        //                     },
-        //                    child: Padding(
-        //                      padding: EdgeInsets.all(8.0.sp),
-        //                      child: ValueListenableBuilder<AdvancedDrawerValue>(
-        //                        valueListenable: _advancedDrawerController,
-        //                        builder: (_, value, __) {
-        //                          return AnimatedSwitcher(
-        //                            duration: Duration(milliseconds: 250),
-        //                            child: Icon(
-        //                              value.visible ? Icons.clear : Icons.menu,
-        //                              key: ValueKey<bool>(value.visible),
-        //                            ),
-        //                          );
-        //                        },
-        //                      ),
-        //                    ),
-        //                     // child: Padding(
-        //                     //   padding: EdgeInsets.all(8.0.sp),
-        //                     //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-        //                     // ),
-        //                   ),
-        //                   Spacer(),
-        //                   Column(
-        //                     mainAxisAlignment: MainAxisAlignment.center,
-        //                     children: [
-        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                       SizedBox(
-        //                         height: 2.h,
-        //                       ),
-        //                       Container(
-        //                         height: 8.h,
-        //                         width: 130.w,
-        //                         decoration: BoxDecoration(
-        //                           borderRadius: BorderRadius.circular(20.sp),
-        //                           color: greyOpenClr,
-        //                         ),
-        //                         child: Stack(
-        //                           children: [
-        //                             Positioned(
-        //                                 top:0,
-        //                                 bottom: 0,
-        //                                 left: 0,
-        //                                 right: 60,
-        //                                 child: Container(
-        //                                   decoration: BoxDecoration(
-        //                                     borderRadius: BorderRadius.circular(20.sp),
-        //                                     color: srpgradient2,
-        //                                   ),
-        //                                   height: 11.h,
-        //                                   width: 133.w,
-        //                                 ),
-        //                               )
-        //                             ],
-        //                           ),
-        //                         )
-        //                       ],
-        //                     ),
-        //                   Spacer(),
-        //                   Container(
-        //                     width: 30.0.w,
-        //                     height: 30.0.h,
-        //                     child: Stack(
-        //                       children: [
-        //                         ClipRRect(
-        //                           borderRadius: BorderRadius.circular(15.0.sp),
-        //                           child: Image.asset(
-        //                             'assets/user.jpg',
-        //                             width: 30.0.w,
-        //                             height: 30.0.h,
-        //                             fit: BoxFit.fill,
-        //                           ),
-        //                         ),
-        //                         Positioned(
-        //                           bottom: 1.5,
-        //                           right: 1.5,
-        //                           child: Container(
-        //                             height: 5.h,
-        //                             width: 5.w,
-        //                             //color:online,
-        //                             decoration: BoxDecoration(
-        //                               borderRadius: BorderRadius.circular(5.sp),
-        //                               color: online,
-        //                             ),
-        //                           ),
-        //                         )
-        //                       ],
-        //                     ),
-        //                   ),
-        //                   SizedBox(width: 15.w,)
-        //                 ],
-        //               ),
-        //
-        //               Container(
-        //                 height: 50.h,
-        //                 width: MediaQuery.of(context).size.width,
-        //                 child: Row(
-        //                   mainAxisAlignment: MainAxisAlignment.center,
-        //                   children: [
-        //                     Container(
-        //                       width: 80.w,
-        //                       height: 40.h,
-        //                       decoration: BoxDecoration(
-        //                         boxShadow: [
-        //                           BoxShadow(
-        //                             color: Colors.grey.withOpacity(0.2),
-        //                             spreadRadius: 2,
-        //                             blurRadius: 1,
-        //                             offset: const Offset(0, 2), // changes position of shadow
-        //                           ),
-        //                         ],
-        //                         borderRadius: BorderRadius.circular(5),
-        //                         color: whiteClr,
-        //                       ),
-        //                       child: Column(
-        //                         children: [
-        //                           SizedBox(height: 5.h,),
-        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-        //
-        //                         ],
-        //                       ),
-        //                     ),
-        //                     Padding(
-        //                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        //                       child: Container(
-        //                         color: coverBackClr,
-        //                         height: 40.h,
-        //                         width: 1.w,
-        //                       ),
-        //                     ),
-        //                     Container(
-        //                       width: 240.w,
-        //                       height: 40.h,
-        //                       decoration: BoxDecoration(
-        //                         boxShadow: [
-        //                           BoxShadow(
-        //                             color: Colors.grey.withOpacity(0.2),
-        //                             spreadRadius: 2,
-        //                             blurRadius: 1,
-        //                             offset: const Offset(0, 2), // changes position of shadow
-        //                           ),
-        //                         ],
-        //                         borderRadius: BorderRadius.circular(5),
-        //                         color: whiteClr,
-        //                       ),
-        //                      child: Padding(
-        //                        padding: EdgeInsets.all( 10.sp),
-        //                        child: Row(
-        //                          children: [
-        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-        //                            Spacer(),
-        //                            Container(
-        //                              height: 20.h,
-        //                              width: 20.w,
-        //                              decoration: BoxDecoration(
-        //                                boxShadow: [
-        //                                  BoxShadow(
-        //                                    color: Colors.grey.withOpacity(0),
-        //                                    spreadRadius: 0,
-        //                                    blurRadius: 1,
-        //                                    offset: const Offset(0, 2), // changes position of shadow
-        //                                  ),
-        //                                ],
-        //                                borderRadius: BorderRadius.circular(15.sp),
-        //                                color: greybackground,
-        //                              ),
-        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
-        //                          ],
-        //                        ),
-        //                      ),
-        //                     ),
-        //                   ],
-        //                 ),
-        //               )
-        //             ],
-        //           ),
-        //         ),
-        //         SizedBox(
-        //           height: 10.h,
-        //         ),
-        //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
-        //           child: Container(
-        //             height: 115.h,
-        //             width:MediaQuery.of(context).size.width,
-        //             decoration: BoxDecoration(
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                   color: Colors.grey.withOpacity(0.4),
-        //                   spreadRadius: 2,
-        //                   blurRadius: 1,
-        //                   offset: const Offset(0, 2), // changes position of shadow
-        //                 ),
-        //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
-        //               color: whiteClr,
-        //             ),
-        //             child: Column(
-        //               children: [
-        //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
-        //                   child: Container(
-        //                     height: 25.h,
-        //                     width: MediaQuery.of(context).size.width,
-        //                     child: Row(
-        //                       children: [
-        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                         Spacer(),
-        //                         Container(
-        //                           height: 17.h,
-        //                           width: 17.w,
-        //                           decoration: BoxDecoration(
-        //                             boxShadow: [
-        //                               BoxShadow(
-        //                                 color: Colors.grey.withOpacity(0),
-        //                                 spreadRadius: 0,
-        //                                 blurRadius: 1,
-        //                                 offset: const Offset(0, 2), // changes position of shadow
-        //                               ),
-        //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
-        //                             color: greybackground,
-        //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
-        //                       ],
-        //                     ),
-        //                   ),
-        //                 ),
-        //                 Container(
-        //                   height: 1,
-        //                   width: MediaQuery.of(context).size.width,
-        //                   color: coverBackClr,
-        //                 ),
-        //                 SizedBox(
-        //                   width: MediaQuery.of(context).size.width,
-        //                   height: 78.h,
-        //                   child: Padding(
-        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20.h),
-        //                     child: Row(
-        //                       children: [
-        //                         Column(
-        //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                           ],
-        //                         ),
-        //                         Spacer(),
-        //                         Column(
-        //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                           ],
-        //                         ),
-        //                         Spacer(),
-        //                         Column(
-        //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                           ],
-        //                         ),
-        //                       ],
-        //                     ),
-        //                   ),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
-        //           child: Container(
-        //             height: 305.h,
-        //             width:MediaQuery.of(context).size.width,
-        //             decoration: BoxDecoration(
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                   color: Colors.grey.withOpacity(0.4),
-        //                   spreadRadius: 2,
-        //                   blurRadius: 1,
-        //                   offset: const Offset(0, 2), // changes position of shadow
-        //                 ),
-        //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
-        //               color: whiteClr,
-        //             ),
-        //             child: Column(
-        //               children: [
-        //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
-        //                   child: Container(
-        //                     height: 25.h,
-        //                     width: MediaQuery.of(context).size.width,
-        //                     child: Row(
-        //                       children: [
-        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                         const Spacer(),
-        //                         Container(
-        //                           height: 17.h,
-        //                           width: 17.w,
-        //                           decoration: BoxDecoration(
-        //                             boxShadow: [
-        //                               BoxShadow(
-        //                                 color: Colors.grey.withOpacity(0),
-        //                                 spreadRadius: 0,
-        //                                 blurRadius: 1,
-        //                                 offset: const Offset(0, 2), // changes position of shadow
-        //                               ),
-        //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
-        //                             color: greybackground,
-        //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
-        //                       ],
-        //                     ),
-        //                   ),
-        //                 ),
-        //                 Container(
-        //                   height: 1,
-        //                   width: MediaQuery.of(context).size.width,
-        //                   color: coverBackClr,
-        //                 ),
-        //                 SizedBox(
-        //                   width: MediaQuery.of(context).size.width,
-        //                   height: 74.h,
-        //                   child: Padding(
-        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
-        //                     child: Row(
-        //                       children: [
-        //                         Column(
-        //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //
-        //                           ],
-        //                         ),
-        //                         Spacer(),
-        //                         Column(
-        //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //
-        //                           ],
-        //                         ),
-        //                         Spacer(),
-        //                         Column(
-        //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                           ],
-        //                         ),
-        //                       ],
-        //                     ),
-        //                   ),
-        //                 ),
-        //                 Container(
-        //                   height: 1,
-        //                   width: MediaQuery.of(context).size.width,
-        //                   color: coverBackClr,
-        //                 ),
-        //                 LineChartSample3(),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
-        //           child: Container(
-        //             height: 315.h,
-        //             width:MediaQuery.of(context).size.width,
-        //             decoration: BoxDecoration(
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                   color: Colors.grey.withOpacity(0.4),
-        //                   spreadRadius: 2,
-        //                   blurRadius: 1,
-        //                   offset: const Offset(0, 2), // changes position of shadow
-        //                 ),
-        //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
-        //               color: whiteClr,
-        //             ),
-        //             child: Column(
-        //               children: [
-        //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
-        //                   child: Container(
-        //                     height: 25.h,
-        //                     width: MediaQuery.of(context).size.width,
-        //                     child: Row(
-        //                       children: [
-        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                         const Spacer(),
-        //
-        //                       ],
-        //                     ),
-        //                   ),
-        //                 ),
-        //                 Container(
-        //                   height: 1,
-        //                   width: MediaQuery.of(context).size.width,
-        //                   color: coverBackClr,
-        //                 ),
-        //                 Stack(
-        //                   children: [
-        //                     PieChartSample2(),
-        //                     Positioned(
-        //                         top: 127,
-        //                         left: 92,
-        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
-        //                   ],
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
-        //           child: Container(
-        //             height: 315.h,
-        //             width:MediaQuery.of(context).size.width,
-        //             decoration: BoxDecoration(
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                   color: Colors.grey.withOpacity(0.4),
-        //                   spreadRadius: 2,
-        //                   blurRadius: 1,
-        //                   offset: const Offset(0, 2), // changes position of shadow
-        //                 ),
-        //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
-        //               color: whiteClr,
-        //             ),
-        //             child: Column(
-        //               children: [
-        //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
-        //                   child: Container(
-        //                     height: 25.h,
-        //                     width: MediaQuery.of(context).size.width,
-        //                     child: Row(
-        //                       children: [
-        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                         const Spacer(),
-        //
-        //                       ],
-        //                     ),
-        //                   ),
-        //                 ),
-        //                 Container(
-        //                   height: 1,
-        //                   width: MediaQuery.of(context).size.width,
-        //                   color: coverBackClr,
-        //                 ),
-        //                 Stack(
-        //                   children: [
-        //                     PieChartSample21(),
-        //                     Positioned(
-        //                         top: 127,
-        //                         left: 92,
-        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
-        //                   ],
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
-        //           child: Container(
-        //             height: 95.h,
-        //             width: MediaQuery.of(context).size.width,
-        //             //color: Colors.lightGreen,
-        //             decoration: BoxDecoration(
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                   color: Colors.grey.withOpacity(0.4),
-        //                   spreadRadius: 2,
-        //                   blurRadius: 1,
-        //                   offset: const Offset(0, 2), // changes position of shadow
-        //                 ),
-        //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
-        //               color: whiteClr,
-        //             ),
-        //             child: Column(
-        //               crossAxisAlignment: CrossAxisAlignment.start,
-        //               children:[
-        //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                 ),
-        //                 Container(
-        //                   height: 1,
-        //                   color: greyOpenClr,
-        //                   width: MediaQuery.of(context).size.width,
-        //                 ),
-        //                 SizedBox(height: 15.h,),
-        //                 Row(
-        //                   children: [
-        //                     SizedBox(width: 11.w,),
-        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                     SizedBox(width: 10.w,),
-        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                     SizedBox(width: 10.w,),
-        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-        //                   ],
-        //                 )
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //         SizedBox(
-        //           height: 20.h,
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
+        ),
       ),
     );
   }
@@ -2041,7 +2815,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
       SnackBar(
-        content: Text('$text',style:GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient2)),
+        content: Text('$text',style:GoogleFonts.poppins(fontSize: 11,color: srpgradient2)),
           //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
@@ -2190,419 +2964,833 @@ class _ListOfRequest1State extends State<ListOfRequest1> {
 
   @override
   Widget build(BuildContext context) {
+    final hh= MediaQuery.of(context).size.height;
+    final ww= MediaQuery.of(context).size.width;
     return SafeArea(
-      child: CsScreenUtilInit(
-        child: Scaffold(
-          // appBar: AppBar(
-          //   leading: SizedBox(),
-          //   backgroundColor: Colors.transparent,
-          //   flexibleSpace:
-          appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(74.0.h),
-            child: Container(
-              height: 122.h,
-              width:MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 2,
-                    blurRadius: 1,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-                color: whiteClr,
-              ),
-              child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 30.h,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pop(context);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0.sp),
-                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
-                        ),
-                      ),
-                      Spacer(),
-                      Text("Leave List", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                      Spacer(),
-                      Container(
-                        width: 30.0.w,
-                        height: 30.0.h,
-                        // child: Stack(
-                        //   children: [
-                        //     ClipRRect(
-                        //       borderRadius: BorderRadius.circular(15.0.sp),
-                        //       child: Image.asset(
-                        //         'assets/user.jpg',
-                        //         width: 30.0.w,
-                        //         height: 30.0.h,
-                        //         fit: BoxFit.fill,
-                        //       ),
-                        //     ),
-                        //     Positioned(
-                        //       bottom: 1.5,
-                        //       right: 1.5,
-                        //       child: Container(
-                        //         height: 5.h,
-                        //         width: 5.w,
-                        //         //color:online,
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(5.sp),
-                        //           color: online,
-                        //         ),
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
-                      ),
-                      SizedBox(width: 15.w,),
-                    ],
-                  ),
-                  // Container(
-                  //   height: 50.h,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       Container(
-                  //         width: 80.w,
-                  //         height: 40.h,
-                  //         decoration: BoxDecoration(
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //               color: Colors.grey.withOpacity(0.2),
-                  //               spreadRadius: 2,
-                  //               blurRadius: 1,
-                  //               offset: const Offset(0, 2), // changes position of shadow
-                  //             ),
-                  //           ],
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           color: whiteClr,
-                  //         ),
-                  //         child: Column(
-                  //           children: [
-                  //             SizedBox(height: 5.h,),
-                  //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                  //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  //         child: Container(
-                  //           color: coverBackClr,
-                  //           height: 40.h,
-                  //           width: 1.w,
-                  //         ),
-                  //       ),
-                  //       Container(
-                  //         width: 240.w,
-                  //         height: 40.h,
-                  //         decoration: BoxDecoration(
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //               color: Colors.grey.withOpacity(0.2),
-                  //               spreadRadius: 2,
-                  //               blurRadius: 1,
-                  //               offset: const Offset(0, 2), // changes position of shadow
-                  //             ),
-                  //           ],
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           color: whiteClr,
-                  //         ),
-                  //         child: Padding(
-                  //           padding: EdgeInsets.all( 10.sp),
-                  //           child: Row(
-                  //             children: [
-                  //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                  //               Spacer(),
-                  //               Container(
-                  //                 height: 20.h,
-                  //                 width: 20.w,
-                  //                 decoration: BoxDecoration(
-                  //                   boxShadow: [
-                  //                     BoxShadow(
-                  //                       color: Colors.grey.withOpacity(0),
-                  //                       spreadRadius: 0,
-                  //                       blurRadius: 1,
-                  //                       offset: const Offset(0, 2), // changes position of shadow
-                  //                     ),
-                  //                   ],
-                  //                   borderRadius: BorderRadius.circular(15.sp),
-                  //                   color: greybackground,
-                  //                 ),
-                  //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //
-                  //     ],
-                  //   ),
-                  // )
-                ],
-              ),
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                // Container(
-                //   height: 102.h,
-                //   width:MediaQuery.of(context).size.width,
-                //   decoration: BoxDecoration(
-                //     boxShadow: [
-                //       BoxShadow(
-                //         color: Colors.grey.withOpacity(0.4),
-                //         spreadRadius: 2,
-                //         blurRadius: 1,
-                //         offset: const Offset(0, 2), // changes position of shadow
-                //       ),
-                //     ],
-                //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-                //     color: whiteClr,
-                //   ),
-                //   child: Column(
-                //     crossAxisAlignment:CrossAxisAlignment.center ,
-                //     children: [
-                //       SizedBox(height: 20.h,),
-                //       Row(
-                //         mainAxisAlignment: MainAxisAlignment.center,
-                //         children: [
-                //           Padding(
-                //             padding: EdgeInsets.all(8.0.sp),
-                //             child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                //           ),
-                //           Spacer(),
-                //           Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                //           Spacer(),
-                //           Container(
-                //             width: 30.0.w,
-                //             height: 30.0.h,
-                //             // child: Stack(
-                //             //   children: [
-                //             //     ClipRRect(
-                //             //       borderRadius: BorderRadius.circular(15.0.sp),
-                //             //       child: Image.asset(
-                //             //         'assets/user.jpg',
-                //             //         width: 30.0.w,
-                //             //         height: 30.0.h,
-                //             //         fit: BoxFit.fill,
-                //             //       ),
-                //             //     ),
-                //             //     Positioned(
-                //             //       bottom: 1.5,
-                //             //       right: 1.5,
-                //             //       child: Container(
-                //             //         height: 5.h,
-                //             //         width: 5.w,
-                //             //         //color:online,
-                //             //         decoration: BoxDecoration(
-                //             //           borderRadius: BorderRadius.circular(5.sp),
-                //             //           color: online,
-                //             //         ),
-                //             //       ),
-                //             //     )
-                //             //   ],
-                //             // ),
-                //           ),
-                //           SizedBox(width: 15.w,)
-                //         ],
-                //       ),
-                //       // Container(
-                //       //   height: 50.h,
-                //       //   width: MediaQuery.of(context).size.width,
-                //       //   child: Row(
-                //       //     mainAxisAlignment: MainAxisAlignment.center,
-                //       //     children: [
-                //       //       Container(
-                //       //         width: 80.w,
-                //       //         height: 40.h,
-                //       //         decoration: BoxDecoration(
-                //       //           boxShadow: [
-                //       //             BoxShadow(
-                //       //               color: Colors.grey.withOpacity(0.2),
-                //       //               spreadRadius: 2,
-                //       //               blurRadius: 1,
-                //       //               offset: const Offset(0, 2), // changes position of shadow
-                //       //             ),
-                //       //           ],
-                //       //           borderRadius: BorderRadius.circular(5),
-                //       //           color: whiteClr,
-                //       //         ),
-                //       //         child: Column(
-                //       //           children: [
-                //       //             SizedBox(height: 5.h,),
-                //       //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                //       //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                //       //           ],
-                //       //         ),
-                //       //       ),
-                //       //       Padding(
-                //       //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                //       //         child: Container(
-                //       //           color: coverBackClr,
-                //       //           height: 40.h,
-                //       //           width: 1.w,
-                //       //         ),
-                //       //       ),
-                //       //       Container(
-                //       //         width: 240.w,
-                //       //         height: 40.h,
-                //       //         decoration: BoxDecoration(
-                //       //           boxShadow: [
-                //       //             BoxShadow(
-                //       //               color: Colors.grey.withOpacity(0.2),
-                //       //               spreadRadius: 2,
-                //       //               blurRadius: 1,
-                //       //               offset: const Offset(0, 2), // changes position of shadow
-                //       //             ),
-                //       //           ],
-                //       //           borderRadius: BorderRadius.circular(5),
-                //       //           color: whiteClr,
-                //       //         ),
-                //       //         child: Padding(
-                //       //           padding: EdgeInsets.all( 10.sp),
-                //       //           child: Row(
-                //       //             children: [
-                //       //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                //       //               Spacer(),
-                //       //               Container(
-                //       //                 height: 20.h,
-                //       //                 width: 20.w,
-                //       //                 decoration: BoxDecoration(
-                //       //                   boxShadow: [
-                //       //                     BoxShadow(
-                //       //                       color: Colors.grey.withOpacity(0),
-                //       //                       spreadRadius: 0,
-                //       //                       blurRadius: 1,
-                //       //                       offset: const Offset(0, 2), // changes position of shadow
-                //       //                     ),
-                //       //                   ],
-                //       //                   borderRadius: BorderRadius.circular(15.sp),
-                //       //                   color: greybackground,
-                //       //                 ),
-                //       //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
-                //       //             ],
-                //       //           ),
-                //       //         ),
-                //       //       ),
-                //       //
-                //       //     ],
-                //       //   ),
-                //       // )
-                //     ],
-                //   ),
-                // ),
-                SizedBox(
-                  height: 15.h,
+      child: Scaffold(
+        // appBar: AppBar(
+        //   leading: SizedBox(),
+        //   backgroundColor: Colors.transparent,
+        //   flexibleSpace:
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(hh*0.11),
+          child: Container(
+            height: hh*0.11,
+            width:MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.4),
+                  spreadRadius: 2,
+                  blurRadius: 1,
+                  offset: const Offset(0, 2),
                 ),
-                // Padding(
-                //   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                //   child: CsMainInputField1(
-                //     providerGenerator: widget.providerGenerator,
-                //     width: 287.w,
-                //     mycontroller: textEditingController,
-                //     myhint: TextStrings.Search,
-                //     prefixIcon: Icons.search,
-                //     isPassword: false,
-                //     keyboardType: TextInputType.emailAddress,
-                //     bordercolor: widget.providerGenerator.getVisibleError(index: 0)
-                //         ? Colors.red
-                //         : null,
-                //     // bordercolor: providerGenerator.getVisibleError(index: 0)
-                //     //     ? Colors.red
-                //     //     : null,
-                //   ),
+              ],
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(ww*0.06),bottomRight: Radius.circular(ww*0.06)),
+              color: whiteClr,
+            ),
+            child: Column(
+              crossAxisAlignment:CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: hh*0.045,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(ww*0.02),
+                        child: Icon(FontAwesomeIcons.anglesLeft,size: ww*0.065,color: greybackground,),
+                      ),
+                    ),
+                    Spacer(),
+                    Text("Leave List", style: GoogleFonts.poppins(fontSize: ww*0.045,color: fontclr,fontWeight: FontWeight.w400),),
+                    Spacer(),
+                    // Container(
+                    //   width: 30.0.w,
+                    //   height: 30.0.h,
+                    //   // child: Stack(
+                    //   //   children: [
+                    //   //     ClipRRect(
+                    //   //       borderRadius: BorderRadius.circular(15.0.sp),
+                    //   //       child: Image.asset(
+                    //   //         'assets/user.jpg',
+                    //   //         width: 30.0.w,
+                    //   //         height: 30.0.h,
+                    //   //         fit: BoxFit.fill,
+                    //   //       ),
+                    //   //     ),
+                    //   //     Positioned(
+                    //   //       bottom: 1.5,
+                    //   //       right: 1.5,
+                    //   //       child: Container(
+                    //   //         height: 5.h,
+                    //   //         width: 5.w,
+                    //   //         //color:online,
+                    //   //         decoration: BoxDecoration(
+                    //   //           borderRadius: BorderRadius.circular(5.sp),
+                    //   //           color: online,
+                    //   //         ),
+                    //   //       ),
+                    //   //     )
+                    //   //   ],
+                    //   // ),
+                    // ),
+                    SizedBox(width: ww*0.1,),
+                  ],
+                ),
+                // Container(
+                //   height: 50.h,
+                //   width: MediaQuery.of(context).size.width,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       Container(
+                //         width: 80.w,
+                //         height: 40.h,
+                //         decoration: BoxDecoration(
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Colors.grey.withOpacity(0.2),
+                //               spreadRadius: 2,
+                //               blurRadius: 1,
+                //               offset: const Offset(0, 2), // changes position of shadow
+                //             ),
+                //           ],
+                //           borderRadius: BorderRadius.circular(5),
+                //           color: whiteClr,
+                //         ),
+                //         child: Column(
+                //           children: [
+                //             SizedBox(height: 5.h,),
+                //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+                //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //           ],
+                //         ),
+                //       ),
+                //       Padding(
+                //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                //         child: Container(
+                //           color: coverBackClr,
+                //           height: 40.h,
+                //           width: 1.w,
+                //         ),
+                //       ),
+                //       Container(
+                //         width: 240.w,
+                //         height: 40.h,
+                //         decoration: BoxDecoration(
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Colors.grey.withOpacity(0.2),
+                //               spreadRadius: 2,
+                //               blurRadius: 1,
+                //               offset: const Offset(0, 2), // changes position of shadow
+                //             ),
+                //           ],
+                //           borderRadius: BorderRadius.circular(5),
+                //           color: whiteClr,
+                //         ),
+                //         child: Padding(
+                //           padding: EdgeInsets.all( 10.sp),
+                //           child: Row(
+                //             children: [
+                //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //               Spacer(),
+                //               Container(
+                //                 height: 20.h,
+                //                 width: 20.w,
+                //                 decoration: BoxDecoration(
+                //                   boxShadow: [
+                //                     BoxShadow(
+                //                       color: Colors.grey.withOpacity(0),
+                //                       spreadRadius: 0,
+                //                       blurRadius: 1,
+                //                       offset: const Offset(0, 2), // changes position of shadow
+                //                     ),
+                //                   ],
+                //                   borderRadius: BorderRadius.circular(15.sp),
+                //                   color: greybackground,
+                //                 ),
+                //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                //             ],
+                //           ),
+                //         ),
+                //       ),
                 //
-                // ),
-                StreamBuilder(
-                    stream: streamController.stream,
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      print("%%%%%%%%% $snapshot");
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                          return const Text(" null", style: TextStyle(color: Colors.white),);
-                        case ConnectionState.waiting:
-                          return const SizedBox();
-                        case ConnectionState.active:
-                          return (snapshot.hasData == false)
-                              ? const CircularProgressIndicator()
-                              : ListView.builder(
-                                padding: const EdgeInsets.only(top: 0),
-                                shrinkWrap: true,
-                                physics: const BouncingScrollPhysics(),
-                                itemCount: listofleave.length,
-                                itemBuilder: (context, index) {
-                                  // managetotalcontact = contact.length.toString();
-                                  // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
-                                  return NoOfRequest(
-                                    subject: listofleave[index].subject,
-                                    message: listofleave[index].message,
-                                    approve: listofleave[index].approve,);
-                            },
-                          );
-                        case ConnectionState.done:
-                          return (snapshot.hasData == false)
-                              ? const CircularProgressIndicator()
-                              : ListView.builder(
-                                padding: const EdgeInsets.only(top: 0),
-                                shrinkWrap: true,
-                                physics: const BouncingScrollPhysics(),
-                                itemCount:listofleave.length,
-                                itemBuilder: (context, index) => NoOfRequest(subject: listofleave[index].subject,
-                                  message: listofleave[index].message,
-                                  approve: listofleave[index].approve,),
-                          );
-                        default:
-                          return const Text("default", style: TextStyle(color: Colors.white));
-                      }
-                    }),
-                // NoOfRequest(),
-                // NoOfRequest(),
-                // NoOfRequest(),
-                // NoOfRequest(),
-                // NoOfRequest(),
-                // NoOfRequest(),
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ),
-
-          floatingActionButton: FloatingActionButton(
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [srpgradient1, srpgradient3])
-              ),
-              child: Icon(
-                Icons.add,
-                size: 25.sp,
-              ),
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => WriteLeave(adminemail: widget.adminemail,providerGenerator: widget.providerGenerator,)),
-              );
-            },
-          ),
-
         ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Container(
+              //   height: 102.h,
+              //   width:MediaQuery.of(context).size.width,
+              //   decoration: BoxDecoration(
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color: Colors.grey.withOpacity(0.4),
+              //         spreadRadius: 2,
+              //         blurRadius: 1,
+              //         offset: const Offset(0, 2), // changes position of shadow
+              //       ),
+              //     ],
+              //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+              //     color: whiteClr,
+              //   ),
+              //   child: Column(
+              //     crossAxisAlignment:CrossAxisAlignment.center ,
+              //     children: [
+              //       SizedBox(height: 20.h,),
+              //       Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           Padding(
+              //             padding: EdgeInsets.all(8.0.sp),
+              //             child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+              //           ),
+              //           Spacer(),
+              //           Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+              //           Spacer(),
+              //           Container(
+              //             width: 30.0.w,
+              //             height: 30.0.h,
+              //             // child: Stack(
+              //             //   children: [
+              //             //     ClipRRect(
+              //             //       borderRadius: BorderRadius.circular(15.0.sp),
+              //             //       child: Image.asset(
+              //             //         'assets/user.jpg',
+              //             //         width: 30.0.w,
+              //             //         height: 30.0.h,
+              //             //         fit: BoxFit.fill,
+              //             //       ),
+              //             //     ),
+              //             //     Positioned(
+              //             //       bottom: 1.5,
+              //             //       right: 1.5,
+              //             //       child: Container(
+              //             //         height: 5.h,
+              //             //         width: 5.w,
+              //             //         //color:online,
+              //             //         decoration: BoxDecoration(
+              //             //           borderRadius: BorderRadius.circular(5.sp),
+              //             //           color: online,
+              //             //         ),
+              //             //       ),
+              //             //     )
+              //             //   ],
+              //             // ),
+              //           ),
+              //           SizedBox(width: 15.w,)
+              //         ],
+              //       ),
+              //       // Container(
+              //       //   height: 50.h,
+              //       //   width: MediaQuery.of(context).size.width,
+              //       //   child: Row(
+              //       //     mainAxisAlignment: MainAxisAlignment.center,
+              //       //     children: [
+              //       //       Container(
+              //       //         width: 80.w,
+              //       //         height: 40.h,
+              //       //         decoration: BoxDecoration(
+              //       //           boxShadow: [
+              //       //             BoxShadow(
+              //       //               color: Colors.grey.withOpacity(0.2),
+              //       //               spreadRadius: 2,
+              //       //               blurRadius: 1,
+              //       //               offset: const Offset(0, 2), // changes position of shadow
+              //       //             ),
+              //       //           ],
+              //       //           borderRadius: BorderRadius.circular(5),
+              //       //           color: whiteClr,
+              //       //         ),
+              //       //         child: Column(
+              //       //           children: [
+              //       //             SizedBox(height: 5.h,),
+              //       //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+              //       //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+              //       //           ],
+              //       //         ),
+              //       //       ),
+              //       //       Padding(
+              //       //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //       //         child: Container(
+              //       //           color: coverBackClr,
+              //       //           height: 40.h,
+              //       //           width: 1.w,
+              //       //         ),
+              //       //       ),
+              //       //       Container(
+              //       //         width: 240.w,
+              //       //         height: 40.h,
+              //       //         decoration: BoxDecoration(
+              //       //           boxShadow: [
+              //       //             BoxShadow(
+              //       //               color: Colors.grey.withOpacity(0.2),
+              //       //               spreadRadius: 2,
+              //       //               blurRadius: 1,
+              //       //               offset: const Offset(0, 2), // changes position of shadow
+              //       //             ),
+              //       //           ],
+              //       //           borderRadius: BorderRadius.circular(5),
+              //       //           color: whiteClr,
+              //       //         ),
+              //       //         child: Padding(
+              //       //           padding: EdgeInsets.all( 10.sp),
+              //       //           child: Row(
+              //       //             children: [
+              //       //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+              //       //               Spacer(),
+              //       //               Container(
+              //       //                 height: 20.h,
+              //       //                 width: 20.w,
+              //       //                 decoration: BoxDecoration(
+              //       //                   boxShadow: [
+              //       //                     BoxShadow(
+              //       //                       color: Colors.grey.withOpacity(0),
+              //       //                       spreadRadius: 0,
+              //       //                       blurRadius: 1,
+              //       //                       offset: const Offset(0, 2), // changes position of shadow
+              //       //                     ),
+              //       //                   ],
+              //       //                   borderRadius: BorderRadius.circular(15.sp),
+              //       //                   color: greybackground,
+              //       //                 ),
+              //       //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+              //       //             ],
+              //       //           ),
+              //       //         ),
+              //       //       ),
+              //       //
+              //       //     ],
+              //       //   ),
+              //       // )
+              //     ],
+              //   ),
+              // ),
+              SizedBox(
+                height: 18,
+              ),
+              // Padding(
+              //   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+              //   child: CsMainInputField1(
+              //     providerGenerator: widget.providerGenerator,
+              //     width: 287.w,
+              //     mycontroller: textEditingController,
+              //     myhint: TextStrings.Search,
+              //     prefixIcon: Icons.search,
+              //     isPassword: false,
+              //     keyboardType: TextInputType.emailAddress,
+              //     bordercolor: widget.providerGenerator.getVisibleError(index: 0)
+              //         ? Colors.red
+              //         : null,
+              //     // bordercolor: providerGenerator.getVisibleError(index: 0)
+              //     //     ? Colors.red
+              //     //     : null,
+              //   ),
+              //
+              // ),
+              StreamBuilder(
+                  stream: streamController.stream,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    print("%%%%%%%%% $snapshot");
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        return const Text(" null", style: TextStyle(color: Colors.white),);
+                      case ConnectionState.waiting:
+                        return const SizedBox();
+                      case ConnectionState.active:
+                        return (snapshot.hasData == false)
+                            ? const CircularProgressIndicator()
+                            : ListView.builder(
+                          padding: const EdgeInsets.only(top: 0),
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: listofleave.length,
+                          itemBuilder: (context, index) {
+                            // managetotalcontact = contact.length.toString();
+                            // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+                            return NoOfRequest(
+                              subject: listofleave[index].subject,
+                              message: listofleave[index].message,
+                              approve: listofleave[index].approve,);
+                          },
+                        );
+                      case ConnectionState.done:
+                        return (snapshot.hasData == false)
+                            ? const CircularProgressIndicator()
+                            : ListView.builder(
+                          padding: const EdgeInsets.only(top: 0),
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount:listofleave.length,
+                          itemBuilder: (context, index) => NoOfRequest(subject: listofleave[index].subject,
+                            message: listofleave[index].message,
+                            approve: listofleave[index].approve,),
+                        );
+                      default:
+                        return const Text("default", style: TextStyle(color: Colors.white));
+                    }
+                  }),
+              // NoOfRequest(),
+              // NoOfRequest(),
+              // NoOfRequest(),
+              // NoOfRequest(),
+              // NoOfRequest(),
+              // NoOfRequest(),
+            ],
+          ),
+        ),
+
+        floatingActionButton: FloatingActionButton(
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [srpgradient1, srpgradient3])
+            ),
+            child: Icon(
+              Icons.add,
+              size: 25,
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WriteLeave(adminemail: widget.adminemail,providerGenerator: widget.providerGenerator,)),
+            );
+          },
+        ),
+
       ),
     );
+
+    // return SafeArea(
+    //   child: CsScreenUtilInit(
+    //     child: Scaffold(
+    //       // appBar: AppBar(
+    //       //   leading: SizedBox(),
+    //       //   backgroundColor: Colors.transparent,
+    //       //   flexibleSpace:
+    //       appBar: PreferredSize(
+    //         preferredSize:  Size.fromHeight(74.0.h),
+    //         child: Container(
+    //           height: 122.h,
+    //           width:MediaQuery.of(context).size.width,
+    //           decoration: BoxDecoration(
+    //             boxShadow: [
+    //               BoxShadow(
+    //                 color: Colors.grey.withOpacity(0.4),
+    //                 spreadRadius: 2,
+    //                 blurRadius: 1,
+    //                 offset: const Offset(0, 2),
+    //               ),
+    //             ],
+    //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+    //             color: whiteClr,
+    //           ),
+    //           child: Column(
+    //             crossAxisAlignment:CrossAxisAlignment.center,
+    //             children: [
+    //               SizedBox(height: 30.h,),
+    //               Row(
+    //                 mainAxisAlignment: MainAxisAlignment.center,
+    //                 children: [
+    //                   GestureDetector(
+    //                     onTap: (){
+    //                       Navigator.pop(context);
+    //                     },
+    //                     child: Padding(
+    //                       padding: EdgeInsets.all(8.0.sp),
+    //                       child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+    //                     ),
+    //                   ),
+    //                   Spacer(),
+    //                   Text("Leave List", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+    //                   Spacer(),
+    //                   Container(
+    //                     width: 30.0.w,
+    //                     height: 30.0.h,
+    //                     // child: Stack(
+    //                     //   children: [
+    //                     //     ClipRRect(
+    //                     //       borderRadius: BorderRadius.circular(15.0.sp),
+    //                     //       child: Image.asset(
+    //                     //         'assets/user.jpg',
+    //                     //         width: 30.0.w,
+    //                     //         height: 30.0.h,
+    //                     //         fit: BoxFit.fill,
+    //                     //       ),
+    //                     //     ),
+    //                     //     Positioned(
+    //                     //       bottom: 1.5,
+    //                     //       right: 1.5,
+    //                     //       child: Container(
+    //                     //         height: 5.h,
+    //                     //         width: 5.w,
+    //                     //         //color:online,
+    //                     //         decoration: BoxDecoration(
+    //                     //           borderRadius: BorderRadius.circular(5.sp),
+    //                     //           color: online,
+    //                     //         ),
+    //                     //       ),
+    //                     //     )
+    //                     //   ],
+    //                     // ),
+    //                   ),
+    //                   SizedBox(width: 15.w,),
+    //                 ],
+    //               ),
+    //               // Container(
+    //               //   height: 50.h,
+    //               //   width: MediaQuery.of(context).size.width,
+    //               //   child: Row(
+    //               //     mainAxisAlignment: MainAxisAlignment.center,
+    //               //     children: [
+    //               //       Container(
+    //               //         width: 80.w,
+    //               //         height: 40.h,
+    //               //         decoration: BoxDecoration(
+    //               //           boxShadow: [
+    //               //             BoxShadow(
+    //               //               color: Colors.grey.withOpacity(0.2),
+    //               //               spreadRadius: 2,
+    //               //               blurRadius: 1,
+    //               //               offset: const Offset(0, 2), // changes position of shadow
+    //               //             ),
+    //               //           ],
+    //               //           borderRadius: BorderRadius.circular(5),
+    //               //           color: whiteClr,
+    //               //         ),
+    //               //         child: Column(
+    //               //           children: [
+    //               //             SizedBox(height: 5.h,),
+    //               //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+    //               //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //               //           ],
+    //               //         ),
+    //               //       ),
+    //               //       Padding(
+    //               //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    //               //         child: Container(
+    //               //           color: coverBackClr,
+    //               //           height: 40.h,
+    //               //           width: 1.w,
+    //               //         ),
+    //               //       ),
+    //               //       Container(
+    //               //         width: 240.w,
+    //               //         height: 40.h,
+    //               //         decoration: BoxDecoration(
+    //               //           boxShadow: [
+    //               //             BoxShadow(
+    //               //               color: Colors.grey.withOpacity(0.2),
+    //               //               spreadRadius: 2,
+    //               //               blurRadius: 1,
+    //               //               offset: const Offset(0, 2), // changes position of shadow
+    //               //             ),
+    //               //           ],
+    //               //           borderRadius: BorderRadius.circular(5),
+    //               //           color: whiteClr,
+    //               //         ),
+    //               //         child: Padding(
+    //               //           padding: EdgeInsets.all( 10.sp),
+    //               //           child: Row(
+    //               //             children: [
+    //               //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //               //               Spacer(),
+    //               //               Container(
+    //               //                 height: 20.h,
+    //               //                 width: 20.w,
+    //               //                 decoration: BoxDecoration(
+    //               //                   boxShadow: [
+    //               //                     BoxShadow(
+    //               //                       color: Colors.grey.withOpacity(0),
+    //               //                       spreadRadius: 0,
+    //               //                       blurRadius: 1,
+    //               //                       offset: const Offset(0, 2), // changes position of shadow
+    //               //                     ),
+    //               //                   ],
+    //               //                   borderRadius: BorderRadius.circular(15.sp),
+    //               //                   color: greybackground,
+    //               //                 ),
+    //               //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+    //               //             ],
+    //               //           ),
+    //               //         ),
+    //               //       ),
+    //               //
+    //               //     ],
+    //               //   ),
+    //               // )
+    //             ],
+    //           ),
+    //         ),
+    //       ),
+    //       body: SingleChildScrollView(
+    //         child: Column(
+    //           children: [
+    //             // Container(
+    //             //   height: 102.h,
+    //             //   width:MediaQuery.of(context).size.width,
+    //             //   decoration: BoxDecoration(
+    //             //     boxShadow: [
+    //             //       BoxShadow(
+    //             //         color: Colors.grey.withOpacity(0.4),
+    //             //         spreadRadius: 2,
+    //             //         blurRadius: 1,
+    //             //         offset: const Offset(0, 2), // changes position of shadow
+    //             //       ),
+    //             //     ],
+    //             //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+    //             //     color: whiteClr,
+    //             //   ),
+    //             //   child: Column(
+    //             //     crossAxisAlignment:CrossAxisAlignment.center ,
+    //             //     children: [
+    //             //       SizedBox(height: 20.h,),
+    //             //       Row(
+    //             //         mainAxisAlignment: MainAxisAlignment.center,
+    //             //         children: [
+    //             //           Padding(
+    //             //             padding: EdgeInsets.all(8.0.sp),
+    //             //             child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+    //             //           ),
+    //             //           Spacer(),
+    //             //           Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+    //             //           Spacer(),
+    //             //           Container(
+    //             //             width: 30.0.w,
+    //             //             height: 30.0.h,
+    //             //             // child: Stack(
+    //             //             //   children: [
+    //             //             //     ClipRRect(
+    //             //             //       borderRadius: BorderRadius.circular(15.0.sp),
+    //             //             //       child: Image.asset(
+    //             //             //         'assets/user.jpg',
+    //             //             //         width: 30.0.w,
+    //             //             //         height: 30.0.h,
+    //             //             //         fit: BoxFit.fill,
+    //             //             //       ),
+    //             //             //     ),
+    //             //             //     Positioned(
+    //             //             //       bottom: 1.5,
+    //             //             //       right: 1.5,
+    //             //             //       child: Container(
+    //             //             //         height: 5.h,
+    //             //             //         width: 5.w,
+    //             //             //         //color:online,
+    //             //             //         decoration: BoxDecoration(
+    //             //             //           borderRadius: BorderRadius.circular(5.sp),
+    //             //             //           color: online,
+    //             //             //         ),
+    //             //             //       ),
+    //             //             //     )
+    //             //             //   ],
+    //             //             // ),
+    //             //           ),
+    //             //           SizedBox(width: 15.w,)
+    //             //         ],
+    //             //       ),
+    //             //       // Container(
+    //             //       //   height: 50.h,
+    //             //       //   width: MediaQuery.of(context).size.width,
+    //             //       //   child: Row(
+    //             //       //     mainAxisAlignment: MainAxisAlignment.center,
+    //             //       //     children: [
+    //             //       //       Container(
+    //             //       //         width: 80.w,
+    //             //       //         height: 40.h,
+    //             //       //         decoration: BoxDecoration(
+    //             //       //           boxShadow: [
+    //             //       //             BoxShadow(
+    //             //       //               color: Colors.grey.withOpacity(0.2),
+    //             //       //               spreadRadius: 2,
+    //             //       //               blurRadius: 1,
+    //             //       //               offset: const Offset(0, 2), // changes position of shadow
+    //             //       //             ),
+    //             //       //           ],
+    //             //       //           borderRadius: BorderRadius.circular(5),
+    //             //       //           color: whiteClr,
+    //             //       //         ),
+    //             //       //         child: Column(
+    //             //       //           children: [
+    //             //       //             SizedBox(height: 5.h,),
+    //             //       //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+    //             //       //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //             //       //           ],
+    //             //       //         ),
+    //             //       //       ),
+    //             //       //       Padding(
+    //             //       //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    //             //       //         child: Container(
+    //             //       //           color: coverBackClr,
+    //             //       //           height: 40.h,
+    //             //       //           width: 1.w,
+    //             //       //         ),
+    //             //       //       ),
+    //             //       //       Container(
+    //             //       //         width: 240.w,
+    //             //       //         height: 40.h,
+    //             //       //         decoration: BoxDecoration(
+    //             //       //           boxShadow: [
+    //             //       //             BoxShadow(
+    //             //       //               color: Colors.grey.withOpacity(0.2),
+    //             //       //               spreadRadius: 2,
+    //             //       //               blurRadius: 1,
+    //             //       //               offset: const Offset(0, 2), // changes position of shadow
+    //             //       //             ),
+    //             //       //           ],
+    //             //       //           borderRadius: BorderRadius.circular(5),
+    //             //       //           color: whiteClr,
+    //             //       //         ),
+    //             //       //         child: Padding(
+    //             //       //           padding: EdgeInsets.all( 10.sp),
+    //             //       //           child: Row(
+    //             //       //             children: [
+    //             //       //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //             //       //               Spacer(),
+    //             //       //               Container(
+    //             //       //                 height: 20.h,
+    //             //       //                 width: 20.w,
+    //             //       //                 decoration: BoxDecoration(
+    //             //       //                   boxShadow: [
+    //             //       //                     BoxShadow(
+    //             //       //                       color: Colors.grey.withOpacity(0),
+    //             //       //                       spreadRadius: 0,
+    //             //       //                       blurRadius: 1,
+    //             //       //                       offset: const Offset(0, 2), // changes position of shadow
+    //             //       //                     ),
+    //             //       //                   ],
+    //             //       //                   borderRadius: BorderRadius.circular(15.sp),
+    //             //       //                   color: greybackground,
+    //             //       //                 ),
+    //             //       //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+    //             //       //             ],
+    //             //       //           ),
+    //             //       //         ),
+    //             //       //       ),
+    //             //       //
+    //             //       //     ],
+    //             //       //   ),
+    //             //       // )
+    //             //     ],
+    //             //   ),
+    //             // ),
+    //             SizedBox(
+    //               height: 15.h,
+    //             ),
+    //             // Padding(
+    //             //   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+    //             //   child: CsMainInputField1(
+    //             //     providerGenerator: widget.providerGenerator,
+    //             //     width: 287.w,
+    //             //     mycontroller: textEditingController,
+    //             //     myhint: TextStrings.Search,
+    //             //     prefixIcon: Icons.search,
+    //             //     isPassword: false,
+    //             //     keyboardType: TextInputType.emailAddress,
+    //             //     bordercolor: widget.providerGenerator.getVisibleError(index: 0)
+    //             //         ? Colors.red
+    //             //         : null,
+    //             //     // bordercolor: providerGenerator.getVisibleError(index: 0)
+    //             //     //     ? Colors.red
+    //             //     //     : null,
+    //             //   ),
+    //             //
+    //             // ),
+    //             StreamBuilder(
+    //                 stream: streamController.stream,
+    //                 builder: (BuildContext context, AsyncSnapshot snapshot) {
+    //                   print("%%%%%%%%% $snapshot");
+    //                   switch (snapshot.connectionState) {
+    //                     case ConnectionState.none:
+    //                       return const Text(" null", style: TextStyle(color: Colors.white),);
+    //                     case ConnectionState.waiting:
+    //                       return const SizedBox();
+    //                     case ConnectionState.active:
+    //                       return (snapshot.hasData == false)
+    //                           ? const CircularProgressIndicator()
+    //                           : ListView.builder(
+    //                             padding: const EdgeInsets.only(top: 0),
+    //                             shrinkWrap: true,
+    //                             physics: const BouncingScrollPhysics(),
+    //                             itemCount: listofleave.length,
+    //                             itemBuilder: (context, index) {
+    //                               // managetotalcontact = contact.length.toString();
+    //                               // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+    //                               return NoOfRequest(
+    //                                 subject: listofleave[index].subject,
+    //                                 message: listofleave[index].message,
+    //                                 approve: listofleave[index].approve,);
+    //                         },
+    //                       );
+    //                     case ConnectionState.done:
+    //                       return (snapshot.hasData == false)
+    //                           ? const CircularProgressIndicator()
+    //                           : ListView.builder(
+    //                             padding: const EdgeInsets.only(top: 0),
+    //                             shrinkWrap: true,
+    //                             physics: const BouncingScrollPhysics(),
+    //                             itemCount:listofleave.length,
+    //                             itemBuilder: (context, index) => NoOfRequest(subject: listofleave[index].subject,
+    //                               message: listofleave[index].message,
+    //                               approve: listofleave[index].approve,),
+    //                       );
+    //                     default:
+    //                       return const Text("default", style: TextStyle(color: Colors.white));
+    //                   }
+    //                 }),
+    //             // NoOfRequest(),
+    //             // NoOfRequest(),
+    //             // NoOfRequest(),
+    //             // NoOfRequest(),
+    //             // NoOfRequest(),
+    //             // NoOfRequest(),
+    //           ],
+    //         ),
+    //       ),
+    //
+    //       floatingActionButton: FloatingActionButton(
+    //         child: Container(
+    //           width: 60,
+    //           height: 60,
+    //           decoration: const BoxDecoration(
+    //               shape: BoxShape.circle,
+    //               gradient: LinearGradient(
+    //                   begin: Alignment.topCenter,
+    //                   end: Alignment.bottomCenter,
+    //                   colors: [srpgradient1, srpgradient3])
+    //           ),
+    //           child: Icon(
+    //             Icons.add,
+    //             size: 25.sp,
+    //           ),
+    //         ),
+    //         onPressed: () {
+    //           Navigator.push(
+    //             context,
+    //             MaterialPageRoute(builder: (context) => WriteLeave(adminemail: widget.adminemail,providerGenerator: widget.providerGenerator,)),
+    //           );
+    //         },
+    //       ),
+    //
+    //     ),
+    //   ),
+    // );
   }
 }
 
@@ -2624,9 +3812,10 @@ class NoOfRequest extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-
+    final hh= MediaQuery.of(context).size.height;
+    final ww= MediaQuery.of(context).size.width;
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 10.0.h,horizontal: 20.w),
+      padding:  EdgeInsets.symmetric(vertical: hh*0.01,horizontal: ww*0.04),
       child: GestureDetector(
         onTap: (){
           // Navigator.push(
@@ -2635,7 +3824,7 @@ class NoOfRequest extends StatelessWidget {
           // );
         },
         child: Container(
-          height: 130.h,
+          height: hh*0.2,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             boxShadow: [
@@ -2646,16 +3835,16 @@ class NoOfRequest extends StatelessWidget {
                 offset: const Offset(0, 2), // changes position of shadow
               ),
             ],
-            borderRadius: BorderRadius.circular(10.sp),
+            borderRadius: BorderRadius.circular(10),
             color: whiteClr,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 6.h,),
+              SizedBox(height: hh*0.01,),
               Row(
                 children:  [
-                  SizedBox(width: 10.w,),
+                  SizedBox(width: ww*0.03,),
                   // Container(
                   //   height: 40.h,
                   //   width: 40.w,
@@ -2679,30 +3868,28 @@ class NoOfRequest extends StatelessWidget {
                   // ),
                   Icon(FontAwesomeIcons.userTie,color: srpgradient2,),
                   Padding(
-                    padding:EdgeInsets.symmetric(vertical: 4.0.h,horizontal: 10.w),
-                    child: Text(subject,style: GoogleFonts.poppins(fontSize: 14.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+                    padding:EdgeInsets.symmetric(vertical: hh*0.005,horizontal: ww*0.03),
+                    child: Text(subject,style: GoogleFonts.poppins(fontSize: 17, color: iconcolor, fontWeight: FontWeight.w400),),
                   ),
                   const Spacer(),
                   approve==null ? Row(
                     children: [
-                    Text("Pending",style: GoogleFonts.poppins(fontSize: 10.sp, color: Colors.lightBlue, fontWeight: FontWeight.w400),),
-                    SizedBox(width: 3.w,),
+                    Text("Pending",style: GoogleFonts.poppins(fontSize: 12, color: Colors.lightBlue, fontWeight: FontWeight.w400),),
+                    SizedBox(width: 4,),
                     const Icon(FontAwesomeIcons.clockRotateLeft,color: Colors.lightBlue,),
                     ],
                   ): approve==false ? Row(
                     children: [
-                      Text("Unapproved",style: GoogleFonts.poppins(fontSize: 10.sp, color: Colors.red, fontWeight: FontWeight.w400),),
-                      SizedBox(width: 3.w,),
+                      Text("Unapproved",style: GoogleFonts.poppins(fontSize: 12,  color: Colors.red, fontWeight: FontWeight.w400),),
+                      SizedBox(width: 4,),
                       const Icon(FontAwesomeIcons.solidCircleXmark,color: Colors.red,),
                     ],
-                  ) : Row(
-                      children: [
-                        Text("Approved",style: GoogleFonts.poppins(fontSize: 10.sp, color:  Colors.greenAccent, fontWeight: FontWeight.w400),),
-                        SizedBox(width: 3.w,),
+                  ) : Row(children: [
+                        Text("Approved",style: GoogleFonts.poppins(fontSize: 12,  color:  Colors.greenAccent, fontWeight: FontWeight.w400),),
+                        SizedBox(width: 4,),
                         Icon(FontAwesomeIcons.solidCheckCircle,color: Colors.greenAccent,)
-                          ],
-                         ),
-                  SizedBox(width: 13.w,),
+                          ],),
+                  SizedBox(width: ww*0.03),
                   // Padding(
                   //   padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                   //   child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
@@ -2710,13 +3897,13 @@ class NoOfRequest extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding:EdgeInsets.symmetric(vertical: 4.0.h,horizontal: 11.w),
+                padding:EdgeInsets.symmetric(vertical: hh*0.005,horizontal: ww*0.03),
                 child: Container(
-                  height:77.h,
-                  // color:Colors.lightGreen,
+                  height:hh*0.13,
+                   //color:Colors.lightGreen,
                   child: Text(message,
-                    style: GoogleFonts.poppins(fontSize: 9.sp, color: iconcolor, fontWeight: FontWeight.w400,),
-                    maxLines: 6,
+                    style: GoogleFonts.poppins(fontSize: 10, color: iconcolor, fontWeight: FontWeight.w400,),
+                    maxLines: 7,
                     overflow:TextOverflow.fade,
                   ),
                 ),
@@ -2726,6 +3913,107 @@ class NoOfRequest extends StatelessWidget {
         ),
       ),
     );
+    // return Padding(
+    //   padding:  EdgeInsets.symmetric(vertical: hh*0.01,horizontal: ww*0.04),
+    //   child: GestureDetector(
+    //     onTap: (){
+    //       // Navigator.push(
+    //       //   context,
+    //       //   MaterialPageRoute(builder: (context) => SelectedLeave()),
+    //       // );
+    //     },
+    //     child: Container(
+    //       height: hh*0.2,
+    //       width: MediaQuery.of(context).size.width,
+    //       decoration: BoxDecoration(
+    //         boxShadow: [
+    //           BoxShadow(
+    //             color: Colors.grey.withOpacity(0.4),
+    //             spreadRadius: 2,
+    //             blurRadius: 1,
+    //             offset: const Offset(0, 2), // changes position of shadow
+    //           ),
+    //         ],
+    //         borderRadius: BorderRadius.circular(10),
+    //         color: whiteClr,
+    //       ),
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           SizedBox(height: hh*0.01,),
+    //           Row(
+    //             children:  [
+    //               SizedBox(width: 10.w,),
+    //               // Container(
+    //               //   height: 40.h,
+    //               //   width: 40.w,
+    //               //   //color: Colors.lightGreen,
+    //               //   decoration: BoxDecoration(
+    //               //     boxShadow: [
+    //               //       BoxShadow(
+    //               //         color: Colors.grey.withOpacity(0.2),
+    //               //         spreadRadius: 2,
+    //               //         blurRadius: 1,
+    //               //         offset: const Offset(0, 2),
+    //               //       ),
+    //               //     ],
+    //               //     borderRadius: BorderRadius.circular(20.sp),
+    //               //     color: Colors.lightGreen,
+    //               //     image: const DecorationImage(
+    //               //         image: AssetImage('assets/user.jpg',),
+    //               //         fit: BoxFit.fill
+    //               //     ),
+    //               //   ),
+    //               // ),
+    //               Icon(FontAwesomeIcons.userTie,color: srpgradient2,),
+    //               Padding(
+    //                 padding:EdgeInsets.symmetric(vertical: 4.0.h,horizontal: 10.w),
+    //                 child: Text(subject,style: GoogleFonts.poppins(fontSize: 14.sp, color: iconcolor, fontWeight: FontWeight.w400),),
+    //               ),
+    //               const Spacer(),
+    //               approve==null ? Row(
+    //                 children: [
+    //                   Text("Pending",style: GoogleFonts.poppins(fontSize: 10.sp, color: Colors.lightBlue, fontWeight: FontWeight.w400),),
+    //                   SizedBox(width: 3.w,),
+    //                   const Icon(FontAwesomeIcons.clockRotateLeft,color: Colors.lightBlue,),
+    //                 ],
+    //               ): approve==false ? Row(
+    //                 children: [
+    //                   Text("Unapproved",style: GoogleFonts.poppins(fontSize: 10.sp, color: Colors.red, fontWeight: FontWeight.w400),),
+    //                   SizedBox(width: 3.w,),
+    //                   const Icon(FontAwesomeIcons.solidCircleXmark,color: Colors.red,),
+    //                 ],
+    //               ) : Row(
+    //                 children: [
+    //                   Text("Approved",style: GoogleFonts.poppins(fontSize: 10.sp, color:  Colors.greenAccent, fontWeight: FontWeight.w400),),
+    //                   SizedBox(width: 3.w,),
+    //                   Icon(FontAwesomeIcons.solidCheckCircle,color: Colors.greenAccent,)
+    //                 ],
+    //               ),
+    //               SizedBox(width: 13.w,),
+    //               // Padding(
+    //               //   padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+    //               //   child: Icon(Icons.more_vert, size: 20.sp, color:iconcolor,),
+    //               // ),
+    //             ],
+    //           ),
+    //           Padding(
+    //             padding:EdgeInsets.symmetric(vertical: 4.0.h,horizontal: 11.w),
+    //             child: Container(
+    //               height:77.h,
+    //               // color:Colors.lightGreen,
+    //               child: Text(message,
+    //                 style: GoogleFonts.poppins(fontSize: 9.sp, color: iconcolor, fontWeight: FontWeight.w400,),
+    //                 maxLines: 6,
+    //                 overflow:TextOverflow.fade,
+    //               ),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
 
@@ -2783,7 +4071,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                 textButtonTheme: TextButtonThemeData(
                     style: TextButton.styleFrom(
                       textStyle:GoogleFonts.poppins(
-                          fontSize:12.sp,
+                          fontSize:14,
                           color: srpgradient2,
                           fontWeight: FontWeight.w500),
                       primary: srpgradient2,
@@ -2835,7 +4123,7 @@ class _WriteLeaveState extends State<WriteLeave> {
     FirebaseFirestore.instance
         .collection('Companies')
         .doc('${widget.adminemail}').collection("Employee")
-        .doc('${user!.email.toString()}').get().then((value) {
+        .doc('${user?.email.toString()}').get().then((value) {
       generatedid=value.get('generatedId');
       setState(() {});
       print('{{{{{{{{{{{{{{{{{{{{{{{{{{{{ $generatedid ');
@@ -2844,12 +4132,15 @@ class _WriteLeaveState extends State<WriteLeave> {
 
   @override
   Widget build(BuildContext context) {
+    final hh= MediaQuery.of(context).size.height;
+    final ww= MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize:  Size.fromHeight(94.0.h),
+          // preferredSize:  Size.fromHeight(94.0.h),
+          preferredSize: Size.fromHeight(hh*0.14),
           child: Container(
-            height: 102.h,
+            height: hh*0.14,
             width:MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               boxShadow: [
@@ -2860,15 +4151,14 @@ class _WriteLeaveState extends State<WriteLeave> {
                   offset: const Offset(0, 2), // changes position of shadow
                 ),
               ],
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-              color: whiteClr,
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(21),bottomRight: Radius.circular(21)),
+               color: whiteClr,
+              //color: Colors.blue,
             ),
             child: Column(
               crossAxisAlignment:CrossAxisAlignment.center,
               children: [
-
                 const Spacer(),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -2877,20 +4167,20 @@ class _WriteLeaveState extends State<WriteLeave> {
                         Navigator.pop(context);
                       },
                       child: Padding(
-                        padding: EdgeInsets.all(10.0.sp),
-                        child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+                        padding: EdgeInsets.all(11),
+                        child: Icon(FontAwesomeIcons.anglesLeft,size: 24,color: greybackground,),
                       ),
                     ),
                     const Spacer(),
-                    Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                    Text("Leave Request",style: GoogleFonts.poppins(fontSize: 16,color: fontgrey,fontWeight: FontWeight.w500),),
                     const Spacer(),
-                    SizedBox(width: 30.w,),
+                    SizedBox(width: ww*0.1),
                   ],
                 ),
-
                 Container(
-                  height: 30.h,
+                  height:hh*0.041,
                   width: MediaQuery.of(context).size.width,
+                  //color:Colors.blue,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
@@ -2898,24 +4188,23 @@ class _WriteLeaveState extends State<WriteLeave> {
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.all(18.0.sp),
+          padding: EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10.h,),
+                SizedBox(height: hh*0.01,),
                 GestureDetector(
                   onTap: () async {
                     pickDateRange();
                   },
                   child: Container(
-                    height: 36.0.h,
+                    height:  hh*0.05,
                     //width: 125.w,
                     width: MediaQuery.of(context).size.width,
                     //color: Colors.purpleAccent,
@@ -2924,8 +4213,8 @@ class _WriteLeaveState extends State<WriteLeave> {
                       children: [
                         Container(
                           //width: 125.w,
-                          width: 300.w,
-                          height: 42.0.h,
+                          width: ww*0.85,
+                          height: hh*0.045,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -2940,24 +4229,24 @@ class _WriteLeaveState extends State<WriteLeave> {
                           ),
                           //////Ukasha code Start///////////
                           child: Padding(
-                            padding: EdgeInsets.all( 3.5.sp),
+                            padding: EdgeInsets.all(4),
                             child: Row(
                               children: [
-                                Icon(FontAwesomeIcons.calendarDays,size: 17.sp,color: srpgradient2,),
+                                Icon(FontAwesomeIcons.calendarDays,size: 20,color: srpgradient2,),
                                 Spacer(),
                                 Column(
                                   children: [
-                                    Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                    Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                    Text("Select Date", style: GoogleFonts.poppins(fontSize:8, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                    Text("$time", style: GoogleFonts.poppins(fontSize:12, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
                                     // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
-                                  height: 15.h,
-                                  width: 15.w,
+                                  height: hh*0.02,
+                                  width: ww*0.07,
                                   //color: Colors.purpleAccent,
-                                  child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+                                  child: Icon(Icons.keyboard_arrow_down,size:20,color: iconcolor,),),
                               ],
                             ),
                           ),
@@ -3021,15 +4310,15 @@ class _WriteLeaveState extends State<WriteLeave> {
                   //       ),
                   //     ),
                   //  ),
-                SizedBox(height: 12.h,),
+                SizedBox(height: hh*0.02,),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
-                  child: Text("Select Subject",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),),
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  child: Text("Select Subject",style: GoogleFonts.poppins(fontSize: 17,color: fontgrey),),
                 ),
-                SizedBox(height: 10.h,),
+                SizedBox(height: hh*0.015,),
                 Container(
-                  height: 60.h,
-                  width: 272.w,
+                  height: hh*0.08,
+                  width: ww*0.8,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -3043,15 +4332,15 @@ class _WriteLeaveState extends State<WriteLeave> {
                     color: whiteClr,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(8.0.sp),
+                    padding: EdgeInsets.all(9),
                     child: Row(
                       children: [
-                        SizedBox(width: 15.w,),
+                        SizedBox(width: ww*0.1,),
                         const Icon(FontAwesomeIcons.personWalkingArrowRight,color: srpgradient2,),
-                        SizedBox(width: 25.w,),
+                        SizedBox(width: ww*0.08  ,),
                         DropdownButton(
                           hint: Text('Subject',
-                            style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),),
+                            style: GoogleFonts.poppins(fontSize: 17,color: fontgrey),),
                           value: _selectedLocation,
                           onChanged: (newValue) {setState(() {
                               _selectedLocation = newValue.toString();
@@ -3061,7 +4350,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                             return DropdownMenuItem(
                               value: location,
                               child: Text(location,
-                                style:GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black),),
+                                style:GoogleFonts.poppins(fontSize: 17,color: Colors.black),),
                             );
                           }).toList(),),],),
                     // child: TextFormField(
@@ -3114,9 +4403,9 @@ class _WriteLeaveState extends State<WriteLeave> {
                     // ),
                   ),
                 ),
-                SizedBox(height: 25.h,),
+                SizedBox(height: hh*0.03,),
                 Container(
-                  height: 200.h,
+                  height: hh*0.3,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -3126,11 +4415,11 @@ class _WriteLeaveState extends State<WriteLeave> {
                         offset: const Offset(0, 4), // changes position of shadow
                       ),
                     ],
-                    borderRadius: BorderRadius.circular(10.sp),
+                    borderRadius: BorderRadius.circular(12),
                     color: whiteClr,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(8.0.sp),
+                    padding: EdgeInsets.all(10.0),
                     child: TextFormField(
                       minLines: 10,
                       keyboardType: TextInputType.multiline,
@@ -3139,14 +4428,14 @@ class _WriteLeaveState extends State<WriteLeave> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: whiteClr,
-                        contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+                        contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
                         hintText: "Write a message",
                         // hintStyle: TextStyle(
                         //   fontSize: 15.0.sp,
                         //   fontWeight: FontWeight.w400,
                         //   color: blackClr.withOpacity(0.8),
                         // ),
-                        hintStyle: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),
+                        hintStyle: GoogleFonts.poppins(fontSize: 17,color: fontgrey),
                         // prefixIcon: Icon(
                         //   Icons.message,
                         //   color: blackClr.withOpacity(0.6),
@@ -3181,7 +4470,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.h,),
+                SizedBox(height: hh*0.03,),
                 GestureDetector(
                   onTap: (){
                     //Navigator.pop(context);
@@ -3216,6 +4505,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                               'message': "${textEditingController.text.trim()}",
                               'approve': null})
                               .then((value) async {
+                          _showToast(context,'Added successfully');
                                 var data =
                                   {
                                     "leave_type": "$_selectedLocation",
@@ -3244,7 +4534,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                     // );
                   },
                     child: Container(
-                      height: 40.h,
+                      height: hh*0.06,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
@@ -3268,7 +4558,7 @@ class _WriteLeaveState extends State<WriteLeave> {
                         color: whiteClr,
                       ),
                       child: Center(
-                        child:load==true ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),):Text("Submit", style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                        child:load==true ? SizedBox(height: 17, width: 17, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),):Text("Submit", style: GoogleFonts.poppins(fontSize: 16,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                       )
                     ),
                   ),
@@ -3278,13 +4568,444 @@ class _WriteLeaveState extends State<WriteLeave> {
           ),
         ),
       );
+    // return SafeArea(
+    //   child: Scaffold(
+    //     appBar: PreferredSize(
+    //       // preferredSize:  Size.fromHeight(94.0.h),
+    //       preferredSize: Size.fromHeight(hh*0.14),
+    //       child: Container(
+    //         height: 102.h,
+    //         width:MediaQuery.of(context).size.width,
+    //         decoration: BoxDecoration(
+    //           boxShadow: [
+    //             BoxShadow(
+    //               color: Colors.grey.withOpacity(0.4),
+    //               spreadRadius: 2,
+    //               blurRadius: 1,
+    //               offset: const Offset(0, 2), // changes position of shadow
+    //             ),
+    //           ],
+    //           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+    //           color: whiteClr,
+    //         ),
+    //         child: Column(
+    //           crossAxisAlignment:CrossAxisAlignment.center,
+    //           children: [
+    //             const Spacer(),
+    //             Row(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: [
+    //                 GestureDetector(
+    //                   onTap:(){
+    //                     Navigator.pop(context);
+    //                   },
+    //                   child: Padding(
+    //                     padding: EdgeInsets.all(10.0.sp),
+    //                     child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+    //                   ),
+    //                 ),
+    //                 const Spacer(),
+    //                 Text("Leave Request",style: GoogleFonts.poppins(fontSize: 15.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+    //                 const Spacer(),
+    //                 SizedBox(width: 30.w,),
+    //               ],
+    //             ),
+    //             Container(
+    //               height: 30.h,
+    //               width: MediaQuery.of(context).size.width,
+    //               child: Row(
+    //                 mainAxisAlignment: MainAxisAlignment.center,
+    //                 children: const [
+    //
+    //                 ],
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //     body: Padding(
+    //       padding: EdgeInsets.all(18.0.sp),
+    //       child: SingleChildScrollView(
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+    //             SizedBox(height: 10.h,),
+    //             GestureDetector(
+    //               onTap: () async {
+    //                 pickDateRange();
+    //               },
+    //               child: Container(
+    //                 height: 36.0.h,
+    //                 //width: 125.w,
+    //                 width: MediaQuery.of(context).size.width,
+    //                 //color: Colors.purpleAccent,
+    //                 child: Row(
+    //                   mainAxisAlignment: MainAxisAlignment.start,
+    //                   children: [
+    //                     Container(
+    //                       //width: 125.w,
+    //                       width: 300.w,
+    //                       height: 42.0.h,
+    //                       decoration: BoxDecoration(
+    //                         boxShadow: [
+    //                           BoxShadow(
+    //                             color: Colors.grey.withOpacity(0.2),
+    //                             spreadRadius: 2,
+    //                             blurRadius: 1,
+    //                             offset: const Offset(0, 2), // changes position of shadow
+    //                           ),
+    //                         ],
+    //                         borderRadius: BorderRadius.circular(5),
+    //                         color: whiteClr,
+    //                       ),
+    //                       //////Ukasha code Start///////////
+    //                       child: Padding(
+    //                         padding: EdgeInsets.all( 3.5.sp),
+    //                         child: Row(
+    //                           children: [
+    //                             Icon(FontAwesomeIcons.calendarDays,size: 17.sp,color: srpgradient2,),
+    //                             Spacer(),
+    //                             Column(
+    //                               children: [
+    //                                 Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //                                 Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+    //                                 // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+    //                               ],
+    //                             ),
+    //                             const Spacer(),
+    //                             Container(
+    //                               height: 15.h,
+    //                               width: 15.w,
+    //                               //color: Colors.purpleAccent,
+    //                               child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ),
+    //             // Container(
+    //             //       height: 60.0.h,
+    //             //       //width: 125.w,
+    //             //       width: MediaQuery.of(context).size.width,
+    //             //       //color: Colors.purpleAccent,
+    //             //       child: Row(
+    //             //         mainAxisAlignment: MainAxisAlignment.start,
+    //             //         children: [
+    //             //           Container(
+    //             //             // width: 125.w,
+    //             //             width: 272.w,
+    //             //             height: 62.0.h,
+    //             //             decoration: BoxDecoration(
+    //             //               boxShadow: [
+    //             //                 BoxShadow(
+    //             //                   color: Colors.grey.withOpacity(0.2),
+    //             //                   spreadRadius: 2,
+    //             //                   blurRadius: 1,
+    //             //                   offset: const Offset(0, 2), // changes position of shadow
+    //             //                 ),
+    //             //               ],
+    //             //               borderRadius: BorderRadius.circular(5),
+    //             //               color: whiteClr,
+    //             //             ),
+    //             //             child: Padding(
+    //             //               padding: EdgeInsets.all(3.5.sp),
+    //             //               child: Row(
+    //             //                 children: [
+    //             //                   SizedBox(width: 15.w,),
+    //             //                   Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+    //             //                   Spacer(),
+    //             //                   Column(
+    //             //                     mainAxisAlignment: MainAxisAlignment.center,
+    //             //                     crossAxisAlignment: CrossAxisAlignment.center,
+    //             //                     children: [
+    //             //                       Text("Select Date", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //             //                       Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+    //             //                       // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+    //             //                     ],
+    //             //                   ),
+    //             //                   const Spacer(),
+    //             //                   Container(
+    //             //                     height: 25.h,
+    //             //                     width: 25.w,
+    //             //                     // color: Colors.purpleAccent,
+    //             //                     child: Icon(Icons.arrow_drop_down,size:24.sp,),),
+    //             //                   SizedBox(width: 9.w,),
+    //             //                 ],
+    //             //               ),
+    //             //             ),
+    //             //           ),
+    //             //         ],
+    //             //       ),
+    //             //     ),
+    //             //  ),
+    //             SizedBox(height: 12.h,),
+    //             Padding(
+    //               padding: EdgeInsets.symmetric(horizontal: 4.w),
+    //               child: Text("Select Subject",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),),
+    //             ),
+    //             SizedBox(height: 10.h,),
+    //             Container(
+    //               height: 60.h,
+    //               width: 272.w,
+    //               decoration: BoxDecoration(
+    //                 boxShadow: [
+    //                   BoxShadow(
+    //                     color: Colors.grey.withOpacity(0.2),
+    //                     spreadRadius: 2,
+    //                     blurRadius: 1,
+    //                     offset: const Offset(0, 2), // changes position of shadow
+    //                   ),
+    //                 ],
+    //                 borderRadius: BorderRadius.circular(5),
+    //                 color: whiteClr,
+    //               ),
+    //               child: Padding(
+    //                 padding: EdgeInsets.all(8.0.sp),
+    //                 child: Row(
+    //                   children: [
+    //                     SizedBox(width: 15.w,),
+    //                     const Icon(FontAwesomeIcons.personWalkingArrowRight,color: srpgradient2,),
+    //                     SizedBox(width: 25.w,),
+    //                     DropdownButton(
+    //                       hint: Text('Subject',
+    //                         style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),),
+    //                       value: _selectedLocation,
+    //                       onChanged: (newValue) {setState(() {
+    //                         _selectedLocation = newValue.toString();
+    //                         textEditingController1.text=_selectedLocation;
+    //                       });},
+    //                       items: _locations.map((location) {
+    //                         return DropdownMenuItem(
+    //                           value: location,
+    //                           child: Text(location,
+    //                             style:GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black),),
+    //                         );
+    //                       }).toList(),),],),
+    //                 // child: TextFormField(
+    //                 //   minLines: 1,
+    //                 //   keyboardType: TextInputType.multiline,
+    //                 //   maxLines: null,
+    //                 //   controller: textEditingController1,
+    //                 //   decoration: InputDecoration(
+    //                 //     filled: true,
+    //                 //     fillColor: whiteClr,
+    //                 //     contentPadding: EdgeInsets.symmetric(vertical: 2.0.h, horizontal: 12.w),
+    //                 //     hintText: "Subject",
+    //                 //     // hintStyle: TextStyle(
+    //                 //     //   fontSize: 15.0.sp,
+    //                 //     //   fontWeight: FontWeight.w400,
+    //                 //     //   color: blackClr.withOpacity(0.8),
+    //                 //     // ),
+    //                 //     hintStyle: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),
+    //                 //     // prefixIcon: Icon(
+    //                 //     //   Icons.message,
+    //                 //     //   color: blackClr.withOpacity(0.6),
+    //                 //     //   size: 20.sp,
+    //                 //     // ),
+    //                 //     // suffixIcon: isPassword ? GestureDetector(
+    //                 //     //   onTap: () {
+    //                 //     //     providerGenerator.setObscurText(value: false, index: obscureIndex!);
+    //                 //     //     Future.delayed(
+    //                 //     //         const Duration(milliseconds: 1000),
+    //                 //     //             () => providerGenerator.setObscurText(
+    //                 //     //             value: true, index: obscureIndex!)
+    //                 //     //     );
+    //                 //     //   },
+    //                 //     //   child: Icon(
+    //                 //     //     providerGenerator.getObscurText(index: obscureIndex!)
+    //                 //     //         ? Icons.visibility_off_rounded
+    //                 //     //         : Icons.visibility_rounded,
+    //                 //     //     color: subTitleClr.withOpacity(0.6),
+    //                 //     //     size: 17.sp,
+    //                 //     //   ),
+    //                 //     // ) : null,
+    //                 //     focusedBorder: OutlineInputBorder(
+    //                 //       borderRadius: BorderRadius.circular(10),
+    //                 //       borderSide: BorderSide(width: 1.0, color:  Colors.white),
+    //                 //     ),
+    //                 //     enabledBorder: OutlineInputBorder(
+    //                 //       borderRadius: BorderRadius.circular(10),
+    //                 //       borderSide: BorderSide(width: 1.0, color:  Colors.white),
+    //                 //     ),
+    //                 //   ),
+    //                 // ),
+    //               ),
+    //             ),
+    //             SizedBox(height: 25.h,),
+    //             Container(
+    //               height: 200.h,
+    //               decoration: BoxDecoration(
+    //                 boxShadow: [
+    //                   BoxShadow(
+    //                     color: Colors.grey.withOpacity(0.2),
+    //                     spreadRadius: 3,
+    //                     blurRadius: 6,
+    //                     offset: const Offset(0, 4), // changes position of shadow
+    //                   ),
+    //                 ],
+    //                 borderRadius: BorderRadius.circular(10.sp),
+    //                 color: whiteClr,
+    //               ),
+    //               child: Padding(
+    //                 padding: EdgeInsets.all(8.0.sp),
+    //                 child: TextFormField(
+    //                   minLines: 10,
+    //                   keyboardType: TextInputType.multiline,
+    //                   maxLines: null,
+    //                   controller: textEditingController,
+    //                   decoration: InputDecoration(
+    //                     filled: true,
+    //                     fillColor: whiteClr,
+    //                     contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+    //                     hintText: "Write a message",
+    //                     // hintStyle: TextStyle(
+    //                     //   fontSize: 15.0.sp,
+    //                     //   fontWeight: FontWeight.w400,
+    //                     //   color: blackClr.withOpacity(0.8),
+    //                     // ),
+    //                     hintStyle: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),
+    //                     // prefixIcon: Icon(
+    //                     //   Icons.message,
+    //                     //   color: blackClr.withOpacity(0.6),
+    //                     //   size: 20.sp,
+    //                     // ),
+    //                     // suffixIcon: isPassword ? GestureDetector(
+    //                     //   onTap: () {
+    //                     //     providerGenerator.setObscurText(value: false, index: obscureIndex!);
+    //                     //     Future.delayed(
+    //                     //         const Duration(milliseconds: 1000),
+    //                     //             () => providerGenerator.setObscurText(
+    //                     //             value: true, index: obscureIndex!)
+    //                     //     );
+    //                     //   },
+    //                     //   child: Icon(
+    //                     //     providerGenerator.getObscurText(index: obscureIndex!)
+    //                     //         ? Icons.visibility_off_rounded
+    //                     //         : Icons.visibility_rounded,
+    //                     //     color: subTitleClr.withOpacity(0.6),
+    //                     //     size: 17.sp,
+    //                     //   ),
+    //                     // ) : null,
+    //                     focusedBorder: OutlineInputBorder(
+    //                       borderRadius: BorderRadius.circular(10),
+    //                       borderSide: BorderSide(width: 1.0, color:  Colors.white),
+    //                     ),
+    //                     enabledBorder: OutlineInputBorder(
+    //                       borderRadius: BorderRadius.circular(10),
+    //                       borderSide: BorderSide(width: 1.0, color:  Colors.white),
+    //                     ),
+    //                   ),
+    //                 ),
+    //               ),
+    //             ),
+    //             SizedBox(height: 20.h,),
+    //             GestureDetector(
+    //               onTap: (){
+    //                 //Navigator.pop(context);
+    //                 // FrLoginService(FirebaseAuth.instance).onTapSignIn(
+    //                 //     buttonIndex: 1,
+    //                 //     errorIndex: 0,
+    //                 //     context: context,
+    //                 //     email: textEditingController1.text.trim(),
+    //                 //     password: textEditingController2.text.trim(),
+    //                 //     providerGenerator: providerGenerator);
+    //                 Future.delayed(const Duration(seconds: 3), () {
+    //                   setState(() {
+    //                     load=false;
+    //                   });
+    //                 });
+    //
+    //                 if(load==true){}else{
+    //                   if(textEditingController.text.isNotEmpty) {
+    //                     setState(() {
+    //                       load=true;
+    //                     });
+    //                     FirebaseFirestore.instance
+    //                         .collection('Companies')
+    //                         .doc('${widget.adminemail}')
+    //                         .collection("Employee")
+    //                         .doc(user!.email.toString())
+    //                         .collection('Leaves')
+    //                         .doc()
+    //                         .set({
+    //                       'date':'$time',
+    //                       'subject': "${_selectedLocation}",
+    //                       'message': "${textEditingController.text.trim()}",
+    //                       'approve': null})
+    //                         .then((value) async {
+    //                       var data =
+    //                       {
+    //                         "leave_type": "$_selectedLocation",
+    //                         "employee" : "$generatedid",
+    //                         "from_date": "$fromdate",
+    //                         "to_date": "$todate",
+    //                         "leave_approver": "${widget.adminemail}",
+    //                         "description":"${textEditingController.text.trim()}",
+    //                       };
+    //
+    //                       var res = await LeaveCreate().createleave(data,'');
+    //
+    //                     }).then((value) => _showToast(context,'Leave request added successfully'))
+    //                         .then((value) =>
+    //                         Navigator.of(context).pushReplacement(
+    //                             MaterialPageRoute(builder: (BuildContext context) => EmployeeDashboard(admineamil: aadmin,)),// Homepage()),munib
+    //                             result: false));
+    //                   }
+    //                   else{
+    //                     _showToast(context,'Please write some message');
+    //                   }
+    //                 }
+    //                 // Navigator.push(
+    //                 //   context,
+    //                 //   MaterialPageRoute(builder: (context) => const ScreenMain()),
+    //                 // );
+    //               },
+    //               child: Container(
+    //                   height: 40.h,
+    //                   width: MediaQuery.of(context).size.width,
+    //                   decoration: BoxDecoration(
+    //                     gradient: const LinearGradient(
+    //                       begin: Alignment.topCenter,
+    //                       end: Alignment.bottomCenter,
+    //                       colors: [
+    //                         srpgradient1,
+    //                         srpgradient2,
+    //                         srpgradient3
+    //                       ],
+    //                     ),
+    //                     boxShadow: [
+    //                       BoxShadow(
+    //                         color: Colors.grey.withOpacity(0.5),
+    //                         spreadRadius: 1,
+    //                         blurRadius: 1,
+    //                         offset: const Offset(0, 0), // changes position of shadow
+    //                       ),
+    //                     ],
+    //                     borderRadius: BorderRadius.circular(8.2),
+    //                     color: whiteClr,
+    //                   ),
+    //                   child: Center(
+    //                     child:load==true ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),):Text("Submit", style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+    //                   )
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
     }
 
   void _showToast(BuildContext context,String text) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
       SnackBar(
-        content: Text('$text',style:GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2)),
+        content: Text('$text',style:GoogleFonts.poppins(fontSize: 17,color: srpgradient2)),
         //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
@@ -3571,615 +5292,1229 @@ class _ByEmployee1State extends State<ByEmployee1> {
 
   @override
   Widget build(BuildContext context) {
+    final size =MediaQuery.of(context).size;
+    final sizeh =MediaQuery.of(context).size.height;
+    final sizew =MediaQuery.of(context).size.width;
     return SafeArea(
-        child: CsScreenUtilInit(
-          child: Scaffold(
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(80.0.h),
-              child: Container(
-                child:  Container(
-                  height: 300.h,
-                  width:MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 2,
-                        blurRadius: 1,
-                        offset: const Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20.sp),
-                        bottomRight: Radius.circular(20.sp)),
-                    color: whiteClr,
-                    //color: Colors.cyanAccent
-                  ),
-                  child: Stack(
-                      children:[
-                        Positioned(
-                          top: 0,
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Column(
-                              children:[
-                                SizedBox(height: 15.h,),
-                                Container(
-                                  //color: Colors.black45,
-                                  alignment:Alignment.center,
-                                  width: 185.w,
-                                  child: Text("Employee Attendance",
-                                    style: GoogleFonts.poppins(fontSize:12.sp,
-                                        color: Colors.black, fontWeight: FontWeight.w500),),
-                                ),
-                                SizedBox(height: 10.h,),
-                                Row(
-                                  children: [
-                                    Spacer(),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        //DatePickerTitle(date: dateTime);
-                                        // _showRangePicker(context);
-                                        // showDateRangePicker(
-                                        //     context: context,
-                                        //     firstDate: DateTime(2000),
-                                        //     lastDate: DateTime(2200),
-                                        //     builder: (context, child) {
-                                        //       return Theme(
-                                        //         data: ThemeData.light().copyWith(
-                                        //             colorScheme: const ColorScheme.light(
-                                        //                 onPrimary: Colors.white, // selected text color
-                                        //                 onSurface: srpgradient3, // default text color
-                                        //                 primary: srpgradient2 // circle color
-                                        //                 // onPrimary: Colors.black, // selected text color
-                                        //                 // onSurface: Colors.amberAccent, // default text color
-                                        //                 // primary: Colors.lightBlue // circle color
-                                        //             ),
-                                        //             dialogBackgroundColor: Colors.white,
-                                        //             textButtonTheme: TextButtonThemeData(
-                                        //                 style: TextButton.styleFrom(
-                                        //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
-                                        //                         color: srpgradient2, fontWeight: FontWeight.w500),
-                                        //                     primary: srpgradient2, // color of button's letters
-                                        //                     //backgroundColor: Colors.white60, // Background color
-                                        //                     //backgroundColor: Colors.white, // Background color
-                                        //                     shape: RoundedRectangleBorder(
-                                        //                         side: const BorderSide(
-                                        //                             color: Colors.transparent,
-                                        //                             width: 1,
-                                        //                             style: BorderStyle.solid),
-                                        //                         borderRadius: BorderRadius.circular(50))
-                                        //                 ))),
-                                        //         child: child!,
-                                        //       );
-                                        //     });
-                                        pickDateRange();
-                                        // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
-                                        // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
-                                        // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
-                                        // final String formatted = serverFormater.format(displayDate);
-                                        // var a,b,c;
-                                        // newDateTime = await buildShowRoundedDatePicker(context);
-                                        // a=newDateTime?.day.toString();
-                                        // b=newDateTime?.month.toString();
-                                        // c=newDateTime?.year.toString();
-                                        // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-                                        //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-                                        //   a="0$a";
-                                        // }
-                                        // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-                                        //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-                                        //   b="0$b";
-                                        // }
-                                        // print("guddi teri ma ka $a $b $c");
-                                        // print(newDateTime);
-                                        // if (newDateTime != null) {
-                                        //   setState(() {
-                                        //
-                                        //     time= "$c-$b-$a";
-                                        //     dateTime = newDateTime!;
-                                        //   });
-                                        //   print("${dateTime.month}");
-                                        // }
-                                      },
-                                      child: Container(
-                                        height: 36.0.h,
-                                        //width: 125.w,
-                                        width: MediaQuery.of(context).size.width,
-                                        //color: Colors.purpleAccent,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              //width: 125.w,
-                                              width: 300.w,
-                                              height: 42.0.h,
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey.withOpacity(0.2),
-                                                    spreadRadius: 2,
-                                                    blurRadius: 1,
-                                                    offset: const Offset(0, 2), // changes position of shadow
-                                                  ),
-                                                ],
-                                                borderRadius: BorderRadius.circular(5),
-                                                color: whiteClr,
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsets.all( 3.5.sp),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-                                                    Spacer(),
-                                                    Column(
-                                                      children: [
-                                                        Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                                        Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                                        // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                                      ],
-                                                    ),
-                                                    const Spacer(),
-                                                    Container(
-                                                      height: 15.h,
-                                                      width: 15.w,
-                                                      //color: Colors.purpleAccent,
-                                                      child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
-                                                  ],
+        child: Scaffold(
+          appBar: PreferredSize(
+            //preferredSize: Size.fromHeight(80.0.h),
+            preferredSize: Size.fromHeight(size.height*0.15),
+            child: Container(
+              child:  Container(
+                //height: 300.h,
+                height: size.height*0.16,
+                width:MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 2,
+                      blurRadius: 1,
+                      offset: const Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
+                  color: whiteClr,
+                  //color: Colors.cyanAccent
+                ),
+                child: Stack(
+                    children:[
+                      Positioned(
+                        top: 18,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Column(
+                            children:[
+                              SizedBox(height: size.height*0.025,),
+                              Container(
+                                //color: Colors.black45,
+                                alignment:Alignment.center,
+                                width: sizew*0.6,
+                                child: Text("Employee Attendance",
+                                  style: GoogleFonts.poppins(fontSize:14,
+                                      color: Colors.black, fontWeight: FontWeight.w500),),
+                              ),
+                              SizedBox(height: sizeh*0.01,),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      //DatePickerTitle(date: dateTime);
+                                      // _showRangePicker(context);
+                                      // showDateRangePicker(
+                                      //     context: context,
+                                      //     firstDate: DateTime(2000),
+                                      //     lastDate: DateTime(2200),
+                                      //     builder: (context, child) {
+                                      //       return Theme(
+                                      //         data: ThemeData.light().copyWith(
+                                      //             colorScheme: const ColorScheme.light(
+                                      //                 onPrimary: Colors.white, // selected text color
+                                      //                 onSurface: srpgradient3, // default text color
+                                      //                 primary: srpgradient2 // circle color
+                                      //                 // onPrimary: Colors.black, // selected text color
+                                      //                 // onSurface: Colors.amberAccent, // default text color
+                                      //                 // primary: Colors.lightBlue // circle color
+                                      //             ),
+                                      //             dialogBackgroundColor: Colors.white,
+                                      //             textButtonTheme: TextButtonThemeData(
+                                      //                 style: TextButton.styleFrom(
+                                      //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
+                                      //                         color: srpgradient2, fontWeight: FontWeight.w500),
+                                      //                     primary: srpgradient2, // color of button's letters
+                                      //                     //backgroundColor: Colors.white60, // Background color
+                                      //                     //backgroundColor: Colors.white, // Background color
+                                      //                     shape: RoundedRectangleBorder(
+                                      //                         side: const BorderSide(
+                                      //                             color: Colors.transparent,
+                                      //                             width: 1,
+                                      //                             style: BorderStyle.solid),
+                                      //                         borderRadius: BorderRadius.circular(50))
+                                      //                 ))),
+                                      //         child: child!,
+                                      //       );
+                                      //     });
+                                      pickDateRange();
+                                      // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+                                      // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
+                                      // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
+                                      // final String formatted = serverFormater.format(displayDate);
+                                      // var a,b,c;
+                                      // newDateTime = await buildShowRoundedDatePicker(context);
+                                      // a=newDateTime?.day.toString();
+                                      // b=newDateTime?.month.toString();
+                                      // c=newDateTime?.year.toString();
+                                      // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+                                      //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+                                      //   a="0$a";
+                                      // }
+                                      // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+                                      //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+                                      //   b="0$b";
+                                      // }
+                                      // print("guddi teri ma ka $a $b $c");
+                                      // print(newDateTime);
+                                      // if (newDateTime != null) {
+                                      //   setState(() {
+                                      //
+                                      //     time= "$c-$b-$a";
+                                      //     dateTime = newDateTime!;
+                                      //   });
+                                      //   print("${dateTime.month}");
+                                      // }
+                                    },
+                                    child: Container(
+                                      height: sizeh*0.051,
+                                      //width: 125.w,
+                                      width: MediaQuery.of(context).size.width,
+                                      //color: Colors.purpleAccent,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            //width: 125.w,
+                                            // width: 300.w,
+
+                                            width: sizew*0.75,
+                                             //height: 42.0,
+                                             height: sizeh*0.1,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey.withOpacity(0.2),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 1,
+                                                  offset: const Offset(0, 2), // changes position of shadow
                                                 ),
+                                              ],
+                                              borderRadius: BorderRadius.circular(5),
+                                              // color: Colors.amber,
+                                              color: whiteClr,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(6.5),
+                                              child: Row(
+                                                children: [
+                                                  Icon(FontAwesomeIcons.calendarDays,size: 27 ,color: srpgradient2,),
+                                                  Spacer(),
+                                                  Column(
+                                                    children: [
+                                                      Text("Select Date", style: GoogleFonts.poppins(fontSize:7, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                                      Text("$time", style: GoogleFonts.poppins(fontSize:10.5, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                      // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                    ],
+                                                  ),
+                                                  const Spacer(),
+                                                  Container(
+                                                    height: 15,
+                                                    width: 15,
+                                                    //color: Colors.purpleAccent,
+                                                    child: Icon(Icons.keyboard_arrow_down,size:17,color: iconcolor,),),
+                                                ],
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Spacer(),
-                                    // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
-                                    // Spacer(),
-                                    // GestureDetector(
-                                    //   onTap: () async {
-                                    //     //DatePickerTitle(date: dateTime);
-                                    //     // _showRangePicker(context);
-                                    //     var a,b,c;
-                                    //     newDateTime1 = await buildShowRoundedDatePicker(context);
-                                    //
-                                    //     a=newDateTime1?.day.toString();
-                                    //     b=newDateTime1?.month.toString();
-                                    //     c=newDateTime1?.year.toString();
-                                    //
-                                    //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-                                    //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-                                    //       a="0$a";
-                                    //     }
-                                    //
-                                    //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-                                    //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-                                    //       b="0$b";
-                                    //     }
-                                    //
-                                    //     print("guddi teri ma ka $a $b $c");
-                                    //
-                                    //     print(newDateTime1);
-                                    //     if (newDateTime1 != null) {
-                                    //       setState(() {
-                                    //         // time=newDateTime.toString();
-                                    //         // time=time.substring(0,time.length-13);
-                                    //         time1 = "$c-$b-$a";
-                                    //         dateTime1 = newDateTime1!;
-                                    //       });
-                                    //       print("${dateTime1.month}");
-                                    //     }
-                                    //   },
-                                    //   child: Container(
-                                    //     height: 36.0.h,
-                                    //     width: 125.w,
-                                    //     child: Row(
-                                    //       mainAxisAlignment: MainAxisAlignment.center,
-                                    //       children: [
-                                    //         Container(
-                                    //           width: 125.w,
-                                    //           height: 42.0.h,
-                                    //           decoration: BoxDecoration(
-                                    //             boxShadow: [
-                                    //               BoxShadow(
-                                    //                 color: Colors.grey.withOpacity(0.2),
-                                    //                 spreadRadius: 2,
-                                    //                 blurRadius: 1,
-                                    //                 offset: const Offset(0, 2), // changes position of shadow
-                                    //               ),
-                                    //             ],
-                                    //             borderRadius: BorderRadius.circular(5),
-                                    //             color: whiteClr,
-                                    //           ),
-                                    //           child: Padding(
-                                    //             padding: EdgeInsets.all( 3.5.sp),
-                                    //             child: Row(
-                                    //               children: [
-                                    //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-                                    //                 SizedBox(width: 10.w,),
-                                    //                 Column(
-                                    //                   children: [
-                                    //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                    //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                    //                   ],
-                                    //                 ),
-                                    //                 const Spacer(),
-                                    //                 Container(
-                                    //                   height: 15.h,
-                                    //                   width: 15.w,
-                                    //                   //color: Colors.purpleAccent,
-                                    //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
-                                    //               ],
-                                    //             ),
-                                    //           ),
-                                    //         ),
-                                    //       ],
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    // Spacer(),
-                                  ],
-                                ),
-
-                                SizedBox(height: 12.h,),
-
-                                // Container(
-                                //   height: 30.h,
-                                //   width: 300.w,
-                                //   decoration: BoxDecoration(
-                                //     boxShadow: [
-                                //       BoxShadow(
-                                //         color: Colors.grey.withOpacity(0.2),
-                                //         spreadRadius: 2,
-                                //         blurRadius: 1,
-                                //         offset: const Offset(0, 2), // changes position of shadow
-                                //       ),
-                                //     ],
-                                //     borderRadius: BorderRadius.circular(5),
-                                //     color: whiteClr,
-                                //   ),
-                                //   //color: Colors.purpleAccent,
-                                //   child:  Row(
-                                //     children: [
-                                //       SizedBox(width: 5.w,),
-                                //       Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
-                                //       SizedBox(width: 14.w,),
-                                //       DropdownButton(
-                                //         // Initial Value
-                                //         value: dropdownvalue1,
-                                //         // Down Arrow Icon
-                                //         icon:  Row(children: [SizedBox(width: 112.w,), Icon(Icons.keyboard_arrow_down,size: 23.sp,)],),
-                                //         // Array list of items
-                                //         items: items1.map((String items) {
-                                //           return DropdownMenuItem(
-                                //             value: items,
-                                //             child: Text(items),
-                                //           );
-                                //         }).toList(),
-                                //         // After selecting the desired option,it will
-                                //         // change button value to selected value
-                                //         onChanged: (String? newValue) {
-                                //           setState(() {
-                                //             dropdownvalue1 = newValue!;
-                                //           });
-                                //           print("::::::::::: $dropdownvalue1 $days");
-                                //           if(dropdownvalue1=='All'){
-                                //
-                                //             FirebaseFirestore.instance
-                                //                 .collection('Companies')
-                                //                 .doc('${user!.email.toString()}')
-                                //                 .collection("Employee").get().then((value) {
-                                //               value.docs.forEach((element) {
-                                //                 String a;
-                                //                 a = element.id;
-                                //                 FirebaseFirestore.instance
-                                //                     .collection('Companies')
-                                //                     .doc(user!.email.toString())
-                                //                     .collection("Employee")
-                                //                     .doc(a).collection('Attendance')
-                                //                     .get()
-                                //                     .then((value) {
-                                //                   value.docs.forEach((element) {
-                                //
-                                //
-                                //                     for(int i=0;i<days.length;i++) {
-                                //                       String b;
-                                //                       b= '${days[i].year}-${days[i].month}-${days[i].day}';
-                                //                       print("!!!!!!!!!! ${b}");
-                                //
-                                //                       if(b==element.id){
-                                //                         print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-                                //
-                                //                         // setState(() {
-                                //                         //   attendance=[];
-                                //                         //   //streamController.isPaused;
-                                //                         // });
-                                //
-                                //                         FirebaseFirestore.instance
-                                //                             .collection('Companies')
-                                //                             .doc('${user!.email.toString()}')
-                                //                             .collection("Employee")
-                                //                             .doc(a)
-                                //                             .collection('Attendance')
-                                //                             .doc('$b').get().then((value) {
-                                //
-                                //                           String e,f,g,h,j;
-                                //                           e=value.get('TimeIn');
-                                //                           f=value.get('TimeInAddress');
-                                //                           g=value.get('TimeOut');
-                                //                           h=value.get('TimeOutAddress');
-                                //
-                                //                           attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-                                //                           streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
-                                //                           print("///////////// $attendance");
-                                //
-                                //                         });
-                                //                         setState(() {
-                                //                           streamController.stream;
-                                //                         });
-                                //                       }
-                                //
-                                //
-                                //                     }
-                                //
-                                //
-                                //                   });
-                                //                 });
-                                //
-                                //                 //     FirebaseFirestore.instance
-                                //                 //         .collection('Companies')
-                                //                 //         .doc('${user!.email.toString()}')
-                                //                 //         .collection("Employee")
-                                //                 //         .doc(dropdownvalue1)
-                                //                 //         .collection('Attendance')
-                                //                 //
-                                //                 //         .get().then((value) {
-                                //                 //       value.docs.forEach((element) {
-                                //                 //         a=element.id;
-                                //                 //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
-                                //                 //
-                                //                 //         if(date==a){
-                                //                 //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
-                                //                 //
-                                //                 //           // setState(() {
-                                //                 //           //   attendance=[];
-                                //                 //           //   //streamController.isPaused;
-                                //                 //           // });
-                                //                 //
-                                //                 //           FirebaseFirestore.instance
-                                //                 //               .collection('Companies')
-                                //                 //               .doc('${user!.email.toString()}')
-                                //                 //               .collection("Employee")
-                                //                 //               .doc(dropdownvalue1)
-                                //                 //               .collection('Attendance')
-                                //                 //               .doc('$date').get().then((value) {
-                                //                 //             String e,f,g,h,j;
-                                //                 //             e=value.get('TimeIn');
-                                //                 //             f=value.get('TimeInAddress');
-                                //                 //             g=value.get('TimeOut');
-                                //                 //             h=value.get('TimeOutAddress');
-                                //                 //
-                                //                 //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-                                //                 //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
-                                //                 //
-                                //                 //             print("///////////// $attendance");
-                                //                 //           });
-                                //                 //           setState(() {
-                                //                 //             streamController.stream;
-                                //                 //           });
-                                //                 //         }
-                                //                 //         else{
-                                //                 //           print("1111111111111");
-                                //                 //         }
-                                //                 //         setState(() {
-                                //                 //           streamController.stream;
-                                //                 //         });
-                                //                 //       });
-                                //                 //     });
-                                //                 //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
-                                //                 //
-                                //                 //   });
-                                //                 // });
-                                //
-                                //               });
-                                //             });
-                                //           }
-                                //           else{
-                                //             if(days.isEmpty){}
-                                //             else {
-                                //               String a;
-                                //               setState(() {
-                                //                 attendance=[];
-                                //                 print("iiiiiiiiiiiiiiiii ${attendance.length}");
-                                //                 //streamController.isPaused;
-                                //               });
-                                //               for(int i=0;i<days.length;i++) {
-                                //                 String b;
-                                //                 b= '${days[i].year}-${days[i].month}-${days[i].day}';
-                                //                 //print("987987987987987987 $b");
-                                //                 fetchattendance(b);
-                                //                 // .get().then((value){
-                                //                 //   value.docs.forEach((element) {
-                                //                 //       a=element.id.toString();
-                                //                 //       print("yayayyayayayayayayay $a");
-                                //                 //     });
-                                //                 //   });
-                                //               }
-                                //             }
-                                //           }
-                                //         },
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
-
-                              ]
-                          ),
-                        ),
-                        Positioned(
-                          top: 6,
-                          left: 4,
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              //color: Colors.yellow,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 10.w,top: 8.h),
-                                child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+                                  ),
+                                  Spacer(),
+                                  // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
+                                  // Spacer(),
+                                  // GestureDetector(
+                                  //   onTap: () async {
+                                  //     //DatePickerTitle(date: dateTime);
+                                  //     // _showRangePicker(context);
+                                  //     var a,b,c;
+                                  //     newDateTime1 = await buildShowRoundedDatePicker(context);
+                                  //
+                                  //     a=newDateTime1?.day.toString();
+                                  //     b=newDateTime1?.month.toString();
+                                  //     c=newDateTime1?.year.toString();
+                                  //
+                                  //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+                                  //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+                                  //       a="0$a";
+                                  //     }
+                                  //
+                                  //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+                                  //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+                                  //       b="0$b";
+                                  //     }
+                                  //
+                                  //     print("guddi teri ma ka $a $b $c");
+                                  //
+                                  //     print(newDateTime1);
+                                  //     if (newDateTime1 != null) {
+                                  //       setState(() {
+                                  //         // time=newDateTime.toString();
+                                  //         // time=time.substring(0,time.length-13);
+                                  //         time1 = "$c-$b-$a";
+                                  //         dateTime1 = newDateTime1!;
+                                  //       });
+                                  //       print("${dateTime1.month}");
+                                  //     }
+                                  //   },
+                                  //   child: Container(
+                                  //     height: 36.0.h,
+                                  //     width: 125.w,
+                                  //     child: Row(
+                                  //       mainAxisAlignment: MainAxisAlignment.center,
+                                  //       children: [
+                                  //         Container(
+                                  //           width: 125.w,
+                                  //           height: 42.0.h,
+                                  //           decoration: BoxDecoration(
+                                  //             boxShadow: [
+                                  //               BoxShadow(
+                                  //                 color: Colors.grey.withOpacity(0.2),
+                                  //                 spreadRadius: 2,
+                                  //                 blurRadius: 1,
+                                  //                 offset: const Offset(0, 2), // changes position of shadow
+                                  //               ),
+                                  //             ],
+                                  //             borderRadius: BorderRadius.circular(5),
+                                  //             color: whiteClr,
+                                  //           ),
+                                  //           child: Padding(
+                                  //             padding: EdgeInsets.all( 3.5.sp),
+                                  //             child: Row(
+                                  //               children: [
+                                  //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+                                  //                 SizedBox(width: 10.w,),
+                                  //                 Column(
+                                  //                   children: [
+                                  //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                  //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                  //                   ],
+                                  //                 ),
+                                  //                 const Spacer(),
+                                  //                 Container(
+                                  //                   height: 15.h,
+                                  //                   width: 15.w,
+                                  //                   //color: Colors.purpleAccent,
+                                  //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+                                  //               ],
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // Spacer(),
+                                ],
                               ),
+
+                              //SizedBox(height: sizeh*0.01),
+
+                              // Container(
+                              //   height: 30.h,
+                              //   width: 300.w,
+                              //   decoration: BoxDecoration(
+                              //     boxShadow: [
+                              //       BoxShadow(
+                              //         color: Colors.grey.withOpacity(0.2),
+                              //         spreadRadius: 2,
+                              //         blurRadius: 1,
+                              //         offset: const Offset(0, 2), // changes position of shadow
+                              //       ),
+                              //     ],
+                              //     borderRadius: BorderRadius.circular(5),
+                              //     color: whiteClr,
+                              //   ),
+                              //   //color: Colors.purpleAccent,
+                              //   child:  Row(
+                              //     children: [
+                              //       SizedBox(width: 5.w,),
+                              //       Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
+                              //       SizedBox(width: 14.w,),
+                              //       DropdownButton(
+                              //         // Initial Value
+                              //         value: dropdownvalue1,
+                              //         // Down Arrow Icon
+                              //         icon:  Row(children: [SizedBox(width: 112.w,), Icon(Icons.keyboard_arrow_down,size: 23.sp,)],),
+                              //         // Array list of items
+                              //         items: items1.map((String items) {
+                              //           return DropdownMenuItem(
+                              //             value: items,
+                              //             child: Text(items),
+                              //           );
+                              //         }).toList(),
+                              //         // After selecting the desired option,it will
+                              //         // change button value to selected value
+                              //         onChanged: (String? newValue) {
+                              //           setState(() {
+                              //             dropdownvalue1 = newValue!;
+                              //           });
+                              //           print("::::::::::: $dropdownvalue1 $days");
+                              //           if(dropdownvalue1=='All'){
+                              //
+                              //             FirebaseFirestore.instance
+                              //                 .collection('Companies')
+                              //                 .doc('${user!.email.toString()}')
+                              //                 .collection("Employee").get().then((value) {
+                              //               value.docs.forEach((element) {
+                              //                 String a;
+                              //                 a = element.id;
+                              //                 FirebaseFirestore.instance
+                              //                     .collection('Companies')
+                              //                     .doc(user!.email.toString())
+                              //                     .collection("Employee")
+                              //                     .doc(a).collection('Attendance')
+                              //                     .get()
+                              //                     .then((value) {
+                              //                   value.docs.forEach((element) {
+                              //
+                              //
+                              //                     for(int i=0;i<days.length;i++) {
+                              //                       String b;
+                              //                       b= '${days[i].year}-${days[i].month}-${days[i].day}';
+                              //                       print("!!!!!!!!!! ${b}");
+                              //
+                              //                       if(b==element.id){
+                              //                         print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+                              //
+                              //                         // setState(() {
+                              //                         //   attendance=[];
+                              //                         //   //streamController.isPaused;
+                              //                         // });
+                              //
+                              //                         FirebaseFirestore.instance
+                              //                             .collection('Companies')
+                              //                             .doc('${user!.email.toString()}')
+                              //                             .collection("Employee")
+                              //                             .doc(a)
+                              //                             .collection('Attendance')
+                              //                             .doc('$b').get().then((value) {
+                              //
+                              //                           String e,f,g,h,j;
+                              //                           e=value.get('TimeIn');
+                              //                           f=value.get('TimeInAddress');
+                              //                           g=value.get('TimeOut');
+                              //                           h=value.get('TimeOutAddress');
+                              //
+                              //                           attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                              //                           streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+                              //                           print("///////////// $attendance");
+                              //
+                              //                         });
+                              //                         setState(() {
+                              //                           streamController.stream;
+                              //                         });
+                              //                       }
+                              //
+                              //
+                              //                     }
+                              //
+                              //
+                              //                   });
+                              //                 });
+                              //
+                              //                 //     FirebaseFirestore.instance
+                              //                 //         .collection('Companies')
+                              //                 //         .doc('${user!.email.toString()}')
+                              //                 //         .collection("Employee")
+                              //                 //         .doc(dropdownvalue1)
+                              //                 //         .collection('Attendance')
+                              //                 //
+                              //                 //         .get().then((value) {
+                              //                 //       value.docs.forEach((element) {
+                              //                 //         a=element.id;
+                              //                 //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
+                              //                 //
+                              //                 //         if(date==a){
+                              //                 //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+                              //                 //
+                              //                 //           // setState(() {
+                              //                 //           //   attendance=[];
+                              //                 //           //   //streamController.isPaused;
+                              //                 //           // });
+                              //                 //
+                              //                 //           FirebaseFirestore.instance
+                              //                 //               .collection('Companies')
+                              //                 //               .doc('${user!.email.toString()}')
+                              //                 //               .collection("Employee")
+                              //                 //               .doc(dropdownvalue1)
+                              //                 //               .collection('Attendance')
+                              //                 //               .doc('$date').get().then((value) {
+                              //                 //             String e,f,g,h,j;
+                              //                 //             e=value.get('TimeIn');
+                              //                 //             f=value.get('TimeInAddress');
+                              //                 //             g=value.get('TimeOut');
+                              //                 //             h=value.get('TimeOutAddress');
+                              //                 //
+                              //                 //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                              //                 //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+                              //                 //
+                              //                 //             print("///////////// $attendance");
+                              //                 //           });
+                              //                 //           setState(() {
+                              //                 //             streamController.stream;
+                              //                 //           });
+                              //                 //         }
+                              //                 //         else{
+                              //                 //           print("1111111111111");
+                              //                 //         }
+                              //                 //         setState(() {
+                              //                 //           streamController.stream;
+                              //                 //         });
+                              //                 //       });
+                              //                 //     });
+                              //                 //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
+                              //                 //
+                              //                 //   });
+                              //                 // });
+                              //
+                              //               });
+                              //             });
+                              //           }
+                              //           else{
+                              //             if(days.isEmpty){}
+                              //             else {
+                              //               String a;
+                              //               setState(() {
+                              //                 attendance=[];
+                              //                 print("iiiiiiiiiiiiiiiii ${attendance.length}");
+                              //                 //streamController.isPaused;
+                              //               });
+                              //               for(int i=0;i<days.length;i++) {
+                              //                 String b;
+                              //                 b= '${days[i].year}-${days[i].month}-${days[i].day}';
+                              //                 //print("987987987987987987 $b");
+                              //                 fetchattendance(b);
+                              //                 // .get().then((value){
+                              //                 //   value.docs.forEach((element) {
+                              //                 //       a=element.id.toString();
+                              //                 //       print("yayayyayayayayayayay $a");
+                              //                 //     });
+                              //                 //   });
+                              //               }
+                              //             }
+                              //           }
+                              //         },
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+
+                            ]
+                        ),
+                      ),
+                      Positioned(
+                        top: 23,
+                        left: 4,
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            //color: Colors.yellow,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 10,top: 8,right: 4),
+                              child: Image.asset('assets/doublearrow.png',height: sizeh*0.04,width: sizew*0.055 ,),
                             ),
                           ),
                         ),
-                      ]
-                  ),
+                      ),
+                    ]
                 ),
               ),
             ),
-            body: days.isEmpty ? SizedBox() : SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 20.h,),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 8.sp),
-                    child: Container(
-                      height: 30.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 2,
-                            blurRadius: 2,
-                            offset: const Offset(0, 2), // changes position of shadow
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(10.sp),
-                        color: whiteClr,
-                        // color: Colors.cyanAccent
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding:  EdgeInsets.only(left: 15.0.w),
-                            child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
-                                color: srpgradient2,fontWeight: FontWeight.w600),),
-                          ),
-                          SizedBox(width: 100.w,),
-                          Padding(
-                            padding:  EdgeInsets.only(left:.0.w),
-                            child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
-                                color: srpgradient2,fontWeight: FontWeight.w600),),
-                          ),
-                          Spacer(),
-                          Padding(
-                            padding: EdgeInsets.only(left: 25.0.w),
-                            child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
-                                color: srpgradient2,fontWeight: FontWeight.w600),),
-                          ),
-                          SizedBox(width: 23.w,),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10.0.w),
-                            child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
-                                color: srpgradient2,fontWeight: FontWeight.w600),),
-                          ),
-                          SizedBox(width: 5.w,),
-                        ],
-                      ),
+          ),
+          body: days.isEmpty ? SizedBox() : SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: sizeh*0.02),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: sizew*0.018),
+                  child: Container(
+                    //height: 30.h,
+                    height: sizeh*0.04,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 2,
+                          offset: const Offset(0, 2), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      color: whiteClr,
+                      // color: Colors.cyanAccent
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: sizew*0.03),
+                          child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:sizew*0.032,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        SizedBox(width: sizew*0.26),
+                        Text("Date",style: GoogleFonts.poppins(fontSize:sizew*0.032,
+                            color: srpgradient2,fontWeight: FontWeight.w600),),
+                        Spacer(),
+                        Padding(
+                          padding: EdgeInsets.only(left: sizew*0.03),
+                          child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:sizew*0.032,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        SizedBox(width: sizew*0.06),
+                        Padding(
+                          padding: EdgeInsets.only(left: sizew*0.03),
+                          child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:sizew*0.032,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        SizedBox(width: sizew*0.02),
+                      ],
                     ),
                   ),
-                  StreamBuilder(
-                      stream: streamController.stream,
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        print("%%%%%%%%% $snapshot");
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                            return const Text(
-                              " null",
-                              style: TextStyle(color: Colors.white),
-                            );
-                          case ConnectionState.waiting:
-                            return const SizedBox();
-                          case ConnectionState.active:
-                            return (snapshot.hasData == false)
-                                ? const CircularProgressIndicator()
-                                : ListView.builder(
-                                  padding: const EdgeInsets.only(top: 0),
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: attendance.length,
-                                  itemBuilder: (context, index) {
-                                    //managetotalcontact = contact.length.toString();
-                                    // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
-                                  return TabsforDesignationAbsentLateEarly1(
-                                    timein: attendance[index].timein,timeout: attendance[index].timeout,
-                                    addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
-                                    date: attendance[index].date,
-                                    time: time,tabcount: 0, datetime: days,employe: attendance[index].employee,);
-                              },
-                            );
-                          case ConnectionState.done:
-                            return (snapshot.hasData == false)
-                                ? const CircularProgressIndicator()
-                                : ListView.builder(
-                                    padding: const EdgeInsets.only(top: 0),
-                                    shrinkWrap: true,
-                                    physics: const BouncingScrollPhysics(),
-                                    itemCount: attendance.length,
-                                    itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly1(
-                                      timein: attendance[index].timein,timeout: attendance[index].timeout,
-                                      addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
-                                      date: attendance[index].date,
-                                      time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
-                                  );
-                          default:
-                            return const Text("default", style: TextStyle(color: Colors.white));
-                        }
-                      }),
-                    ],
-                  ),
                 ),
-            // TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
-
-            // DefaultTabController(
-            //   length: 1,
-            //   initialIndex: 0,
-            //   child:  Scaffold(
-            //     appBar:  AppBar(
-            //       leading: SizedBox(),
-            //       flexibleSpace: Column(
-            //         mainAxisAlignment: MainAxisAlignment.end,
-            //         children:  [
-            //           TabBar(
-            //             labelPadding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
-            //             indicatorColor:srpgradient2,
-            //             isScrollable: true,
-            //             tabs: [
-            //               Tab(child:  Tabname(name: "Present",),),
-            //               // Tab(child:  Tabname(name: "Absent",),),
-            //               // Tab(child:  Tabname(name: "Late Comers",),),
-            //               // Tab(child:  Tabname(name: "Early Leavers",),),
-            //             ],
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     /*--------------- Build Tab body here -------------------*/
-            //     body:  TabBarView(
-            //       children: <Widget>[
-            //         TabsforDesignationAbsentLateEarly(time: time,tabcount: 0,),
-            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 1,),
-            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 2,),
-            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 3,),
-            //       ],
-            //     ),
-            //   ),
-            // ),
+                StreamBuilder(
+                    stream: streamController.stream,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      print("%%%%%%%%% $snapshot");
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return const Text(
+                            " null",
+                            style: TextStyle(color: Colors.white),
+                          );
+                        case ConnectionState.waiting:
+                          return const SizedBox();
+                        case ConnectionState.active:
+                          return (snapshot.hasData == false)
+                              ? const CircularProgressIndicator()
+                              : ListView.builder(
+                            padding: const EdgeInsets.only(top: 0),
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: attendance.length,
+                            itemBuilder: (context, index) {
+                              //managetotalcontact = contact.length.toString();
+                              // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+                              return TabsforDesignationAbsentLateEarly1(
+                                timein: attendance[index].timein,timeout: attendance[index].timeout,
+                                addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                                date: attendance[index].date,
+                                time: time,tabcount: 0, datetime: days,employe: attendance[index].employee,);
+                            },
+                          );
+                        case ConnectionState.done:
+                          return (snapshot.hasData == false)
+                              ? const CircularProgressIndicator()
+                              : ListView.builder(
+                            padding: const EdgeInsets.only(top: 0),
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: attendance.length,
+                            itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly1(
+                              timein: attendance[index].timein,timeout: attendance[index].timeout,
+                              addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+                              date: attendance[index].date,
+                              time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+                          );
+                        default:
+                          return const Text("default", style: TextStyle(color: Colors.white));
+                      }
+                    }),
+              ],
+            ),
           ),
+          // TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+
+          // DefaultTabController(
+          //   length: 1,
+          //   initialIndex: 0,
+          //   child:  Scaffold(
+          //     appBar:  AppBar(
+          //       leading: SizedBox(),
+          //       flexibleSpace: Column(
+          //         mainAxisAlignment: MainAxisAlignment.end,
+          //         children:  [
+          //           TabBar(
+          //             labelPadding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
+          //             indicatorColor:srpgradient2,
+          //             isScrollable: true,
+          //             tabs: [
+          //               Tab(child:  Tabname(name: "Present",),),
+          //               // Tab(child:  Tabname(name: "Absent",),),
+          //               // Tab(child:  Tabname(name: "Late Comers",),),
+          //               // Tab(child:  Tabname(name: "Early Leavers",),),
+          //             ],
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     /*--------------- Build Tab body here -------------------*/
+          //     body:  TabBarView(
+          //       children: <Widget>[
+          //         TabsforDesignationAbsentLateEarly(time: time,tabcount: 0,),
+          //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 1,),
+          //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 2,),
+          //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 3,),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         )
     );
+    // return SafeArea(
+    //      child: CsScreenUtilInit(
+    //       child: Scaffold(
+    //         appBar: PreferredSize(
+    //           preferredSize: Size.fromHeight(80.0.h),
+    //           child: Container(
+    //             child:  Container(
+    //               height: 300.h,
+    //               width:MediaQuery.of(context).size.width,
+    //               decoration: BoxDecoration(
+    //                 boxShadow: [
+    //                   BoxShadow(
+    //                     color: Colors.grey.withOpacity(0.4),
+    //                     spreadRadius: 2,
+    //                     blurRadius: 1,
+    //                     offset: const Offset(0, 2), // changes position of shadow
+    //                   ),
+    //                 ],
+    //                 borderRadius: BorderRadius.only(
+    //                     bottomLeft: Radius.circular(20.sp),
+    //                     bottomRight: Radius.circular(20.sp)),
+    //                 color: whiteClr,
+    //                 //color: Colors.cyanAccent
+    //               ),
+    //               child: Stack(
+    //                   children:[
+    //                     Positioned(
+    //                       top: 18,
+    //                       bottom: 0,
+    //                       left: 0,
+    //                       right: 0,
+    //                       child: Column(
+    //                           children:[
+    //                             SizedBox(height: 15.h,),
+    //                             Container(
+    //                               //color: Colors.black45,
+    //                               alignment:Alignment.center,
+    //                               width: 185.w,
+    //                               child: Text("Employee Attendance",
+    //                                 style: GoogleFonts.poppins(fontSize:12.sp,
+    //                                     color: Colors.black, fontWeight: FontWeight.w500),),
+    //                             ),
+    //                             SizedBox(height: 10.h,),
+    //                             Row(
+    //                               children: [
+    //                                 Spacer(),
+    //                                 GestureDetector(
+    //                                   onTap: () async {
+    //                                     //DatePickerTitle(date: dateTime);
+    //                                     // _showRangePicker(context);
+    //                                     // showDateRangePicker(
+    //                                     //     context: context,
+    //                                     //     firstDate: DateTime(2000),
+    //                                     //     lastDate: DateTime(2200),
+    //                                     //     builder: (context, child) {
+    //                                     //       return Theme(
+    //                                     //         data: ThemeData.light().copyWith(
+    //                                     //             colorScheme: const ColorScheme.light(
+    //                                     //                 onPrimary: Colors.white, // selected text color
+    //                                     //                 onSurface: srpgradient3, // default text color
+    //                                     //                 primary: srpgradient2 // circle color
+    //                                     //                 // onPrimary: Colors.black, // selected text color
+    //                                     //                 // onSurface: Colors.amberAccent, // default text color
+    //                                     //                 // primary: Colors.lightBlue // circle color
+    //                                     //             ),
+    //                                     //             dialogBackgroundColor: Colors.white,
+    //                                     //             textButtonTheme: TextButtonThemeData(
+    //                                     //                 style: TextButton.styleFrom(
+    //                                     //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
+    //                                     //                         color: srpgradient2, fontWeight: FontWeight.w500),
+    //                                     //                     primary: srpgradient2, // color of button's letters
+    //                                     //                     //backgroundColor: Colors.white60, // Background color
+    //                                     //                     //backgroundColor: Colors.white, // Background color
+    //                                     //                     shape: RoundedRectangleBorder(
+    //                                     //                         side: const BorderSide(
+    //                                     //                             color: Colors.transparent,
+    //                                     //                             width: 1,
+    //                                     //                             style: BorderStyle.solid),
+    //                                     //                         borderRadius: BorderRadius.circular(50))
+    //                                     //                 ))),
+    //                                     //         child: child!,
+    //                                     //       );
+    //                                     //     });
+    //                                     pickDateRange();
+    //                                     // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+    //                                     // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
+    //                                     // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
+    //                                     // final String formatted = serverFormater.format(displayDate);
+    //                                     // var a,b,c;
+    //                                     // newDateTime = await buildShowRoundedDatePicker(context);
+    //                                     // a=newDateTime?.day.toString();
+    //                                     // b=newDateTime?.month.toString();
+    //                                     // c=newDateTime?.year.toString();
+    //                                     // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+    //                                     //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+    //                                     //   a="0$a";
+    //                                     // }
+    //                                     // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+    //                                     //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+    //                                     //   b="0$b";
+    //                                     // }
+    //                                     // print("guddi teri ma ka $a $b $c");
+    //                                     // print(newDateTime);
+    //                                     // if (newDateTime != null) {
+    //                                     //   setState(() {
+    //                                     //
+    //                                     //     time= "$c-$b-$a";
+    //                                     //     dateTime = newDateTime!;
+    //                                     //   });
+    //                                     //   print("${dateTime.month}");
+    //                                     // }
+    //                                   },
+    //                                   child: Container(
+    //                                     height: 36.0.h,
+    //                                     //width: 125.w,
+    //                                     width: MediaQuery.of(context).size.width,
+    //                                     //color: Colors.purpleAccent,
+    //                                     child: Row(
+    //                                       mainAxisAlignment: MainAxisAlignment.center,
+    //                                       children: [
+    //                                         Container(
+    //                                           //width: 125.w,
+    //                                           width: 300.w,
+    //                                           height: 42.0.h,
+    //                                           decoration: BoxDecoration(
+    //                                             boxShadow: [
+    //                                               BoxShadow(
+    //                                                 color: Colors.grey.withOpacity(0.2),
+    //                                                 spreadRadius: 2,
+    //                                                 blurRadius: 1,
+    //                                                 offset: const Offset(0, 2), // changes position of shadow
+    //                                               ),
+    //                                             ],
+    //                                             borderRadius: BorderRadius.circular(5),
+    //                                             color: whiteClr,
+    //                                           ),
+    //                                           child: Padding(
+    //                                             padding: EdgeInsets.all( 3.5.sp),
+    //                                             child: Row(
+    //                                               children: [
+    //                                                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+    //                                                 Spacer(),
+    //                                                 Column(
+    //                                                   children: [
+    //                                                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //                                                     Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+    //                                                     // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+    //                                                   ],
+    //                                                 ),
+    //                                                 const Spacer(),
+    //                                                 Container(
+    //                                                   height: 15.h,
+    //                                                   width: 15.w,
+    //                                                   //color: Colors.purpleAccent,
+    //                                                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+    //                                               ],
+    //                                             ),
+    //                                           ),
+    //                                         ),
+    //                                       ],
+    //                                     ),
+    //                                   ),
+    //                                 ),
+    //                                 Spacer(),
+    //                                 // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
+    //                                 // Spacer(),
+    //                                 // GestureDetector(
+    //                                 //   onTap: () async {
+    //                                 //     //DatePickerTitle(date: dateTime);
+    //                                 //     // _showRangePicker(context);
+    //                                 //     var a,b,c;
+    //                                 //     newDateTime1 = await buildShowRoundedDatePicker(context);
+    //                                 //
+    //                                 //     a=newDateTime1?.day.toString();
+    //                                 //     b=newDateTime1?.month.toString();
+    //                                 //     c=newDateTime1?.year.toString();
+    //                                 //
+    //                                 //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+    //                                 //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+    //                                 //       a="0$a";
+    //                                 //     }
+    //                                 //
+    //                                 //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+    //                                 //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+    //                                 //       b="0$b";
+    //                                 //     }
+    //                                 //
+    //                                 //     print("guddi teri ma ka $a $b $c");
+    //                                 //
+    //                                 //     print(newDateTime1);
+    //                                 //     if (newDateTime1 != null) {
+    //                                 //       setState(() {
+    //                                 //         // time=newDateTime.toString();
+    //                                 //         // time=time.substring(0,time.length-13);
+    //                                 //         time1 = "$c-$b-$a";
+    //                                 //         dateTime1 = newDateTime1!;
+    //                                 //       });
+    //                                 //       print("${dateTime1.month}");
+    //                                 //     }
+    //                                 //   },
+    //                                 //   child: Container(
+    //                                 //     height: 36.0.h,
+    //                                 //     width: 125.w,
+    //                                 //     child: Row(
+    //                                 //       mainAxisAlignment: MainAxisAlignment.center,
+    //                                 //       children: [
+    //                                 //         Container(
+    //                                 //           width: 125.w,
+    //                                 //           height: 42.0.h,
+    //                                 //           decoration: BoxDecoration(
+    //                                 //             boxShadow: [
+    //                                 //               BoxShadow(
+    //                                 //                 color: Colors.grey.withOpacity(0.2),
+    //                                 //                 spreadRadius: 2,
+    //                                 //                 blurRadius: 1,
+    //                                 //                 offset: const Offset(0, 2), // changes position of shadow
+    //                                 //               ),
+    //                                 //             ],
+    //                                 //             borderRadius: BorderRadius.circular(5),
+    //                                 //             color: whiteClr,
+    //                                 //           ),
+    //                                 //           child: Padding(
+    //                                 //             padding: EdgeInsets.all( 3.5.sp),
+    //                                 //             child: Row(
+    //                                 //               children: [
+    //                                 //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+    //                                 //                 SizedBox(width: 10.w,),
+    //                                 //                 Column(
+    //                                 //                   children: [
+    //                                 //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+    //                                 //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+    //                                 //                   ],
+    //                                 //                 ),
+    //                                 //                 const Spacer(),
+    //                                 //                 Container(
+    //                                 //                   height: 15.h,
+    //                                 //                   width: 15.w,
+    //                                 //                   //color: Colors.purpleAccent,
+    //                                 //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+    //                                 //               ],
+    //                                 //             ),
+    //                                 //           ),
+    //                                 //         ),
+    //                                 //       ],
+    //                                 //     ),
+    //                                 //   ),
+    //                                 // ),
+    //                                 // Spacer(),
+    //                               ],
+    //                             ),
+    //
+    //                             SizedBox(height: 12.h,),
+    //
+    //                             // Container(
+    //                             //   height: 30.h,
+    //                             //   width: 300.w,
+    //                             //   decoration: BoxDecoration(
+    //                             //     boxShadow: [
+    //                             //       BoxShadow(
+    //                             //         color: Colors.grey.withOpacity(0.2),
+    //                             //         spreadRadius: 2,
+    //                             //         blurRadius: 1,
+    //                             //         offset: const Offset(0, 2), // changes position of shadow
+    //                             //       ),
+    //                             //     ],
+    //                             //     borderRadius: BorderRadius.circular(5),
+    //                             //     color: whiteClr,
+    //                             //   ),
+    //                             //   //color: Colors.purpleAccent,
+    //                             //   child:  Row(
+    //                             //     children: [
+    //                             //       SizedBox(width: 5.w,),
+    //                             //       Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
+    //                             //       SizedBox(width: 14.w,),
+    //                             //       DropdownButton(
+    //                             //         // Initial Value
+    //                             //         value: dropdownvalue1,
+    //                             //         // Down Arrow Icon
+    //                             //         icon:  Row(children: [SizedBox(width: 112.w,), Icon(Icons.keyboard_arrow_down,size: 23.sp,)],),
+    //                             //         // Array list of items
+    //                             //         items: items1.map((String items) {
+    //                             //           return DropdownMenuItem(
+    //                             //             value: items,
+    //                             //             child: Text(items),
+    //                             //           );
+    //                             //         }).toList(),
+    //                             //         // After selecting the desired option,it will
+    //                             //         // change button value to selected value
+    //                             //         onChanged: (String? newValue) {
+    //                             //           setState(() {
+    //                             //             dropdownvalue1 = newValue!;
+    //                             //           });
+    //                             //           print("::::::::::: $dropdownvalue1 $days");
+    //                             //           if(dropdownvalue1=='All'){
+    //                             //
+    //                             //             FirebaseFirestore.instance
+    //                             //                 .collection('Companies')
+    //                             //                 .doc('${user!.email.toString()}')
+    //                             //                 .collection("Employee").get().then((value) {
+    //                             //               value.docs.forEach((element) {
+    //                             //                 String a;
+    //                             //                 a = element.id;
+    //                             //                 FirebaseFirestore.instance
+    //                             //                     .collection('Companies')
+    //                             //                     .doc(user!.email.toString())
+    //                             //                     .collection("Employee")
+    //                             //                     .doc(a).collection('Attendance')
+    //                             //                     .get()
+    //                             //                     .then((value) {
+    //                             //                   value.docs.forEach((element) {
+    //                             //
+    //                             //
+    //                             //                     for(int i=0;i<days.length;i++) {
+    //                             //                       String b;
+    //                             //                       b= '${days[i].year}-${days[i].month}-${days[i].day}';
+    //                             //                       print("!!!!!!!!!! ${b}");
+    //                             //
+    //                             //                       if(b==element.id){
+    //                             //                         print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+    //                             //
+    //                             //                         // setState(() {
+    //                             //                         //   attendance=[];
+    //                             //                         //   //streamController.isPaused;
+    //                             //                         // });
+    //                             //
+    //                             //                         FirebaseFirestore.instance
+    //                             //                             .collection('Companies')
+    //                             //                             .doc('${user!.email.toString()}')
+    //                             //                             .collection("Employee")
+    //                             //                             .doc(a)
+    //                             //                             .collection('Attendance')
+    //                             //                             .doc('$b').get().then((value) {
+    //                             //
+    //                             //                           String e,f,g,h,j;
+    //                             //                           e=value.get('TimeIn');
+    //                             //                           f=value.get('TimeInAddress');
+    //                             //                           g=value.get('TimeOut');
+    //                             //                           h=value.get('TimeOutAddress');
+    //                             //
+    //                             //                           attendance.add(ListAttandance(employee: a ,date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+    //                             //                           streamController.add(ListAttandance(employee: a, date: b, timein: e, addressIn: f, timeout: g, addressout: h));
+    //                             //                           print("///////////// $attendance");
+    //                             //
+    //                             //                         });
+    //                             //                         setState(() {
+    //                             //                           streamController.stream;
+    //                             //                         });
+    //                             //                       }
+    //                             //
+    //                             //
+    //                             //                     }
+    //                             //
+    //                             //
+    //                             //                   });
+    //                             //                 });
+    //                             //
+    //                             //                 //     FirebaseFirestore.instance
+    //                             //                 //         .collection('Companies')
+    //                             //                 //         .doc('${user!.email.toString()}')
+    //                             //                 //         .collection("Employee")
+    //                             //                 //         .doc(dropdownvalue1)
+    //                             //                 //         .collection('Attendance')
+    //                             //                 //
+    //                             //                 //         .get().then((value) {
+    //                             //                 //       value.docs.forEach((element) {
+    //                             //                 //         a=element.id;
+    //                             //                 //         print("^&^&^&^&^&^&^&^&^&^& $date $a ${attendance.length}");
+    //                             //                 //
+    //                             //                 //         if(date==a){
+    //                             //                 //           print("~~~~~~~~~~~~~~ $dropdownvalue1 $a");
+    //                             //                 //
+    //                             //                 //           // setState(() {
+    //                             //                 //           //   attendance=[];
+    //                             //                 //           //   //streamController.isPaused;
+    //                             //                 //           // });
+    //                             //                 //
+    //                             //                 //           FirebaseFirestore.instance
+    //                             //                 //               .collection('Companies')
+    //                             //                 //               .doc('${user!.email.toString()}')
+    //                             //                 //               .collection("Employee")
+    //                             //                 //               .doc(dropdownvalue1)
+    //                             //                 //               .collection('Attendance')
+    //                             //                 //               .doc('$date').get().then((value) {
+    //                             //                 //             String e,f,g,h,j;
+    //                             //                 //             e=value.get('TimeIn');
+    //                             //                 //             f=value.get('TimeInAddress');
+    //                             //                 //             g=value.get('TimeOut');
+    //                             //                 //             h=value.get('TimeOutAddress');
+    //                             //                 //
+    //                             //                 //             attendance.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+    //                             //                 //             streamController.add(ListAttandance(date: date, timein: e, addressIn: f, timeout: g, addressout: h));
+    //                             //                 //
+    //                             //                 //             print("///////////// $attendance");
+    //                             //                 //           });
+    //                             //                 //           setState(() {
+    //                             //                 //             streamController.stream;
+    //                             //                 //           });
+    //                             //                 //         }
+    //                             //                 //         else{
+    //                             //                 //           print("1111111111111");
+    //                             //                 //         }
+    //                             //                 //         setState(() {
+    //                             //                 //           streamController.stream;
+    //                             //                 //         });
+    //                             //                 //       });
+    //                             //                 //     });
+    //                             //                 //     print("::::::::::::::::LLLLLLLKKKKKKKK $a");
+    //                             //                 //
+    //                             //                 //   });
+    //                             //                 // });
+    //                             //
+    //                             //               });
+    //                             //             });
+    //                             //           }
+    //                             //           else{
+    //                             //             if(days.isEmpty){}
+    //                             //             else {
+    //                             //               String a;
+    //                             //               setState(() {
+    //                             //                 attendance=[];
+    //                             //                 print("iiiiiiiiiiiiiiiii ${attendance.length}");
+    //                             //                 //streamController.isPaused;
+    //                             //               });
+    //                             //               for(int i=0;i<days.length;i++) {
+    //                             //                 String b;
+    //                             //                 b= '${days[i].year}-${days[i].month}-${days[i].day}';
+    //                             //                 //print("987987987987987987 $b");
+    //                             //                 fetchattendance(b);
+    //                             //                 // .get().then((value){
+    //                             //                 //   value.docs.forEach((element) {
+    //                             //                 //       a=element.id.toString();
+    //                             //                 //       print("yayayyayayayayayayay $a");
+    //                             //                 //     });
+    //                             //                 //   });
+    //                             //               }
+    //                             //             }
+    //                             //           }
+    //                             //         },
+    //                             //       ),
+    //                             //     ],
+    //                             //   ),
+    //                             // ),
+    //
+    //                           ]
+    //                       ),
+    //                     ),
+    //                     Positioned(
+    //                       top: 23,
+    //                       left: 4,
+    //                       child: GestureDetector(
+    //                         onTap: (){
+    //                           Navigator.pop(context);
+    //                         },
+    //                         child: Container(
+    //                           //color: Colors.yellow,
+    //                           child: Padding(
+    //                             padding: EdgeInsets.only(left: 10.w,top: 8.h,right: 4.w),
+    //                             child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+    //                           ),
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ]
+    //               ),
+    //             ),
+    //           ),
+    //         ),
+    //         body: days.isEmpty ? SizedBox() : SingleChildScrollView(
+    //           child: Column(
+    //             children: [
+    //               SizedBox(height: 20.h,),
+    //               Padding(
+    //                 padding:  EdgeInsets.symmetric(horizontal: 8.sp),
+    //                 child: Container(
+    //                   height: 30.h,
+    //                   width: MediaQuery.of(context).size.width,
+    //                   decoration: BoxDecoration(
+    //                     boxShadow: [
+    //                       BoxShadow(
+    //                         color: Colors.grey.withOpacity(0.2),
+    //                         spreadRadius: 2,
+    //                         blurRadius: 2,
+    //                         offset: const Offset(0, 2), // changes position of shadow
+    //                       ),
+    //                     ],
+    //                     borderRadius: BorderRadius.circular(10.sp),
+    //                     color: whiteClr,
+    //                     // color: Colors.cyanAccent
+    //                   ),
+    //                   child: Row(
+    //                     children: [
+    //                       Padding(
+    //                         padding:  EdgeInsets.only(left: 15.0.w),
+    //                         child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
+    //                             color: srpgradient2,fontWeight: FontWeight.w600),),
+    //                       ),
+    //                       SizedBox(width: 100.w,),
+    //                       Padding(
+    //                         padding:  EdgeInsets.only(left:.0.w),
+    //                         child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
+    //                             color: srpgradient2,fontWeight: FontWeight.w600),),
+    //                       ),
+    //                       Spacer(),
+    //                       Padding(
+    //                         padding: EdgeInsets.only(left: 25.0.w),
+    //                         child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
+    //                             color: srpgradient2,fontWeight: FontWeight.w600),),
+    //                       ),
+    //                       SizedBox(width: 23.w,),
+    //                       Padding(
+    //                         padding: EdgeInsets.only(left: 10.0.w),
+    //                         child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
+    //                             color: srpgradient2,fontWeight: FontWeight.w600),),
+    //                       ),
+    //                       SizedBox(width: 4.w,),
+    //                     ],
+    //                   ),
+    //                 ),
+    //               ),
+    //               StreamBuilder(
+    //                   stream: streamController.stream,
+    //                   builder: (BuildContext context, AsyncSnapshot snapshot) {
+    //                     print("%%%%%%%%% $snapshot");
+    //                     switch (snapshot.connectionState) {
+    //                       case ConnectionState.none:
+    //                         return const Text(
+    //                           " null",
+    //                           style: TextStyle(color: Colors.white),
+    //                         );
+    //                       case ConnectionState.waiting:
+    //                         return const SizedBox();
+    //                       case ConnectionState.active:
+    //                         return (snapshot.hasData == false)
+    //                             ? const CircularProgressIndicator()
+    //                             : ListView.builder(
+    //                               padding: const EdgeInsets.only(top: 0),
+    //                               shrinkWrap: true,
+    //                               physics: const BouncingScrollPhysics(),
+    //                               itemCount: attendance.length,
+    //                               itemBuilder: (context, index) {
+    //                                 //managetotalcontact = contact.length.toString();
+    //                                 // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+    //                               return TabsforDesignationAbsentLateEarly1(
+    //                                 timein: attendance[index].timein,timeout: attendance[index].timeout,
+    //                                 addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+    //                                 date: attendance[index].date,
+    //                                 time: time,tabcount: 0, datetime: days,employe: attendance[index].employee,);
+    //                           },
+    //                         );
+    //                       case ConnectionState.done:
+    //                         return (snapshot.hasData == false)
+    //                             ? const CircularProgressIndicator()
+    //                             : ListView.builder(
+    //                                 padding: const EdgeInsets.only(top: 0),
+    //                                 shrinkWrap: true,
+    //                                 physics: const BouncingScrollPhysics(),
+    //                                 itemCount: attendance.length,
+    //                                 itemBuilder: (context, index) =>  TabsforDesignationAbsentLateEarly1(
+    //                                   timein: attendance[index].timein,timeout: attendance[index].timeout,
+    //                                   addressin: attendance[index].addressIn,addressout: attendance[index].addressout,
+    //                                   date: attendance[index].date,
+    //                                   time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+    //                               );
+    //                       default:
+    //                         return const Text("default", style: TextStyle(color: Colors.white));
+    //                     }
+    //                   }),
+    //                 ],
+    //               ),
+    //             ),
+    //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
+    //
+    //         // DefaultTabController(
+    //         //   length: 1,
+    //         //   initialIndex: 0,
+    //         //   child:  Scaffold(
+    //         //     appBar:  AppBar(
+    //         //       leading: SizedBox(),
+    //         //       flexibleSpace: Column(
+    //         //         mainAxisAlignment: MainAxisAlignment.end,
+    //         //         children:  [
+    //         //           TabBar(
+    //         //             labelPadding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
+    //         //             indicatorColor:srpgradient2,
+    //         //             isScrollable: true,
+    //         //             tabs: [
+    //         //               Tab(child:  Tabname(name: "Present",),),
+    //         //               // Tab(child:  Tabname(name: "Absent",),),
+    //         //               // Tab(child:  Tabname(name: "Late Comers",),),
+    //         //               // Tab(child:  Tabname(name: "Early Leavers",),),
+    //         //             ],
+    //         //           ),
+    //         //         ],
+    //         //       ),
+    //         //     ),
+    //         //     /*--------------- Build Tab body here -------------------*/
+    //         //     body:  TabBarView(
+    //         //       children: <Widget>[
+    //         //         TabsforDesignationAbsentLateEarly(time: time,tabcount: 0,),
+    //         //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 1,),
+    //         //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 2,),
+    //         //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 3,),
+    //         //       ],
+    //         //     ),
+    //         //   ),
+    //         // ),
+    //       ),
+    //     )
+    // );
   }
 
   late DateTimeRange dateTimeRange =dateRange;
@@ -4267,7 +6602,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
                 textButtonTheme: TextButtonThemeData(
                     style: TextButton.styleFrom(
                       textStyle:GoogleFonts.poppins(
-                          fontSize:12.sp,
+                          fontSize:14,
                           color: srpgradient2,
                           fontWeight: FontWeight.w500),
                       primary: srpgradient2,
@@ -4403,6 +6738,7 @@ class _ByEmployee1State extends State<ByEmployee1> {
 
 }
 
+// ye wala krna hai responsive
 class TabsforDesignationAbsentLateEarly1 extends StatefulWidget {
   const TabsforDesignationAbsentLateEarly1({Key? key, required this.time,
     required this.tabcount, required this.datetime, required this.employe,
@@ -4438,36 +6774,39 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
 
   @override
   Widget build(BuildContext context) {
+    final hh= MediaQuery.of(context).size.height;
+    final ww= MediaQuery.of(context).size.width;
     return Container(
-      height: 167.h,
+      // height: 167.h,
+      height: hh*0.21,
       width: MediaQuery.of(context).size.width,
-      //color: Colors.purpleAccent,
+      // color: Colors.purpleAccent,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2.5.w),
+        padding: EdgeInsets.symmetric(horizontal: ww*0.015),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 10.h,),
+            SizedBox(height: hh*0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 10.0.w),
+                  padding: EdgeInsets.only(left: ww*0.015),
                   child: Container(
                     //color: Colors.lightBlue,
                     alignment: Alignment.topLeft,
-                    width: 129.w,
-                    height: 155.h,
+                    width: ww*0.35,
+                    height: hh*0.20,
                     child: Column(
                       crossAxisAlignment:CrossAxisAlignment.start,
                       children: [
-                        Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12.sp,
+                        Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:ww*0.027,
                             color: blackClr,fontWeight: FontWeight.w600),),
-                        Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
+                        Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:ww*0.027,
                             color: blackClr,fontWeight: FontWeight.w400),),
-                        Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
+                        Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:ww*0.027,
                             color: blackClr,fontWeight: FontWeight.w400),),
                       ],
                     ),
@@ -4482,13 +6821,13 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: .0.w),
+                        padding: EdgeInsets.only(left: .0),
                         child: Column(
                           children: [
                             Text(
                               "${widget.date}",
                               //"2023-23-21",
-                              style: GoogleFonts.poppins(fontSize:11.sp,
+                              style: GoogleFonts.poppins(fontSize:ww*0.03,
                                   color: srpgradient2,fontWeight: FontWeight.w600),),
                             // ClipRRect(
                             //   borderRadius: BorderRadius.circular(20.0.sp),
@@ -4504,13 +6843,14 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
                       ),
 
                       Container(
-                        width: 80.w,
+                        width: ww*0.208,
+
                         //color: Colors.red,
                         child: Padding(
-                          padding:  EdgeInsets.only(left: 10.0.w),
+                          padding:  EdgeInsets.only(left: ww*0.01),
                           child: Column(
                             children: [
-                              Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
+                              Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:ww*0.03,
                                   color: srpgradient2,fontWeight: FontWeight.w600),),
                               // ClipRRect(
                               //   borderRadius: BorderRadius.circular(20.0.sp),
@@ -4527,16 +6867,16 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
                       ),
 
                       Container(
-                        width: 74.w,
-                        height: 100.h,
+                        width: ww*0.19,
+                        height: hh*0.16,
                         //color: Colors.yellow,
                         alignment: Alignment.center,
                         child: Padding(
-                            padding:  EdgeInsets.only(left: 22.0.w),
+                            padding:  EdgeInsets.only(left: ww*0.01),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:ww*0.03,
                                     color: srpgradient2,fontWeight: FontWeight.w600),),
                                 // ClipRRect(
                                 //   borderRadius: BorderRadius.circular(20.0.sp),
@@ -4551,7 +6891,7 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
                             )
                         ),
                       ),
-                      SizedBox(width: 10.w,),
+                      SizedBox(width: ww*0.018),
                     ],
                   ),
                 ),
@@ -4561,6 +6901,130 @@ class _TabsforDesignationAbsentLateEarly1State extends State<TabsforDesignationA
         ),
       ),
     );
+    // return Container(
+    //   // height: 167.h,
+    //   height: hh*0.21,
+    //   width: MediaQuery.of(context).size.width,
+    //   // color: Colors.purpleAccent,
+    //   child: Padding(
+    //     padding: EdgeInsets.symmetric(horizontal: 2.5.w),
+    //     child: Column(
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       mainAxisAlignment: MainAxisAlignment.start,
+    //       children: [
+    //         SizedBox(height: 10.h,),
+    //         Row(
+    //           mainAxisAlignment: MainAxisAlignment.start,
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+    //             Padding(
+    //               padding: EdgeInsets.only(left: 10.0.w),
+    //               child: Container(
+    //                 //color: Colors.lightBlue,
+    //                 alignment: Alignment.topLeft,
+    //                 width: 129.w,
+    //                 height: 155.h,
+    //                 child: Column(
+    //                   crossAxisAlignment:CrossAxisAlignment.start,
+    //                   children: [
+    //                     Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12.sp,
+    //                         color: blackClr,fontWeight: FontWeight.w600),),
+    //                     Text("Time In at: ${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
+    //                         color: blackClr,fontWeight: FontWeight.w400),),
+    //                     Text("Time Out at: ${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
+    //                         color: blackClr,fontWeight: FontWeight.w400),),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ),
+    //             Spacer(),
+    //             Container(
+    //               // width: 230.w,
+    //               // color: Colors.lightBlue,
+    //               child: Row(
+    //                 mainAxisAlignment: MainAxisAlignment.center,
+    //                 crossAxisAlignment: CrossAxisAlignment.center,
+    //                 children: [
+    //                   Padding(
+    //                     padding: EdgeInsets.only(left: .0.w),
+    //                     child: Column(
+    //                       children: [
+    //                         Text(
+    //                           "${widget.date}",
+    //                           //"2023-23-21",
+    //                           style: GoogleFonts.poppins(fontSize:11.sp,
+    //                               color: srpgradient2,fontWeight: FontWeight.w600),),
+    //                         // ClipRRect(
+    //                         //   borderRadius: BorderRadius.circular(20.0.sp),
+    //                         //   child: Image.asset(
+    //                         //     'assets/user.jpg',
+    //                         //     width: 40.0.w,
+    //                         //     height: 40.0.h,
+    //                         //     fit: BoxFit.fill,
+    //                         //   ),
+    //                         // ),
+    //                       ],
+    //                     ),
+    //                   ),
+    //
+    //                   Container(
+    //                     width: 80.w,
+    //                     //color: Colors.red,
+    //                     child: Padding(
+    //                       padding:  EdgeInsets.only(left: 10.0.w),
+    //                       child: Column(
+    //                         children: [
+    //                           Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
+    //                               color: srpgradient2,fontWeight: FontWeight.w600),),
+    //                           // ClipRRect(
+    //                           //   borderRadius: BorderRadius.circular(20.0.sp),
+    //                           //   child: Image.asset(
+    //                           //     'assets/user.jpg',
+    //                           //     width: 40.0.w,
+    //                           //     height: 40.0.h,
+    //                           //     fit: BoxFit.fill,
+    //                           //   ),
+    //                           // ),
+    //                         ],
+    //                       ),
+    //                     ),
+    //                   ),
+    //
+    //                   Container(
+    //                     width: 74.w,
+    //                     height: 100.h,
+    //                     //color: Colors.yellow,
+    //                     alignment: Alignment.center,
+    //                     child: Padding(
+    //                         padding:  EdgeInsets.only(left: 22.0.w),
+    //                         child: Column(
+    //                           mainAxisAlignment: MainAxisAlignment.center,
+    //                           children: [
+    //                             Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
+    //                                 color: srpgradient2,fontWeight: FontWeight.w600),),
+    //                             // ClipRRect(
+    //                             //   borderRadius: BorderRadius.circular(20.0.sp),
+    //                             //   child: Image.asset(
+    //                             //     'assets/user.jpg',
+    //                             //     width: 40.0.w,
+    //                             //     height: 40.0.h,
+    //                             //     fit: BoxFit.fill,
+    //                             //   ),
+    //                             // ),
+    //                           ],
+    //                         )
+    //                     ),
+    //                   ),
+    //                   SizedBox(width: 10.w,),
+    //                 ],
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 
 }

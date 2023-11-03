@@ -31,7 +31,7 @@ import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/p
 import 'package:hrmanagementapp/View/Profile/Home/components/piechart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
-import 'package:flutter_zoom_drawer/config.dart';
+// import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -72,7 +72,7 @@ import 'package:hrmanagementapp/View/Shifts/shifts.dart';
 import 'package:hrmanagementapp/View/changepassword/Changepassword.dart';
 import 'package:hrmanagementapp/View/employeDirectory/EmployeDirectory.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
-import 'package:flutter_zoom_drawer/config.dart';
+// import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -247,7 +247,6 @@ class _HomeState extends State<Home> {
             // ],),
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
-
         drawer: SafeArea(
           child: Container(
             child: ListTileTheme(
@@ -259,30 +258,30 @@ class _HomeState extends State<Home> {
                   Container(
                     width: 128.0,
                     height: 128.0,
-                    margin: EdgeInsets.only(
-                      top: 24.0.h,
-                      bottom: 10.0.h,
+                    margin: const EdgeInsets.only(
+                      top: 24.0,
+                      bottom: 10.0,
                     ),
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.buildingUser, size: 60.sp, color: whiteClr,),
+                    child: Icon(FontAwesomeIcons.buildingUser, size: 60, color: whiteClr,),
                     // child: Image.asset(
                     //   'assets/user.jpg',
                     // ),
                   ),
                   Padding(
-                    padding:EdgeInsets.symmetric(horizontal :18.0.w),
-                    child: Text('${a}',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                    padding:EdgeInsets.symmetric(horizontal :18.0),
+                    child: Text('${a}',style: GoogleFonts.poppins(fontSize: 14.5,color: Colors.white,),),
                   ),
-                  SizedBox(height:45.h,),
+                  SizedBox(height:45,),
                   Container(
                     height: 1,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.white,),
-                  SizedBox(height: 20.h,),
+                  SizedBox(height: 20,),
                   ListTile(
                     onTap: () async {
                       Navigator.push(
@@ -291,7 +290,7 @@ class _HomeState extends State<Home> {
                             EmployeeDashboard2(admineamil: user!.email.toString())),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.marker,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.marker,size: 20,color: whiteClr,),
                     title: Text('Mark Attendance'),
                   ),
                   ListTile(
@@ -301,7 +300,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(builder: (context) => Reports()),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.chartColumn,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.chartColumn,size: 20,color: whiteClr,),
                     title: Text('Reports'),
                   ),
                   ListTile(
@@ -311,7 +310,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(builder: (context) => EmployeeDirectory(password: widget.password,superadmin: false,compnayemail: '',)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.users,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.users,size: 20,color: whiteClr,),
                     title: Text('Employees'),
                   ),
                   ListTile(
@@ -321,7 +320,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(builder: (context) => Shifts(password: widget.password,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.solidClock,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.solidClock,size: 20,color: whiteClr,),
                     title: Text('Shifts'),
                   ),
                   ListTile(
@@ -331,7 +330,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(builder: (context) => DepartmentList1(password: widget.password,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.sitemap,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.sitemap,size: 20,color: whiteClr,),
                     title: Text('Departments'),
                     ),
                   //
@@ -342,7 +341,7 @@ class _HomeState extends State<Home> {
                   //       MaterialPageRoute(builder: (context) => Designation()),
                   //     );
                   //   },
-                  //   leading: Icon(FontAwesomeIcons.idCardClip,size: 20.sp,color: whiteClr,),
+                  //   leading: Icon(FontAwesomeIcons.idCardClip,size: 20,color: whiteClr,),
                   //   title: Text('Designation'),
                   //   ),
                   ListTile(
@@ -352,7 +351,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(builder: (context) => Profile()),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.userPen,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.userPen,size: 20,color: whiteClr,),
                     title: Text('Profile'),
                   ),
                   // ListTile(
@@ -362,7 +361,7 @@ class _HomeState extends State<Home> {
                   //       MaterialPageRoute(builder: (context) => ChangePassword()),
                   //     );
                   //   },
-                  //   leading: Icon(FontAwesomeIcons.lock,size: 20.sp,color: whiteClr,),
+                  //   leading: Icon(FontAwesomeIcons.lock,size: 20,color: whiteClr,),
                   //   title: Text('Password'),
                   // ),
                   ListTile(
@@ -374,7 +373,7 @@ class _HomeState extends State<Home> {
                           );
                         });
                     },
-                    leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.rightToBracket,size: 20,color: whiteClr,),
                     title: Text('Logout'),
                   ),
                   // ListTile(
@@ -423,9 +422,9 @@ class _HomeState extends State<Home> {
         ),
         child: Scaffold(
             appBar:PreferredSize(
-              preferredSize:  Size.fromHeight(94.0.h),
+              preferredSize:  Size.fromHeight(94.0),
               child: Container(
-                height: 102.h,
+                height: 102,
                 width:MediaQuery.of(context).size.width,
 
                 decoration: BoxDecoration(
@@ -438,8 +437,8 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                   borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20.sp),
-                      bottomRight: Radius.circular(20.sp)),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
                   color: whiteClr,
                 ),
 
@@ -462,7 +461,7 @@ class _HomeState extends State<Home> {
                           //   // });
                           // },
                           child: Padding(
-                            padding: EdgeInsets.all(10.0.sp),
+                            padding: EdgeInsets.all(10.0),
                             child: ValueListenableBuilder<AdvancedDrawerValue>(
                               valueListenable: _advancedDrawerController,
                               builder: (_, value, __) {
@@ -477,23 +476,23 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           // child: Padding(
-                          //   padding: EdgeInsets.all(8.0.sp),
-                          //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                          //   padding: EdgeInsets.all(8.0),
+                          //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
                           // ),
                         ),
                         Spacer(),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Onboarding progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                            Text("Onboarding progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
                             SizedBox(
-                              height: 2.h,
+                              height: 2,
                             ),
                             Container(
-                              height: 8.h,
-                              width: 130.w,
+                              height: 8,
+                              width: 130,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.sp),
+                                borderRadius: BorderRadius.circular(20),
                                 color: greyOpenClr,
                               ),
                               child: Stack(
@@ -505,11 +504,11 @@ class _HomeState extends State<Home> {
                                     right: 60,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20.sp),
+                                        borderRadius: BorderRadius.circular(20),
                                         color: srpgradient2,
                                       ),
-                                      height: 11.h,
-                                      width: 133.w,
+                                      height: 11,
+                                      width: 133,
                                     ),
                                   )
                                 ],
@@ -519,16 +518,16 @@ class _HomeState extends State<Home> {
                         ),
                         Spacer(),
                         Container(
-                          width: 30.0.w,
-                          height: 30.0.h,
+                          width: 30.0,
+                          height: 30.0,
                           child: Stack(
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(15.0.sp),
+                                borderRadius: BorderRadius.circular(15.0),
                                 child: Image.asset(
                                   'assets/user.jpg',
-                                  width: 30.0.w,
-                                  height: 30.0.h,
+                                  width: 30.0,
+                                  height: 30.0,
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -536,11 +535,11 @@ class _HomeState extends State<Home> {
                                 bottom: 1.5,
                                 right: 1.5,
                                 child: Container(
-                                  height: 5.h,
-                                  width: 5.w,
+                                  height: 5,
+                                  width: 5,
                                   //color:online,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5.sp),
+                                    borderRadius: BorderRadius.circular(5),
                                     color: online,
                                   ),
                                 ),
@@ -548,18 +547,18 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 15.w,)
+                        SizedBox(width: 15,)
                       ],
                     ),
                     Container(
-                      height: 50.h,
+                      height: 50,
                       width: MediaQuery.of(context).size.width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: 80.w,
-                            height: 42.h,
+                            width: 80,
+                            height: 42,
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -574,9 +573,9 @@ class _HomeState extends State<Home> {
                             ),
                             child: Column(
                               children: [
-                                SizedBox(height: 5.h,),
-                                Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                                Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                SizedBox(height: 5,),
+                                Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+                                Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                               ],
                             ),
                           ),
@@ -584,13 +583,13 @@ class _HomeState extends State<Home> {
                             padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Container(
                               color: coverBackClr,
-                              height: 40.h,
-                              width: 1.w,
+                              height: 40,
+                              width: 1,
                             ),
                           ),
                           Container(
-                            width: 240.w,
-                            height: 40.h,
+                            width: 240,
+                            height: 40,
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -604,15 +603,15 @@ class _HomeState extends State<Home> {
                               color: whiteClr,
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all( 10.sp),
+                              padding: EdgeInsets.all( 10),
                               child: Row(
                                 children: [
                                   Text("View Organization",
-                                    style: GoogleFonts.poppins(fontSize:12.sp, color: const Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                    style: GoogleFonts.poppins(fontSize:12, color: const Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                                   const Spacer(),
                                   Container(
-                                    height: 20.h,
-                                    width: 20.w,
+                                    height: 20,
+                                    width: 20,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -622,10 +621,10 @@ class _HomeState extends State<Home> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
-                                    child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+                                    child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
                                 ],
                               ),
                             ),
@@ -641,7 +640,7 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   // Container(
-                  //   height: 102.h,
+                  //   height: 102,
                   //   width:MediaQuery.of(context).size.width,
                   //   decoration: BoxDecoration(
                   //     boxShadow: [
@@ -652,7 +651,7 @@ class _HomeState extends State<Home> {
                   //         offset: const Offset(0, 2), // changes position of shadow
                   //       ),
                   //     ],
-                  //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                  //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                   //     color: whiteClr,
                   //   ),
                   //   child: Column(
@@ -673,7 +672,7 @@ class _HomeState extends State<Home> {
                   //               // });
                   //             },
                   //             child: Padding(
-                  //               padding: EdgeInsets.all(8.0.sp),
+                  //               padding: EdgeInsets.all(8.0),
                   //               child: ValueListenableBuilder<AdvancedDrawerValue>(
                   //                 valueListenable: _advancedDrawerController,
                   //                 builder: (_, value, __) {
@@ -688,23 +687,23 @@ class _HomeState extends State<Home> {
                   //               ),
                   //             ),
                   //             // child: Padding(
-                  //             //   padding: EdgeInsets.all(8.0.sp),
-                  //             //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                  //             //   padding: EdgeInsets.all(8.0),
+                  //             //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
                   //             // ),
                   //           ),
                   //           Spacer(),
                   //           Column(
                   //             mainAxisAlignment: MainAxisAlignment.center,
                   //             children: [
-                  //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                  //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
                   //               SizedBox(
-                  //                 height: 2.h,
+                  //                 height: 2,
                   //               ),
                   //               Container(
-                  //                 height: 8.h,
+                  //                 height: 8,
                   //                 width: 130.w,
                   //                 decoration: BoxDecoration(
-                  //                   borderRadius: BorderRadius.circular(20.sp),
+                  //                   borderRadius: BorderRadius.circular(20),
                   //                   color: greyOpenClr,
                   //                 ),
                   //                 child: Stack(
@@ -716,10 +715,10 @@ class _HomeState extends State<Home> {
                   //                       right: 60,
                   //                       child: Container(
                   //                         decoration: BoxDecoration(
-                  //                           borderRadius: BorderRadius.circular(20.sp),
+                  //                           borderRadius: BorderRadius.circular(20),
                   //                           color: srpgradient2,
                   //                         ),
-                  //                         height: 11.h,
+                  //                         height: 11,
                   //                         width: 133.w,
                   //                       ),
                   //                     )
@@ -731,15 +730,15 @@ class _HomeState extends State<Home> {
                   //           Spacer(),
                   //           Container(
                   //             width: 30.0.w,
-                  //             height: 30.0.h,
+                  //             height: 30.0,
                   //             child: Stack(
                   //               children: [
                   //                 ClipRRect(
-                  //                   borderRadius: BorderRadius.circular(15.0.sp),
+                  //                   borderRadius: BorderRadius.circular(15.0),
                   //                   child: Image.asset(
                   //                     'assets/user.jpg',
                   //                     width: 30.0.w,
-                  //                     height: 30.0.h,
+                  //                     height: 30.0,
                   //                     fit: BoxFit.fill,
                   //                   ),
                   //                 ),
@@ -747,11 +746,11 @@ class _HomeState extends State<Home> {
                   //                   bottom: 1.5,
                   //                   right: 1.5,
                   //                   child: Container(
-                  //                     height: 5.h,
+                  //                     height: 5,
                   //                     width: 5.w,
                   //                     //color:online,
                   //                     decoration: BoxDecoration(
-                  //                       borderRadius: BorderRadius.circular(5.sp),
+                  //                       borderRadius: BorderRadius.circular(5),
                   //                       color: online,
                   //                     ),
                   //                   ),
@@ -764,14 +763,14 @@ class _HomeState extends State<Home> {
                   //       ),
                   //
                   //       Container(
-                  //         height: 50.h,
+                  //         height: 50,
                   //         width: MediaQuery.of(context).size.width,
                   //         child: Row(
                   //           mainAxisAlignment: MainAxisAlignment.center,
                   //           children: [
                   //             Container(
                   //               width: 80.w,
-                  //               height: 40.h,
+                  //               height: 40,
                   //               decoration: BoxDecoration(
                   //                 boxShadow: [
                   //                   BoxShadow(
@@ -786,9 +785,9 @@ class _HomeState extends State<Home> {
                   //               ),
                   //               child: Column(
                   //                 children: [
-                  //                   SizedBox(height: 5.h,),
-                  //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                  //                   Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                  //                   SizedBox(height: 5,),
+                  //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+                  //                   Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                   //
                   //                 ],
                   //               ),
@@ -797,13 +796,13 @@ class _HomeState extends State<Home> {
                   //               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   //               child: Container(
                   //                 color: coverBackClr,
-                  //                 height: 40.h,
+                  //                 height: 40,
                   //                 width: 1.w,
                   //               ),
                   //             ),
                   //             Container(
                   //               width: 240.w,
-                  //               height: 40.h,
+                  //               height: 40,
                   //               decoration: BoxDecoration(
                   //                 boxShadow: [
                   //                   BoxShadow(
@@ -817,13 +816,13 @@ class _HomeState extends State<Home> {
                   //                 color: whiteClr,
                   //               ),
                   //               child: Padding(
-                  //                 padding: EdgeInsets.all( 10.sp),
+                  //                 padding: EdgeInsets.all( 10),
                   //                 child: Row(
                   //                   children: [
-                  //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                  //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                   //                     Spacer(),
                   //                     Container(
-                  //                       height: 20.h,
+                  //                       height: 20,
                   //                       width: 20.w,
                   //                       decoration: BoxDecoration(
                   //                         boxShadow: [
@@ -834,10 +833,10 @@ class _HomeState extends State<Home> {
                   //                             offset: const Offset(0, 2), // changes position of shadow
                   //                           ),
                   //                         ],
-                  //                         borderRadius: BorderRadius.circular(15.sp),
+                  //                         borderRadius: BorderRadius.circular(15),
                   //                         color: greybackground,
                   //                       ),
-                  //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                  //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
                   //                   ],
                   //                 ),
                   //               ),
@@ -849,12 +848,12 @@ class _HomeState extends State<Home> {
                   //   ),
                   // ),
                   // SizedBox(
-                  //   height: 10.h,
+                  //   height: 10,
                   // ),
                   Padding(
-                    padding: EdgeInsets.all(20.0.sp),
+                    padding: EdgeInsets.all(20.0),
                     child: Container(
-                      height: 115.h,
+                      height: 115,
                       width:MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -865,23 +864,23 @@ class _HomeState extends State<Home> {
                             offset: const Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(6.sp),
+                        borderRadius: BorderRadius.circular(6),
                         color: whiteClr,
                       ),
                       child: Column(
                         children: [
                           Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                            padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                             child: Container(
-                              height: 25.h,
+                              height: 25,
                               width: MediaQuery.of(context).size.width,
                               child: Row(
                                 children: [
-                                  Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                  Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   Spacer(),
-                                  Container(
-                                    height: 17.h,
-                                    width: 17.w,
+                                  Container (
+                                    height: 17,
+                                    width: 17,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -891,10 +890,10 @@ class _HomeState extends State<Home> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
-                                    child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+                                    child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
                                 ],
                               ),
                             ),
@@ -908,29 +907,29 @@ class _HomeState extends State<Home> {
 
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            height: 78.h,
+                            height: 78,
                             child: Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20.h),
+                              padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 20),
                               child: Row(
                                 children: [
                                   Column(
                                     children: [
-                                      Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                      Text("IN",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                      Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                      Text("IN",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                     ],
                                   ),
                                   Spacer(),
                                   Column(
                                     children: [
-                                      Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                      Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                      Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                      Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                     ],
                                   ),
                                   Spacer(),
                                   Column(
                                     children: [
-                                      Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                      Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                      Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                      Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                     ],
                                   ),
                                 ],
@@ -943,9 +942,9 @@ class _HomeState extends State<Home> {
                   ),
 
                   Padding(
-                    padding: EdgeInsets.all(20.0.sp),
+                    padding: EdgeInsets.all(20.0),
                     child: Container(
-                      height: 305.h,
+                      height: 345,
                       width:MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -956,23 +955,23 @@ class _HomeState extends State<Home> {
                             offset: const Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(6.sp),
+                        borderRadius: BorderRadius.circular(6),
                         color: whiteClr,
                       ),
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                            padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                             child: Container(
-                              height: 25.h,
+                              height: 25,
                               width: MediaQuery.of(context).size.width,
                               child: Row(
                                 children: [
-                                  Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                  Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   const Spacer(),
                                   Container(
-                                    height: 17.h,
-                                    width: 17.w,
+                                    height: 17,
+                                    width: 17,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -982,10 +981,10 @@ class _HomeState extends State<Home> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
-                                    child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+                                    child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
                                 ],
                               ),
                             ),
@@ -997,30 +996,30 @@ class _HomeState extends State<Home> {
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            height: 77.h,
+                            height: 77,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
+                              padding: EdgeInsets.symmetric(horizontal: 30.0,vertical: 20),
                               child: Row(
                                 children: [
                                   Column(
                                     children: [
-                                      Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                      Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                      Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                      Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                     ],
                                   ),
                                   Spacer(),
                                   Column(
                                     children: [
-                                      Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                      Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                      Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                      Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
 
                                     ],
                                   ),
                                   Spacer(),
                                   Column(
                                     children: [
-                                      Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                      Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                      Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                      Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                     ],
                                   ),
                                 ],
@@ -1038,9 +1037,9 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(20.0.sp),
+                    padding: EdgeInsets.all(20.0),
                     child: Container(
-                      height: 319.h,
+                      height: 339,
                       width:MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -1051,19 +1050,19 @@ class _HomeState extends State<Home> {
                             offset: const Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(6.sp),
+                        borderRadius: BorderRadius.circular(6),
                         color: whiteClr,
                       ),
                       child: Column(
                         children: [
                           Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                            padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                             child: Container(
-                              height: 25.h,
+                              height: 25,
                               width: MediaQuery.of(context).size.width,
                               child: Row(
                                 children: [
-                                  Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                  Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   const Spacer(),
                                 ],
                               ),
@@ -1080,7 +1079,7 @@ class _HomeState extends State<Home> {
                               Positioned(
                                   top: 127,
                                   left: 92,
-                                  child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+                                  child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
                             ],
                           ),
                         ],
@@ -1088,9 +1087,9 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(20.0.sp),
+                    padding: EdgeInsets.all(20.0),
                     child: Container(
-                      height: 315.h,
+                      height: 339,
                       width:MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -1101,19 +1100,19 @@ class _HomeState extends State<Home> {
                             offset: const Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(6.sp),
+                        borderRadius: BorderRadius.circular(6),
                         color: whiteClr,
                       ),
                       child: Column(
                         children: [
                           Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                            padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                             child: Container(
-                              height: 25.h,
+                              height: 25,
                               width: MediaQuery.of(context).size.width,
                               child: Row(
                                 children: [
-                                  Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                  Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   const Spacer(),
                                 ],
                               ),
@@ -1130,7 +1129,7 @@ class _HomeState extends State<Home> {
                               Positioned(
                                   top: 127,
                                   left: 92,
-                                  child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+                                  child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
                             ],
                           ),
                         ],
@@ -1139,9 +1138,9 @@ class _HomeState extends State<Home> {
                   ),
 
                   Padding(
-                    padding: EdgeInsets.all(20.0.sp),
+                    padding: EdgeInsets.all(20.0),
                     child: Container(
-                      height: 95.h,
+                      height: 95,
                       width: MediaQuery.of(context).size.width,
                       //color: Colors.lightGreen,
                       decoration: BoxDecoration(
@@ -1153,42 +1152,42 @@ class _HomeState extends State<Home> {
                             offset: const Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(6.sp),
+                        borderRadius: BorderRadius.circular(6),
                         color: whiteClr,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:[
                           Padding(
-                            padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-                            child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                            padding:  EdgeInsets.symmetric(vertical: 14.0,horizontal: 10),
+                            child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                           ),
                           Container(
                             height: 1,
                             color: greyOpenClr,
                             width: MediaQuery.of(context).size.width,
                           ),
-                          SizedBox(height: 15.h,),
+                          SizedBox(height: 15,),
                           Row(
                             children: [
-                              SizedBox(width: 11.w,),
+                              SizedBox(width: 11,),
                               Container(
                                   // color: Colors.purpleAccent,
-                                  height: 30.h,
-                                  width: 100.w,
-                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
-                              SizedBox(width: 10.w,),
+                                  height: 30,
+                                  width: 100,
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
+                              SizedBox(width: 10,),
                               Container(
                                   // color: Colors.purpleAccent,
-                                  height: 30.h,
-                                  width: 100.w,
-                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
-                              SizedBox(width: 10.w,),
+                                  height: 30,
+                                  width: 100,
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
+                              SizedBox(width: 10,),
                               Container(
                                   // color: Colors.purpleAccent,
-                                  height: 30.h,
-                                  width: 100.w,
-                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                                  height: 30,
+                                  width: 100,
+                                  child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
                             ],
                           )
                         ],
@@ -1196,7 +1195,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
                 ],
               ),
@@ -1225,7 +1224,7 @@ class _HomeState extends State<Home> {
         //     child: Column(
         //       children: [
         //         Container(
-        //           height: 102.h,
+        //           height: 102,
         //           width:MediaQuery.of(context).size.width,
         //           decoration: BoxDecoration(
         //             boxShadow: [
@@ -1236,7 +1235,7 @@ class _HomeState extends State<Home> {
         //                 offset: const Offset(0, 2), // changes position of shadow
         //               ),
         //             ],
-        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
         //             color: whiteClr,
         //           ),
         //           child: Column(
@@ -1257,7 +1256,7 @@ class _HomeState extends State<Home> {
         //                       // });
         //                     },
         //                    child: Padding(
-        //                      padding: EdgeInsets.all(8.0.sp),
+        //                      padding: EdgeInsets.all(8.0),
         //                      child: ValueListenableBuilder<AdvancedDrawerValue>(
         //                        valueListenable: _advancedDrawerController,
         //                        builder: (_, value, __) {
@@ -1272,23 +1271,23 @@ class _HomeState extends State<Home> {
         //                      ),
         //                    ),
         //                     // child: Padding(
-        //                     //   padding: EdgeInsets.all(8.0.sp),
-        //                     //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+        //                     //   padding: EdgeInsets.all(8.0),
+        //                     //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
         //                     // ),
         //                   ),
         //                   Spacer(),
         //                   Column(
         //                     mainAxisAlignment: MainAxisAlignment.center,
         //                     children: [
-        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
         //                       SizedBox(
-        //                         height: 2.h,
+        //                         height: 2,
         //                       ),
         //                       Container(
-        //                         height: 8.h,
+        //                         height: 8,
         //                         width: 130.w,
         //                         decoration: BoxDecoration(
-        //                           borderRadius: BorderRadius.circular(20.sp),
+        //                           borderRadius: BorderRadius.circular(20),
         //                           color: greyOpenClr,
         //                         ),
         //                         child: Stack(
@@ -1300,10 +1299,10 @@ class _HomeState extends State<Home> {
         //                                 right: 60,
         //                                 child: Container(
         //                                   decoration: BoxDecoration(
-        //                                     borderRadius: BorderRadius.circular(20.sp),
+        //                                     borderRadius: BorderRadius.circular(20),
         //                                     color: srpgradient2,
         //                                   ),
-        //                                   height: 11.h,
+        //                                   height: 11,
         //                                   width: 133.w,
         //                                 ),
         //                               )
@@ -1315,15 +1314,15 @@ class _HomeState extends State<Home> {
         //                   Spacer(),
         //                   Container(
         //                     width: 30.0.w,
-        //                     height: 30.0.h,
+        //                     height: 30.0,
         //                     child: Stack(
         //                       children: [
         //                         ClipRRect(
-        //                           borderRadius: BorderRadius.circular(15.0.sp),
+        //                           borderRadius: BorderRadius.circular(15.0),
         //                           child: Image.asset(
         //                             'assets/user.jpg',
         //                             width: 30.0.w,
-        //                             height: 30.0.h,
+        //                             height: 30.0,
         //                             fit: BoxFit.fill,
         //                           ),
         //                         ),
@@ -1331,11 +1330,11 @@ class _HomeState extends State<Home> {
         //                           bottom: 1.5,
         //                           right: 1.5,
         //                           child: Container(
-        //                             height: 5.h,
+        //                             height: 5,
         //                             width: 5.w,
         //                             //color:online,
         //                             decoration: BoxDecoration(
-        //                               borderRadius: BorderRadius.circular(5.sp),
+        //                               borderRadius: BorderRadius.circular(5),
         //                               color: online,
         //                             ),
         //                           ),
@@ -1348,14 +1347,14 @@ class _HomeState extends State<Home> {
         //               ),
         //
         //               Container(
-        //                 height: 50.h,
+        //                 height: 50,
         //                 width: MediaQuery.of(context).size.width,
         //                 child: Row(
         //                   mainAxisAlignment: MainAxisAlignment.center,
         //                   children: [
         //                     Container(
         //                       width: 80.w,
-        //                       height: 40.h,
+        //                       height: 40,
         //                       decoration: BoxDecoration(
         //                         boxShadow: [
         //                           BoxShadow(
@@ -1370,9 +1369,9 @@ class _HomeState extends State<Home> {
         //                       ),
         //                       child: Column(
         //                         children: [
-        //                           SizedBox(height: 5.h,),
-        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+        //                           SizedBox(height: 5,),
+        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
         //
         //                         ],
         //                       ),
@@ -1381,13 +1380,13 @@ class _HomeState extends State<Home> {
         //                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
         //                       child: Container(
         //                         color: coverBackClr,
-        //                         height: 40.h,
+        //                         height: 40,
         //                         width: 1.w,
         //                       ),
         //                     ),
         //                     Container(
         //                       width: 240.w,
-        //                       height: 40.h,
+        //                       height: 40,
         //                       decoration: BoxDecoration(
         //                         boxShadow: [
         //                           BoxShadow(
@@ -1401,13 +1400,13 @@ class _HomeState extends State<Home> {
         //                         color: whiteClr,
         //                       ),
         //                      child: Padding(
-        //                        padding: EdgeInsets.all( 10.sp),
+        //                        padding: EdgeInsets.all( 10),
         //                        child: Row(
         //                          children: [
-        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
         //                            Spacer(),
         //                            Container(
-        //                              height: 20.h,
+        //                              height: 20,
         //                              width: 20.w,
         //                              decoration: BoxDecoration(
         //                                boxShadow: [
@@ -1418,10 +1417,10 @@ class _HomeState extends State<Home> {
         //                                    offset: const Offset(0, 2), // changes position of shadow
         //                                  ),
         //                                ],
-        //                                borderRadius: BorderRadius.circular(15.sp),
+        //                                borderRadius: BorderRadius.circular(15),
         //                                color: greybackground,
         //                              ),
-        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
         //                          ],
         //                        ),
         //                      ),
@@ -1433,12 +1432,12 @@ class _HomeState extends State<Home> {
         //           ),
         //         ),
         //         SizedBox(
-        //           height: 10.h,
+        //           height: 10,
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 115.h,
+        //             height: 115,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -1449,22 +1448,22 @@ class _HomeState extends State<Home> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         Spacer(),
         //                         Container(
-        //                           height: 17.h,
+        //                           height: 17,
         //                           width: 17.w,
         //                           decoration: BoxDecoration(
         //                             boxShadow: [
@@ -1475,10 +1474,10 @@ class _HomeState extends State<Home> {
         //                                 offset: const Offset(0, 2), // changes position of shadow
         //                               ),
         //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
+        //                             borderRadius: BorderRadius.circular(15),
         //                             color: greybackground,
         //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
         //                       ],
         //                     ),
         //                   ),
@@ -1490,29 +1489,29 @@ class _HomeState extends State<Home> {
         //                 ),
         //                 SizedBox(
         //                   width: MediaQuery.of(context).size.width,
-        //                   height: 78.h,
+        //                   height: 78,
         //                   child: Padding(
-        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20.h),
+        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20),
         //                     child: Row(
         //                       children: [
         //                         Column(
         //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                       ],
@@ -1524,9 +1523,9 @@ class _HomeState extends State<Home> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 305.h,
+        //             height: 305,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -1537,22 +1536,22 @@ class _HomeState extends State<Home> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //                         Container(
-        //                           height: 17.h,
+        //                           height: 17,
         //                           width: 17.w,
         //                           decoration: BoxDecoration(
         //                             boxShadow: [
@@ -1563,10 +1562,10 @@ class _HomeState extends State<Home> {
         //                                 offset: const Offset(0, 2), // changes position of shadow
         //                               ),
         //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
+        //                             borderRadius: BorderRadius.circular(15),
         //                             color: greybackground,
         //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
         //                       ],
         //                     ),
         //                   ),
@@ -1578,31 +1577,31 @@ class _HomeState extends State<Home> {
         //                 ),
         //                 SizedBox(
         //                   width: MediaQuery.of(context).size.width,
-        //                   height: 74.h,
+        //                   height: 74,
         //                   child: Padding(
-        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
+        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20),
         //                     child: Row(
         //                       children: [
         //                         Column(
         //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                       ],
@@ -1620,9 +1619,9 @@ class _HomeState extends State<Home> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 315.h,
+        //             height: 315,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -1633,19 +1632,19 @@ class _HomeState extends State<Home> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //
         //                       ],
@@ -1663,7 +1662,7 @@ class _HomeState extends State<Home> {
         //                     Positioned(
         //                         top: 127,
         //                         left: 92,
-        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
         //                   ],
         //                 ),
         //               ],
@@ -1671,9 +1670,9 @@ class _HomeState extends State<Home> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 315.h,
+        //             height: 315,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -1684,19 +1683,19 @@ class _HomeState extends State<Home> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //
         //                       ],
@@ -1714,7 +1713,7 @@ class _HomeState extends State<Home> {
         //                     Positioned(
         //                         top: 127,
         //                         left: 92,
-        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
         //                   ],
         //                 ),
         //               ],
@@ -1722,9 +1721,9 @@ class _HomeState extends State<Home> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 95.h,
+        //             height: 95,
         //             width: MediaQuery.of(context).size.width,
         //             //color: Colors.lightGreen,
         //             decoration: BoxDecoration(
@@ -1736,30 +1735,30 @@ class _HomeState extends State<Home> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               crossAxisAlignment: CrossAxisAlignment.start,
         //               children:[
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                   padding:  EdgeInsets.symmetric(vertical: 14.0,horizontal: 10.w),
+        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                 ),
         //                 Container(
         //                   height: 1,
         //                   color: greyOpenClr,
         //                   width: MediaQuery.of(context).size.width,
         //                 ),
-        //                 SizedBox(height: 15.h,),
+        //                 SizedBox(height: 15,),
         //                 Row(
         //                   children: [
         //                     SizedBox(width: 11.w,),
-        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                     SizedBox(width: 10.w,),
-        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                     SizedBox(width: 10.w,),
-        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                   ],
         //                 )
         //               ],
@@ -1767,7 +1766,7 @@ class _HomeState extends State<Home> {
         //           ),
         //         ),
         //         SizedBox(
-        //           height: 20.h,
+        //           height: 20,
         //         ),
         //       ],
         //     ),
@@ -1885,6 +1884,8 @@ class _Home1State extends State<Home1> {
 
   @override
   Widget build(BuildContext context) {
+    final hh =MediaQuery.of(context).size.height;
+    final ww =MediaQuery.of(context).size.width;
     return SafeArea(
       child: AdvancedDrawer(
         backdropColor: srpgradient2,
@@ -1927,32 +1928,33 @@ class _Home1State extends State<Home1> {
                     width: 128.0,
                     height: 128.0,
                     margin: EdgeInsets.only(
-                      top: 24.0.h,
-                      bottom: 10.0.h,
+                      top: 24.0,
+                      bottom: 10.0,
                     ),
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.buildingUser, size: 60.sp, color: whiteClr,),
+                    child: Icon(FontAwesomeIcons.buildingUser, size: 60, color: whiteClr,),
                     // child: Image.asset(
                     //   'assets/user.jpg',
                     // ),
                   ),
                   Padding(
-                    padding:EdgeInsets.symmetric(horizontal :18.0.w),
-                    child: Text('${a}',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                    padding:EdgeInsets.symmetric(horizontal :20),
+                    child: Text('${a}',style: GoogleFonts.poppins(fontSize: 14.5,color: Colors.white,),),
                   ),
-                  SizedBox(height: 45.h,),
+                  SizedBox(height: 45,),
                   Container(
                     height: 1,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.white,),
-                  SizedBox(height: 20.h,),
+                  SizedBox(height: 20,),
 
                   ListTile(
                     onTap: () async {
+                      print("::::::::::: $admin__email");
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) =>
@@ -1962,7 +1964,7 @@ class _Home1State extends State<Home1> {
                             )),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.marker,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.marker,size: 20,color: whiteClr,),
                     title: Text('Mark Attendance'),
                   ),
 
@@ -1974,7 +1976,7 @@ class _Home1State extends State<Home1> {
                         MaterialPageRoute(builder: (context) => Reports()),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.chartColumn,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.chartColumn,size: 20,color: whiteClr,),
                     title: Text('Reports'),
                   ),
 
@@ -1986,7 +1988,7 @@ class _Home1State extends State<Home1> {
                         MaterialPageRoute(builder: (context) => EmployeeDirectory(password: widget.adminpassword,superadmin: false,compnayemail: '',)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.users,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.users,size: 20,color: whiteClr,),
                     title: Text('Employees'),
                   ),
 
@@ -1997,18 +1999,16 @@ class _Home1State extends State<Home1> {
                         MaterialPageRoute(builder: (context) => Shifts(password: widget.adminpassword,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.solidClock,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.solidClock,size: 20,color: whiteClr,),
                     title: Text('Shifts'),
                   ),
 
                   ListTile(
                     onTap: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => DepartmentList1(password: widget.adminpassword,)),
-                      );
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => ScanScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DepartmentList1(password: widget.adminpassword,)),);
                     },
-                    leading: Icon(FontAwesomeIcons.sitemap,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.sitemap,size: 20,color: whiteClr,),
                     title: Text('Departments'),
                   ),
                   //
@@ -2019,7 +2019,7 @@ class _Home1State extends State<Home1> {
                   //       MaterialPageRoute(builder: (context) => Designation()),
                   //     );
                   //   },
-                  //   leading: Icon(FontAwesomeIcons.idCardClip,size: 20.sp,color: whiteClr,),
+                  //   leading: Icon(FontAwesomeIcons.idCardClip,size: 20,color: whiteClr,),
                   //   title: Text('Designation'),
                   //   ),
 
@@ -2030,7 +2030,7 @@ class _Home1State extends State<Home1> {
                         MaterialPageRoute(builder: (context) => Profile()),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.userPen,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.userPen,size: 20,color: whiteClr,),
                     title: Text('Profile'),
                   ),
 
@@ -2041,7 +2041,7 @@ class _Home1State extends State<Home1> {
                   //       MaterialPageRoute(builder: (context) => ChangePassword()),
                   //     );
                   //   },
-                  //   leading: Icon(FontAwesomeIcons.lock,size: 20.sp,color: whiteClr,),
+                  //   leading: Icon(FontAwesomeIcons.lock,size: 20,color: whiteClr,),
                   //   title: Text('Password'),
                   // ),
 
@@ -2054,7 +2054,7 @@ class _Home1State extends State<Home1> {
                         );
                       });
                     },
-                    leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
+                    leading: Icon(FontAwesomeIcons.rightToBracket,size: 20,color: whiteClr,),
                     title: Text('Logout'),
                   ),
 
@@ -2107,9 +2107,9 @@ class _Home1State extends State<Home1> {
 
         child: Scaffold(
           appBar:PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
+            preferredSize:  Size.fromHeight(94.0),
             child: Container(
-              height: 102.h,
+              height: 102,
               width:MediaQuery.of(context).size.width,
 
               decoration: BoxDecoration(
@@ -2122,8 +2122,8 @@ class _Home1State extends State<Home1> {
                   ),
                 ],
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20.sp),
-                    bottomRight: Radius.circular(20.sp)),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)),
                 color: whiteClr,
               ),
 
@@ -2146,7 +2146,7 @@ class _Home1State extends State<Home1> {
                         //   // });
                         // },
                         child: Padding(
-                          padding: EdgeInsets.all(10.0.sp),
+                          padding: EdgeInsets.all(10.0),
                           child: ValueListenableBuilder<AdvancedDrawerValue>(
                             valueListenable: _advancedDrawerController,
                             builder: (_, value, __) {
@@ -2161,23 +2161,23 @@ class _Home1State extends State<Home1> {
                           ),
                         ),
                         // child: Padding(
-                        //   padding: EdgeInsets.all(8.0.sp),
-                        //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                        //   padding: EdgeInsets.all(8.0),
+                        //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
                         // ),
                       ),
                       Spacer(),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Onboarding progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                          Text("Onboarding progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
                           SizedBox(
-                            height: 2.h,
+                            height: 2,
                           ),
                           Container(
-                            height: 8.h,
-                            width: 130.w,
+                            height: 8,
+                            width: 130,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.sp),
+                              borderRadius: BorderRadius.circular(20),
                               color: greyOpenClr,
                             ),
                             child: Stack(
@@ -2189,11 +2189,11 @@ class _Home1State extends State<Home1> {
                                   right: 60,
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.sp),
+                                      borderRadius: BorderRadius.circular(20),
                                       color: srpgradient2,
                                     ),
-                                    height: 11.h,
-                                    width: 133.w,
+                                    height: 11,
+                                    width: 133,
                                   ),
                                 )
                               ],
@@ -2203,16 +2203,16 @@ class _Home1State extends State<Home1> {
                       ),
                       Spacer(),
                       Container(
-                        width: 30.0.w,
-                        height: 30.0.h,
+                        width: 30.0,
+                        height: 30.0,
                         child: Stack(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0.sp),
+                              borderRadius: BorderRadius.circular(15.0),
                               child: Image.asset(
                                 'assets/user.jpg',
-                                width: 30.0.w,
-                                height: 30.0.h,
+                                width: 30.0,
+                                height: 30.0,
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -2220,11 +2220,11 @@ class _Home1State extends State<Home1> {
                               bottom: 1.5,
                               right: 1.5,
                               child: Container(
-                                height: 5.h,
-                                width: 5.w,
+                                height: 5,
+                                width: 5,
                                 //color:online,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.sp),
+                                  borderRadius: BorderRadius.circular(5),
                                   color: online,
                                 ),
                               ),
@@ -2232,18 +2232,18 @@ class _Home1State extends State<Home1> {
                           ],
                         ),
                       ),
-                      SizedBox(width: 15.w,)
+                      SizedBox(width: 15,)
                     ],
                   ),
                   Container(
-                    height: 50.h,
+                    height: 50,
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 80.w,
-                          height: 42.h,
+                          width: 80,
+                          height: 42,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -2258,9 +2258,9 @@ class _Home1State extends State<Home1> {
                           ),
                           child: Column(
                             children: [
-                              SizedBox(height: 5.h,),
-                              Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                              Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                              SizedBox(height: 5,),
+                              Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+                              Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                             ],
                           ),
                         ),
@@ -2268,13 +2268,13 @@ class _Home1State extends State<Home1> {
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Container(
                             color: coverBackClr,
-                            height: 40.h,
-                            width: 1.w,
+                            height: 40,
+                            width: 1,
                           ),
                         ),
                         Container(
-                          width: 240.w,
-                          height: 40.h,
+                          width: 240,
+                          height: 40,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -2288,15 +2288,15 @@ class _Home1State extends State<Home1> {
                             color: whiteClr,
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all( 10.sp),
+                            padding: EdgeInsets.all( 10),
                             child: Row(
                               children: [
                                 Text("View Organization",
-                                  style: GoogleFonts.poppins(fontSize:12.sp, color: const Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                  style: GoogleFonts.poppins(fontSize:12, color: const Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                                 const Spacer(),
                                 Container(
-                                  height: 20.h,
-                                  width: 20.w,
+                                  height: 20,
+                                  width: 20,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -2306,10 +2306,10 @@ class _Home1State extends State<Home1> {
                                         offset: const Offset(0, 2), // changes position of shadow
                                       ),
                                     ],
-                                    borderRadius: BorderRadius.circular(15.sp),
+                                    borderRadius: BorderRadius.circular(15),
                                     color: greybackground,
                                   ),
-                                  child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+                                  child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
                               ],
                             ),
                           ),
@@ -2326,7 +2326,7 @@ class _Home1State extends State<Home1> {
             child: Column(
               children: [
                 // Container(
-                //   height: 102.h,
+                //   height: 102,
                 //   width:MediaQuery.of(context).size.width,
                 //   decoration: BoxDecoration(
                 //     boxShadow: [
@@ -2337,7 +2337,7 @@ class _Home1State extends State<Home1> {
                 //         offset: const Offset(0, 2), // changes position of shadow
                 //       ),
                 //     ],
-                //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 //     color: whiteClr,
                 //   ),
                 //   child: Column(
@@ -2358,7 +2358,7 @@ class _Home1State extends State<Home1> {
                 //               // });
                 //             },
                 //             child: Padding(
-                //               padding: EdgeInsets.all(8.0.sp),
+                //               padding: EdgeInsets.all(8.0),
                 //               child: ValueListenableBuilder<AdvancedDrawerValue>(
                 //                 valueListenable: _advancedDrawerController,
                 //                 builder: (_, value, __) {
@@ -2373,23 +2373,23 @@ class _Home1State extends State<Home1> {
                 //               ),
                 //             ),
                 //             // child: Padding(
-                //             //   padding: EdgeInsets.all(8.0.sp),
-                //             //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                //             //   padding: EdgeInsets.all(8.0),
+                //             //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
                 //             // ),
                 //           ),
                 //           Spacer(),
                 //           Column(
                 //             mainAxisAlignment: MainAxisAlignment.center,
                 //             children: [
-                //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
                 //               SizedBox(
-                //                 height: 2.h,
+                //                 height: 2,
                 //               ),
                 //               Container(
-                //                 height: 8.h,
+                //                 height: 8,
                 //                 width: 130.w,
                 //                 decoration: BoxDecoration(
-                //                   borderRadius: BorderRadius.circular(20.sp),
+                //                   borderRadius: BorderRadius.circular(20),
                 //                   color: greyOpenClr,
                 //                 ),
                 //                 child: Stack(
@@ -2401,10 +2401,10 @@ class _Home1State extends State<Home1> {
                 //                       right: 60,
                 //                       child: Container(
                 //                         decoration: BoxDecoration(
-                //                           borderRadius: BorderRadius.circular(20.sp),
+                //                           borderRadius: BorderRadius.circular(20),
                 //                           color: srpgradient2,
                 //                         ),
-                //                         height: 11.h,
+                //                         height: 11,
                 //                         width: 133.w,
                 //                       ),
                 //                     )
@@ -2416,15 +2416,15 @@ class _Home1State extends State<Home1> {
                 //           Spacer(),
                 //           Container(
                 //             width: 30.0.w,
-                //             height: 30.0.h,
+                //             height: 30.0,
                 //             child: Stack(
                 //               children: [
                 //                 ClipRRect(
-                //                   borderRadius: BorderRadius.circular(15.0.sp),
+                //                   borderRadius: BorderRadius.circular(15.0),
                 //                   child: Image.asset(
                 //                     'assets/user.jpg',
                 //                     width: 30.0.w,
-                //                     height: 30.0.h,
+                //                     height: 30.0,
                 //                     fit: BoxFit.fill,
                 //                   ),
                 //                 ),
@@ -2432,11 +2432,11 @@ class _Home1State extends State<Home1> {
                 //                   bottom: 1.5,
                 //                   right: 1.5,
                 //                   child: Container(
-                //                     height: 5.h,
+                //                     height: 5,
                 //                     width: 5.w,
                 //                     //color:online,
                 //                     decoration: BoxDecoration(
-                //                       borderRadius: BorderRadius.circular(5.sp),
+                //                       borderRadius: BorderRadius.circular(5),
                 //                       color: online,
                 //                     ),
                 //                   ),
@@ -2449,14 +2449,14 @@ class _Home1State extends State<Home1> {
                 //       ),
                 //
                 //       Container(
-                //         height: 50.h,
+                //         height: 50,
                 //         width: MediaQuery.of(context).size.width,
                 //         child: Row(
                 //           mainAxisAlignment: MainAxisAlignment.center,
                 //           children: [
                 //             Container(
                 //               width: 80.w,
-                //               height: 40.h,
+                //               height: 40,
                 //               decoration: BoxDecoration(
                 //                 boxShadow: [
                 //                   BoxShadow(
@@ -2471,9 +2471,9 @@ class _Home1State extends State<Home1> {
                 //               ),
                 //               child: Column(
                 //                 children: [
-                //                   SizedBox(height: 5.h,),
-                //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                //                   Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //                   SizedBox(height: 5,),
+                //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+                //                   Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                 //
                 //                 ],
                 //               ),
@@ -2482,13 +2482,13 @@ class _Home1State extends State<Home1> {
                 //               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 //               child: Container(
                 //                 color: coverBackClr,
-                //                 height: 40.h,
+                //                 height: 40,
                 //                 width: 1.w,
                 //               ),
                 //             ),
                 //             Container(
                 //               width: 240.w,
-                //               height: 40.h,
+                //               height: 40,
                 //               decoration: BoxDecoration(
                 //                 boxShadow: [
                 //                   BoxShadow(
@@ -2502,13 +2502,13 @@ class _Home1State extends State<Home1> {
                 //                 color: whiteClr,
                 //               ),
                 //               child: Padding(
-                //                 padding: EdgeInsets.all( 10.sp),
+                //                 padding: EdgeInsets.all( 10),
                 //                 child: Row(
                 //                   children: [
-                //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                 //                     Spacer(),
                 //                     Container(
-                //                       height: 20.h,
+                //                       height: 20,
                 //                       width: 20.w,
                 //                       decoration: BoxDecoration(
                 //                         boxShadow: [
@@ -2519,10 +2519,10 @@ class _Home1State extends State<Home1> {
                 //                             offset: const Offset(0, 2), // changes position of shadow
                 //                           ),
                 //                         ],
-                //                         borderRadius: BorderRadius.circular(15.sp),
+                //                         borderRadius: BorderRadius.circular(15),
                 //                         color: greybackground,
                 //                       ),
-                //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
                 //                   ],
                 //                 ),
                 //               ),
@@ -2534,12 +2534,12 @@ class _Home1State extends State<Home1> {
                 //   ),
                 // ),
                 // SizedBox(
-                //   height: 10.h,
+                //   height: 10,
                 // ),
                 Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 115.h,
+                    height: 115,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -2550,23 +2550,23 @@ class _Home1State extends State<Home1> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 25.h,
+                            height: 25,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
-                                Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                 Spacer(),
                                 Container(
-                                  height: 17.h,
-                                  width: 17.w,
+                                  height: 17,
+                                  width: 17,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -2576,10 +2576,10 @@ class _Home1State extends State<Home1> {
                                         offset: const Offset(0, 2), // changes position of shadow
                                       ),
                                     ],
-                                    borderRadius: BorderRadius.circular(15.sp),
+                                    borderRadius: BorderRadius.circular(15),
                                     color: greybackground,
                                   ),
-                                  child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+                                  child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
                               ],
                             ),
                           ),
@@ -2593,29 +2593,29 @@ class _Home1State extends State<Home1> {
 
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 78.h,
+                          height: 78,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 20),
                             child: Row(
                               children: [
                                 Column(
                                   children: [
-                                    Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                    Text("IN",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                    Text("IN",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 Spacer(),
                                 Column(
                                   children: [
-                                    Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                    Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                    Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 Spacer(),
                                 Column(
                                   children: [
-                                    Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                    Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                    Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                               ],
@@ -2628,9 +2628,9 @@ class _Home1State extends State<Home1> {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 305.h,
+                    height: 305,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -2641,23 +2641,23 @@ class _Home1State extends State<Home1> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 25.h,
+                            height: 25,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
-                                Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                 const Spacer(),
                                 Container(
-                                  height: 17.h,
-                                  width: 17.w,
+                                  height: 17,
+                                  width: 17,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -2667,10 +2667,10 @@ class _Home1State extends State<Home1> {
                                         offset: const Offset(0, 2), // changes position of shadow
                                       ),
                                     ],
-                                    borderRadius: BorderRadius.circular(15.sp),
+                                    borderRadius: BorderRadius.circular(15),
                                     color: greybackground,
                                   ),
-                                  child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+                                  child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
                               ],
                             ),
                           ),
@@ -2682,30 +2682,30 @@ class _Home1State extends State<Home1> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 77.h,
+                          height: 77,
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
+                            padding: EdgeInsets.symmetric(horizontal: 30.0,vertical: 20),
                             child: Row(
                               children: [
                                 Column(
                                   children: [
-                                    Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                    Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                    Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 Spacer(),
                                 Column(
                                   children: [
-                                    Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                    Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                    Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
 
                                   ],
                                 ),
                                 Spacer(),
                                 Column(
                                   children: [
-                                    Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-                                    Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+                                    Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                               ],
@@ -2723,9 +2723,9 @@ class _Home1State extends State<Home1> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 319.h,
+                    height: 319,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -2736,19 +2736,19 @@ class _Home1State extends State<Home1> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 25.h,
+                            height: 25,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
-                                Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                 const Spacer(),
                               ],
                             ),
@@ -2765,7 +2765,7 @@ class _Home1State extends State<Home1> {
                             Positioned(
                                 top: 127,
                                 left: 92,
-                                child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+                                child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
                           ],
                         ),
                       ],
@@ -2773,9 +2773,9 @@ class _Home1State extends State<Home1> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 315.h,
+                    height: 315,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -2786,19 +2786,19 @@ class _Home1State extends State<Home1> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 25.h,
+                            height: 25,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
-                                Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                                 const Spacer(),
                               ],
                             ),
@@ -2815,7 +2815,7 @@ class _Home1State extends State<Home1> {
                             Positioned(
                                 top: 127,
                                 left: 92,
-                                child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+                                child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
                           ],
                         ),
                       ],
@@ -2823,9 +2823,9 @@ class _Home1State extends State<Home1> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 95.h,
+                    height: 95,
                     width: MediaQuery.of(context).size.width,
                     //color: Colors.lightGreen,
                     decoration: BoxDecoration(
@@ -2837,42 +2837,42 @@ class _Home1State extends State<Home1> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:[
                         Padding(
-                          padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-                          child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                          padding:  EdgeInsets.symmetric(vertical: 14.0,horizontal: 10),
+                          child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                         ),
                         Container(
                           height: 1,
                           color: greyOpenClr,
                           width: MediaQuery.of(context).size.width,
                         ),
-                        SizedBox(height: 15.h,),
+                        SizedBox(height: 15,),
                         Row(
                           children: [
-                            SizedBox(width: 11.w,),
+                            SizedBox(width: 11,),
                             Container(
                               // color: Colors.purpleAccent,
-                                height: 30.h,
-                                width: 100.w,
-                                child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
-                            SizedBox(width: 10.w,),
+                                height: 30,
+                                width: 100,
+                                child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
+                            SizedBox(width: 10,),
                             Container(
                               // color: Colors.purpleAccent,
-                                height: 30.h,
-                                width: 100.w,
-                                child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
-                            SizedBox(width: 10.w,),
+                                height: 30,
+                                width: 100,
+                                child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
+                            SizedBox(width: 10,),
                             Container(
                               // color: Colors.purpleAccent,
-                                height: 30.h,
-                                width: 100.w,
-                                child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                                height: 30,
+                                width: 100,
+                                child: Center(child: Text("Saturday, 9 July Eid al-Adha" ,style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
                           ],
                         )
                       ],
@@ -2880,7 +2880,7 @@ class _Home1State extends State<Home1> {
                   ),
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 20,
                 ),
               ],
             ),
@@ -2909,7 +2909,7 @@ class _Home1State extends State<Home1> {
         //     child: Column(
         //       children: [
         //         Container(
-        //           height: 102.h,
+        //           height: 102,
         //           width:MediaQuery.of(context).size.width,
         //           decoration: BoxDecoration(
         //             boxShadow: [
@@ -2920,7 +2920,7 @@ class _Home1State extends State<Home1> {
         //                 offset: const Offset(0, 2), // changes position of shadow
         //               ),
         //             ],
-        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
         //             color: whiteClr,
         //           ),
         //           child: Column(
@@ -2941,7 +2941,7 @@ class _Home1State extends State<Home1> {
         //                       // });
         //                     },
         //                    child: Padding(
-        //                      padding: EdgeInsets.all(8.0.sp),
+        //                      padding: EdgeInsets.all(8.0),
         //                      child: ValueListenableBuilder<AdvancedDrawerValue>(
         //                        valueListenable: _advancedDrawerController,
         //                        builder: (_, value, __) {
@@ -2956,23 +2956,23 @@ class _Home1State extends State<Home1> {
         //                      ),
         //                    ),
         //                     // child: Padding(
-        //                     //   padding: EdgeInsets.all(8.0.sp),
-        //                     //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+        //                     //   padding: EdgeInsets.all(8.0),
+        //                     //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
         //                     // ),
         //                   ),
         //                   Spacer(),
         //                   Column(
         //                     mainAxisAlignment: MainAxisAlignment.center,
         //                     children: [
-        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
         //                       SizedBox(
-        //                         height: 2.h,
+        //                         height: 2,
         //                       ),
         //                       Container(
-        //                         height: 8.h,
+        //                         height: 8,
         //                         width: 130.w,
         //                         decoration: BoxDecoration(
-        //                           borderRadius: BorderRadius.circular(20.sp),
+        //                           borderRadius: BorderRadius.circular(20),
         //                           color: greyOpenClr,
         //                         ),
         //                         child: Stack(
@@ -2984,10 +2984,10 @@ class _Home1State extends State<Home1> {
         //                                 right: 60,
         //                                 child: Container(
         //                                   decoration: BoxDecoration(
-        //                                     borderRadius: BorderRadius.circular(20.sp),
+        //                                     borderRadius: BorderRadius.circular(20),
         //                                     color: srpgradient2,
         //                                   ),
-        //                                   height: 11.h,
+        //                                   height: 11,
         //                                   width: 133.w,
         //                                 ),
         //                               )
@@ -2999,15 +2999,15 @@ class _Home1State extends State<Home1> {
         //                   Spacer(),
         //                   Container(
         //                     width: 30.0.w,
-        //                     height: 30.0.h,
+        //                     height: 30.0,
         //                     child: Stack(
         //                       children: [
         //                         ClipRRect(
-        //                           borderRadius: BorderRadius.circular(15.0.sp),
+        //                           borderRadius: BorderRadius.circular(15.0),
         //                           child: Image.asset(
         //                             'assets/user.jpg',
         //                             width: 30.0.w,
-        //                             height: 30.0.h,
+        //                             height: 30.0,
         //                             fit: BoxFit.fill,
         //                           ),
         //                         ),
@@ -3015,11 +3015,11 @@ class _Home1State extends State<Home1> {
         //                           bottom: 1.5,
         //                           right: 1.5,
         //                           child: Container(
-        //                             height: 5.h,
+        //                             height: 5,
         //                             width: 5.w,
         //                             //color:online,
         //                             decoration: BoxDecoration(
-        //                               borderRadius: BorderRadius.circular(5.sp),
+        //                               borderRadius: BorderRadius.circular(5),
         //                               color: online,
         //                             ),
         //                           ),
@@ -3032,14 +3032,14 @@ class _Home1State extends State<Home1> {
         //               ),
         //
         //               Container(
-        //                 height: 50.h,
+        //                 height: 50,
         //                 width: MediaQuery.of(context).size.width,
         //                 child: Row(
         //                   mainAxisAlignment: MainAxisAlignment.center,
         //                   children: [
         //                     Container(
         //                       width: 80.w,
-        //                       height: 40.h,
+        //                       height: 40,
         //                       decoration: BoxDecoration(
         //                         boxShadow: [
         //                           BoxShadow(
@@ -3054,9 +3054,9 @@ class _Home1State extends State<Home1> {
         //                       ),
         //                       child: Column(
         //                         children: [
-        //                           SizedBox(height: 5.h,),
-        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+        //                           SizedBox(height: 5,),
+        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
         //
         //                         ],
         //                       ),
@@ -3065,13 +3065,13 @@ class _Home1State extends State<Home1> {
         //                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
         //                       child: Container(
         //                         color: coverBackClr,
-        //                         height: 40.h,
+        //                         height: 40,
         //                         width: 1.w,
         //                       ),
         //                     ),
         //                     Container(
         //                       width: 240.w,
-        //                       height: 40.h,
+        //                       height: 40,
         //                       decoration: BoxDecoration(
         //                         boxShadow: [
         //                           BoxShadow(
@@ -3085,13 +3085,13 @@ class _Home1State extends State<Home1> {
         //                         color: whiteClr,
         //                       ),
         //                      child: Padding(
-        //                        padding: EdgeInsets.all( 10.sp),
+        //                        padding: EdgeInsets.all( 10),
         //                        child: Row(
         //                          children: [
-        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
         //                            Spacer(),
         //                            Container(
-        //                              height: 20.h,
+        //                              height: 20,
         //                              width: 20.w,
         //                              decoration: BoxDecoration(
         //                                boxShadow: [
@@ -3102,10 +3102,10 @@ class _Home1State extends State<Home1> {
         //                                    offset: const Offset(0, 2), // changes position of shadow
         //                                  ),
         //                                ],
-        //                                borderRadius: BorderRadius.circular(15.sp),
+        //                                borderRadius: BorderRadius.circular(15),
         //                                color: greybackground,
         //                              ),
-        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
         //                          ],
         //                        ),
         //                      ),
@@ -3117,12 +3117,12 @@ class _Home1State extends State<Home1> {
         //           ),
         //         ),
         //         SizedBox(
-        //           height: 10.h,
+        //           height: 10,
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 115.h,
+        //             height: 115,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -3133,22 +3133,22 @@ class _Home1State extends State<Home1> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         Spacer(),
         //                         Container(
-        //                           height: 17.h,
+        //                           height: 17,
         //                           width: 17.w,
         //                           decoration: BoxDecoration(
         //                             boxShadow: [
@@ -3159,10 +3159,10 @@ class _Home1State extends State<Home1> {
         //                                 offset: const Offset(0, 2), // changes position of shadow
         //                               ),
         //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
+        //                             borderRadius: BorderRadius.circular(15),
         //                             color: greybackground,
         //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
         //                       ],
         //                     ),
         //                   ),
@@ -3174,29 +3174,29 @@ class _Home1State extends State<Home1> {
         //                 ),
         //                 SizedBox(
         //                   width: MediaQuery.of(context).size.width,
-        //                   height: 78.h,
+        //                   height: 78,
         //                   child: Padding(
-        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20.h),
+        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20),
         //                     child: Row(
         //                       children: [
         //                         Column(
         //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                       ],
@@ -3208,9 +3208,9 @@ class _Home1State extends State<Home1> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 305.h,
+        //             height: 305,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -3221,22 +3221,22 @@ class _Home1State extends State<Home1> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //                         Container(
-        //                           height: 17.h,
+        //                           height: 17,
         //                           width: 17.w,
         //                           decoration: BoxDecoration(
         //                             boxShadow: [
@@ -3247,10 +3247,10 @@ class _Home1State extends State<Home1> {
         //                                 offset: const Offset(0, 2), // changes position of shadow
         //                               ),
         //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
+        //                             borderRadius: BorderRadius.circular(15),
         //                             color: greybackground,
         //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
         //                       ],
         //                     ),
         //                   ),
@@ -3262,31 +3262,31 @@ class _Home1State extends State<Home1> {
         //                 ),
         //                 SizedBox(
         //                   width: MediaQuery.of(context).size.width,
-        //                   height: 74.h,
+        //                   height: 74,
         //                   child: Padding(
-        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
+        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20),
         //                     child: Row(
         //                       children: [
         //                         Column(
         //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                       ],
@@ -3304,9 +3304,9 @@ class _Home1State extends State<Home1> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 315.h,
+        //             height: 315,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -3317,19 +3317,19 @@ class _Home1State extends State<Home1> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //
         //                       ],
@@ -3347,7 +3347,7 @@ class _Home1State extends State<Home1> {
         //                     Positioned(
         //                         top: 127,
         //                         left: 92,
-        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
         //                   ],
         //                 ),
         //               ],
@@ -3355,9 +3355,9 @@ class _Home1State extends State<Home1> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 315.h,
+        //             height: 315,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -3368,19 +3368,19 @@ class _Home1State extends State<Home1> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //
         //                       ],
@@ -3398,7 +3398,7 @@ class _Home1State extends State<Home1> {
         //                     Positioned(
         //                         top: 127,
         //                         left: 92,
-        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
         //                   ],
         //                 ),
         //               ],
@@ -3406,9 +3406,9 @@ class _Home1State extends State<Home1> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 95.h,
+        //             height: 95,
         //             width: MediaQuery.of(context).size.width,
         //             //color: Colors.lightGreen,
         //             decoration: BoxDecoration(
@@ -3420,30 +3420,30 @@ class _Home1State extends State<Home1> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               crossAxisAlignment: CrossAxisAlignment.start,
         //               children:[
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                   padding:  EdgeInsets.symmetric(vertical: 14.0,horizontal: 10.w),
+        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                 ),
         //                 Container(
         //                   height: 1,
         //                   color: greyOpenClr,
         //                   width: MediaQuery.of(context).size.width,
         //                 ),
-        //                 SizedBox(height: 15.h,),
+        //                 SizedBox(height: 15,),
         //                 Row(
         //                   children: [
         //                     SizedBox(width: 11.w,),
-        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                     SizedBox(width: 10.w,),
-        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                     SizedBox(width: 10.w,),
-        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                   ],
         //                 )
         //               ],
@@ -3451,7 +3451,7 @@ class _Home1State extends State<Home1> {
         //           ),
         //         ),
         //         SizedBox(
-        //           height: 20.h,
+        //           height: 20,
         //         ),
         //       ],
         //     ),
@@ -3539,7 +3539,7 @@ class _Home1State extends State<Home1> {
 //   late TabController tabController = TabController(length: 3, vsync: this);
 //
 //   Animation<RelativeRect> getPanelAnimation(BoxConstraints constraints) {
-//     final _height = constraints.biggest.height;
+//     final _height = constraints.biggesteight;
 //     final _backPanelHeight = _height - _headerHeight;
 //     const _frontPanelHeight = -_headerHeight;
 //
@@ -3581,15 +3581,15 @@ class _Home1State extends State<Home1> {
 //               controller: tabController,
 //               tabs: const [
 //                 Tab(
-//                   //icon: Icon(Icons.home_filled),
+//                   //icon: Icon(Iconsome_filled),
 //                   text: 'lll',
 //                 ),
 //                 Tab(
-//                   icon: Icon(Icons.home_filled),
+//                   icon: Icon(Iconsome_filled),
 //                   //text: 'lll',
 //                 ),
 //                 Tab(
-//                   icon: Icon(Icons.home_filled),
+//                   icon: Icon(Iconsome_filled),
 //                   text: 'lll',
 //                 )
 //               ],
@@ -3745,9 +3745,11 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
       datestring='${now.year}-$m-${now.day}';
       print("gudddddddddddddddddii $datestring 1");
       // time=time1.toString();
-      // time='${now.hour}:${now.minute}';
+      // time='${nowour}:${now.minute}';
       // datestring=date.toString();
       // datestring=datestring.substring(0, datestring.length - 13);
+    }else{
+      datestring='${now.year}-${now.month}-${now.day}';
     }
     print("*-/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/  $time");
     fetchuser();
@@ -3958,9 +3960,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
-    Placemark place1=placemark[1];
+    //Placemark place1=placemark[1];
     setState(() {
-      Address= '${place.thoroughfare!.isEmpty ? place1.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place1.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place1.locality}, ${place.postalCode}';
+      Address= '${place.thoroughfare!.isEmpty ? place.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place.locality}, ${place.postalCode}';
       reload=false;
     });
 
@@ -3971,9 +3973,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemark);
     Placemark place=placemark[0];
-    Placemark place1=placemark[1];
+   // Placemark place1=placemark[1];
     setState(() {
-      Address1= '${place.thoroughfare!.isEmpty ? place1.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place1.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place1.locality}, ${place.postalCode}';
+      Address1= '${place.thoroughfare!.isEmpty ? place.thoroughfare:place.thoroughfare}, ${place.subLocality!.isEmpty ? place.subLocality: place.subLocality}, ${place.locality!.isEmpty?place.locality:place.locality}, ${place.postalCode}';
       reload=false;
     });
 
@@ -3988,9 +3990,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
     return SafeArea(
       child: Scaffold(
           appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
+            preferredSize:  Size.fromHeight(94.0),
             child: Container(
-              height: 102.h,
+              height: 102,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -4001,7 +4003,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                     offset: const Offset(0, 2), // changes position of shadow
                   ),
                 ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 color: whiteClr,
               ),
               child: Column(
@@ -4024,23 +4026,23 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         //   // });
                         // },
                         child: Padding(
-                          padding: EdgeInsets.all(10.0.sp),
-                          child: Icon(Icons.arrow_back_ios_new_outlined,size:19.sp,color: Colors.black,),
+                          padding: EdgeInsets.all(10.0),
+                          child: Icon(Icons.arrow_back_ios_new_outlined,size:19,color: Colors.black,),
                         ),
                         // child: Padding(
-                        //   padding: EdgeInsets.all(8.0.sp),
-                        //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                        //   padding: EdgeInsets.all(8.0),
+                        //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
                         // ),
                       ),
                       const Spacer(),
-                      Text("$user_name",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                      Text("$user_name",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                       const Spacer(),
-                      SizedBox(width: 30.w,),
+                      SizedBox(width: 30,),
                     ],
                   ),
 
                   Container(
-                    height: 30.h,
+                    height: 30,
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -4059,14 +4061,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
             // timeinshow == false && timeoutshow == false ?
             // Container(
             //   // color: Colors.purpleAccent,
-            //   height: MediaQuery.of(context).size.height,
+            //   height: MediaQuery.of(context).sizeeight,
             //   width: MediaQuery.of(context).size.width,
-            //   child:Center(child: Text("Attendance is Marked",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),),
+            //   child:Center(child: Text("Attendance is Marked",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),),
             // ) :
             Column(
               children: [
                 // Container(
-                //   height: 102.h,
+                //   height: 102,
                 //   width:MediaQuery.of(context).size.width,
                 //   decoration: BoxDecoration(
                 //     boxShadow: [
@@ -4077,7 +4079,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //         offset: const Offset(0, 2), // changes position of shadow
                 //       ),
                 //     ],
-                //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 //     color: whiteClr,
                 //   ),
                 //   child: Column(
@@ -4098,7 +4100,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //               // });
                 //             },
                 //             child: Padding(
-                //               padding: EdgeInsets.all(8.0.sp),
+                //               padding: EdgeInsets.all(8.0),
                 //               child: ValueListenableBuilder<AdvancedDrawerValue>(
                 //                 valueListenable: _advancedDrawerController,
                 //                 builder: (_, value, __) {
@@ -4113,23 +4115,23 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //               ),
                 //             ),
                 //             // child: Padding(
-                //             //   padding: EdgeInsets.all(8.0.sp),
-                //             //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                //             //   padding: EdgeInsets.all(8.0),
+                //             //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
                 //             // ),
                 //           ),
                 //           Spacer(),
                 //           Column(
                 //             mainAxisAlignment: MainAxisAlignment.center,
                 //             children: [
-                //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
                 //               SizedBox(
-                //                 height: 2.h,
+                //                 height: 2,
                 //               ),
                 //               Container(
-                //                 height: 8.h,
+                //                 height: 8,
                 //                 width: 130.w,
                 //                 decoration: BoxDecoration(
-                //                   borderRadius: BorderRadius.circular(20.sp),
+                //                   borderRadius: BorderRadius.circular(20),
                 //                   color: greyOpenClr,
                 //                 ),
                 //                 child: Stack(
@@ -4141,10 +4143,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                       right: 60,
                 //                       child: Container(
                 //                         decoration: BoxDecoration(
-                //                           borderRadius: BorderRadius.circular(20.sp),
+                //                           borderRadius: BorderRadius.circular(20),
                 //                           color: srpgradient2,
                 //                         ),
-                //                         height: 11.h,
+                //                         height: 11,
                 //                         width: 133.w,
                 //                       ),
                 //                     )
@@ -4156,15 +4158,15 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //           Spacer(),
                 //           Container(
                 //             width: 30.0.w,
-                //             height: 30.0.h,
+                //             height: 30.0,
                 //             child: Stack(
                 //               children: [
                 //                 ClipRRect(
-                //                   borderRadius: BorderRadius.circular(15.0.sp),
+                //                   borderRadius: BorderRadius.circular(15.0),
                 //                   child: Image.asset(
                 //                     'assets/user.jpg',
                 //                     width: 30.0.w,
-                //                     height: 30.0.h,
+                //                     height: 30.0,
                 //                     fit: BoxFit.fill,
                 //                   ),
                 //                 ),
@@ -4172,11 +4174,11 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                   bottom: 1.5,
                 //                   right: 1.5,
                 //                   child: Container(
-                //                     height: 5.h,
+                //                     height: 5,
                 //                     width: 5.w,
                 //                     //color:online,
                 //                     decoration: BoxDecoration(
-                //                       borderRadius: BorderRadius.circular(5.sp),
+                //                       borderRadius: BorderRadius.circular(5),
                 //                       color: online,
                 //                     ),
                 //                   ),
@@ -4189,14 +4191,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //       ),
                 //
                 //       Container(
-                //         height: 50.h,
+                //         height: 50,
                 //         width: MediaQuery.of(context).size.width,
                 //         child: Row(
                 //           mainAxisAlignment: MainAxisAlignment.center,
                 //           children: [
                 //             Container(
                 //               width: 80.w,
-                //               height: 40.h,
+                //               height: 40,
                 //               decoration: BoxDecoration(
                 //                 boxShadow: [
                 //                   BoxShadow(
@@ -4211,9 +4213,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //               ),
                 //               child: Column(
                 //                 children: [
-                //                   SizedBox(height: 5.h,),
-                //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                //                   Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //                   SizedBox(height: 5,),
+                //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+                //                   Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                 //
                 //                 ],
                 //               ),
@@ -4222,13 +4224,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 //               child: Container(
                 //                 color: coverBackClr,
-                //                 height: 40.h,
+                //                 height: 40,
                 //                 width: 1.w,
                 //               ),
                 //             ),
                 //             Container(
                 //               width: 240.w,
-                //               height: 40.h,
+                //               height: 40,
                 //               decoration: BoxDecoration(
                 //                 boxShadow: [
                 //                   BoxShadow(
@@ -4242,13 +4244,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                 color: whiteClr,
                 //               ),
                 //               child: Padding(
-                //                 padding: EdgeInsets.all( 10.sp),
+                //                 padding: EdgeInsets.all( 10),
                 //                 child: Row(
                 //                   children: [
-                //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                 //                     Spacer(),
                 //                     Container(
-                //                       height: 20.h,
+                //                       height: 20,
                 //                       width: 20.w,
                 //                       decoration: BoxDecoration(
                 //                         boxShadow: [
@@ -4259,10 +4261,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                             offset: const Offset(0, 2), // changes position of shadow
                 //                           ),
                 //                         ],
-                //                         borderRadius: BorderRadius.circular(15.sp),
+                //                         borderRadius: BorderRadius.circular(15),
                 //                         color: greybackground,
                 //                       ),
-                //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
                 //                   ],
                 //                 ),
                 //               ),
@@ -4274,12 +4276,12 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //   ),
                 // ),
                 // SizedBox(
-                //   height: 10.h,
+                //   height: 10,
                 // ),
                 timeinshow==true ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 151.h,
+                    height: 151,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -4290,32 +4292,32 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 35.h,
+                            height: 35,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    SizedBox(height: 5,),
+                                    Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
                                   // color: Colors.purpleAccent,
-                                    width: 92.w,
-                                    height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                    width: 92,
+                                    height: 25,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: ()async{
@@ -4335,8 +4337,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     });
                                   },
                                   child: Container(
-                                    height: 27.h,
-                                    width: 27.w,
+                                    height: 27,
+                                    width: 27,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -4346,17 +4348,17 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
                                     child: reload ==true ?SizedBox(
-                                      height: 5.h,
-                                      width: 5.w,
+                                      height: 5,
+                                      width: 5,
                                       child: CircularProgressIndicator(
                                         backgroundColor: Colors.white,
-                                        strokeWidth: 1.w,
+                                        strokeWidth: 1,
                                       ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                                   ),
                                 ),
                               ],
@@ -4370,14 +4372,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 104.h,
+                          height: 104,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0,vertical: 12),
                             child: Column(
                               children: [
-                                Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
-                                  height: 10.h,
+                                  height: 10,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
@@ -4388,7 +4390,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     // FirebaseFirestore.instance
                                     //     .collection('Companies').doc('${admin}').collection("Employee")
                                     //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
-                                    //     .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
+                                    //     .update({"TimeIn":"${nowour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
                                     //     .then((value) {
                                     //       setState(() {
                                     //         timeinshow=false;
@@ -4398,8 +4400,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     // }); //.then((value) => initState());
                                   },
                                   child: Container(
-                                      height: 40.h,
-                                      width: 295.w,
+                                      height: 40,
+                                      width: 295,
                                       decoration: BoxDecoration(
                                         gradient: const LinearGradient(
                                           begin: Alignment.topCenter,
@@ -4423,8 +4425,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                       ),
                                       child:Center(
                                         child:  timinindicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                            ? SizedBox(height: 15, width: 15, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time In",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                       )
                                   ),
                                 ),
@@ -4438,9 +4440,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 ) : SizedBox(),
 
                 timeoutshow==true ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 151.1.h,
+                    height: 151.1,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -4451,33 +4453,33 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 35.h,
+                            height: 35,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    SizedBox(height: 5,),
+                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
                                   // color: Colors.purpleAccent,
-                                    width: 92.w,
-                                    height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                    width: 92,
+                                    height: 25,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: ()async{
@@ -4496,8 +4498,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     });
                                   },
                                   child: Container(
-                                    height: 27.h,
-                                    width: 27.w,
+                                    height: 27,
+                                    width: 27,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -4507,17 +4509,17 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
                                     child: reload ==true ?SizedBox(
-                                      height: 5.h,
-                                      width: 5.w,
+                                      height: 5,
+                                      width: 5,
                                       child: CircularProgressIndicator(
                                         backgroundColor: Colors.white,
-                                        strokeWidth: 1.w,
+                                        strokeWidth: 1,
                                       ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                                   ),
                                 ),
                               ],
@@ -4531,14 +4533,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 105.h,
+                          height: 105,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0,vertical: 12),
                             child: Column(
                               children: [
-                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
-                                  height: 10.h,
+                                  height: 10,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
@@ -4546,8 +4548,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     // .then((value) => initState());
                                   },
                                   child: Container(
-                                      height: 40.h,
-                                      width: 295.w,
+                                      height: 40,
+                                      width: 295,
                                       decoration: BoxDecoration(
                                         // gradient: const LinearGradient(
                                         //   begin: Alignment.topCenter,
@@ -4571,8 +4573,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                       ),
                                       child:Center(
                                         child: timinoutdicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                            ? SizedBox(height: 15, width: 15, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
 
                                       )
                                   ),
@@ -4587,9 +4589,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 ) : SizedBox(),
 
                 timeinshow==false && timeoutshow==false ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 151.1.h,
+                    height: 151.1,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -4600,33 +4602,33 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 35.h,
+                            height: 35,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    SizedBox(height: 5,),
+                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
                                   // color: Colors.purpleAccent,
-                                    width: 92.w,
-                                    height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                    width: 92,
+                                    height: 25,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: ()async{
@@ -4645,8 +4647,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     });
                                   },
                                   child: Container(
-                                    height: 27.h,
-                                    width: 27.w,
+                                    height: 27,
+                                    width: 27,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -4656,17 +4658,17 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
                                     child: reload ==true ?SizedBox(
-                                      height: 5.h,
-                                      width: 5.w,
+                                      height: 5,
+                                      width: 5,
                                       child: CircularProgressIndicator(
                                         backgroundColor: Colors.white,
-                                        strokeWidth: 1.w,
+                                        strokeWidth: 1,
                                       ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                                   ),
                                 ),
                               ],
@@ -4680,14 +4682,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 105.h,
+                          height: 105,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0,vertical: 12),
                             child: Column(
                               children: [
-                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
-                                  height: 10.h,
+                                  height: 10,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
@@ -4695,8 +4697,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     // .then((value) => initState());
                                   },
                                   child: Container(
-                                      height: 40.h,
-                                      width: 295.w,
+                                      height: 40,
+                                      width: 295,
                                       decoration: BoxDecoration(
                                         // gradient: const LinearGradient(
                                         //   begin: Alignment.topCenter,
@@ -4720,8 +4722,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                       ),
                                       child:Center(
                                         child: timinoutdicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                            ? SizedBox(height: 15, width: 15, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
 
                                       )
                                   ),
@@ -4736,9 +4738,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 ) : SizedBox(),
 
                 // timeinshow==false && timeoutshow==false ? Padding(
-                //   padding: EdgeInsets.all(20.0.sp),
+                //   padding: EdgeInsets.all(20.0),
                 //   child: Container(
-                //     height: 151.h,
+                //     height: 151,
                 //     width:MediaQuery.of(context).size.width,
                 //     decoration: BoxDecoration(
                 //       boxShadow: [
@@ -4749,32 +4751,32 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //           offset: const Offset(0, 2), // changes position of shadow
                 //         ),
                 //       ],
-                //       borderRadius: BorderRadius.circular(6.sp),
+                //       borderRadius: BorderRadius.circular(6),
                 //       color: whiteClr,
                 //     ),
                 //     child: Column(
                 //       children: [
                 //         Padding(
-                //           padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                //           padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                 //           child: Container(
-                //             height: 36.h,
+                //             height: 36,
                 //             width: MediaQuery.of(context).size.width,
                 //             child: Row(
                 //               children: [
                 //                 Column(
                 //                   crossAxisAlignment: CrossAxisAlignment.start,
                 //                   children: [
-                //                     SizedBox(height: 5.h,),
-                //                     Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                //                     Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                //                     SizedBox(height: 5,),
+                //                     Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                //                     Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                 //                   ],
                 //                 ),
                 //                 const Spacer(),
                 //                 Container(
                 //                   // color: Colors.purpleAccent,
                 //                     width: 92.w,
-                //                     height: 25.h,
-                //                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                //                     height: 25,
+                //                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                 //                 const Spacer(),
                 //                 GestureDetector(
                 //                   onTap: ()async{
@@ -4793,7 +4795,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                     });
                 //                   },
                 //                   child: Container(
-                //                     height: 27.h,
+                //                     height: 27,
                 //                     width: 27.w,
                 //                     decoration: BoxDecoration(
                 //                       boxShadow: [
@@ -4804,17 +4806,17 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                           offset: const Offset(0, 2), // changes position of shadow
                 //                         ),
                 //                       ],
-                //                       borderRadius: BorderRadius.circular(15.sp),
+                //                       borderRadius: BorderRadius.circular(15),
                 //                       color: greybackground,
                 //                     ),
                 //                     child: reload ==true ?SizedBox(
-                //                       height: 5.h,
+                //                       height: 5,
                 //                       width: 5.w,
                 //                       child: CircularProgressIndicator(
                 //                         backgroundColor: Colors.white,
                 //                         strokeWidth: 1.w,
                 //                       ),
-                //                     ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                //                     ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                 //                   ),
                 //                 ),
                 //               ],
@@ -4828,14 +4830,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //         ),
                 //         SizedBox(
                 //           width: MediaQuery.of(context).size.width,
-                //           height: 104.h,
+                //           height: 104,
                 //           child: Padding(
-                //             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                //             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12),
                 //             child: Column(
                 //               children: [
-                //                 Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //                 Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                 //                 SizedBox(
-                //                   height: 10.h,
+                //                   height: 10,
                 //                 ),
                 //                 GestureDetector(
                 //                   onTap: () async {
@@ -4843,7 +4845,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                      //.then((value) => initState());
                 //                   },
                 //                   child: Container(
-                //                       height: 40.h,
+                //                       height: 40,
                 //                       width: 295.w,
                 //                       decoration: BoxDecoration(
                 //                         gradient: const LinearGradient(
@@ -4869,8 +4871,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                       child:Center(
                 //                         child:
                 //                         timinindicator==true
-                //                         ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                //                         : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                //                         ? SizedBox(height: 15, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                //                         : Text("Time In",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                 //                       )
                 //                   ),
                 //                 ),
@@ -4884,13 +4886,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 // ) : SizedBox(),
 
                 SizedBox(
-                  height: 20.h,
+                  height: 20,
                 ),
 
                 // Padding(
-                //   padding: EdgeInsets.all(20.0.sp),
+                //   padding: EdgeInsets.all(20.0),
                 //   child: Container(
-                //     height: 95.h,
+                //     height: 95,
                 //     width: MediaQuery.of(context).size.width,
                 //     //color: Colors.lightGreen,
                 //     decoration: BoxDecoration(
@@ -4902,42 +4904,42 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //           offset: const Offset(0, 2), // changes position of shadow
                 //         ),
                 //       ],
-                //       borderRadius: BorderRadius.circular(6.sp),
+                //       borderRadius: BorderRadius.circular(6),
                 //       color: whiteClr,
                 //     ),
                 //     child: Column(
                 //       crossAxisAlignment: CrossAxisAlignment.start,
                 //       children:[
                 //         Padding(
-                //           padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-                //           child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //           padding:  EdgeInsets.symmetric(vertical: 14.0,horizontal: 10.w),
+                //           child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                 //         ),
                 //         Container(
                 //           height: 1,
                 //           color: greyOpenClr,
                 //           width: MediaQuery.of(context).size.width,
                 //         ),
-                //         SizedBox(height: 15.h,),
+                //         SizedBox(height: 15,),
                 //         Row(
                 //           children: [
                 //             SizedBox(width: 11.w,),
                 //             Container(
                 //               // color: Colors.purpleAccent,
-                //                 height: 30.h,
+                //                 height: 30,
                 //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
                 //             SizedBox(width: 10.w,),
                 //             Container(
                 //               //color: Colors.purpleAccent,
-                //                 height: 30.h,
+                //                 height: 30,
                 //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
                 //             SizedBox(width: 10.w,),
                 //             Container(
                 //               // color: Colors.purpleAccent,
-                //                 height: 30.h,
+                //                 height: 30,
                 //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
                 //           ],
                 //         )
                 //       ],
@@ -4971,7 +4973,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //     child: Column(
         //       children: [
         //         Container(
-        //           height: 102.h,
+        //           height: 102,
         //           width:MediaQuery.of(context).size.width,
         //           decoration: BoxDecoration(
         //             boxShadow: [
@@ -4982,7 +4984,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                 offset: const Offset(0, 2), // changes position of shadow
         //               ),
         //             ],
-        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
         //             color: whiteClr,
         //           ),
         //           child: Column(
@@ -5003,7 +5005,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                       // });
         //                     },
         //                    child: Padding(
-        //                      padding: EdgeInsets.all(8.0.sp),
+        //                      padding: EdgeInsets.all(8.0),
         //                      child: ValueListenableBuilder<AdvancedDrawerValue>(
         //                        valueListenable: _advancedDrawerController,
         //                        builder: (_, value, __) {
@@ -5018,23 +5020,23 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                      ),
         //                    ),
         //                     // child: Padding(
-        //                     //   padding: EdgeInsets.all(8.0.sp),
-        //                     //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+        //                     //   padding: EdgeInsets.all(8.0),
+        //                     //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
         //                     // ),
         //                   ),
         //                   Spacer(),
         //                   Column(
         //                     mainAxisAlignment: MainAxisAlignment.center,
         //                     children: [
-        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
         //                       SizedBox(
-        //                         height: 2.h,
+        //                         height: 2,
         //                       ),
         //                       Container(
-        //                         height: 8.h,
+        //                         height: 8,
         //                         width: 130.w,
         //                         decoration: BoxDecoration(
-        //                           borderRadius: BorderRadius.circular(20.sp),
+        //                           borderRadius: BorderRadius.circular(20),
         //                           color: greyOpenClr,
         //                         ),
         //                         child: Stack(
@@ -5046,10 +5048,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                                 right: 60,
         //                                 child: Container(
         //                                   decoration: BoxDecoration(
-        //                                     borderRadius: BorderRadius.circular(20.sp),
+        //                                     borderRadius: BorderRadius.circular(20),
         //                                     color: srpgradient2,
         //                                   ),
-        //                                   height: 11.h,
+        //                                   height: 11,
         //                                   width: 133.w,
         //                                 ),
         //                               )
@@ -5061,15 +5063,15 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   Spacer(),
         //                   Container(
         //                     width: 30.0.w,
-        //                     height: 30.0.h,
+        //                     height: 30.0,
         //                     child: Stack(
         //                       children: [
         //                         ClipRRect(
-        //                           borderRadius: BorderRadius.circular(15.0.sp),
+        //                           borderRadius: BorderRadius.circular(15.0),
         //                           child: Image.asset(
         //                             'assets/user.jpg',
         //                             width: 30.0.w,
-        //                             height: 30.0.h,
+        //                             height: 30.0,
         //                             fit: BoxFit.fill,
         //                           ),
         //                         ),
@@ -5077,11 +5079,11 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                           bottom: 1.5,
         //                           right: 1.5,
         //                           child: Container(
-        //                             height: 5.h,
+        //                             height: 5,
         //                             width: 5.w,
         //                             //color:online,
         //                             decoration: BoxDecoration(
-        //                               borderRadius: BorderRadius.circular(5.sp),
+        //                               borderRadius: BorderRadius.circular(5),
         //                               color: online,
         //                             ),
         //                           ),
@@ -5094,14 +5096,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //               ),
         //
         //               Container(
-        //                 height: 50.h,
+        //                 height: 50,
         //                 width: MediaQuery.of(context).size.width,
         //                 child: Row(
         //                   mainAxisAlignment: MainAxisAlignment.center,
         //                   children: [
         //                     Container(
         //                       width: 80.w,
-        //                       height: 40.h,
+        //                       height: 40,
         //                       decoration: BoxDecoration(
         //                         boxShadow: [
         //                           BoxShadow(
@@ -5116,9 +5118,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                       ),
         //                       child: Column(
         //                         children: [
-        //                           SizedBox(height: 5.h,),
-        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+        //                           SizedBox(height: 5,),
+        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
         //
         //                         ],
         //                       ),
@@ -5127,13 +5129,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
         //                       child: Container(
         //                         color: coverBackClr,
-        //                         height: 40.h,
+        //                         height: 40,
         //                         width: 1.w,
         //                       ),
         //                     ),
         //                     Container(
         //                       width: 240.w,
-        //                       height: 40.h,
+        //                       height: 40,
         //                       decoration: BoxDecoration(
         //                         boxShadow: [
         //                           BoxShadow(
@@ -5147,13 +5149,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                         color: whiteClr,
         //                       ),
         //                      child: Padding(
-        //                        padding: EdgeInsets.all( 10.sp),
+        //                        padding: EdgeInsets.all( 10),
         //                        child: Row(
         //                          children: [
-        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
         //                            Spacer(),
         //                            Container(
-        //                              height: 20.h,
+        //                              height: 20,
         //                              width: 20.w,
         //                              decoration: BoxDecoration(
         //                                boxShadow: [
@@ -5164,10 +5166,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                                    offset: const Offset(0, 2), // changes position of shadow
         //                                  ),
         //                                ],
-        //                                borderRadius: BorderRadius.circular(15.sp),
+        //                                borderRadius: BorderRadius.circular(15),
         //                                color: greybackground,
         //                              ),
-        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
         //                          ],
         //                        ),
         //                      ),
@@ -5179,12 +5181,12 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         SizedBox(
-        //           height: 10.h,
+        //           height: 10,
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 115.h,
+        //             height: 115,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -5195,22 +5197,22 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         Spacer(),
         //                         Container(
-        //                           height: 17.h,
+        //                           height: 17,
         //                           width: 17.w,
         //                           decoration: BoxDecoration(
         //                             boxShadow: [
@@ -5221,10 +5223,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                                 offset: const Offset(0, 2), // changes position of shadow
         //                               ),
         //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
+        //                             borderRadius: BorderRadius.circular(15),
         //                             color: greybackground,
         //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
         //                       ],
         //                     ),
         //                   ),
@@ -5236,29 +5238,29 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                 ),
         //                 SizedBox(
         //                   width: MediaQuery.of(context).size.width,
-        //                   height: 78.h,
+        //                   height: 78,
         //                   child: Padding(
-        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20.h),
+        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20),
         //                     child: Row(
         //                       children: [
         //                         Column(
         //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                       ],
@@ -5270,9 +5272,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 305.h,
+        //             height: 305,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -5283,22 +5285,22 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //                         Container(
-        //                           height: 17.h,
+        //                           height: 17,
         //                           width: 17.w,
         //                           decoration: BoxDecoration(
         //                             boxShadow: [
@@ -5309,10 +5311,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                                 offset: const Offset(0, 2), // changes position of shadow
         //                               ),
         //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
+        //                             borderRadius: BorderRadius.circular(15),
         //                             color: greybackground,
         //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
         //                       ],
         //                     ),
         //                   ),
@@ -5324,31 +5326,31 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                 ),
         //                 SizedBox(
         //                   width: MediaQuery.of(context).size.width,
-        //                   height: 74.h,
+        //                   height: 74,
         //                   child: Padding(
-        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
+        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20),
         //                     child: Row(
         //                       children: [
         //                         Column(
         //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                       ],
@@ -5366,9 +5368,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 315.h,
+        //             height: 315,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -5379,19 +5381,19 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //
         //                       ],
@@ -5409,7 +5411,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                     Positioned(
         //                         top: 127,
         //                         left: 92,
-        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
         //                   ],
         //                 ),
         //               ],
@@ -5417,9 +5419,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 315.h,
+        //             height: 315,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -5430,19 +5432,19 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //
         //                       ],
@@ -5460,7 +5462,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                     Positioned(
         //                         top: 127,
         //                         left: 92,
-        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
         //                   ],
         //                 ),
         //               ],
@@ -5468,9 +5470,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 95.h,
+        //             height: 95,
         //             width: MediaQuery.of(context).size.width,
         //             //color: Colors.lightGreen,
         //             decoration: BoxDecoration(
@@ -5482,30 +5484,30 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               crossAxisAlignment: CrossAxisAlignment.start,
         //               children:[
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                   padding:  EdgeInsets.symmetric(vertical: 14.0,horizontal: 10.w),
+        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                 ),
         //                 Container(
         //                   height: 1,
         //                   color: greyOpenClr,
         //                   width: MediaQuery.of(context).size.width,
         //                 ),
-        //                 SizedBox(height: 15.h,),
+        //                 SizedBox(height: 15,),
         //                 Row(
         //                   children: [
         //                     SizedBox(width: 11.w,),
-        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                     SizedBox(width: 10.w,),
-        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                     SizedBox(width: 10.w,),
-        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                   ],
         //                 )
         //               ],
@@ -5513,7 +5515,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         SizedBox(
-        //           height: 20.h,
+        //           height: 20,
         //         ),
         //       ],
         //     ),
@@ -5521,7 +5523,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         // ),
 
     );
-    return SafeArea(
+      return SafeArea(
       child: AdvancedDrawer(
         backdropColor: srpgradient2,
         controller: _advancedDrawerController,
@@ -5562,26 +5564,26 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                     width: 128.0,
                     height: 128.0,
                     margin:  EdgeInsets.only(
-                      top: 24.0.h,
-                      bottom: 10.0.h,
+                      top: 24.0,
+                      bottom: 10.0,
                     ),
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(
                       color: Colors.black26,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.user, size: 80.sp, color: whiteClr,),
+                    child: Icon(FontAwesomeIcons.user, size: 80, color: whiteClr,),
                     // child: Image.asset(
                     //   'assets/user.jpg',
                     // ),
                   ),
-                  Text('${name}',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
-                  SizedBox(height: 45.h,),
+                  Text('${name}',style: GoogleFonts.poppins(fontSize: 14.5,color: Colors.white,),),
+                  SizedBox(height: 45,),
                   Container(
                     height: 1,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.white,),
-                  SizedBox(height: 20.h,),
+                  SizedBox(height: 20,),
                   ListTile(
                     onTap: () async {
                       Navigator.push(
@@ -5589,8 +5591,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         MaterialPageRoute(builder: (context) => ByEmployee1(admin: widget.admineamil,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.clock,size: 20.sp,color: whiteClr,),
-                    title: Text('Check Attendance',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                    leading: Icon(FontAwesomeIcons.clock,size: 20,color: whiteClr,),
+                    title: Text('Check Attendance',style: GoogleFonts.poppins(fontSize: 14.5,color: Colors.white,),),
                   ),
                   ListTile(
                     onTap: () async {
@@ -5599,8 +5601,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         MaterialPageRoute(builder: (context) => ListOfRequest1(adminemail: widget.admineamil,providerGenerator: providerGenerator,)),
                       );
                     },
-                    leading: Icon(FontAwesomeIcons.addressCard,size: 20.sp,color: whiteClr,),
-                    title: Text('Leave',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white,),),
+                    leading: Icon(FontAwesomeIcons.addressCard,size: 20,color: whiteClr,),
+                    title: Text('Leave',style: GoogleFonts.poppins(fontSize: 14.5,color: Colors.white,),),
                   ),
                   ListTile(
                     onTap: () async {
@@ -5610,8 +5612,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                             result: false);
                       });
                     },
-                    leading: Icon(FontAwesomeIcons.rightToBracket,size: 20.sp,color: whiteClr,),
-                    title:  Text('Logout',style: GoogleFonts.poppins(fontSize: 14.5.sp,color: Colors.white),),
+                    leading: Icon(FontAwesomeIcons.rightToBracket,size: 20,color: whiteClr,),
+                    title:  Text('Logout',style: GoogleFonts.poppins(fontSize: 14.5,color: Colors.white),),
                   ),
                   // ListTile(
                   //   onTap: () {},
@@ -5659,9 +5661,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         ),
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
+            preferredSize:  Size.fromHeight(94.0),
             child: Container(
-              height: 102.h,
+              height: 102,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -5672,7 +5674,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                     offset: const Offset(0, 2), // changes position of shadow
                   ),
                 ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 color: whiteClr,
               ),
               child: Column(
@@ -5695,7 +5697,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         //   // });
                         // },
                         child: Padding(
-                          padding: EdgeInsets.all(10.0.sp),
+                          padding: EdgeInsets.all(10.0),
                           child: ValueListenableBuilder<AdvancedDrawerValue>(
                             valueListenable: _advancedDrawerController,
                             builder: (_, value, __) {
@@ -5710,19 +5712,19 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                           ),
                         ),
                         // child: Padding(
-                        //   padding: EdgeInsets.all(8.0.sp),
-                        //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                        //   padding: EdgeInsets.all(8.0),
+                        //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
                         // ),
                       ),
                       const Spacer(),
-                      Text("$user_name",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                      Text("$user_name",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                       const Spacer(),
                       SizedBox(width: 30.w,),
                     ],
                   ),
 
                   Container(
-                    height: 30.h,
+                    height: 30,
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -5741,14 +5743,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
             // timeinshow == false && timeoutshow == false ?
             // Container(
             //   // color: Colors.purpleAccent,
-            //   height: MediaQuery.of(context).size.height,
+            //   height: MediaQuery.of(context).sizeeight,
             //   width: MediaQuery.of(context).size.width,
-            //   child:Center(child: Text("Attendance is Marked",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),),
+            //   child:Center(child: Text("Attendance is Marked",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),),
             // ) :
             Column(
               children: [
                 // Container(
-                //   height: 102.h,
+                //   height: 102,
                 //   width:MediaQuery.of(context).size.width,
                 //   decoration: BoxDecoration(
                 //     boxShadow: [
@@ -5759,7 +5761,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //         offset: const Offset(0, 2), // changes position of shadow
                 //       ),
                 //     ],
-                //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 //     color: whiteClr,
                 //   ),
                 //   child: Column(
@@ -5780,7 +5782,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //               // });
                 //             },
                 //             child: Padding(
-                //               padding: EdgeInsets.all(8.0.sp),
+                //               padding: EdgeInsets.all(8.0),
                 //               child: ValueListenableBuilder<AdvancedDrawerValue>(
                 //                 valueListenable: _advancedDrawerController,
                 //                 builder: (_, value, __) {
@@ -5795,23 +5797,23 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //               ),
                 //             ),
                 //             // child: Padding(
-                //             //   padding: EdgeInsets.all(8.0.sp),
-                //             //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                //             //   padding: EdgeInsets.all(8.0),
+                //             //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
                 //             // ),
                 //           ),
                 //           Spacer(),
                 //           Column(
                 //             mainAxisAlignment: MainAxisAlignment.center,
                 //             children: [
-                //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //               Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
                 //               SizedBox(
-                //                 height: 2.h,
+                //                 height: 2,
                 //               ),
                 //               Container(
-                //                 height: 8.h,
+                //                 height: 8,
                 //                 width: 130.w,
                 //                 decoration: BoxDecoration(
-                //                   borderRadius: BorderRadius.circular(20.sp),
+                //                   borderRadius: BorderRadius.circular(20),
                 //                   color: greyOpenClr,
                 //                 ),
                 //                 child: Stack(
@@ -5823,10 +5825,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                       right: 60,
                 //                       child: Container(
                 //                         decoration: BoxDecoration(
-                //                           borderRadius: BorderRadius.circular(20.sp),
+                //                           borderRadius: BorderRadius.circular(20),
                 //                           color: srpgradient2,
                 //                         ),
-                //                         height: 11.h,
+                //                         height: 11,
                 //                         width: 133.w,
                 //                       ),
                 //                     )
@@ -5838,15 +5840,15 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //           Spacer(),
                 //           Container(
                 //             width: 30.0.w,
-                //             height: 30.0.h,
+                //             height: 30.0,
                 //             child: Stack(
                 //               children: [
                 //                 ClipRRect(
-                //                   borderRadius: BorderRadius.circular(15.0.sp),
+                //                   borderRadius: BorderRadius.circular(15.0),
                 //                   child: Image.asset(
                 //                     'assets/user.jpg',
                 //                     width: 30.0.w,
-                //                     height: 30.0.h,
+                //                     height: 30.0,
                 //                     fit: BoxFit.fill,
                 //                   ),
                 //                 ),
@@ -5854,11 +5856,11 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                   bottom: 1.5,
                 //                   right: 1.5,
                 //                   child: Container(
-                //                     height: 5.h,
+                //                     height: 5,
                 //                     width: 5.w,
                 //                     //color:online,
                 //                     decoration: BoxDecoration(
-                //                       borderRadius: BorderRadius.circular(5.sp),
+                //                       borderRadius: BorderRadius.circular(5),
                 //                       color: online,
                 //                     ),
                 //                   ),
@@ -5871,14 +5873,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //       ),
                 //
                 //       Container(
-                //         height: 50.h,
+                //         height: 50,
                 //         width: MediaQuery.of(context).size.width,
                 //         child: Row(
                 //           mainAxisAlignment: MainAxisAlignment.center,
                 //           children: [
                 //             Container(
                 //               width: 80.w,
-                //               height: 40.h,
+                //               height: 40,
                 //               decoration: BoxDecoration(
                 //                 boxShadow: [
                 //                   BoxShadow(
@@ -5893,9 +5895,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //               ),
                 //               child: Column(
                 //                 children: [
-                //                   SizedBox(height: 5.h,),
-                //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                //                   Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //                   SizedBox(height: 5,),
+                //                   Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+                //                   Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                 //
                 //                 ],
                 //               ),
@@ -5904,13 +5906,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 //               child: Container(
                 //                 color: coverBackClr,
-                //                 height: 40.h,
+                //                 height: 40,
                 //                 width: 1.w,
                 //               ),
                 //             ),
                 //             Container(
                 //               width: 240.w,
-                //               height: 40.h,
+                //               height: 40,
                 //               decoration: BoxDecoration(
                 //                 boxShadow: [
                 //                   BoxShadow(
@@ -5924,13 +5926,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                 color: whiteClr,
                 //               ),
                 //               child: Padding(
-                //                 padding: EdgeInsets.all( 10.sp),
+                //                 padding: EdgeInsets.all( 10),
                 //                 child: Row(
                 //                   children: [
-                //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //                     Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                 //                     Spacer(),
                 //                     Container(
-                //                       height: 20.h,
+                //                       height: 20,
                 //                       width: 20.w,
                 //                       decoration: BoxDecoration(
                 //                         boxShadow: [
@@ -5941,10 +5943,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                             offset: const Offset(0, 2), // changes position of shadow
                 //                           ),
                 //                         ],
-                //                         borderRadius: BorderRadius.circular(15.sp),
+                //                         borderRadius: BorderRadius.circular(15),
                 //                         color: greybackground,
                 //                       ),
-                //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                //                       child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
                 //                   ],
                 //                 ),
                 //               ),
@@ -5956,13 +5958,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //   ),
                 // ),
                 // SizedBox(
-                //   height: 10.h,
+                //   height: 10,
                 // ),
 
                 timeinshow==true ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 151.h,
+                    height: 151,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -5973,32 +5975,32 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 35.h,
+                            height: 35,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    SizedBox(height: 5,),
+                                    Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
                                   // color: Colors.purpleAccent,
                                     width: 92.w,
-                                    height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                    height: 25,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: ()async{
@@ -6017,7 +6019,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     });
                                   },
                                   child: Container(
-                                    height: 27.h,
+                                    height: 27,
                                     width: 27.w,
                                     decoration: BoxDecoration(
                                       boxShadow: [
@@ -6028,17 +6030,17 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
                                     child: reload ==true ?SizedBox(
-                                      height: 5.h,
+                                      height: 5,
                                       width: 5.w,
                                       child: CircularProgressIndicator(
                                         backgroundColor: Colors.white,
                                         strokeWidth: 1.w,
                                       ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                                   ),
                                 ),
                               ],
@@ -6052,14 +6054,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 104.h,
+                          height: 104,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12),
                             child: Column(
                               children: [
-                                Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
-                                  height: 10.h,
+                                  height: 10,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
@@ -6070,7 +6072,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     // FirebaseFirestore.instance
                                     //     .collection('Companies').doc('${admin}').collection("Employee")
                                     //     .doc('${user!.email.toString()}').collection("Attendance").doc('$datestring')
-                                    //     .update({"TimeIn":"${now.hour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
+                                    //     .update({"TimeIn":"${nowour.toString() + ":" + now.minute.toString() + ":" + now.second.toString()}","TimeInAddress":"$Address1"})
                                     //     .then((value) {
                                     //       setState(() {
                                     //         timeinshow=false;
@@ -6080,7 +6082,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     // }); //.then((value) => initState());
                                   },
                                   child: Container(
-                                      height: 40.h,
+                                      height: 40,
                                       width: 295.w,
                                       decoration: BoxDecoration(
                                         gradient: const LinearGradient(
@@ -6105,8 +6107,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                       ),
                                       child:Center(
                                         child:  timinindicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                            ? SizedBox(height: 15, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time In",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                                       )
                                   ),
                                 ),
@@ -6120,9 +6122,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 ) : SizedBox(),
 
                 timeoutshow==true ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 151.1.h,
+                    height: 151.1,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -6133,33 +6135,33 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 35.h,
+                            height: 35,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    SizedBox(height: 5,),
+                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
                                   // color: Colors.purpleAccent,
                                     width: 92.w,
-                                    height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                    height: 25,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: ()async{
@@ -6178,7 +6180,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     });
                                   },
                                   child: Container(
-                                    height: 27.h,
+                                    height: 27,
                                     width: 27.w,
                                     decoration: BoxDecoration(
                                       boxShadow: [
@@ -6189,17 +6191,17 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
                                     child: reload ==true ?SizedBox(
-                                      height: 5.h,
+                                      height: 5,
                                       width: 5.w,
                                       child: CircularProgressIndicator(
                                         backgroundColor: Colors.white,
                                         strokeWidth: 1.w,
                                       ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                                   ),
                                 ),
                               ],
@@ -6213,14 +6215,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 105.h,
+                          height: 105,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12),
                             child: Column(
                               children: [
-                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
-                                  height: 10.h,
+                                  height: 10,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
@@ -6228,7 +6230,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     // .then((value) => initState());
                                   },
                                   child: Container(
-                                      height: 40.h,
+                                      height: 40,
                                       width: 295.w,
                                       decoration: BoxDecoration(
                                         // gradient: const LinearGradient(
@@ -6253,8 +6255,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                       ),
                                       child:Center(
                                         child: timinoutdicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                            ? SizedBox(height: 15, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
 
                                       )
                                   ),
@@ -6269,9 +6271,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 ) : SizedBox(),
 
                 timeinshow==false && timeoutshow==false ? Padding(
-                  padding: EdgeInsets.all(20.0.sp),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    height: 151.1.h,
+                    height: 151.1,
                     width:MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -6282,33 +6284,33 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(6.sp),
+                      borderRadius: BorderRadius.circular(6),
                       color: whiteClr,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                          padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                           child: Container(
-                            height: 35.h,
+                            height: 35,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 5.h,),
-                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                                    SizedBox(height: 5,),
+                                    Text(name.isEmpty?'':name,style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                                    Text(department.isEmpty?'':department,style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                                   ],
                                 ),
                                 const Spacer(),
                                 Container(
                                   // color: Colors.purpleAccent,
                                     width: 92.w,
-                                    height: 25.h,
-                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                                    height: 25,
+                                    child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: ()async{
@@ -6327,7 +6329,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     });
                                   },
                                   child: Container(
-                                    height: 27.h,
+                                    height: 27,
                                     width: 27.w,
                                     decoration: BoxDecoration(
                                       boxShadow: [
@@ -6338,17 +6340,17 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                           offset: const Offset(0, 2), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(15.sp),
+                                      borderRadius: BorderRadius.circular(15),
                                       color: greybackground,
                                     ),
                                     child: reload ==true ?SizedBox(
-                                      height: 5.h,
+                                      height: 5,
                                       width: 5.w,
                                       child: CircularProgressIndicator(
                                         backgroundColor: Colors.white,
                                         strokeWidth: 1.w,
                                       ),
-                                    ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                                    ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                                   ),
                                 ),
                               ],
@@ -6362,14 +6364,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 105.h,
+                          height: 105,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                            padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12),
                             child: Column(
                               children: [
-                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("$Address",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                                 SizedBox(
-                                  height: 10.h,
+                                  height: 10,
                                 ),
                                 GestureDetector(
                                   onTap: () async {
@@ -6377,7 +6379,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                     // .then((value) => initState());
                                   },
                                   child: Container(
-                                      height: 40.h,
+                                      height: 40,
                                       width: 295.w,
                                       decoration: BoxDecoration(
                                         // gradient: const LinearGradient(
@@ -6402,8 +6404,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                                       ),
                                       child:Center(
                                         child: timinoutdicator==true
-                                            ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                                            ? SizedBox(height: 15, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                                            : Text("Time Out",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
 
                                       )
                                   ),
@@ -6418,9 +6420,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 ) : SizedBox(),
 
                 // timeinshow==false && timeoutshow==false ? Padding(
-                //   padding: EdgeInsets.all(20.0.sp),
+                //   padding: EdgeInsets.all(20.0),
                 //   child: Container(
-                //     height: 151.h,
+                //     height: 151,
                 //     width:MediaQuery.of(context).size.width,
                 //     decoration: BoxDecoration(
                 //       boxShadow: [
@@ -6431,32 +6433,32 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //           offset: const Offset(0, 2), // changes position of shadow
                 //         ),
                 //       ],
-                //       borderRadius: BorderRadius.circular(6.sp),
+                //       borderRadius: BorderRadius.circular(6),
                 //       color: whiteClr,
                 //     ),
                 //     child: Column(
                 //       children: [
                 //         Padding(
-                //           padding: EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+                //           padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
                 //           child: Container(
-                //             height: 36.h,
+                //             height: 36,
                 //             width: MediaQuery.of(context).size.width,
                 //             child: Row(
                 //               children: [
                 //                 Column(
                 //                   crossAxisAlignment: CrossAxisAlignment.start,
                 //                   children: [
-                //                     SizedBox(height: 5.h,),
-                //                     Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-                //                     Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8.sp,color: coverBackClr,fontWeight: FontWeight.w500),),
+                //                     SizedBox(height: 5,),
+                //                     Text(name.isEmpty?'':name, style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
+                //                     Text(department.isEmpty?'':department, style: GoogleFonts.poppins(fontSize: 8,color: coverBackClr,fontWeight: FontWeight.w500),),
                 //                   ],
                 //                 ),
                 //                 const Spacer(),
                 //                 Container(
                 //                   // color: Colors.purpleAccent,
                 //                     width: 92.w,
-                //                     height: 25.h,
-                //                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18.sp,color: fontgrey,fontWeight: FontWeight.w700),)),
+                //                     height: 25,
+                //                     child: Text('$_timeString', style: GoogleFonts.poppins(fontSize: 18,color: fontgrey,fontWeight: FontWeight.w700),)),
                 //                 const Spacer(),
                 //                 GestureDetector(
                 //                   onTap: ()async{
@@ -6475,7 +6477,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                     });
                 //                   },
                 //                   child: Container(
-                //                     height: 27.h,
+                //                     height: 27,
                 //                     width: 27.w,
                 //                     decoration: BoxDecoration(
                 //                       boxShadow: [
@@ -6486,17 +6488,17 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                           offset: const Offset(0, 2), // changes position of shadow
                 //                         ),
                 //                       ],
-                //                       borderRadius: BorderRadius.circular(15.sp),
+                //                       borderRadius: BorderRadius.circular(15),
                 //                       color: greybackground,
                 //                     ),
                 //                     child: reload ==true ?SizedBox(
-                //                       height: 5.h,
+                //                       height: 5,
                 //                       width: 5.w,
                 //                       child: CircularProgressIndicator(
                 //                         backgroundColor: Colors.white,
                 //                         strokeWidth: 1.w,
                 //                       ),
-                //                     ):Icon(FontAwesomeIcons.refresh, size:17.sp, color: whiteClr,),
+                //                     ):Icon(FontAwesomeIcons.refresh, size:17, color: whiteClr,),
                 //                   ),
                 //                 ),
                 //               ],
@@ -6510,14 +6512,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //         ),
                 //         SizedBox(
                 //           width: MediaQuery.of(context).size.width,
-                //           height: 104.h,
+                //           height: 104,
                 //           child: Padding(
-                //             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12.h),
+                //             padding:  EdgeInsets.symmetric(horizontal: 10.0.w,vertical: 12),
                 //             child: Column(
                 //               children: [
-                //                 Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //                 Text("${Address1}",style: GoogleFonts.poppins(fontSize: 9,color: fontgrey,fontWeight: FontWeight.w500),),
                 //                 SizedBox(
-                //                   height: 10.h,
+                //                   height: 10,
                 //                 ),
                 //                 GestureDetector(
                 //                   onTap: () async {
@@ -6525,7 +6527,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                      //.then((value) => initState());
                 //                   },
                 //                   child: Container(
-                //                       height: 40.h,
+                //                       height: 40,
                 //                       width: 295.w,
                 //                       decoration: BoxDecoration(
                 //                         gradient: const LinearGradient(
@@ -6551,8 +6553,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //                       child:Center(
                 //                         child:
                 //                         timinindicator==true
-                //                         ? SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
-                //                         : Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                //                         ? SizedBox(height: 15, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue),)
+                //                         : Text("Time In",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                 //                       )
                 //                   ),
                 //                 ),
@@ -6566,13 +6568,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 // ) : SizedBox(),
 
                 SizedBox(
-                  height: 20.h,
+                  height: 20,
                 ),
 
                 // Padding(
-                //   padding: EdgeInsets.all(20.0.sp),
+                //   padding: EdgeInsets.all(20.0),
                 //   child: Container(
-                //     height: 95.h,
+                //     height: 95,
                 //     width: MediaQuery.of(context).size.width,
                 //     //color: Colors.lightGreen,
                 //     decoration: BoxDecoration(
@@ -6584,42 +6586,42 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
                 //           offset: const Offset(0, 2), // changes position of shadow
                 //         ),
                 //       ],
-                //       borderRadius: BorderRadius.circular(6.sp),
+                //       borderRadius: BorderRadius.circular(6),
                 //       color: whiteClr,
                 //     ),
                 //     child: Column(
                 //       crossAxisAlignment: CrossAxisAlignment.start,
                 //       children:[
                 //         Padding(
-                //           padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-                //           child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                //           padding:  EdgeInsets.symmetric(vertical: 14.0,horizontal: 10.w),
+                //           child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                 //         ),
                 //         Container(
                 //           height: 1,
                 //           color: greyOpenClr,
                 //           width: MediaQuery.of(context).size.width,
                 //         ),
-                //         SizedBox(height: 15.h,),
+                //         SizedBox(height: 15,),
                 //         Row(
                 //           children: [
                 //             SizedBox(width: 11.w,),
                 //             Container(
                 //               // color: Colors.purpleAccent,
-                //                 height: 30.h,
+                //                 height: 30,
                 //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
                 //             SizedBox(width: 10.w,),
                 //             Container(
                 //               //color: Colors.purpleAccent,
-                //                 height: 30.h,
+                //                 height: 30,
                 //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
                 //             SizedBox(width: 10.w,),
                 //             Container(
                 //               // color: Colors.purpleAccent,
-                //                 height: 30.h,
+                //                 height: 30,
                 //                 width: 95.w,
-                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),))),
+                //                 child: Center(child: Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),))),
                 //           ],
                 //         )
                 //       ],
@@ -6653,7 +6655,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //     child: Column(
         //       children: [
         //         Container(
-        //           height: 102.h,
+        //           height: 102,
         //           width:MediaQuery.of(context).size.width,
         //           decoration: BoxDecoration(
         //             boxShadow: [
@@ -6664,7 +6666,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                 offset: const Offset(0, 2), // changes position of shadow
         //               ),
         //             ],
-        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+        //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
         //             color: whiteClr,
         //           ),
         //           child: Column(
@@ -6685,7 +6687,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                       // });
         //                     },
         //                    child: Padding(
-        //                      padding: EdgeInsets.all(8.0.sp),
+        //                      padding: EdgeInsets.all(8.0),
         //                      child: ValueListenableBuilder<AdvancedDrawerValue>(
         //                        valueListenable: _advancedDrawerController,
         //                        builder: (_, value, __) {
@@ -6700,23 +6702,23 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                      ),
         //                    ),
         //                     // child: Padding(
-        //                     //   padding: EdgeInsets.all(8.0.sp),
-        //                     //   child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+        //                     //   padding: EdgeInsets.all(8.0),
+        //                     //   child: Image.asset('assets/mainmenu.png',height: 30,width: 30.w,),
         //                     // ),
         //                   ),
         //                   Spacer(),
         //                   Column(
         //                     mainAxisAlignment: MainAxisAlignment.center,
         //                     children: [
-        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                       Text("Onborading progress",style: GoogleFonts.poppins(fontSize: 12,color: fontgrey,fontWeight: FontWeight.w500),),
         //                       SizedBox(
-        //                         height: 2.h,
+        //                         height: 2,
         //                       ),
         //                       Container(
-        //                         height: 8.h,
+        //                         height: 8,
         //                         width: 130.w,
         //                         decoration: BoxDecoration(
-        //                           borderRadius: BorderRadius.circular(20.sp),
+        //                           borderRadius: BorderRadius.circular(20),
         //                           color: greyOpenClr,
         //                         ),
         //                         child: Stack(
@@ -6728,10 +6730,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                                 right: 60,
         //                                 child: Container(
         //                                   decoration: BoxDecoration(
-        //                                     borderRadius: BorderRadius.circular(20.sp),
+        //                                     borderRadius: BorderRadius.circular(20),
         //                                     color: srpgradient2,
         //                                   ),
-        //                                   height: 11.h,
+        //                                   height: 11,
         //                                   width: 133.w,
         //                                 ),
         //                               )
@@ -6743,15 +6745,15 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   Spacer(),
         //                   Container(
         //                     width: 30.0.w,
-        //                     height: 30.0.h,
+        //                     height: 30.0,
         //                     child: Stack(
         //                       children: [
         //                         ClipRRect(
-        //                           borderRadius: BorderRadius.circular(15.0.sp),
+        //                           borderRadius: BorderRadius.circular(15.0),
         //                           child: Image.asset(
         //                             'assets/user.jpg',
         //                             width: 30.0.w,
-        //                             height: 30.0.h,
+        //                             height: 30.0,
         //                             fit: BoxFit.fill,
         //                           ),
         //                         ),
@@ -6759,11 +6761,11 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                           bottom: 1.5,
         //                           right: 1.5,
         //                           child: Container(
-        //                             height: 5.h,
+        //                             height: 5,
         //                             width: 5.w,
         //                             //color:online,
         //                             decoration: BoxDecoration(
-        //                               borderRadius: BorderRadius.circular(5.sp),
+        //                               borderRadius: BorderRadius.circular(5),
         //                               color: online,
         //                             ),
         //                           ),
@@ -6776,14 +6778,14 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //               ),
         //
         //               Container(
-        //                 height: 50.h,
+        //                 height: 50,
         //                 width: MediaQuery.of(context).size.width,
         //                 child: Row(
         //                   mainAxisAlignment: MainAxisAlignment.center,
         //                   children: [
         //                     Container(
         //                       width: 80.w,
-        //                       height: 40.h,
+        //                       height: 40,
         //                       decoration: BoxDecoration(
         //                         boxShadow: [
         //                           BoxShadow(
@@ -6798,9 +6800,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                       ),
         //                       child: Column(
         //                         children: [
-        //                           SizedBox(height: 5.h,),
-        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+        //                           SizedBox(height: 5,),
+        //                           Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+        //                           Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
         //
         //                         ],
         //                       ),
@@ -6809,13 +6811,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
         //                       child: Container(
         //                         color: coverBackClr,
-        //                         height: 40.h,
+        //                         height: 40,
         //                         width: 1.w,
         //                       ),
         //                     ),
         //                     Container(
         //                       width: 240.w,
-        //                       height: 40.h,
+        //                       height: 40,
         //                       decoration: BoxDecoration(
         //                         boxShadow: [
         //                           BoxShadow(
@@ -6829,13 +6831,13 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                         color: whiteClr,
         //                       ),
         //                      child: Padding(
-        //                        padding: EdgeInsets.all( 10.sp),
+        //                        padding: EdgeInsets.all( 10),
         //                        child: Row(
         //                          children: [
-        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+        //                            Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
         //                            Spacer(),
         //                            Container(
-        //                              height: 20.h,
+        //                              height: 20,
         //                              width: 20.w,
         //                              decoration: BoxDecoration(
         //                                boxShadow: [
@@ -6846,10 +6848,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                                    offset: const Offset(0, 2), // changes position of shadow
         //                                  ),
         //                                ],
-        //                                borderRadius: BorderRadius.circular(15.sp),
+        //                                borderRadius: BorderRadius.circular(15),
         //                                color: greybackground,
         //                              ),
-        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+        //                              child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
         //                          ],
         //                        ),
         //                      ),
@@ -6861,12 +6863,12 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         SizedBox(
-        //           height: 10.h,
+        //           height: 10,
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 115.h,
+        //             height: 115,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -6877,22 +6879,22 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("In or Out",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         Spacer(),
         //                         Container(
-        //                           height: 17.h,
+        //                           height: 17,
         //                           width: 17.w,
         //                           decoration: BoxDecoration(
         //                             boxShadow: [
@@ -6903,10 +6905,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                                 offset: const Offset(0, 2), // changes position of shadow
         //                               ),
         //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
+        //                             borderRadius: BorderRadius.circular(15),
         //                             color: greybackground,
         //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
         //                       ],
         //                     ),
         //                   ),
@@ -6918,29 +6920,29 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                 ),
         //                 SizedBox(
         //                   width: MediaQuery.of(context).size.width,
-        //                   height: 78.h,
+        //                   height: 78,
         //                   child: Padding(
-        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20.h),
+        //                     padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 20),
         //                     child: Row(
         //                       children: [
         //                         Column(
         //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("IN",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("OUT",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                       ],
@@ -6952,9 +6954,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 305.h,
+        //             height: 305,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -6965,22 +6967,22 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Tracked hours",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //                         Container(
-        //                           height: 17.h,
+        //                           height: 17,
         //                           width: 17.w,
         //                           decoration: BoxDecoration(
         //                             boxShadow: [
@@ -6991,10 +6993,10 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                                 offset: const Offset(0, 2), // changes position of shadow
         //                               ),
         //                             ],
-        //                             borderRadius: BorderRadius.circular(15.sp),
+        //                             borderRadius: BorderRadius.circular(15),
         //                             color: greybackground,
         //                           ),
-        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
+        //                           child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),),
         //                       ],
         //                     ),
         //                   ),
@@ -7006,31 +7008,31 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                 ),
         //                 SizedBox(
         //                   width: MediaQuery.of(context).size.width,
-        //                   height: 74.h,
+        //                   height: 74,
         //                   child: Padding(
-        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20.h),
+        //                     padding: EdgeInsets.symmetric(horizontal: 30.0.w,vertical: 20),
         //                     child: Row(
         //                       children: [
         //                         Column(
         //                           children: [
-        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("9:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("WORKED",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("5",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("BREAK",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //
         //                           ],
         //                         ),
         //                         Spacer(),
         //                         Column(
         //                           children: [
-        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12.sp,color: linkclr,fontWeight: FontWeight.w500),),
-        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                             Text("6:00PM",style: GoogleFonts.poppins(fontSize: 12,color: linkclr,fontWeight: FontWeight.w500),),
+        //                             Text("OVERTIME",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                           ],
         //                         ),
         //                       ],
@@ -7048,9 +7050,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 315.h,
+        //             height: 315,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -7061,19 +7063,19 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Activites",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //
         //                       ],
@@ -7091,7 +7093,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                     Positioned(
         //                         top: 127,
         //                         left: 92,
-        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+        //                         child: Text("Activites",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
         //                   ],
         //                 ),
         //               ],
@@ -7099,9 +7101,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 315.h,
+        //             height: 315,
         //             width:MediaQuery.of(context).size.width,
         //             decoration: BoxDecoration(
         //               boxShadow: [
@@ -7112,19 +7114,19 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               children: [
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+        //                   padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
         //                   child: Container(
-        //                     height: 25.h,
+        //                     height: 25,
         //                     width: MediaQuery.of(context).size.width,
         //                     child: Row(
         //                       children: [
-        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                         Text("Projects",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                         const Spacer(),
         //
         //                       ],
@@ -7142,7 +7144,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                     Positioned(
         //                         top: 127,
         //                         left: 92,
-        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5.sp,color: fontgrey,fontWeight: FontWeight.w500),)),
+        //                         child: Text("Projects",style: GoogleFonts.poppins(fontSize: 20.5,color: fontgrey,fontWeight: FontWeight.w500),)),
         //                   ],
         //                 ),
         //               ],
@@ -7150,9 +7152,9 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         Padding(
-        //           padding: EdgeInsets.all(20.0.sp),
+        //           padding: EdgeInsets.all(20.0),
         //           child: Container(
-        //             height: 95.h,
+        //             height: 95,
         //             width: MediaQuery.of(context).size.width,
         //             //color: Colors.lightGreen,
         //             decoration: BoxDecoration(
@@ -7164,30 +7166,30 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //                   offset: const Offset(0, 2), // changes position of shadow
         //                 ),
         //               ],
-        //               borderRadius: BorderRadius.circular(6.sp),
+        //               borderRadius: BorderRadius.circular(6),
         //               color: whiteClr,
         //             ),
         //             child: Column(
         //               crossAxisAlignment: CrossAxisAlignment.start,
         //               children:[
         //                 Padding(
-        //                   padding:  EdgeInsets.symmetric(vertical: 14.0.h,horizontal: 10.w),
-        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                   padding:  EdgeInsets.symmetric(vertical: 14.0,horizontal: 10.w),
+        //                   child: Text("Upcoming Holidays",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                 ),
         //                 Container(
         //                   height: 1,
         //                   color: greyOpenClr,
         //                   width: MediaQuery.of(context).size.width,
         //                 ),
-        //                 SizedBox(height: 15.h,),
+        //                 SizedBox(height: 15,),
         //                 Row(
         //                   children: [
         //                     SizedBox(width: 11.w,),
-        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Saturday, 9 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                     SizedBox(width: 10.w,),
-        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Sunday, 10 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                     SizedBox(width: 10.w,),
-        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+        //                     Text("Monday, 11 July Eid al-Adha",style: GoogleFonts.poppins(fontSize: 7.5,color: fontgrey,fontWeight: FontWeight.w500),),
         //                   ],
         //                 )
         //               ],
@@ -7195,7 +7197,7 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
         //           ),
         //         ),
         //         SizedBox(
-        //           height: 20.h,
+        //           height: 20,
         //         ),
         //       ],
         //     ),
@@ -7209,8 +7211,8 @@ class _EmployeeDashboard2State extends State<EmployeeDashboard2> {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
       SnackBar(
-        content: Text('$text',style:GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient2)),
-        //action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+        content: Text('$text',style:GoogleFonts.poppins(fontSize: 11,color: srpgradient2)),
+        //action: SnackBarAction(label: 'UNDO', onPressed: scaffoldideCurrentSnackBar),
       ),
     );
   }

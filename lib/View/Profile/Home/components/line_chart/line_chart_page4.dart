@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/samples/line_chart_sample10.dart';
 
 class LineChartPage4 extends StatelessWidget {
-  const LineChartPage4({super.key});
+  const LineChartPage4({key});
+  // const LineChartPage4({super.key});
 
   @override
   Widget build(BuildContext context) {

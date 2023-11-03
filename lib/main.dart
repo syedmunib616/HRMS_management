@@ -20,10 +20,18 @@ import 'Theme/Theme_Style.dart';
 import 'View/signup/Sginup.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
 void main()async {
+
    WidgetsFlutterBinding.ensureInitialized();
    Firebase.initializeApp();
+   Firebase.initializeApp();
+   // Firebase.initializeApp(options:FirebaseOptions(
+   //   apiKey: "AIzaSyDX8J5YBOTaxPVOHlDwTqzJ8cu0kKQTNm0",
+   //   appId: "1:456164337524:ios:b9d6bcfe839a84072bee21",
+   //   messagingSenderId: "Messaging sender id here",
+   //   projectId: "srp-hrms-cf79e",
+   // ),);
+
    // WidgetsFlutterBinding.ensureInitialized;
    EasyLocalization.ensureInitialized();
    //WidgetsFlutterBinding.ensureInitialized();
@@ -129,14 +137,13 @@ class _ScreenSplachState extends State<ScreenSplach> {
   @override
   void initState() {
    // TODO: implement initState
-
     //FrLoginService(FirebaseAuth.instance).signinwithgoogle(context);
     //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)  =>  Homepage()),);
     //Timer(const Duration(milliseconds: 990000),
                   //Timer(const Duration(milliseconds: 490),
           Timer(const Duration(milliseconds: 4900),
           () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-   //  builder: (BuildContext context) => const ScreenBoarding())));
+          //  builder: (BuildContext context) => const ScreenBoarding())));
           // builder: (BuildContext context) => SelectCountry())));
           builder: (BuildContext context) => Login(loading: false,),)));
     super.initState();

@@ -27,279 +27,278 @@ class Reports extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hh =MediaQuery.of(context).size.height;
+    final ww =MediaQuery.of(context).size.width;
     return SafeArea(
-      child: CsScreenUtilInit(
-        child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
-            child:  Container(
-              height: 102.h,
-              width:MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 2,
-                    blurRadius: 1,
-                    offset: const Offset(0, 2),
-                    // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-                color: whiteClr,
-              ),
-              child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 40.h,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize:  Size.fromHeight(98),
+          child:  Container(
+            height: hh*0.2,
+            width:MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.4),
+                  spreadRadius: 2,
+                  blurRadius: 1,
+                  offset: const Offset(0, 2),
+                  // changes position of shadow
+                ),
+              ],
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(22),bottomRight: Radius.circular(22)),
+              color: whiteClr,
+            ),
+            child: Column(
+              crossAxisAlignment:CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: hh*0.03,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
 
-                      // GestureDetector(
-                      //   onTap: (){
-                      //     Navigator.pop(context);
-                      //   },
-                      //   child: Padding(
-                      //     padding: EdgeInsets.all(8.0.sp),
-                      //     child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
-                      //   ),
-                      // ),
+                    // GestureDetector(
+                    //   onTap: (){
+                    //     Navigator.pop(context);
+                    //   },
+                    //   child: Padding(
+                    //     padding: EdgeInsets.all(8.0.sp),
+                    //     child: Image.asset('assets/mainmenu.png',height: 30.h,width: 30.w,),
+                    //   ),
+                    // ),
 
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                         // color: Colors.yellow,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 10.w,top: 8.h,right: 5.w),
-                            child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
-                          ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                       // color: Colors.yellow,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 13,top: 8,right: 5),
+                          child: Image.asset('assets/doublearrow.png',height: 24,width: 24,),
                         ),
                       ),
-                      SizedBox(width: 120.w,),
-                      Text("Report",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                      Spacer(),
-
-                      // Container(
-                      //   width: 30.0.w,
-                      //   height: 30.0.h,
-                      //   // child: Stack(
-                      //   //   children: [
-                      //   //     ClipRRect(
-                      //   //       borderRadius: BorderRadius.circular(15.0.sp),
-                      //   //       child: Image.asset(
-                      //   //         'assets/user.jpg',
-                      //   //         width: 30.0.w,
-                      //   //         height: 30.0.h,
-                      //   //         fit: BoxFit.fill,
-                      //   //       ),
-                      //   //     ),
-                      //   //     Positioned(
-                      //   //       bottom: 1.5,
-                      //   //       right: 1.5,
-                      //   //       child: Container(
-                      //   //         height: 5.h,
-                      //   //         width: 5.w,
-                      //   //         //color:online,
-                      //   //         decoration: BoxDecoration(
-                      //   //           borderRadius: BorderRadius.circular(5.sp),
-                      //   //           color: online,
-                      //   //         ),
-                      //   //       ),
-                      //   //     )
-                      //   //   ],
-                      //   // ),
-                      // ),
-                      //
-                      // SizedBox(width: 15.w,),
-
-                      ],
                     ),
-                  // Container(
-                  //   height: 50.h,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       Container(
-                  //         width: 80.w,
-                  //         height: 40.h,
-                  //         decoration: BoxDecoration(
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //               color: Colors.grey.withOpacity(0.2),
-                  //               spreadRadius: 2,
-                  //               blurRadius: 1,
-                  //               offset: const Offset(0, 2), // changes position of shadow
-                  //             ),
-                  //           ],
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           color: whiteClr,
-                  //         ),
-                  //         child: Column(
-                  //           children: [
-                  //             SizedBox(height: 5.h,),
-                  //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                  //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  //         child: Container(
-                  //           color: coverBackClr,
-                  //           height: 40.h,
-                  //           width: 1.w,
-                  //         ),
-                  //       ),
-                  //       Container(
-                  //         width: 240.w,
-                  //         height: 40.h,
-                  //         decoration: BoxDecoration(
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //               color: Colors.grey.withOpacity(0.2),
-                  //               spreadRadius: 2,
-                  //               blurRadius: 1,
-                  //               offset: const Offset(0, 2), // changes position of shadow
-                  //             ),
-                  //           ],
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           color: whiteClr,
-                  //         ),
-                  //         child: Padding(
-                  //           padding: EdgeInsets.all( 10.sp),
-                  //           child: Row(
-                  //             children: [
-                  //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                  //               Spacer(),
-                  //               Container(
-                  //                 height: 20.h,
-                  //                 width: 20.w,
-                  //                 decoration: BoxDecoration(
-                  //                   boxShadow: [
-                  //                     BoxShadow(
-                  //                       color: Colors.grey.withOpacity(0),
-                  //                       spreadRadius: 0,
-                  //                       blurRadius: 1,
-                  //                       offset: const Offset(0, 2), // changes position of shadow
-                  //                     ),
-                  //                   ],
-                  //                   borderRadius: BorderRadius.circular(15.sp),
-                  //                   color: greybackground,
-                  //                 ),
-                  //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //
-                  //     ],
-                  //   ),
-                  // )
-                ],
-              ),
+                    SizedBox(width: ww*0.35,),
+                    Text("Report",style: GoogleFonts.poppins(fontSize: 17,color: fontclr,fontWeight: FontWeight.w400),),
+                    Spacer(),
+
+                    // Container(
+                    //   width: 30.0.w,
+                    //   height: 30.0.h,
+                    //   // child: Stack(
+                    //   //   children: [
+                    //   //     ClipRRect(
+                    //   //       borderRadius: BorderRadius.circular(15.0.sp),
+                    //   //       child: Image.asset(
+                    //   //         'assets/user.jpg',
+                    //   //         width: 30.0.w,
+                    //   //         height: 30.0.h,
+                    //   //         fit: BoxFit.fill,
+                    //   //       ),
+                    //   //     ),
+                    //   //     Positioned(
+                    //   //       bottom: 1.5,
+                    //   //       right: 1.5,
+                    //   //       child: Container(
+                    //   //         height: 5.h,
+                    //   //         width: 5.w,
+                    //   //         //color:online,
+                    //   //         decoration: BoxDecoration(
+                    //   //           borderRadius: BorderRadius.circular(5.sp),
+                    //   //           color: online,
+                    //   //         ),
+                    //   //       ),
+                    //   //     )
+                    //   //   ],
+                    //   // ),
+                    // ),
+                    //
+                    // SizedBox(width: 15.w,),
+
+                    ],
+                  ),
+                // Container(
+                //   height: 50.h,
+                //   width: MediaQuery.of(context).size.width,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       Container(
+                //         width: 80.w,
+                //         height: 40.h,
+                //         decoration: BoxDecoration(
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Colors.grey.withOpacity(0.2),
+                //               spreadRadius: 2,
+                //               blurRadius: 1,
+                //               offset: const Offset(0, 2), // changes position of shadow
+                //             ),
+                //           ],
+                //           borderRadius: BorderRadius.circular(5),
+                //           color: whiteClr,
+                //         ),
+                //         child: Column(
+                //           children: [
+                //             SizedBox(height: 5.h,),
+                //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+                //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //           ],
+                //         ),
+                //       ),
+                //       Padding(
+                //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                //         child: Container(
+                //           color: coverBackClr,
+                //           height: 40.h,
+                //           width: 1.w,
+                //         ),
+                //       ),
+                //       Container(
+                //         width: 240.w,
+                //         height: 40.h,
+                //         decoration: BoxDecoration(
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Colors.grey.withOpacity(0.2),
+                //               spreadRadius: 2,
+                //               blurRadius: 1,
+                //               offset: const Offset(0, 2), // changes position of shadow
+                //             ),
+                //           ],
+                //           borderRadius: BorderRadius.circular(5),
+                //           color: whiteClr,
+                //         ),
+                //         child: Padding(
+                //           padding: EdgeInsets.all( 10.sp),
+                //           child: Row(
+                //             children: [
+                //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                //               Spacer(),
+                //               Container(
+                //                 height: 20.h,
+                //                 width: 20.w,
+                //                 decoration: BoxDecoration(
+                //                   boxShadow: [
+                //                     BoxShadow(
+                //                       color: Colors.grey.withOpacity(0),
+                //                       spreadRadius: 0,
+                //                       blurRadius: 1,
+                //                       offset: const Offset(0, 2), // changes position of shadow
+                //                     ),
+                //                   ],
+                //                   borderRadius: BorderRadius.circular(15.sp),
+                //                   color: greybackground,
+                //                 ),
+                //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //
+                //     ],
+                //   ),
+                // )
+              ],
             ),
           ),
-          backgroundColor: backgroundcolorr,
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0.w),
-              child: Column(
-                children: [
+        ),
+        backgroundColor: Color(0xffF6F6F6),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 17),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 23,
+                ),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => DailyAttendance()
+                //         ),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSettings(iconString: "assets/month.png",title: TextStrings.DailyAttendance,subtitle: TextStrings.CheckPresentsAbsentList,)
+                // ),
+                // SizedBox(height: 18.h,),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => LateComers()),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSettings(iconString: "assets/clock.png",title: TextStrings.LateComers,subtitle: TextStrings.GetLateComersList,)),
+                // SizedBox(height: 18.h,),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => EarlyLeaves()),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSettings(iconString: "assets/hour.png",title: TextStrings.EarlyLeavers,subtitle: TextStrings.GetEarlyLeaversList,)),
+                // SizedBox(height: 18.h,),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => ByDepartment()),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSettings(iconString: "assets/office.png",title: TextStrings.ByDepartment,subtitle: TextStrings.AttendancebyDepartment,)),
+                // SizedBox(height: 18.h,),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => ByDesignation()),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSettings(iconString: "assets/identity.png",title: TextStrings.ByDesignation,subtitle: TextStrings.AttendancebyDesignation,)),
+                // SizedBox(height: 18.h,),
+                GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ByEmployee()),
+                      );
+                    },
+                    child: SubReportsOrSubSettings(iconString: "assets/users.png",title: TextStrings.ByEmployee,subtitle: TextStrings.AttendancedataofspecifiedEmployees,)),
+                // SizedBox(height: 18.h,),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => PunchedVisit()),
+                //             //Paswrd()),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.PunchedVisits,subtitle: TextStrings.ListofPinchedVisits,)),
+                // SizedBox(height: 18.h,),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => Suspicious()),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSettings(iconString: "assets/pic.png",title: TextStrings.SuspiciousSelfies,subtitle: TextStrings.ListofPinchedVisits,)),
+                //
+                SizedBox(height: 20,),
 
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  // GestureDetector(
-                  //     onTap: (){
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => DailyAttendance()
-                  //         ),
-                  //       );
-                  //     },
-                  //     child: SubReportsOrSubSettings(iconString: "assets/month.png",title: TextStrings.DailyAttendance,subtitle: TextStrings.CheckPresentsAbsentList,)
-                  // ),
-                  // SizedBox(height: 18.h,),
-                  // GestureDetector(
-                  //     onTap: (){
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => LateComers()),
-                  //       );
-                  //     },
-                  //     child: SubReportsOrSubSettings(iconString: "assets/clock.png",title: TextStrings.LateComers,subtitle: TextStrings.GetLateComersList,)),
-                  // SizedBox(height: 18.h,),
-                  // GestureDetector(
-                  //     onTap: (){
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => EarlyLeaves()),
-                  //       );
-                  //     },
-                  //     child: SubReportsOrSubSettings(iconString: "assets/hour.png",title: TextStrings.EarlyLeavers,subtitle: TextStrings.GetEarlyLeaversList,)),
-                  // SizedBox(height: 18.h,),
-                  // GestureDetector(
-                  //     onTap: (){
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => ByDepartment()),
-                  //       );
-                  //     },
-                  //     child: SubReportsOrSubSettings(iconString: "assets/office.png",title: TextStrings.ByDepartment,subtitle: TextStrings.AttendancebyDepartment,)),
-                  // SizedBox(height: 18.h,),
-                  // GestureDetector(
-                  //     onTap: (){
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => ByDesignation()),
-                  //       );
-                  //     },
-                  //     child: SubReportsOrSubSettings(iconString: "assets/identity.png",title: TextStrings.ByDesignation,subtitle: TextStrings.AttendancebyDesignation,)),
-                  // SizedBox(height: 18.h,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ByEmployee()),
-                        );
-                      },
-                      child: SubReportsOrSubSettings(iconString: "assets/users.png",title: TextStrings.ByEmployee,subtitle: TextStrings.AttendancedataofspecifiedEmployees,)),
-                  // SizedBox(height: 18.h,),
-                  // GestureDetector(
-                  //     onTap: (){
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => PunchedVisit()),
-                  //             //Paswrd()),
-                  //       );
-                  //     },
-                  //     child: SubReportsOrSubSettings(iconString: "assets/adduser.png",title: TextStrings.PunchedVisits,subtitle: TextStrings.ListofPinchedVisits,)),
-                  // SizedBox(height: 18.h,),
-                  // GestureDetector(
-                  //     onTap: (){
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => Suspicious()),
-                  //       );
-                  //     },
-                  //     child: SubReportsOrSubSettings(iconString: "assets/pic.png",title: TextStrings.SuspiciousSelfies,subtitle: TextStrings.ListofPinchedVisits,)),
-                  //
-                  SizedBox(height: 18.h,),
-
-                  // GestureDetector(
-                  //     onTap: (){
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => OutsideGeoFence()),
-                  //       );
-                  //     },
-                  //     child: SubReportsOrSubSettings(iconString: "assets/gps.png",title: TextStrings.OutsideGeoFence,subtitle: TextStrings.Employeesnotinthespecifiedlocation,)),
-                ],
-              ),
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => OutsideGeoFence()),
+                //       );
+                //     },
+                //     child: SubReportsOrSubSettings(iconString: "assets/gps.png",title: TextStrings.OutsideGeoFence,subtitle: TextStrings.Employeesnotinthespecifiedlocation,)),
+              ],
             ),
           ),
         ),

@@ -6,7 +6,8 @@ import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/p
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PieChartPage extends StatelessWidget {
-  const PieChartPage({super.key});
+  const PieChartPage({key});
+  // const PieChartPage({super.key});
 
   Color get barColor => Colors.white;
   Color get barBackgroundColor => const Color(0xff72d8bf);

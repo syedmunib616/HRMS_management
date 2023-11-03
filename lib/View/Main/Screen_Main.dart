@@ -270,7 +270,7 @@ class _ScreenMainState extends State<ScreenMain> {
                       width: 24,
                       color: curentindex==0? srpgradient2 : settingFontBackColor(context),
                     ),
-                    Text("Home",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==0? srpgradient2 :fontgrey,),),
+                    Text("Home",style: GoogleFonts.poppins(fontSize: 12,color: curentindex==0? srpgradient2 :fontgrey,),),
                   ],
                 )),
             // BottomNavigationBarItem(
@@ -298,7 +298,7 @@ class _ScreenMainState extends State<ScreenMain> {
                       width: 24,
                       color:curentindex==2? srpgradient2 : settingFontBackColor(context),
                     ),
-                    Text("Request",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==2? srpgradient2 :fontgrey,),),
+                    Text("Request",style: GoogleFonts.poppins(fontSize: 12,color: curentindex==2? srpgradient2 :fontgrey,),),
                   ],
                 )),
             // BottomNavigationBarItem(
@@ -558,7 +558,7 @@ class _ScreenMain1State extends State<ScreenMain1> {
                       width: 24,
                       color: curentindex==0? srpgradient2 : settingFontBackColor(context),
                     ),
-                    Text("Home",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==0? srpgradient2 :fontgrey,),),
+                    Text("Home",style: GoogleFonts.poppins(fontSize: 12,color: curentindex==0? srpgradient2 :fontgrey,),),
                   ],
                 )),
             // BottomNavigationBarItem(
@@ -586,7 +586,7 @@ class _ScreenMain1State extends State<ScreenMain1> {
                       width: 24,
                       color:curentindex==2? srpgradient2 : settingFontBackColor(context),
                     ),
-                    Text("Request",style: GoogleFonts.poppins(fontSize: 10.sp,color: curentindex==2? srpgradient2 :fontgrey,),),
+                    Text("Request",style: GoogleFonts.poppins(fontSize: 12,color: curentindex==2? srpgradient2 :fontgrey,),),
                   ],
                 )),
             // BottomNavigationBarItem(

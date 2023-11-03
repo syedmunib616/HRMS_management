@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class LineChartSample9 extends StatelessWidget {
-  LineChartSample9({super.key});
+  // LineChartSample9({super.key});
+  LineChartSample9({key});
   final spots = List.generate(101, (i) => (i - 50) / 10)
       .map((x) => FlSpot(x, sin(x)))
       .toList();

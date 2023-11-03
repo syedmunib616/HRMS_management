@@ -2,7 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LineChartSample5 extends StatelessWidget {
-  const LineChartSample5({super.key});
+  const LineChartSample5({key});
+  // const LineChartSample5({super.key});
 
   List<int> get showIndexes => const [1, 3, 5];
   List<FlSpot> get allSpots => const [

@@ -44,7 +44,7 @@ import 'package:hrmanagementapp/View/Profile/Home/components/pie_chart/samples/p
 import 'package:hrmanagementapp/View/Profile/Home/components/piechart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hrmanagementapp/View/login/login.dart';
-import 'package:flutter_zoom_drawer/config.dart';
+// import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -222,1285 +222,807 @@ class _ByEmployeeState extends State<ByEmployee> {
 
   @override
   Widget build(BuildContext context) {
+
+    final hh=MediaQuery.of(context).size.height;
+    final ww=MediaQuery.of(context).size.width;
+
     return SafeArea(
-        child: CsScreenUtilInit(
-          child: Scaffold(
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(155.0.h),
-              child: Container(
-                child:  Container(
-                  height: 300.h,
-                  width:MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 2,
-                        blurRadius: 1,
-                        offset: const Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-                    color: whiteClr,
-                      //color: Colors.cyanAccent
-                  ),
-                  child: Stack(
-                      children:[
-                        Positioned(
-                          top: 0,
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Column(
-                              children:[
-                                SizedBox(height: 15.h,),
-                                Container(
-                                  //color: Colors.black45,
-                                  alignment:Alignment.center ,
-                                  width: 185.w,
-                                  child: Text("Employee Wise Attendance",
-                                    style: GoogleFonts.poppins(fontSize:12.sp,
-                                        color: Colors.black, fontWeight: FontWeight.w500),),
-                                ),
-                                SizedBox(height: 10.h,),
-                                Row(
-                                  children: [
-                                    Spacer(),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        //DatePickerTitle(date: dateTime);
-                                        // _showRangePicker(context);
-                                        // showDateRangePicker(
-                                        //     context: context,
-                                        //     firstDate: DateTime(2000),
-                                        //     lastDate: DateTime(2200),
-                                        //     builder: (context, child) {
-                                        //       return Theme(
-                                        //         data: ThemeData.light().copyWith(
-                                        //             colorScheme: const ColorScheme.light(
-                                        //                 onPrimary: Colors.white, // selected text color
-                                        //                 onSurface: srpgradient3, // default text color
-                                        //                 primary: srpgradient2 // circle color
-                                        //                 // onPrimary: Colors.black, // selected text color
-                                        //                 // onSurface: Colors.amberAccent, // default text color
-                                        //                 // primary: Colors.lightBlue // circle color
-                                        //             ),
-                                        //             dialogBackgroundColor: Colors.white,
-                                        //             textButtonTheme: TextButtonThemeData(
-                                        //                 style: TextButton.styleFrom(
-                                        //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
-                                        //                         color: srpgradient2, fontWeight: FontWeight.w500),
-                                        //                     primary: srpgradient2, // color of button's letters
-                                        //                     //backgroundColor: Colors.white60, // Background color
-                                        //                     //backgroundColor: Colors.white, // Background color
-                                        //                     shape: RoundedRectangleBorder(
-                                        //                         side: const BorderSide(
-                                        //                             color: Colors.transparent,
-                                        //                             width: 1,
-                                        //                             style: BorderStyle.solid),
-                                        //                         borderRadius: BorderRadius.circular(50))
-                                        //                 ))),
-                                        //         child: child!,
-                                        //       );
-                                        //     });
-                                        pickDateRange();
-                                        // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
-                                        // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
-                                        // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
-                                        // final String formatted = serverFormater.format(displayDate);
-                                        // var a,b,c;
-                                        // newDateTime = await buildShowRoundedDatePicker(context);
-                                        // a=newDateTime?.day.toString();
-                                        // b=newDateTime?.month.toString();
-                                        // c=newDateTime?.year.toString();
-                                        // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-                                        //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-                                        //   a="0$a";
-                                        // }
-                                        // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-                                        //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-                                        //   b="0$b";
-                                        // }
-                                        // print("guddi teri ma ka $a $b $c");
-                                        // print(newDateTime);
-                                        // if (newDateTime != null) {
-                                        //   setState(() {
-                                        //
-                                        //     time= "$c-$b-$a";
-                                        //     dateTime = newDateTime!;
-                                        //   });
-                                        //   print("${dateTime.month}");
-                                        // }
-                                      },
-                                      child: Container(
-                                        height: 36.0.h,
-                                        //width: 125.w,
-                                        width: MediaQuery.of(context).size.width,
-                                        //color: Colors.purpleAccent,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              //width: 125.w,
-                                              width: 300.w,
-                                              height: 42.0.h,
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey.withOpacity(0.2),
-                                                    spreadRadius: 2,
-                                                    blurRadius: 1,
-                                                    offset: const Offset(0, 2), // changes position of shadow
-                                                  ),
-                                                ],
-                                                borderRadius: BorderRadius.circular(5),
-                                                color: whiteClr,
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsets.all( 3.5.sp),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-                                                    Spacer(),
-                                                    Column(
-                                                      children: [
-                                                        Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                                         Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                                       // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                                      ],
-                                                    ),
-                                                    const Spacer(),
-                                                    Container(
-                                                      height: 15.h,
-                                                      width: 15.w,
-                                                      //color: Colors.purpleAccent,
-                                                      child: Icon(Icons.keyboard_arrow_down,size:22.sp,color: iconcolor,),),
-                                                    SizedBox(width: 10.w,)
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
-                                    // Spacer(),
-                                    // GestureDetector(
-                                    //   onTap: () async {
-                                    //     //DatePickerTitle(date: dateTime);
-                                    //     // _showRangePicker(context);
-                                    //     var a,b,c;
-                                    //     newDateTime1 = await buildShowRoundedDatePicker(context);
-                                    //
-                                    //     a=newDateTime1?.day.toString();
-                                    //     b=newDateTime1?.month.toString();
-                                    //     c=newDateTime1?.year.toString();
-                                    //
-                                    //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-                                    //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-                                    //       a="0$a";
-                                    //     }
-                                    //
-                                    //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-                                    //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-                                    //       b="0$b";
-                                    //     }
-                                    //
-                                    //     print("guddi teri ma ka $a $b $c");
-                                    //
-                                    //     print(newDateTime1);
-                                    //     if (newDateTime1 != null) {
-                                    //       setState(() {
-                                    //         // time=newDateTime.toString();
-                                    //         // time=time.substring(0,time.length-13);
-                                    //         time1 = "$c-$b-$a";
-                                    //         dateTime1 = newDateTime1!;
-                                    //       });
-                                    //       print("${dateTime1.month}");
-                                    //     }
-                                    //   },
-                                    //   child: Container(
-                                    //     height: 36.0.h,
-                                    //     width: 125.w,
-                                    //     child: Row(
-                                    //       mainAxisAlignment: MainAxisAlignment.center,
-                                    //       children: [
-                                    //         Container(
-                                    //           width: 125.w,
-                                    //           height: 42.0.h,
-                                    //           decoration: BoxDecoration(
-                                    //             boxShadow: [
-                                    //               BoxShadow(
-                                    //                 color: Colors.grey.withOpacity(0.2),
-                                    //                 spreadRadius: 2,
-                                    //                 blurRadius: 1,
-                                    //                 offset: const Offset(0, 2), // changes position of shadow
-                                    //               ),
-                                    //             ],
-                                    //             borderRadius: BorderRadius.circular(5),
-                                    //             color: whiteClr,
-                                    //           ),
-                                    //           child: Padding(
-                                    //             padding: EdgeInsets.all( 3.5.sp),
-                                    //             child: Row(
-                                    //               children: [
-                                    //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-                                    //                 SizedBox(width: 10.w,),
-                                    //                 Column(
-                                    //                   children: [
-                                    //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                    //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-                                    //                   ],
-                                    //                 ),
-                                    //                 const Spacer(),
-                                    //                 Container(
-                                    //                   height: 15.h,
-                                    //                   width: 15.w,
-                                    //                   //color: Colors.purpleAccent,
-                                    //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
-                                    //               ],
-                                    //             ),
-                                    //           ),
-                                    //         ),
-                                    //       ],
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    // Spacer(),
-                                    ],
-                                  ),
-
-                                SizedBox(height: 12.h,),
-
-                                Container(
-                                  height: 30.h,
-                                  width: 300.w,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.2),
-                                        spreadRadius: 2,
-                                        blurRadius: 1,
-                                        offset: const Offset(0, 2), // changes position of shadow
-                                      ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(5),
-                                    // color: Colors.purpleAccent,
-                                    color: whiteClr,
-                                  ),
-                                  //color: Colors.purpleAccent,
-                                  child:  Stack(
-                                    children: [
-
-                                      Positioned(
-                                        top: 0,
-                                        bottom: 0,
-                                        left: 0,
-                                        right: 0,
-                                        child: Row(
-                                          children: [
-                                            SizedBox(width: 5.w,),
-                                            Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
-                                            SizedBox(width: 14.w,),
-                                            DropdownButton(
-                                              // Initial Value
-                                              value: dropdownvalue1,
-                                              // Down Arrow Icon
-                                              icon: Container(
-                                              //  color: Colors.green,
-                                                height: 30.h,
-                                                width: 1.w,
-                                              ),
-                                              // Array list of items
-                                              items: items1.map((String items) {
-                                                return DropdownMenuItem(
-                                                  value: items,
-                                                  child: Container(
-                                                      width: 229.w,
-                                                      // color: Colors.blue,
-                                                      child: Text(items,style: GoogleFonts.poppins(fontSize: 12.sp, color:blackClr,),)),
-                                                );
-                                              }).toList(),
-                                              // After selecting the desired option,it will
-                                              // change button value to selected value
-                                              onChanged: (String? newValue) {
-                                                setState(() {
-                                                  dropdownvalue1 = newValue!;
-                                                });
-                                                print("::::::::::: $dropdownvalue1 $days");
-                                                dropdownfetchattendance(dropdownvalue1);
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    Positioned(
-                                            top: 5,
-                                              right: 10,
-                                              child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                SizedBox(height: 5.h,),
-                                Container(
-                                  //color: Colors.yellow,
-                                  height: 49.h,
-                                  width: MediaQuery.of(context).size.width*0.8,
-                                  child: Row(
-                                      // mainAxisAlignment:  MainAxisAlignment.end,
-                                      children: [
-
-                                        Text("Total Count of Attendance: ${attendance.length}",style: GoogleFonts.poppins(fontSize:12.sp,
-                                              color: srpgradient2,fontWeight: FontWeight.w600),),
-                                        Spacer(),
-                                        GestureDetector(
-                                          child: Container(
-                                            width:72.w,
-                                            height: 35.h,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(hh*0.27),
+            child: Container(
+              child:  Container(
+                height: hh*0.31,
+                width:MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 2,
+                      blurRadius: 1,
+                      offset: const Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(22),bottomRight: Radius.circular(22)),
+                  color: whiteClr,
+                    //color: Colors.cyanAccent
+                ),
+                child: Stack(
+                    children:[
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Column(
+                            children:[
+                              SizedBox(height: 11,),
+                              Container(
+                                //color: Colors.black45,
+                                alignment:Alignment.center ,
+                                width: ww*0.8,
+                                child: Text("Employee Wise Attendance",
+                                  style: GoogleFonts.poppins(fontSize:13,
+                                      color: Colors.black, fontWeight: FontWeight.w500),),
+                              ),
+                              SizedBox(height: hh*0.025,),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      //DatePickerTitle(date: dateTime);
+                                      // _showRangePicker(context);
+                                      // showDateRangePicker(
+                                      //     context: context,
+                                      //     firstDate: DateTime(2000),
+                                      //     lastDate: DateTime(2200),
+                                      //     builder: (context, child) {
+                                      //       return Theme(
+                                      //         data: ThemeData.light().copyWith(
+                                      //             colorScheme: const ColorScheme.light(
+                                      //                 onPrimary: Colors.white, // selected text color
+                                      //                 onSurface: srpgradient3, // default text color
+                                      //                 primary: srpgradient2 // circle color
+                                      //                 // onPrimary: Colors.black, // selected text color
+                                      //                 // onSurface: Colors.amberAccent, // default text color
+                                      //                 // primary: Colors.lightBlue // circle color
+                                      //             ),
+                                      //             dialogBackgroundColor: Colors.white,
+                                      //             textButtonTheme: TextButtonThemeData(
+                                      //                 style: TextButton.styleFrom(
+                                      //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
+                                      //                         color: srpgradient2, fontWeight: FontWeight.w500),
+                                      //                     primary: srpgradient2, // color of button's letters
+                                      //                     //backgroundColor: Colors.white60, // Background color
+                                      //                     //backgroundColor: Colors.white, // Background color
+                                      //                     shape: RoundedRectangleBorder(
+                                      //                         side: const BorderSide(
+                                      //                             color: Colors.transparent,
+                                      //                             width: 1,
+                                      //                             style: BorderStyle.solid),
+                                      //                         borderRadius: BorderRadius.circular(50))
+                                      //                 ))),
+                                      //         child: child!,
+                                      //       );
+                                      //     });
+                                      pickDateRange();
+                                      // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+                                      // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
+                                      // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
+                                      // final String formatted = serverFormater.format(displayDate);
+                                      // var a,b,c;
+                                      // newDateTime = await buildShowRoundedDatePicker(context);
+                                      // a=newDateTime?.day.toString();
+                                      // b=newDateTime?.month.toString();
+                                      // c=newDateTime?.year.toString();
+                                      // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+                                      //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+                                      //   a="0$a";
+                                      // }
+                                      // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+                                      //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+                                      //   b="0$b";
+                                      // }
+                                      // print("guddi teri ma ka $a $b $c");
+                                      // print(newDateTime);
+                                      // if (newDateTime != null) {
+                                      //   setState(() {
+                                      //
+                                      //     time= "$c-$b-$a";
+                                      //     dateTime = newDateTime!;
+                                      //   });
+                                      //   print("${dateTime.month}");
+                                      // }
+                                    },
+                                    child: Container(
+                                      height: hh*0.06,
+                                      //width: 125.w,
+                                      width: MediaQuery.of(context).size.width,
+                                      //color: Colors.purpleAccent,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            //width: 125.w,
+                                            width: ww*0.85,
+                                            height: hh*0.06,
                                             decoration: BoxDecoration(
                                               boxShadow: [
-                                                BoxShadow(color: Colors.grey.withOpacity(0.2),
+                                                BoxShadow(
+                                                  color: Colors.grey.withOpacity(0.2),
                                                   spreadRadius: 2,
                                                   blurRadius: 1,
-                                                  offset: const Offset(0, 2),
+                                                  offset: const Offset(0, 2), // changes position of shadow
                                                 ),
                                               ],
                                               borderRadius: BorderRadius.circular(5),
                                               color: whiteClr,
+                                             // color: Colors.blue,
                                             ),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(width: 5.h,),
-                                                 Icon(
-                                                  size: 23.sp,
-                                                  Icons.remove_red_eye_outlined,
-                                                  color: srpgradient2,
-                                                ),
-                                                SizedBox(width: 5.h,),
-                                                shownhichalyga==true? SizedBox(
-                                                  height: 20,
-                                                  width: 20,
-                                                  child: CircularProgressIndicator(
-                                                    backgroundColor: Colors.white,
-                                                    strokeWidth: 1.6.w,
+                                            child: Padding(
+                                              padding: EdgeInsets.all( 5),
+                                              child: Row(
+                                                children: [
+                                                  Icon(FontAwesomeIcons.calendarDays,size: 26,color: srpgradient2,),
+                                                  Spacer(),
+                                                  Column(
+                                                    children: [
+                                                      Text("Select Date", style: GoogleFonts.poppins(fontSize:9, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                                       Text("$time", style: GoogleFonts.poppins(fontSize:12.5, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                     // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                                    ],
                                                   ),
-                                                ) :  Text("Show" ,style: GoogleFonts.poppins(fontSize: 11.sp, color:blackClr,),),
-                                                // Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                                                // Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                              ],
+                                                  const Spacer(),
+                                                  Container(
+                                                    height: 17,
+                                                    width: 17,
+                                                    //color: Colors.purpleAccent,
+                                                    child: Icon(Icons.keyboard_arrow_down,size:23,color: iconcolor,),),
+                                                  SizedBox(width: 12,)
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                          onTap:() => {
-                                          Future.delayed(const Duration(seconds: 7), () {
-
-                                          setState(() {
-                                            shownhichalyga=false;
-                                          });
-
-                                          }),
-                                            attendance.clear(),
-                                            print("rukja yarr $shownhichalyga"),
-                                            shownhichalyga == false?
-                                            Future.delayed(const Duration(milliseconds: 90), () {
-                                              attendance.clear();
-                                              attendance.clear();
-                                              shownhichalyga == false ? Future.delayed(const Duration(milliseconds: 150), () {
-                                                attendance.clear();
-                                                shownhichalyga == false ? dropdownfetchattendance(dropdownvalue1) : print("ik");
-                                                }) : print("ik");
-                                              })
-                                                :print("taha ")
-                                            },
-                                          ),
-
-                                          // Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                        //  child: Container(
-                                        //    color: coverBackClr,
-                                        //    height: 40.h,
-                                        //    width: 1.w ,
-                                        //  ),
-                                        // ),
-                                        // SizedBox(
-                                        //   width: 12.w,
-                                        // )
-
                                         ],
                                       ),
                                     ),
-                                  // Row(
-                                //   children: [
-                                //     Spacer(),
-                                //     GestureDetector(
-                                //       onTap: (){
-                                //         showAlertDialog(context);
-                                //       },
-                                //       child: Container(
-                                //         height: 37.h,
-                                //         width: 149.w,
-                                //         decoration: BoxDecoration(
-                                //           boxShadow: [
-                                //             BoxShadow(
-                                //               color: Colors.grey.withOpacity(0.25),
-                                //               spreadRadius: 1,
-                                //               blurRadius: 1,
-                                //               offset: const Offset(0, 2), // changes position of shadow
-                                //             ),
-                                //           ],
-                                //           borderRadius: BorderRadius.circular(5.sp),
-                                //           color: whiteClr,
-                                //         ),
-                                //         child: Row(
-                                //           mainAxisAlignment: MainAxisAlignment.start,
-                                //           children: [
-                                //             Padding(
-                                //               padding: const EdgeInsets.only(left: 8.0),
-                                //               child: SizedBox(
-                                //                 height: 25.h,
-                                //                 width: 25.w,
-                                //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
-                                //               ),
-                                //             ),
-                                //             Spacer(),
-                                //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                //             Spacer(),
-                                //             SizedBox(width: 4.w,),
-                                //
-                                //           ],
-                                //         ),
-                                //       ),
-                                //     ),
-                                //     Spacer(),
-                                //     GestureDetector(
-                                //       onTap: (){
-                                //         showAlertDialog(context);
-                                //       },
-                                //       child: Container(
-                                //         height: 37.h,
-                                //         width: 149.w,
-                                //         decoration: BoxDecoration(
-                                //           boxShadow: [
-                                //             BoxShadow(
-                                //               color: Colors.grey.withOpacity(0.25),
-                                //               spreadRadius: 1,
-                                //               blurRadius: 1,
-                                //               offset: const Offset(0, 2), // changes position of shadow
-                                //             ),
-                                //           ],
-                                //           borderRadius: BorderRadius.circular(5.sp),
-                                //           color: whiteClr,
-                                //         ),
-                                //         child: Row(
-                                //           mainAxisAlignment: MainAxisAlignment.start,
-                                //           children: [
-                                //             Padding(
-                                //               padding: const EdgeInsets.only(left: 8.0),
-                                //               child: SizedBox(
-                                //                 height: 25.h,
-                                //                 width: 25.w,
-                                //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
-                                //               ),
-                                //             ),
-                                //             Spacer(),
-                                //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-                                //             Spacer(),
-                                //             SizedBox(width: 4.w,),
-                                //
-                                //           ],
-                                //         ),
-                                //       ),
-                                //     ),
-                                //     Spacer(),
-                                //   ],
-                                // ),
-                                 ]
-                               ),
-                             ),
-
-                          Positioned(
-                            top: 6,
-                            left: 4,
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                //color: Colors.yellow,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 10.w,top: 8.h),
-                                  child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
+                                  ),
+                                  Spacer(),
+                                  // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
+                                  // Spacer(),
+                                  // GestureDetector(
+                                  //   onTap: () async {
+                                  //     //DatePickerTitle(date: dateTime);
+                                  //     // _showRangePicker(context);
+                                  //     var a,b,c;
+                                  //     newDateTime1 = await buildShowRoundedDatePicker(context);
+                                  //
+                                  //     a=newDateTime1?.day.toString();
+                                  //     b=newDateTime1?.month.toString();
+                                  //     c=newDateTime1?.year.toString();
+                                  //
+                                  //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
+                                  //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
+                                  //       a="0$a";
+                                  //     }
+                                  //
+                                  //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
+                                  //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
+                                  //       b="0$b";
+                                  //     }
+                                  //
+                                  //     print("guddi teri ma ka $a $b $c");
+                                  //
+                                  //     print(newDateTime1);
+                                  //     if (newDateTime1 != null) {
+                                  //       setState(() {
+                                  //         // time=newDateTime.toString();
+                                  //         // time=time.substring(0,time.length-13);
+                                  //         time1 = "$c-$b-$a";
+                                  //         dateTime1 = newDateTime1!;
+                                  //       });
+                                  //       print("${dateTime1.month}");
+                                  //     }
+                                  //   },
+                                  //   child: Container(
+                                  //     height: 36.0.h,
+                                  //     width: 125.w,
+                                  //     child: Row(
+                                  //       mainAxisAlignment: MainAxisAlignment.center,
+                                  //       children: [
+                                  //         Container(
+                                  //           width: 125.w,
+                                  //           height: 42.0.h,
+                                  //           decoration: BoxDecoration(
+                                  //             boxShadow: [
+                                  //               BoxShadow(
+                                  //                 color: Colors.grey.withOpacity(0.2),
+                                  //                 spreadRadius: 2,
+                                  //                 blurRadius: 1,
+                                  //                 offset: const Offset(0, 2), // changes position of shadow
+                                  //               ),
+                                  //             ],
+                                  //             borderRadius: BorderRadius.circular(5),
+                                  //             color: whiteClr,
+                                  //           ),
+                                  //           child: Padding(
+                                  //             padding: EdgeInsets.all( 3.5.sp),
+                                  //             child: Row(
+                                  //               children: [
+                                  //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
+                                  //                 SizedBox(width: 10.w,),
+                                  //                 Column(
+                                  //                   children: [
+                                  //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                  //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
+                                  //                   ],
+                                  //                 ),
+                                  //                 const Spacer(),
+                                  //                 Container(
+                                  //                   height: 15.h,
+                                  //                   width: 15.w,
+                                  //                   //color: Colors.purpleAccent,
+                                  //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
+                                  //               ],
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // Spacer(),
+                                  ],
                                 ),
+
+                              SizedBox(height: 14,),
+
+                              Container(
+                                height: hh*0.048,
+                                width: ww*0.85,
+                                // width: 300.w,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 1,
+                                      offset: const Offset(0, 2), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(5),
+                                  // color: Colors.purpleAccent,
+                                  color: whiteClr,
+                                ),
+                                //color: Colors.purpleAccent,
+                                child:  Stack(
+                                  children: [
+
+                                    Positioned(
+                                      top: 0,
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(width: 9,),
+                                          Icon(FontAwesomeIcons.userTie,size: 24,color: srpgradient2,),
+                                          SizedBox(width: 16,),
+                                          DropdownButton(
+                                            // Initial Value
+                                            value: dropdownvalue1,
+                                            // Down Arrow Icon
+                                            icon: Container(
+                                              //  color: Colors.green,
+                                              height: hh*0.1,
+                                              width: 2,
+                                            ),
+                                            // Array list of items
+                                            items: items1.map((String items) {
+                                              return DropdownMenuItem(
+                                                value: items,
+                                                child: Container(
+                                                    //width: 229.w,
+                                                    width: ww*0.7,
+                                                    //color: Colors.blue,
+                                                    child: Text(items,style: GoogleFonts.poppins(fontSize: 13, color:blackClr,),)),
+                                              );
+                                            }).toList(),
+                                            // After selecting the desired option,it will
+                                            // change button value to selected value
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                dropdownvalue1 = newValue!;
+                                              });
+                                              print("::::::::::: $dropdownvalue1 $days");
+                                              dropdownfetchattendance(dropdownvalue1);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  Positioned(
+                                    top: 5,
+                                    right: 10,
+                                    child: Icon(Icons.keyboard_arrow_down,size: 26,color: iconcolor,)
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              SizedBox(height: 6,),
+                              Container(
+                                //color: Colors.yellow,
+                                // height: 48.h,
+                                height: hh*0.07,
+                                width: MediaQuery.of(context).size.width*0.8,
+                                child: Row(
+                                    // mainAxisAlignment:  MainAxisAlignment.end,
+                                    children: [
+
+                                      Text("Total Count of Attendance: ${attendance.length}", style: GoogleFonts.poppins(fontSize:13,color: srpgradient2,fontWeight: FontWeight.w600),),
+                                      Spacer(),
+                                      GestureDetector(
+                                        child: Container(
+                                          width: ww*0.22,
+                                          height: hh*0.055,
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(color: Colors.grey.withOpacity(0.2),
+                                                spreadRadius: 2,
+                                                blurRadius: 1,
+                                                offset: const Offset(0, 2),
+                                              ),
+                                            ],
+                                            borderRadius: BorderRadius.circular(5),
+                                            color: whiteClr,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(width: 8,),
+                                              Icon(
+                                                Icons.remove_red_eye_outlined,
+                                                size: 24,
+                                                //Icons.remove_red_eye_outlined,
+                                                color: srpgradient2,
+                                              ),
+                                              SizedBox(width: 7),
+                                              shownhichalyga==true ? SizedBox(
+                                                height: 20,
+                                                width: 20,
+                                                child: CircularProgressIndicator(
+                                                  backgroundColor: Colors.white,
+                                                  strokeWidth: 1.6,
+                                                ),
+                                              ) :  Text("Show", style: GoogleFonts.poppins(fontSize: 13, color:blackClr,),),
+                                              // Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
+                                              // Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                                            ],
+                                          ),
+                                        ),
+                                        onTap:() => {
+                                        Future.delayed(const Duration(seconds: 7), () {
+
+                                        setState(() {
+                                          shownhichalyga=false;
+                                        });
+
+                                        }),
+                                          attendance.clear(),
+                                          print("rukja yarr $shownhichalyga"),
+                                          shownhichalyga == false?
+                                          Future.delayed(const Duration(milliseconds: 90), () {
+                                            attendance.clear();
+                                            attendance.clear();
+                                            shownhichalyga == false ? Future.delayed(const Duration(milliseconds: 150), () {
+                                              attendance.clear();
+                                              shownhichalyga == false ? dropdownfetchattendance(dropdownvalue1) : print("ik");
+                                              }) : print("ik");
+                                            })
+                                              :print("taha ")
+                                          },
+                                        ),
+
+                                        // Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                      //  child: Container(
+                                      //    color: coverBackClr,
+                                      //    height: 40.h,
+                                      //    width: 1.w ,
+                                      //  ),
+                                      // ),
+                                      // SizedBox(
+                                      //   width: 12.w,
+                                      // )
+
+                                      ],
+                                    ),
+                                  ),
+                                // Row(
+                              //   children: [
+                              //     Spacer(),
+                              //     GestureDetector(
+                              //       onTap: (){
+                              //         showAlertDialog(context);
+                              //       },
+                              //       child: Container(
+                              //         height: 37.h,
+                              //         width: 149.w,
+                              //         decoration: BoxDecoration(
+                              //           boxShadow: [
+                              //             BoxShadow(
+                              //               color: Colors.grey.withOpacity(0.25),
+                              //               spreadRadius: 1,
+                              //               blurRadius: 1,
+                              //               offset: const Offset(0, 2), // changes position of shadow
+                              //             ),
+                              //           ],
+                              //           borderRadius: BorderRadius.circular(5.sp),
+                              //           color: whiteClr,
+                              //         ),
+                              //         child: Row(
+                              //           mainAxisAlignment: MainAxisAlignment.start,
+                              //           children: [
+                              //             Padding(
+                              //               padding: const EdgeInsets.only(left: 8.0),
+                              //               child: SizedBox(
+                              //                 height: 25.h,
+                              //                 width: 25.w,
+                              //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
+                              //               ),
+                              //             ),
+                              //             Spacer(),
+                              //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                              //             Spacer(),
+                              //             SizedBox(width: 4.w,),
+                              //
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     Spacer(),
+                              //     GestureDetector(
+                              //       onTap: (){
+                              //         showAlertDialog(context);
+                              //       },
+                              //       child: Container(
+                              //         height: 37.h,
+                              //         width: 149.w,
+                              //         decoration: BoxDecoration(
+                              //           boxShadow: [
+                              //             BoxShadow(
+                              //               color: Colors.grey.withOpacity(0.25),
+                              //               spreadRadius: 1,
+                              //               blurRadius: 1,
+                              //               offset: const Offset(0, 2), // changes position of shadow
+                              //             ),
+                              //           ],
+                              //           borderRadius: BorderRadius.circular(5.sp),
+                              //           color: whiteClr,
+                              //         ),
+                              //         child: Row(
+                              //           mainAxisAlignment: MainAxisAlignment.start,
+                              //           children: [
+                              //             Padding(
+                              //               padding: const EdgeInsets.only(left: 8.0),
+                              //               child: SizedBox(
+                              //                 height: 25.h,
+                              //                 width: 25.w,
+                              //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
+                              //               ),
+                              //             ),
+                              //             Spacer(),
+                              //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                              //             Spacer(),
+                              //             SizedBox(width: 4.w,),
+                              //
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     Spacer(),
+                              //   ],
+                              // ),
+                               ]
+                             ),
+                           ),
+
+                        Positioned(
+                          top: 6,
+                          left: 4,
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              //color: Colors.yellow,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 13,top: 10),
+                                child: Image.asset('assets/doublearrow.png',height: 25,width: 25,),
                               ),
                             ),
                           ),
-                        ]
-                      ),
+                        ),
+                      ]
                     ),
                   ),
                 ),
+              ),
 
-            //             appBar: PreferredSize(
-            //               preferredSize: Size.fromHeight(145.0.h),
-            //               child: Container(
-            //                 child:  Container(
-            //                   height: 300.h,
-            //                   width:MediaQuery.of(context).size.width,
-            //                   decoration: BoxDecoration(
-            //                     boxShadow: [
-            //                       BoxShadow(
-            //                         color: Colors.grey.withOpacity(0.4),
-            //                         spreadRadius: 2,
-            //                         blurRadius: 1,
-            //                         offset: const Offset(0, 2), // changes position of shadow
-            //                       ),
-            //                     ],
-            //                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-            //                     color: whiteClr,
-            //                     //color: Colors.cyanAccent
-            //                   ),
-            //                   child: Stack(
-            //                       children:[
-            //
-            //                         Positioned(
-            //                           top: 0,
-            //                           bottom: 0,
-            //                           left: 0,
-            //                           right: 0,
-            //                           child: Column(
-            //                               children:[
-            //                                 SizedBox(height: 11.h,),
-            //                                 Container(
-            //                                   // color: Colors.black45,
-            //                                   alignment:Alignment.center ,
-            //                                   width: 185.w,
-            //                                   child: Text("Employee Wise Attendance",
-            //                                     style: GoogleFonts.poppins(fontSize:12.sp,
-            //                                         color: Colors.black, fontWeight: FontWeight.w500),),
-            //                                 ),
-            //                                 SizedBox(height: 10.h,),
-            //                                 Row(
-            //                                   children: [
-            //                                     SizedBox(width: 55.w,),
-            //                                     GestureDetector(
-            //                                       onTap: () async {
-            //                                         //DatePickerTitle(date: dateTime);
-            //                                         // _showRangePicker(context);
-            //                                         // showDateRangePicker(
-            //                                         //     context: context,
-            //                                         //     firstDate: DateTime(2000),
-            //                                         //     lastDate: DateTime(2200),
-            //                                         //     builder: (context, child) {
-            //                                         //       return Theme(
-            //                                         //         data: ThemeData.light().copyWith(
-            //                                         //             colorScheme: const ColorScheme.light(
-            //                                         //                 onPrimary: Colors.white, // selected text color
-            //                                         //                 onSurface: srpgradient3, // default text color
-            //                                         //                 primary: srpgradient2 // circle color
-            //                                         //                 // onPrimary: Colors.black, // selected text color
-            //                                         //                 // onSurface: Colors.amberAccent, // default text color
-            //                                         //                 // primary: Colors.lightBlue // circle color
-            //                                         //             ),
-            //                                         //             dialogBackgroundColor: Colors.white,
-            //                                         //             textButtonTheme: TextButtonThemeData(
-            //                                         //                 style: TextButton.styleFrom(
-            //                                         //                     textStyle:GoogleFonts.poppins(fontSize:12.sp,
-            //                                         //                         color: srpgradient2, fontWeight: FontWeight.w500),
-            //                                         //                     primary: srpgradient2, // color of button's letters
-            //                                         //                     //backgroundColor: Colors.white60, // Background color
-            //                                         //                     //backgroundColor: Colors.white, // Background color
-            //                                         //                     shape: RoundedRectangleBorder(
-            //                                         //                         side: const BorderSide(
-            //                                         //                             color: Colors.transparent,
-            //                                         //                             width: 1,
-            //                                         //                             style: BorderStyle.solid),
-            //                                         //                         borderRadius: BorderRadius.circular(50))
-            //                                         //                 ))),
-            //                                         //         child: child!,
-            //                                         //       );
-            //                                         //     });
-            //
-            //                                         pickDateRange();
-            //                                         // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
-            //                                         // final DateFormat serverFormater = DateFormat('dd-MM-yyyy');
-            //                                         // final DateTime displayDate = displayFormater.parse(dateTimeRange.start.d);
-            //                                         // final String formatted = serverFormater.format(displayDate);
-            //                                         // var a,b,c;
-            //                                         // newDateTime = await buildShowRoundedDatePicker(context);
-            //                                         // a=newDateTime?.day.toString();
-            //                                         // b=newDateTime?.month.toString();
-            //                                         // c=newDateTime?.year.toString();
-            //                                         // if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-            //                                         //     a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-            //                                         //   a="0$a";
-            //                                         // }
-            //                                         // if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-            //                                         //     b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-            //                                         //   b="0$b";
-            //                                         // }
-            //                                         // print("guddi teri ma ka $a $b $c");
-            //                                         // print(newDateTime);
-            //                                         // if (newDateTime != null) {
-            //                                         //   setState(() {
-            //                                         //
-            //                                         //     time= "$c-$b-$a";
-            //                                         //     dateTime = newDateTime!;
-            //                                         //   });
-            //                                         //   print("${dateTime.month}");
-            //                                         // }
-            //                                       },
-            //                                       ////Calender Container///////
-            //                                       child:
-            //                                       Container(
-            //                                         height: 36.0.h,
-            //                                         width: 275.w,
-            //                                         //width: MediaQuery.of(context).size.width,
-            //                                         //
-            //                                         child: Row(
-            //                                           // mainAxisAlignment: MainAxisAlignment.,
-            //                                           children: [SizedBox(height: 12.h,),
-            //                                             Container(
-            //                                               //width: 125.w,
-            //                                               width: 270.w,
-            //                                               height: 42.0.h,
-            //                                               decoration: BoxDecoration(
-            //                                                 boxShadow: [
-            //                                                   BoxShadow(
-            //                                                     color: Colors.grey.withOpacity(0.2),
-            //                                                     spreadRadius: 2,
-            //                                                     blurRadius: 1,
-            //                                                     offset: const Offset(0, 2), // changes position of shadow
-            //                                                   ),
-            //                                                 ],
-            //                                                 borderRadius: BorderRadius.circular(5),
-            //                                                 color: whiteClr,
-            //                                               ),
-            //                                               child: Padding(
-            //                                                 padding: EdgeInsets.all( 2.5.sp),
-            //                                                 child: Row(
-            //                                                   children: [
-            //                                                     Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-            //                                                     Spacer(),
-            //                                                     Column(
-            //                                                       children: [
-            //                                                         Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                                                         Text("$time", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-            //                                                         // Text("( ${dateTimeRange.start.year} / ${dateTimeRange.start.month} / ${dateTimeRange.start.day} )  -  ( ${dateTimeRange.end.year} / ${dateTimeRange.end.month} / ${dateTimeRange.end.day} )", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-            //                                                       ],
-            //                                                     ),
-            //                                                     const Spacer(),
-            //                                                     Container(
-            //                                                       height: 15.h,
-            //                                                       width: 15.w,
-            //                                                       //color: Colors.purpleAccent,
-            //                                                       child: Icon(Icons.keyboard_arrow_down,size:22.sp,color: iconcolor,),),
-            //                                                     SizedBox(width: 10.w,)
-            //                                                   ],
-            //                                                 ),
-            //                                               ),
-            //                                             ),
-            //                                           ],
-            //                                         ),
-            //                                       ),
-            //                                     ),
-            //                                     Spacer(),
-            //                                     // Text("To",style: GoogleFonts.poppins(fontSize:12.sp, color: Colors.black, fontWeight: FontWeight.w500),),
-            //                                     // Spacer(),
-            //                                     // GestureDetector(
-            //                                     //   onTap: () async {
-            //                                     //     //DatePickerTitle(date: dateTime);
-            //                                     //     // _showRangePicker(context);
-            //                                     //     var a,b,c;
-            //                                     //     newDateTime1 = await buildShowRoundedDatePicker(context);
-            //                                     //
-            //                                     //     a=newDateTime1?.day.toString();
-            //                                     //     b=newDateTime1?.month.toString();
-            //                                     //     c=newDateTime1?.year.toString();
-            //                                     //
-            //                                     //     if(a.toString()=="1"||a.toString()=="2"||a.toString()=="3"||a.toString()=="4"||a.toString()=="5"||
-            //                                     //         a.toString()=="6"||a.toString()=="7"||a.toString()=="8"|| a.toString()=="9"){
-            //                                     //       a="0$a";
-            //                                     //     }
-            //                                     //
-            //                                     //     if(b.toString()=="1"||b.toString()=="2"||b.toString()=="3"||b.toString()=="4"||b.toString()=="5"||
-            //                                     //         b.toString()=="6"|| b.toString()=="7"||b.toString()=="8"||b.toString()=="9"){
-            //                                     //       b="0$b";
-            //                                     //     }
-            //                                     //
-            //                                     //     print("guddi teri ma ka $a $b $c");
-            //                                     //
-            //                                     //     print(newDateTime1);
-            //                                     //     if (newDateTime1 != null) {
-            //                                     //       setState(() {
-            //                                     //         // time=newDateTime.toString();
-            //                                     //         // time=time.substring(0,time.length-13);
-            //                                     //         time1 = "$c-$b-$a";
-            //                                     //         dateTime1 = newDateTime1!;
-            //                                     //       });
-            //                                     //       print("${dateTime1.month}");
-            //                                     //     }
-            //                                     //   },
-            //                                     //   child: Container(
-            //                                     //     height: 36.0.h,
-            //                                     //     width: 125.w,
-            //                                     //     child: Row(
-            //                                     //       mainAxisAlignment: MainAxisAlignment.center,
-            //                                     //       children: [
-            //                                     //         Container(
-            //                                     //           width: 125.w,
-            //                                     //           height: 42.0.h,
-            //                                     //           decoration: BoxDecoration(
-            //                                     //             boxShadow: [
-            //                                     //               BoxShadow(
-            //                                     //                 color: Colors.grey.withOpacity(0.2),
-            //                                     //                 spreadRadius: 2,
-            //                                     //                 blurRadius: 1,
-            //                                     //                 offset: const Offset(0, 2), // changes position of shadow
-            //                                     //               ),
-            //                                     //             ],
-            //                                     //             borderRadius: BorderRadius.circular(5),
-            //                                     //             color: whiteClr,
-            //                                     //           ),
-            //                                     //           child: Padding(
-            //                                     //             padding: EdgeInsets.all( 3.5.sp),
-            //                                     //             child: Row(
-            //                                     //               children: [
-            //                                     //                 Icon(FontAwesomeIcons.calendarDays,size: 23.sp,color: srpgradient2,),
-            //                                     //                 SizedBox(width: 10.w,),
-            //                                     //                 Column(
-            //                                     //                   children: [
-            //                                     //                     Text("Select Date", style: GoogleFonts.poppins(fontSize:7.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                                     //                     Text("$time1", style: GoogleFonts.poppins(fontSize:10.5.sp, color: Color(0xff2E2E2E),fontWeight: FontWeight.w600),),
-            //                                     //                   ],
-            //                                     //                 ),
-            //                                     //                 const Spacer(),
-            //                                     //                 Container(
-            //                                     //                   height: 15.h,
-            //                                     //                   width: 15.w,
-            //                                     //                   //color: Colors.purpleAccent,
-            //                                     //                   child: Icon(Icons.keyboard_arrow_down,size:15.sp,color: iconcolor,),),
-            //                                     //               ],
-            //                                     //             ),
-            //                                     //           ),
-            //                                     //         ),
-            //                                     //       ],
-            //                                     //     ),
-            //                                     //   ),
-            //                                     // ),
-            //                                     // Spacer(),
-            //                                   ],
-            //                                 ),
-            //                                 SizedBox(height: 12.h,),
-            //                                 ////All container////
-            //                                 Container(
-            //                                   height: 30.h,
-            //                                   width: 272.w,
-            //                                   decoration: BoxDecoration(
-            //                                     boxShadow: [
-            //                                       BoxShadow(
-            //                                         color: Colors.grey.withOpacity(0.2),
-            //                                         spreadRadius: 2,
-            //                                         blurRadius: 1,
-            //                                         offset: const Offset(0, 2), // changes position of shadow
-            //                                       ),
-            //                                     ],
-            //                                     borderRadius: BorderRadius.circular(5),
-            //                                     // color: Colors.purpleAccent,
-            //                                     color: whiteClr,
-            //                                   ),
-            //                                   // color: Colors.purpleAccent,
-            //                                   // child:  Stack(
-            //                                   //   children: [
-            //                                   //
-            //                                   //     Positioned(
-            //                                   //       top: 0,
-            //                                   //       bottom: 0,
-            //                                   //       left: 0,
-            //                                   //       right: 0,
-            //                                   //       child: Container(
-            //                                   //         child: Row(
-            //                                   //           children: [
-            //                                   //             SizedBox(width: 5.w,),
-            //                                   //             Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
-            //                                   //             SizedBox(width: 5.w,),
-            //                                   //             DropdownButton(
-            //                                   //               // Initial Value
-            //                                   //               value: dropdownvalue1,
-            //                                   //               // Down Arrow Icon
-            //                                   //               icon: Container(
-            //                                   //                 height: 30.h,
-            //                                   //                 width: 80.w,
-            //                                   //               ),
-            //                                   //               // Array list of items
-            //                                   //               items: items1.map((String items) {
-            //                                   //                 return DropdownMenuItem(
-            //                                   //                   value: items,
-            //                                   //                   child: Text(items),
-            //                                   //                 );
-            //                                   //               }).toList(),
-            //                                   //               // After selecting the desired option,it will
-            //                                   //               // change button value to selected value
-            //                                   //               onChanged: (String? newValue) {
-            //                                   //                 setState(() {
-            //                                   //                   dropdownvalue1 = newValue!;
-            //                                   //                 });
-            //                                   //                 print("::::::::::: $dropdownvalue1 $days");
-            //                                   //                 dropdownfetchattendance(dropdownvalue1);
-            //                                   //               },
-            //                                   //             ),
-            //                                   //           ],
-            //                                   //         ),
-            //                                   //       ),
-            //                                   //     ),
-            //                                   //     Container(
-            //                                   //       child: Positioned(
-            //                                   //           top: 5,
-            //                                   //           right: 10,
-            //                                   //           child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
-            //                                   //       ),
-            //                                   //     ),
-            //                                   //   ],
-            //                                   // ),
-            //                                   child:  Stack(
-            //                                     children: [
-            //                                       Positioned(
-            //                                                                   top: 0,
-            //                                                                   bottom: 0,
-            //                                                                   left: 0,
-            //                                                                   right: 0,
-            //                                                                   child: Row(
-            //                                                                     children: [
-            //                                                                       SizedBox(width: 5.w,),
-            //                                                                       Icon(FontAwesomeIcons.userTie,size: 20.sp,color: srpgradient2,),
-            //                                                                       SizedBox(width: 14.w,),
-            //                                                                       DropdownButton(
-            //                                                                         // Initial Value
-            //                                                                         value: dropdownvalue1,
-            //                                                                         // Down Arrow Icon
-            //                                                                         icon: Container(
-            //
-            //                                                                           height: 30.h,
-            //                                                                           width: 100.w,
-            //                                                                             ),
-            //                                                                         // Array list of items
-            //                                                                         items: items1.map((String items) {
-            //                                                                           return DropdownMenuItem(
-            //                                                                             value: items,
-            //                                                                             child: Text(items),
-            //                                                                           );
-            //                                                                         }).toList(),
-            //                                                                         // After selecting the desired option,it will
-            //                                                                         // change button value to selected value
-            //                                                                         onChanged: (String? newValue) {
-            //                                                                           setState(() {
-            //                                                                             dropdownvalue1 = newValue!;
-            //                                                                           });
-            //                                                                           print("::::::::::: $dropdownvalue1 $days");
-            //                                                                           dropdownfetchattendance(dropdownvalue1);
-            //                                                                         },
-            //                                                                       ),
-            //                                                                     ],
-            //                                                                   ),
-            //                                                                 ),
-            //                                       Positioned(
-            //                                                                   top: 5,
-            //                                                                     right: 10,
-            //                                                                     child: Icon(Icons.keyboard_arrow_down,size: 23.sp,color: iconcolor,)
-            //                                                                 ),
-            //                                       ],
-            //                                   ),
-            //                                 ),
-            //                                 SizedBox(height: 10.h,),
-            //                                 Container(
-            //                                   margin: EdgeInsets.only(left: 200.0),
-            //                                   height: 30.h,
-            //                                   width: 90.w,
-            //                                   decoration: BoxDecoration(
-            //                                     boxShadow: [
-            //                                       BoxShadow(
-            //                                         color: Colors.grey.withOpacity(0.2),
-            //                                         spreadRadius: 2,
-            //                                         blurRadius: 1,
-            //                                         offset: const Offset(0, 2), // changes position of shadow
-            //                                       ),
-            //                                     ],
-            //                                     borderRadius: BorderRadius.circular(5),
-            //                                     // color: Colors.purpleAccent,
-            //                                     color: whiteClr,
-            //                                   ),
-            //                                   // color: Colors.purpleAccent,
-            //                                   child:  Row(mainAxisAlignment: MainAxisAlignment.center,
-            //                                     children: [
-            //                                       GestureDetector(
-            //                                         onTap: () {
-            //                                           dropdownfetchattendance(dropdownvalue1);
-            //                                         },
-            //                                       child: const Icon(
-            //                                         size: 32,
-            //                                         Icons.remove_red_eye_outlined,
-            //                                         color: srpgradient2,
-            //                                       ),
-            //                                       ),
-            //                                       SizedBox(width: 10.w,),
-            //                                       Text("Show" ,textAlign: TextAlign.center, style: GoogleFonts.poppins(fontSize: 13.sp, color:blackClr,fontWeight: FontWeight.w400,letterSpacing:2 ),),
-            //                                       // Positioned(
-            //                                       //   top: 0,
-            //                                       //   bottom: 0,
-            //                                       //   left: 0,
-            //                                       //   right: 0,
-            //                                       //   child: Row(
-            //                                       //     children: [
-            //                                       //       // SizedBox(width: 90.w,),
-            //                                       //       // Text("Show" ,textAlign: TextAlign.center, style: GoogleFonts.poppins(fontSize: 9.sp, color:blackClr,fontWeight: FontWeight.bold,),),
-            //                                       //       // // Icon(FontAwesomeIcons.eye,size: 20.sp,color: srpgradient2,),
-            //                                       //       // SizedBox(width: 90.w,),
-            //                                       //     ],
-            //                                       //   ),
-            //                                       // ),
-            //                                     ],
-            //                                   ),
-            //                                 ),
-            //                                 // Row(
-            //                                 //   children: [
-            //                                 //     Spacer(),
-            //                                 //     GestureDetector(
-            //                                 //       onTap: (){
-            //                                 //         showAlertDialog(context);
-            //                                 //       },
-            //                                 //       child: Container(
-            //                                 //         height: 37.h,
-            //                                 //         width: 149.w,
-            //                                 //         decoration: BoxDecoration(
-            //                                 //           boxShadow: [
-            //                                 //             BoxShadow(
-            //                                 //               color: Colors.grey.withOpacity(0.25),
-            //                                 //               spreadRadius: 1,
-            //                                 //               blurRadius: 1,
-            //                                 //               offset: const Offset(0, 2), // changes position of shadow
-            //                                 //             ),
-            //                                 //           ],
-            //                                 //           borderRadius: BorderRadius.circular(5.sp),
-            //                                 //           color: whiteClr,
-            //                                 //         ),
-            //                                 //         child: Row(
-            //                                 //           mainAxisAlignment: MainAxisAlignment.start,
-            //                                 //           children: [
-            //                                 //             Padding(
-            //                                 //               padding: const EdgeInsets.only(left: 8.0),
-            //                                 //               child: SizedBox(
-            //                                 //                 height: 25.h,
-            //                                 //                 width: 25.w,
-            //                                 //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
-            //                                 //               ),
-            //                                 //             ),
-            //                                 //             Spacer(),
-            //                                 //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                                 //             Spacer(),
-            //                                 //             SizedBox(width: 4.w,),
-            //                                 //
-            //                                 //           ],
-            //                                 //         ),
-            //                                 //       ),
-            //                                 //     ),
-            //                                 //     Spacer(),
-            //                                 //     GestureDetector(
-            //                                 //       onTap: (){
-            //                                 //         showAlertDialog(context);
-            //                                 //       },
-            //                                 //       child: Container(
-            //                                 //         height: 37.h,
-            //                                 //         width: 149.w,
-            //                                 //         decoration: BoxDecoration(
-            //                                 //           boxShadow: [
-            //                                 //             BoxShadow(
-            //                                 //               color: Colors.grey.withOpacity(0.25),
-            //                                 //               spreadRadius: 1,
-            //                                 //               blurRadius: 1,
-            //                                 //               offset: const Offset(0, 2), // changes position of shadow
-            //                                 //             ),
-            //                                 //           ],
-            //                                 //           borderRadius: BorderRadius.circular(5.sp),
-            //                                 //           color: whiteClr,
-            //                                 //         ),
-            //                                 //         child: Row(
-            //                                 //           mainAxisAlignment: MainAxisAlignment.start,
-            //                                 //           children: [
-            //                                 //             Padding(
-            //                                 //               padding: const EdgeInsets.only(left: 8.0),
-            //                                 //               child: SizedBox(
-            //                                 //                 height: 25.h,
-            //                                 //                 width: 25.w,
-            //                                 //                 child: Icon(FontAwesomeIcons.chartPie,size: 20.sp,color: srpgradient2,),
-            //                                 //               ),
-            //                                 //             ),
-            //                                 //             Spacer(),
-            //                                 //             Text("Tap to see Graph", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            //                                 //             Spacer(),
-            //                                 //             SizedBox(width: 4.w,),
-            //                                 //
-            //                                 //           ],
-            //                                 //         ),
-            //                                 //       ),
-            //                                 //     ),
-            //                                 //     Spacer(),
-            //                                 //   ],
-            //                                 // ),
-            //                               ]
-            //                           ),
-            //                         ),
-            //                         // SizedBox(width: 15.w,),
-            //                         /////////Ukasha Start////////
-            // /////////////////2nd/////
-            // //                         Container(
-            // //                           color: Colors.red,
-            // //                           height: 120.h,
-            // //                           width: 100.w,
-            // //                           child: Row(
-            // //                               mainAxisAlignment:  MainAxisAlignment.end,
-            // //                           children: [
-            // //                             Container(
-            // //                               width:57.w,
-            // //                               height: 35.h,
-            // //                               decoration: BoxDecoration(
-            // //                                 boxShadow: [
-            // //                                   BoxShadow(color: Colors.grey.withOpacity(0.2),
-            // //                                     spreadRadius: 2,
-            // //                                     blurRadius: 1,
-            // //                                     offset: const Offset(0, 2),
-            // //                                   ),
-            // //                                 ],
-            // //                                   borderRadius: BorderRadius.circular(5),
-            // //                                   color: whiteClr,
-            // //                               ),
-            // //                               child: Column(
-            // //                                 children: [SizedBox(height: 5.h,),
-            // //                                   GestureDetector(
-            // //                                     onTap: () => { dropdownfetchattendance(dropdownvalue1)},
-            // //                                     child: const Icon(
-            // //                                       size: 15,
-            // //                                       Icons.remove_red_eye_outlined,
-            // //                                       color: srpgradient2,
-            // //
-            // //                                     ),
-            // //                                   ),
-            // //                                   Text("Show" ,style: GoogleFonts.poppins(fontSize: 9.sp, color:blackClr,fontWeight: FontWeight.bold),),
-            // //                                   // Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-            // //                                   // Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
-            // //                                 ],
-            // //                               ),
-            // //                             ),
-            // //                             // Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            // //                             //  child: Container(
-            // //                             //    color: coverBackClr,
-            // //                             //    height: 40.h,
-            // //                             //    width: 1.w ,
-            // //                             //  ),
-            // //                             // ),
-            // //                             SizedBox(
-            // //                               width: 12.w,
-            // //                             )
-            // //                             ]
-            // //                           ),
-            // //                         ),
-            //
-            //                         //////Ukasha End////////
-            //                         // isky andr kam nhi hona
-            //                         Positioned(
-            //                           top: 6,
-            //                           left: 4,
-            //                           child: GestureDetector(
-            //                             onTap: (){
-            //                               Navigator.pop(context);
-            //                             },
-            //                             child: Container(
-            //                               //color: Colors.yellow,
-            //                               child: Padding(
-            //                                 padding: EdgeInsets.only(left: 10.w,top: 8.h),
-            //                                 child: Image.asset('assets/doublearrow.png',height: 22.h,width: 22.w,),
-            //                               ),
-            //                             ),
-            //                           ),
-            //                         ),
-            //                       ]
-            //                   ),
-            //                 ),
-            //               ),
-            //             ),
+          // body: days.isEmpty? SizedBox() :
+          //
+          // SingleChildScrollView(
+          //   child: Column(
+          //     children: [
+          //       SizedBox(height: 10.h,),
+          //       Padding(
+          //         padding:  EdgeInsets.symmetric(horizontal: 8.sp),
+          //         child: Container(
+          //           height: 30.h,
+          //           width: MediaQuery.of(context).size.width,
+          //           decoration: BoxDecoration(
+          //             boxShadow: [
+          //               BoxShadow(
+          //                 color: Colors.grey.withOpacity(0.2),
+          //                 spreadRadius: 2,
+          //                 blurRadius: 2,
+          //                 offset: const Offset(0, 2), // changes position of shadow
+          //               ),
+          //             ],
+          //             borderRadius: BorderRadius.circular(10.sp),
+          //             color: whiteClr,
+          //             // color: Colors.cyanAccent
+          //           ),
+          //           child: Row(
+          //             children: [
+          //               Padding(
+          //                 padding: EdgeInsets.only(left: 15.0.w),
+          //                 child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
+          //                     color: srpgradient2,fontWeight: FontWeight.w600),),
+          //               ),
+          //               Spacer(),
+          //               Padding(
+          //                 padding: EdgeInsets.only(left:10.0.w),
+          //                 child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
+          //                     color: srpgradient2,fontWeight: FontWeight.w600),),
+          //               ),
+          //               SizedBox(width: 22.w,),
+          //               // Padding(
+          //               //   padding:  EdgeInsets.only(left: 35.0.w),
+          //               //   child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
+          //               //       color: srpgradient2,fontWeight: FontWeight.w600),),
+          //               // ),
+          //               Container(
+          //                 width: 50.w,
+          //                 //color: Colors.yellow,
+          //                 child: Row(
+          //                   mainAxisAlignment: MainAxisAlignment.end,
+          //                   children: [
+          //                     Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
+          //                         color: srpgradient2,fontWeight: FontWeight.w600),),
+          //                   ],
+          //                 ),
+          //               ),
+          //               Container(
+          //                 width: 80.w,
+          //                 // color: Colors.red,
+          //                 child: Row(
+          //                   mainAxisAlignment: MainAxisAlignment.end,
+          //                   children: [
+          //                     Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
+          //                         color: srpgradient2,fontWeight: FontWeight.w600),),
+          //                   ],
+          //                 ),
+          //               ),
+          //               // Padding(
+          //               //   padding:  EdgeInsets.only(left: 10.0.w),
+          //               //   child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
+          //               //       color: srpgradient2,fontWeight: FontWeight.w600),),
+          //               // ),
+          //               SizedBox(width: 5.w,),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //       StreamBuilder(
+          //           stream: streamController.stream,
+          //           builder: (BuildContext context, AsyncSnapshot snapshot) {
+          //             print("%%%%%%%%% $snapshot");
+          //             switch (snapshot.connectionState) {
+          //               case ConnectionState.none:
+          //                 return const Text(
+          //                   " null",
+          //                   style: TextStyle(color: Colors.white),
+          //                 );
+          //               case ConnectionState.waiting:
+          //                 return const SizedBox();
+          //               case ConnectionState.active:
+          //                 return (snapshot.hasData == false)
+          //                     ? const CircularProgressIndicator()
+          //                     : ListView.builder(
+          //                   padding: const EdgeInsets.only(top: 0),
+          //                   shrinkWrap: true,
+          //                   physics: const BouncingScrollPhysics(),
+          //                   itemCount: attendance.length,
+          //                   itemBuilder: (context, index) {
+          //                     // managetotalcontact = contact.length.toString();
+          //                     // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+          //                     return TabsforDesignationAbsentLateEarly(
+          //                       name:attendance[index].name ,
+          //                       timein: attendance[index].timein,
+          //                       timeout: attendance[index].timeout,
+          //                       addressin: attendance[index].addressIn,
+          //                       addressout: attendance[index].addressout,
+          //                       date: attendance[index].date,
+          //                       time: time,
+          //                       tabcount: 0,
+          //                       datetime: days,
+          //                       employe: attendance[index].employee,);
+          //                   },
+          //                 );
+          //               case ConnectionState.done:
+          //                 return (snapshot.hasData == false)
+          //                     ? const CircularProgressIndicator()
+          //                     : ListView.builder(
+          //                   padding: const EdgeInsets.only(top: 0),
+          //                   shrinkWrap: true,
+          //                   physics: const BouncingScrollPhysics(),
+          //                   itemCount: attendance.length,
+          //                   itemBuilder: (context, index) => TabsforDesignationAbsentLateEarly(
+          //                     name:attendance[index].name ,
+          //                     timein: attendance[index].timein,
+          //                     timeout: attendance[index].timeout,
+          //                     addressin: attendance[index].addressIn,
+          //                     addressout: attendance[index].addressout,
+          //                     date: attendance[index].date,
+          //                     time: time,tabcount: 0,
+          //                     datetime: days,
+          //                     employe: dropdownvalue1,),
+          //                 );
+          //               default:
+          //                 return const Text("default", style: TextStyle(color: Colors.white));
+          //             }
+          //           }),
+          //     ],
+          //   ),
+          // ),
 
-            body: days.isEmpty? SizedBox() :
+          body: days.isEmpty? SizedBox() :
 
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 20.h,),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 8.sp),
-                    child: Container(
-                      height: 30.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 2,
-                            blurRadius: 2,
-                            offset: const Offset(0, 2), // changes position of shadow
+          SingleChildScrollView (
+            child: Column(
+              children: [
+                SizedBox(height: 10,),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 9),
+                  child: Container(
+                    height: hh*0.04,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 2,
+                          offset: const Offset(0, 2), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(12),
+                      color: whiteClr,
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 16),
+                          child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:13,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: EdgeInsets.only(left:16),
+                          child: Text("Date",style: GoogleFonts.poppins(fontSize:13,
+                              color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        SizedBox(width: ww*0.08),
+                        // Padding(
+                        //   padding:  EdgeInsets.only(left: 35.0.w),
+                        //   child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
+                        //       color: srpgradient2,fontWeight: FontWeight.w600),),
+                        // ),
+                        Container(
+                          //width: 50.w,
+                          width: ww*0.14,
+                          //color: Colors.yellow,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:13,
+                                  color: srpgradient2,fontWeight: FontWeight.w600),),
+                            ],
                           ),
-                        ],
-                        borderRadius: BorderRadius.circular(10.sp),
-                        color: whiteClr,
-                        // color: Colors.cyanAccent
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 15.0.w),
-                            child: Text(TextStrings.Name,style: GoogleFonts.poppins(fontSize:12.sp,
-                                color: srpgradient2,fontWeight: FontWeight.w600),),
+                        ),
+                        Container(
+                          //width: 80.w,
+                          width: ww*0.22,
+
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:13,
+                                  color: srpgradient2,fontWeight: FontWeight.w600),),
+                            ],
                           ),
-                          Spacer(),
-                          Padding(
-                            padding: EdgeInsets.only(left:10.0.w),
-                            child: Text("Date",style: GoogleFonts.poppins(fontSize:12.sp,
-                                color: srpgradient2,fontWeight: FontWeight.w600),),
-                          ),
-                          SizedBox(width: 22.w,),
-                          // Padding(
-                          //   padding:  EdgeInsets.only(left: 35.0.w),
-                          //   child: Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
-                          //       color: srpgradient2,fontWeight: FontWeight.w600),),
-                          // ),
-                          Container(
-                            width: 50.w,
-                            //color: Colors.yellow,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(TextStrings.Timein,style: GoogleFonts.poppins(fontSize:12.sp,
-                                    color: srpgradient2,fontWeight: FontWeight.w600),),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: 80.w,
-                            // color: Colors.red,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
-                                    color: srpgradient2,fontWeight: FontWeight.w600),),
-                              ],
-                            ),
-                          ),
-                          // Padding(
-                          //   padding:  EdgeInsets.only(left: 10.0.w),
-                          //   child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
-                          //       color: srpgradient2,fontWeight: FontWeight.w600),),
-                          // ),
-                          SizedBox(width: 5.w,),
-                        ],
-                      ),
+                        ),
+                        // Padding(
+                        //   padding:  EdgeInsets.only(left: 10.0.w),
+                        //   child: Text(TextStrings.Timeout,style: GoogleFonts.poppins(fontSize:12.sp,
+                        //       color: srpgradient2,fontWeight: FontWeight.w600),),
+                        // ),
+                        SizedBox(width: 7,),
+                      ],
                     ),
                   ),
-                  StreamBuilder(
-                      stream: streamController.stream,
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        print("%%%%%%%%% $snapshot");
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                            return const Text(
-                              " null",
-                              style: TextStyle(color: Colors.white),
-                            );
-                          case ConnectionState.waiting:
-                            return const SizedBox();
-                          case ConnectionState.active:
-                            return (snapshot.hasData == false)
-                                ? const CircularProgressIndicator()
-                                : ListView.builder(
-                                  padding: const EdgeInsets.only(top: 0),
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: attendance.length,
-                                  itemBuilder: (context, index) {
-                                  // managetotalcontact = contact.length.toString();
-                                  // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
-                                 return TabsforDesignationAbsentLateEarly(
-                                   name:attendance[index].name ,
+                ),
+                StreamBuilder(
+                    stream: streamController.stream,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      print("%%%%%%%%% $snapshot");
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return const Text(
+                            " null",
+                            style: TextStyle(color: Colors.white),
+                          );
+                        case ConnectionState.waiting:
+                          return const SizedBox();
+                        case ConnectionState.active:
+                          return (snapshot.hasData == false)
+                              ? const CircularProgressIndicator()
+                              : ListView.builder(
+                                padding: const EdgeInsets.only(top: 0),
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: attendance.length,
+                                itemBuilder: (context, index) {
+                                // managetotalcontact = contact.length.toString();
+                                // return Text("${ attendance[index].timein} || ${ attendance[index].timeout}");
+                               return TabsforDesignationAbsentLateEarly(
+                                 name:attendance[index].name ,
+                                timein: attendance[index].timein,
+                                timeout: attendance[index].timeout,
+                                addressin: attendance[index].addressIn,
+                                addressout: attendance[index].addressout,
+                                date: attendance[index].date,
+                                time: time,
+                                tabcount: 0,
+                                datetime: days,
+                                employe: attendance[index].employee,);
+                            },
+                          );
+                        case ConnectionState.done:
+                          return (snapshot.hasData == false)
+                              ? const CircularProgressIndicator()
+                              : ListView.builder(
+                                padding: const EdgeInsets.only(top: 0),
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: attendance.length,
+                                itemBuilder: (context, index) => TabsforDesignationAbsentLateEarly(
+                                  name:attendance[index].name ,
                                   timein: attendance[index].timein,
                                   timeout: attendance[index].timeout,
                                   addressin: attendance[index].addressIn,
                                   addressout: attendance[index].addressout,
                                   date: attendance[index].date,
-                                  time: time,
-                                  tabcount: 0,
+                                  time: time,tabcount: 0,
                                   datetime: days,
-                                  employe: attendance[index].employee,);
-                              },
-                            );
-                          case ConnectionState.done:
-                            return (snapshot.hasData == false)
-                                ? const CircularProgressIndicator()
-                                : ListView.builder(
-                                  padding: const EdgeInsets.only(top: 0),
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: attendance.length,
-                                  itemBuilder: (context, index) => TabsforDesignationAbsentLateEarly(
-                                    name:attendance[index].name ,
-                                    timein: attendance[index].timein,
-                                    timeout: attendance[index].timeout,
-                                    addressin: attendance[index].addressIn,
-                                    addressout: attendance[index].addressout,
-                                    date: attendance[index].date,
-                                    time: time,tabcount: 0,
-                                    datetime: days,
-                                    employe: dropdownvalue1,),
-                            );
-                          default:
-                            return const Text("default", style: TextStyle(color: Colors.white));
-                        }
-                      }),
-                ],
-              ),
+                                  employe: dropdownvalue1,),
+                          );
+                        default:
+                          return const Text("default", style: TextStyle(color: Colors.white));
+                      }
+                    }),
+              ],
             ),
-                //TabsforDesignationAbsentLateEarly(time: time,tabcount: 0, datetime: days,employe: dropdownvalue1,),
-
-            // DefaultTabController(
-            //   length: 1,
-            //   initialIndex: 0,
-            //   child:  Scaffold(
-            //     appBar:  AppBar(
-            //       leading: SizedBox(),
-            //       flexibleSpace: Column(
-            //         mainAxisAlignment: MainAxisAlignment.end,
-            //         children:  [
-            //           TabBar(
-            //             labelPadding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
-            //             indicatorColor:srpgradient2,
-            //             isScrollable: true,
-            //             tabs: [
-            //               Tab(child:  Tabname(name: "Present",),),
-            //               // Tab(child:  Tabname(name: "Absent",),),
-            //               // Tab(child:  Tabname(name: "Late Comers",),),
-            //               // Tab(child:  Tabname(name: "Early Leavers",),),
-            //             ],
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     /*--------------- Build Tab body here -------------------*/
-            //     body:  TabBarView(
-            //       children: <Widget>[
-            //         TabsforDesignationAbsentLateEarly(time: time,tabcount: 0,),
-            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 1,),
-            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 2,),
-            //         // TabsforDesignationAbsentLateEarly(time: time,tabcount: 3,),
-            //       ],
-            //     ),
-            //   ),
-            // ),
           ),
         )
       );
@@ -1509,8 +1031,6 @@ class _ByEmployeeState extends State<ByEmployee> {
   bool shownhichalyga=false;
   List<String> datesofattendance=[];
   List<DateTime> datesList = [];
-
-
 
   // dropdownfetchattendance(String dropdownvalue1){
   //   if(dropdownvalue1=='All'){
@@ -1694,7 +1214,6 @@ class _ByEmployeeState extends State<ByEmployee> {
   //   }
   // }
 
-
   dropdownfetchattendance(String dropdownvalue1) {
     if(dropdownvalue1=='All'){
         setState(() {
@@ -1798,7 +1317,6 @@ class _ByEmployeeState extends State<ByEmployee> {
         }
       }
     }
-
 
   late DateTimeRange dateTimeRange =dateRange;
   List<DateTime> days = [];
@@ -2069,12 +1587,10 @@ class _ByEmployeeState extends State<ByEmployee> {
               });
             }
           else{
-
               setState(() { hasAttendance=true; });
                 print("1111111111111");
               }
-              setState(() {  streamController.stream;  });
-              });
+              setState(() {  streamController.stream;  });});
            }).then((value) {
 
            }).then((value) {
@@ -2089,11 +1605,11 @@ class _ByEmployeeState extends State<ByEmployee> {
              });
            }
            else{
-
            }
             }).then((value) {
 
-              }).then((value) {
+              }).
+    then((value) {
                 setState(() {
                 streamController.stream;
                 shownhichalyga=false;
@@ -2127,7 +1643,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                   textButtonTheme: TextButtonThemeData(
                       style: TextButton.styleFrom(
                           textStyle:GoogleFonts.poppins(
-                              fontSize:12.sp,
+                              fontSize:12,
                               color: srpgradient2,
                               fontWeight: FontWeight.w500),
                               primary: srpgradient2,
@@ -2174,7 +1690,7 @@ class _ByEmployeeState extends State<ByEmployee> {
     //   onPressed:  () {},
     // );
     Widget continueButton = TextButton(
-      child: Text("OK", style: GoogleFonts.poppins(fontSize:11.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+      child: Text("OK", style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
       onPressed:  () {},
     );
 
@@ -2182,7 +1698,10 @@ class _ByEmployeeState extends State<ByEmployee> {
     AlertDialog alert = AlertDialog(
       // title: Text("AlertDialog"),
       content:  Container(
-        height: 315.h,
+         height: 320,
+        //height: 315.h,
+        // color: Colors.blue,
+        //height: MediaQuery.of(context).size.height*0.1,
         width:MediaQuery.of(context).size.width,
         // decoration: BoxDecoration(
         //   boxShadow: [
@@ -2199,13 +1718,13 @@ class _ByEmployeeState extends State<ByEmployee> {
         child: Column(
           children: [
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 20.0.sp,vertical: 5.sp),
+              padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 5),
               child: Container(
-                height: 25.h,
+                height: 25,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
-                    Text("Record",style: GoogleFonts.poppins(fontSize: 10.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                    Text("Record",style: GoogleFonts.poppins(fontSize: 10.5,color: fontgrey,fontWeight: FontWeight.w500),),
                     const Spacer(),
                   ],
                 ),
@@ -2237,7 +1756,7 @@ class _ByEmployeeState extends State<ByEmployee> {
                             child: Row(
                               mainAxisAlignment:MainAxisAlignment.center ,
                               children: [
-                                Text("Record",style: GoogleFonts.poppins(fontSize: 18.5.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+                                Text("Record",style: GoogleFonts.poppins(fontSize: 18.5,color: fontgrey,fontWeight: FontWeight.w500),),
                               ],
                             )),
                           ],
@@ -2296,7 +1815,7 @@ class _ByEmployeeState extends State<ByEmployee> {
       initialDate: DateTime.now(),
       firstDate: DateTime(DateTime.now().year - 1),
       lastDate: DateTime(DateTime.now().year + 1),
-      borderRadius: 30.sp,
+      borderRadius: 30,
     );
   }
 
@@ -2345,6 +1864,8 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
 
   @override
   Widget build(BuildContext context) {
+    final hh=MediaQuery.of(context).size.height;
+    final ww=MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: (){
        widget.timeout.isEmpty || widget.timein.isEmpty ? Navigator.push(context, MaterialPageRoute(builder: (context) =>
@@ -2361,34 +1882,38 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
               )),) : null;
       },
       child: Container(
-        height: 172.h,
+        // height: 184.h,
+          height: hh*0.267,
         width: MediaQuery.of(context).size.width,
          color: widget.timeout.isEmpty || widget.timein.isEmpty ?
          const Color(0xffdbfdb8):Colors.transparent,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 3.0.w),
+          padding: EdgeInsets.symmetric(horizontal: 4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 12.h,),
+              SizedBox(height: hh*0.01,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 14.0.w),
+                    padding: EdgeInsets.only(left: 16),
                     child: Container(
                       // color: Colors.lightBlue,
                       alignment: Alignment.topLeft,
-                      width: 120.w,
-                      height: 160.h,
+                      // width: 120.w,
+                      // height: 172.h,
+                      width: ww*0.3,
+                      height: hh*0.25,
+                      // color: Colors.blue,
                       child: Column(
                         crossAxisAlignment:CrossAxisAlignment.start,
                         children: [
-                          Text("${widget.name}",style: GoogleFonts.poppins(fontSize:12.sp,
+                          Text("${widget.name}",style: GoogleFonts.poppins(fontSize:13,
                               color: srpgradient2,fontWeight: FontWeight.w600),),
-                          Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:11.sp,
+                          Text("${widget.employe}",style: GoogleFonts.poppins(fontSize:12,
                               color: blackClr,fontWeight: FontWeight.w600),),
                           RichText(
                             text: TextSpan(
@@ -2399,9 +1924,9 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                                 color: Colors.black,
                               ),
                               children: <TextSpan>[
-                                TextSpan(text: "Time In at : ",style: GoogleFonts.poppins(fontSize:10.sp,
+                                TextSpan(text: "Time In at : ",style: GoogleFonts.poppins(fontSize:11,
                                        color: blackClr,fontWeight: FontWeight.w600),),
-                                TextSpan(text: "${widget.addressin}",style: GoogleFonts.poppins(fontSize:10.sp,
+                                TextSpan(text: "${widget.addressin}",style: GoogleFonts.poppins(fontSize:11,
                                        color: blackClr,fontWeight: FontWeight.w400),),
                                 // TextSpan(text: 'World', style: const TextStyle(fontWeight: FontWeight.bold)),
                               ],
@@ -2416,9 +1941,9 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                                 color: Colors.black,
                                 ),
                                 children: <TextSpan>[
-                                TextSpan(text: "Time Out at : ",style: GoogleFonts.poppins(fontSize:10.sp,
+                                TextSpan(text: "Time Out at : ",style: GoogleFonts.poppins(fontSize:11,
                                     color: blackClr,fontWeight: FontWeight.w600),),
-                                TextSpan(text: "${widget.addressout}",style: GoogleFonts.poppins(fontSize:10.sp,
+                                TextSpan(text: "${widget.addressout}",style: GoogleFonts.poppins(fontSize:11,
                                     color: blackClr,fontWeight: FontWeight.w400),),
                                  // TextSpan(text: 'World', style: const TextStyle(fontWeight: FontWeight.bold)),
                               ],
@@ -2441,13 +1966,13 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                      crossAxisAlignment: CrossAxisAlignment.center,
                      children: [
                         Padding(
-                           padding: EdgeInsets.only(left: .0.w),
+                           padding: EdgeInsets.only(left: .0),
                            child: Column(
                              children: [
                                Text(
                                  "${widget.date}",
                                  //"2023-23-21",
-                                 style: GoogleFonts.poppins(fontSize:11.sp,
+                                 style: GoogleFonts.poppins(fontSize:11,
                                      color: srpgradient2,fontWeight: FontWeight.w600),),
                                // ClipRRect(
                                //   borderRadius: BorderRadius.circular(20.0.sp),
@@ -2462,12 +1987,12 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                            ),
                         ),
                         Container(
-                          width: 70.w,
+                          width: 70,
                            //color: Colors.red,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11.sp,
+                              Text("${widget.timein}",style: GoogleFonts.poppins(fontSize:11,
                                   color: srpgradient2,fontWeight: FontWeight.w600),),
                               // ClipRRect(
                               //   borderRadius: BorderRadius.circular(20.0.sp),
@@ -2482,17 +2007,19 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                           ),
                         ),
                         Container(
-                         width: 80.w,
-                         height: 100.h,
-                         color: Colors.transparent,
-                         //color: Colors.red,
+                         // width: 80.w,
+                          //height: 100.h,
+                          width: ww*0.225,
+                          height:hh*0.145 ,
+                         // color: Colors.transparent,
+                        // color: Colors.red,
                          alignment: Alignment.centerRight,
                          child: Padding(
-                              padding: EdgeInsets.only(left: 22.0.w,right: 2.w),
+                              padding: EdgeInsets.only(left: 24,right: 3),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:11.sp,
+                                  Text("${widget.timeout}",style: GoogleFonts.poppins(fontSize:12,
                                       color: srpgradient2,fontWeight: FontWeight.w600),),
                                     // ClipRRect(
                                     //   borderRadius: BorderRadius.circular(20.0.sp),
@@ -2507,7 +2034,7 @@ class _TabsforDesignationAbsentLateEarlyState extends State<TabsforDesignationAb
                               )
                             ),
                           ),
-                        SizedBox(width: 10.w,),
+                        SizedBox(width: 12,),
                       ],
                     ),
                   ),
@@ -2571,221 +2098,436 @@ class _EditSelectedAttendanceState extends State<EditSelectedAttendance> {
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
-    return CsScreenUtilInit(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("${widget.date}"),
-          backgroundColor: srpgradient2,
-        ),
-        //backgroundColor: Colors.red,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 15.h,),
-                Text("Email : ${widget.employe}",style: GoogleFonts.poppins(fontSize: 14.sp, color:srpgradient2,),),
-                SizedBox(height: 13.h,),
-                const Divider(thickness: 1,),
-                SizedBox(height: 7.h,),
-                Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
-                SizedBox(height: 7.h,),
-                GestureDetector(
-                  onTap: () async {
-                    TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay,);
-                    if(newTime ==null) return;
-                    setState(() {
-                      timeOfDay=newTime;
-                      IN='${timeOfDay.hour}:${timeOfDay.minute}:00';
-                    });
-                    print("lakjsdhfalkjs ${timeOfDay} ${timeOfDay.hour} ${timeOfDay.minute}");
-                  },
-                  child: Container(
-                    height: 40.h,
-                    width: MediaQuery.of(context).size.width*0.6,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: const Offset(0, 0), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(8.2),
-                      color: whiteClr,
-                    ),
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        SizedBox(width: 20.w,),
-                        const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
-                        SizedBox(width: 10.w,),
-                        IN.isEmpty ? Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
-                        Text("   $IN", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey, letterSpacing: 4.5.w,fontWeight: FontWeight.bold),),
-                        Spacer(),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.h,),
-                Text("Time In Address",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
-                SizedBox(height: 7.h,),
-                CsMainInputField12(
-                  providerGenerator: providerGenerator,
-                  width: MediaQuery.of(context).size.width,
-                  // width: 287.w,
-                  mycontroller: textEditingController1,
-                  myhint: "Address which he/she check in",
-                  prefixIcon: FontAwesomeIcons.locationDot,
-                  isPassword: false,
-                  keyboardType: TextInputType.text,
-                  bordercolor: providerGenerator.getVisibleError(index: 0) ? Colors.red : null,
-                  // bordercolor: providerGenerator.getVisibleError(index: 0)
-                  //     ? Colors.red
-                  //     : null,
-                ),
-                SizedBox(height: 20.h,),
-                Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
-                SizedBox(height: 7.h,),
-                GestureDetector(
-                  onTap: () async {
-                    TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay1,);
-                    if(newTime == null) return;
-                    setState(() {
-                      timeOfDay1=newTime;
-                      OUT='${timeOfDay1.hour}:${timeOfDay1.minute}:00';
-                    });
-                    print("lakjsdhfalkjs ${timeOfDay1} ${timeOfDay1.hour} ${timeOfDay1.minute}");
-                  },
-                  child: Container(
-                    height: 40.h,
-                    width: MediaQuery.of(context).size.width*0.6,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: const Offset(0, 0), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(8.2),
-                      color: whiteClr,
-                    ),
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        SizedBox(width: 20.w,),
-                        const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
-                        SizedBox(width: 10.w,),
-                        OUT.isEmpty?Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
-                        Text("   $OUT", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey, letterSpacing: 4.5.w,fontWeight: FontWeight.bold),),
-                        Spacer(),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.h,),
-                Text("Time Out Address",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
-                SizedBox(height: 7.h,),
-                CsMainInputField12(
-                  providerGenerator: providerGenerator,
-                  width: MediaQuery.of(context).size.width,
-                  //width: 287.w,
-                  mycontroller: textEditingController2,
-                  myhint: "Address which he/she check out",
-                  prefixIcon: FontAwesomeIcons.locationDot,
-                  isPassword: false,
-                  keyboardType: TextInputType.text,
-                  bordercolor: providerGenerator.getVisibleError(index: 0) ? Colors.red : null,
-                  // bordercolor: providerGenerator.getVisibleError(index: 0)
-                  //     ? Colors.red
-                  //     : null,
-                ),
-                SizedBox(height: 15.h,),
-                // Row(
-                //   children: [
-                //     Text("Services Active",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
-                //     SizedBox(width: 20.w,),
-                //     // Switch.adaptive(
-                //     //   activeColor: inputBackColor(context),
-                //     //   inactiveThumbColor: settingButtonBackColor(context),
-                //     //   inactiveTrackColor: subTitleClr,
-                //     //   activeTrackColor: buttonBackColor(context),
-                //     //   value: active,
-                //     //   onChanged: (valu) async {
-                //     //     // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
-                //     //     //
-                //     //     // }
-                //     //     await UserT.doc(widget.email).update({"active":valu}).then((value) {
-                //     //       setState(() {
-                //     //         active = valu;
-                //     //       });
-                //     //     });
-                //     //     // await f.doc(user?.email.toString()).collection("Linkstore").doc("${ModelLinkInfo.linkInfoList[widget.index].linkTypeSvG}").update({"personal":valu}).
-                //     //     // then((value) {setState(() {
-                //     //     //   widget.active = valu;
-                //     //     // }); });
-                //     //   },
-                //     // ),
-                //   ],
-                // ),
-                SizedBox(height: 10.h,),
-                GestureDetector(
-                  onTap: () {
-                      print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
-                      print("&&&&&&&&&&& ${textEditingController1.text} ${textEditingController2.text}");
-                      UserT.doc('${mainuser ==true? user!.email.toString():admin__email}')
-                          .collection('Employee').doc("${widget.employe}")
-                          .collection('Attendance').doc('${widget.date}')
-                          .update({
-                        'TimeIn': IN,
-                        'TimeInAddress': "${textEditingController1.text}",
-                        'TimeOut': OUT,
-                        'TimeOutAddress': "${textEditingController2.text}",
-                      }).then((value) {
-                        print("///////////// ${textEditingController1.text} ${textEditingController2.text}");
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) =>  ByEmployee()), result: false);
-                      });},
-                  child: Container(
-                      height: 40.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            srpgradient1,
-                            srpgradient2,
-                            srpgradient3
-                          ],
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: const Offset(0, 0), // changes position of shadow
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(8.2),
-                        color: whiteClr,
+    final hh=MediaQuery.of(context).size.height;
+    final ww=MediaQuery.of(context).size.width;
+      return Scaffold(
+      appBar: AppBar(
+        title: Text("${widget.date}"),
+        backgroundColor: srpgradient2,
+      ),
+      //backgroundColor: Colors.red,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: hh*0.01,),
+              Text("Email : ${widget.employe}",style: GoogleFonts.poppins(fontSize: 15, color:srpgradient2,),),
+              SizedBox(height: hh*0.01,),
+              const Divider(thickness: 1,),
+              SizedBox(height: hh*0.01,),
+              Text("Time In",style: GoogleFonts.poppins(fontSize: 15,color:  srpgradient2,),),
+              SizedBox(height: hh*0.01,),
+              GestureDetector(
+                onTap: () async {
+                  TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay,);
+                  if(newTime ==null) return;
+                  setState(() {
+                    timeOfDay=newTime;
+                    IN='${timeOfDay.hour}:${timeOfDay.minute}:00';
+                  });
+                  print("lakjsdhfalkjs ${timeOfDay} ${timeOfDay.hour} ${timeOfDay.minute}");
+                },
+                child: Container(
+                  height: hh*0.05,
+                  width: MediaQuery.of(context).size.width*0.6,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: const Offset(0, 0), // changes position of shadow
                       ),
-                      child: Center(
-                        child: Text("Save",
-                          style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),)
+                    ],
+                    borderRadius: BorderRadius.circular(8.2),
+                    color: whiteClr,
+                  ),
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      SizedBox(width: ww*0.05,),
+                      const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
+                      SizedBox(width: ww*0.05,),
+                      IN.isEmpty ? Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,letterSpacing: .6,),):
+                      Text("   $IN", style: GoogleFonts.poppins(fontSize: 16,color: fontgrey, letterSpacing: 5.5,fontWeight: FontWeight.bold),),
+                      Spacer(),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              SizedBox(height: hh*0.025,),
+              Text("Time In Address",style: GoogleFonts.poppins(fontSize: 15,color:  srpgradient2 ,),),
+              SizedBox(height: hh*0.01,),
+              CsMainInputField12(
+                providerGenerator: providerGenerator,
+                width: MediaQuery.of(context).size.width,
+                // width: 287.w,
+                mycontroller: textEditingController1,
+                myhint: "Address which he/she check in",
+                prefixIcon: FontAwesomeIcons.locationDot,
+                isPassword: false,
+                keyboardType: TextInputType.text,
+                bordercolor: providerGenerator.getVisibleError(index: 0) ? Colors.red : null,
+                // bordercolor: providerGenerator.getVisibleError(index: 0)
+                //     ? Colors.red
+                //     : null,
+              ),
+              SizedBox(height: hh*0.025,),
+              Text("Time Out",style: GoogleFonts.poppins(fontSize: 15,color:  srpgradient2 ,),),
+              SizedBox(height: hh*0.01,),
+              GestureDetector(
+                onTap: () async {
+                  TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay1,);
+                  if(newTime == null) return;
+                  setState(() {
+                    timeOfDay1=newTime;
+                    OUT='${timeOfDay1.hour}:${timeOfDay1.minute}:00';
+                  });
+                  print("lakjsdhfalkjs ${timeOfDay1} ${timeOfDay1.hour} ${timeOfDay1.minute}");
+                },
+                child: Container(
+                  height: hh*0.05,
+                  width: MediaQuery.of(context).size.width*0.6,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: const Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(8.2),
+                    color: whiteClr,
+                  ),
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      SizedBox(width: ww*0.05,),
+                      const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
+                      SizedBox(width: ww*0.05,),
+                      OUT.isEmpty?Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,letterSpacing: .6,),):
+                      Text("   $OUT", style: GoogleFonts.poppins(fontSize: 16,color: fontgrey, letterSpacing: 5.5,fontWeight: FontWeight.bold),),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: hh*0.025,),
+              Text("Time Out Address",style: GoogleFonts.poppins(fontSize: 15,color:  srpgradient2 ,),),
+              SizedBox(height: hh*0.01,),
+              CsMainInputField12(
+                providerGenerator: providerGenerator,
+                width: MediaQuery.of(context).size.width,
+                //width: 287.w,
+                mycontroller: textEditingController2,
+                myhint: "Address which he/she check out",
+                prefixIcon: FontAwesomeIcons.locationDot,
+                isPassword: false,
+                keyboardType: TextInputType.text,
+                bordercolor: providerGenerator.getVisibleError(index: 0) ? Colors.red : null,
+                // bordercolor: providerGenerator.getVisibleError(index: 0)
+                //     ? Colors.red
+                //     : null,
+              ),
+              SizedBox(height: hh*0.025,),
+              // Row(
+              //   children: [
+              //     Text("Services Active",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
+              //     SizedBox(width: 20.w,),
+              //     // Switch.adaptive(
+              //     //   activeColor: inputBackColor(context),
+              //     //   inactiveThumbColor: settingButtonBackColor(context),
+              //     //   inactiveTrackColor: subTitleClr,
+              //     //   activeTrackColor: buttonBackColor(context),
+              //     //   value: active,
+              //     //   onChanged: (valu) async {
+              //     //     // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+              //     //     //
+              //     //     // }
+              //     //     await UserT.doc(widget.email).update({"active":valu}).then((value) {
+              //     //       setState(() {
+              //     //         active = valu;
+              //     //       });
+              //     //     });
+              //     //     // await f.doc(user?.email.toString()).collection("Linkstore").doc("${ModelLinkInfo.linkInfoList[widget.index].linkTypeSvG}").update({"personal":valu}).
+              //     //     // then((value) {setState(() {
+              //     //     //   widget.active = valu;
+              //     //     // }); });
+              //     //   },
+              //     // ),
+              //   ],
+              // ),
+              SizedBox(height: hh*0.015,),
+              GestureDetector(
+                onTap: () {
+                  print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
+                  print("&&&&&&&&&&& ${textEditingController1.text} ${textEditingController2.text}");
+                  UserT.doc('${mainuser ==true? user!.email.toString():admin__email}')
+                      .collection('Employee').doc("${widget.employe}")
+                      .collection('Attendance').doc('${widget.date}')
+                      .update({
+                    'TimeIn': IN,
+                    'TimeInAddress': "${textEditingController1.text}",
+                    'TimeOut': OUT,
+                    'TimeOutAddress': "${textEditingController2.text}",
+                  }).then((value) {
+                    print("///////////// ${textEditingController1.text} ${textEditingController2.text}");
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) =>  ByEmployee()), result: false);
+                  });},
+                child: Container(
+                    height: hh*0.06,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          srpgradient1,
+                          srpgradient2,
+                          srpgradient3
+                        ],
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: const Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(8.2),
+                      color: whiteClr,
+                    ),
+                    child: Center(
+                      child: Text("Save",
+                        style: GoogleFonts.poppins(fontSize: 15,color: shapeitemColor(context),fontWeight: FontWeight.w500),),)
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
+    // return CsScreenUtilInit(
+    //   child: Scaffold(
+    //     appBar: AppBar(
+    //       title: Text("${widget.date}"),
+    //       backgroundColor: srpgradient2,
+    //     ),
+    //     //backgroundColor: Colors.red,
+    //     body: SingleChildScrollView(
+    //       child: Padding(
+    //         padding: const EdgeInsets.all(14.0),
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+    //             SizedBox(height: 15.h,),
+    //             Text("Email : ${widget.employe}",style: GoogleFonts.poppins(fontSize: 14.sp, color:srpgradient2,),),
+    //             SizedBox(height: 13.h,),
+    //             const Divider(thickness: 1,),
+    //             SizedBox(height: 7.h,),
+    //             Text("Time In",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
+    //             SizedBox(height: 7.h,),
+    //             GestureDetector(
+    //               onTap: () async {
+    //                 TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay,);
+    //                 if(newTime ==null) return;
+    //                 setState(() {
+    //                   timeOfDay=newTime;
+    //                   IN='${timeOfDay.hour}:${timeOfDay.minute}:00';
+    //                 });
+    //                 print("lakjsdhfalkjs ${timeOfDay} ${timeOfDay.hour} ${timeOfDay.minute}");
+    //               },
+    //               child: Container(
+    //                 height: 40.h,
+    //                 width: MediaQuery.of(context).size.width*0.6,
+    //                 decoration: BoxDecoration(
+    //                   boxShadow: [
+    //                     BoxShadow(
+    //                       color: Colors.grey.withOpacity(0.5),
+    //                       spreadRadius: 1,
+    //                       blurRadius: 1,
+    //                       offset: const Offset(0, 0), // changes position of shadow
+    //                     ),
+    //                   ],
+    //                   borderRadius: BorderRadius.circular(8.2),
+    //                   color: whiteClr,
+    //                 ),
+    //                 alignment: Alignment.center,
+    //                 child: Row(
+    //                   children: [
+    //                     SizedBox(width: 20.w,),
+    //                     const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
+    //                     SizedBox(width: 10.w,),
+    //                     IN.isEmpty ? Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
+    //                     Text("   $IN", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey, letterSpacing: 4.5.w,fontWeight: FontWeight.bold),),
+    //                     Spacer(),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ),
+    //             SizedBox(height: 20.h,),
+    //             Text("Time In Address",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
+    //             SizedBox(height: 7.h,),
+    //             CsMainInputField12(
+    //               providerGenerator: providerGenerator,
+    //               width: MediaQuery.of(context).size.width,
+    //               // width: 287.w,
+    //               mycontroller: textEditingController1,
+    //               myhint: "Address which he/she check in",
+    //               prefixIcon: FontAwesomeIcons.locationDot,
+    //               isPassword: false,
+    //               keyboardType: TextInputType.text,
+    //               bordercolor: providerGenerator.getVisibleError(index: 0) ? Colors.red : null,
+    //               // bordercolor: providerGenerator.getVisibleError(index: 0)
+    //               //     ? Colors.red
+    //               //     : null,
+    //             ),
+    //             SizedBox(height: 20.h,),
+    //             Text("Time Out",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
+    //             SizedBox(height: 7.h,),
+    //             GestureDetector(
+    //               onTap: () async {
+    //                 TimeOfDay? newTime = await showTimePicker(context: context, initialTime: timeOfDay1,);
+    //                 if(newTime == null) return;
+    //                 setState(() {
+    //                   timeOfDay1=newTime;
+    //                   OUT='${timeOfDay1.hour}:${timeOfDay1.minute}:00';
+    //                 });
+    //                 print("lakjsdhfalkjs ${timeOfDay1} ${timeOfDay1.hour} ${timeOfDay1.minute}");
+    //               },
+    //               child: Container(
+    //                 height: 40.h,
+    //                 width: MediaQuery.of(context).size.width*0.6,
+    //                 decoration: BoxDecoration(
+    //                   boxShadow: [
+    //                     BoxShadow(
+    //                       color: Colors.grey.withOpacity(0.5),
+    //                       spreadRadius: 1,
+    //                       blurRadius: 1,
+    //                       offset: const Offset(0, 0), // changes position of shadow
+    //                     ),
+    //                   ],
+    //                   borderRadius: BorderRadius.circular(8.2),
+    //                   color: whiteClr,
+    //                 ),
+    //                 alignment: Alignment.center,
+    //                 child: Row(
+    //                   children: [
+    //                     SizedBox(width: 20.w,),
+    //                     const Icon(FontAwesomeIcons.solidClock,color: iconcolor,),
+    //                     SizedBox(width: 10.w,),
+    //                     OUT.isEmpty?Text("Time which he/she check out" , style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,letterSpacing: .5.w,),):
+    //                     Text("   $OUT", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey, letterSpacing: 4.5.w,fontWeight: FontWeight.bold),),
+    //                     Spacer(),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ),
+    //             SizedBox(height: 20.h,),
+    //             Text("Time Out Address",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2 ,),),
+    //             SizedBox(height: 7.h,),
+    //             CsMainInputField12(
+    //               providerGenerator: providerGenerator,
+    //               width: MediaQuery.of(context).size.width,
+    //               //width: 287.w,
+    //               mycontroller: textEditingController2,
+    //               myhint: "Address which he/she check out",
+    //               prefixIcon: FontAwesomeIcons.locationDot,
+    //               isPassword: false,
+    //               keyboardType: TextInputType.text,
+    //               bordercolor: providerGenerator.getVisibleError(index: 0) ? Colors.red : null,
+    //               // bordercolor: providerGenerator.getVisibleError(index: 0)
+    //               //     ? Colors.red
+    //               //     : null,
+    //             ),
+    //             SizedBox(height: 15.h,),
+    //             // Row(
+    //             //   children: [
+    //             //     Text("Services Active",style: GoogleFonts.poppins(fontSize: 14.sp,color:  srpgradient2,),),
+    //             //     SizedBox(width: 20.w,),
+    //             //     // Switch.adaptive(
+    //             //     //   activeColor: inputBackColor(context),
+    //             //     //   inactiveThumbColor: settingButtonBackColor(context),
+    //             //     //   inactiveTrackColor: subTitleClr,
+    //             //     //   activeTrackColor: buttonBackColor(context),
+    //             //     //   value: active,
+    //             //     //   onChanged: (valu) async {
+    //             //     //     // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+    //             //     //     //
+    //             //     //     // }
+    //             //     //     await UserT.doc(widget.email).update({"active":valu}).then((value) {
+    //             //     //       setState(() {
+    //             //     //         active = valu;
+    //             //     //       });
+    //             //     //     });
+    //             //     //     // await f.doc(user?.email.toString()).collection("Linkstore").doc("${ModelLinkInfo.linkInfoList[widget.index].linkTypeSvG}").update({"personal":valu}).
+    //             //     //     // then((value) {setState(() {
+    //             //     //     //   widget.active = valu;
+    //             //     //     // }); });
+    //             //     //   },
+    //             //     // ),
+    //             //   ],
+    //             // ),
+    //             SizedBox(height: 10.h,),
+    //             GestureDetector(
+    //               onTap: () {
+    //                   print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
+    //                   print("&&&&&&&&&&& ${textEditingController1.text} ${textEditingController2.text}");
+    //                   UserT.doc('${mainuser ==true? user!.email.toString():admin__email}')
+    //                       .collection('Employee').doc("${widget.employe}")
+    //                       .collection('Attendance').doc('${widget.date}')
+    //                       .update({
+    //                     'TimeIn': IN,
+    //                     'TimeInAddress': "${textEditingController1.text}",
+    //                     'TimeOut': OUT,
+    //                     'TimeOutAddress': "${textEditingController2.text}",
+    //                   }).then((value) {
+    //                     print("///////////// ${textEditingController1.text} ${textEditingController2.text}");
+    //                     Navigator.of(context).pop();
+    //                     Navigator.of(context).pushReplacement(
+    //                         MaterialPageRoute(builder: (context) =>  ByEmployee()), result: false);
+    //                   });},
+    //               child: Container(
+    //                   height: 40.h,
+    //                   width: MediaQuery.of(context).size.width,
+    //                   decoration: BoxDecoration(
+    //                     gradient: const LinearGradient(
+    //                       begin: Alignment.topCenter,
+    //                       end: Alignment.bottomCenter,
+    //                       colors: [
+    //                         srpgradient1,
+    //                         srpgradient2,
+    //                         srpgradient3
+    //                       ],
+    //                     ),
+    //                     boxShadow: [
+    //                       BoxShadow(
+    //                         color: Colors.grey.withOpacity(0.5),
+    //                         spreadRadius: 1,
+    //                         blurRadius: 1,
+    //                         offset: const Offset(0, 0), // changes position of shadow
+    //                       ),
+    //                     ],
+    //                     borderRadius: BorderRadius.circular(8.2),
+    //                     color: whiteClr,
+    //                   ),
+    //                   child: Center(
+    //                     child: Text("Save",
+    //                       style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),)
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
 }

@@ -5,7 +5,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LineChartSample10 extends StatefulWidget {
-  const LineChartSample10({super.key});
+  const LineChartSample10({key});
+  // const LineChartSample10({super.key});
 
   @override
   State<LineChartSample10> createState() => _LineChartSample10State();

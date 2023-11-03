@@ -4,7 +4,8 @@ import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/samples/
 import 'package:hrmanagementapp/View/Profile/Home/components/line_chart/samples/line_chart_sample9.dart';
 
 class LineChartPage3 extends StatelessWidget {
-  const LineChartPage3({super.key});
+  const LineChartPage3({key});
+  // const LineChartPage3({super.key});
 
   @override
   Widget build(BuildContext context) {

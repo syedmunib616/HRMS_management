@@ -4,7 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 /// Icons by svgrepo.com (https://www.svgrepo.com/collection/job-and-professions-3/)
 class PieChartSample3 extends StatefulWidget {
-  const PieChartSample3({super.key});
+  const PieChartSample3({key});
+  // const PieChartSample3({super.key});
 
   @override
   State<StatefulWidget> createState() => PieChartSample3State();

@@ -24,7 +24,7 @@ class NameEditprofilepic extends StatelessWidget {
       child: Row(
         children:  [
           SizedBox(width: 20.w,),
-          Text("$adminname",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w600),),
+          Text("$adminname",style: GoogleFonts.poppins(fontSize: 11.sp,color: Color(0xFF323232),fontWeight: FontWeight.w600),),
           Spacer(),
           Container(
             height: 50.h,

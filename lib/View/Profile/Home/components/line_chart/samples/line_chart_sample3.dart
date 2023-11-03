@@ -7,7 +7,8 @@ import 'package:hrmanagementapp/Theme/Theme_Color.dart';
 
 
 class LineChartSample3 extends StatefulWidget {
-  const LineChartSample3({super.key});
+  const LineChartSample3({key});
+  //const LineChartSample3({super.key});
 
   List<String> get weekDays =>
       const ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
@@ -29,7 +30,7 @@ class _LineChartSample3State extends State<LineChartSample3> {
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     //const style = TextStyle(color: Colors.black, fontSize: 10);
-   var style = GoogleFonts.poppins(fontSize: 9.sp,color: linkclr,fontWeight: FontWeight.w500);
+   var style = GoogleFonts.poppins(fontSize: 10,color: linkclr,fontWeight: FontWeight.w500);
 
     String text;
     switch (value.toInt()) {
@@ -63,7 +64,7 @@ class _LineChartSample3State extends State<LineChartSample3> {
       fontWeight: FontWeight.bold,
     );
 
-    final s=GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient2,fontWeight: FontWeight.w500);
+    final s=GoogleFonts.poppins(fontSize: 12,color: srpgradient2,fontWeight: FontWeight.w500);
     return SideTitleWidget(
       space: 4,
       axisSide: meta.axisSide,
@@ -109,11 +110,11 @@ class _LineChartSample3State extends State<LineChartSample3> {
         //   height: 18,
         // ),
         SizedBox(
-          height: 20.h,
+          height: 22,
         ),
         SizedBox(
-          width: 320.w,
-          height: 164.h,
+          width: 322,
+          height: 166,
           child: LineChart(
             LineChartData(
               lineTouchData: LineTouchData(

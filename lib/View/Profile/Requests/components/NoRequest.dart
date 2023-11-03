@@ -179,18 +179,14 @@ class SelectedLeave1 extends StatefulWidget {
   var approve;
   final String adminname;
   @override
-  State<SelectedLeave1> createState() => _SelectedLeave1State();
-}
-
+  State<SelectedLeave1> createState() => _SelectedLeave1State();}
 class _SelectedLeave1State extends State<SelectedLeave1> {
   TextEditingController textEditingController1 = TextEditingController();
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
-
   final userr = FirebaseAuth.instance.currentUser;
   bool pressed=false;
 
@@ -267,6 +263,27 @@ class _SelectedLeave1State extends State<SelectedLeave1> {
                       //   //   ],
                       //   // ),
                       // ),
+                      GestureDetector(
+                        onTap: (){
+                          print("::::::::user  ${widget.user}");
+
+                          FirebaseFirestore.instance
+                              .collection('Companies')
+                              .doc('${userr!.email.toString()}')
+                              .collection("Employee").doc("${widget.user}")
+                              .collection("Leaves")
+                              .doc("${widget.leavid}").delete().then((value) {
+                             print("::::::::del ${widget.leavid} :: ${widget.user}");
+                             _showToast(context,'Done');
+                             Navigator.pop(context);
+
+                             // dismissCard(listofleavebyemployee[index].leavid);
+                          }).catchError((error) {
+                            print("Error deleting document: $error");
+                          });
+                        },
+                        child: Icon(Icons.delete,size: 30.sp,color: Colors.red,),
+                      ),
                        SizedBox(width: 15.w,)
                     ],
                   ),

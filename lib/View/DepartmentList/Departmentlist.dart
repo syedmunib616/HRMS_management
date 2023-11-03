@@ -184,11 +184,11 @@ class _DepartmentListState extends State<DepartmentList> {
       child: CsScreenUtilInit(
         child: Scaffold(
           //  resizeToAvoidBottomInset: true,
-          backgroundColor: backgroundcolorr,
+          backgroundColor: Color(0xffF6F6F6),
           appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
+            preferredSize:  Size.fromHeight(94.0),
             child:  Container(
-              height: 102.h,
+              height: 102,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -200,41 +200,41 @@ class _DepartmentListState extends State<DepartmentList> {
                     // changes position of shadow
                   ),
                 ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),
-                    bottomRight: Radius.circular(20.sp)),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)),
                 color: whiteClr,
               ),
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: 15.w,),
+                      SizedBox(width: 15,),
                       GestureDetector(
                         onTap: (){
                           Navigator.pop(context);
                         },
                         child: Padding(
-                          padding: EdgeInsets.all(8.0.sp),
-                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23,color: greybackground,),
                         ),
                       ),
                       Spacer(),
-                      Text("Departments List",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                      Text("Departments List",style: GoogleFonts.poppins(fontSize: 15,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
                       Container(
-                        width: 30.0.w,
-                        height: 30.0.h,
+                        width: 30.0,
+                        height: 30.0,
                         // child: Stack(
                         //   children: [
                         //     ClipRRect(
-                        //       borderRadius: BorderRadius.circular(15.0.sp),
+                        //       borderRadius: BorderRadius.circular(15.0),
                         //       child: Image.asset(
                         //         'assets/user.jpg',
                         //         width: 30.0.w,
-                        //         height: 30.0.h,
+                        //         height: 30.0,
                         //         fit: BoxFit.fill,
                         //       ),
                         //     ),
@@ -242,11 +242,11 @@ class _DepartmentListState extends State<DepartmentList> {
                         //       bottom: 1.5,
                         //       right: 1.5,
                         //       child: Container(
-                        //         height: 5.h,
+                        //         height: 5,
                         //         width: 5.w,
                         //         //color:online,
                         //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(5.sp),
+                        //           borderRadius: BorderRadius.circular(5),
                         //           color: online,
                         //         ),
                         //       ),
@@ -254,18 +254,18 @@ class _DepartmentListState extends State<DepartmentList> {
                         //   ],
                         // ),
                       ),
-                      SizedBox(width: 5.w,),
+                      SizedBox(width: 5,),
                     ],
                   ),
                   // Container(
-                  //   height: 50.h,
+                  //   height: 50,
                   //   width: MediaQuery.of(context).size.width,
                   //   child: Row(
                   //     mainAxisAlignment: MainAxisAlignment.center,
                   //     children: [
                   //       Container(
                   //         width: 80.w,
-                  //         height: 40.h,
+                  //         height: 40,
                   //         decoration: BoxDecoration(
                   //           boxShadow: [
                   //             BoxShadow(
@@ -280,9 +280,9 @@ class _DepartmentListState extends State<DepartmentList> {
                   //         ),
                   //         child: Column(
                   //           children: [
-                  //             SizedBox(height: 5.h,),
-                  //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                  //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                  //             SizedBox(height: 5,),
+                  //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+                  //             Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                   //           ],
                   //         ),
                   //       ),
@@ -290,13 +290,13 @@ class _DepartmentListState extends State<DepartmentList> {
                   //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   //         child: Container(
                   //           color: coverBackClr,
-                  //           height: 40.h,
+                  //           height: 40,
                   //           width: 1.w,
                   //         ),
                   //       ),
                   //       Container(
                   //         width: 240.w,
-                  //         height: 40.h,
+                  //         height: 40,
                   //         decoration: BoxDecoration(
                   //           boxShadow: [
                   //             BoxShadow(
@@ -310,13 +310,13 @@ class _DepartmentListState extends State<DepartmentList> {
                   //           color: whiteClr,
                   //         ),
                   //         child: Padding(
-                  //           padding: EdgeInsets.all( 10.sp),
+                  //           padding: EdgeInsets.all( 10),
                   //           child: Row(
                   //             children: [
-                  //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                  //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                   //               Spacer(),
                   //               Container(
-                  //                 height: 20.h,
+                  //                 height: 20,
                   //                 width: 20.w,
                   //                 decoration: BoxDecoration(
                   //                   boxShadow: [
@@ -327,10 +327,10 @@ class _DepartmentListState extends State<DepartmentList> {
                   //                       offset: const Offset(0, 2), // changes position of shadow
                   //                     ),
                   //                   ],
-                  //                   borderRadius: BorderRadius.circular(15.sp),
+                  //                   borderRadius: BorderRadius.circular(15),
                   //                   color: greybackground,
                   //                 ),
-                  //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                  //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
                   //             ],
                   //           ),
                   //         ),
@@ -350,14 +350,14 @@ class _DepartmentListState extends State<DepartmentList> {
               children: [
 
                 SizedBox(
-                    height: 22.h,
+                    height: 22,
                   ),
 
                 Padding(
-                    padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                    padding:EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
                     child:
                     Container(
-                      height: 26.h,
+                      height: 26,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -368,25 +368,25 @@ class _DepartmentListState extends State<DepartmentList> {
                             offset: const Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(10.sp),
+                        borderRadius: BorderRadius.circular(10),
                         color: whiteClr,
                       ),
                       child: Row(
                         children:  [
-                          SizedBox(width: 20.w,),
-                          Text("ID",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                          SizedBox(width: 20,),
+                          Text("ID",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
                           Spacer(),
-                          Text("Department",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                          Text("Department",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
                           Spacer(),
-                          Text("Status",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                          SizedBox(width: 20.w,),
+                          Text("Status",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
+                          SizedBox(width: 20,),
                         ],
                       ),
                     ),
                   ),
 
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
                   child: departments.isEmpty ? SizedBox() : Container(
                         height:  MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
@@ -446,7 +446,7 @@ class _DepartmentListState extends State<DepartmentList> {
                                 children:  [
                                   // A SlidableAction can have an icon and/or a label.
                                   SlidableAction(
-                                    spacing: 7.h,
+                                    spacing: 7,
                                     onPressed: doNothing(context ,departments[index].id),
                                     backgroundColor: Color(0xFFFE4A49),
                                     foregroundColor: Colors.white,
@@ -466,7 +466,7 @@ class _DepartmentListState extends State<DepartmentList> {
                               // component is not dragged.
 
                               child: SizedBox(
-                                height: 54.h,
+                                height: 54,
                                 width: MediaQuery.of(context).size.width,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -474,13 +474,13 @@ class _DepartmentListState extends State<DepartmentList> {
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(width: 20.w,),
-                                        Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                                        SizedBox(width: 20,),
+                                        Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                                         Spacer(),
-                                        Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                                        Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                                         Spacer(),
-                                        Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
-                                        SizedBox(width: 15.w,),
+                                        Text("Active ",style: GoogleFonts.poppins(fontSize: 11,color: srpgradient1,fontWeight: FontWeight.w400),),
+                                        SizedBox(width: 15,),
                                       ],
                                     ),
                                   ],
@@ -548,7 +548,7 @@ class _DepartmentListState extends State<DepartmentList> {
                   //   // The child of the Slidable is what the user sees when the
                   //   // component is not dragged.
                   //   child: SizedBox(
-                  //     height: 40.h,
+                  //     height: 40,
                   //     width: 200.w,
                   //     child:
                   //     Column(
@@ -556,11 +556,11 @@ class _DepartmentListState extends State<DepartmentList> {
                   //         Row(
                   //           children: [
                   //             SizedBox(width: 15.w,),
-                  //             Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                  //             Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                   //             Spacer(),
-                  //             Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                  //             Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                   //             Spacer(),
-                  //             Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
+                  //             Text("Active ",style: GoogleFonts.poppins(fontSize: 11,color: srpgradient1,fontWeight: FontWeight.w400),),
                   //             SizedBox(width: 15.w,)
                   //           ],
                   //         ),
@@ -572,17 +572,17 @@ class _DepartmentListState extends State<DepartmentList> {
 
 
                   // Padding(
-                  //   padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  //   padding:  EdgeInsets.symmetric(vertical: 8.0,horizontal: 20.w),
                   //   child: departments.isEmpty ? SizedBox() :
                   //   Container(
-                  //     height:  MediaQuery.of(context).size.height,
+                  //     height:  MediaQuery.of(context).sizeeight,
                   //     width: MediaQuery.of(context).size.width,
                   //     //color: Colors.red,
                   //     child: ListView.builder(
                   //         itemCount: departments.length,
                   //         itemBuilder: (context,index) {
                   //           return SizedBox(
-                  //             height: 40.h,
+                  //             height: 40,
                   //             width: 200.w,
                   //             child:
                   //             Column(
@@ -590,11 +590,11 @@ class _DepartmentListState extends State<DepartmentList> {
                   //                 Row(
                   //                   children: [
                   //                     SizedBox(width: 15.w,),
-                  //                     Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                  //                     Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                   //                     Spacer(),
-                  //                     Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                  //                     Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                   //                     Spacer(),
-                  //                     Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
+                  //                     Text("Active ",style: GoogleFonts.poppins(fontSize: 11,color: srpgradient1,fontWeight: FontWeight.w400),),
                   //                     SizedBox(width: 15.w,)
                   //                   ],
                   //                 ),
@@ -615,7 +615,7 @@ class _DepartmentListState extends State<DepartmentList> {
               height: 60,
               child: Icon(
                 Icons.add,
-                size: 25.sp,
+                size: 25,
               ),
               decoration: const BoxDecoration(
                   shape: BoxShape.circle,
@@ -675,23 +675,23 @@ class _DepartmentListState extends State<DepartmentList> {
             //could change this to Color(0xFF737373),
             // so you don't have to change MaterialApp canvasColor
             child: Container(
-              height: 110.h,
-              width: 300.w,
+              height: 110,
+              width: 300,
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
 
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
 
                   Text("Add Department",
-                    style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+                    style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
 
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
 
                   CsMainInputField4(
                     // providerGenerator: providerGenerator,
-                    width: 287.w,
+                    width: 287,
                     mycontroller: textEditingController1,
                     // myhint: TextStrings.Enter_your_email_address.tr(),
                     myhint: "ID",
@@ -706,11 +706,11 @@ class _DepartmentListState extends State<DepartmentList> {
                     //     : null,
                   ),
 
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
 
                   CsMainInputField4(
                     // providerGenerator: providerGenerator,
-                    width: 287.w,
+                    width: 287,
                     mycontroller: textEditingController2,
                     // myhint: TextStrings.Enter_your_email_address.tr(),
                     myhint: "Department Name",
@@ -725,7 +725,7 @@ class _DepartmentListState extends State<DepartmentList> {
                     //     : null,
                   ),
 
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -749,8 +749,8 @@ class _DepartmentListState extends State<DepartmentList> {
                           }
                           },
                         child: Container(
-                          height: 50.h,
-                          width: 150.w,
+                          height: 50,
+                          width: 150,
                           //color: Colors.yellow,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -762,15 +762,15 @@ class _DepartmentListState extends State<DepartmentList> {
                                 offset: const Offset(0, 2), // changes position of shadow
                               ),
                             ],
-                            borderRadius: BorderRadius.circular(6.sp),
+                            borderRadius: BorderRadius.circular(6),
                             color: srpgradient2,
                           ),
-                          child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.w400),),
+                          child: Text("Create",style: GoogleFonts.poppins(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w400),),
                         ),
                       ),
 
                       // TextButton(
-                      //   child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+                      //   child: Text("Create",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
                       //   onPressed:  () {
                       //     print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
                       //     if(textEditingController1.text.trim().isNotEmpty && textEditingController2.text.trim().isNotEmpty) {
@@ -789,15 +789,15 @@ class _DepartmentListState extends State<DepartmentList> {
                       //   },
                       // ),
 
-                      SizedBox( width: 10.w, ),
+                      SizedBox( width: 10, ),
 
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).pop();
                         },
                         child: Container(
-                          height: 50.h,
-                          width: 150.w,
+                          height: 50,
+                          width: 150,
                           // color: Colors.yellow,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -809,15 +809,15 @@ class _DepartmentListState extends State<DepartmentList> {
                                 offset: const Offset(0, 2), // changes position of shadow
                               ),
                             ],
-                            borderRadius: BorderRadius.circular(6.sp),
+                            borderRadius: BorderRadius.circular(6),
                             color: srpgradient2,
                           ),
-                          child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.w400),),
+                          child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w400),),
                         ),
                       ),
 
                       // TextButton(
-                      //   child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+                      //   child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
                       //   onPressed:  () {
                       //     Navigator.of(context).pop();
                       //   },
@@ -836,7 +836,7 @@ class _DepartmentListState extends State<DepartmentList> {
   showAlertDialog(BuildContext context) {
     // set up the buttons
     Widget remindButton = TextButton(
-      child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      child: Text("Create",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
       onPressed:  () {
         print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
         if(textEditingController1.text.trim().isNotEmpty && textEditingController2.text.trim().isNotEmpty) {
@@ -855,7 +855,7 @@ class _DepartmentListState extends State<DepartmentList> {
       },
     );
     Widget cancelButton = TextButton(
-      child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
       onPressed:  () {
         Navigator.of(context).pop();
       },
@@ -866,15 +866,15 @@ class _DepartmentListState extends State<DepartmentList> {
     // );
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
          content: Container(
-           height: 110.h,
-           width: 300.w,
+           height: 110,
+           width: 300,
            child: Column(
              children: [
                CsMainInputField4(
                  // providerGenerator: providerGenerator,
-                 width: 287.w,
+                 width: 287,
                  mycontroller: textEditingController1,
                  // myhint: TextStrings.Enter_your_email_address.tr(),
                  myhint: "ID",
@@ -888,10 +888,10 @@ class _DepartmentListState extends State<DepartmentList> {
                  //     ? Colors.red
                  //     : null,
                ),
-               SizedBox(height: 10.h,),
+               SizedBox(height: 10,),
                CsMainInputField4(
                  // providerGenerator: providerGenerator,
-                 width: 287.w,
+                 width: 287,
                  mycontroller: textEditingController2,
                  // myhint: TextStrings.Enter_your_email_address.tr(),
                  myhint: "Department Name",
@@ -921,15 +921,15 @@ class _DepartmentListState extends State<DepartmentList> {
       //  barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+          title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
           content: Container(
-            height: 110.h,
-            width: 300.w,
+            height: 110,
+            width: 300,
             child: Column(
               children: [
                 CsMainInputField4(
                   // providerGenerator: providerGenerator,
-                  width: 287.w,
+                  width: 287,
                   mycontroller: textEditingController1,
                   // myhint: TextStrings.Enter_your_email_address.tr(),
                   myhint: "ID",
@@ -943,10 +943,10 @@ class _DepartmentListState extends State<DepartmentList> {
                   //     ? Colors.red
                   //     : null,
                 ),
-                SizedBox(height: 10.h,),
+                SizedBox(height: 10,),
                 CsMainInputField4(
                   // providerGenerator: providerGenerator,
-                  width: 287.w,
+                  width: 287,
                   mycontroller: textEditingController2,
                   // myhint: TextStrings.Enter_your_email_address.tr(),
                   myhint: "Department Name",
@@ -1119,11 +1119,11 @@ class _DepartmentList1State extends State<DepartmentList1> {
       child: CsScreenUtilInit(
         child: Scaffold(
           //  resizeToAvoidBottomInset: true,
-          backgroundColor: backgroundcolorr,
+          backgroundColor: Color(0xffF6F6F6),
           appBar: PreferredSize(
-            preferredSize:  Size.fromHeight(94.0.h),
+            preferredSize:  Size.fromHeight(94.0),
             child:  Container(
-              height: 102.h,
+              height: 102,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -1135,37 +1135,37 @@ class _DepartmentList1State extends State<DepartmentList1> {
                     // changes position of shadow
                   ),
                 ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),
-                    bottomRight: Radius.circular(20.sp)),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)),
                 color: whiteClr,
               ),
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: 15.w,),
+                      SizedBox(width: 15,),
                       GestureDetector(
                         onTap: (){
                           Navigator.pop(context);
                         },
                         child: Padding(
-                          padding: EdgeInsets.all(8.0.sp),
-                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23,color: greybackground,),
                         ),
                       ),
                       Spacer(),
-                      Text("Departments List",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                      Text("Departments List",style: GoogleFonts.poppins(fontSize: 15,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
                       Container(
-                        width: 30.0.w,
-                        height: 30.0.h,
+                        width: 30.0,
+                        height: 30.0,
                         // child: Stack(
                         //   children: [
                         //     ClipRRect(
-                        //       borderRadius: BorderRadius.circular(15.0.sp),
+                        //       borderRadius: BorderRadius.circular(15.0),
                         //       child: Image.asset(
                         //         'assets/user.jpg',
                         //         width: 30.0.w,
@@ -1181,7 +1181,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
                         //         width: 5.w,
                         //         //color:online,
                         //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(5.sp),
+                        //           borderRadius: BorderRadius.circular(5),
                         //           color: online,
                         //         ),
                         //       ),
@@ -1189,7 +1189,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
                         //   ],
                         // ),
                       ),
-                      SizedBox(width: 5.w,),
+                      SizedBox(width: 5,),
                     ],
                   ),
                   // Container(
@@ -1216,8 +1216,8 @@ class _DepartmentList1State extends State<DepartmentList1> {
                   //         child: Column(
                   //           children: [
                   //             SizedBox(height: 5.h,),
-                  //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9.sp, color:coverBackClr,fontWeight: FontWeight.bold),),
-                  //             Text("Week",style: GoogleFonts.poppins(fontSize:13.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                  //             Text("Date Range",style: GoogleFonts.poppins(fontSize:9, color:coverBackClr,fontWeight: FontWeight.bold),),
+                  //             Text("Week",style: GoogleFonts.poppins(fontSize:13, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                   //           ],
                   //         ),
                   //       ),
@@ -1245,10 +1245,10 @@ class _DepartmentList1State extends State<DepartmentList1> {
                   //           color: whiteClr,
                   //         ),
                   //         child: Padding(
-                  //           padding: EdgeInsets.all( 10.sp),
+                  //           padding: EdgeInsets.all( 10),
                   //           child: Row(
                   //             children: [
-                  //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12.sp, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
+                  //               Text("View Organization",style: GoogleFonts.poppins(fontSize:12, color: Color(0xffb3b2b2),fontWeight: FontWeight.w600),),
                   //               Spacer(),
                   //               Container(
                   //                 height: 20.h,
@@ -1262,10 +1262,10 @@ class _DepartmentList1State extends State<DepartmentList1> {
                   //                       offset: const Offset(0, 2), // changes position of shadow
                   //                     ),
                   //                   ],
-                  //                   borderRadius: BorderRadius.circular(15.sp),
+                  //                   borderRadius: BorderRadius.circular(15),
                   //                   color: greybackground,
                   //                 ),
-                  //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),)
+                  //                 child: Icon(Icons.arrow_forward_ios_rounded,size:13,color: whiteClr,),)
                   //             ],
                   //           ),
                   //         ),
@@ -1284,14 +1284,14 @@ class _DepartmentList1State extends State<DepartmentList1> {
               children: [
 
                 SizedBox(
-                  height: 22.h,
+                  height: 22,
                 ),
 
                 Padding(
-                  padding:EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding:EdgeInsets.symmetric(vertical: 8.0,horizontal: 20.w),
                   child:
                   Container(
-                    height: 26.h,
+                    height: 26,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -1302,25 +1302,25 @@ class _DepartmentList1State extends State<DepartmentList1> {
                           offset: const Offset(0, 2), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(10.sp),
+                      borderRadius: BorderRadius.circular(10),
                       color: whiteClr,
                     ),
                     child: Row(
                       children:  [
-                        SizedBox(width: 20.w,),
-                        Text("ID",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                        SizedBox(width: 20,),
+                        Text("ID",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
                         Spacer(),
-                        Text("Department",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                        Text("Department",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
                         Spacer(),
-                        Text("Status",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                        SizedBox(width: 20.w,),
+                        Text("Status",style: GoogleFonts.poppins(fontSize: 11,color: fontclr,fontWeight: FontWeight.w400),),
+                        SizedBox(width: 20,),
                       ],
                     ),
                   ),
                 ),
 
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+                  padding:  EdgeInsets.symmetric(vertical: 8.0,horizontal: 20.w),
                   child: departments.isEmpty ? SizedBox() : Container(
                     height:  MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -1400,7 +1400,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
                             // component is not dragged.
 
                             child: SizedBox(
-                              height: 54.h,
+                              height: 54,
                               width: MediaQuery.of(context).size.width,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1408,13 +1408,13 @@ class _DepartmentList1State extends State<DepartmentList1> {
                                 children: [
                                   Row(
                                     children: [
-                                      SizedBox(width: 15.w,),
-                                      Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                                      SizedBox(width: 15,),
+                                      Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                                       Spacer(),
-                                      Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                                      Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                                       Spacer(),
-                                      Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
-                                      SizedBox(width: 15.w,)
+                                      Text("Active ",style: GoogleFonts.poppins(fontSize: 11,color: srpgradient1,fontWeight: FontWeight.w400),),
+                                      SizedBox(width: 15,)
                                     ],
                                   ),
                                 ],
@@ -1490,11 +1490,11 @@ class _DepartmentList1State extends State<DepartmentList1> {
                 //         Row(
                 //           children: [
                 //             SizedBox(width: 15.w,),
-                //             Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                //             Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                 //             Spacer(),
-                //             Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                //             Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                 //             Spacer(),
-                //             Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
+                //             Text("Active ",style: GoogleFonts.poppins(fontSize: 11,color: srpgradient1,fontWeight: FontWeight.w400),),
                 //             SizedBox(width: 15.w,)
                 //           ],
                 //         ),
@@ -1524,11 +1524,11 @@ class _DepartmentList1State extends State<DepartmentList1> {
                 //                 Row(
                 //                   children: [
                 //                     SizedBox(width: 15.w,),
-                //                     Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                //                     Text("${departments[index].id}",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                 //                     Spacer(),
-                //                     Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11.sp,color: fontgrey,fontWeight: FontWeight.w400),),
+                //                     Text("${departments[index].name} ",style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w400),),
                 //                     Spacer(),
-                //                     Text("Active ",style: GoogleFonts.poppins(fontSize: 11.sp,color: srpgradient1,fontWeight: FontWeight.w400),),
+                //                     Text("Active ",style: GoogleFonts.poppins(fontSize: 11,color: srpgradient1,fontWeight: FontWeight.w400),),
                 //                     SizedBox(width: 15.w,)
                 //                   ],
                 //                 ),
@@ -1549,7 +1549,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
               height: 60,
               child: Icon(
                 Icons.add,
-                size: 25.sp,
+                size: 25,
               ),
               decoration: const BoxDecoration(
                   shape: BoxShape.circle,
@@ -1611,19 +1611,19 @@ class _DepartmentList1State extends State<DepartmentList1> {
             //could change this to Color(0xFF737373),
             // so you don't have to change MaterialApp canvasColor
             child: Container(
-              height: 110.h,
-              width: 300.w,
+              height: 110,
+              width: 300,
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30.h,),
-                  Text("Add Department",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
+                  Text("Add Department",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
+                  SizedBox(height: 30,),
 
                   CsMainInputField4(
                     // providerGenerator: providerGenerator,
-                    width: 287.w,
+                    width: 287,
                     mycontroller: textEditingController1,
                     // myhint: TextStrings.Enter_your_email_address.tr(),
                     myhint: "ID",
@@ -1638,11 +1638,11 @@ class _DepartmentList1State extends State<DepartmentList1> {
                     //     : null,
                   ),
 
-                  SizedBox(height: 10.h,),
+                  SizedBox(height: 10,),
 
                   CsMainInputField4(
                     // providerGenerator: providerGenerator,
-                    width: 287.w,
+                    width: 287,
                     mycontroller: textEditingController2,
                     // myhint: TextStrings.Enter_your_email_address.tr(),
                     myhint: "Department Name",
@@ -1657,7 +1657,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
                     //     : null,
                   ),
 
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1681,8 +1681,8 @@ class _DepartmentList1State extends State<DepartmentList1> {
                           }
                         },
                         child: Container(
-                          height: 50.h,
-                          width: 150.w,
+                          height: 50,
+                          width: 150,
                           //color: Colors.yellow,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -1694,15 +1694,15 @@ class _DepartmentList1State extends State<DepartmentList1> {
                                 offset: const Offset(0, 2), // changes position of shadow
                               ),
                             ],
-                            borderRadius: BorderRadius.circular(6.sp),
+                            borderRadius: BorderRadius.circular(6),
                             color: srpgradient2,
                           ),
-                          child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.w400),),
+                          child: Text("Create",style: GoogleFonts.poppins(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w400),),
                         ),
                       ),
 
                       // TextButton(
-                      //   child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+                      //   child: Text("Create",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
                       //   onPressed:  () {
                       //     print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
                       //     if(textEditingController1.text.trim().isNotEmpty && textEditingController2.text.trim().isNotEmpty) {
@@ -1720,7 +1720,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
                       //     }
                       //   },
                       // ),
-                      SizedBox( width: 10.w, ),
+                      SizedBox( width: 10, ),
 
                       GestureDetector(
 
@@ -1729,8 +1729,8 @@ class _DepartmentList1State extends State<DepartmentList1> {
                         },
 
                         child: Container(
-                          height: 50.h,
-                          width: 150.w,
+                          height: 50,
+                          width: 150,
                           //color: Colors.yellow,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -1742,16 +1742,16 @@ class _DepartmentList1State extends State<DepartmentList1> {
                                 offset: const Offset(0, 2), // changes position of shadow
                               ),
                             ],
-                            borderRadius: BorderRadius.circular(6.sp),
+                            borderRadius: BorderRadius.circular(6),
                             color: srpgradient2,
                           ),
-                          child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.w400),),
+                          child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w400),),
                         ),
 
                       ),
 
                       // TextButton(
-                      //   child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+                      //   child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
                       //   onPressed:  () {
                       //     Navigator.of(context).pop();
                       //   },
@@ -1770,7 +1770,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
   showAlertDialog(BuildContext context) {
     // set up the buttons
     Widget remindButton = TextButton(
-      child: Text("Create",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      child: Text("Create",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
       onPressed:  () {
         print("+++++++++++++++ ${textEditingController1.text} ${textEditingController2.text}");
         if(textEditingController1.text.trim().isNotEmpty && textEditingController2.text.trim().isNotEmpty) {
@@ -1789,7 +1789,7 @@ class _DepartmentList1State extends State<DepartmentList1> {
       },
     );
     Widget cancelButton = TextButton(
-      child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      child: Text("Cancel",style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
       onPressed:  () {
         Navigator.of(context).pop();
       },
@@ -1802,15 +1802,15 @@ class _DepartmentList1State extends State<DepartmentList1> {
     // set up the AlertDialog
 
     AlertDialog alert = AlertDialog(
-      title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+      title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
       content: Container(
-        height: 110.h,
-        width: 300.w,
+        height: 110,
+        width: 300,
         child: Column(
           children: [
             CsMainInputField4(
               // providerGenerator: providerGenerator,
-              width: 287.w,
+              width: 287,
               mycontroller: textEditingController1,
               // myhint: TextStrings.Enter_your_email_address.tr(),
               myhint: "ID",
@@ -1824,10 +1824,10 @@ class _DepartmentList1State extends State<DepartmentList1> {
               //     ? Colors.red
               //     : null,
             ),
-            SizedBox(height: 10.h,),
+            SizedBox(height: 10,),
             CsMainInputField4(
               // providerGenerator: providerGenerator,
-              width: 287.w,
+              width: 287,
               mycontroller: textEditingController2,
               // myhint: TextStrings.Enter_your_email_address.tr(),
               myhint: "Department Name",
@@ -1857,15 +1857,15 @@ class _DepartmentList1State extends State<DepartmentList1> {
       //  barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
+          title: Text("Add Department", style: GoogleFonts.poppins(fontSize: 15,color: srpgradient2,fontWeight: FontWeight.w400),),
           content: Container(
-            height: 110.h,
-            width: 300.w,
+            height: 110,
+            width: 300,
             child: Column(
               children: [
                 CsMainInputField4(
                   // providerGenerator: providerGenerator,
-                  width: 287.w,
+                  width: 287,
                   mycontroller: textEditingController1,
                   // myhint: TextStrings.Enter_your_email_address.tr(),
                   myhint: "ID",
@@ -1879,10 +1879,10 @@ class _DepartmentList1State extends State<DepartmentList1> {
                   //     ? Colors.red
                   //     : null,
                 ),
-                SizedBox(height: 10.h,),
+                SizedBox(height: 10,),
                 CsMainInputField4(
                   // providerGenerator: providerGenerator,
-                  width: 287.w,
+                  width: 287,
                   mycontroller: textEditingController2,
                   // myhint: TextStrings.Enter_your_email_address.tr(),
                   myhint: "Department Name",

@@ -23,8 +23,10 @@ class SubReportsOrSubSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hh =MediaQuery.of(context).size.height;
+    final ww =MediaQuery.of(context).size.width;
     return Container(
-      height: 53.h,
+      height: hh*0.07,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         boxShadow: [
@@ -35,27 +37,27 @@ class SubReportsOrSubSettings extends StatelessWidget {
             offset: const Offset(0, 2), // changes position of shadow
           ),
         ],
-        borderRadius: BorderRadius.circular(5.sp),
+        borderRadius: BorderRadius.circular(7),
         color: whiteClr,
       ),
       child: Row(
         children: [
           Padding(
-            padding:  EdgeInsets.only(left: 32.w,right: 20.w),
-            child: Image.asset(iconString,height: 25.h,width: 25,),
+            padding:  EdgeInsets.only(left: 32,right: 20),
+            child: Image.asset(iconString,height: 27,width: 25,),
           ),
           Column(
-            crossAxisAlignment:CrossAxisAlignment.start ,
-            mainAxisAlignment:MainAxisAlignment.center ,
+            crossAxisAlignment:CrossAxisAlignment.start,
+            mainAxisAlignment:MainAxisAlignment.center,
             children: [
-              Text(title,style: GoogleFonts.poppins(fontSize: 12.sp,color: fontgrey,fontWeight: FontWeight.w500),),
-              Text(subtitle,style: GoogleFonts.poppins(fontSize: 10.sp,color: fontgrey,fontWeight: FontWeight.w500),),
+              Text(title,style: GoogleFonts.poppins(fontSize: 13,color: fontgrey,fontWeight: FontWeight.w500),),
+              Text(subtitle,style: GoogleFonts.poppins(fontSize: 11,color: fontgrey,fontWeight: FontWeight.w500),),
             ],
           ),
           Spacer(),
           Container(
-            height: 20.h,
-            width: 20.w,
+            height: 22,
+            width: 22,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -65,11 +67,12 @@ class SubReportsOrSubSettings extends StatelessWidget {
                   offset: const Offset(0, 2), // changes position of shadow
                 ),
               ],
-              borderRadius: BorderRadius.circular(15.sp),
+              borderRadius: BorderRadius.circular(17),
               color: greybackground,
             ),
-            child: Icon(Icons.arrow_forward_ios_rounded,size:13.sp,color: whiteClr,),),
-          SizedBox(width: 20.w,),
+            child: Icon(Icons.arrow_forward_ios_rounded,size:15,color: whiteClr,),
+          ),
+          SizedBox(width: 22,),
         ],
       ),
     );

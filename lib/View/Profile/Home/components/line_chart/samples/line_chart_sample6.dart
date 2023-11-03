@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class LineChartSample6 extends StatelessWidget {
-  LineChartSample6({super.key}) {
+  // LineChartSample6({super.key}) {
+  LineChartSample6({key}) {
     minSpotX = spots.first.x;
     maxSpotX = spots.first.x;
     minSpotY = spots.first.y;

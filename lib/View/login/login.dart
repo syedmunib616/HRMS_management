@@ -589,84 +589,82 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                       //   //     : null,
                       // ),
 
-                      CsScreenUtilInit(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 0.8,
-                                blurRadius: 1,
-                                offset: const Offset(0, 0), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(8.2),
-                            color: whiteClr,
-                          ),
-                          height: 51.h,
-                          width:287.w,
-                          child: TextFormField(
-                            textAlignVertical:TextAlignVertical.bottom ,
-                            maxLines: 1,
-                            keyboardType: TextInputType.emailAddress,
-                            controller:  textEditingController1,
-                            obscureText: false,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                setState(() {
-                                  err=true;
-                                  errmesg='Invalid Email';
-                                });
-                              //  return 'Email is required';
-                              }
-                              else if(!value.contains('@')){
-                                setState(() {
-                                  err=true;
-                                  errmesg='Invalid email format';
-                                });
-                              }
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 0.8,
+                              blurRadius: 1,
+                              offset: const Offset(0, 0), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(8.2),
+                          color: whiteClr,
+                        ),
+                        height: 51.h,
+                        width:287.w,
+                        child: TextFormField(
+                          textAlignVertical:TextAlignVertical.bottom ,
+                          maxLines: 1,
+                          keyboardType: TextInputType.emailAddress,
+                          controller:  textEditingController1,
+                          obscureText: false,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              setState(() {
+                                err=true;
+                                errmesg='Invalid Email';
+                              });
+                            //  return 'Email is required';
+                            }
+                            else if(!value.contains('@')){
+                              setState(() {
+                                err=true;
+                                errmesg='Invalid email format';
+                              });
+                            }
 
-                              // else if (isValidEmail(value)) {
-                              //   print("sssss");
-                              //   setState(() {
-                              //     err=true;
-                              //     errmesg='Invalid email format';
-                              //   });
-                              //   //return 'Invalid email format';
-                              // }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _email = value!;
-                            },
-                            // onFieldSubmitted: onSubmite ?? (_) {},
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: whiteClr,
-                              contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
-                              hintText: 'Enter your email address',
-                              // hintStyle: TextStyle(
-                              //   fontSize: 15.0.sp,
-                              //   fontWeight: FontWeight.w400,
-                              //   color: blackClr.withOpacity(0.8),
-                              // ),
-                              hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
-                              prefixIcon: Icon(
-                                Icons.email_outlined,
-                                color: blackClr.withOpacity(0.6),
-                                size: 20.sp,
-                              ),
-                              suffixIcon: null,
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(width: 1.0, color: Colors.white),
-                                //  BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(width: 1.0, color:  Colors.white),
-                                //BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
-                              ),
+                            // else if (isValidEmail(value)) {
+                            //   print("sssss");
+                            //   setState(() {
+                            //     err=true;
+                            //     errmesg='Invalid email format';
+                            //   });
+                            //   //return 'Invalid email format';
+                            // }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            _email = value!;
+                          },
+                          // onFieldSubmitted: onSubmite ?? (_) {},
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: whiteClr,
+                            contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+                            hintText: 'Enter your email address',
+                            // hintStyle: TextStyle(
+                            //   fontSize: 15.0.sp,
+                            //   fontWeight: FontWeight.w400,
+                            //   color: blackClr.withOpacity(0.8),
+                            // ),
+                            hintStyle: GoogleFonts.poppins(fontSize: 14.sp,color: fontgrey),
+                            prefixIcon: Icon(
+                              Icons.email_outlined,
+                              color: blackClr.withOpacity(0.6),
+                              size: 20.sp,
+                            ),
+                            suffixIcon: null,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(width: 1.0, color: Colors.white),
+                              //  BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(width: 1.0, color:  Colors.white),
+                              //BorderSide(width: 1.0, color: bordercolor ?? Colors.white),
                             ),
                           ),
                         ),

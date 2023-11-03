@@ -27,8 +27,10 @@ class CsMainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CsScreenUtilInit(
-      child: GestureDetector(
+    return
+      // CsScreenUtilInit(
+      // child:
+      GestureDetector(
         onTap: onTap,
         child: Container(
           width: width!,
@@ -59,7 +61,7 @@ class CsMainButton extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
+    // );
   }
 }

@@ -160,177 +160,350 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
+
+    final hh=MediaQuery.of(context).size.height;
+    final ww=MediaQuery.of(context).size.width;
     return SafeArea(
-      child: CsScreenUtilInit(
-        child: Scaffold(
-          appBar: AppBar(
-            leading:
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
-                child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            flexibleSpace:  Container(
-              height: 102.h,
-              width:MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.01),
-                    spreadRadius: 2,
-                    blurRadius: 1,
-                    offset: const Offset(0, 2), // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-                color: whiteClr,
-              ),
-              child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 26.h,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-                      Spacer(),
-                      Text("Employee Directory",style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
-                      Spacer(),
-
-                    ],
-                  ),
-                ],
-              ),
+      child: Scaffold(
+        appBar: AppBar(
+          leading:
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: 17.0,right: 17,bottom: 24),
+              child: Image.asset('assets/doublearrow.png',height: 10,width: 10,),
             ),
           ),
-          body: Stack(
-            children: [
-              reporting.length==null ? SizedBox(): Positioned(
-                top: 75,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child:_searchResult.length != 0 || textEditingController1.text.isNotEmpty ?
-                ListView.builder(
-                    itemCount: _searchResult.length,
-                    itemBuilder: (BuildContext contet, index) {
-
-                      return Empolyee(
-                       // companyemail: widget.compnayemail,
-                        companyemail: companyadmin,
-                        superadmin:widget.superadmin,
-                        email: _searchResult[index].Email,
-                        name: _searchResult[index].Name,
-                      );
-                    }
-                ) :
-                ListView.builder(
-                    itemCount: reporting.length,
-                    itemBuilder: (BuildContext contet,index){
-                      print('jjjjjooooooooo $companyadmin');
-                      return Empolyee(
-                        //companyemail: widget.compnayemail,
-                              companyemail: companyadmin,
-                              superadmin:widget.superadmin,
-                              email: reporting[index].Email,
-                              name: reporting[index].Name,);
-                      }
-                    ),
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
-                  // child: CsMainInputField1(
-                  //   // onSubmite: ,
-                  //   providerGenerator: providerGenerator,
-                  //   width: 287.w,
-                  //   mycontroller: textEditingController1,
-                  //   myhint: TextStrings.Search,
-                  //   prefixIcon: Icons.search,
-                  //   isPassword: false,
-                  //   keyboardType: TextInputType.emailAddress,
-                  //   bordercolor: providerGenerator.getVisibleError(index: 0)
-                  //       ? Colors.red
-                  //       : null,
-                  //   // bordercolor: providerGenerator.getVisibleError(index: 0)
-                  //   //     ? Colors.red
-                  //   //     : null,
-                  // ),
-                 child: buildContainerforSearch(),
-                  // Container(
-                  //   height: 35.h,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   decoration: BoxDecoration(
-                  //     boxShadow: [
-                  //       BoxShadow(
-                  //         color: Colors.grey.withOpacity(0.4),
-                  //         spreadRadius: 2,
-                  //         blurRadius: 1,
-                  //         offset: const Offset(0, 2), // changes position of shadow
-                  //       ),
-                  //     ],
-                  //     borderRadius: BorderRadius.circular(20.sp),
-                  //     color: whiteClr,
-                  //   ),
-                  //   child: Row(
-                  //     children:  [
-                  //       SizedBox(width: 10.w,),
-                  //       Icon(Icons.search,size: 20.sp,color: greybackground,)
-                  //
-                  //
-                  //
-                  //     ],
-                  //   ),
-                  // ),
+          backgroundColor: Colors.transparent,
+          flexibleSpace:  Container(
+            height: hh*0.2 ,
+            width:MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.01),
+                  spreadRadius: 2,
+                  blurRadius: 1,
+                  offset: const Offset(0, 2), // changes position of shadow
                 ),
-              ),
-              // NoOfRequest(),
-              // NoOfRequest(),
-              // NoOfRequest(),
-              // NoOfRequest(),
-              // NoOfRequest(),
-              // NoOfRequest(),
+              ],
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+              color: whiteClr,
+            ),
+            child: Column(
+              crossAxisAlignment:CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: hh*0.01,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    Spacer(),
+                    Text("Employee Directory",style: GoogleFonts.poppins(fontSize: 15,color: fontclr,fontWeight: FontWeight.w400),),
+                    Spacer(),
+
+                  ],
+                ),
               ],
             ),
+          ),
+        ),
+        body: Stack(
+          children: [
+            reporting.length==null ? SizedBox(): Positioned(
+              top: 75,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child:_searchResult.length != 0 || textEditingController1.text.isNotEmpty ?
+              ListView.builder(
+                  itemCount: _searchResult.length,
+                  itemBuilder: (BuildContext contet, index) {
 
-            floatingActionButton: FloatingActionButton(
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [srpgradient1, srpgradient3])
-              ),
-              child: Icon(
-                Icons.add,
-                size: 25.sp,
+                    return Empolyee(
+                      // companyemail: widget.compnayemail,
+                      companyemail: companyadmin,
+                      superadmin:widget.superadmin,
+                      email: _searchResult[index].Email,
+                      name: _searchResult[index].Name,
+                    );
+                  }
+              ) :
+              ListView.builder(
+                  itemCount: reporting.length,
+                  itemBuilder: (BuildContext contet,index){
+                    print('jjjjjooooooooo $companyadmin');
+                    return Empolyee(
+                      //companyemail: widget.compnayemail,
+                      companyemail: companyadmin,
+                      superadmin:widget.superadmin,
+                      email: reporting[index].Email,
+                      name: reporting[index].Name,);
+                  }
               ),
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreateEmployee( email: widget.compnayemail,
-                  superadmin: widget.superadmin, password: widget.password, )),
-              );
-            },
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding:  EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
+                // child: CsMainInputField1(
+                //   // onSubmite: ,
+                //   providerGenerator: providerGenerator,
+                //   width: 287.w,
+                //   mycontroller: textEditingController1,
+                //   myhint: TextStrings.Search,
+                //   prefixIcon: Icons.search,
+                //   isPassword: false,
+                //   keyboardType: TextInputType.emailAddress,
+                //   bordercolor: providerGenerator.getVisibleError(index: 0)
+                //       ? Colors.red
+                //       : null,
+                //   // bordercolor: providerGenerator.getVisibleError(index: 0)
+                //   //     ? Colors.red
+                //   //     : null,
+                // ),
+                child: buildContainerforSearch(),
+                // Container(
+                //   height: 35.h,
+                //   width: MediaQuery.of(context).size.width,
+                //   decoration: BoxDecoration(
+                //     boxShadow: [
+                //       BoxShadow(
+                //         color: Colors.grey.withOpacity(0.4),
+                //         spreadRadius: 2,
+                //         blurRadius: 1,
+                //         offset: const Offset(0, 2), // changes position of shadow
+                //       ),
+                //     ],
+                //     borderRadius: BorderRadius.circular(20),
+                //     color: whiteClr,
+                //   ),
+                //   child: Row(
+                //     children:  [
+                //       SizedBox(width: 10.w,),
+                //       Icon(Icons.search,size: 20,color: greybackground,)
+                //
+                //
+                //
+                //     ],
+                //   ),
+                // ),
+              ),
+            ),
+            // NoOfRequest(),
+            // NoOfRequest(),
+            // NoOfRequest(),
+            // NoOfRequest(),
+            // NoOfRequest(),
+            // NoOfRequest(),
+          ],
+        ),
+
+        floatingActionButton: FloatingActionButton(
+          child: Container(
+            width: ww*0.3,
+            height: hh*0.3,
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [srpgradient1, srpgradient3])
+            ),
+            child: Icon(
+              Icons.add,
+              size: 25,
+            ),
           ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreateEmployee( email: widget.compnayemail,
+                superadmin: widget.superadmin, password: widget.password, )),
+            );
+          },
         ),
       ),
     );
+    // return SafeArea(
+    //   child: CsScreenUtilInit(
+    //     child: Scaffold(
+    //       appBar: AppBar(
+    //         leading:
+    //         GestureDetector(
+    //           onTap: () {
+    //             Navigator.pop(context);
+    //           },
+    //           child: Padding(
+    //             padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
+    //             child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
+    //           ),
+    //         ),
+    //         backgroundColor: Colors.transparent,
+    //         flexibleSpace:  Container(
+    //           height: 102.h,
+    //           width:MediaQuery.of(context).size.width,
+    //           decoration: BoxDecoration(
+    //             boxShadow: [
+    //               BoxShadow(
+    //                 color: Colors.grey.withOpacity(0.01),
+    //                 spreadRadius: 2,
+    //                 blurRadius: 1,
+    //                 offset: const Offset(0, 2), // changes position of shadow
+    //               ),
+    //             ],
+    //             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+    //             color: whiteClr,
+    //           ),
+    //           child: Column(
+    //             crossAxisAlignment:CrossAxisAlignment.center,
+    //             children: [
+    //               SizedBox(height: 26.h,),
+    //               Row(
+    //                 mainAxisAlignment: MainAxisAlignment.center,
+    //                 children: [
+    //
+    //                   Spacer(),
+    //                   Text("Employee Directory",style: GoogleFonts.poppins(fontSize: 15,color: fontclr,fontWeight: FontWeight.w400),),
+    //                   Spacer(),
+    //
+    //                 ],
+    //               ),
+    //             ],
+    //           ),
+    //         ),
+    //       ),
+    //       body: Stack(
+    //         children: [
+    //           reporting.length==null ? SizedBox(): Positioned(
+    //             top: 75,
+    //             bottom: 0,
+    //             left: 0,
+    //             right: 0,
+    //             child:_searchResult.length != 0 || textEditingController1.text.isNotEmpty ?
+    //             ListView.builder(
+    //                 itemCount: _searchResult.length,
+    //                 itemBuilder: (BuildContext contet, index) {
+    //
+    //                   return Empolyee(
+    //                    // companyemail: widget.compnayemail,
+    //                     companyemail: companyadmin,
+    //                     superadmin:widget.superadmin,
+    //                     email: _searchResult[index].Email,
+    //                     name: _searchResult[index].Name,
+    //                   );
+    //                 }
+    //             ) :
+    //             ListView.builder(
+    //                 itemCount: reporting.length,
+    //                 itemBuilder: (BuildContext contet,index){
+    //                   print('jjjjjooooooooo $companyadmin');
+    //                   return Empolyee(
+    //                     //companyemail: widget.compnayemail,
+    //                           companyemail: companyadmin,
+    //                           superadmin:widget.superadmin,
+    //                           email: reporting[index].Email,
+    //                           name: reporting[index].Name,);
+    //                   }
+    //                 ),
+    //           ),
+    //           Positioned(
+    //             top: 0,
+    //             left: 0,
+    //             right: 0,
+    //             child: Padding(
+    //               padding:  EdgeInsets.symmetric(vertical: 8.0.h,horizontal: 20.w),
+    //               // child: CsMainInputField1(
+    //               //   // onSubmite: ,
+    //               //   providerGenerator: providerGenerator,
+    //               //   width: 287.w,
+    //               //   mycontroller: textEditingController1,
+    //               //   myhint: TextStrings.Search,
+    //               //   prefixIcon: Icons.search,
+    //               //   isPassword: false,
+    //               //   keyboardType: TextInputType.emailAddress,
+    //               //   bordercolor: providerGenerator.getVisibleError(index: 0)
+    //               //       ? Colors.red
+    //               //       : null,
+    //               //   // bordercolor: providerGenerator.getVisibleError(index: 0)
+    //               //   //     ? Colors.red
+    //               //   //     : null,
+    //               // ),
+    //              child: buildContainerforSearch(),
+    //               // Container(
+    //               //   height: 35.h,
+    //               //   width: MediaQuery.of(context).size.width,
+    //               //   decoration: BoxDecoration(
+    //               //     boxShadow: [
+    //               //       BoxShadow(
+    //               //         color: Colors.grey.withOpacity(0.4),
+    //               //         spreadRadius: 2,
+    //               //         blurRadius: 1,
+    //               //         offset: const Offset(0, 2), // changes position of shadow
+    //               //       ),
+    //               //     ],
+    //               //     borderRadius: BorderRadius.circular(20),
+    //               //     color: whiteClr,
+    //               //   ),
+    //               //   child: Row(
+    //               //     children:  [
+    //               //       SizedBox(width: 10.w,),
+    //               //       Icon(Icons.search,size: 20,color: greybackground,)
+    //               //
+    //               //
+    //               //
+    //               //     ],
+    //               //   ),
+    //               // ),
+    //             ),
+    //           ),
+    //           // NoOfRequest(),
+    //           // NoOfRequest(),
+    //           // NoOfRequest(),
+    //           // NoOfRequest(),
+    //           // NoOfRequest(),
+    //           // NoOfRequest(),
+    //           ],
+    //         ),
+    //
+    //         floatingActionButton: FloatingActionButton(
+    //         child: Container(
+    //           width: 60,
+    //           height: 60,
+    //           decoration: const BoxDecoration(
+    //               shape: BoxShape.circle,
+    //               gradient: LinearGradient(
+    //                   begin: Alignment.topCenter,
+    //                   end: Alignment.bottomCenter,
+    //                   colors: [srpgradient1, srpgradient3])
+    //           ),
+    //           child: Icon(
+    //             Icons.add,
+    //             size: 25,
+    //           ),
+    //         ),
+    //         onPressed: () {
+    //           Navigator.push(
+    //             context,
+    //             MaterialPageRoute(builder: (context) => CreateEmployee( email: widget.compnayemail,
+    //               superadmin: widget.superadmin, password: widget.password, )),
+    //           );
+    //         },
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   Container buildContainerforSearch() {
+
+    final hh=MediaQuery.of(context).size.height;
+    final ww=MediaQuery.of(context).size.width;
+
     return Container(
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -341,13 +514,14 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                         offset: const Offset(0, 4), // changes position of shadow
                       ),
                     ],
-                    borderRadius: BorderRadius.circular(170.sp),
+                    borderRadius: BorderRadius.circular(170),
                     color: whiteClr,
                   ),
-                  height: 51.h,
-                  width: 287.w,
+                  height: hh*0.04,
+                  width: ww*0.3,
                   child:TextFormField(
-                    textAlignVertical: TextAlignVertical.bottom ,
+                    textAlignVertical: TextAlignVertical.
+                    bottom ,
                     maxLines:  1,
                     keyboardType: TextInputType.emailAddress,
                     controller:  textEditingController1,
@@ -361,19 +535,19 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: whiteClr,
-                      contentPadding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 18.w),
+                      contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 18),
                       hintText: TextStrings.Search,
 
                       // hintStyle: TextStyle(
-                      //   fontSize: 15.0.sp,
+                      //   fontSize: 15.0,
                       //   fontWeight: FontWeight.w400,
                       //   color: blackClr.withOpacity(0.8),
                       // ),
-                      hintStyle: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),
+                      hintStyle: GoogleFonts.poppins(fontSize: 15,color: fontgrey),
                       prefixIcon: Icon(
                         Icons.search,
                         color: blackClr.withOpacity(0.6),
-                        size: 20.sp,
+                        size: 20,
                       ),
                       suffixIcon: null,
                       focusedBorder: OutlineInputBorder(
@@ -407,15 +581,15 @@ class _EmployeeDirectoryState extends State<EmployeeDirectory> {
                   //     hintText: TextStrings.Search,
                   //
                   //     // hintStyle: TextStyle(
-                  //     //   fontSize: 15.0.sp,
+                  //     //   fontSize: 15.0,
                   //     //   fontWeight: FontWeight.w400,
                   //     //   color: blackClr.withOpacity(0.8),
                   //     // ),
-                  //     hintStyle: GoogleFonts.poppins(fontSize: 15.sp,color: fontgrey),
+                  //     hintStyle: GoogleFonts.poppins(fontSize: 15,color: fontgrey),
                   //     prefixIcon: Icon(
                   //       Icons.search,
                   //       color: blackClr.withOpacity(0.6),
-                  //       size: 20.sp,
+                  //       size: 20,
                   //     ),
                   //     suffixIcon: null,
                   //     focusedBorder: OutlineInputBorder(
@@ -647,677 +821,355 @@ class _EditEmployeeState extends State<EditEmployee> {
 
   @override
   Widget build(BuildContext context) {
+
+    final hh=MediaQuery.of(context).size.height;
+    final ww=MediaQuery.of(context).size.width;
+
     return SafeArea(
-      child: CsScreenUtilInit(
-        child: Scaffold(
-          appBar: AppBar(
-            leading: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+               // color: Colors.amber,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 17.0.w,right: 17.w,bottom: 24.w),
-                  child: Image.asset('assets/doublearrow.png',height: 10.h,width: 10.w,),
-                ),
-              ),
-              backgroundColor: srpgradient20,
-              flexibleSpace:  Container(
-                height: 102.h,
-                width:MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.01),
-                      spreadRadius: 2,
-                      blurRadius: 1,
-                      offset: const Offset(0, 2), // changes position of shadow
-                    ),
-                  ],
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
-                  color: whiteClr,
-                ),
-                child: Column(
-                  crossAxisAlignment:CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 26.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Spacer(),
-                        Row(
-                           children: [
-                                // Icon(FontAwesomeIcons.user),
-                                Text(" Profile",style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,fontWeight: FontWeight.w400),),
-                             ],
-                           ),
-                        Spacer(),
-                      ],
-                    ),
-                  ],
+                  padding: EdgeInsets.only(left: 17.0,right: 17,bottom: 4),
+                  child: Image.asset('assets/doublearrow.png',height: 10,width: 10,),
                 ),
               ),
             ),
-          body: Stack(
-              children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                   right: 0,
-                   child: Container(
-                      height: 150.h,
-                      width: MediaQuery.of(context).size.width,
-                     decoration: BoxDecoration(
-                       boxShadow: [
-                         BoxShadow(
-                           color: Colors.grey.withOpacity(0.01),
-                           spreadRadius: 2,
-                           blurRadius: 1,
-                           offset: const Offset(0, 2), // changes position of shadow
-                         ),
-                       ],
-                         // gradient: const LinearGradient(
-                         //   begin: Alignment.topRight,
-                         //   end: Alignment.bottomLeft,
-                         //   colors: [
-                         //     //srpgradient1,
-                         //     srpgradient2,
-                         //     //srpgradient3
-                         //   ],
-                         // ),
-                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50.sp),bottomRight: Radius.circular(50.sp)),
-                       color: srpgradient2,
-                     ),
-                   )
-                ),
-                // Positioned(
-                //   top: 100,
-                //   bottom: 1,
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Container(
-                //         height:140.h,
-                //         width: MediaQuery.of(context).size.width,
-                //         child: Container(
-                //           width: 130.h,
-                //           height: 130.w,
-                //           decoration: BoxDecoration(
-                //             color: Colors.white,
-                //               border: Border.all(
-                //                   width: 4,
-                //                   color: Theme.of(context).scaffoldBackgroundColor),
-                //               boxShadow: [
-                //                 BoxShadow(
-                //                     spreadRadius: 2,
-                //                     blurRadius: 10,
-                //                     color: Colors.black.withOpacity(0.15),
-                //                     offset: const Offset(0, 10))
-                //               ],
-                //               shape: BoxShape.circle,
-                //
-                //               // image: const DecorationImage(
-                //               //     fit: BoxFit.cover,
-                //               //     image: NetworkImage(
-                //               //       "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                //               //     ))
-                //
-                //           ),
-                //           child: Icon(FontAwesomeIcons.userTie,size: 65.sp,color: srpgradient2,),
-                //         ),
-                //       ),
-                //       SizedBox(height: 38.h,),
-                //       // const TextField(
-                //       //   decoration: InputDecoration(
-                //       //     labelText: "Name",
-                //       //     border: OutlineInputBorder(
-                //       //         borderSide: BorderSide(color: Colors.teal)),
-                //       //     hintText: 'Input Name',
-                //       //   ),
-                //       //  // controller: displayNameController,
-                //       //   keyboardType: TextInputType.name,
-                //       // ),
-                //       // const TextField(
-                //       //   decoration: InputDecoration(
-                //       //     labelText: "Age",
-                //       //     border: OutlineInputBorder(
-                //       //         borderSide: BorderSide(color: Colors.teal)),
-                //       //     hintText: 'Input Age',
-                //       //   ),
-                //       //  // controller: ageController,
-                //       //   //
-                //       //   keyboardType: TextInputType.number,
-                //       // ),
-                //       widget.superadmin==false? Padding(
-                //         padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
-                //         child: Row(
-                //           children: [
-                //             Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
-                //             SizedBox(width: 20.w,),
-                //             Switch.adaptive(
-                //               activeColor: inputBackColor(context),
-                //               inactiveThumbColor: settingButtonBackColor(context),
-                //               inactiveTrackColor: subTitleClr,
-                //               activeTrackColor: buttonBackColor(context),
-                //               value: active,
-                //               onChanged: (valu) async {
-                //                 // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
-                //                 //
-                //                 // }
-                //                 await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
-                //                   setState(() {
-                //                     active = valu;
-                //                   });
-                //                 });
-                //               },
-                //             ),
-                //           ],
-                //         ),
-                //       ) : SizedBox(),
-                //       // Container(
-                //       //   color: Colors.grey,
-                //       //   width: MediaQuery.of(context).size.width,
-                //       //   height: 1,
-                //       // ),
-                //       // Padding(
-                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //       //   child: Row(
-                //       //     children: [
-                //       //       Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //       //       TextField(
-                //       //         controller: name1,
-                //       //       )                          ],
-                //       //   ),
-                //       // ),
-                //       // Container(
-                //       //   color: Colors.grey,
-                //       //   width: MediaQuery.of(context).size.width,
-                //       //   height: 1,
-                //       // ),
-                //       // Padding(
-                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //       //   child: Row(
-                //       //     children: [
-                //       //       Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //       //       Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                //       //     ],
-                //       //   ),
-                //       // ),
-                //       // Container(
-                //       //   color: Colors.grey,
-                //       //   width: MediaQuery.of(context).size.width,
-                //       //   height: 1,),
-                //       // Padding(
-                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //       //   child: Row(
-                //       //     children: [
-                //       //       Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //       //       TextField(
-                //       //         controller: phonenumber1,
-                //       //       )                          ],
-                //       //   ),
-                //       // ),
-                //       // Container(
-                //       //   color: Colors.grey,
-                //       //   width: MediaQuery.of(context).size.width,
-                //       //   height: 1,
-                //       // ),
-                //       // Padding(
-                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //       //   child: Row(
-                //       //     children: [
-                //       //       Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //       //       TextField(
-                //       //         controller: designation1,
-                //       //       )
-                //       //     ],
-                //       //   ),
-                //       // ),
-                //       // Container(
-                //       //   color: Colors.grey,
-                //       //   width: MediaQuery.of(context).size.width,
-                //       //   height: 1,
-                //       // ),
-                //       // Padding(
-                //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //       //   child: Row(
-                //       //     children: [
-                //       //       Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //       //       TextField(
-                //       //         controller: department1,
-                //       //       )
-                //       //       //Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                //       //     ],
-                //       //   ),
-                //       // ),
-                //       // Container(
-                //       //   color: Colors.grey,
-                //       //   width: MediaQuery.of(context).size.width,
-                //       //   height: 1,
-                //       // ),
-                //       Container(
-                //         color: Colors.grey,
-                //         width: MediaQuery.of(context).size.width,
-                //         height: 1,
-                //       ),
-                //       Padding(
-                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //         child: Row(
-                //           children: [
-                //             Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //             Text("$name", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                //           ],
-                //         ),
-                //       ),
-                //       Container(
-                //         color: Colors.grey,
-                //         width: MediaQuery.of(context).size.width,
-                //         height: 1,
-                //       ),
-                //       Padding(
-                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //         child: Row(
-                //           children: [
-                //             Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //             Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                //           ],
-                //         ),
-                //       ),
-                //       Container(
-                //         color: Colors.grey,
-                //         width: MediaQuery.of(context).size.width,
-                //         height: 1,),
-                //       Padding(
-                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //         child: Row(
-                //           children: [
-                //             Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //             Text("$phonenumber", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                //           ],
-                //         ),
-                //       ),
-                //       Container(
-                //         color: Colors.grey,
-                //         width: MediaQuery.of(context).size.width,
-                //         height: 1,
-                //       ),
-                //       Padding(
-                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //         child: Row(
-                //           children: [
-                //             Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //             Text("$designation", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                //           ],
-                //         ),
-                //       ),
-                //       Container(
-                //         color: Colors.grey,
-                //         width: MediaQuery.of(context).size.width,
-                //         height: 1,
-                //       ),
-                //       Padding(
-                //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                //         child: Row(
-                //           children: [
-                //             Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                //             Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                //           ],
-                //         ),
-                //       ),
-                //       Container(
-                //         color: Colors.grey,
-                //         width: MediaQuery.of(context).size.width,
-                //         height: 1,
-                //       ),
-                //
-                //
-                //
-                //     ],
-                //   ),
-                // ),
-                widget.superadmin==false ? Positioned(
-                  top: 100,
-                  bottom: 1,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height:140.h,
-                          width: MediaQuery.of(context).size.width,
-                          child: Container(
-                            width: 130.h,
-                            height: 130.w,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(width: 4, color: Theme.of(context).scaffoldBackgroundColor),
-                              boxShadow: [
-                                BoxShadow(
-                                    spreadRadius: 2,
-                                    blurRadius: 10,
-                                    color: Colors.black.withOpacity(0.15),
-                                    offset: const Offset(0, 10))
-                              ],
-                              shape: BoxShape.circle,
-
-                              // image: const DecorationImage(
-                              //     fit: BoxFit.cover,
-                              //     image: NetworkImage(
-                              //       "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                              //     ))
-
-                            ),
-                            child: Icon(FontAwesomeIcons.userTie,size: 65.sp,color: srpgradient2,),
-                          ),
-                        ),
-                        SizedBox(height: 38.h,),
-                        // const TextField(
-                        //   decoration: InputDecoration(
-                        //     labelText: "Name",
-                        //     border: OutlineInputBorder(
-                        //         borderSide: BorderSide(color: Colors.teal)),
-                        //     hintText: 'Input Name',
-                        //   ),
-                        //  // controller: displayNameController,
-                        //   keyboardType: TextInputType.name,
-                        // ),
-                        // const TextField(
-                        //   decoration: InputDecoration(
-                        //     labelText: "Age",
-                        //     border: OutlineInputBorder(
-                        //         borderSide: BorderSide(color: Colors.teal)),
-                        //     hintText: 'Input Age',
-                        //   ),
-                        //  // controller: ageController,
-                        //   //
-                        //   keyboardType: TextInputType.number,
-                        // ),
-                        widget.superadmin==false? Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
-                          child: Row(
-                            children: [
-                              Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
-                              SizedBox(width: 20.w,),
-                              Switch.adaptive(
-                                activeColor: inputBackColor(context),
-                                inactiveThumbColor: settingButtonBackColor(context),
-                                inactiveTrackColor: subTitleClr,
-                                activeTrackColor: buttonBackColor(context),
-                                value: active,
-                                onChanged: (valu) async {
-                                  // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
-                                  //
-                                  // }
-                                  await UserT.doc("${mainuser ==true ? user!.email.toString():admin__email}").collection('Employee').doc('$email').update({"active":valu}).then((value) {
-                                    setState(() {
-                                      active = valu;
-                                    });
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ) : SizedBox(),
-                        widget.superadmin==false? Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
-                          child: Row(
-                            children: [
-                              Text("Make Admin",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
-                              SizedBox(width: 20.w,),
-                              Switch.adaptive(
-                                activeColor: inputBackColor(context),
-                                inactiveThumbColor: settingButtonBackColor(context),
-                                inactiveTrackColor: subTitleClr,
-                                activeTrackColor: buttonBackColor(context),
-                                value: adminuser,
-                                onChanged: (valu) async {
-                                  // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
-                                  //
-                                  // }
-                                  await UserT.doc("${mainuser ==true ? user!.email.toString():admin__email}").collection('Employee').doc('$email').update({"admin":valu}).then((value) {
-                                    setState(() {
-                                      adminuser = valu;
-                                    });
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ) : SizedBox(),
-                        //Text(":::::::::::::"),
-
-                        // Container(
-                        //   color: Colors.grey,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   height: 1,
-                        // ),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        //   child: Row(
-                        //     children: [
-                        //       Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                        //       TextField(
-                        //         controller: name1,
-                        //       )                          ],
-                        //   ),
-                        // ),
-                        // Container(
-                        //   color: Colors.grey,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   height: 1,
-                        // ),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        //   child: Row(
-                        //     children: [
-                        //       Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                        //       Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                        //     ],
-                        //   ),
-                        // ),
-                        // Container(
-                        //   color: Colors.grey,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   height: 1,),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        //   child: Row(
-                        //     children: [
-                        //       Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                        //       TextField(
-                        //         controller: phonenumber1,
-                        //       )                          ],
-                        //   ),
-                        // ),
-                        // Container(
-                        //   color: Colors.grey,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   height: 1,
-                        // ),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        //   child: Row(
-                        //     children: [
-                        //       Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                        //       TextField(
-                        //         controller: designation1,
-                        //       )
-                        //     ],
-                        //   ),
-                        // ),
-                        // Container(
-                        //   color: Colors.grey,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   height: 1,
-                        // ),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        //   child: Row(
-                        //     children: [
-                        //       Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                        //       TextField(
-                        //         controller: department1,
-                        //       )
-                        //       //Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                        //     ],
-                        //   ),
-                        // ),
-                        // Container(
-                        //   color: Colors.grey,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   height: 1,
-                        // ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                          child: Row(
-                            children: [
-                              Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                              Text("${email1.text}", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.5.w,vertical: 4.h),
-                          child: Container(
-                            height: 55.h,
-                            width: MediaQuery.of(context).size.width,
-                            // color: Colors.green,
-                            child: TextField(
-                              controller: name1,
-                              decoration: InputDecoration(
-                                labelText: "Name",
-                                labelStyle: GoogleFonts.poppins(fontSize: 13.sp,
-                                    color: srpgradient2,letterSpacing: 1.5),
-                              ),
-                            )
-                          ),
-                        ),
-                        // Padding(
-                        //   padding:  EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
-                        //   child: Container(
-                        //       height: 40.h,
-                        //       width: MediaQuery.of(context).size.width,
-                        //     //  color: Colors.blue,
-                        //       child: TextField(controller: designation1,)
-                        //   ),
-                        // ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.5.w,vertical: 4.h),
-                          child: Container(
-                              height: 55.h,
-                              width: MediaQuery.of(context).size.width,
-                              //  color: Colors.green,
-                              child: TextField(
-                                controller: designation1,
-                                decoration: InputDecoration(
-                                  labelText: "Designation",
-                                  labelStyle: GoogleFonts.poppins(fontSize: 13.sp,color: srpgradient2,letterSpacing: 1.5),
-                                ),
-                              )
-                          ),
-                        ),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
-                        //   child: Container(
-                        //       height: 40.h,
-                        //       width: MediaQuery.of(context).size.width,
-                        //       // color: Colors.yellow,
-                        //       child: TextField(controller: phonenumber1,)
-                        //   ),
-                        // ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.5.w,vertical: 4.h),
-                          child: Container(
-                              height: 55.h,
-                              width: MediaQuery.of(context).size.width,
-                              //  color: Colors.green,
-                              child: TextField(
-                                keyboardType:TextInputType.phone ,
-                                controller: phonenumber1,
-                                decoration: InputDecoration(
-                                  labelText: "Phone Number",
-                                  labelStyle: GoogleFonts.poppins(fontSize: 13.sp,color: srpgradient2,letterSpacing: 1.5),
-                                ),
-                              )
-                          ),
-                        ),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
-                        //   child: Container(
-                        //       height: 40.h,
-                        //       width: MediaQuery.of(context).size.width,
-                        //      // color: Colors.purpleAccent,
-                        //       child: TextField(controller: department1,)
-                        //   ),
-                        // ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.5.w,vertical: 4.h),
-                          child: Container(
-                              height: 55.h,
-                              width: MediaQuery.of(context).size.width,
-                              // color: Colors.green,
-                              child: TextField(
-                                controller: department1,
-                                decoration: InputDecoration(
-                                  labelText: "Department",
-                                  labelStyle: GoogleFonts.poppins(fontSize: 13.sp,color: srpgradient2,letterSpacing: 1.5),
-                                ),
-                              )
-                          ),
-                        ),
-                        SizedBox(height: 10.h,),
-                        GestureDetector(
-                          onTap: (){
-                            // name=element.get('name');
-                            // email=element.get('email');
-                            // designation=element.get('designation');
-                            // phonenumber=element.get('phonenumber');
-                            // department=element.get('department');
-
-                             Future.delayed( const Duration(seconds: 5), () {
-                                setState(() {
-                                  load=false;
-                                });
-                             });
-
-                             setState(() {
-                               load=true;
-                             });
-
-                             mainuser==true ? saveThroughMainUser() : saveThroughEmployeeAdminUser();
-
-                             // f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
-                             // element.reference.collection("Employee").doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
-                             // })).then((value) {
-                             // setState(() {load=false;});
-                             // CSMainPopup2(context: context,btnText: "Ok",popMessag: "Added Successfully");
-                             // });
-
-                          },
-                          child: BtnSave(load: load),
-                        ),
-
-                        SizedBox(height: 20.h,),
-
-                      ],
-                    ),
+            backgroundColor: Color(0xFF197B6C),
+            flexibleSpace:  Container(
+              height: hh*0.2,
+              width:MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.01),
+                    spreadRadius: 2,
+                    blurRadius: 1,
+                    offset: const Offset(0, 2), // changes position of shadow
                   ),
-                ): Positioned(
-                  top: 100,
-                  bottom: 1,
+                ],
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+                color: whiteClr,
+              ),
+              child: Column(
+                crossAxisAlignment:CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: hh*0.01,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Spacer(),
+                      Row(
+                         children: [
+                              // Icon(FontAwesomeIcons.user),
+                              Text(" Profile",style: GoogleFonts.poppins(fontSize: 18,color: srpgradient2,fontWeight: FontWeight.w400),),
+                           ],
+                         ),
+                      Spacer(),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        body: Stack(
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                 right: 0,
+                 child: Container(
+                    height: hh*0.3,
+                    width: MediaQuery.of(context).size.width,
+                   decoration: BoxDecoration(
+                     boxShadow: [
+                       BoxShadow(
+                         color: Colors.grey.withOpacity(0.01),
+                         spreadRadius: 2,
+                         blurRadius: 1,
+                         offset: const Offset(0, 2), // changes position of shadow
+                       ),
+                     ],
+                       // gradient: const LinearGradient(
+                       //   begin: Alignment.topRight,
+                       //   end: Alignment.bottomLeft,
+                       //   colors: [
+                       //     //srpgradient1,
+                       //     srpgradient2,
+                       //     //srpgradient3
+                       //   ],
+                       // ),
+                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50)),
+                     color: srpgradient2,
+                   ),
+                 )
+              ),
+              // Positioned(
+              //   top: 100,
+              //   bottom: 1,
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Container(
+              //         height:140.h,
+              //         width: MediaQuery.of(context).size.width,
+              //         child: Container(
+              //           width: 130.h,
+              //           height: 130.w,
+              //           decoration: BoxDecoration(
+              //             color: Colors.white,
+              //               border: Border.all(
+              //                   width: 4,
+              //                   color: Theme.of(context).scaffoldBackgroundColor),
+              //               boxShadow: [
+              //                 BoxShadow(
+              //                     spreadRadius: 2,
+              //                     blurRadius: 10,
+              //                     color: Colors.black.withOpacity(0.15),
+              //                     offset: const Offset(0, 10))
+              //               ],
+              //               shape: BoxShape.circle,
+              //
+              //               // image: const DecorationImage(
+              //               //     fit: BoxFit.cover,
+              //               //     image: NetworkImage(
+              //               //       "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+              //               //     ))
+              //
+              //           ),
+              //           child: Icon(FontAwesomeIcons.userTie,size: 65.sp,color: srpgradient2,),
+              //         ),
+              //       ),
+              //       SizedBox(height: 38.h,),
+              //       // const TextField(
+              //       //   decoration: InputDecoration(
+              //       //     labelText: "Name",
+              //       //     border: OutlineInputBorder(
+              //       //         borderSide: BorderSide(color: Colors.teal)),
+              //       //     hintText: 'Input Name',
+              //       //   ),
+              //       //  // controller: displayNameController,
+              //       //   keyboardType: TextInputType.name,
+              //       // ),
+              //       // const TextField(
+              //       //   decoration: InputDecoration(
+              //       //     labelText: "Age",
+              //       //     border: OutlineInputBorder(
+              //       //         borderSide: BorderSide(color: Colors.teal)),
+              //       //     hintText: 'Input Age',
+              //       //   ),
+              //       //  // controller: ageController,
+              //       //   //
+              //       //   keyboardType: TextInputType.number,
+              //       // ),
+              //       widget.superadmin==false? Padding(
+              //         padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+              //         child: Row(
+              //           children: [
+              //             Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
+              //             SizedBox(width: 20.w,),
+              //             Switch.adaptive(
+              //               activeColor: inputBackColor(context),
+              //               inactiveThumbColor: settingButtonBackColor(context),
+              //               inactiveTrackColor: subTitleClr,
+              //               activeTrackColor: buttonBackColor(context),
+              //               value: active,
+              //               onChanged: (valu) async {
+              //                 // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+              //                 //
+              //                 // }
+              //                 await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+              //                   setState(() {
+              //                     active = valu;
+              //                   });
+              //                 });
+              //               },
+              //             ),
+              //           ],
+              //         ),
+              //       ) : SizedBox(),
+              //       // Container(
+              //       //   color: Colors.grey,
+              //       //   width: MediaQuery.of(context).size.width,
+              //       //   height: 1,
+              //       // ),
+              //       // Padding(
+              //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //       //   child: Row(
+              //       //     children: [
+              //       //       Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //       //       TextField(
+              //       //         controller: name1,
+              //       //       )                          ],
+              //       //   ),
+              //       // ),
+              //       // Container(
+              //       //   color: Colors.grey,
+              //       //   width: MediaQuery.of(context).size.width,
+              //       //   height: 1,
+              //       // ),
+              //       // Padding(
+              //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //       //   child: Row(
+              //       //     children: [
+              //       //       Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //       //       Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+              //       //     ],
+              //       //   ),
+              //       // ),
+              //       // Container(
+              //       //   color: Colors.grey,
+              //       //   width: MediaQuery.of(context).size.width,
+              //       //   height: 1,),
+              //       // Padding(
+              //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //       //   child: Row(
+              //       //     children: [
+              //       //       Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //       //       TextField(
+              //       //         controller: phonenumber1,
+              //       //       )                          ],
+              //       //   ),
+              //       // ),
+              //       // Container(
+              //       //   color: Colors.grey,
+              //       //   width: MediaQuery.of(context).size.width,
+              //       //   height: 1,
+              //       // ),
+              //       // Padding(
+              //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //       //   child: Row(
+              //       //     children: [
+              //       //       Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //       //       TextField(
+              //       //         controller: designation1,
+              //       //       )
+              //       //     ],
+              //       //   ),
+              //       // ),
+              //       // Container(
+              //       //   color: Colors.grey,
+              //       //   width: MediaQuery.of(context).size.width,
+              //       //   height: 1,
+              //       // ),
+              //       // Padding(
+              //       //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //       //   child: Row(
+              //       //     children: [
+              //       //       Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //       //       TextField(
+              //       //         controller: department1,
+              //       //       )
+              //       //       //Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+              //       //     ],
+              //       //   ),
+              //       // ),
+              //       // Container(
+              //       //   color: Colors.grey,
+              //       //   width: MediaQuery.of(context).size.width,
+              //       //   height: 1,
+              //       // ),
+              //       Container(
+              //         color: Colors.grey,
+              //         width: MediaQuery.of(context).size.width,
+              //         height: 1,
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //         child: Row(
+              //           children: [
+              //             Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //             Text("$name", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+              //           ],
+              //         ),
+              //       ),
+              //       Container(
+              //         color: Colors.grey,
+              //         width: MediaQuery.of(context).size.width,
+              //         height: 1,
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //         child: Row(
+              //           children: [
+              //             Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //             Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+              //           ],
+              //         ),
+              //       ),
+              //       Container(
+              //         color: Colors.grey,
+              //         width: MediaQuery.of(context).size.width,
+              //         height: 1,),
+              //       Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //         child: Row(
+              //           children: [
+              //             Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //             Text("$phonenumber", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+              //           ],
+              //         ),
+              //       ),
+              //       Container(
+              //         color: Colors.grey,
+              //         width: MediaQuery.of(context).size.width,
+              //         height: 1,
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //         child: Row(
+              //           children: [
+              //             Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //             Text("$designation", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+              //           ],
+              //         ),
+              //       ),
+              //       Container(
+              //         color: Colors.grey,
+              //         width: MediaQuery.of(context).size.width,
+              //         height: 1,
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+              //         child: Row(
+              //           children: [
+              //             Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+              //             Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+              //           ],
+              //         ),
+              //       ),
+              //       Container(
+              //         color: Colors.grey,
+              //         width: MediaQuery.of(context).size.width,
+              //         height: 1,
+              //       ),
+              //
+              //
+              //
+              //     ],
+              //   ),
+              // ),
+              widget.superadmin==false ? Positioned(
+                top: 100,
+                bottom: 1,
+                child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height:140.h,
+                        height:hh*0.2,
                         width: MediaQuery.of(context).size.width,
                         child: Container(
-                          width: 130.h,
-                          height: 130.w,
+                          width: 130,
+                          height: 130,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(
-                                width: 4,
-                                color: Theme.of(context).scaffoldBackgroundColor),
+                            border: Border.all(width: 4, color: Theme.of(context).scaffoldBackgroundColor),
                             boxShadow: [
                               BoxShadow(
                                   spreadRadius: 2,
@@ -1334,10 +1186,10 @@ class _EditEmployeeState extends State<EditEmployee> {
                             //     ))
 
                           ),
-                          child: Icon(FontAwesomeIcons.userTie,size: 65.sp,color: srpgradient2,),
+                          child: Icon(FontAwesomeIcons.userTie,size: 65,color: srpgradient2,),
                         ),
                       ),
-                      SizedBox(height: 38.h,),
+                      SizedBox(height: 38,),
                       // const TextField(
                       //   decoration: InputDecoration(
                       //     labelText: "Name",
@@ -1359,15 +1211,12 @@ class _EditEmployeeState extends State<EditEmployee> {
                       //   //
                       //   keyboardType: TextInputType.number,
                       // ),
-
-
-
-                      widget.superadmin==false ? Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+                      widget.superadmin==false? Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 17.0),
                         child: Row(
                           children: [
-                            Text("Services Active",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
-                            SizedBox(width: 20.w,),
+                            Text("Services Active",style: GoogleFonts.poppins(fontSize: 18,color:  srpgradient2,),),
+                            SizedBox(width: 20,),
                             Switch.adaptive(
                               activeColor: inputBackColor(context),
                               inactiveThumbColor: settingButtonBackColor(context),
@@ -1378,7 +1227,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                                 // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
                                 //
                                 // }
-                                await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                                await UserT.doc("${mainuser ==true ? user!.email.toString():admin__email}").collection('Employee').doc('$email').update({"active":valu}).then((value) {
                                   setState(() {
                                     active = valu;
                                   });
@@ -1388,37 +1237,33 @@ class _EditEmployeeState extends State<EditEmployee> {
                           ],
                         ),
                       ) : SizedBox(),
-
-
-
-                      // widget.superadmin==false ? Padding(
-                      //   padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
-                      //   child: Row(
-                      //     children: [
-                      //       Text("Services ",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
-                      //       SizedBox(width: 20.w,),
-                      //       Switch.adaptive(
-                      //         activeColor: inputBackColor(context),
-                      //         inactiveThumbColor: settingButtonBackColor(context),
-                      //         inactiveTrackColor: subTitleClr,
-                      //         activeTrackColor: buttonBackColor(context),
-                      //         value: active,
-                      //         onChanged: (valu) async {
-                      //           // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
-                      //           //
-                      //           // }
-                      //           await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
-                      //             setState(() {
-                      //               active = valu;
-                      //             });
-                      //           });
-                      //         },
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ) : SizedBox(),
-
-
+                      widget.superadmin==false? Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 17.0),
+                        child: Row(
+                          children: [
+                            Text("Make Admin",style: GoogleFonts.poppins(fontSize: 18,color:  srpgradient2,),),
+                            SizedBox(width: 20,),
+                            Switch.adaptive(
+                              activeColor: inputBackColor(context),
+                              inactiveThumbColor: settingButtonBackColor(context),
+                              inactiveTrackColor: subTitleClr,
+                              activeTrackColor: buttonBackColor(context),
+                              value: adminuser,
+                              onChanged: (valu) async {
+                                // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                                //
+                                // }
+                                await UserT.doc("${mainuser ==true ? user!.email.toString():admin__email}").collection('Employee').doc('$email').update({"admin":valu}).then((value) {
+                                  setState(() {
+                                    adminuser = valu;
+                                  });
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ) : SizedBox(),
+                      //Text(":::::::::::::"),
 
                       // Container(
                       //   color: Colors.grey,
@@ -1501,88 +1346,420 @@ class _EditEmployeeState extends State<EditEmployee> {
                       //   width: MediaQuery.of(context).size.width,
                       //   height: 1,
                       // ),
-                      Container(
-                        color: Colors.grey,
-                        width: MediaQuery.of(context).size.width,
-                        height: 1,
-                      ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                        padding: EdgeInsets.symmetric(horizontal: 17.0,vertical: 12),
                         child: Row(
                           children: [
-                            Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                            Text("$name", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                            Text("Email : ", style: GoogleFonts.poppins(fontSize: 18,color: srpgradient2,letterSpacing: 1.5),),
+                            Text("${email1.text}", style: GoogleFonts.poppins(fontSize: 15,color: Colors.black,letterSpacing: 1.5),),
                           ],
                         ),
                       ),
-                      Container(
-                        color: Colors.grey,
-                        width: MediaQuery.of(context).size.width,
-                        height: 1,
-                      ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        child: Row(
-                          children: [
-                            Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                            Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                          ],
+                        padding: EdgeInsets.symmetric(horizontal: 15.5,vertical: 4),
+                        child: Container(
+                          height: hh*0.07,
+                          width: MediaQuery.of(context).size.width,
+                          // color: Colors.green,
+                          child: TextField(
+                            controller: name1,
+                            decoration: InputDecoration(
+                              labelText: "Name",
+                              labelStyle: GoogleFonts.poppins(fontSize: 13,
+                                  color: srpgradient2,letterSpacing: 1.5),
+                            ),
+                          )
                         ),
                       ),
-                      Container(
-                        color: Colors.grey,
-                        width: MediaQuery.of(context).size.width,
-                        height: 1,),
+                      // Padding(
+                      //   padding:  EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
+                      //   child: Container(
+                      //       height: 40.h,
+                      //       width: MediaQuery.of(context).size.width,
+                      //     //  color: Colors.blue,
+                      //       child: TextField(controller: designation1,)
+                      //   ),
+                      // ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        child: Row(
-                          children: [
-                            Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                            Text("$phonenumber", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                          ],
+                        padding: EdgeInsets.symmetric(horizontal: 15.5,vertical: 4),
+                        child: Container(
+                            height: hh*0.07,
+                            width: MediaQuery.of(context).size.width,
+                            //  color: Colors.green,
+                            child: TextField(
+                              controller: designation1,
+                              decoration: InputDecoration(
+                                labelText: "Designation",
+                                labelStyle: GoogleFonts.poppins(fontSize: 13,color: srpgradient2,letterSpacing: 1.5),
+                              ),
+                            )
                         ),
                       ),
-                      Container(
-                        color: Colors.grey,
-                        width: MediaQuery.of(context).size.width,
-                        height: 1,
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
+                      //   child: Container(
+                      //       height: 40.h,
+                      //       width: MediaQuery.of(context).size.width,
+                      //       // color: Colors.yellow,
+                      //       child: TextField(controller: phonenumber1,)
+                      //   ),
+                      // ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        child: Row(
-                          children: [
-                            Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                            Text("$designation", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                          ],
+                        padding: EdgeInsets.symmetric(horizontal: 15.5,vertical: 4),
+                        child: Container(
+                            height: hh*0.07,
+                            width: MediaQuery.of(context).size.width,
+                            //  color: Colors.green,
+                            child: TextField(
+                              keyboardType:TextInputType.phone ,
+                              controller: phonenumber1,
+                              decoration: InputDecoration(
+                                labelText: "Phone Number",
+                                labelStyle: GoogleFonts.poppins(fontSize: 13,color: srpgradient2,letterSpacing: 1.5),
+                              ),
+                            )
                         ),
                       ),
-                      Container(
-                        color: Colors.grey,
-                        width: MediaQuery.of(context).size.width,
-                        height: 1,
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
+                      //   child: Container(
+                      //       height: 40.h,
+                      //       width: MediaQuery.of(context).size.width,
+                      //      // color: Colors.purpleAccent,
+                      //       child: TextField(controller: department1,)
+                      //   ),
+                      // ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
-                        child: Row(
-                          children: [
-                            Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
-                            Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
-                          ],
+                        padding: EdgeInsets.symmetric(horizontal: 15.5,vertical: 4),
+                        child: Container(
+                            height: hh*0.07,
+                            width: MediaQuery.of(context).size.width,
+                            // color: Colors.green,
+                            child: TextField(
+                              controller: department1,
+                              decoration: InputDecoration(
+                                labelText: "Department",
+                                labelStyle: GoogleFonts.poppins(fontSize: 13,color: srpgradient2,letterSpacing: 1.5),
+                              ),
+                            )
                         ),
                       ),
-                      Container(
-                        color: Colors.grey,
-                        width: MediaQuery.of(context).size.width,
-                        height: 1,
+                      SizedBox(height: 10,),
+                      GestureDetector(
+                        onTap: (){
+                          // name=element.get('name');
+                          // email=element.get('email');
+                          // designation=element.get('designation');
+                          // phonenumber=element.get('phonenumber');
+                          // department=element.get('department');
+
+                           Future.delayed( const Duration(seconds: 5), () {
+                              setState(() {
+                                load=false;
+                              });
+                           });
+
+                           setState(() {
+                             load=true;
+                           });
+
+                           mainuser==true ? saveThroughMainUser() : saveThroughEmployeeAdminUser();
+
+                           // f.where('email', isEqualTo: user!.email.toString()).get().then((value) => value.docs.forEach((element) {
+                           // element.reference.collection("Employee").doc(widget.email).update({"name":"${name1.text.toString()}","email":"${email1.text.toString()}","designation":"${designation1.text.toString()}","phonenumber":"${phonenumber1.text.toString()}","department":"${department1.text.toString()}",});
+                           // })).then((value) {
+                           // setState(() {load=false;});
+                           // CSMainPopup2(context: context,btnText: "Ok",popMessag: "Added Successfully");
+                           // });
+
+                        },
+                        child: BtnSave(load: load),
                       ),
 
+                      SizedBox(height: 20),
 
                     ],
                   ),
                 ),
-              ],
-            ),
-          )
+              ): Positioned(
+                top: 100,
+                bottom: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: hh*0.2,
+                      width: MediaQuery.of(context).size.width,
+                      child: Container(
+                        width: ww*0.07,
+                        height: hh*0.7,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              width: 4,
+                              color: Theme.of(context).scaffoldBackgroundColor),
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.15),
+                                offset: const Offset(0, 10))
+                          ],
+                          shape: BoxShape.circle,
+
+                          // image: const DecorationImage(
+                          //     fit: BoxFit.cover,
+                          //     image: NetworkImage(
+                          //       "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+                          //     ))
+
+                        ),
+                        child: Icon(FontAwesomeIcons.userTie,size: 65,color: srpgradient2,),
+                      ),
+                    ),
+                    SizedBox(height: 38,),
+                    // const TextField(
+                    //   decoration: InputDecoration(
+                    //     labelText: "Name",
+                    //     border: OutlineInputBorder(
+                    //         borderSide: BorderSide(color: Colors.teal)),
+                    //     hintText: 'Input Name',
+                    //   ),
+                    //  // controller: displayNameController,
+                    //   keyboardType: TextInputType.name,
+                    // ),
+                    // const TextField(
+                    //   decoration: InputDecoration(
+                    //     labelText: "Age",
+                    //     border: OutlineInputBorder(
+                    //         borderSide: BorderSide(color: Colors.teal)),
+                    //     hintText: 'Input Age',
+                    //   ),
+                    //  // controller: ageController,
+                    //   //
+                    //   keyboardType: TextInputType.number,
+                    // ),
+
+
+
+                    widget.superadmin==false ? Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 17.0),
+                      child: Row(
+                        children: [
+                          Text("Services Active",style: GoogleFonts.poppins(fontSize: 18,color:  srpgradient2,),),
+                          SizedBox(width: 20,),
+                          Switch.adaptive(
+                            activeColor: inputBackColor(context),
+                            inactiveThumbColor: settingButtonBackColor(context),
+                            inactiveTrackColor: subTitleClr,
+                            activeTrackColor: buttonBackColor(context),
+                            value: active,
+                            onChanged: (valu) async {
+                              // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                              //
+                              // }
+                              await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                                setState(() {
+                                  active = valu;
+                                });
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ) : SizedBox(),
+
+
+
+                    // widget.superadmin==false ? Padding(
+                    //   padding:  EdgeInsets.symmetric(horizontal: 17.0.w),
+                    //   child: Row(
+                    //     children: [
+                    //       Text("Services ",style: GoogleFonts.poppins(fontSize: 18.sp,color:  srpgradient2,),),
+                    //       SizedBox(width: 20.w,),
+                    //       Switch.adaptive(
+                    //         activeColor: inputBackColor(context),
+                    //         inactiveThumbColor: settingButtonBackColor(context),
+                    //         inactiveTrackColor: subTitleClr,
+                    //         activeTrackColor: buttonBackColor(context),
+                    //         value: active,
+                    //         onChanged: (valu) async {
+                    //           // for(int i=0;i<ModelLinkInfo.linkInfoList.length;i++ ){
+                    //           //
+                    //           // }
+                    //           await UserT.doc(user!.email.toString()).collection('Employee').doc('$email').update({"active":valu}).then((value) {
+                    //             setState(() {
+                    //               active = valu;
+                    //             });
+                    //           });
+                    //         },
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ) : SizedBox(),
+
+
+
+                    // Container(
+                    //   color: Colors.grey,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   height: 1,
+                    // ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                    //   child: Row(
+                    //     children: [
+                    //       Text("Name : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                    //       TextField(
+                    //         controller: name1,
+                    //       )                          ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   color: Colors.grey,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   height: 1,
+                    // ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                    //   child: Row(
+                    //     children: [
+                    //       Text("Email : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                    //       Text("$email", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   color: Colors.grey,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   height: 1,),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                    //   child: Row(
+                    //     children: [
+                    //       Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                    //       TextField(
+                    //         controller: phonenumber1,
+                    //       )                          ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   color: Colors.grey,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   height: 1,
+                    // ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                    //   child: Row(
+                    //     children: [
+                    //       Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                    //       TextField(
+                    //         controller: designation1,
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   color: Colors.grey,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   height: 1,
+                    // ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 17.0.w,vertical: 12.h),
+                    //   child: Row(
+                    //     children: [
+                    //       Text("Department : ", style: GoogleFonts.poppins(fontSize: 18.sp,color: srpgradient2,letterSpacing: 1.5),),
+                    //       TextField(
+                    //         controller: department1,
+                    //       )
+                    //       //Text("$department", style: GoogleFonts.poppins(fontSize: 15.sp,color: Colors.black,letterSpacing: 1.5),),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   color: Colors.grey,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   height: 1,
+                    // ),
+                    Container(
+                      color: Colors.grey,
+                      width: MediaQuery.of(context).size.width,
+                      height: 1,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 17.0,vertical: 12),
+                      child: Row(
+                        children: [
+                          Text("Name : ", style: GoogleFonts.poppins(fontSize: 18,color: srpgradient2,letterSpacing: 1.5),),
+                          Text("$name", style: GoogleFonts.poppins(fontSize: 15,color: Colors.black,letterSpacing: 1.5),),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      width: MediaQuery.of(context).size.width,
+                      height: 1,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 17.0,vertical: 12),
+                      child: Row(
+                        children: [
+                          Text("Email : ", style: GoogleFonts.poppins(fontSize: 18,color: srpgradient2,letterSpacing: 1.5),),
+                          Text("$email", style: GoogleFonts.poppins(fontSize: 15,color: Colors.black,letterSpacing: 1.5),),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      width: MediaQuery.of(context).size.width,
+                      height: 1,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 17.0,vertical: 12),
+                      child: Row(
+                        children: [
+                          Text("Phone Number : ", style: GoogleFonts.poppins(fontSize: 18,color: srpgradient2,letterSpacing: 1.5),),
+                          Text("$phonenumber", style: GoogleFonts.poppins(fontSize: 15,color: Colors.black,letterSpacing: 1.5),),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      width: MediaQuery.of(context).size.width,
+                      height: 1,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 17.0,vertical: 12),
+                      child: Row(
+                        children: [
+                          Text("Designation : ", style: GoogleFonts.poppins(fontSize: 18,color: srpgradient2,letterSpacing: 1.5),),
+                          Text("$designation", style: GoogleFonts.poppins(fontSize: 15,color: Colors.black,letterSpacing: 1.5),),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      width: MediaQuery.of(context).size.width,
+                      height: 1,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 17.0,vertical: 12),
+                      child: Row(
+                        children: [
+                          Text("Department : ", style: GoogleFonts.poppins(fontSize: 18,color: srpgradient2,letterSpacing: 1.5),),
+                          Text("$department", style: GoogleFonts.poppins(fontSize: 15,color: Colors.black,letterSpacing: 1.5),),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      width: MediaQuery.of(context).size.width,
+                      height: 1,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         )
       );
     }
@@ -1607,8 +1784,9 @@ class _EditEmployeeState extends State<EditEmployee> {
   }
 
 class BtnSave extends StatelessWidget {
-  const BtnSave({
-    super.key,
+   BtnSave({
+    key,
+     // super.key,
     required this.load,
   });
 
@@ -1616,11 +1794,15 @@ class BtnSave extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final hh=MediaQuery.of(context).size.height;
+    final ww=MediaQuery.of(context).size.width;
+
     return Padding(
       padding:  EdgeInsets.only(left: 10,right: 100),
       child: Container(
-          height: 40.h,
-          width: 140,
+          height: hh*0.05,
+          width: ww*0.3,
           decoration: BoxDecoration(
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
@@ -1648,10 +1830,10 @@ class BtnSave extends StatelessWidget {
               width: 26,
               child: CircularProgressIndicator(
                 backgroundColor: Colors.white,
-                strokeWidth: 1.6.w,
+                strokeWidth: 1.6,
               ),
             ) :
-            Text("Save",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+            Text("Save",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
           )
       ),
     );
@@ -1672,52 +1854,55 @@ class Empolyee extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final providerGenerator = Provider.of<ProviderGenerator>(context);
+    final hh=MediaQuery.of(context).size.height;
+    final ww=MediaQuery.of(context).size.width;
+
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 1.0.h,horizontal: 1.w),
+      padding:  EdgeInsets.symmetric(vertical: 1.0,horizontal: 1),
       child: Column(
         children: [
           InkWell(
             child: Container(
-              height: 55.h,
+              height: hh*0.06 ,
               width: MediaQuery.of(context).size.width,
-              child: Row(
-                children:  [
-                  SizedBox(width: 20.w,height: 10,),
-                  Container (
-                    height: 50.h,
-                    width: 50.w,
-                    child: Icon(Icons.person,size: 50.sp,color: srpgradient2,),
+              child: Row (
+                children:[
+                  SizedBox(width: 20,height: 10,),
+                  Container(
+                    height: hh*0.06,
+                    width: ww*0.09,
+                    child: Icon(Icons.person,size: 50,color: srpgradient2,),
                   ),
                   Padding(
-                    padding:EdgeInsets.symmetric(horizontal: 20.w),
+                    padding:EdgeInsets.symmetric(horizontal: 20),
                     child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("$name",style: GoogleFonts.poppins(fontSize: 13.sp, color: iconcolor, fontWeight: FontWeight.w700),),
-                        Text("$email",style: GoogleFonts.poppins(fontSize: 13.sp, color: iconcolor, fontWeight: FontWeight.w400),
+                        Text("$name",style: GoogleFonts.poppins(fontSize: 13, color: iconcolor, fontWeight: FontWeight.w700),),
+                        Text("$email",style: GoogleFonts.poppins(fontSize: 13, color: iconcolor, fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),),
                   const Spacer(),
                   // CircleAvatar(
-                  //   radius: 15.sp,
+                  //   radius: 15,
                   //   backgroundColor:Colors.grey.shade400,
                   //   child: IconButton(
                   //     icon: Icon(
                   //       Icons.chevron_right_sharp,
                   //       color:  Colors.white,
-                  //       size: 15.sp,
+                  //       size: 15,
                   //     ),
                   //     onPressed: () {},
                   //   ),
                   // ),
                   CircleAvatar(
-                    radius: 15.sp,
+                    radius: 15,
                     backgroundColor:Colors.grey.shade400,
                     child: IconButton(
                       icon: Icon(
                         Icons.chevron_right_sharp,
                         color:  Colors.white,
-                        size: 15.sp,
+                        size: 15,
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -1727,7 +1912,7 @@ class Empolyee extends StatelessWidget {
                       },
                     ),
                   ),
-                  SizedBox(width: 10.w,),
+                  SizedBox(width: 10,),
                 ],
               ),
             ),
@@ -1943,9 +2128,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
       child: CsScreenUtilInit(
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(94.0.h),
+            preferredSize: Size.fromHeight(94.0),
             child: Container(
-              height: 102.h,
+              height: 102,
               width:MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -1957,17 +2142,17 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                     // changes position of shadow
                   ),
                 ],
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.sp),bottomRight: Radius.circular(20.sp)),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 color: whiteClr,
               ),
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: 15.w,),
+                      SizedBox(width: 15,),
                       GestureDetector(
                         onTap: () {
                          Navigator.pop(context);
@@ -1981,18 +2166,18 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                           //     }));
                         },
                         child: Padding(
-                          padding: EdgeInsets.all(8.0.sp),
-                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23.sp,color: greybackground,),
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(FontAwesomeIcons.anglesLeft,size: 23,color: greybackground,),
                         ),
                       ),
                       Spacer(),
-                      Text("Create Employee", style: GoogleFonts.poppins(fontSize: 15.sp,color: fontclr,fontWeight: FontWeight.w400),),
+                      Text("Create Employee", style: GoogleFonts.poppins(fontSize: 15,color: fontclr,fontWeight: FontWeight.w400),),
                       Spacer(),
                       Container(
-                        width: 30.0.w,
-                        height: 30.0.h,
+                        width: 30.0,
+                        height: 30.0,
                       ),
-                      SizedBox(width: 5.w,),
+                      SizedBox(width: 5,),
                     ],
                   ),
                 ],
@@ -2008,10 +2193,10 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 45.h,
+                    height: 45,
                   ),
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                    padding:  EdgeInsets.symmetric(horizontal: 26),
                     child: CsMainInputField(
                       providerGenerator: providerGenerator,
                       width: MediaQuery.of(context).size.width,
@@ -2026,10 +2211,10 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                    padding:  EdgeInsets.symmetric(horizontal: 26),
                     child: CsMainInputField(
                       providerGenerator: providerGenerator,
                       width: MediaQuery.of(context).size.width,
@@ -2044,20 +2229,20 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                     ),
                   ),
                   SizedBox(
-                    height: 10.h,
+                    height: 10,
                   ),
                   providerGenerator.getErrorMessage(index: 1) == "Please enter your Information" ? SizedBox() :
                   Visibility(
                     visible: providerGenerator.getVisibleError(index: 1),
                     child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 12.h),
+                        margin: EdgeInsets.symmetric(vertical: 12),
                         child: CsErrorContainer(errorMsg: providerGenerator.getErrorMessage(index: 1))),
                   ),
                   SizedBox(
-                    height: 10.h,
+                    height: 10,
                   ),
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                    padding:  EdgeInsets.symmetric(horizontal: 26),
                     child: CsMainInputField121(
                       providerGenerator: providerGenerator,
                       width: MediaQuery.of(context).size.width,
@@ -2072,9 +2257,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
-                  // CsMainInputField3(
+                   // CsMainInputField3(
                   //   providerGenerator: providerGenerator,
                   //   width: 287.w,
                   //   mycontroller: textEditingController3,
@@ -2089,7 +2274,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   //       : null,
                   // ),
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                    padding:  EdgeInsets.symmetric(horizontal: 26),
                     child: CsMainInputField3(
                       providerGenerator: providerGenerator,
                       width: MediaQuery.of(context).size.width,
@@ -2110,13 +2295,13 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   ),
 
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
 
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                    padding:  EdgeInsets.symmetric(horizontal: 26),
                     child: Container(
-                      height: 37.h,
+                      height: 37,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -2127,7 +2312,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             offset: const Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(5.sp),
+                        borderRadius: BorderRadius.circular(5),
                         color: whiteClr,
                       ),
                       child: Row(
@@ -2136,21 +2321,21 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: SizedBox(
-                              height: 25.h,
-                              width: 25.w,
-                              child: Icon(FontAwesomeIcons.peopleArrows,size: 23.sp,color: subTitleClr,),
+                              height: 25,
+                              width: 25,
+                              child: Icon(FontAwesomeIcons.peopleArrows,size: 23,color: subTitleClr,),
                             ),
                           ),
-                          SizedBox(width: 23.w,),
+                          SizedBox(width: 23,),
                           DropdownButtonHideUnderline(
                             child: DropdownButton(
-                              style: GoogleFonts.poppins(fontSize:10.sp, color: fontgrey,fontWeight: FontWeight.w400),
+                              style: GoogleFonts.poppins(fontSize:10, color: fontgrey,fontWeight: FontWeight.w400),
                               elevation: 0,
                               value: dropdownvalue1,
                               icon:  Container(
-                                  height: 20.h,
+                                  height: 20,
                                   alignment: Alignment.topRight,
-                                  width: 172.w,
+                                  width: 172,
                                   //color: Colors.purpleAccent,
                                   child: Icon(Icons.keyboard_arrow_down)),
                               items:items1.map((String items) {
@@ -2174,13 +2359,13 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   ),
 
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
 
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 26.w),
+                    padding:  EdgeInsets.symmetric(horizontal: 26),
                     child: Container(
-                      height: 37.h,
+                      height: 37,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -2191,7 +2376,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             offset: const Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(5.sp),
+                        borderRadius: BorderRadius.circular(5),
                         color: whiteClr,
                       ),
                       child: Row(
@@ -2200,29 +2385,29 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: SizedBox(
-                              height: 25.h,
-                              width: 25.w,
-                              child: Icon(FontAwesomeIcons.building,size: 23.sp,color: subTitleClr,),
+                              height: 25,
+                              width: 25,
+                              child: Icon(FontAwesomeIcons.building,size: 23,color: subTitleClr,),
                             ),
                           ),
-                          SizedBox(width: 25.w,),
+                          SizedBox(width: 25,),
                           DropdownButtonHideUnderline(
                             child: DropdownButton(
-                              style: GoogleFonts.poppins(fontSize:10.sp,
+                              style: GoogleFonts.poppins(fontSize:10,
                                   color: fontgrey,fontWeight: FontWeight.w400),
                               elevation: 0,
                               value: dropdownvalue,
                               icon:  Container(
-                                  height: 20.h,
+                                  height: 20,
                                   alignment: Alignment.topRight,
-                                  width: 150.w,
+                                  width: 150,
                                   //color: Colors.purpleAccent,
                                   child: Icon(Icons.keyboard_arrow_down)),
                               items:items.map((String items) {
                                 return DropdownMenuItem(
                                     value: items,
                                     child: SizedBox(
-                                        width: 100.w,
+                                        width: 100,
                                         child: Text(items))
                                 );
                               }
@@ -2241,7 +2426,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   ),
 
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
 
                   //
@@ -2381,7 +2566,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   Visibility(
                     visible: providerGenerator.getVisibleError(index: 2),
                     child: Container(
-                        margin: EdgeInsets.only(top: 19.h, bottom: 27.h),
+                        margin: EdgeInsets.only(top: 19, bottom: 27),
                         child: CsErrorContainer(
                             errorMsg:
                             providerGenerator.getErrorMessage(index: 2))),
@@ -2390,7 +2575,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   Visibility(
                     visible:checkingtextfeild,
                     child: Container(
-                        margin: EdgeInsets.only(top: 19.h, bottom: 27.h),
+                        margin: EdgeInsets.only(top: 19, bottom: 27),
                         child: CsErrorContainer(errorMsg:errmsg)),
                   ),
 
@@ -2661,7 +2846,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text("Admin",style:  GoogleFonts.poppins(fontSize:10.sp,
+                      Text("Admin",style:  GoogleFonts.poppins(fontSize:10,
                         color: fontgrey,fontWeight: FontWeight.w400),),
                       IconButton(
                         icon: Icon(
@@ -2677,7 +2862,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                           });
                         },
                       ),
-                      Text("Employee",style:  GoogleFonts.poppins(fontSize:10.sp,
+                      Text("Employee",style:  GoogleFonts.poppins(fontSize:10,
                           color: fontgrey,fontWeight: FontWeight.w400),),
                       IconButton(
                         icon: Icon(
@@ -2695,7 +2880,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5.h,),
+                  SizedBox(height: 5,),
                   GestureDetector(
                     onTap: () {
                       CollectionReference UserT = FirebaseFirestore.instance.collection("Companies");
@@ -2723,9 +2908,9 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                       }
                     },
                     child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 28.0.w),
+                        padding:  EdgeInsets.symmetric(horizontal: 28.0),
                         child: Container(
-                            height: 40.h,
+                            height: 40,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
@@ -2750,8 +2935,8 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                             ),
                             child:  Center(
                               child:
-                              isLoading?  SizedBox(height: 15.h, width: 15.w, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue,),):
-                              Text("Create Employee",style: GoogleFonts.poppins(fontSize: 14.sp,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
+                              isLoading?  SizedBox(height: 15, width: 15, child: CircularProgressIndicator(backgroundColor: Colors.white, color:Colors.blue,),):
+                              Text("Create Employee",style: GoogleFonts.poppins(fontSize: 14,color: shapeitemColor(context),fontWeight: FontWeight.w500),),
                             )
                         )
                     ),
@@ -2853,7 +3038,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                   //   ),
                   // ),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
                 ],
               ),
