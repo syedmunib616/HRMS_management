@@ -4,6 +4,11 @@ A Flutter-based Human Resource Management System (HRMS) designed to manage compa
 
 This project was developed at SRP Global LLC.
 
+## 📱 Available on
+
+- Google Play: https://play.google.com/store/apps/details?id=com.srp.hrmate
+- Apple App Store: https://apps.apple.com/us/app/srp-hrmate/id6502698627
+
 ## Features
 
 The application supports three types of users:
